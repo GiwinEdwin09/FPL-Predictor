@@ -76,6 +76,7 @@ The script prints a JSON summary with the source URLs, row counts, and whether e
 - `matches.csv`: concatenate `data/2025-2026/By Gameweek/GW*/matches.csv`
 - `playerstats.csv`: concatenate `data/2025-2026/By Gameweek/GW*/playerstats.csv`
 - `playermatchstats.csv`: concatenate `data/2025-2026/By Gameweek/GW*/playermatchstats.csv`
+- This will be the case for the current season depending on how the original dataset is being kept
 
 For gameweek-built datasets, the pipeline stamps a `source_gameweek` column when the upstream CSV does not already include one. `playermatchstats` should still be joined back to `matches` through `match_id` when you need the authoritative fixture gameweek.
 
