@@ -144,6 +144,12 @@ The current Phase 3 trainer:
 - calibrates probabilities with temperature scaling on a recent pre-validation Premier League slice to improve log loss and Brier score
 - reports `accuracy`, multiclass `log loss`, and multiclass `Brier score`
 
+Current `model_v2` validation metrics:
+
+- accuracy: `0.45`
+- multiclass log loss: `1.0847`
+- multiclass Brier score: `0.6540`
+
 Sample weighting currently defaults to:
 
 - Premier League: `1.0`
@@ -163,4 +169,50 @@ This writes a timestamped folder and `.tar.gz` archive under:
 
 ```text
 data/reference/
+```
+
+## Web Frontend
+
+The Next.js frontend now lives in:
+
+```text
+apps/web
+```
+
+It reads a generated dashboard payload that includes:
+
+- upcoming unfinished Premier League fixtures
+- calibrated home/draw/away probabilities from `model_v2`
+- historical finished matches with key stats and pre-match context
+
+The app structure is:
+
+- `/`: landing page that explains the website
+- `/predictions`: upcoming fixtures grouped by gameweek with arrow navigation
+- `/history`: historical matches grouped by gameweek with arrow navigation
+
+Generate the web payload like this:
+
+```bash
+PYTHONPATH=src python3 scripts/export_web_dashboard.py
+```
+
+This writes:
+
+```text
+apps/web/public/data/dashboard.json
+```
+
+Run the frontend locally:
+
+```bash
+cd apps/web
+npm install
+npm run dev
+```
+
+For Vercel, set the project root to:
+
+```text
+apps/web
 ```
