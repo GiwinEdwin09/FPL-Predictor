@@ -22,6 +22,11 @@ def test_extract_gameweek_supports_players() -> None:
     assert extract_gameweek(path, "players") == 7
 
 
+def test_extract_gameweek_supports_teams() -> None:
+    path = "data/2025-2026/By Gameweek/GW4/teams.csv"
+    assert extract_gameweek(path, "teams") == 4
+
+
 def test_extract_gameweek_rejects_non_matches_file() -> None:
     path = "data/2025-2026/By Gameweek/GW29/fixtures.csv"
     assert extract_gameweek(path) is None
@@ -76,4 +81,15 @@ def test_find_season_dataset_paths_prefers_players_master_file() -> None:
     ]
     assert find_season_dataset_paths(paths, "2025-2026", DATASET_CONFIGS["players"]) == [
         "data/2025-2026/players.csv",
+    ]
+
+
+def test_find_season_dataset_paths_prefers_teams_master_file() -> None:
+    paths = [
+        "data/2025-2026/By Gameweek/GW1/teams.csv",
+        "data/2025-2026/By Gameweek/GW2/teams.csv",
+        "data/2025-2026/teams.csv",
+    ]
+    assert find_season_dataset_paths(paths, "2025-2026", DATASET_CONFIGS["teams"]) == [
+        "data/2025-2026/teams.csv",
     ]

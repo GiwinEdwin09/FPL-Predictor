@@ -31,7 +31,7 @@ class DatasetConfig:
     name: str
     prefer_season_master: bool
     sort_columns: tuple[str, ...]
-    output_filename: str
+    output_filename: str | None
 
 
 DATASET_CONFIGS = {
@@ -40,6 +40,12 @@ DATASET_CONFIGS = {
         prefer_season_master=True,
         sort_columns=("kickoff_time", "gameweek", "home_team", "away_team"),
         output_filename="matches.csv",
+    ),
+    "teams": DatasetConfig(
+        name="teams",
+        prefer_season_master=True,
+        sort_columns=("source_season", "id"),
+        output_filename=None,
     ),
     "players": DatasetConfig(
         name="players",
@@ -240,7 +246,10 @@ def build_master_dataset(
     data_dir: Path,
     dataset: DatasetConfig,
     season_frames: list[tuple[str, pd.DataFrame]],
-) -> Path:
+) -> Path | None:
+    if dataset.output_filename is None:
+        return None
+
     master_frames: list[pd.DataFrame] = []
     for season, frame in season_frames:
         prepared = frame.copy()
@@ -291,10 +300,12 @@ def run_sync(
             season_frames.append((season, frame))
 
         master_path = build_master_dataset(data_dir, dataset, season_frames)
-        datasets_summary[dataset_name] = {
-            "output_path": str(master_path),
+        dataset_summary: dict[str, object] = {
             "seasons": [asdict(result) for result in results],
         }
+        if master_path is not None:
+            dataset_summary["output_path"] = str(master_path)
+        datasets_summary[dataset_name] = dataset_summary
 
     state_path = write_sync_state(data_dir, datasets_summary)
 
@@ -319,7 +330,7 @@ def parse_args() -> argparse.Namespace:
         nargs="+",
         choices=sorted(DATASET_CONFIGS),
         default=list(DEFAULT_DATASETS),
-        help="Datasets to sync. Defaults to matches, players, playerstats, and playermatchstats.",
+        help="Datasets to sync. Defaults to matches, teams, players, playerstats, and playermatchstats.",
     )
     parser.add_argument(
         "--force",

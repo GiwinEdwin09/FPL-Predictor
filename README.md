@@ -7,12 +7,12 @@ Premier League prediction pipeline built on top of the
 
 This repo now includes a sync script that:
 
-- syncs `players`, `matches`, `playerstats`, and `playermatchstats`
+- syncs `teams`, `players`, `matches`, `playerstats`, and `playermatchstats`
 - pulls CSVs directly from GitHub raw URLs with `pandas`
 - stores local season copies under `data/raw/{season}/`
 - rebuilds season files from top-level gameweek snapshots when the upstream repo does not expose a single cumulative CSV
 - only overwrites a local season file when the upstream data has more rows or the content hash changes
-- writes canonical merged outputs as `data/players.csv`, `data/matches.csv`, `data/playerstats.csv`, and `data/playermatchstats.csv`
+- keeps `teams.csv` season-specific and writes canonical merged outputs for `players.csv`, `matches.csv`, `playerstats.csv`, and `playermatchstats.csv`
 - records sync metadata in `data/sync_state.json`
 
 ### Project structure
@@ -21,11 +21,13 @@ This repo now includes a sync script that:
 data/
   raw/
     2024-2025/
+      teams.csv
       players.csv
       matches.csv
       playerstats.csv
       playermatchstats.csv
     2025-2026/
+      teams.csv
       players.csv
       matches.csv
       playerstats.csv
@@ -62,13 +64,14 @@ python3 scripts/sync_matches.py --force
 To sync a subset of datasets:
 
 ```bash
-python3 scripts/sync_matches.py --datasets players matches
+python3 scripts/sync_matches.py --datasets teams players matches
 ```
 
 The script prints a JSON summary with the source URLs, row counts, and whether each season file was updated.
 
 ### How 2025/2026 is handled
 
+- `teams.csv`: use the season-level file and keep it only at `data/raw/2025-2026/teams.csv`
 - `players.csv`: use the season-level `data/2025-2026/players.csv`
 - `matches.csv`: concatenate `data/2025-2026/By Gameweek/GW*/matches.csv`
 - `playerstats.csv`: concatenate `data/2025-2026/By Gameweek/GW*/playerstats.csv`
