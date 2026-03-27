@@ -1,255 +1,92 @@
 # FPL-Predictor
 
-Premier League prediction pipeline built on top of the
-[FPL Core Insights](https://github.com/olbauday/FPL-Core-Insights) dataset.
+FPL-Predictor is a Premier League forecasting product built on top of the
+[FPL Core Insights](https://github.com/olbauday/FPL-Core-Insights) data source.
+It combines football data engineering, an XGBoost match model, a FastAPI backend,
+and a Next.js frontend to turn raw match updates into a browsable prediction site.
 
-## Phase 1: Automated Data Ingestion
+## What The Product Does
 
-This repo now includes a sync script that:
+The website is designed around two simple use cases:
 
-- syncs `teams`, `players`, `matches`, `playerstats`, and `playermatchstats`
-- pulls CSVs directly from GitHub raw URLs with `pandas`
-- stores local season copies under `data/raw/{season}/`
-- rebuilds season files from top-level gameweek snapshots when the upstream repo does not expose a single cumulative CSV
-- only overwrites a local season file when the upstream data has more rows or the content hash changes
-- keeps `teams.csv` season-specific and writes canonical merged outputs for `players.csv`, `matches.csv`, `playerstats.csv`, and `playermatchstats.csv`
-- records sync metadata in `data/sync_state.json`
+- browse upcoming Premier League fixtures and see calibrated home win, draw, and away win probabilities
+- browse finished matches and review the key stats behind what happened
 
-### Project structure
-
-```text
-data/
-  raw/
-    2024-2025/
-      teams.csv
-      players.csv
-      matches.csv
-      playerstats.csv
-      playermatchstats.csv
-    2025-2026/
-      teams.csv
-      players.csv
-      matches.csv
-      playerstats.csv
-      playermatchstats.csv
-  players.csv
-  matches.csv
-  playerstats.csv
-  playermatchstats.csv
-  sync_state.json
-scripts/
-  sync_matches.py
-src/
-  fpl_predictor/data_ingestion.py
-```
-
-### Install
-
-```bash
-python3 -m pip install -e .
-```
-
-### Run the sync
-
-```bash
-python3 scripts/sync_matches.py
-```
-
-Use `--force` to overwrite local files even if the row count has not grown:
-
-```bash
-python3 scripts/sync_matches.py --force
-```
-
-To sync a subset of datasets:
-
-```bash
-python3 scripts/sync_matches.py --datasets teams players matches
-```
-
-The script prints a JSON summary with the source URLs, row counts, and whether each season file was updated.
-
-### How 2025/2026 is handled
-
-- `teams.csv`: use the season-level file and keep it only at `data/raw/2025-2026/teams.csv`
-- `players.csv`: use the season-level `data/2025-2026/players.csv`
-- `matches.csv`: concatenate `data/2025-2026/By Gameweek/GW*/matches.csv`
-- `playerstats.csv`: concatenate `data/2025-2026/By Gameweek/GW*/playerstats.csv`
-- `playermatchstats.csv`: concatenate `data/2025-2026/By Gameweek/GW*/playermatchstats.csv`
-- This will be the case for the current season depending on how the original dataset is being kept
-
-For gameweek-built datasets, the pipeline stamps a `source_gameweek` column when the upstream CSV does not already include one. `playermatchstats` should still be joined back to `matches` through `match_id` when you need the authoritative fixture gameweek.
-
-## Next phases
-
-- Build kickoff-time-aware rolling team and player feature factories from the canonical datasets
-- Train a time-aware multi-class result model
-- Automate retraining and fixture predictions on a schedule
-
-### Phase 2 Starter
-
-Build the first pre-match feature table from the previous five finished matches per team:
-
-```bash
-PYTHONPATH=src python3 scripts/build_phase2_features.py
-```
-
-This writes:
-
-```text
-data/features/match_pre_match_features.csv
-```
-
-The current Phase 2 starter uses `kickoff_time` to order matches chronologically, falls back to `source_gameweek` / `gameweek` when kickoff is missing, avoids leaking same-batch results into the snapshot, and includes rolling averages for:
-
-- xG
-- xGA
-- shots on target
-- big chances
-- tackles won
-- clean sheet rate
-- days of rest
-- current Elo from the match row
-
-The output feature table only keeps Premier League fixtures, but each team's last-five history can include other competitions as long as they happened earlier in the timeline.
-
-If you need all competitions for model training, build the full feature table like this:
-
-```bash
-PYTHONPATH=src python3 scripts/build_phase2_features.py --competition-scope all --output-path data/features/all_match_pre_match_features.csv
-```
-
-## Phase 3 Starter
-
-Train the first XGBoost result model on the Phase 2 features:
-
-```bash
-PYTHONPATH=src python3 scripts/train_phase3_model.py
-```
-
-This writes:
-
-```text
-data/models/model_v2.json
-data/models/model_v2_metrics.json
-```
-
-The current Phase 3 trainer:
-
-- uses `XGBoost` for a 3-class target: `0` home win, `1` draw, `2` away win
-- trains on all finished matches before the validation window, with competition-aware sample weights
-- validates on the most recent 4 weeks of finished 2025/26 Premier League matches
-- uses `kickoff_time` as the main split boundary and falls back to gameweek ordering if needed
-- adds contextual competition features such as `is_cup_match` and `is_european_match`
-- calibrates probabilities with temperature scaling on a recent pre-validation Premier League slice to improve log loss and Brier score
-- reports `accuracy`, multiclass `log loss`, and multiclass `Brier score`
-
-Current `model_v2` validation metrics:
-
-- accuracy: `0.45`
-- multiclass log loss: `1.0847`
-- multiclass Brier score: `0.6540`
-
-Sample weighting currently defaults to:
-
-- Premier League: `1.0`
-- Champions League / Europa League / Conference League: `0.8`
-- EFL Cup: `0.4`
-- unknown cup-style competitions: `0.4`
-
-## Reference Snapshot
-
-Archive the original synced datasets into a single compressed snapshot for future reference:
-
-```bash
-PYTHONPATH=src python3 scripts/archive_original_data.py
-```
-
-This writes a timestamped folder and `.tar.gz` archive under:
-
-```text
-data/reference/
-```
-
-## Web Frontend
-
-The Next.js frontend now lives in:
-
-```text
-apps/web
-```
-
-It reads a generated dashboard payload that includes:
-
-- upcoming unfinished Premier League fixtures
-- calibrated home/draw/away probabilities from `model_v2`
-- historical finished matches with key stats and pre-match context
-
-The app structure is:
+The frontend is split into three pages:
 
 - `/`: landing page that explains the website
-- `/predictions`: upcoming fixtures grouped by gameweek with arrow navigation
-- `/history`: historical matches grouped by gameweek with arrow navigation
+- `/predictions`: upcoming matches, grouped by gameweek, with arrow-based week navigation
+- `/history`: finished matches, grouped by gameweek, with important stat summaries
 
-Generate the web payload like this:
+## What Powers It
 
-```bash
-PYTHONPATH=src python3 scripts/export_web_dashboard.py
-```
+Behind the site, the project currently includes:
 
-This writes:
+- automated ingestion of `teams`, `players`, `matches`, `playerstats`, and `playermatchstats`
+- kickoff-time-aware rolling features for each club's previous matches
+- an XGBoost result model trained on Premier League data with cup and European context
+- probability calibration to improve confidence quality
+- a FastAPI backend for serving dashboard, predictions, and historical match data
+- a Next.js frontend deployed separately from the API
 
-```text
-apps/web/public/data/dashboard.json
-```
+## Product Experience
 
-Run the frontend locally:
+### Predictions
 
-```bash
-cd apps/web
-npm install
-npm run dev
-```
+The predictions page focuses on future Premier League fixtures.
+For each match, the site presents:
 
-For Vercel, set the project root to:
+- home win probability
+- draw probability
+- away win probability
+- supporting context such as Elo, rest days, and recent xG form
 
-```text
-apps/web
-```
+### Historical Match View
 
-If you deploy the frontend separately from the API, set:
+The history page focuses on completed matches.
+It highlights the most useful summary stats, including:
 
-```text
-API_BASE_URL=https://your-api-host
-```
+- scoreline
+- expected goals (xG)
+- shots on target
+- big chances
+- possession
+- selected pre-match context
 
-The web app will fetch `/api/dashboard` from that backend instead of reading the local JSON file.
+## Architecture
 
-## FastAPI Backend
+The product is currently split across:
 
-The backend entrypoint lives at:
+- [apps/web](/Users/giwin/Documents/FPLpred/FPL-Predictor/apps/web): Next.js frontend
+- [apps/api](/Users/giwin/Documents/FPLpred/FPL-Predictor/apps/api): FastAPI backend entrypoint
+- [src/fpl_predictor](/Users/giwin/Documents/FPLpred/FPL-Predictor/src/fpl_predictor): shared ingestion, feature, training, and export logic
+- [data](/Users/giwin/Documents/FPLpred/FPL-Predictor/data): synced datasets, features, models, and reference artifacts
 
-```text
-apps/api/main.py
-```
+## Deployment
 
-Run it locally with:
+Current deployment shape:
 
-```bash
-uvicorn apps.api.main:app --host 0.0.0.0 --port 8000 --reload
-```
+- frontend on Vercel
+- backend on Railway
 
-Main endpoints:
+The frontend can either:
 
-- `GET /health`
-- `GET /api/dashboard`
-- `GET /api/predictions/upcoming`
-- `GET /api/history`
-- `POST /api/admin/refresh`
+- read a generated local dashboard payload, or
+- fetch live data from the FastAPI backend using `API_BASE_URL`
 
-Useful environment variables:
+## Build Progress
 
-- `API_BASE_URL`: frontend uses this to fetch the backend
-- `CORS_ALLOW_ORIGINS`: comma-separated allowed origins for the API
-- `ADMIN_TOKEN`: optional token required for `POST /api/admin/refresh`
-- `DASHBOARD_CACHE_PATH`: where the backend reads/writes the cached dashboard JSON
+All implementation notes, build steps, model metrics, ingestion details, and deployment instructions now live in:
+
+- [Build progress/README.md](/Users/giwin/Documents/FPLpred/FPL-Predictor/Build%20progress/README.md)
+
+## Status
+
+The product now has:
+
+- a live frontend structure
+- a deployed backend path
+- trained model artifacts
+- exported prediction and historical datasets for the site
+
+The next major milestone is full automation so the deployed website refreshes itself whenever upstream data changes.
