@@ -82,6 +82,33 @@ For gameweek-built datasets, the pipeline stamps a `source_gameweek` column when
 
 ## Next phases
 
-- Build rolling team and player feature factories from the canonical datasets
+- Build kickoff-time-aware rolling team and player feature factories from the canonical datasets
 - Train a time-aware multi-class result model
 - Automate retraining and fixture predictions on a schedule
+
+### Phase 2 Starter
+
+Build the first pre-match feature table from the previous five finished matches per team:
+
+```bash
+PYTHONPATH=src python3 scripts/build_phase2_features.py
+```
+
+This writes:
+
+```text
+data/features/match_pre_match_features.csv
+```
+
+The current Phase 2 starter uses `kickoff_time` to order matches chronologically, falls back to `source_gameweek` / `gameweek` when kickoff is missing, avoids leaking same-batch results into the snapshot, and includes rolling averages for:
+
+- xG
+- xGA
+- shots on target
+- big chances
+- tackles won
+- clean sheet rate
+- days of rest
+- current Elo from the match row
+
+The output feature table only keeps Premier League fixtures, but each team's last-five history can include other competitions as long as they happened earlier in the timeline.
