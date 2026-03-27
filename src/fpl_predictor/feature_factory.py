@@ -3,7 +3,7 @@ from __future__ import annotations
 import argparse
 from collections import defaultdict, deque
 from pathlib import Path
-from typing import Any
+from typing import Any, Literal
 
 import pandas as pd
 
@@ -11,6 +11,8 @@ WINDOW_SIZE = 5
 AVG_METRICS = ("xg", "xga", "shots_on_target", "big_chances", "tackles_won")
 RATE_METRICS = ("clean_sheet",)
 PREMIER_LEAGUE_TOURNAMENTS = frozenset({"prem", "premier league"})
+EUROPEAN_TOURNAMENTS = frozenset({"champions-league", "europa-league", "conference-league"})
+DOMESTIC_CUP_TOURNAMENTS = frozenset({"efl-cup", "fa-cup", "league-cup", "carabao-cup"})
 BASE_COLUMNS = (
     "match_id",
     "source_season",
@@ -43,6 +45,30 @@ def is_premier_league_match(match_row: pd.Series) -> bool:
         return True
     match_id = str(match_row.get("match_id", "")).casefold()
     return "-prem-" in match_id
+
+
+def competition_code(match_row: pd.Series) -> str:
+    tournament = normalize_tournament(match_row.get("tournament"))
+    if tournament:
+        return tournament
+    if is_premier_league_match(match_row):
+        return "prem"
+    return "unknown"
+
+
+def is_cup_match(match_row: pd.Series) -> bool:
+    competition = competition_code(match_row)
+    return competition != "prem"
+
+
+def is_european_match(match_row: pd.Series) -> bool:
+    return competition_code(match_row) in EUROPEAN_TOURNAMENTS
+
+
+def should_emit_match(match_row: pd.Series, competition_scope: Literal["all", "premier_league"]) -> bool:
+    if competition_scope == "all":
+        return True
+    return is_premier_league_match(match_row)
 
 
 def build_team_observations(match_row: pd.Series) -> list[dict[str, Any]]:
@@ -144,9 +170,13 @@ def is_finished_match(match_row: pd.Series) -> bool:
     return bool(finished)
 
 
-def build_pre_match_feature_table(matches: pd.DataFrame, window_size: int = WINDOW_SIZE) -> pd.DataFrame:
+def build_pre_match_feature_table(
+    matches: pd.DataFrame,
+    window_size: int = WINDOW_SIZE,
+    competition_scope: Literal["all", "premier_league"] = "premier_league",
+) -> pd.DataFrame:
     working = matches.copy()
-    working["kickoff_time"] = pd.to_datetime(working["kickoff_time"], errors="coerce")
+    working["kickoff_time"] = pd.to_datetime(working["kickoff_time"], errors="coerce", format="mixed")
     working["_ordering_gameweek"] = pd.to_numeric(
         working.get("source_gameweek", working.get("gameweek")),
         errors="coerce",
@@ -182,6 +212,10 @@ def build_pre_match_feature_table(matches: pd.DataFrame, window_size: int = WIND
                 else pd.NaT
             )
             feature_row = {column: match_row[column] for column in BASE_COLUMNS if column in match_row.index}
+            feature_row["competition_code"] = competition_code(match_row)
+            feature_row["is_premier_league_match"] = int(is_premier_league_match(match_row))
+            feature_row["is_cup_match"] = int(is_cup_match(match_row))
+            feature_row["is_european_match"] = int(is_european_match(match_row))
             feature_row.update(
                 compute_team_snapshot(
                     prefix="home",
@@ -205,7 +239,7 @@ def build_pre_match_feature_table(matches: pd.DataFrame, window_size: int = WIND
             batch_features.append(feature_row)
 
         for feature_row, (_, match_row) in zip(batch_features, batch.iterrows(), strict=True):
-            if is_premier_league_match(match_row):
+            if should_emit_match(match_row, competition_scope):
                 feature_rows.append(feature_row)
 
         for _, match_row in batch.iterrows():
@@ -231,9 +265,14 @@ def build_feature_table(
     matches_path: Path,
     output_path: Path,
     window_size: int = WINDOW_SIZE,
+    competition_scope: Literal["all", "premier_league"] = "premier_league",
 ) -> Path:
     matches = pd.read_csv(matches_path)
-    feature_table = build_pre_match_feature_table(matches, window_size=window_size)
+    feature_table = build_pre_match_feature_table(
+        matches,
+        window_size=window_size,
+        competition_scope=competition_scope,
+    )
     output_path.parent.mkdir(parents=True, exist_ok=True)
     feature_table.to_csv(output_path, index=False)
     return output_path
@@ -259,6 +298,12 @@ def parse_args() -> argparse.Namespace:
         default=WINDOW_SIZE,
         help="Number of previous finished matches to include per team.",
     )
+    parser.add_argument(
+        "--competition-scope",
+        choices=("premier_league", "all"),
+        default="premier_league",
+        help="Whether to emit only Premier League fixtures or all competitions.",
+    )
     return parser.parse_args()
 
 
@@ -268,6 +313,7 @@ def main() -> None:
         matches_path=Path(args.matches_path),
         output_path=Path(args.output_path),
         window_size=args.window_size,
+        competition_scope=args.competition_scope,
     )
     print(output_path)
 

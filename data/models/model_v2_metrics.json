@@ -1,0 +1,69 @@
+{
+  "model_path": "data/models/model_v2.json",
+  "metrics_path": "data/models/model_v2_metrics.json",
+  "prediction_feature_table_path": "data/features/match_pre_match_features.csv",
+  "training_feature_table_path": "data/features/all_match_pre_match_features.csv",
+  "target_distribution_train": {
+    "0": 302,
+    "1": 186,
+    "2": 266
+  },
+  "target_distribution_validation": {
+    "0": 14,
+    "1": 12,
+    "2": 14
+  },
+  "competition_distribution_train": {
+    "prem": 649,
+    "champions-league": 48,
+    "efl-cup": 37,
+    "europa-league": 14,
+    "conference-league": 6
+  },
+  "split": {
+    "train_rows": 754,
+    "validation_rows": 40,
+    "validation_cutoff_utc": "2026-02-22T14:15:00+00:00",
+    "latest_finished_kickoff_utc": "2026-03-22T14:15:00+00:00"
+  },
+  "calibration_temperature": 4.7,
+  "calibration_rows": 34,
+  "calibration_cutoff_utc": "2026-02-01T14:00:00+00:00",
+  "metrics": {
+    "accuracy": 0.45,
+    "multiclass_log_loss": 1.084706015807526,
+    "multiclass_brier_score": 0.6539718633727982
+  },
+  "feature_columns": [
+    "is_cup_match",
+    "is_european_match",
+    "is_premier_league_match",
+    "home_last5_matches",
+    "home_days_rest",
+    "home_current_elo",
+    "home_last5_avg_xg",
+    "home_last5_avg_xga",
+    "home_last5_avg_shots_on_target",
+    "home_last5_avg_big_chances",
+    "home_last5_avg_tackles_won",
+    "home_last5_clean_sheet_rate",
+    "away_last5_matches",
+    "away_days_rest",
+    "away_current_elo",
+    "away_last5_avg_xg",
+    "away_last5_avg_xga",
+    "away_last5_avg_shots_on_target",
+    "away_last5_avg_big_chances",
+    "away_last5_avg_tackles_won",
+    "away_last5_clean_sheet_rate",
+    "elo_diff",
+    "days_rest_diff",
+    "last5_matches_diff",
+    "last5_avg_xg_diff",
+    "last5_avg_xga_diff",
+    "last5_avg_shots_on_target_diff",
+    "last5_avg_big_chances_diff",
+    "last5_avg_tackles_won_diff",
+    "last5_clean_sheet_rate_diff"
+  ]
+}

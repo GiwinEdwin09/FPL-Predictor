@@ -1,0 +1,86 @@
+{
+  "archived_at_utc": "2026-03-27T02:04:43.227062+00:00",
+  "snapshot_root": "data/reference/original_datasets_snapshot_20260327T020443Z",
+  "files": [
+    {
+      "path": "data/raw/.DS_Store",
+      "sha256": "ede33cf5d3a0d28123a15dbf1f4e8084108810152cca7a04b87f86e9bb5beb2b",
+      "size_bytes": 6148
+    },
+    {
+      "path": "data/raw/2024-2025/matches.csv",
+      "sha256": "a5176d5e9711f3b8fe4acbfa1e5aec4f5c6422feb6922bc920e8144146f1e612",
+      "size_bytes": 164182
+    },
+    {
+      "path": "data/raw/2024-2025/playermatchstats.csv",
+      "sha256": "514bfe901ec2d25fad21ce074ed3009d6dd637ca1e58b3d2e95f459ad64d1373",
+      "size_bytes": 1972629
+    },
+    {
+      "path": "data/raw/2024-2025/players.csv",
+      "sha256": "c6f589f5ebafe43a6a5f93b80bf53e35baa16f9af2c5d67e3276a942346b9f19",
+      "size_bytes": 38531
+    },
+    {
+      "path": "data/raw/2024-2025/playerstats.csv",
+      "sha256": "9aaa0928f25499da1bb9b1532a91cfa2943b5d05d0e7904cefd600cdd75263a6",
+      "size_bytes": 5778361
+    },
+    {
+      "path": "data/raw/2024-2025/teams.csv",
+      "sha256": "008d7b1ff53199a1410d7fcb0bf77d0039b26cc56a20f911b53a4cf27b444d94",
+      "size_bytes": 1342
+    },
+    {
+      "path": "data/raw/2025-2026/matches.csv",
+      "sha256": "a1556b22639eec6fa4be244a260c3c5273d7b35b25717317f327ef14bba1b9e0",
+      "size_bytes": 287662
+    },
+    {
+      "path": "data/raw/2025-2026/playermatchstats.csv",
+      "sha256": "cc832356c68ab131a4abf5c19ee707ca2d935fc06baff0474beb6fc774932dbd",
+      "size_bytes": 2683336
+    },
+    {
+      "path": "data/raw/2025-2026/players.csv",
+      "sha256": "a861229699fd8a9f3e3d150592fa0d3ecb285c771e53b2656b475f9d9ffc9f8e",
+      "size_bytes": 39606
+    },
+    {
+      "path": "data/raw/2025-2026/playerstats.csv",
+      "sha256": "a70ebec7c0112c29a874472044159f83030c6e97b3490ed212945756eba12fe4",
+      "size_bytes": 7697083
+    },
+    {
+      "path": "data/raw/2025-2026/teams.csv",
+      "sha256": "08bb3378859af9bb682dff773723d3212316c7ba1f1b7cb361fa5bc222f70aeb",
+      "size_bytes": 1630
+    },
+    {
+      "path": "data/matches.csv",
+      "sha256": "8ce6d0a08700c18fd8830772d29dc198f262a683af84a81ec527cc541e012f18",
+      "size_bytes": 528343
+    },
+    {
+      "path": "data/players.csv",
+      "sha256": "d191af721f05415416799129769ff02c1d614c0267ec49e81dc5badc2f3a954e",
+      "size_bytes": 94368
+    },
+    {
+      "path": "data/playerstats.csv",
+      "sha256": "8131e8fc72c33f364ac227d32e7e5b196f0bd7db9573a609a028f6f4d1b85fd2",
+      "size_bytes": 15810820
+    },
+    {
+      "path": "data/playermatchstats.csv",
+      "sha256": "8dd9513b94a126ca7acee17633f468039d39ca7e8cff9d519cbcae0f2e52ffd6",
+      "size_bytes": 5229008
+    },
+    {
+      "path": "data/sync_state.json",
+      "sha256": "ee84a8bab6999d587aaa4a32cd3b10f189b7d3176e1088be1b525750d43a9da0",
+      "size_bytes": 29235
+    }
+  ]
+}

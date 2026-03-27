@@ -204,3 +204,38 @@ def test_build_pre_match_feature_table_filters_to_premier_league_but_uses_other_
     assert row["home_last5_matches"] == 1
     assert row["home_last5_avg_xg"] == 1.4
     assert math.isnan(row["home_days_rest"])
+
+
+def test_build_pre_match_feature_table_can_emit_all_competitions() -> None:
+    matches = pd.DataFrame(
+        [
+            {
+                "match_id": "cup1",
+                "source_season": "2025-2026",
+                "source_gameweek": 1,
+                "tournament": "europa-league",
+                "gameweek": 1,
+                "kickoff_time": "2025-08-01 19:00:00",
+                "finished": False,
+                "home_team": 1,
+                "away_team": 2,
+                "home_team_elo": 1500,
+                "away_team_elo": 1400,
+                "home_score": None,
+                "away_score": None,
+                "home_expected_goals_xg": None,
+                "away_expected_goals_xg": None,
+                "home_shots_on_target": None,
+                "away_shots_on_target": None,
+                "home_big_chances": None,
+                "away_big_chances": None,
+                "home_tackles_won": None,
+                "away_tackles_won": None,
+            }
+        ]
+    )
+
+    feature_table = build_pre_match_feature_table(matches, competition_scope="all")
+    assert feature_table["match_id"].tolist() == ["cup1"]
+    assert feature_table.iloc[0]["is_cup_match"] == 1
+    assert feature_table.iloc[0]["is_european_match"] == 1

@@ -112,3 +112,55 @@ The current Phase 2 starter uses `kickoff_time` to order matches chronologically
 - current Elo from the match row
 
 The output feature table only keeps Premier League fixtures, but each team's last-five history can include other competitions as long as they happened earlier in the timeline.
+
+If you need all competitions for model training, build the full feature table like this:
+
+```bash
+PYTHONPATH=src python3 scripts/build_phase2_features.py --competition-scope all --output-path data/features/all_match_pre_match_features.csv
+```
+
+## Phase 3 Starter
+
+Train the first XGBoost result model on the Phase 2 features:
+
+```bash
+PYTHONPATH=src python3 scripts/train_phase3_model.py
+```
+
+This writes:
+
+```text
+data/models/model_v2.json
+data/models/model_v2_metrics.json
+```
+
+The current Phase 3 trainer:
+
+- uses `XGBoost` for a 3-class target: `0` home win, `1` draw, `2` away win
+- trains on all finished matches before the validation window, with competition-aware sample weights
+- validates on the most recent 4 weeks of finished 2025/26 Premier League matches
+- uses `kickoff_time` as the main split boundary and falls back to gameweek ordering if needed
+- adds contextual competition features such as `is_cup_match` and `is_european_match`
+- calibrates probabilities with temperature scaling on a recent pre-validation Premier League slice to improve log loss and Brier score
+- reports `accuracy`, multiclass `log loss`, and multiclass `Brier score`
+
+Sample weighting currently defaults to:
+
+- Premier League: `1.0`
+- Champions League / Europa League / Conference League: `0.8`
+- EFL Cup: `0.4`
+- unknown cup-style competitions: `0.4`
+
+## Reference Snapshot
+
+Archive the original synced datasets into a single compressed snapshot for future reference:
+
+```bash
+PYTHONPATH=src python3 scripts/archive_original_data.py
+```
+
+This writes a timestamped folder and `.tar.gz` archive under:
+
+```text
+data/reference/
+```
