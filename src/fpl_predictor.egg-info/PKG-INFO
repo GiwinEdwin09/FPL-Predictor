@@ -1,3 +1,16 @@
+Metadata-Version: 2.4
+Name: fpl-predictor
+Version: 0.1.0
+Summary: Premier League prediction pipeline
+Requires-Python: >=3.12
+Description-Content-Type: text/markdown
+Requires-Dist: fastapi>=0.115.0
+Requires-Dist: pandas>=2.2.0
+Requires-Dist: requests>=2.32.0
+Requires-Dist: scikit-learn>=1.5.0
+Requires-Dist: uvicorn>=0.30.0
+Requires-Dist: xgboost>=2.1.0
+
 # FPL-Predictor
 
 Premier League prediction pipeline built on top of the
@@ -216,40 +229,3 @@ For Vercel, set the project root to:
 ```text
 apps/web
 ```
-
-If you deploy the frontend separately from the API, set:
-
-```text
-API_BASE_URL=https://your-api-host
-```
-
-The web app will fetch `/api/dashboard` from that backend instead of reading the local JSON file.
-
-## FastAPI Backend
-
-The backend entrypoint lives at:
-
-```text
-apps/api/main.py
-```
-
-Run it locally with:
-
-```bash
-uvicorn apps.api.main:app --host 0.0.0.0 --port 8000 --reload
-```
-
-Main endpoints:
-
-- `GET /health`
-- `GET /api/dashboard`
-- `GET /api/predictions/upcoming`
-- `GET /api/history`
-- `POST /api/admin/refresh`
-
-Useful environment variables:
-
-- `API_BASE_URL`: frontend uses this to fetch the backend
-- `CORS_ALLOW_ORIGINS`: comma-separated allowed origins for the API
-- `ADMIN_TOKEN`: optional token required for `POST /api/admin/refresh`
-- `DASHBOARD_CACHE_PATH`: where the backend reads/writes the cached dashboard JSON

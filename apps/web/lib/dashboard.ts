@@ -87,7 +87,17 @@ export type DashboardData = {
 const dashboardPath = path.join(process.cwd(), "public", "data", "dashboard.json");
 
 export async function loadDashboardData(): Promise<DashboardData> {
+  const apiBaseUrl = process.env.API_BASE_URL;
+  if (apiBaseUrl) {
+    const response = await fetch(`${apiBaseUrl.replace(/\/$/, "")}/api/dashboard`, {
+      cache: "no-store",
+    });
+    if (!response.ok) {
+      throw new Error(`Failed to load dashboard from API: ${response.status}`);
+    }
+    return (await response.json()) as DashboardData;
+  }
+
   const raw = await fs.readFile(dashboardPath, "utf-8");
   return JSON.parse(raw) as DashboardData;
 }
-

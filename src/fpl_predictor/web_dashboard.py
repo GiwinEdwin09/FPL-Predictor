@@ -266,18 +266,17 @@ def build_historical_matches(
     return items
 
 
-def export_dashboard(
-    output_path: Path,
+def build_dashboard_payload(
     data_dir: Path,
     feature_table_path: Path,
     matches_path: Path,
     model_path: Path,
     metrics_path: Path,
-) -> Path:
+) -> dict[str, Any]:
     team_lookup = load_team_lookup(data_dir)
     temperature, model_metadata = load_model_metadata(metrics_path)
 
-    dashboard = {
+    return {
         "generatedAtUtc": datetime.now(UTC).isoformat(),
         "currentSeason": CURRENT_SEASON,
         "model": {
@@ -299,6 +298,23 @@ def export_dashboard(
             team_lookup=team_lookup,
         ),
     }
+
+
+def export_dashboard(
+    output_path: Path,
+    data_dir: Path,
+    feature_table_path: Path,
+    matches_path: Path,
+    model_path: Path,
+    metrics_path: Path,
+) -> Path:
+    dashboard = build_dashboard_payload(
+        data_dir=data_dir,
+        feature_table_path=feature_table_path,
+        matches_path=matches_path,
+        model_path=model_path,
+        metrics_path=metrics_path,
+    )
 
     output_path.parent.mkdir(parents=True, exist_ok=True)
     output_path.write_text(json.dumps(dashboard, indent=2), encoding="utf-8")
