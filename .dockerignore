@@ -1,0 +1,17 @@
+.git
+.gitignore
+.DS_Store
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+
+apps/web/.next/
+apps/web/node_modules/
+node_modules/
+
+tests/
+scripts/
+TeamImages/
+data/reference/
