@@ -282,6 +282,7 @@ def run_sync(
 ) -> dict[str, object]:
     repo_paths = fetch_repository_paths()
     datasets_summary: dict[str, object] = {}
+    any_updated = False
 
     for dataset_name in dataset_names:
         dataset = DATASET_CONFIGS[dataset_name]
@@ -298,6 +299,7 @@ def run_sync(
             )
             results.append(result)
             season_frames.append((season, frame))
+            any_updated = any_updated or result.updated
 
         master_path = build_master_dataset(data_dir, dataset, season_frames)
         dataset_summary: dict[str, object] = {
@@ -307,11 +309,14 @@ def run_sync(
             dataset_summary["output_path"] = str(master_path)
         datasets_summary[dataset_name] = dataset_summary
 
-    state_path = write_sync_state(data_dir, datasets_summary)
+    state_path = data_dir / "sync_state.json"
+    if any_updated or not state_path.exists():
+        state_path = write_sync_state(data_dir, datasets_summary)
 
     return {
         "data_dir": str(data_dir),
         "sync_state_path": str(state_path),
+        "any_updated": any_updated,
         "datasets": datasets_summary,
     }
 

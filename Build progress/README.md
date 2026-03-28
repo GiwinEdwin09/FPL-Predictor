@@ -246,6 +246,28 @@ Useful environment variables:
 - `ADMIN_TOKEN`
 - `DASHBOARD_CACHE_PATH`
 
+## Automation
+
+The scheduled refresh pipeline now lives in:
+
+- [src/fpl_predictor/automation.py](/Users/giwin/Documents/FPLpred/FPL-Predictor/src/fpl_predictor/automation.py)
+- [scripts/run_refresh_pipeline.py](/Users/giwin/Documents/FPLpred/FPL-Predictor/scripts/run_refresh_pipeline.py)
+- [scheduled-refresh.yml](/Users/giwin/Documents/FPLpred/FPL-Predictor/.github/workflows/scheduled-refresh.yml)
+
+What it does:
+
+1. sync upstream source data
+2. detect whether anything actually changed
+3. rebuild prediction-facing and all-competition feature tables
+4. retrain `model_v2`
+5. regenerate the frontend dashboard payload
+6. commit refreshed artifacts back to the repository if there was a real change
+
+Schedule:
+
+- `05:30 UTC`
+- `17:30 UTC`
+
 ## Deployment Notes
 
 ### Vercel
