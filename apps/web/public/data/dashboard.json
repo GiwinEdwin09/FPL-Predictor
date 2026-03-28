@@ -1,13 +1,13 @@
 {
-  "generatedAtUtc": "2026-03-28T16:49:19.679683+00:00",
+  "generatedAtUtc": "2026-03-28T16:53:47.319731+00:00",
   "currentSeason": "2025-2026",
   "model": {
     "version": "model_v2",
-    "calibrationTemperature": 4.7,
+    "calibrationTemperature": 5.0,
     "metrics": {
       "accuracy": 0.45,
-      "multiclass_log_loss": 1.084706015807526,
-      "multiclass_brier_score": 0.6539718633727982
+      "multiclass_log_loss": 1.0748799860310034,
+      "multiclass_brier_score": 0.6477933280213944
     },
     "split": {
       "train_rows": 754,
@@ -44,9 +44,9 @@
         "badgePath": "/teams/bournemouth.football-logos.cc.png"
       },
       "probabilities": {
-        "homeWin": 0.4736,
-        "draw": 0.3141,
-        "awayWin": 0.2122
+        "homeWin": 0.4578,
+        "draw": 0.3051,
+        "awayWin": 0.2371
       },
       "context": {
         "homeElo": 2065.0,
@@ -81,9 +81,9 @@
         "badgePath": "/teams/everton.football-logos.cc.png"
       },
       "probabilities": {
-        "homeWin": 0.3938,
-        "draw": 0.2843,
-        "awayWin": 0.3219
+        "homeWin": 0.3917,
+        "draw": 0.295,
+        "awayWin": 0.3133
       },
       "context": {
         "homeElo": 1853.0,
@@ -118,9 +118,9 @@
         "badgePath": "/teams/brighton.football-logos.cc.png"
       },
       "probabilities": {
-        "homeWin": 0.2691,
-        "draw": 0.2823,
-        "awayWin": 0.4487
+        "homeWin": 0.2573,
+        "draw": 0.2972,
+        "awayWin": 0.4455
       },
       "context": {
         "homeElo": 1685.0,
@@ -155,9 +155,9 @@
         "badgePath": "/teams/manchester-city.football-logos.cc.png"
       },
       "probabilities": {
-        "homeWin": 0.4505,
-        "draw": 0.2615,
-        "awayWin": 0.288
+        "homeWin": 0.4209,
+        "draw": 0.2631,
+        "awayWin": 0.316
       },
       "context": {
         "homeElo": 1930.0,
@@ -192,9 +192,9 @@
         "badgePath": "/teams/newcastle.football-logos.cc.png"
       },
       "probabilities": {
-        "homeWin": 0.3571,
-        "draw": 0.2708,
-        "awayWin": 0.3722
+        "homeWin": 0.3532,
+        "draw": 0.2763,
+        "awayWin": 0.3705
       },
       "context": {
         "homeElo": 1806.0,
@@ -229,9 +229,9 @@
         "badgePath": "/teams/fulham.football-logos.cc.png"
       },
       "probabilities": {
-        "homeWin": 0.4416,
-        "draw": 0.2884,
-        "awayWin": 0.27
+        "homeWin": 0.4306,
+        "draw": 0.2964,
+        "awayWin": 0.273
       },
       "context": {
         "homeElo": 1949.0,
@@ -266,9 +266,9 @@
         "badgePath": "/teams/leeds-united.football-logos.cc.png"
       },
       "probabilities": {
-        "homeWin": 0.4061,
-        "draw": 0.2815,
-        "awayWin": 0.3124
+        "homeWin": 0.3962,
+        "draw": 0.2902,
+        "awayWin": 0.3136
       },
       "context": {
         "homeElo": 1881.0,
@@ -303,9 +303,9 @@
         "badgePath": "/teams/aston-villa.football-logos.cc.png"
       },
       "probabilities": {
-        "homeWin": 0.3178,
-        "draw": 0.2213,
-        "awayWin": 0.4609
+        "homeWin": 0.3026,
+        "draw": 0.2271,
+        "awayWin": 0.4702
       },
       "context": {
         "homeElo": 1785.0,
@@ -340,9 +340,9 @@
         "badgePath": "/teams/tottenham.football-logos.cc.png"
       },
       "probabilities": {
-        "homeWin": 0.3297,
-        "draw": 0.2425,
-        "awayWin": 0.4278
+        "homeWin": 0.3118,
+        "draw": 0.2551,
+        "awayWin": 0.4332
       },
       "context": {
         "homeElo": 1706.0,
@@ -377,9 +377,9 @@
         "badgePath": "/teams/wolves.football-logos.cc.png"
       },
       "probabilities": {
-        "homeWin": 0.4669,
-        "draw": 0.2756,
-        "awayWin": 0.2576
+        "homeWin": 0.4244,
+        "draw": 0.2974,
+        "awayWin": 0.2781
       },
       "context": {
         "homeElo": 1744.0,
@@ -414,9 +414,9 @@
         "badgePath": "/teams/sunderland.football-logos.cc.png"
       },
       "probabilities": {
-        "homeWin": 0.4351,
-        "draw": 0.3019,
-        "awayWin": 0.263
+        "homeWin": 0.4078,
+        "draw": 0.3132,
+        "awayWin": 0.279
       },
       "context": {
         "homeElo": 1929.0,
@@ -451,9 +451,9 @@
         "badgePath": "/teams/fulham.football-logos.cc.png"
       },
       "probabilities": {
-        "homeWin": 0.4138,
-        "draw": 0.2927,
-        "awayWin": 0.2935
+        "homeWin": 0.4038,
+        "draw": 0.299,
+        "awayWin": 0.2972
       },
       "context": {
         "homeElo": 1853.0,
@@ -488,9 +488,9 @@
         "badgePath": "/teams/manchester-united.football-logos.cc.png"
       },
       "probabilities": {
-        "homeWin": 0.4257,
-        "draw": 0.292,
-        "awayWin": 0.2823
+        "homeWin": 0.3931,
+        "draw": 0.284,
+        "awayWin": 0.3229
       },
       "context": {
         "homeElo": 1930.0,
@@ -525,9 +525,9 @@
         "badgePath": "/teams/west-ham.football-logos.cc.png"
       },
       "probabilities": {
-        "homeWin": 0.4233,
-        "draw": 0.2691,
-        "awayWin": 0.3076
+        "homeWin": 0.3995,
+        "draw": 0.2883,
+        "awayWin": 0.3122
       },
       "context": {
         "homeElo": 1806.0,
@@ -562,9 +562,9 @@
         "badgePath": "/teams/liverpool.football-logos.cc.png"
       },
       "probabilities": {
-        "homeWin": 0.3506,
-        "draw": 0.3196,
-        "awayWin": 0.3298
+        "homeWin": 0.3478,
+        "draw": 0.3245,
+        "awayWin": 0.3277
       },
       "context": {
         "homeElo": 1832.0,
@@ -599,9 +599,9 @@
         "badgePath": "/teams/wolves.football-logos.cc.png"
       },
       "probabilities": {
-        "homeWin": 0.4779,
-        "draw": 0.2724,
-        "awayWin": 0.2496
+        "homeWin": 0.4577,
+        "draw": 0.2746,
+        "awayWin": 0.2677
       },
       "context": {
         "homeElo": 1780.0,
@@ -636,9 +636,9 @@
         "badgePath": "/teams/arsenal.football-logos.cc.png"
       },
       "probabilities": {
-        "homeWin": 0.3846,
-        "draw": 0.2398,
-        "awayWin": 0.3756
+        "homeWin": 0.355,
+        "draw": 0.2498,
+        "awayWin": 0.3952
       },
       "context": {
         "homeElo": 1974.0,
@@ -673,9 +673,9 @@
         "badgePath": "/teams/bournemouth.football-logos.cc.png"
       },
       "probabilities": {
-        "homeWin": 0.3954,
-        "draw": 0.3226,
-        "awayWin": 0.282
+        "homeWin": 0.4006,
+        "draw": 0.3222,
+        "awayWin": 0.2772
       },
       "context": {
         "homeElo": 1867.0,
@@ -710,9 +710,9 @@
         "badgePath": "/teams/burnley.football-logos.cc.png"
       },
       "probabilities": {
-        "homeWin": 0.4651,
-        "draw": 0.2522,
-        "awayWin": 0.2827
+        "homeWin": 0.4524,
+        "draw": 0.2491,
+        "awayWin": 0.2985
       },
       "context": {
         "homeElo": 1785.0,
@@ -747,9 +747,9 @@
         "badgePath": "/teams/brighton.football-logos.cc.png"
       },
       "probabilities": {
-        "homeWin": 0.3452,
-        "draw": 0.3258,
-        "awayWin": 0.329
+        "homeWin": 0.3282,
+        "draw": 0.3188,
+        "awayWin": 0.353
       },
       "context": {
         "homeElo": 1820.0,
@@ -784,9 +784,9 @@
         "badgePath": "/teams/leeds-united.football-logos.cc.png"
       },
       "probabilities": {
-        "homeWin": 0.4027,
-        "draw": 0.3252,
-        "awayWin": 0.2721
+        "homeWin": 0.393,
+        "draw": 0.3345,
+        "awayWin": 0.2725
       },
       "context": {
         "homeElo": 1835.0,
@@ -821,9 +821,9 @@
         "badgePath": "/teams/newcastle.football-logos.cc.png"
       },
       "probabilities": {
-        "homeWin": 0.5042,
-        "draw": 0.2626,
-        "awayWin": 0.2332
+        "homeWin": 0.4782,
+        "draw": 0.2697,
+        "awayWin": 0.2521
       },
       "context": {
         "homeElo": 2065.0,
@@ -858,9 +858,9 @@
         "badgePath": "/teams/chelsea.football-logos.cc.png"
       },
       "probabilities": {
-        "homeWin": 0.3776,
-        "draw": 0.2643,
-        "awayWin": 0.3581
+        "homeWin": 0.3574,
+        "draw": 0.2867,
+        "awayWin": 0.3559
       },
       "context": {
         "homeElo": 1830.0,
@@ -895,9 +895,9 @@
         "badgePath": "/teams/manchester-city.football-logos.cc.png"
       },
       "probabilities": {
-        "homeWin": 0.2337,
-        "draw": 0.2892,
-        "awayWin": 0.4771
+        "homeWin": 0.2349,
+        "draw": 0.2817,
+        "awayWin": 0.4834
       },
       "context": {
         "homeElo": 1685.0,
@@ -932,9 +932,9 @@
         "badgePath": "/teams/aston-villa.football-logos.cc.png"
       },
       "probabilities": {
-        "homeWin": 0.3437,
-        "draw": 0.2332,
-        "awayWin": 0.4231
+        "homeWin": 0.3518,
+        "draw": 0.2348,
+        "awayWin": 0.4133
       },
       "context": {
         "homeElo": 1808.0,
@@ -969,9 +969,9 @@
         "badgePath": "/teams/crystal-palace.football-logos.cc.png"
       },
       "probabilities": {
-        "homeWin": 0.4272,
-        "draw": 0.2661,
-        "awayWin": 0.3067
+        "homeWin": 0.4144,
+        "draw": 0.2792,
+        "awayWin": 0.3064
       },
       "context": {
         "homeElo": 1949.0,
@@ -1006,9 +1006,9 @@
         "badgePath": "/teams/brentford.football-logos.cc.png"
       },
       "probabilities": {
-        "homeWin": 0.403,
-        "draw": 0.2379,
-        "awayWin": 0.3591
+        "homeWin": 0.382,
+        "draw": 0.2435,
+        "awayWin": 0.3745
       },
       "context": {
         "homeElo": 1881.0,
@@ -1043,9 +1043,9 @@
         "badgePath": "/teams/nottingham-forest.football-logos.cc.png"
       },
       "probabilities": {
-        "homeWin": 0.3407,
-        "draw": 0.2521,
-        "awayWin": 0.4072
+        "homeWin": 0.3367,
+        "draw": 0.246,
+        "awayWin": 0.4173
       },
       "context": {
         "homeElo": 1706.0,
@@ -1080,9 +1080,9 @@
         "badgePath": "/teams/everton.football-logos.cc.png"
       },
       "probabilities": {
-        "homeWin": 0.3028,
-        "draw": 0.3347,
-        "awayWin": 0.3625
+        "homeWin": 0.2921,
+        "draw": 0.331,
+        "awayWin": 0.3768
       },
       "context": {
         "homeElo": 1744.0,
@@ -1117,9 +1117,9 @@
         "badgePath": "/teams/tottenham.football-logos.cc.png"
       },
       "probabilities": {
-        "homeWin": 0.3042,
-        "draw": 0.3014,
-        "awayWin": 0.3944
+        "homeWin": 0.3097,
+        "draw": 0.3021,
+        "awayWin": 0.3882
       },
       "context": {
         "homeElo": 1669.0,
@@ -1154,9 +1154,9 @@
         "badgePath": "/teams/crystal-palace.football-logos.cc.png"
       },
       "probabilities": {
-        "homeWin": 0.3678,
-        "draw": 0.3066,
-        "awayWin": 0.3256
+        "homeWin": 0.3539,
+        "draw": 0.3226,
+        "awayWin": 0.3235
       },
       "context": {
         "homeElo": 1835.0,
@@ -1191,9 +1191,9 @@
         "badgePath": "/teams/fulham.football-logos.cc.png"
       },
       "probabilities": {
-        "homeWin": 0.4907,
-        "draw": 0.2854,
-        "awayWin": 0.2238
+        "homeWin": 0.4696,
+        "draw": 0.2949,
+        "awayWin": 0.2355
       },
       "context": {
         "homeElo": 2065.0,
@@ -1228,9 +1228,9 @@
         "badgePath": "/teams/tottenham.football-logos.cc.png"
       },
       "probabilities": {
-        "homeWin": 0.4477,
-        "draw": 0.215,
-        "awayWin": 0.3373
+        "homeWin": 0.4464,
+        "draw": 0.2273,
+        "awayWin": 0.3263
       },
       "context": {
         "homeElo": 1929.0,
@@ -1265,9 +1265,9 @@
         "badgePath": "/teams/west-ham.football-logos.cc.png"
       },
       "probabilities": {
-        "homeWin": 0.426,
-        "draw": 0.2899,
-        "awayWin": 0.2841
+        "homeWin": 0.4081,
+        "draw": 0.2952,
+        "awayWin": 0.2967
       },
       "context": {
         "homeElo": 1853.0,
@@ -1302,9 +1302,9 @@
         "badgePath": "/teams/nottingham-forest.football-logos.cc.png"
       },
       "probabilities": {
-        "homeWin": 0.425,
-        "draw": 0.2675,
-        "awayWin": 0.3075
+        "homeWin": 0.4234,
+        "draw": 0.2631,
+        "awayWin": 0.3135
       },
       "context": {
         "homeElo": 1930.0,
@@ -1339,9 +1339,9 @@
         "badgePath": "/teams/manchester-city.football-logos.cc.png"
       },
       "probabilities": {
-        "homeWin": 0.4063,
-        "draw": 0.2545,
-        "awayWin": 0.3392
+        "homeWin": 0.3758,
+        "draw": 0.272,
+        "awayWin": 0.3522
       },
       "context": {
         "homeElo": 1832.0,
@@ -1376,9 +1376,9 @@
         "badgePath": "/teams/burnley.football-logos.cc.png"
       },
       "probabilities": {
-        "homeWin": 0.4498,
-        "draw": 0.2693,
-        "awayWin": 0.2809
+        "homeWin": 0.4355,
+        "draw": 0.2538,
+        "awayWin": 0.3107
       },
       "context": {
         "homeElo": 1780.0,
@@ -1413,9 +1413,9 @@
         "badgePath": "/teams/liverpool.football-logos.cc.png"
       },
       "probabilities": {
-        "homeWin": 0.3819,
-        "draw": 0.2848,
-        "awayWin": 0.3333
+        "homeWin": 0.3865,
+        "draw": 0.2838,
+        "awayWin": 0.3297
       },
       "context": {
         "homeElo": 1881.0,
@@ -1450,8 +1450,8 @@
         "badgePath": "/teams/brighton.football-logos.cc.png"
       },
       "probabilities": {
-        "homeWin": 0.3259,
-        "draw": 0.3165,
+        "homeWin": 0.31,
+        "draw": 0.3323,
         "awayWin": 0.3576
       },
       "context": {
@@ -1487,9 +1487,9 @@
         "badgePath": "/teams/sunderland.football-logos.cc.png"
       },
       "probabilities": {
-        "homeWin": 0.3669,
-        "draw": 0.3031,
-        "awayWin": 0.33
+        "homeWin": 0.3531,
+        "draw": 0.3059,
+        "awayWin": 0.341
       },
       "context": {
         "homeElo": 1669.0,
@@ -1524,9 +1524,9 @@
         "badgePath": "/teams/wolves.football-logos.cc.png"
       },
       "probabilities": {
-        "homeWin": 0.3753,
-        "draw": 0.3251,
-        "awayWin": 0.2996
+        "homeWin": 0.3611,
+        "draw": 0.3421,
+        "awayWin": 0.2968
       },
       "context": {
         "homeElo": 1830.0,
@@ -1561,9 +1561,9 @@
         "badgePath": "/teams/aston-villa.football-logos.cc.png"
       },
       "probabilities": {
-        "homeWin": 0.2384,
-        "draw": 0.221,
-        "awayWin": 0.5406
+        "homeWin": 0.231,
+        "draw": 0.2321,
+        "awayWin": 0.5369
       },
       "context": {
         "homeElo": 1685.0,
@@ -1598,9 +1598,9 @@
         "badgePath": "/teams/everton.football-logos.cc.png"
       },
       "probabilities": {
-        "homeWin": 0.348,
-        "draw": 0.2702,
-        "awayWin": 0.3818
+        "homeWin": 0.3392,
+        "draw": 0.2621,
+        "awayWin": 0.3987
       },
       "context": {
         "homeElo": 1806.0,
@@ -1635,9 +1635,9 @@
         "badgePath": "/teams/bournemouth.football-logos.cc.png"
       },
       "probabilities": {
-        "homeWin": 0.3831,
-        "draw": 0.2705,
-        "awayWin": 0.3464
+        "homeWin": 0.3797,
+        "draw": 0.2664,
+        "awayWin": 0.3539
       },
       "context": {
         "homeElo": 1808.0,
@@ -1672,9 +1672,9 @@
         "badgePath": "/teams/chelsea.football-logos.cc.png"
       },
       "probabilities": {
-        "homeWin": 0.371,
-        "draw": 0.2681,
-        "awayWin": 0.3608
+        "homeWin": 0.3576,
+        "draw": 0.2787,
+        "awayWin": 0.3637
       },
       "context": {
         "homeElo": 1949.0,
@@ -1709,9 +1709,9 @@
         "badgePath": "/teams/brentford.football-logos.cc.png"
       },
       "probabilities": {
-        "homeWin": 0.4253,
-        "draw": 0.261,
-        "awayWin": 0.3138
+        "homeWin": 0.4031,
+        "draw": 0.2656,
+        "awayWin": 0.3313
       },
       "context": {
         "homeElo": 1974.0,
@@ -1746,9 +1746,9 @@
         "badgePath": "/teams/newcastle.football-logos.cc.png"
       },
       "probabilities": {
-        "homeWin": 0.35,
-        "draw": 0.2921,
-        "awayWin": 0.3578
+        "homeWin": 0.3311,
+        "draw": 0.2977,
+        "awayWin": 0.3712
       },
       "context": {
         "homeElo": 1785.0,
@@ -1783,9 +1783,9 @@
         "badgePath": "/teams/manchester-united.football-logos.cc.png"
       },
       "probabilities": {
-        "homeWin": 0.2508,
-        "draw": 0.3036,
-        "awayWin": 0.4456
+        "homeWin": 0.2505,
+        "draw": 0.3077,
+        "awayWin": 0.4418
       },
       "context": {
         "homeElo": 1706.0,
@@ -1820,9 +1820,9 @@
         "badgePath": "/teams/leeds-united.football-logos.cc.png"
       },
       "probabilities": {
-        "homeWin": 0.3545,
-        "draw": 0.299,
-        "awayWin": 0.3464
+        "homeWin": 0.3628,
+        "draw": 0.2982,
+        "awayWin": 0.339
       },
       "context": {
         "homeElo": 1820.0,
@@ -1857,9 +1857,9 @@
         "badgePath": "/teams/arsenal.football-logos.cc.png"
       },
       "probabilities": {
-        "homeWin": 0.2397,
-        "draw": 0.3556,
-        "awayWin": 0.4047
+        "homeWin": 0.237,
+        "draw": 0.3395,
+        "awayWin": 0.4235
       },
       "context": {
         "homeElo": 1744.0,
@@ -1894,9 +1894,9 @@
         "badgePath": "/teams/manchester-city.football-logos.cc.png"
       },
       "probabilities": {
-        "homeWin": 0.3323,
-        "draw": 0.3352,
-        "awayWin": 0.3326
+        "homeWin": 0.3156,
+        "draw": 0.3362,
+        "awayWin": 0.3482
       },
       "context": {
         "homeElo": 1835.0,
@@ -1931,9 +1931,9 @@
         "badgePath": "/teams/burnley.football-logos.cc.png"
       },
       "probabilities": {
-        "homeWin": 0.5483,
-        "draw": 0.2258,
-        "awayWin": 0.2259
+        "homeWin": 0.5259,
+        "draw": 0.236,
+        "awayWin": 0.2381
       },
       "context": {
         "homeElo": 2065.0,
@@ -1968,9 +1968,9 @@
         "badgePath": "/teams/liverpool.football-logos.cc.png"
       },
       "probabilities": {
-        "homeWin": 0.4237,
-        "draw": 0.2747,
-        "awayWin": 0.3015
+        "homeWin": 0.4054,
+        "draw": 0.2803,
+        "awayWin": 0.3143
       },
       "context": {
         "homeElo": 1929.0,
@@ -2005,9 +2005,9 @@
         "badgePath": "/teams/crystal-palace.football-logos.cc.png"
       },
       "probabilities": {
-        "homeWin": 0.4466,
-        "draw": 0.2458,
-        "awayWin": 0.3076
+        "homeWin": 0.4313,
+        "draw": 0.2603,
+        "awayWin": 0.3085
       },
       "context": {
         "homeElo": 1853.0,
@@ -2042,9 +2042,9 @@
         "badgePath": "/teams/tottenham.football-logos.cc.png"
       },
       "probabilities": {
-        "homeWin": 0.4539,
-        "draw": 0.2316,
-        "awayWin": 0.3145
+        "homeWin": 0.451,
+        "draw": 0.2375,
+        "awayWin": 0.3116
       },
       "context": {
         "homeElo": 1930.0,
@@ -2079,9 +2079,9 @@
         "badgePath": "/teams/sunderland.football-logos.cc.png"
       },
       "probabilities": {
-        "homeWin": 0.3745,
-        "draw": 0.3859,
-        "awayWin": 0.2395
+        "homeWin": 0.3519,
+        "draw": 0.3913,
+        "awayWin": 0.2568
       },
       "context": {
         "homeElo": 1832.0,
@@ -2116,9 +2116,9 @@
         "badgePath": "/teams/brighton.football-logos.cc.png"
       },
       "probabilities": {
-        "homeWin": 0.301,
-        "draw": 0.3471,
-        "awayWin": 0.3519
+        "homeWin": 0.2914,
+        "draw": 0.328,
+        "awayWin": 0.3806
       },
       "context": {
         "homeElo": 1780.0,
@@ -2153,9 +2153,9 @@
         "badgePath": "/teams/nottingham-forest.football-logos.cc.png"
       },
       "probabilities": {
-        "homeWin": 0.3902,
-        "draw": 0.2827,
-        "awayWin": 0.3271
+        "homeWin": 0.3885,
+        "draw": 0.2767,
+        "awayWin": 0.3348
       },
       "context": {
         "homeElo": 1881.0,
@@ -2190,9 +2190,9 @@
         "badgePath": "/teams/west-ham.football-logos.cc.png"
       },
       "probabilities": {
-        "homeWin": 0.3686,
-        "draw": 0.3141,
-        "awayWin": 0.3173
+        "homeWin": 0.3682,
+        "draw": 0.3018,
+        "awayWin": 0.33
       },
       "context": {
         "homeElo": 1867.0,
@@ -2227,9 +2227,9 @@
         "badgePath": "/teams/fulham.football-logos.cc.png"
       },
       "probabilities": {
-        "homeWin": 0.3718,
-        "draw": 0.2681,
-        "awayWin": 0.36
+        "homeWin": 0.36,
+        "draw": 0.279,
+        "awayWin": 0.361
       },
       "context": {
         "homeElo": 1669.0,
@@ -2264,9 +2264,9 @@
         "badgePath": "/teams/manchester-united.football-logos.cc.png"
       },
       "probabilities": {
-        "homeWin": 0.3655,
-        "draw": 0.2655,
-        "awayWin": 0.369
+        "homeWin": 0.348,
+        "draw": 0.2828,
+        "awayWin": 0.3691
       },
       "context": {
         "homeElo": 1830.0,
@@ -2301,9 +2301,9 @@
         "badgePath": "/teams/wolves.football-logos.cc.png"
       },
       "probabilities": {
-        "homeWin": 0.4109,
-        "draw": 0.2481,
-        "awayWin": 0.341
+        "homeWin": 0.3722,
+        "draw": 0.2789,
+        "awayWin": 0.3489
       },
       "context": {
         "homeElo": 1685.0,
@@ -2338,9 +2338,9 @@
         "badgePath": "/teams/arsenal.football-logos.cc.png"
       },
       "probabilities": {
-        "homeWin": 0.2714,
-        "draw": 0.297,
-        "awayWin": 0.4316
+        "homeWin": 0.2572,
+        "draw": 0.2887,
+        "awayWin": 0.4541
       },
       "context": {
         "homeElo": 1806.0,
@@ -2375,9 +2375,9 @@
         "badgePath": "/teams/newcastle.football-logos.cc.png"
       },
       "probabilities": {
-        "homeWin": 0.3594,
-        "draw": 0.2572,
-        "awayWin": 0.3833
+        "homeWin": 0.3494,
+        "draw": 0.2582,
+        "awayWin": 0.3924
       },
       "context": {
         "homeElo": 1808.0,
@@ -2412,9 +2412,9 @@
         "badgePath": "/teams/brentford.football-logos.cc.png"
       },
       "probabilities": {
-        "homeWin": 0.3948,
-        "draw": 0.2433,
-        "awayWin": 0.3619
+        "homeWin": 0.3754,
+        "draw": 0.2506,
+        "awayWin": 0.374
       },
       "context": {
         "homeElo": 1949.0,
@@ -2449,9 +2449,9 @@
         "badgePath": "/teams/aston-villa.football-logos.cc.png"
       },
       "probabilities": {
-        "homeWin": 0.4316,
-        "draw": 0.2672,
-        "awayWin": 0.3012
+        "homeWin": 0.4184,
+        "draw": 0.2683,
+        "awayWin": 0.3133
       },
       "context": {
         "homeElo": 1974.0,
@@ -2486,9 +2486,9 @@
         "badgePath": "/teams/bournemouth.football-logos.cc.png"
       },
       "probabilities": {
-        "homeWin": 0.4146,
-        "draw": 0.2423,
-        "awayWin": 0.3432
+        "homeWin": 0.4175,
+        "draw": 0.2443,
+        "awayWin": 0.3381
       },
       "context": {
         "homeElo": 1785.0,
@@ -2523,9 +2523,9 @@
         "badgePath": "/teams/chelsea.football-logos.cc.png"
       },
       "probabilities": {
-        "homeWin": 0.2792,
-        "draw": 0.2546,
-        "awayWin": 0.4663
+        "homeWin": 0.271,
+        "draw": 0.261,
+        "awayWin": 0.468
       },
       "context": {
         "homeElo": 1706.0,
@@ -2560,9 +2560,9 @@
         "badgePath": "/teams/everton.football-logos.cc.png"
       },
       "probabilities": {
-        "homeWin": 0.3249,
-        "draw": 0.3259,
-        "awayWin": 0.3491
+        "homeWin": 0.3509,
+        "draw": 0.2996,
+        "awayWin": 0.3495
       },
       "context": {
         "homeElo": 1820.0,
@@ -2597,9 +2597,9 @@
         "badgePath": "/teams/leeds-united.football-logos.cc.png"
       },
       "probabilities": {
-        "homeWin": 0.3792,
-        "draw": 0.2658,
-        "awayWin": 0.355
+        "homeWin": 0.357,
+        "draw": 0.2728,
+        "awayWin": 0.3702
       },
       "context": {
         "homeElo": 1744.0,
@@ -2634,9 +2634,9 @@
         "badgePath": "/teams/crystal-palace.football-logos.cc.png"
       },
       "probabilities": {
-        "homeWin": 0.4208,
-        "draw": 0.3196,
-        "awayWin": 0.2596
+        "homeWin": 0.4063,
+        "draw": 0.3371,
+        "awayWin": 0.2566
       },
       "context": {
         "homeElo": 1974.0,
