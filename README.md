@@ -88,5 +88,4 @@ The product now has:
 - a deployed backend path
 - trained model artifacts
 - exported prediction and historical datasets for the site
-
-The next major milestone is full automation so the deployed website refreshes itself whenever upstream data changes.
+- Full data automation
