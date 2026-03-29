@@ -1,5 +1,5 @@
 {
-  "refreshed_at_utc": "2026-03-29T06:41:57.753483+00:00",
+  "refreshed_at_utc": "2026-03-29T17:58:20.061443+00:00",
   "data_changed": true,
   "sync_state_path": "data/sync_state.json",
   "prediction_feature_table_path": "data/features/match_pre_match_features.csv",
@@ -8,6 +8,9 @@
   "metrics_path": "data/models/model_v2_metrics.json",
   "dashboard_path": "apps/web/public/data/dashboard.json",
   "updated_datasets": {
+    "players": [
+      "2025-2026"
+    ],
     "playerstats": [
       "2025-2026"
     ]
