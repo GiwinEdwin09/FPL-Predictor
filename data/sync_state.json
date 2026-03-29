@@ -1,5 +1,5 @@
 {
-  "synced_at_utc": "2026-03-28T17:56:13.949439+00:00",
+  "synced_at_utc": "2026-03-29T06:41:51.852485+00:00",
   "datasets": {
     "matches": {
       "seasons": [
@@ -297,8 +297,8 @@
           "local_path": "data/raw/2025-2026/playerstats.csv",
           "local_rows": 24142,
           "remote_rows": 24142,
-          "local_hash": "167ffedc96045ff3983bbaa22600cbee7f594e3245567026c389a1eef2f8128e",
-          "remote_hash": "37421108bc5f3ae747cfaa7f7b9112d6695d90d842ed0ec3859850b97bfad803",
+          "local_hash": "37421108bc5f3ae747cfaa7f7b9112d6695d90d842ed0ec3859850b97bfad803",
+          "remote_hash": "71f6cbb16abe5756959a0b15dd251d5134b4b5d1421d0ad8a7835f180d2cd5fa",
           "updated": true
         }
       ],
