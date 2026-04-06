@@ -1,5 +1,5 @@
 {
-  "synced_at_utc": "2026-04-06T07:09:44.264219+00:00",
+  "synced_at_utc": "2026-04-06T18:12:21.052889+00:00",
   "datasets": {
     "matches": {
       "seasons": [
@@ -107,9 +107,9 @@
           "local_path": "data/raw/2025-2026/matches.csv",
           "local_rows": 519,
           "remote_rows": 519,
-          "local_hash": "a1556b22639eec6fa4be244a260c3c5273d7b35b25717317f327ef14bba1b9e0",
+          "local_hash": "2ff4ee60cb44d03ae65668943f531b2375f13322028072ee182c5980e93e22a0",
           "remote_hash": "2ff4ee60cb44d03ae65668943f531b2375f13322028072ee182c5980e93e22a0",
-          "updated": true
+          "updated": false
         }
       ],
       "output_path": "data/matches.csv"
@@ -147,8 +147,8 @@
           "local_rows": 20,
           "remote_rows": 20,
           "local_hash": "08bb3378859af9bb682dff773723d3212316c7ba1f1b7cb361fa5bc222f70aeb",
-          "remote_hash": "08bb3378859af9bb682dff773723d3212316c7ba1f1b7cb361fa5bc222f70aeb",
-          "updated": false
+          "remote_hash": "eee4e8de820464a32238542ff13827191247075b3b0912e59da34f2c26811654",
+          "updated": true
         }
       ]
     },
@@ -184,8 +184,8 @@
           "local_path": "data/raw/2025-2026/players.csv",
           "local_rows": 825,
           "remote_rows": 825,
-          "local_hash": "5bdc48b125e9339bd70166839b366a53c6fc2416d63d5b3451e9cf633130a5a6",
-          "remote_hash": "a861229699fd8a9f3e3d150592fa0d3ecb285c771e53b2656b475f9d9ffc9f8e",
+          "local_hash": "a861229699fd8a9f3e3d150592fa0d3ecb285c771e53b2656b475f9d9ffc9f8e",
+          "remote_hash": "5bdc48b125e9339bd70166839b366a53c6fc2416d63d5b3451e9cf633130a5a6",
           "updated": true
         }
       ],
@@ -297,8 +297,8 @@
           "local_path": "data/raw/2025-2026/playerstats.csv",
           "local_rows": 24142,
           "remote_rows": 24142,
-          "local_hash": "63415ef1c8651a6a8cabc45cd3c8cfc376d7b01c488479f1fc5fe630e83d4849",
-          "remote_hash": "71330de336f72906775615ab6eaebaad1cd4fa94701894a3f70a20dc2ca529f7",
+          "local_hash": "71330de336f72906775615ab6eaebaad1cd4fa94701894a3f70a20dc2ca529f7",
+          "remote_hash": "07877b494d1cfa4a423fdc29f52e7c1c3160236f5bb57f667f6f89f18113b8a3",
           "updated": true
         }
       ],
