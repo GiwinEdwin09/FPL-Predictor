@@ -1,5 +1,5 @@
 {
-  "synced_at_utc": "2026-04-08T18:47:41.062183+00:00",
+  "synced_at_utc": "2026-04-09T06:56:22.817960+00:00",
   "datasets": {
     "matches": {
       "seasons": [
@@ -107,8 +107,8 @@
           "local_path": "data/raw/2025-2026/matches.csv",
           "local_rows": 519,
           "remote_rows": 519,
-          "local_hash": "7e69411c3dedeb41b295c4ea34e3f4b4f4afc7b3ad52c331c66654e691a8f3a1",
-          "remote_hash": "37abd83f5d8d4ac0de1f4209bb39c1fb0a8b9f6be265472f4e4333d321217537",
+          "local_hash": "37abd83f5d8d4ac0de1f4209bb39c1fb0a8b9f6be265472f4e4333d321217537",
+          "remote_hash": "a99fcd516a6f7700fbe456e87a80d1be647a697d96871249cf195a0a7c7c121d",
           "updated": true
         }
       ],
@@ -146,9 +146,9 @@
           "local_path": "data/raw/2025-2026/teams.csv",
           "local_rows": 20,
           "remote_rows": 20,
-          "local_hash": "94818dcbeac459f89897ca04a0424598d56406d677eb34307e37fe7a6310d4b5",
+          "local_hash": "6b9a26c96b1c8088a7efae0192f3b2a1a37e7de0e19fd8bc1b61ff487bb85d16",
           "remote_hash": "6b9a26c96b1c8088a7efae0192f3b2a1a37e7de0e19fd8bc1b61ff487bb85d16",
-          "updated": true
+          "updated": false
         }
       ]
     },
@@ -184,8 +184,8 @@
           "local_path": "data/raw/2025-2026/players.csv",
           "local_rows": 825,
           "remote_rows": 825,
-          "local_hash": "5bdc48b125e9339bd70166839b366a53c6fc2416d63d5b3451e9cf633130a5a6",
-          "remote_hash": "a861229699fd8a9f3e3d150592fa0d3ecb285c771e53b2656b475f9d9ffc9f8e",
+          "local_hash": "a861229699fd8a9f3e3d150592fa0d3ecb285c771e53b2656b475f9d9ffc9f8e",
+          "remote_hash": "5bdc48b125e9339bd70166839b366a53c6fc2416d63d5b3451e9cf633130a5a6",
           "updated": true
         }
       ],
@@ -297,8 +297,8 @@
           "local_path": "data/raw/2025-2026/playerstats.csv",
           "local_rows": 24142,
           "remote_rows": 24142,
-          "local_hash": "9d4f3919504d1273be99197639e20b0cafb744a59434f56bcabb033f904f68ba",
-          "remote_hash": "7c1dcadfcfd6e82da32297e48cab8f025c84526b820cb86b3fe8293bd0f7db57",
+          "local_hash": "7c1dcadfcfd6e82da32297e48cab8f025c84526b820cb86b3fe8293bd0f7db57",
+          "remote_hash": "e4aa5f95fa20764d867b38faa06b6d35936a89f5f8aef2b3f49f2416c19b5ea5",
           "updated": true
         }
       ],
@@ -408,11 +408,11 @@
             "https://raw.githubusercontent.com/olbauday/FPL-Core-Insights/main/data/2025-2026/By%20Gameweek/GW38/playermatchstats.csv"
           ],
           "local_path": "data/raw/2025-2026/playermatchstats.csv",
-          "local_rows": 12154,
+          "local_rows": 12173,
           "remote_rows": 12173,
-          "local_hash": "cc832356c68ab131a4abf5c19ee707ca2d935fc06baff0474beb6fc774932dbd",
+          "local_hash": "2f91ac825f369babadd57f1ceaa6e3b18f8eb770e67353dfd610f610da63cc20",
           "remote_hash": "2f91ac825f369babadd57f1ceaa6e3b18f8eb770e67353dfd610f610da63cc20",
-          "updated": true
+          "updated": false
         }
       ],
       "output_path": "data/playermatchstats.csv"
