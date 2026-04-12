@@ -15,6 +15,22 @@ function sortWeekNumbers(values: Array<number | null>) {
     .sort((left, right) => left - right);
 }
 
+function formatWeekStart(kickoffTime: string | null, fixtureCount: number) {
+  if (!kickoffTime) {
+    return `${fixtureCount} fixtures in this round`;
+  }
+
+  return `Starts ${new Intl.DateTimeFormat("en-GB", {
+    weekday: "short",
+    day: "numeric",
+    month: "short",
+    hour: "2-digit",
+    minute: "2-digit",
+    timeZone: "UTC",
+    timeZoneName: "short",
+  }).format(new Date(kickoffTime))}`;
+}
+
 export function FixturesWeekView({ fixtures }: FixturesWeekViewProps) {
   const grouped = useMemo(() => {
     const map = new Map<number, UpcomingFixture[]>();
@@ -45,6 +61,10 @@ export function FixturesWeekView({ fixtures }: FixturesWeekViewProps) {
 
   const gameweek = gameweeks[Math.min(index, gameweeks.length - 1)];
   const fixturesForWeek = grouped.get(gameweek) ?? [];
+  const firstKickoff = fixturesForWeek
+    .map((fixture) => fixture.kickoffTime)
+    .filter((kickoffTime): kickoffTime is string => kickoffTime !== null)
+    .sort()[0] ?? null;
 
   return (
     <section className="week-panel">
@@ -60,7 +80,7 @@ export function FixturesWeekView({ fixtures }: FixturesWeekViewProps) {
         <div className="week-heading">
           <p className="eyebrow">Upcoming Gameweek</p>
           <h2>Gameweek {gameweek}</h2>
-          <p>{fixturesForWeek.length} fixtures in this round</p>
+          <p>{formatWeekStart(firstKickoff, fixturesForWeek.length)}</p>
         </div>
         <button
           className="week-arrow"
@@ -80,4 +100,3 @@ export function FixturesWeekView({ fixtures }: FixturesWeekViewProps) {
     </section>
   );
 }
-

@@ -11,14 +11,16 @@ export default async function PredictionsPage() {
           <p className="eyebrow">Predictions</p>
           <h1 className="page-title">Upcoming Premier League fixtures, one gameweek at a time.</h1>
           <p className="hero-text">
-            Use the arrows to move between gameweeks for upcoming rounds, or switch to the postponed tab for fixtures
-            that are still waiting on a confirmed reschedule.
+            Use the current-gameweek tab once a round has started, browse future rounds gameweek by gameweek, and keep
+            postponed fixtures separate so unresolved scheduling changes do not confuse the forecast view.
           </p>
         </div>
         <p className="section-note">Updated {new Date(dashboard.generatedAtUtc).toUTCString()}</p>
       </section>
 
       <PredictionsBrowser
+        currentGameweek={dashboard.currentGameweek}
+        currentGameweekFixtures={dashboard.currentGameweekFixtures}
         upcomingFixtures={dashboard.upcomingFixtures}
         postponedFixtures={dashboard.postponedFixtures}
       />

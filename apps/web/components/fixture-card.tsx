@@ -50,6 +50,16 @@ export function FixtureCard({ fixture }: { fixture: UpcomingFixture }) {
         <span>{formatKickoff(fixture.kickoffTime)}</span>
       </div>
 
+      {fixture.finished ? (
+        <div className="fixture-score-banner">
+          <span>Current Result</span>
+          <strong>
+            {fixture.homeTeam.shortName} {fixture.score.home ?? "-"} - {fixture.score.away ?? "-"}{" "}
+            {fixture.awayTeam.shortName}
+          </strong>
+        </div>
+      ) : null}
+
       <div className="fixture-clubs">
         <div className="club-stack">
           <TeamBadge name={fixture.homeTeam.name} badgePath={fixture.homeTeam.badgePath} />

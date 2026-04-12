@@ -212,6 +212,11 @@ def serialize_prediction_fixture(
         ),
         "homeTeam": serialize_team(team_lookup, row["source_season"], row["home_team"]),
         "awayTeam": serialize_team(team_lookup, row["source_season"], row["away_team"]),
+        "finished": bool(row.get("finished")) if pd.notna(row.get("finished")) else False,
+        "score": {
+            "home": coerce_int(row.get("home_score")),
+            "away": coerce_int(row.get("away_score")),
+        },
         "probabilities": {
             "homeWin": round(float(probability[0]), 4),
             "draw": round(float(probability[1]), 4),
@@ -232,20 +237,57 @@ def serialize_prediction_fixture(
     }
 
 
+def current_active_gameweek(features: pd.DataFrame, season: str, now_utc: pd.Timestamp) -> int | None:
+    current_candidates = features.loc[
+        (features["source_season"] == season)
+        & is_premier_league_frame(features)
+        & (features["finished"] != True)
+        & features["kickoff_time"].notna()
+        & (features["kickoff_time"] <= now_utc)
+    ].copy()
+    if current_candidates.empty:
+        return None
+    value = pd.to_numeric(
+        current_candidates.get("source_gameweek").fillna(current_candidates.get("gameweek")),
+        errors="coerce",
+    ).min()
+    if pd.isna(value):
+        return None
+    return int(value)
+
+
 def build_prediction_groups(
     feature_table_path: Path,
     model_path: Path,
     metrics_path: Path,
     team_lookup: dict[tuple[str, int], dict[str, Any]],
-) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
+) -> tuple[int | None, list[dict[str, Any]], list[dict[str, Any]], list[dict[str, Any]]]:
     features = pd.read_csv(feature_table_path)
     features = add_sorting_columns(features)
     features = add_derived_features(features)
     now_utc = pd.Timestamp.now(tz=UTC)
     latest_completed_gw = latest_completed_gameweek(features, CURRENT_SEASON)
+    current_gameweek = current_active_gameweek(features, CURRENT_SEASON, now_utc)
     unresolved = features.loc[is_premier_league_frame(features) & (features["finished"] != True)].copy()
     postponed = unresolved.loc[
         unresolved.apply(
+            lambda row: is_postponed_match(
+                row.to_dict(),
+                latest_completed_gw=latest_completed_gw,
+            ),
+            axis=1,
+        )
+    ].copy()
+    current = features.loc[
+        is_premier_league_frame(features)
+        & (features["source_season"] == CURRENT_SEASON)
+        & (
+            pd.to_numeric(features.get("source_gameweek").fillna(features.get("gameweek")), errors="coerce")
+            == current_gameweek
+        )
+    ].copy() if current_gameweek is not None else features.iloc[0:0].copy()
+    current = current.loc[
+        ~current.apply(
             lambda row: is_postponed_match(
                 row.to_dict(),
                 latest_completed_gw=latest_completed_gw,
@@ -263,16 +305,32 @@ def build_prediction_groups(
             axis=1,
         )
     ].copy()
+    if current_gameweek is not None:
+        upcoming = upcoming.loc[
+            pd.to_numeric(upcoming.get("source_gameweek").fillna(upcoming.get("gameweek")), errors="coerce")
+            != current_gameweek
+        ].copy()
     upcoming = upcoming.sort_values(
         ["kickoff_time", "source_season", "_ordering_gameweek", "match_id"],
         kind="stable",
         na_position="last",
     ).reset_index(drop=True)
+    current = current.sort_values(
+        ["kickoff_time", "source_season", "_ordering_gameweek", "match_id"],
+        kind="stable",
+        na_position="last",
+    ).reset_index(drop=True)
+    postponed = postponed.sort_values(
+        ["source_season", "_ordering_gameweek", "match_id"],
+        kind="stable",
+        na_position="last",
+    ).reset_index(drop=True)
 
-    if upcoming.empty and postponed.empty:
+    if upcoming.empty and postponed.empty and current.empty:
+        current_fixtures: list[dict[str, Any]] = []
         upcoming_fixtures: list[dict[str, Any]] = []
         postponed_fixtures: list[dict[str, Any]] = []
-        return upcoming_fixtures, postponed_fixtures
+        return current_gameweek, current_fixtures, upcoming_fixtures, postponed_fixtures
 
     temperature, _ = load_model_metadata(metrics_path)
     model = load_model(model_path)
@@ -290,12 +348,15 @@ def build_prediction_groups(
             items.append(item)
         return items
 
+    current_fixtures = serialize_rows(current)
+    for item in current_fixtures:
+        item["status"] = "current"
     upcoming_fixtures = serialize_rows(upcoming)
     postponed_fixtures = serialize_rows(
         postponed,
         postponed_reason="Awaiting a confirmed kickoff time from the source data.",
     )
-    return upcoming_fixtures, postponed_fixtures
+    return current_gameweek, current_fixtures, upcoming_fixtures, postponed_fixtures
 
 
 def build_historical_matches(
@@ -371,7 +432,7 @@ def build_dashboard_payload(
 ) -> dict[str, Any]:
     team_lookup = load_team_lookup(data_dir)
     temperature, model_metadata = load_model_metadata(metrics_path)
-    upcoming_fixtures, postponed_fixtures = build_prediction_groups(
+    current_gameweek, current_fixtures, upcoming_fixtures, postponed_fixtures = build_prediction_groups(
         feature_table_path=feature_table_path,
         model_path=model_path,
         metrics_path=metrics_path,
@@ -388,6 +449,8 @@ def build_dashboard_payload(
             "split": model_metadata.get("split", {}),
             "competitionDistributionTrain": model_metadata.get("competition_distribution_train", {}),
         },
+        "currentGameweek": current_gameweek,
+        "currentGameweekFixtures": current_fixtures,
         "upcomingFixtures": upcoming_fixtures,
         "postponedFixtures": postponed_fixtures,
         "historicalMatches": build_historical_matches(

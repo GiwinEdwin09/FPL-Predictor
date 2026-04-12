@@ -14,6 +14,11 @@ export type UpcomingFixture = {
   season: string;
   gameweek: number | null;
   kickoffTime: string | null;
+  finished: boolean;
+  score: {
+    home: number | null;
+    away: number | null;
+  };
   homeTeam: TeamSummary;
   awayTeam: TeamSummary;
   probabilities: {
@@ -66,6 +71,7 @@ export type HistoricalMatch = {
 export type DashboardData = {
   generatedAtUtc: string;
   currentSeason: string;
+  currentGameweek: number | null;
   model: {
     version: string;
     calibrationTemperature: number;
@@ -82,6 +88,7 @@ export type DashboardData = {
     };
     competitionDistributionTrain: Record<string, number>;
   };
+  currentGameweekFixtures: UpcomingFixture[];
   upcomingFixtures: UpcomingFixture[];
   postponedFixtures: UpcomingFixture[];
   historicalMatches: HistoricalMatch[];
