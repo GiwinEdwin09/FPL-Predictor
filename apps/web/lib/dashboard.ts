@@ -33,6 +33,8 @@ export type UpcomingFixture = {
     homeLast5Matches: number | null;
     awayLast5Matches: number | null;
   };
+  status?: string;
+  statusReason?: string;
 };
 
 export type HistoricalMatch = {
@@ -81,6 +83,7 @@ export type DashboardData = {
     competitionDistributionTrain: Record<string, number>;
   };
   upcomingFixtures: UpcomingFixture[];
+  postponedFixtures: UpcomingFixture[];
   historicalMatches: HistoricalMatch[];
 };
 

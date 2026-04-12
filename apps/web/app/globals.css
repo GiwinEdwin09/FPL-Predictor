@@ -213,6 +213,45 @@ a {
   gap: 1rem;
 }
 
+.tab-bar {
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+.tab-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.85rem 1rem;
+  border-radius: 999px;
+  border: 1px solid rgba(72, 52, 34, 0.1);
+  background: rgba(255, 251, 245, 0.72);
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.tab-button-active {
+  background: #2f7c73;
+  color: white;
+}
+
+.tab-count {
+  display: inline-grid;
+  place-items: center;
+  min-width: 1.8rem;
+  height: 1.8rem;
+  padding: 0 0.35rem;
+  border-radius: 999px;
+  background: rgba(29, 20, 13, 0.1);
+}
+
+.tab-button-active .tab-count {
+  background: rgba(255, 255, 255, 0.18);
+}
+
 .home-card {
   display: block;
   padding: 1.2rem;
@@ -263,6 +302,10 @@ a {
   margin-bottom: 1rem;
 }
 
+.week-panel-header-simple {
+  grid-template-columns: 1fr;
+}
+
 .week-heading h2 {
   margin: 0;
   font-family: var(--font-display), sans-serif;
@@ -297,6 +340,40 @@ a {
   max-height: 68vh;
   overflow-y: auto;
   padding-right: 0.25rem;
+}
+
+.postponed-grid {
+  display: grid;
+  gap: 1rem;
+}
+
+.postponed-card {
+  padding: 1rem;
+  border-radius: 1.4rem;
+  background: rgba(255, 255, 255, 0.68);
+  border: 1px solid rgba(72, 52, 34, 0.08);
+}
+
+.postponed-topline {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  color: var(--muted);
+  font-size: 0.84rem;
+}
+
+.postponed-clubs {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  margin: 0.9rem 0 0.5rem;
+  font-size: 1.1rem;
+}
+
+.postponed-note {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.55;
 }
 
 .fixture-card {

@@ -143,68 +143,159 @@ def load_model(model_path: Path) -> Any:
     return model
 
 
-def build_upcoming_predictions(
+def latest_completed_gameweek(features: pd.DataFrame, season: str) -> int | None:
+    completed = features.loc[
+        (features["source_season"] == season)
+        & is_premier_league_frame(features)
+        & (features["finished"] == True)
+    ].copy()
+    if completed.empty:
+        return None
+    value = pd.to_numeric(completed.get("source_gameweek").fillna(completed.get("gameweek")), errors="coerce").max()
+    if pd.isna(value):
+        return None
+    return int(value)
+
+
+def should_include_upcoming_match(
+    row: dict[str, Any],
+    *,
+    now_utc: pd.Timestamp,
+    latest_completed_gw: int | None,
+) -> bool:
+    kickoff_time = row.get("kickoff_time")
+    gameweek = coerce_int(row.get("source_gameweek")) or coerce_int(row.get("gameweek"))
+
+    if pd.notna(kickoff_time):
+        kickoff_timestamp = pd.Timestamp(kickoff_time)
+        if kickoff_timestamp.tzinfo is None:
+            kickoff_timestamp = kickoff_timestamp.tz_localize("UTC")
+        return kickoff_timestamp > now_utc
+
+    if latest_completed_gw is not None and gameweek is not None and gameweek <= latest_completed_gw:
+        return False
+
+    return True
+
+
+def is_postponed_match(
+    row: dict[str, Any],
+    *,
+    latest_completed_gw: int | None,
+) -> bool:
+    gameweek = coerce_int(row.get("source_gameweek")) or coerce_int(row.get("gameweek"))
+    kickoff_time = row.get("kickoff_time")
+    if pd.notna(kickoff_time):
+        return False
+    if latest_completed_gw is None or gameweek is None:
+        return False
+    return gameweek <= latest_completed_gw
+
+
+def serialize_prediction_fixture(
+    row: dict[str, Any],
+    probability: Any,
+    team_lookup: dict[tuple[str, int], dict[str, Any]],
+) -> dict[str, Any]:
+    return {
+        "matchId": row["match_id"],
+        "season": row["source_season"],
+        "gameweek": coerce_int(row.get("source_gameweek")) or coerce_int(row.get("gameweek")),
+        "kickoffTime": (
+            pd.Timestamp(row["kickoff_time"]).tz_localize("UTC").isoformat()
+            if pd.notna(row.get("kickoff_time")) and pd.Timestamp(row["kickoff_time"]).tzinfo is None
+            else (
+                pd.Timestamp(row["kickoff_time"]).isoformat()
+                if pd.notna(row.get("kickoff_time"))
+                else None
+            )
+        ),
+        "homeTeam": serialize_team(team_lookup, row["source_season"], row["home_team"]),
+        "awayTeam": serialize_team(team_lookup, row["source_season"], row["away_team"]),
+        "probabilities": {
+            "homeWin": round(float(probability[0]), 4),
+            "draw": round(float(probability[1]), 4),
+            "awayWin": round(float(probability[2]), 4),
+        },
+        "context": {
+            "homeElo": coerce_float(row.get("home_current_elo"), 0),
+            "awayElo": coerce_float(row.get("away_current_elo"), 0),
+            "homeDaysRest": coerce_float(row.get("home_days_rest")),
+            "awayDaysRest": coerce_float(row.get("away_days_rest")),
+            "homeLast5Xg": coerce_float(row.get("home_last5_avg_xg")),
+            "awayLast5Xg": coerce_float(row.get("away_last5_avg_xg")),
+            "homeLast5Xga": coerce_float(row.get("home_last5_avg_xga")),
+            "awayLast5Xga": coerce_float(row.get("away_last5_avg_xga")),
+            "homeLast5Matches": coerce_int(row.get("home_last5_matches")),
+            "awayLast5Matches": coerce_int(row.get("away_last5_matches")),
+        },
+    }
+
+
+def build_prediction_groups(
     feature_table_path: Path,
     model_path: Path,
     metrics_path: Path,
     team_lookup: dict[tuple[str, int], dict[str, Any]],
-) -> list[dict[str, Any]]:
+) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
     features = pd.read_csv(feature_table_path)
     features = add_sorting_columns(features)
     features = add_derived_features(features)
-    upcoming = features.loc[is_premier_league_frame(features) & (features["finished"] != True)].copy()
+    now_utc = pd.Timestamp.now(tz=UTC)
+    latest_completed_gw = latest_completed_gameweek(features, CURRENT_SEASON)
+    unresolved = features.loc[is_premier_league_frame(features) & (features["finished"] != True)].copy()
+    postponed = unresolved.loc[
+        unresolved.apply(
+            lambda row: is_postponed_match(
+                row.to_dict(),
+                latest_completed_gw=latest_completed_gw,
+            ),
+            axis=1,
+        )
+    ].copy()
+    upcoming = unresolved.loc[
+        unresolved.apply(
+            lambda row: should_include_upcoming_match(
+                row.to_dict(),
+                now_utc=now_utc,
+                latest_completed_gw=latest_completed_gw,
+            ),
+            axis=1,
+        )
+    ].copy()
     upcoming = upcoming.sort_values(
         ["kickoff_time", "source_season", "_ordering_gameweek", "match_id"],
         kind="stable",
         na_position="last",
     ).reset_index(drop=True)
 
-    if upcoming.empty:
-        return []
+    if upcoming.empty and postponed.empty:
+        upcoming_fixtures: list[dict[str, Any]] = []
+        postponed_fixtures: list[dict[str, Any]] = []
+        return upcoming_fixtures, postponed_fixtures
 
     temperature, _ = load_model_metadata(metrics_path)
     model = load_model(model_path)
-    probabilities = model.predict_proba(upcoming.loc[:, FEATURE_COLUMNS])
-    probabilities = apply_temperature(probabilities, temperature)
+    def serialize_rows(frame: pd.DataFrame, *, postponed_reason: str | None = None) -> list[dict[str, Any]]:
+        if frame.empty:
+            return []
+        probabilities = model.predict_proba(frame.loc[:, FEATURE_COLUMNS])
+        probabilities = apply_temperature(probabilities, temperature)
+        items: list[dict[str, Any]] = []
+        for row, probability in zip(frame.to_dict(orient="records"), probabilities, strict=True):
+            item = serialize_prediction_fixture(row, probability, team_lookup)
+            if postponed_reason is not None:
+                item["status"] = "postponed"
+                item["statusReason"] = postponed_reason
+            items.append(item)
+        return items
 
-    fixtures: list[dict[str, Any]] = []
-    for row, probability in zip(upcoming.to_dict(orient="records"), probabilities, strict=True):
-        fixtures.append(
-            {
-                "matchId": row["match_id"],
-                "season": row["source_season"],
-                "gameweek": coerce_int(row.get("source_gameweek")) or coerce_int(row.get("gameweek")),
-                "kickoffTime": (
-                    pd.Timestamp(row["kickoff_time"]).tz_localize("UTC").isoformat()
-                    if pd.notna(row.get("kickoff_time")) and pd.Timestamp(row["kickoff_time"]).tzinfo is None
-                    else (
-                        pd.Timestamp(row["kickoff_time"]).isoformat()
-                        if pd.notna(row.get("kickoff_time"))
-                        else None
-                    )
-                ),
-                "homeTeam": serialize_team(team_lookup, row["source_season"], row["home_team"]),
-                "awayTeam": serialize_team(team_lookup, row["source_season"], row["away_team"]),
-                "probabilities": {
-                    "homeWin": round(float(probability[0]), 4),
-                    "draw": round(float(probability[1]), 4),
-                    "awayWin": round(float(probability[2]), 4),
-                },
-                "context": {
-                    "homeElo": coerce_float(row.get("home_current_elo"), 0),
-                    "awayElo": coerce_float(row.get("away_current_elo"), 0),
-                    "homeDaysRest": coerce_float(row.get("home_days_rest")),
-                    "awayDaysRest": coerce_float(row.get("away_days_rest")),
-                    "homeLast5Xg": coerce_float(row.get("home_last5_avg_xg")),
-                    "awayLast5Xg": coerce_float(row.get("away_last5_avg_xg")),
-                    "homeLast5Xga": coerce_float(row.get("home_last5_avg_xga")),
-                    "awayLast5Xga": coerce_float(row.get("away_last5_avg_xga")),
-                    "homeLast5Matches": coerce_int(row.get("home_last5_matches")),
-                    "awayLast5Matches": coerce_int(row.get("away_last5_matches")),
-                },
-            }
-        )
-    return fixtures
+    upcoming_fixtures = serialize_rows(upcoming)
+    postponed_fixtures = serialize_rows(
+        postponed,
+        postponed_reason="Awaiting a confirmed kickoff time from the source data.",
+    )
+    return upcoming_fixtures, postponed_fixtures
 
 
 def build_historical_matches(
@@ -280,6 +371,12 @@ def build_dashboard_payload(
 ) -> dict[str, Any]:
     team_lookup = load_team_lookup(data_dir)
     temperature, model_metadata = load_model_metadata(metrics_path)
+    upcoming_fixtures, postponed_fixtures = build_prediction_groups(
+        feature_table_path=feature_table_path,
+        model_path=model_path,
+        metrics_path=metrics_path,
+        team_lookup=team_lookup,
+    )
 
     return {
         "generatedAtUtc": datetime.now(UTC).isoformat(),
@@ -291,12 +388,8 @@ def build_dashboard_payload(
             "split": model_metadata.get("split", {}),
             "competitionDistributionTrain": model_metadata.get("competition_distribution_train", {}),
         },
-        "upcomingFixtures": build_upcoming_predictions(
-            feature_table_path=feature_table_path,
-            model_path=model_path,
-            metrics_path=metrics_path,
-            team_lookup=team_lookup,
-        ),
+        "upcomingFixtures": upcoming_fixtures,
+        "postponedFixtures": postponed_fixtures,
         "historicalMatches": build_historical_matches(
             matches_path=matches_path,
             feature_table_path=feature_table_path,

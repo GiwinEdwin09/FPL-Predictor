@@ -1,5 +1,5 @@
 {
-  "synced_at_utc": "2026-04-12T18:01:53.566271+00:00",
+  "synced_at_utc": "2026-04-12T22:57:52.335391+00:00",
   "datasets": {
     "matches": {
       "seasons": [
@@ -184,8 +184,8 @@
           "local_path": "data/raw/2025-2026/players.csv",
           "local_rows": 826,
           "remote_rows": 826,
-          "local_hash": "5a061d595cf9cb44c9de50728382ce04b8bc7288202c38495080a20027e5ae0d",
-          "remote_hash": "471b65fe27642d52cc64abd066104ae1a92156ad1229eff56792ab15761a48c7",
+          "local_hash": "471b65fe27642d52cc64abd066104ae1a92156ad1229eff56792ab15761a48c7",
+          "remote_hash": "5a43d0d07acf536aef9872c30b95a7d5733b7d367bb607b46222c63bbe9ab4a0",
           "updated": true
         }
       ],
@@ -206,8 +206,8 @@
           "local_path": "data/raw/2024-2025/playerstats.csv",
           "local_rows": 27657,
           "remote_rows": 27657,
-          "local_hash": "8098ef0673f757d414cf20fc91615199bca01bf39c181826d24c597ce17d8472",
-          "remote_hash": "8098ef0673f757d414cf20fc91615199bca01bf39c181826d24c597ce17d8472",
+          "local_hash": "9aaa0928f25499da1bb9b1532a91cfa2943b5d05d0e7904cefd600cdd75263a6",
+          "remote_hash": "9aaa0928f25499da1bb9b1532a91cfa2943b5d05d0e7904cefd600cdd75263a6",
           "updated": false
         },
         {
@@ -297,8 +297,8 @@
           "local_path": "data/raw/2025-2026/playerstats.csv",
           "local_rows": 24968,
           "remote_rows": 24968,
-          "local_hash": "fc1a28153a1599d4f104f5fc78e09dfbfbc8b311189b77969f489af1cfffdcd6",
-          "remote_hash": "f69f02f80e78aee36fccb7a3d64fa3bee772c6a2f69a976223845ff45d768ebf",
+          "local_hash": "f69f02f80e78aee36fccb7a3d64fa3bee772c6a2f69a976223845ff45d768ebf",
+          "remote_hash": "92a9c78c2d94b1c661237ddf0bd11e16ae8bd8687d591f57f694cf6d64340d6d",
           "updated": true
         }
       ],
