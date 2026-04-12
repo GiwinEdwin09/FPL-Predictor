@@ -1,5 +1,5 @@
 {
-  "synced_at_utc": "2026-04-12T06:53:55.337704+00:00",
+  "synced_at_utc": "2026-04-12T18:01:53.566271+00:00",
   "datasets": {
     "matches": {
       "seasons": [
@@ -107,9 +107,9 @@
           "local_path": "data/raw/2025-2026/matches.csv",
           "local_rows": 519,
           "remote_rows": 519,
-          "local_hash": "fc972d5bafa3391c0934f576d4668f57e57df9176b79e97c46ce7918005ff2e2",
+          "local_hash": "f772988ef7af31e200698a41d372b836b8a276292d70b6619a0a3a177987d44a",
           "remote_hash": "f772988ef7af31e200698a41d372b836b8a276292d70b6619a0a3a177987d44a",
-          "updated": true
+          "updated": false
         }
       ],
       "output_path": "data/matches.csv"
@@ -182,10 +182,10 @@
             "https://raw.githubusercontent.com/olbauday/FPL-Core-Insights/main/data/2025-2026/players.csv"
           ],
           "local_path": "data/raw/2025-2026/players.csv",
-          "local_rows": 825,
+          "local_rows": 826,
           "remote_rows": 826,
-          "local_hash": "5bdc48b125e9339bd70166839b366a53c6fc2416d63d5b3451e9cf633130a5a6",
-          "remote_hash": "5a061d595cf9cb44c9de50728382ce04b8bc7288202c38495080a20027e5ae0d",
+          "local_hash": "5a061d595cf9cb44c9de50728382ce04b8bc7288202c38495080a20027e5ae0d",
+          "remote_hash": "471b65fe27642d52cc64abd066104ae1a92156ad1229eff56792ab15761a48c7",
           "updated": true
         }
       ],
@@ -295,10 +295,10 @@
             "https://raw.githubusercontent.com/olbauday/FPL-Core-Insights/main/data/2025-2026/By%20Gameweek/GW38/playerstats.csv"
           ],
           "local_path": "data/raw/2025-2026/playerstats.csv",
-          "local_rows": 24967,
+          "local_rows": 24968,
           "remote_rows": 24968,
-          "local_hash": "b7441b936a9708f29b1fb254f7510a13831ea2e701b2a18bf8f22a6ded551a8f",
-          "remote_hash": "fc1a28153a1599d4f104f5fc78e09dfbfbc8b311189b77969f489af1cfffdcd6",
+          "local_hash": "fc1a28153a1599d4f104f5fc78e09dfbfbc8b311189b77969f489af1cfffdcd6",
+          "remote_hash": "f69f02f80e78aee36fccb7a3d64fa3bee772c6a2f69a976223845ff45d768ebf",
           "updated": true
         }
       ],
