@@ -1,461 +1,30 @@
 {
-  "generatedAtUtc": "2026-04-14T18:44:56.548989+00:00",
+  "generatedAtUtc": "2026-04-15T07:09:03.948042+00:00",
   "currentSeason": "2025-2026",
   "model": {
     "version": "model_v2",
-    "calibrationTemperature": 4.6,
+    "calibrationTemperature": 2.3,
     "metrics": {
-      "accuracy": 0.425,
-      "multiclass_log_loss": 1.0769879888540737,
-      "multiclass_brier_score": 0.649012194067792
+      "accuracy": 0.3333333333333333,
+      "multiclass_log_loss": 1.184894521566057,
+      "multiclass_brier_score": 0.7145437617507219
     },
     "split": {
-      "train_rows": 754,
-      "validation_rows": 40,
-      "validation_cutoff_utc": "2026-02-22T14:15:00+00:00",
-      "latest_finished_kickoff_utc": "2026-03-22T14:15:00+00:00"
+      "train_rows": 783,
+      "validation_rows": 27,
+      "validation_cutoff_utc": "2026-03-14T14:00:00+00:00",
+      "latest_finished_kickoff_utc": "2026-04-11T14:00:00+00:00"
     },
     "competitionDistributionTrain": {
-      "prem": 649,
-      "champions-league": 48,
+      "prem": 672,
+      "champions-league": 50,
       "efl-cup": 37,
-      "europa-league": 14,
-      "conference-league": 6
+      "europa-league": 16,
+      "conference-league": 8
     }
   },
-  "currentGameweek": 32,
-  "currentGameweekFixtures": [
-    {
-      "matchId": "25-26-prem-arsenal-vs-afc-bournemouth",
-      "season": "2025-2026",
-      "gameweek": 32,
-      "kickoffTime": "2026-04-11T14:00:00+00:00",
-      "homeTeam": {
-        "id": 3,
-        "name": "Arsenal",
-        "shortName": "ARS",
-        "badgeSlug": "arsenal",
-        "badgePath": "/teams/arsenal.football-logos.cc.png"
-      },
-      "awayTeam": {
-        "id": 91,
-        "name": "AFC Bournemouth",
-        "shortName": "BOU",
-        "badgeSlug": "bournemouth",
-        "badgePath": "/teams/bournemouth.football-logos.cc.png"
-      },
-      "finished": false,
-      "score": {
-        "home": null,
-        "away": null
-      },
-      "probabilities": {
-        "homeWin": 0.4691,
-        "draw": 0.2993,
-        "awayWin": 0.2317
-      },
-      "context": {
-        "homeElo": 2065.0,
-        "awayElo": 1835.0,
-        "homeDaysRest": 27.0,
-        "awayDaysRest": 21.75,
-        "homeLast5Xg": 1.59,
-        "awayLast5Xg": 1.73,
-        "homeLast5Xga": 0.79,
-        "awayLast5Xga": 1.65,
-        "homeLast5Matches": 5,
-        "awayLast5Matches": 5
-      },
-      "status": "current"
-    },
-    {
-      "matchId": "25-26-prem-brentford-vs-everton",
-      "season": "2025-2026",
-      "gameweek": 32,
-      "kickoffTime": "2026-04-11T14:00:00+00:00",
-      "homeTeam": {
-        "id": 94,
-        "name": "Brentford",
-        "shortName": "BRE",
-        "badgeSlug": "brentford",
-        "badgePath": "/teams/brentford.football-logos.cc.png"
-      },
-      "awayTeam": {
-        "id": 11,
-        "name": "Everton",
-        "shortName": "EVE",
-        "badgeSlug": "everton",
-        "badgePath": "/teams/everton.football-logos.cc.png"
-      },
-      "finished": false,
-      "score": {
-        "home": null,
-        "away": null
-      },
-      "probabilities": {
-        "homeWin": 0.4063,
-        "draw": 0.2826,
-        "awayWin": 0.3111
-      },
-      "context": {
-        "homeElo": 1853.0,
-        "awayElo": 1832.0,
-        "homeDaysRest": 20.75,
-        "awayDaysRest": 20.85,
-        "homeLast5Xg": 1.45,
-        "awayLast5Xg": 1.26,
-        "homeLast5Xga": 1.18,
-        "awayLast5Xga": 1.34,
-        "homeLast5Matches": 5,
-        "awayLast5Matches": 5
-      },
-      "status": "current"
-    },
-    {
-      "matchId": "25-26-prem-burnley-vs-brighton-hove-albion",
-      "season": "2025-2026",
-      "gameweek": 32,
-      "kickoffTime": "2026-04-11T14:00:00+00:00",
-      "homeTeam": {
-        "id": 90,
-        "name": "Burnley",
-        "shortName": "BUR",
-        "badgeSlug": "burnley",
-        "badgePath": "/teams/burnley.football-logos.cc.png"
-      },
-      "awayTeam": {
-        "id": 36,
-        "name": "Brighton & Hove Albion",
-        "shortName": "BHA",
-        "badgeSlug": "brighton",
-        "badgePath": "/teams/brighton.football-logos.cc.png"
-      },
-      "finished": false,
-      "score": {
-        "home": null,
-        "away": null
-      },
-      "probabilities": {
-        "homeWin": 0.2471,
-        "draw": 0.2974,
-        "awayWin": 0.4555
-      },
-      "context": {
-        "homeElo": 1685.0,
-        "awayElo": 1830.0,
-        "homeDaysRest": 20.96,
-        "awayDaysRest": 21.06,
-        "homeLast5Xg": 1.05,
-        "awayLast5Xg": 1.41,
-        "homeLast5Xga": 2.25,
-        "awayLast5Xga": 0.99,
-        "homeLast5Matches": 5,
-        "awayLast5Matches": 5
-      },
-      "status": "current"
-    },
-    {
-      "matchId": "25-26-prem-chelsea-vs-manchester-city",
-      "season": "2025-2026",
-      "gameweek": 32,
-      "kickoffTime": "2026-04-11T14:00:00+00:00",
-      "homeTeam": {
-        "id": 8,
-        "name": "Chelsea",
-        "shortName": "CHE",
-        "badgeSlug": "chelsea",
-        "badgePath": "/teams/chelsea.football-logos.cc.png"
-      },
-      "awayTeam": {
-        "id": 43,
-        "name": "Manchester City",
-        "shortName": "MCI",
-        "badgeSlug": "manchester-city",
-        "badgePath": "/teams/manchester-city.football-logos.cc.png"
-      },
-      "finished": false,
-      "score": {
-        "home": null,
-        "away": null
-      },
-      "probabilities": {
-        "homeWin": 0.4295,
-        "draw": 0.2492,
-        "awayWin": 0.3213
-      },
-      "context": {
-        "homeElo": 1930.0,
-        "awayElo": 1974.0,
-        "homeDaysRest": 20.85,
-        "awayDaysRest": 28.06,
-        "homeLast5Xg": 1.79,
-        "awayLast5Xg": 1.79,
-        "homeLast5Xga": 1.07,
-        "awayLast5Xga": 1.01,
-        "homeLast5Matches": 5,
-        "awayLast5Matches": 5
-      },
-      "status": "current"
-    },
-    {
-      "matchId": "25-26-prem-crystal-palace-vs-newcastle-united",
-      "season": "2025-2026",
-      "gameweek": 32,
-      "kickoffTime": "2026-04-11T14:00:00+00:00",
-      "homeTeam": {
-        "id": 31,
-        "name": "Crystal Palace",
-        "shortName": "CRY",
-        "badgeSlug": "crystal-palace",
-        "badgePath": "/teams/crystal-palace.football-logos.cc.png"
-      },
-      "awayTeam": {
-        "id": 4,
-        "name": "Newcastle United",
-        "shortName": "NEW",
-        "badgeSlug": "newcastle",
-        "badgePath": "/teams/newcastle.football-logos.cc.png"
-      },
-      "finished": false,
-      "score": {
-        "home": null,
-        "away": null
-      },
-      "probabilities": {
-        "homeWin": 0.3651,
-        "draw": 0.2634,
-        "awayWin": 0.3715
-      },
-      "context": {
-        "homeElo": 1806.0,
-        "awayElo": 1867.0,
-        "homeDaysRest": 27.96,
-        "awayDaysRest": 20.08,
-        "homeLast5Xg": 1.33,
-        "awayLast5Xg": 1.36,
-        "homeLast5Xga": 1.38,
-        "awayLast5Xga": 1.76,
-        "homeLast5Matches": 5,
-        "awayLast5Matches": 5
-      },
-      "status": "current"
-    },
-    {
-      "matchId": "25-26-prem-liverpool-vs-fulham",
-      "season": "2025-2026",
-      "gameweek": 32,
-      "kickoffTime": "2026-04-11T14:00:00+00:00",
-      "homeTeam": {
-        "id": 14,
-        "name": "Liverpool",
-        "shortName": "LIV",
-        "badgeSlug": "liverpool",
-        "badgePath": "/teams/liverpool.football-logos.cc.png"
-      },
-      "awayTeam": {
-        "id": 54,
-        "name": "Fulham",
-        "shortName": "FUL",
-        "badgeSlug": "fulham",
-        "badgePath": "/teams/fulham.football-logos.cc.png"
-      },
-      "finished": false,
-      "score": {
-        "home": null,
-        "away": null
-      },
-      "probabilities": {
-        "homeWin": 0.4399,
-        "draw": 0.3008,
-        "awayWin": 0.2592
-      },
-      "context": {
-        "homeElo": 1949.0,
-        "awayElo": 1808.0,
-        "homeDaysRest": 21.06,
-        "awayDaysRest": 20.96,
-        "homeLast5Xg": 1.64,
-        "awayLast5Xg": 1.82,
-        "homeLast5Xga": 1.37,
-        "awayLast5Xga": 1.2,
-        "homeLast5Matches": 5,
-        "awayLast5Matches": 5
-      },
-      "status": "current"
-    },
-    {
-      "matchId": "25-26-prem-manchester-united-vs-leeds-united",
-      "season": "2025-2026",
-      "gameweek": 32,
-      "kickoffTime": "2026-04-11T14:00:00+00:00",
-      "homeTeam": {
-        "id": 1,
-        "name": "Manchester United",
-        "shortName": "MUN",
-        "badgeSlug": "manchester-united",
-        "badgePath": "/teams/manchester-united.football-logos.cc.png"
-      },
-      "awayTeam": {
-        "id": 2,
-        "name": "Leeds United",
-        "shortName": "LEE",
-        "badgeSlug": "leeds-united",
-        "badgePath": "/teams/leeds-united.football-logos.cc.png"
-      },
-      "finished": false,
-      "score": {
-        "home": null,
-        "away": null
-      },
-      "probabilities": {
-        "homeWin": 0.4003,
-        "draw": 0.2858,
-        "awayWin": 0.3139
-      },
-      "context": {
-        "homeElo": 1881.0,
-        "awayElo": 1780.0,
-        "homeDaysRest": 21.75,
-        "awayDaysRest": 20.75,
-        "homeLast5Xg": 1.53,
-        "awayLast5Xg": 1.13,
-        "homeLast5Xga": 1.26,
-        "awayLast5Xga": 1.09,
-        "homeLast5Matches": 5,
-        "awayLast5Matches": 5
-      },
-      "status": "current"
-    },
-    {
-      "matchId": "25-26-prem-nottingham-forest-vs-aston-villa",
-      "season": "2025-2026",
-      "gameweek": 32,
-      "kickoffTime": "2026-04-11T14:00:00+00:00",
-      "homeTeam": {
-        "id": 17,
-        "name": "Nottingham Forest",
-        "shortName": "NFO",
-        "badgeSlug": "nottingham-forest",
-        "badgePath": "/teams/nottingham-forest.football-logos.cc.png"
-      },
-      "awayTeam": {
-        "id": 7,
-        "name": "Aston Villa",
-        "shortName": "AVL",
-        "badgeSlug": "aston-villa",
-        "badgePath": "/teams/aston-villa.football-logos.cc.png"
-      },
-      "finished": false,
-      "score": {
-        "home": null,
-        "away": null
-      },
-      "probabilities": {
-        "homeWin": 0.2872,
-        "draw": 0.2307,
-        "awayWin": 0.4821
-      },
-      "context": {
-        "homeElo": 1785.0,
-        "awayElo": 1929.0,
-        "homeDaysRest": 19.99,
-        "awayDaysRest": 19.99,
-        "homeLast5Xg": 1.08,
-        "awayLast5Xg": 1.19,
-        "homeLast5Xga": 1.49,
-        "awayLast5Xga": 1.55,
-        "homeLast5Matches": 5,
-        "awayLast5Matches": 5
-      },
-      "status": "current"
-    },
-    {
-      "matchId": "25-26-prem-sunderland-vs-tottenham-hotspur",
-      "season": "2025-2026",
-      "gameweek": 32,
-      "kickoffTime": "2026-04-11T14:00:00+00:00",
-      "homeTeam": {
-        "id": 56,
-        "name": "Sunderland",
-        "shortName": "SUN",
-        "badgeSlug": "sunderland",
-        "badgePath": "/teams/sunderland.football-logos.cc.png"
-      },
-      "awayTeam": {
-        "id": 6,
-        "name": "Tottenham Hotspur",
-        "shortName": "TOT",
-        "badgeSlug": "tottenham",
-        "badgePath": "/teams/tottenham.football-logos.cc.png"
-      },
-      "finished": false,
-      "score": {
-        "home": null,
-        "away": null
-      },
-      "probabilities": {
-        "homeWin": 0.3115,
-        "draw": 0.2399,
-        "awayWin": 0.4487
-      },
-      "context": {
-        "homeElo": 1706.0,
-        "awayElo": 1820.0,
-        "homeDaysRest": 20.08,
-        "awayDaysRest": 19.99,
-        "homeLast5Xg": 1.5,
-        "awayLast5Xg": 1.13,
-        "homeLast5Xga": 1.54,
-        "awayLast5Xga": 1.81,
-        "homeLast5Matches": 5,
-        "awayLast5Matches": 5
-      },
-      "status": "current"
-    },
-    {
-      "matchId": "25-26-prem-west-ham-united-vs-wolverhampton-wanderers",
-      "season": "2025-2026",
-      "gameweek": 32,
-      "kickoffTime": "2026-04-11T14:00:00+00:00",
-      "homeTeam": {
-        "id": 21,
-        "name": "West Ham United",
-        "shortName": "WHU",
-        "badgeSlug": "west-ham",
-        "badgePath": "/teams/west-ham.football-logos.cc.png"
-      },
-      "awayTeam": {
-        "id": 39,
-        "name": "Wolverhampton Wanderers",
-        "shortName": "WOL",
-        "badgeSlug": "wolves",
-        "badgePath": "/teams/wolves.football-logos.cc.png"
-      },
-      "finished": false,
-      "score": {
-        "home": null,
-        "away": null
-      },
-      "probabilities": {
-        "homeWin": 0.4387,
-        "draw": 0.2982,
-        "awayWin": 0.2631
-      },
-      "context": {
-        "homeElo": 1744.0,
-        "awayElo": 1669.0,
-        "homeDaysRest": 19.99,
-        "awayDaysRest": 25.75,
-        "homeLast5Xg": 1.52,
-        "awayLast5Xg": 0.92,
-        "homeLast5Xga": 1.44,
-        "awayLast5Xga": 1.82,
-        "homeLast5Matches": 5,
-        "awayLast5Matches": 5
-      },
-      "status": "current"
-    }
-  ],
+  "currentGameweek": null,
+  "currentGameweekFixtures": [],
   "upcomingFixtures": [
     {
       "matchId": "25-26-prem-aston-villa-vs-sunderland",
@@ -482,19 +51,19 @@
         "away": null
       },
       "probabilities": {
-        "homeWin": 0.4423,
-        "draw": 0.2938,
-        "awayWin": 0.2639
+        "homeWin": 0.4044,
+        "draw": 0.2913,
+        "awayWin": 0.3043
       },
       "context": {
         "homeElo": 1929.0,
         "awayElo": 1706.0,
-        "homeDaysRest": 26.99,
-        "awayDaysRest": 27.08,
-        "homeLast5Xg": 1.19,
-        "awayLast5Xg": 1.5,
-        "homeLast5Xga": 1.55,
-        "awayLast5Xga": 1.54,
+        "homeDaysRest": 7.0,
+        "awayDaysRest": 7.0,
+        "homeLast5Xg": 1.1,
+        "awayLast5Xg": 1.39,
+        "homeLast5Xga": 1.51,
+        "awayLast5Xga": 1.33,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
       }
@@ -524,19 +93,19 @@
         "away": null
       },
       "probabilities": {
-        "homeWin": 0.4225,
-        "draw": 0.2794,
-        "awayWin": 0.2981
+        "homeWin": 0.4593,
+        "draw": 0.3017,
+        "awayWin": 0.239
       },
       "context": {
         "homeElo": 1853.0,
         "awayElo": 1808.0,
-        "homeDaysRest": 27.75,
-        "awayDaysRest": 27.96,
-        "homeLast5Xg": 1.45,
-        "awayLast5Xg": 1.82,
-        "homeLast5Xga": 1.18,
-        "awayLast5Xga": 1.2,
+        "homeDaysRest": 7.0,
+        "awayDaysRest": 7.0,
+        "homeLast5Xg": 1.7,
+        "awayLast5Xg": 1.65,
+        "homeLast5Xga": 1.27,
+        "awayLast5Xga": 1.15,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
       }
@@ -566,19 +135,19 @@
         "away": null
       },
       "probabilities": {
-        "homeWin": 0.4054,
-        "draw": 0.2822,
-        "awayWin": 0.3124
+        "homeWin": 0.5953,
+        "draw": 0.206,
+        "awayWin": 0.1987
       },
       "context": {
         "homeElo": 1930.0,
         "awayElo": 1881.0,
-        "homeDaysRest": 27.85,
-        "awayDaysRest": 28.75,
-        "homeLast5Xg": 1.79,
+        "homeDaysRest": 7.0,
+        "awayDaysRest": 7.0,
+        "homeLast5Xg": 1.62,
         "awayLast5Xg": 1.53,
-        "homeLast5Xga": 1.07,
-        "awayLast5Xga": 1.26,
+        "homeLast5Xga": 1.36,
+        "awayLast5Xga": 1.65,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
       }
@@ -608,19 +177,19 @@
         "away": null
       },
       "probabilities": {
-        "homeWin": 0.4108,
-        "draw": 0.279,
-        "awayWin": 0.3103
+        "homeWin": 0.2982,
+        "draw": 0.3271,
+        "awayWin": 0.3746
       },
       "context": {
         "homeElo": 1806.0,
         "awayElo": 1744.0,
-        "homeDaysRest": 34.96,
-        "awayDaysRest": 26.99,
-        "homeLast5Xg": 1.33,
-        "awayLast5Xg": 1.52,
-        "homeLast5Xga": 1.38,
-        "awayLast5Xga": 1.44,
+        "homeDaysRest": 7.0,
+        "awayDaysRest": 7.0,
+        "homeLast5Xg": 1.48,
+        "awayLast5Xg": 1.34,
+        "homeLast5Xga": 1.5,
+        "awayLast5Xga": 1.43,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
       }
@@ -650,19 +219,19 @@
         "away": null
       },
       "probabilities": {
-        "homeWin": 0.346,
-        "draw": 0.3303,
-        "awayWin": 0.3237
+        "homeWin": 0.3157,
+        "draw": 0.4292,
+        "awayWin": 0.2552
       },
       "context": {
         "homeElo": 1832.0,
         "awayElo": 1949.0,
-        "homeDaysRest": 27.85,
-        "awayDaysRest": 28.06,
-        "homeLast5Xg": 1.26,
-        "awayLast5Xg": 1.64,
-        "homeLast5Xga": 1.34,
-        "awayLast5Xga": 1.37,
+        "homeDaysRest": 7.0,
+        "awayDaysRest": 7.0,
+        "homeLast5Xg": 1.44,
+        "awayLast5Xg": 1.61,
+        "homeLast5Xga": 1.66,
+        "awayLast5Xga": 1.34,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
       }
@@ -692,19 +261,19 @@
         "away": null
       },
       "probabilities": {
-        "homeWin": 0.4735,
-        "draw": 0.2648,
-        "awayWin": 0.2616
+        "homeWin": 0.5007,
+        "draw": 0.2687,
+        "awayWin": 0.2306
       },
       "context": {
         "homeElo": 1780.0,
         "awayElo": 1669.0,
-        "homeDaysRest": 27.75,
-        "awayDaysRest": 32.75,
-        "homeLast5Xg": 1.13,
-        "awayLast5Xg": 0.92,
-        "homeLast5Xga": 1.09,
-        "awayLast5Xga": 1.82,
+        "homeDaysRest": 7.0,
+        "awayDaysRest": 7.0,
+        "homeLast5Xg": 1.37,
+        "awayLast5Xg": 0.98,
+        "homeLast5Xga": 1.05,
+        "awayLast5Xga": 1.97,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
       }
@@ -734,19 +303,19 @@
         "away": null
       },
       "probabilities": {
-        "homeWin": 0.3447,
-        "draw": 0.2486,
-        "awayWin": 0.4067
+        "homeWin": 0.3469,
+        "draw": 0.3147,
+        "awayWin": 0.3384
       },
       "context": {
         "homeElo": 1974.0,
         "awayElo": 2065.0,
-        "homeDaysRest": 35.06,
-        "awayDaysRest": 34.0,
-        "homeLast5Xg": 1.79,
-        "awayLast5Xg": 1.59,
-        "homeLast5Xga": 1.01,
-        "awayLast5Xga": 0.79,
+        "homeDaysRest": 7.0,
+        "awayDaysRest": 7.0,
+        "homeLast5Xg": 1.98,
+        "awayLast5Xg": 1.74,
+        "homeLast5Xga": 0.95,
+        "awayLast5Xga": 0.97,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
       }
@@ -776,19 +345,19 @@
         "away": null
       },
       "probabilities": {
-        "homeWin": 0.3849,
-        "draw": 0.3346,
-        "awayWin": 0.2805
+        "homeWin": 0.3561,
+        "draw": 0.2397,
+        "awayWin": 0.4043
       },
       "context": {
         "homeElo": 1867.0,
         "awayElo": 1835.0,
-        "homeDaysRest": 27.08,
-        "awayDaysRest": 28.75,
-        "homeLast5Xg": 1.36,
-        "awayLast5Xg": 1.73,
-        "homeLast5Xga": 1.76,
-        "awayLast5Xga": 1.65,
+        "homeDaysRest": 7.0,
+        "awayDaysRest": 7.0,
+        "homeLast5Xg": 1.46,
+        "awayLast5Xg": 1.83,
+        "homeLast5Xga": 2.0,
+        "awayLast5Xga": 1.46,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
       }
@@ -818,19 +387,19 @@
         "away": null
       },
       "probabilities": {
-        "homeWin": 0.4538,
-        "draw": 0.2446,
-        "awayWin": 0.3016
+        "homeWin": 0.6171,
+        "draw": 0.1898,
+        "awayWin": 0.193
       },
       "context": {
         "homeElo": 1785.0,
         "awayElo": 1685.0,
-        "homeDaysRest": 26.99,
-        "awayDaysRest": 27.96,
-        "homeLast5Xg": 1.08,
-        "awayLast5Xg": 1.05,
-        "homeLast5Xga": 1.49,
-        "awayLast5Xga": 2.25,
+        "homeDaysRest": 7.0,
+        "awayDaysRest": 7.0,
+        "homeLast5Xg": 1.07,
+        "awayLast5Xg": 1.06,
+        "homeLast5Xga": 1.35,
+        "awayLast5Xga": 2.24,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
       }
@@ -860,19 +429,19 @@
         "away": null
       },
       "probabilities": {
-        "homeWin": 0.319,
-        "draw": 0.3113,
-        "awayWin": 0.3697
+        "homeWin": 0.3522,
+        "draw": 0.2194,
+        "awayWin": 0.4284
       },
       "context": {
         "homeElo": 1820.0,
         "awayElo": 1830.0,
-        "homeDaysRest": 26.99,
-        "awayDaysRest": 28.06,
-        "homeLast5Xg": 1.13,
-        "awayLast5Xg": 1.41,
-        "homeLast5Xga": 1.81,
-        "awayLast5Xga": 0.99,
+        "homeDaysRest": 7.0,
+        "awayDaysRest": 7.0,
+        "homeLast5Xg": 1.15,
+        "awayLast5Xg": 1.58,
+        "homeLast5Xga": 1.66,
+        "awayLast5Xga": 0.84,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
       }
@@ -902,19 +471,19 @@
         "away": null
       },
       "probabilities": {
-        "homeWin": 0.3919,
-        "draw": 0.3283,
-        "awayWin": 0.2798
+        "homeWin": 0.2921,
+        "draw": 0.3491,
+        "awayWin": 0.3587
       },
       "context": {
         "homeElo": 1835.0,
         "awayElo": 1780.0,
-        "homeDaysRest": 35.75,
-        "awayDaysRest": 34.75,
-        "homeLast5Xg": 1.73,
-        "awayLast5Xg": 1.13,
-        "homeLast5Xga": 1.65,
-        "awayLast5Xga": 1.09,
+        "homeDaysRest": 14.0,
+        "awayDaysRest": 14.0,
+        "homeLast5Xg": 1.83,
+        "awayLast5Xg": 1.37,
+        "homeLast5Xga": 1.46,
+        "awayLast5Xga": 1.05,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
       }
@@ -944,19 +513,19 @@
         "away": null
       },
       "probabilities": {
-        "homeWin": 0.5028,
-        "draw": 0.2616,
-        "awayWin": 0.2357
+        "homeWin": 0.5838,
+        "draw": 0.2652,
+        "awayWin": 0.151
       },
       "context": {
         "homeElo": 2065.0,
         "awayElo": 1867.0,
-        "homeDaysRest": 41.0,
-        "awayDaysRest": 34.08,
-        "homeLast5Xg": 1.59,
-        "awayLast5Xg": 1.36,
-        "homeLast5Xga": 0.79,
-        "awayLast5Xga": 1.76,
+        "homeDaysRest": 14.0,
+        "awayDaysRest": 14.0,
+        "homeLast5Xg": 1.74,
+        "awayLast5Xg": 1.46,
+        "homeLast5Xga": 0.97,
+        "awayLast5Xga": 2.0,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
       }
@@ -986,19 +555,19 @@
         "away": null
       },
       "probabilities": {
-        "homeWin": 0.3473,
-        "draw": 0.2815,
-        "awayWin": 0.3712
+        "homeWin": 0.3256,
+        "draw": 0.2247,
+        "awayWin": 0.4496
       },
       "context": {
         "homeElo": 1830.0,
         "awayElo": 1930.0,
-        "homeDaysRest": 35.06,
-        "awayDaysRest": 34.85,
-        "homeLast5Xg": 1.41,
-        "awayLast5Xg": 1.79,
-        "homeLast5Xga": 0.99,
-        "awayLast5Xga": 1.07,
+        "homeDaysRest": 14.0,
+        "awayDaysRest": 14.0,
+        "homeLast5Xg": 1.58,
+        "awayLast5Xg": 1.62,
+        "homeLast5Xga": 0.84,
+        "awayLast5Xga": 1.36,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
       }
@@ -1028,19 +597,19 @@
         "away": null
       },
       "probabilities": {
-        "homeWin": 0.2231,
-        "draw": 0.2701,
-        "awayWin": 0.5069
+        "homeWin": 0.1606,
+        "draw": 0.2412,
+        "awayWin": 0.5983
       },
       "context": {
         "homeElo": 1685.0,
         "awayElo": 1974.0,
-        "homeDaysRest": 34.96,
-        "awayDaysRest": 42.06,
-        "homeLast5Xg": 1.05,
-        "awayLast5Xg": 1.79,
-        "homeLast5Xga": 2.25,
-        "awayLast5Xga": 1.01,
+        "homeDaysRest": 14.0,
+        "awayDaysRest": 14.0,
+        "homeLast5Xg": 1.06,
+        "awayLast5Xg": 1.98,
+        "homeLast5Xga": 2.24,
+        "awayLast5Xga": 0.95,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
       }
@@ -1070,19 +639,19 @@
         "away": null
       },
       "probabilities": {
-        "homeWin": 0.3422,
-        "draw": 0.2428,
-        "awayWin": 0.415
+        "homeWin": 0.2132,
+        "draw": 0.1698,
+        "awayWin": 0.617
       },
       "context": {
         "homeElo": 1808.0,
         "awayElo": 1929.0,
-        "homeDaysRest": 34.96,
-        "awayDaysRest": 33.99,
-        "homeLast5Xg": 1.82,
-        "awayLast5Xg": 1.19,
-        "homeLast5Xga": 1.2,
-        "awayLast5Xga": 1.55,
+        "homeDaysRest": 14.0,
+        "awayDaysRest": 14.0,
+        "homeLast5Xg": 1.65,
+        "awayLast5Xg": 1.1,
+        "homeLast5Xga": 1.15,
+        "awayLast5Xga": 1.51,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
       }
@@ -1112,19 +681,19 @@
         "away": null
       },
       "probabilities": {
-        "homeWin": 0.4262,
-        "draw": 0.2855,
-        "awayWin": 0.2884
+        "homeWin": 0.4917,
+        "draw": 0.2406,
+        "awayWin": 0.2677
       },
       "context": {
         "homeElo": 1949.0,
         "awayElo": 1806.0,
-        "homeDaysRest": 35.06,
-        "awayDaysRest": 41.96,
-        "homeLast5Xg": 1.64,
-        "awayLast5Xg": 1.33,
-        "homeLast5Xga": 1.37,
-        "awayLast5Xga": 1.38,
+        "homeDaysRest": 14.0,
+        "awayDaysRest": 14.0,
+        "homeLast5Xg": 1.61,
+        "awayLast5Xg": 1.48,
+        "homeLast5Xga": 1.34,
+        "awayLast5Xga": 1.5,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
       }
@@ -1154,19 +723,19 @@
         "away": null
       },
       "probabilities": {
-        "homeWin": 0.3717,
-        "draw": 0.2488,
-        "awayWin": 0.3795
+        "homeWin": 0.3277,
+        "draw": 0.2173,
+        "awayWin": 0.4549
       },
       "context": {
         "homeElo": 1881.0,
         "awayElo": 1853.0,
-        "homeDaysRest": 35.75,
-        "awayDaysRest": 34.75,
+        "homeDaysRest": 14.0,
+        "awayDaysRest": 14.0,
         "homeLast5Xg": 1.53,
-        "awayLast5Xg": 1.45,
-        "homeLast5Xga": 1.26,
-        "awayLast5Xga": 1.18,
+        "awayLast5Xg": 1.7,
+        "homeLast5Xga": 1.65,
+        "awayLast5Xga": 1.27,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
       }
@@ -1196,19 +765,19 @@
         "away": null
       },
       "probabilities": {
-        "homeWin": 0.3369,
-        "draw": 0.243,
-        "awayWin": 0.4201
+        "homeWin": 0.3001,
+        "draw": 0.2952,
+        "awayWin": 0.4047
       },
       "context": {
         "homeElo": 1706.0,
         "awayElo": 1785.0,
-        "homeDaysRest": 34.08,
-        "awayDaysRest": 33.99,
-        "homeLast5Xg": 1.5,
-        "awayLast5Xg": 1.08,
-        "homeLast5Xga": 1.54,
-        "awayLast5Xga": 1.49,
+        "homeDaysRest": 14.0,
+        "awayDaysRest": 14.0,
+        "homeLast5Xg": 1.39,
+        "awayLast5Xg": 1.07,
+        "homeLast5Xga": 1.33,
+        "awayLast5Xga": 1.35,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
       }
@@ -1238,19 +807,19 @@
         "away": null
       },
       "probabilities": {
-        "homeWin": 0.2851,
-        "draw": 0.3368,
-        "awayWin": 0.3781
+        "homeWin": 0.1938,
+        "draw": 0.4866,
+        "awayWin": 0.3197
       },
       "context": {
         "homeElo": 1744.0,
         "awayElo": 1832.0,
-        "homeDaysRest": 33.99,
-        "awayDaysRest": 34.85,
-        "homeLast5Xg": 1.52,
-        "awayLast5Xg": 1.26,
-        "homeLast5Xga": 1.44,
-        "awayLast5Xga": 1.34,
+        "homeDaysRest": 14.0,
+        "awayDaysRest": 14.0,
+        "homeLast5Xg": 1.34,
+        "awayLast5Xg": 1.44,
+        "homeLast5Xga": 1.43,
+        "awayLast5Xga": 1.66,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
       }
@@ -1280,19 +849,19 @@
         "away": null
       },
       "probabilities": {
-        "homeWin": 0.2906,
-        "draw": 0.2964,
-        "awayWin": 0.413
+        "homeWin": 0.2201,
+        "draw": 0.2201,
+        "awayWin": 0.5598
       },
       "context": {
         "homeElo": 1669.0,
         "awayElo": 1820.0,
-        "homeDaysRest": 39.75,
-        "awayDaysRest": 33.99,
-        "homeLast5Xg": 0.92,
-        "awayLast5Xg": 1.13,
-        "homeLast5Xga": 1.82,
-        "awayLast5Xga": 1.81,
+        "homeDaysRest": 14.0,
+        "awayDaysRest": 14.0,
+        "homeLast5Xg": 0.98,
+        "awayLast5Xg": 1.15,
+        "homeLast5Xga": 1.97,
+        "awayLast5Xga": 1.66,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
       }
@@ -1322,19 +891,19 @@
         "away": null
       },
       "probabilities": {
-        "homeWin": 0.3622,
-        "draw": 0.317,
-        "awayWin": 0.3208
+        "homeWin": 0.4041,
+        "draw": 0.2595,
+        "awayWin": 0.3364
       },
       "context": {
         "homeElo": 1835.0,
         "awayElo": 1806.0,
-        "homeDaysRest": 42.75,
-        "awayDaysRest": 48.96,
-        "homeLast5Xg": 1.73,
-        "awayLast5Xg": 1.33,
-        "homeLast5Xga": 1.65,
-        "awayLast5Xga": 1.38,
+        "homeDaysRest": 21.0,
+        "awayDaysRest": 21.0,
+        "homeLast5Xg": 1.83,
+        "awayLast5Xg": 1.48,
+        "homeLast5Xga": 1.46,
+        "awayLast5Xga": 1.5,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
       }
@@ -1364,19 +933,19 @@
         "away": null
       },
       "probabilities": {
-        "homeWin": 0.4919,
-        "draw": 0.2754,
-        "awayWin": 0.2327
+        "homeWin": 0.6856,
+        "draw": 0.2001,
+        "awayWin": 0.1144
       },
       "context": {
         "homeElo": 2065.0,
         "awayElo": 1808.0,
-        "homeDaysRest": 48.0,
-        "awayDaysRest": 41.96,
-        "homeLast5Xg": 1.59,
-        "awayLast5Xg": 1.82,
-        "homeLast5Xga": 0.79,
-        "awayLast5Xga": 1.2,
+        "homeDaysRest": 21.0,
+        "awayDaysRest": 21.0,
+        "homeLast5Xg": 1.74,
+        "awayLast5Xg": 1.65,
+        "homeLast5Xga": 0.97,
+        "awayLast5Xga": 1.15,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
       }
@@ -1406,19 +975,19 @@
         "away": null
       },
       "probabilities": {
-        "homeWin": 0.4698,
-        "draw": 0.2081,
-        "awayWin": 0.3221
+        "homeWin": 0.611,
+        "draw": 0.1546,
+        "awayWin": 0.2344
       },
       "context": {
         "homeElo": 1929.0,
         "awayElo": 1820.0,
-        "homeDaysRest": 40.99,
-        "awayDaysRest": 40.99,
-        "homeLast5Xg": 1.19,
-        "awayLast5Xg": 1.13,
-        "homeLast5Xga": 1.55,
-        "awayLast5Xga": 1.81,
+        "homeDaysRest": 21.0,
+        "awayDaysRest": 21.0,
+        "homeLast5Xg": 1.1,
+        "awayLast5Xg": 1.15,
+        "homeLast5Xga": 1.51,
+        "awayLast5Xga": 1.66,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
       }
@@ -1448,19 +1017,19 @@
         "away": null
       },
       "probabilities": {
-        "homeWin": 0.4325,
-        "draw": 0.2866,
-        "awayWin": 0.2809
+        "homeWin": 0.5213,
+        "draw": 0.1986,
+        "awayWin": 0.28
       },
       "context": {
         "homeElo": 1853.0,
         "awayElo": 1744.0,
-        "homeDaysRest": 41.75,
-        "awayDaysRest": 40.99,
-        "homeLast5Xg": 1.45,
-        "awayLast5Xg": 1.52,
-        "homeLast5Xga": 1.18,
-        "awayLast5Xga": 1.44,
+        "homeDaysRest": 21.0,
+        "awayDaysRest": 21.0,
+        "homeLast5Xg": 1.7,
+        "awayLast5Xg": 1.34,
+        "homeLast5Xga": 1.27,
+        "awayLast5Xga": 1.43,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
       }
@@ -1490,19 +1059,19 @@
         "away": null
       },
       "probabilities": {
-        "homeWin": 0.4416,
-        "draw": 0.2479,
-        "awayWin": 0.3105
+        "homeWin": 0.4662,
+        "draw": 0.2591,
+        "awayWin": 0.2747
       },
       "context": {
         "homeElo": 1930.0,
         "awayElo": 1785.0,
-        "homeDaysRest": 41.85,
-        "awayDaysRest": 40.99,
-        "homeLast5Xg": 1.79,
-        "awayLast5Xg": 1.08,
-        "homeLast5Xga": 1.07,
-        "awayLast5Xga": 1.49,
+        "homeDaysRest": 21.0,
+        "awayDaysRest": 21.0,
+        "homeLast5Xg": 1.62,
+        "awayLast5Xg": 1.07,
+        "homeLast5Xga": 1.36,
+        "awayLast5Xga": 1.35,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
       }
@@ -1532,19 +1101,19 @@
         "away": null
       },
       "probabilities": {
-        "homeWin": 0.3925,
-        "draw": 0.2649,
-        "awayWin": 0.3426
+        "homeWin": 0.4514,
+        "draw": 0.2301,
+        "awayWin": 0.3185
       },
       "context": {
         "homeElo": 1832.0,
         "awayElo": 1974.0,
-        "homeDaysRest": 41.85,
-        "awayDaysRest": 49.06,
-        "homeLast5Xg": 1.26,
-        "awayLast5Xg": 1.79,
-        "homeLast5Xga": 1.34,
-        "awayLast5Xga": 1.01,
+        "homeDaysRest": 21.0,
+        "awayDaysRest": 21.0,
+        "homeLast5Xg": 1.44,
+        "awayLast5Xg": 1.98,
+        "homeLast5Xga": 1.66,
+        "awayLast5Xga": 0.95,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
       }
@@ -1574,19 +1143,19 @@
         "away": null
       },
       "probabilities": {
-        "homeWin": 0.4359,
-        "draw": 0.2512,
-        "awayWin": 0.3129
+        "homeWin": 0.5595,
+        "draw": 0.1349,
+        "awayWin": 0.3056
       },
       "context": {
         "homeElo": 1780.0,
         "awayElo": 1685.0,
-        "homeDaysRest": 41.75,
-        "awayDaysRest": 41.96,
-        "homeLast5Xg": 1.13,
-        "awayLast5Xg": 1.05,
-        "homeLast5Xga": 1.09,
-        "awayLast5Xga": 2.25,
+        "homeDaysRest": 21.0,
+        "awayDaysRest": 21.0,
+        "homeLast5Xg": 1.37,
+        "awayLast5Xg": 1.06,
+        "homeLast5Xga": 1.05,
+        "awayLast5Xga": 2.24,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
       }
@@ -1616,19 +1185,19 @@
         "away": null
       },
       "probabilities": {
-        "homeWin": 0.3693,
-        "draw": 0.2877,
-        "awayWin": 0.343
+        "homeWin": 0.3539,
+        "draw": 0.223,
+        "awayWin": 0.4231
       },
       "context": {
         "homeElo": 1881.0,
         "awayElo": 1949.0,
-        "homeDaysRest": 42.75,
-        "awayDaysRest": 42.06,
+        "homeDaysRest": 21.0,
+        "awayDaysRest": 21.0,
         "homeLast5Xg": 1.53,
-        "awayLast5Xg": 1.64,
-        "homeLast5Xga": 1.26,
-        "awayLast5Xga": 1.37,
+        "awayLast5Xg": 1.61,
+        "homeLast5Xga": 1.65,
+        "awayLast5Xga": 1.34,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
       }
@@ -1658,19 +1227,19 @@
         "away": null
       },
       "probabilities": {
-        "homeWin": 0.295,
-        "draw": 0.338,
-        "awayWin": 0.367
+        "homeWin": 0.5565,
+        "draw": 0.2459,
+        "awayWin": 0.1975
       },
       "context": {
         "homeElo": 1867.0,
         "awayElo": 1830.0,
-        "homeDaysRest": 41.08,
-        "awayDaysRest": 42.06,
-        "homeLast5Xg": 1.36,
-        "awayLast5Xg": 1.41,
-        "homeLast5Xga": 1.76,
-        "awayLast5Xga": 0.99,
+        "homeDaysRest": 21.0,
+        "awayDaysRest": 21.0,
+        "homeLast5Xg": 1.46,
+        "awayLast5Xg": 1.58,
+        "homeLast5Xga": 2.0,
+        "awayLast5Xga": 0.84,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
       }
@@ -1700,19 +1269,19 @@
         "away": null
       },
       "probabilities": {
-        "homeWin": 0.3534,
-        "draw": 0.3093,
-        "awayWin": 0.3373
+        "homeWin": 0.4303,
+        "draw": 0.1824,
+        "awayWin": 0.3873
       },
       "context": {
         "homeElo": 1669.0,
         "awayElo": 1706.0,
-        "homeDaysRest": 46.75,
-        "awayDaysRest": 41.08,
-        "homeLast5Xg": 0.92,
-        "awayLast5Xg": 1.5,
-        "homeLast5Xga": 1.82,
-        "awayLast5Xga": 1.54,
+        "homeDaysRest": 21.0,
+        "awayDaysRest": 21.0,
+        "homeLast5Xg": 0.98,
+        "awayLast5Xg": 1.39,
+        "homeLast5Xga": 1.97,
+        "awayLast5Xga": 1.33,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
       }
@@ -1742,19 +1311,19 @@
         "away": null
       },
       "probabilities": {
-        "homeWin": 0.3803,
-        "draw": 0.3236,
-        "awayWin": 0.2962
+        "homeWin": 0.3969,
+        "draw": 0.3556,
+        "awayWin": 0.2476
       },
       "context": {
         "homeElo": 1830.0,
         "awayElo": 1669.0,
-        "homeDaysRest": 49.06,
-        "awayDaysRest": 53.75,
-        "homeLast5Xg": 1.41,
-        "awayLast5Xg": 0.92,
-        "homeLast5Xga": 0.99,
-        "awayLast5Xga": 1.82,
+        "homeDaysRest": 28.0,
+        "awayDaysRest": 28.0,
+        "homeLast5Xg": 1.58,
+        "awayLast5Xg": 0.98,
+        "homeLast5Xga": 0.84,
+        "awayLast5Xga": 1.97,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
       }
@@ -1784,19 +1353,19 @@
         "away": null
       },
       "probabilities": {
-        "homeWin": 0.2181,
-        "draw": 0.2285,
-        "awayWin": 0.5533
+        "homeWin": 0.148,
+        "draw": 0.1099,
+        "awayWin": 0.7421
       },
       "context": {
         "homeElo": 1685.0,
         "awayElo": 1929.0,
-        "homeDaysRest": 48.96,
-        "awayDaysRest": 47.99,
-        "homeLast5Xg": 1.05,
-        "awayLast5Xg": 1.19,
-        "homeLast5Xga": 2.25,
-        "awayLast5Xga": 1.55,
+        "homeDaysRest": 28.0,
+        "awayDaysRest": 28.0,
+        "homeLast5Xg": 1.06,
+        "awayLast5Xg": 1.1,
+        "homeLast5Xga": 2.24,
+        "awayLast5Xga": 1.51,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
       }
@@ -1826,19 +1395,19 @@
         "away": null
       },
       "probabilities": {
-        "homeWin": 0.3372,
-        "draw": 0.2604,
-        "awayWin": 0.4024
+        "homeWin": 0.2993,
+        "draw": 0.3395,
+        "awayWin": 0.3612
       },
       "context": {
         "homeElo": 1806.0,
         "awayElo": 1832.0,
-        "homeDaysRest": 55.96,
-        "awayDaysRest": 48.85,
-        "homeLast5Xg": 1.33,
-        "awayLast5Xg": 1.26,
-        "homeLast5Xga": 1.38,
-        "awayLast5Xga": 1.34,
+        "homeDaysRest": 28.0,
+        "awayDaysRest": 28.0,
+        "homeLast5Xg": 1.48,
+        "awayLast5Xg": 1.44,
+        "homeLast5Xga": 1.5,
+        "awayLast5Xga": 1.66,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
       }
@@ -1868,19 +1437,19 @@
         "away": null
       },
       "probabilities": {
-        "homeWin": 0.3881,
-        "draw": 0.2594,
-        "awayWin": 0.3525
+        "homeWin": 0.4319,
+        "draw": 0.1465,
+        "awayWin": 0.4216
       },
       "context": {
         "homeElo": 1808.0,
         "awayElo": 1835.0,
-        "homeDaysRest": 48.96,
-        "awayDaysRest": 49.75,
-        "homeLast5Xg": 1.82,
-        "awayLast5Xg": 1.73,
-        "homeLast5Xga": 1.2,
-        "awayLast5Xga": 1.65,
+        "homeDaysRest": 28.0,
+        "awayDaysRest": 28.0,
+        "homeLast5Xg": 1.65,
+        "awayLast5Xg": 1.83,
+        "homeLast5Xga": 1.15,
+        "awayLast5Xga": 1.46,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
       }
@@ -1910,19 +1479,19 @@
         "away": null
       },
       "probabilities": {
-        "homeWin": 0.3474,
-        "draw": 0.2903,
-        "awayWin": 0.3623
+        "homeWin": 0.5338,
+        "draw": 0.1735,
+        "awayWin": 0.2927
       },
       "context": {
         "homeElo": 1949.0,
         "awayElo": 1930.0,
-        "homeDaysRest": 49.06,
-        "awayDaysRest": 48.85,
-        "homeLast5Xg": 1.64,
-        "awayLast5Xg": 1.79,
-        "homeLast5Xga": 1.37,
-        "awayLast5Xga": 1.07,
+        "homeDaysRest": 28.0,
+        "awayDaysRest": 28.0,
+        "homeLast5Xg": 1.61,
+        "awayLast5Xg": 1.62,
+        "homeLast5Xga": 1.34,
+        "awayLast5Xga": 1.36,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
       }
@@ -1952,19 +1521,19 @@
         "away": null
       },
       "probabilities": {
-        "homeWin": 0.4012,
-        "draw": 0.2658,
-        "awayWin": 0.333
+        "homeWin": 0.4682,
+        "draw": 0.2451,
+        "awayWin": 0.2867
       },
       "context": {
         "homeElo": 1974.0,
         "awayElo": 1853.0,
-        "homeDaysRest": 56.06,
-        "awayDaysRest": 48.75,
-        "homeLast5Xg": 1.79,
-        "awayLast5Xg": 1.45,
-        "homeLast5Xga": 1.01,
-        "awayLast5Xga": 1.18,
+        "homeDaysRest": 28.0,
+        "awayDaysRest": 28.0,
+        "homeLast5Xg": 1.98,
+        "awayLast5Xg": 1.7,
+        "homeLast5Xga": 0.95,
+        "awayLast5Xga": 1.27,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
       }
@@ -1994,19 +1563,19 @@
         "away": null
       },
       "probabilities": {
-        "homeWin": 0.3355,
-        "draw": 0.2945,
-        "awayWin": 0.37
+        "homeWin": 0.5305,
+        "draw": 0.172,
+        "awayWin": 0.2976
       },
       "context": {
         "homeElo": 1785.0,
         "awayElo": 1867.0,
-        "homeDaysRest": 47.99,
-        "awayDaysRest": 48.08,
-        "homeLast5Xg": 1.08,
-        "awayLast5Xg": 1.36,
-        "homeLast5Xga": 1.49,
-        "awayLast5Xga": 1.76,
+        "homeDaysRest": 28.0,
+        "awayDaysRest": 28.0,
+        "homeLast5Xg": 1.07,
+        "awayLast5Xg": 1.46,
+        "homeLast5Xga": 1.35,
+        "awayLast5Xga": 2.0,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
       }
@@ -2036,19 +1605,19 @@
         "away": null
       },
       "probabilities": {
-        "homeWin": 0.2399,
-        "draw": 0.3184,
-        "awayWin": 0.4417
+        "homeWin": 0.2606,
+        "draw": 0.316,
+        "awayWin": 0.4234
       },
       "context": {
         "homeElo": 1706.0,
         "awayElo": 1881.0,
-        "homeDaysRest": 48.08,
-        "awayDaysRest": 49.75,
-        "homeLast5Xg": 1.5,
+        "homeDaysRest": 28.0,
+        "awayDaysRest": 28.0,
+        "homeLast5Xg": 1.39,
         "awayLast5Xg": 1.53,
-        "homeLast5Xga": 1.54,
-        "awayLast5Xga": 1.26,
+        "homeLast5Xga": 1.33,
+        "awayLast5Xga": 1.65,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
       }
@@ -2078,19 +1647,19 @@
         "away": null
       },
       "probabilities": {
-        "homeWin": 0.3518,
-        "draw": 0.2994,
-        "awayWin": 0.3489
+        "homeWin": 0.4853,
+        "draw": 0.2382,
+        "awayWin": 0.2765
       },
       "context": {
         "homeElo": 1820.0,
         "awayElo": 1780.0,
-        "homeDaysRest": 47.99,
-        "awayDaysRest": 48.75,
-        "homeLast5Xg": 1.13,
-        "awayLast5Xg": 1.13,
-        "homeLast5Xga": 1.81,
-        "awayLast5Xga": 1.09,
+        "homeDaysRest": 28.0,
+        "awayDaysRest": 28.0,
+        "homeLast5Xg": 1.15,
+        "awayLast5Xg": 1.37,
+        "homeLast5Xga": 1.66,
+        "awayLast5Xga": 1.05,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
       }
@@ -2120,19 +1689,19 @@
         "away": null
       },
       "probabilities": {
-        "homeWin": 0.2205,
-        "draw": 0.3508,
-        "awayWin": 0.4287
+        "homeWin": 0.1483,
+        "draw": 0.2424,
+        "awayWin": 0.6093
       },
       "context": {
         "homeElo": 1744.0,
         "awayElo": 2065.0,
-        "homeDaysRest": 47.99,
-        "awayDaysRest": 55.0,
-        "homeLast5Xg": 1.52,
-        "awayLast5Xg": 1.59,
-        "homeLast5Xga": 1.44,
-        "awayLast5Xga": 0.79,
+        "homeDaysRest": 28.0,
+        "awayDaysRest": 28.0,
+        "homeLast5Xg": 1.34,
+        "awayLast5Xg": 1.74,
+        "homeLast5Xga": 1.43,
+        "awayLast5Xga": 0.97,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
       }
@@ -2162,19 +1731,19 @@
         "away": null
       },
       "probabilities": {
-        "homeWin": 0.3047,
-        "draw": 0.3481,
-        "awayWin": 0.3473
+        "homeWin": 0.3121,
+        "draw": 0.2873,
+        "awayWin": 0.4006
       },
       "context": {
         "homeElo": 1835.0,
         "awayElo": 1974.0,
-        "homeDaysRest": 57.75,
-        "awayDaysRest": 64.06,
-        "homeLast5Xg": 1.73,
-        "awayLast5Xg": 1.79,
-        "homeLast5Xga": 1.65,
-        "awayLast5Xga": 1.01,
+        "homeDaysRest": 36.0,
+        "awayDaysRest": 36.0,
+        "homeLast5Xg": 1.83,
+        "awayLast5Xg": 1.98,
+        "homeLast5Xga": 1.46,
+        "awayLast5Xga": 0.95,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
       }
@@ -2204,19 +1773,19 @@
         "away": null
       },
       "probabilities": {
-        "homeWin": 0.5495,
-        "draw": 0.2276,
-        "awayWin": 0.2229
+        "homeWin": 0.756,
+        "draw": 0.117,
+        "awayWin": 0.1271
       },
       "context": {
         "homeElo": 2065.0,
         "awayElo": 1685.0,
-        "homeDaysRest": 63.0,
-        "awayDaysRest": 56.96,
-        "homeLast5Xg": 1.59,
-        "awayLast5Xg": 1.05,
-        "homeLast5Xga": 0.79,
-        "awayLast5Xga": 2.25,
+        "homeDaysRest": 36.0,
+        "awayDaysRest": 36.0,
+        "homeLast5Xg": 1.74,
+        "awayLast5Xg": 1.06,
+        "homeLast5Xga": 0.97,
+        "awayLast5Xga": 2.24,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
       }
@@ -2246,19 +1815,19 @@
         "away": null
       },
       "probabilities": {
-        "homeWin": 0.4292,
-        "draw": 0.2698,
-        "awayWin": 0.3009
+        "homeWin": 0.4608,
+        "draw": 0.1716,
+        "awayWin": 0.3676
       },
       "context": {
         "homeElo": 1929.0,
         "awayElo": 1949.0,
-        "homeDaysRest": 55.99,
-        "awayDaysRest": 57.06,
-        "homeLast5Xg": 1.19,
-        "awayLast5Xg": 1.64,
-        "homeLast5Xga": 1.55,
-        "awayLast5Xga": 1.37,
+        "homeDaysRest": 36.0,
+        "awayDaysRest": 36.0,
+        "homeLast5Xg": 1.1,
+        "awayLast5Xg": 1.61,
+        "homeLast5Xga": 1.51,
+        "awayLast5Xga": 1.34,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
       }
@@ -2288,19 +1857,19 @@
         "away": null
       },
       "probabilities": {
-        "homeWin": 0.4665,
-        "draw": 0.2462,
-        "awayWin": 0.2873
+        "homeWin": 0.5198,
+        "draw": 0.1865,
+        "awayWin": 0.2937
       },
       "context": {
         "homeElo": 1853.0,
         "awayElo": 1806.0,
-        "homeDaysRest": 56.75,
-        "awayDaysRest": 63.96,
-        "homeLast5Xg": 1.45,
-        "awayLast5Xg": 1.33,
-        "homeLast5Xga": 1.18,
-        "awayLast5Xga": 1.38,
+        "homeDaysRest": 36.0,
+        "awayDaysRest": 36.0,
+        "homeLast5Xg": 1.7,
+        "awayLast5Xg": 1.48,
+        "homeLast5Xga": 1.27,
+        "awayLast5Xga": 1.5,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
       }
@@ -2330,19 +1899,19 @@
         "away": null
       },
       "probabilities": {
-        "homeWin": 0.4762,
-        "draw": 0.2177,
-        "awayWin": 0.306
+        "homeWin": 0.5005,
+        "draw": 0.2128,
+        "awayWin": 0.2867
       },
       "context": {
         "homeElo": 1930.0,
         "awayElo": 1820.0,
-        "homeDaysRest": 56.85,
-        "awayDaysRest": 55.99,
-        "homeLast5Xg": 1.79,
-        "awayLast5Xg": 1.13,
-        "homeLast5Xga": 1.07,
-        "awayLast5Xga": 1.81,
+        "homeDaysRest": 36.0,
+        "awayDaysRest": 36.0,
+        "homeLast5Xg": 1.62,
+        "awayLast5Xg": 1.15,
+        "homeLast5Xga": 1.36,
+        "awayLast5Xga": 1.66,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
       }
@@ -2372,19 +1941,19 @@
         "away": null
       },
       "probabilities": {
-        "homeWin": 0.3676,
-        "draw": 0.4,
-        "awayWin": 0.2325
+        "homeWin": 0.3773,
+        "draw": 0.3596,
+        "awayWin": 0.2631
       },
       "context": {
         "homeElo": 1832.0,
         "awayElo": 1706.0,
-        "homeDaysRest": 56.85,
-        "awayDaysRest": 56.08,
-        "homeLast5Xg": 1.26,
-        "awayLast5Xg": 1.5,
-        "homeLast5Xga": 1.34,
-        "awayLast5Xga": 1.54,
+        "homeDaysRest": 36.0,
+        "awayDaysRest": 36.0,
+        "homeLast5Xg": 1.44,
+        "awayLast5Xg": 1.39,
+        "homeLast5Xga": 1.66,
+        "awayLast5Xga": 1.33,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
       }
@@ -2414,19 +1983,19 @@
         "away": null
       },
       "probabilities": {
-        "homeWin": 0.2713,
-        "draw": 0.3358,
-        "awayWin": 0.3929
+        "homeWin": 0.4604,
+        "draw": 0.2457,
+        "awayWin": 0.2939
       },
       "context": {
         "homeElo": 1780.0,
         "awayElo": 1830.0,
-        "homeDaysRest": 56.75,
-        "awayDaysRest": 57.06,
-        "homeLast5Xg": 1.13,
-        "awayLast5Xg": 1.41,
-        "homeLast5Xga": 1.09,
-        "awayLast5Xga": 0.99,
+        "homeDaysRest": 36.0,
+        "awayDaysRest": 36.0,
+        "homeLast5Xg": 1.37,
+        "awayLast5Xg": 1.58,
+        "homeLast5Xga": 1.05,
+        "awayLast5Xga": 0.84,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
       }
@@ -2456,19 +2025,19 @@
         "away": null
       },
       "probabilities": {
-        "homeWin": 0.399,
-        "draw": 0.2746,
-        "awayWin": 0.3264
+        "homeWin": 0.3471,
+        "draw": 0.2401,
+        "awayWin": 0.4128
       },
       "context": {
         "homeElo": 1881.0,
         "awayElo": 1785.0,
-        "homeDaysRest": 57.75,
-        "awayDaysRest": 55.99,
+        "homeDaysRest": 36.0,
+        "awayDaysRest": 36.0,
         "homeLast5Xg": 1.53,
-        "awayLast5Xg": 1.08,
-        "homeLast5Xga": 1.26,
-        "awayLast5Xga": 1.49,
+        "awayLast5Xg": 1.07,
+        "homeLast5Xga": 1.65,
+        "awayLast5Xga": 1.35,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
       }
@@ -2498,19 +2067,19 @@
         "away": null
       },
       "probabilities": {
-        "homeWin": 0.3601,
-        "draw": 0.3131,
-        "awayWin": 0.3268
+        "homeWin": 0.5275,
+        "draw": 0.185,
+        "awayWin": 0.2875
       },
       "context": {
         "homeElo": 1867.0,
         "awayElo": 1744.0,
-        "homeDaysRest": 56.08,
-        "awayDaysRest": 55.99,
-        "homeLast5Xg": 1.36,
-        "awayLast5Xg": 1.52,
-        "homeLast5Xga": 1.76,
-        "awayLast5Xga": 1.44,
+        "homeDaysRest": 36.0,
+        "awayDaysRest": 36.0,
+        "homeLast5Xg": 1.46,
+        "awayLast5Xg": 1.34,
+        "homeLast5Xga": 2.0,
+        "awayLast5Xga": 1.43,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
       }
@@ -2540,19 +2109,19 @@
         "away": null
       },
       "probabilities": {
-        "homeWin": 0.3596,
-        "draw": 0.2749,
-        "awayWin": 0.3655
+        "homeWin": 0.4883,
+        "draw": 0.1594,
+        "awayWin": 0.3523
       },
       "context": {
         "homeElo": 1669.0,
         "awayElo": 1808.0,
-        "homeDaysRest": 61.75,
-        "awayDaysRest": 56.96,
-        "homeLast5Xg": 0.92,
-        "awayLast5Xg": 1.82,
-        "homeLast5Xga": 1.82,
-        "awayLast5Xga": 1.2,
+        "homeDaysRest": 36.0,
+        "awayDaysRest": 36.0,
+        "homeLast5Xg": 0.98,
+        "awayLast5Xg": 1.65,
+        "homeLast5Xga": 1.97,
+        "awayLast5Xga": 1.15,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
       }
@@ -2582,19 +2151,19 @@
         "away": null
       },
       "probabilities": {
-        "homeWin": 0.3505,
-        "draw": 0.2754,
-        "awayWin": 0.374
+        "homeWin": 0.3679,
+        "draw": 0.2003,
+        "awayWin": 0.4318
       },
       "context": {
         "homeElo": 1830.0,
         "awayElo": 1881.0,
-        "homeDaysRest": 64.1,
-        "awayDaysRest": 64.79,
-        "homeLast5Xg": 1.41,
+        "homeDaysRest": 43.04,
+        "awayDaysRest": 43.04,
+        "homeLast5Xg": 1.58,
         "awayLast5Xg": 1.53,
-        "homeLast5Xga": 0.99,
-        "awayLast5Xga": 1.26,
+        "homeLast5Xga": 0.84,
+        "awayLast5Xga": 1.65,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
       }
@@ -2624,19 +2193,19 @@
         "away": null
       },
       "probabilities": {
-        "homeWin": 0.3788,
-        "draw": 0.2661,
-        "awayWin": 0.3551
+        "homeWin": 0.457,
+        "draw": 0.2342,
+        "awayWin": 0.3088
       },
       "context": {
         "homeElo": 1685.0,
         "awayElo": 1669.0,
-        "homeDaysRest": 64.0,
-        "awayDaysRest": 68.79,
-        "homeLast5Xg": 1.05,
-        "awayLast5Xg": 0.92,
-        "homeLast5Xga": 2.25,
-        "awayLast5Xga": 1.82,
+        "homeDaysRest": 43.04,
+        "awayDaysRest": 43.04,
+        "homeLast5Xg": 1.06,
+        "awayLast5Xg": 0.98,
+        "homeLast5Xga": 2.24,
+        "awayLast5Xga": 1.97,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
       }
@@ -2666,19 +2235,19 @@
         "away": null
       },
       "probabilities": {
-        "homeWin": 0.243,
-        "draw": 0.2972,
-        "awayWin": 0.4598
+        "homeWin": 0.1759,
+        "draw": 0.3169,
+        "awayWin": 0.5072
       },
       "context": {
         "homeElo": 1806.0,
         "awayElo": 2065.0,
-        "homeDaysRest": 71.0,
-        "awayDaysRest": 70.04,
-        "homeLast5Xg": 1.33,
-        "awayLast5Xg": 1.59,
-        "homeLast5Xga": 1.38,
-        "awayLast5Xga": 0.79,
+        "homeDaysRest": 43.04,
+        "awayDaysRest": 43.04,
+        "homeLast5Xg": 1.48,
+        "awayLast5Xg": 1.74,
+        "homeLast5Xga": 1.5,
+        "awayLast5Xga": 0.97,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
       }
@@ -2708,19 +2277,19 @@
         "away": null
       },
       "probabilities": {
-        "homeWin": 0.3592,
-        "draw": 0.256,
-        "awayWin": 0.3848
+        "homeWin": 0.4382,
+        "draw": 0.1677,
+        "awayWin": 0.3942
       },
       "context": {
         "homeElo": 1808.0,
         "awayElo": 1867.0,
-        "homeDaysRest": 64.0,
-        "awayDaysRest": 63.12,
-        "homeLast5Xg": 1.82,
-        "awayLast5Xg": 1.36,
-        "homeLast5Xga": 1.2,
-        "awayLast5Xga": 1.76,
+        "homeDaysRest": 43.04,
+        "awayDaysRest": 43.04,
+        "homeLast5Xg": 1.65,
+        "awayLast5Xg": 1.46,
+        "homeLast5Xga": 1.15,
+        "awayLast5Xga": 2.0,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
       }
@@ -2750,19 +2319,19 @@
         "away": null
       },
       "probabilities": {
-        "homeWin": 0.3687,
-        "draw": 0.2576,
-        "awayWin": 0.3736
+        "homeWin": 0.4439,
+        "draw": 0.2531,
+        "awayWin": 0.303
       },
       "context": {
         "homeElo": 1949.0,
         "awayElo": 1853.0,
-        "homeDaysRest": 64.1,
-        "awayDaysRest": 63.79,
-        "homeLast5Xg": 1.64,
-        "awayLast5Xg": 1.45,
-        "homeLast5Xga": 1.37,
-        "awayLast5Xga": 1.18,
+        "homeDaysRest": 43.04,
+        "awayDaysRest": 43.04,
+        "homeLast5Xg": 1.61,
+        "awayLast5Xg": 1.7,
+        "homeLast5Xga": 1.34,
+        "awayLast5Xga": 1.27,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
       }
@@ -2792,19 +2361,19 @@
         "away": null
       },
       "probabilities": {
-        "homeWin": 0.4042,
-        "draw": 0.2816,
-        "awayWin": 0.3142
+        "homeWin": 0.4899,
+        "draw": 0.2491,
+        "awayWin": 0.2611
       },
       "context": {
         "homeElo": 1974.0,
         "awayElo": 1929.0,
-        "homeDaysRest": 71.1,
-        "awayDaysRest": 63.03,
-        "homeLast5Xg": 1.79,
-        "awayLast5Xg": 1.19,
-        "homeLast5Xga": 1.01,
-        "awayLast5Xga": 1.55,
+        "homeDaysRest": 43.04,
+        "awayDaysRest": 43.04,
+        "homeLast5Xg": 1.98,
+        "awayLast5Xg": 1.1,
+        "homeLast5Xga": 0.95,
+        "awayLast5Xga": 1.51,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
       }
@@ -2834,19 +2403,19 @@
         "away": null
       },
       "probabilities": {
-        "homeWin": 0.4219,
-        "draw": 0.2403,
-        "awayWin": 0.3378
+        "homeWin": 0.4722,
+        "draw": 0.1336,
+        "awayWin": 0.3941
       },
       "context": {
         "homeElo": 1785.0,
         "awayElo": 1835.0,
-        "homeDaysRest": 63.03,
-        "awayDaysRest": 64.79,
-        "homeLast5Xg": 1.08,
-        "awayLast5Xg": 1.73,
-        "homeLast5Xga": 1.49,
-        "awayLast5Xga": 1.65,
+        "homeDaysRest": 43.04,
+        "awayDaysRest": 43.04,
+        "homeLast5Xg": 1.07,
+        "awayLast5Xg": 1.83,
+        "homeLast5Xga": 1.35,
+        "awayLast5Xga": 1.46,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
       }
@@ -2876,19 +2445,19 @@
         "away": null
       },
       "probabilities": {
-        "homeWin": 0.2649,
-        "draw": 0.2534,
-        "awayWin": 0.4817
+        "homeWin": 0.2539,
+        "draw": 0.3217,
+        "awayWin": 0.4244
       },
       "context": {
         "homeElo": 1706.0,
         "awayElo": 1930.0,
-        "homeDaysRest": 63.12,
-        "awayDaysRest": 63.9,
-        "homeLast5Xg": 1.5,
-        "awayLast5Xg": 1.79,
-        "homeLast5Xga": 1.54,
-        "awayLast5Xga": 1.07,
+        "homeDaysRest": 43.04,
+        "awayDaysRest": 43.04,
+        "homeLast5Xg": 1.39,
+        "awayLast5Xg": 1.62,
+        "homeLast5Xga": 1.33,
+        "awayLast5Xga": 1.36,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
       }
@@ -2918,19 +2487,19 @@
         "away": null
       },
       "probabilities": {
-        "homeWin": 0.3377,
-        "draw": 0.2911,
-        "awayWin": 0.3712
+        "homeWin": 0.366,
+        "draw": 0.2767,
+        "awayWin": 0.3573
       },
       "context": {
         "homeElo": 1820.0,
         "awayElo": 1832.0,
-        "homeDaysRest": 63.03,
-        "awayDaysRest": 63.9,
-        "homeLast5Xg": 1.13,
-        "awayLast5Xg": 1.26,
-        "homeLast5Xga": 1.81,
-        "awayLast5Xga": 1.34,
+        "homeDaysRest": 43.04,
+        "awayDaysRest": 43.04,
+        "homeLast5Xg": 1.15,
+        "awayLast5Xg": 1.44,
+        "homeLast5Xga": 1.66,
+        "awayLast5Xga": 1.66,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
       }
@@ -2960,19 +2529,19 @@
         "away": null
       },
       "probabilities": {
-        "homeWin": 0.3618,
-        "draw": 0.2565,
-        "awayWin": 0.3817
+        "homeWin": 0.4013,
+        "draw": 0.2067,
+        "awayWin": 0.3921
       },
       "context": {
         "homeElo": 1744.0,
         "awayElo": 1780.0,
-        "homeDaysRest": 63.03,
-        "awayDaysRest": 63.79,
-        "homeLast5Xg": 1.52,
-        "awayLast5Xg": 1.13,
-        "homeLast5Xga": 1.44,
-        "awayLast5Xga": 1.09,
+        "homeDaysRest": 43.04,
+        "awayDaysRest": 43.04,
+        "homeLast5Xg": 1.34,
+        "awayLast5Xg": 1.37,
+        "homeLast5Xga": 1.43,
+        "awayLast5Xga": 1.05,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
       }
@@ -3004,19 +2573,19 @@
         "away": null
       },
       "probabilities": {
-        "homeWin": 0.4279,
-        "draw": 0.3283,
-        "awayWin": 0.2438
+        "homeWin": 0.4709,
+        "draw": 0.2898,
+        "awayWin": 0.2392
       },
       "context": {
         "homeElo": 1974.0,
         "awayElo": 1806.0,
         "homeDaysRest": null,
         "awayDaysRest": null,
-        "homeLast5Xg": 1.79,
-        "awayLast5Xg": 0.88,
-        "homeLast5Xga": 1.01,
-        "awayLast5Xga": 1.52,
+        "homeLast5Xg": 1.98,
+        "awayLast5Xg": 1.32,
+        "homeLast5Xga": 0.95,
+        "awayLast5Xga": 1.34,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
       },
@@ -3025,6 +2594,496 @@
     }
   ],
   "historicalMatches": [
+    {
+      "matchId": "25-26-prem-west-ham-united-vs-wolverhampton-wanderers",
+      "season": "2025-2026",
+      "gameweek": 32,
+      "kickoffTime": "2026-04-11T14:00:00+00:00",
+      "homeTeam": {
+        "id": 21,
+        "name": "West Ham United",
+        "shortName": "WHU",
+        "badgeSlug": "west-ham",
+        "badgePath": "/teams/west-ham.football-logos.cc.png"
+      },
+      "awayTeam": {
+        "id": 39,
+        "name": "Wolverhampton Wanderers",
+        "shortName": "WOL",
+        "badgeSlug": "wolves",
+        "badgePath": "/teams/wolves.football-logos.cc.png"
+      },
+      "score": {
+        "home": 4,
+        "away": 0
+      },
+      "stats": {
+        "xg": {
+          "home": 2.35,
+          "away": 0.59
+        },
+        "shotsOnTarget": {
+          "home": 7,
+          "away": 3
+        },
+        "bigChances": {
+          "home": 6,
+          "away": 0
+        },
+        "possession": {
+          "home": 44.0,
+          "away": 56.0
+        }
+      },
+      "preMatch": {
+        "homeElo": 1744.0,
+        "awayElo": 1669.0,
+        "homeLast5Xg": 1.52,
+        "awayLast5Xg": 0.92
+      },
+      "matchUrl": "/matches/wolverhampton-wanderers-vs-west-ham-united/2gnhk2#4813694"
+    },
+    {
+      "matchId": "25-26-prem-sunderland-vs-tottenham-hotspur",
+      "season": "2025-2026",
+      "gameweek": 32,
+      "kickoffTime": "2026-04-11T14:00:00+00:00",
+      "homeTeam": {
+        "id": 56,
+        "name": "Sunderland",
+        "shortName": "SUN",
+        "badgeSlug": "sunderland",
+        "badgePath": "/teams/sunderland.football-logos.cc.png"
+      },
+      "awayTeam": {
+        "id": 6,
+        "name": "Tottenham Hotspur",
+        "shortName": "TOT",
+        "badgeSlug": "tottenham",
+        "badgePath": "/teams/tottenham.football-logos.cc.png"
+      },
+      "score": {
+        "home": 1,
+        "away": 0
+      },
+      "stats": {
+        "xg": {
+          "home": 1.33,
+          "away": 0.84
+        },
+        "shotsOnTarget": {
+          "home": 2,
+          "away": 7
+        },
+        "bigChances": {
+          "home": 3,
+          "away": 1
+        },
+        "possession": {
+          "home": 52.0,
+          "away": 48.0
+        }
+      },
+      "preMatch": {
+        "homeElo": 1706.0,
+        "awayElo": 1820.0,
+        "homeLast5Xg": 1.5,
+        "awayLast5Xg": 1.13
+      },
+      "matchUrl": "/matches/sunderland-vs-tottenham-hotspur/2emo7x#4813693"
+    },
+    {
+      "matchId": "25-26-prem-nottingham-forest-vs-aston-villa",
+      "season": "2025-2026",
+      "gameweek": 32,
+      "kickoffTime": "2026-04-11T14:00:00+00:00",
+      "homeTeam": {
+        "id": 17,
+        "name": "Nottingham Forest",
+        "shortName": "NFO",
+        "badgeSlug": "nottingham-forest",
+        "badgePath": "/teams/nottingham-forest.football-logos.cc.png"
+      },
+      "awayTeam": {
+        "id": 7,
+        "name": "Aston Villa",
+        "shortName": "AVL",
+        "badgeSlug": "aston-villa",
+        "badgePath": "/teams/aston-villa.football-logos.cc.png"
+      },
+      "score": {
+        "home": 1,
+        "away": 1
+      },
+      "stats": {
+        "xg": {
+          "home": 1.15,
+          "away": 1.02
+        },
+        "shotsOnTarget": {
+          "home": 4,
+          "away": 5
+        },
+        "bigChances": {
+          "home": 1,
+          "away": 3
+        },
+        "possession": {
+          "home": 41.0,
+          "away": 59.0
+        }
+      },
+      "preMatch": {
+        "homeElo": 1785.0,
+        "awayElo": 1929.0,
+        "homeLast5Xg": 1.08,
+        "awayLast5Xg": 1.19
+      },
+      "matchUrl": "/matches/nottingham-forest-vs-aston-villa/3gke9k#4813692"
+    },
+    {
+      "matchId": "25-26-prem-manchester-united-vs-leeds-united",
+      "season": "2025-2026",
+      "gameweek": 32,
+      "kickoffTime": "2026-04-11T14:00:00+00:00",
+      "homeTeam": {
+        "id": 1,
+        "name": "Manchester United",
+        "shortName": "MUN",
+        "badgeSlug": "manchester-united",
+        "badgePath": "/teams/manchester-united.football-logos.cc.png"
+      },
+      "awayTeam": {
+        "id": 2,
+        "name": "Leeds United",
+        "shortName": "LEE",
+        "badgeSlug": "leeds-united",
+        "badgePath": "/teams/leeds-united.football-logos.cc.png"
+      },
+      "score": {
+        "home": 1,
+        "away": 2
+      },
+      "stats": {
+        "xg": {
+          "home": 1.27,
+          "away": 2.57
+        },
+        "shotsOnTarget": {
+          "home": 9,
+          "away": 6
+        },
+        "bigChances": {
+          "home": 1,
+          "away": 4
+        },
+        "possession": {
+          "home": 53.0,
+          "away": 47.0
+        }
+      },
+      "preMatch": {
+        "homeElo": 1881.0,
+        "awayElo": 1780.0,
+        "homeLast5Xg": 1.53,
+        "awayLast5Xg": 1.13
+      },
+      "matchUrl": "/matches/leeds-united-vs-manchester-united/2wd539#4813691"
+    },
+    {
+      "matchId": "25-26-prem-liverpool-vs-fulham",
+      "season": "2025-2026",
+      "gameweek": 32,
+      "kickoffTime": "2026-04-11T14:00:00+00:00",
+      "homeTeam": {
+        "id": 14,
+        "name": "Liverpool",
+        "shortName": "LIV",
+        "badgeSlug": "liverpool",
+        "badgePath": "/teams/liverpool.football-logos.cc.png"
+      },
+      "awayTeam": {
+        "id": 54,
+        "name": "Fulham",
+        "shortName": "FUL",
+        "badgeSlug": "fulham",
+        "badgePath": "/teams/fulham.football-logos.cc.png"
+      },
+      "score": {
+        "home": 2,
+        "away": 0
+      },
+      "stats": {
+        "xg": {
+          "home": 1.59,
+          "away": 1.04
+        },
+        "shotsOnTarget": {
+          "home": 5,
+          "away": 4
+        },
+        "bigChances": {
+          "home": 4,
+          "away": 2
+        },
+        "possession": {
+          "home": 53.0,
+          "away": 47.0
+        }
+      },
+      "preMatch": {
+        "homeElo": 1949.0,
+        "awayElo": 1808.0,
+        "homeLast5Xg": 1.64,
+        "awayLast5Xg": 1.82
+      },
+      "matchUrl": "/matches/liverpool-vs-fulham/2u7pyg#4813690"
+    },
+    {
+      "matchId": "25-26-prem-crystal-palace-vs-newcastle-united",
+      "season": "2025-2026",
+      "gameweek": 32,
+      "kickoffTime": "2026-04-11T14:00:00+00:00",
+      "homeTeam": {
+        "id": 31,
+        "name": "Crystal Palace",
+        "shortName": "CRY",
+        "badgeSlug": "crystal-palace",
+        "badgePath": "/teams/crystal-palace.football-logos.cc.png"
+      },
+      "awayTeam": {
+        "id": 4,
+        "name": "Newcastle United",
+        "shortName": "NEW",
+        "badgeSlug": "newcastle",
+        "badgePath": "/teams/newcastle.football-logos.cc.png"
+      },
+      "score": {
+        "home": 2,
+        "away": 1
+      },
+      "stats": {
+        "xg": {
+          "home": 2.56,
+          "away": 1.13
+        },
+        "shotsOnTarget": {
+          "home": 5,
+          "away": 3
+        },
+        "bigChances": {
+          "home": 4,
+          "away": 2
+        },
+        "possession": {
+          "home": 41.0,
+          "away": 59.0
+        }
+      },
+      "preMatch": {
+        "homeElo": 1806.0,
+        "awayElo": 1867.0,
+        "homeLast5Xg": 1.33,
+        "awayLast5Xg": 1.36
+      },
+      "matchUrl": "/matches/crystal-palace-vs-newcastle-united/3c4hty#4813689"
+    },
+    {
+      "matchId": "25-26-prem-chelsea-vs-manchester-city",
+      "season": "2025-2026",
+      "gameweek": 32,
+      "kickoffTime": "2026-04-11T14:00:00+00:00",
+      "homeTeam": {
+        "id": 8,
+        "name": "Chelsea",
+        "shortName": "CHE",
+        "badgeSlug": "chelsea",
+        "badgePath": "/teams/chelsea.football-logos.cc.png"
+      },
+      "awayTeam": {
+        "id": 43,
+        "name": "Manchester City",
+        "shortName": "MCI",
+        "badgeSlug": "manchester-city",
+        "badgePath": "/teams/manchester-city.football-logos.cc.png"
+      },
+      "score": {
+        "home": 0,
+        "away": 3
+      },
+      "stats": {
+        "xg": {
+          "home": 1.14,
+          "away": 2.29
+        },
+        "shotsOnTarget": {
+          "home": 3,
+          "away": 8
+        },
+        "bigChances": {
+          "home": 1,
+          "away": 3
+        },
+        "possession": {
+          "home": 37.0,
+          "away": 63.0
+        }
+      },
+      "preMatch": {
+        "homeElo": 1930.0,
+        "awayElo": 1974.0,
+        "homeLast5Xg": 1.79,
+        "awayLast5Xg": 1.79
+      },
+      "matchUrl": "/matches/chelsea-vs-manchester-city/2d55kw#4813688"
+    },
+    {
+      "matchId": "25-26-prem-burnley-vs-brighton-hove-albion",
+      "season": "2025-2026",
+      "gameweek": 32,
+      "kickoffTime": "2026-04-11T14:00:00+00:00",
+      "homeTeam": {
+        "id": 90,
+        "name": "Burnley",
+        "shortName": "BUR",
+        "badgeSlug": "burnley",
+        "badgePath": "/teams/burnley.football-logos.cc.png"
+      },
+      "awayTeam": {
+        "id": 36,
+        "name": "Brighton & Hove Albion",
+        "shortName": "BHA",
+        "badgeSlug": "brighton",
+        "badgePath": "/teams/brighton.football-logos.cc.png"
+      },
+      "score": {
+        "home": 0,
+        "away": 2
+      },
+      "stats": {
+        "xg": {
+          "home": 0.88,
+          "away": 1.93
+        },
+        "shotsOnTarget": {
+          "home": 5,
+          "away": 6
+        },
+        "bigChances": {
+          "home": 1,
+          "away": 1
+        },
+        "possession": {
+          "home": 50.0,
+          "away": 50.0
+        }
+      },
+      "preMatch": {
+        "homeElo": 1685.0,
+        "awayElo": 1830.0,
+        "homeLast5Xg": 1.05,
+        "awayLast5Xg": 1.41
+      },
+      "matchUrl": "/matches/burnley-vs-brighton-hove-albion/2sqnq1#4813687"
+    },
+    {
+      "matchId": "25-26-prem-brentford-vs-everton",
+      "season": "2025-2026",
+      "gameweek": 32,
+      "kickoffTime": "2026-04-11T14:00:00+00:00",
+      "homeTeam": {
+        "id": 94,
+        "name": "Brentford",
+        "shortName": "BRE",
+        "badgeSlug": "brentford",
+        "badgePath": "/teams/brentford.football-logos.cc.png"
+      },
+      "awayTeam": {
+        "id": 11,
+        "name": "Everton",
+        "shortName": "EVE",
+        "badgeSlug": "everton",
+        "badgePath": "/teams/everton.football-logos.cc.png"
+      },
+      "score": {
+        "home": 2,
+        "away": 2
+      },
+      "stats": {
+        "xg": {
+          "home": 2.84,
+          "away": 1.53
+        },
+        "shotsOnTarget": {
+          "home": 4,
+          "away": 7
+        },
+        "bigChances": {
+          "home": 4,
+          "away": 2
+        },
+        "possession": {
+          "home": 55.0,
+          "away": 45.0
+        }
+      },
+      "preMatch": {
+        "homeElo": 1853.0,
+        "awayElo": 1832.0,
+        "homeLast5Xg": 1.45,
+        "awayLast5Xg": 1.26
+      },
+      "matchUrl": "/matches/everton-vs-brentford/2v1yu4#4813686"
+    },
+    {
+      "matchId": "25-26-prem-arsenal-vs-afc-bournemouth",
+      "season": "2025-2026",
+      "gameweek": 32,
+      "kickoffTime": "2026-04-11T14:00:00+00:00",
+      "homeTeam": {
+        "id": 3,
+        "name": "Arsenal",
+        "shortName": "ARS",
+        "badgeSlug": "arsenal",
+        "badgePath": "/teams/arsenal.football-logos.cc.png"
+      },
+      "awayTeam": {
+        "id": 91,
+        "name": "AFC Bournemouth",
+        "shortName": "BOU",
+        "badgeSlug": "bournemouth",
+        "badgePath": "/teams/bournemouth.football-logos.cc.png"
+      },
+      "score": {
+        "home": 1,
+        "away": 2
+      },
+      "stats": {
+        "xg": {
+          "home": 2.32,
+          "away": 1.19
+        },
+        "shotsOnTarget": {
+          "home": 3,
+          "away": 3
+        },
+        "bigChances": {
+          "home": 5,
+          "away": 2
+        },
+        "possession": {
+          "home": 52.0,
+          "away": 48.0
+        }
+      },
+      "preMatch": {
+        "homeElo": 2065.0,
+        "awayElo": 1835.0,
+        "homeLast5Xg": 1.59,
+        "awayLast5Xg": 1.73
+      },
+      "matchUrl": "/matches/afc-bournemouth-vs-arsenal/2txefx#4813685"
+    },
     {
       "matchId": "25-26-prem-tottenham-hotspur-vs-nottingham-forest",
       "season": "2025-2026",
