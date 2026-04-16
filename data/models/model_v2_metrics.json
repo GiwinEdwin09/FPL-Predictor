@@ -6,7 +6,7 @@
   "target_distribution_train": {
     "0": 314,
     "1": 191,
-    "2": 278
+    "2": 277
   },
   "target_distribution_validation": {
     "0": 9,
@@ -15,24 +15,24 @@
   },
   "competition_distribution_train": {
     "prem": 672,
-    "champions-league": 50,
+    "champions-league": 49,
     "efl-cup": 37,
     "europa-league": 16,
     "conference-league": 8
   },
   "split": {
-    "train_rows": 783,
+    "train_rows": 782,
     "validation_rows": 27,
     "validation_cutoff_utc": "2026-03-14T14:00:00+00:00",
     "latest_finished_kickoff_utc": "2026-04-11T14:00:00+00:00"
   },
-  "calibration_temperature": 2.3,
+  "calibration_temperature": 2.4000000000000004,
   "calibration_rows": 31,
   "calibration_cutoff_utc": "2026-02-21T12:30:00+00:00",
   "metrics": {
-    "accuracy": 0.3333333333333333,
-    "multiclass_log_loss": 1.184894521566057,
-    "multiclass_brier_score": 0.7145437617507219
+    "accuracy": 0.37037037037037035,
+    "multiclass_log_loss": 1.1750881182995898,
+    "multiclass_brier_score": 0.7076430826905692
   },
   "feature_columns": [
     "is_cup_match",
