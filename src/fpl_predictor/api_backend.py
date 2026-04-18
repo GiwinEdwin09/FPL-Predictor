@@ -7,8 +7,9 @@ from typing import Any
 
 from fastapi import FastAPI, Header, HTTPException, Query
 from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel, Field
 
-from fpl_predictor.web_dashboard import build_dashboard_payload
+from fpl_predictor.live_inference import InferencePaths, LiveInferenceService
 
 
 def env_path(name: str, default: str) -> Path:
@@ -38,17 +39,42 @@ def load_cached_dashboard(cache_path: Path) -> dict[str, Any]:
     return json.loads(cache_path.read_text(encoding="utf-8"))
 
 
-def generate_dashboard(cache_path: Path) -> dict[str, Any]:
-    payload = build_dashboard_payload(
+def inference_paths() -> InferencePaths:
+    data_dir = env_path("DATA_DIR", "data")
+    return InferencePaths(
         data_dir=env_path("DATA_DIR", "data"),
-        feature_table_path=env_path("FEATURE_TABLE_PATH", "data/features/match_pre_match_features.csv"),
         matches_path=env_path("MATCHES_PATH", "data/matches.csv"),
+        players_path=env_path("PLAYERS_PATH", "data/players.csv"),
+        playerstats_path=env_path("PLAYERSTATS_PATH", "data/playerstats.csv"),
+        playermatchstats_path=env_path("PLAYERMATCHSTATS_PATH", "data/playermatchstats.csv"),
         model_path=env_path("MODEL_PATH", "data/models/model_v2.json"),
         metrics_path=env_path("METRICS_PATH", "data/models/model_v2_metrics.json"),
     )
+
+
+_service: LiveInferenceService | None = None
+
+
+def get_inference_service() -> LiveInferenceService:
+    global _service
+    if _service is None:
+        _service = LiveInferenceService(inference_paths())
+    return _service
+
+
+def generate_dashboard(cache_path: Path) -> dict[str, Any]:
+    payload = get_inference_service().dashboard_payload(refresh=True)
     cache_path.parent.mkdir(parents=True, exist_ok=True)
     cache_path.write_text(json.dumps(payload, indent=2), encoding="utf-8")
     return payload
+
+
+class SimulationRequest(BaseModel):
+    match_id: str = Field(alias="matchId")
+    home_player_ids: list[int] | None = Field(default=None, alias="homePlayerIds")
+    away_player_ids: list[int] | None = Field(default=None, alias="awayPlayerIds")
+
+    model_config = {"populate_by_name": True}
 
 
 def create_app() -> FastAPI:
@@ -72,13 +98,9 @@ def create_app() -> FastAPI:
 
     @app.get("/api/dashboard")
     def dashboard(refresh: bool = Query(default=False)) -> dict[str, Any]:
-        cache_path = dashboard_cache_path()
         if refresh:
-            return generate_dashboard(cache_path)
-        try:
-            return load_cached_dashboard(cache_path)
-        except FileNotFoundError:
-            return generate_dashboard(cache_path)
+            return generate_dashboard(dashboard_cache_path())
+        return get_inference_service().dashboard_payload()
 
     @app.get("/api/predictions/upcoming")
     def upcoming_predictions(
@@ -87,7 +109,7 @@ def create_app() -> FastAPI:
         refresh: bool = Query(default=False),
     ) -> dict[str, Any]:
         payload = dashboard(refresh=refresh)
-        fixtures = payload["upcomingFixtures"]
+        fixtures = payload["currentGameweekFixtures"] + payload["upcomingFixtures"]
         if season is not None:
             fixtures = [fixture for fixture in fixtures if fixture["season"] == season]
         if gameweek is not None:
@@ -120,6 +142,25 @@ def create_app() -> FastAPI:
             "matches": matches,
         }
 
+    @app.get("/api/v1/fixtures/{match_id}/lineup-context")
+    def lineup_context(match_id: str, refresh: bool = Query(default=False)) -> dict[str, Any]:
+        try:
+            return get_inference_service().fixture_lineup_context(match_id, refresh=refresh)
+        except KeyError as exc:
+            raise HTTPException(status_code=404, detail=str(exc)) from exc
+
+    @app.post("/api/v1/predict/simulate")
+    def simulate_prediction(request: SimulationRequest, refresh: bool = Query(default=False)) -> dict[str, Any]:
+        try:
+            return get_inference_service().simulate_fixture(
+                request.match_id,
+                home_player_ids=request.home_player_ids,
+                away_player_ids=request.away_player_ids,
+                refresh=refresh,
+            )
+        except KeyError as exc:
+            raise HTTPException(status_code=404, detail=str(exc)) from exc
+
     @app.post("/api/admin/refresh")
     def refresh_dashboard(x_admin_token: str | None = Header(default=None)) -> dict[str, Any]:
         require_admin_token(os.getenv("ADMIN_TOKEN"), x_admin_token)
@@ -135,4 +176,3 @@ def create_app() -> FastAPI:
 
 
 app = create_app()
-

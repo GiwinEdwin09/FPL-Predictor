@@ -256,18 +256,20 @@ def current_active_gameweek(features: pd.DataFrame, season: str, now_utc: pd.Tim
     return int(value)
 
 
-def build_prediction_groups(
-    feature_table_path: Path,
-    model_path: Path,
-    metrics_path: Path,
+def build_prediction_groups_from_frame(
+    features: pd.DataFrame,
+    *,
+    model: Any,
+    temperature: float,
     team_lookup: dict[tuple[str, int], dict[str, Any]],
+    now_utc: pd.Timestamp | None = None,
+    season: str = CURRENT_SEASON,
 ) -> tuple[int | None, list[dict[str, Any]], list[dict[str, Any]], list[dict[str, Any]]]:
-    features = pd.read_csv(feature_table_path)
-    features = add_sorting_columns(features)
-    features = add_derived_features(features)
-    now_utc = pd.Timestamp.now(tz=UTC)
-    latest_completed_gw = latest_completed_gameweek(features, CURRENT_SEASON)
-    current_gameweek = current_active_gameweek(features, CURRENT_SEASON, now_utc)
+    if now_utc is None:
+        now_utc = pd.Timestamp.now(tz=UTC)
+
+    latest_completed_gw = latest_completed_gameweek(features, season)
+    current_gameweek = current_active_gameweek(features, season, now_utc)
     unresolved = features.loc[is_premier_league_frame(features) & (features["finished"] != True)].copy()
     postponed = unresolved.loc[
         unresolved.apply(
@@ -280,7 +282,7 @@ def build_prediction_groups(
     ].copy()
     current = features.loc[
         is_premier_league_frame(features)
-        & (features["source_season"] == CURRENT_SEASON)
+        & (features["source_season"] == season)
         & (
             pd.to_numeric(features.get("source_gameweek").fillna(features.get("gameweek")), errors="coerce")
             == current_gameweek
@@ -332,8 +334,6 @@ def build_prediction_groups(
         postponed_fixtures: list[dict[str, Any]] = []
         return current_gameweek, current_fixtures, upcoming_fixtures, postponed_fixtures
 
-    temperature, _ = load_model_metadata(metrics_path)
-    model = load_model(model_path)
     def serialize_rows(frame: pd.DataFrame, *, postponed_reason: str | None = None) -> list[dict[str, Any]]:
         if frame.empty:
             return []
@@ -359,20 +359,40 @@ def build_prediction_groups(
     return current_gameweek, current_fixtures, upcoming_fixtures, postponed_fixtures
 
 
-def build_historical_matches(
-    matches_path: Path,
+def build_prediction_groups(
     feature_table_path: Path,
+    model_path: Path,
+    metrics_path: Path,
+    team_lookup: dict[tuple[str, int], dict[str, Any]],
+) -> tuple[int | None, list[dict[str, Any]], list[dict[str, Any]], list[dict[str, Any]]]:
+    features = pd.read_csv(feature_table_path)
+    features = add_sorting_columns(features)
+    features = add_derived_features(features)
+    temperature, _ = load_model_metadata(metrics_path)
+    model = load_model(model_path)
+    return build_prediction_groups_from_frame(
+        features,
+        model=model,
+        temperature=temperature,
+        team_lookup=team_lookup,
+    )
+
+
+def build_historical_matches_from_frames(
+    matches: pd.DataFrame,
+    features: pd.DataFrame,
     team_lookup: dict[tuple[str, int], dict[str, Any]],
     limit: int | None = RECENT_HISTORY_LIMIT,
 ) -> list[dict[str, Any]]:
-    matches = pd.read_csv(matches_path)
-    features = pd.read_csv(feature_table_path)
-    features = add_sorting_columns(features)
     feature_lookup = features.set_index("match_id", drop=False)
 
     history = matches.loc[is_premier_league_frame(matches) & (matches["finished"] == True)].copy()
     history["kickoff_time"] = pd.to_datetime(history["kickoff_time"], errors="coerce", utc=True, format="mixed")
-    history = history.sort_values(["kickoff_time", "source_season", "gameweek", "match_id"], ascending=[False, False, False, False], kind="stable")
+    history = history.sort_values(
+        ["kickoff_time", "source_season", "gameweek", "match_id"],
+        ascending=[False, False, False, False],
+        kind="stable",
+    )
 
     items: list[dict[str, Any]] = []
     selected_history = history if limit is None else history.head(limit)
@@ -421,6 +441,23 @@ def build_historical_matches(
             }
         )
     return items
+
+
+def build_historical_matches(
+    matches_path: Path,
+    feature_table_path: Path,
+    team_lookup: dict[tuple[str, int], dict[str, Any]],
+    limit: int | None = RECENT_HISTORY_LIMIT,
+) -> list[dict[str, Any]]:
+    matches = pd.read_csv(matches_path)
+    features = pd.read_csv(feature_table_path)
+    features = add_sorting_columns(features)
+    return build_historical_matches_from_frames(
+        matches,
+        features,
+        team_lookup=team_lookup,
+        limit=limit,
+    )
 
 
 def build_dashboard_payload(
