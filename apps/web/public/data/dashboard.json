@@ -1,5 +1,5 @@
 {
-  "generatedAtUtc": "2026-04-17T18:12:34.159241+00:00",
+  "generatedAtUtc": "2026-04-18T18:02:54.409785+00:00",
   "currentSeason": "2025-2026",
   "model": {
     "version": "model_v2",
@@ -23,9 +23,8 @@
       "conference-league": 8
     }
   },
-  "currentGameweek": null,
-  "currentGameweekFixtures": [],
-  "upcomingFixtures": [
+  "currentGameweek": 33,
+  "currentGameweekFixtures": [
     {
       "matchId": "25-26-prem-aston-villa-vs-sunderland",
       "season": "2025-2026",
@@ -66,7 +65,8 @@
         "awayLast5Xga": 1.33,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
-      }
+      },
+      "status": "current"
     },
     {
       "matchId": "25-26-prem-brentford-vs-fulham",
@@ -108,7 +108,8 @@
         "awayLast5Xga": 1.15,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
-      }
+      },
+      "status": "current"
     },
     {
       "matchId": "25-26-prem-chelsea-vs-manchester-united",
@@ -150,7 +151,8 @@
         "awayLast5Xga": 1.65,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
-      }
+      },
+      "status": "current"
     },
     {
       "matchId": "25-26-prem-crystal-palace-vs-west-ham-united",
@@ -192,7 +194,8 @@
         "awayLast5Xga": 1.43,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
-      }
+      },
+      "status": "current"
     },
     {
       "matchId": "25-26-prem-everton-vs-liverpool",
@@ -234,7 +237,8 @@
         "awayLast5Xga": 1.34,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
-      }
+      },
+      "status": "current"
     },
     {
       "matchId": "25-26-prem-leeds-united-vs-wolverhampton-wanderers",
@@ -276,7 +280,8 @@
         "awayLast5Xga": 1.97,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
-      }
+      },
+      "status": "current"
     },
     {
       "matchId": "25-26-prem-manchester-city-vs-arsenal",
@@ -318,7 +323,8 @@
         "awayLast5Xga": 0.97,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
-      }
+      },
+      "status": "current"
     },
     {
       "matchId": "25-26-prem-newcastle-united-vs-afc-bournemouth",
@@ -360,7 +366,8 @@
         "awayLast5Xga": 1.46,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
-      }
+      },
+      "status": "current"
     },
     {
       "matchId": "25-26-prem-nottingham-forest-vs-burnley",
@@ -402,7 +409,8 @@
         "awayLast5Xga": 2.24,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
-      }
+      },
+      "status": "current"
     },
     {
       "matchId": "25-26-prem-tottenham-hotspur-vs-brighton-hove-albion",
@@ -444,8 +452,11 @@
         "awayLast5Xga": 0.84,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
-      }
-    },
+      },
+      "status": "current"
+    }
+  ],
+  "upcomingFixtures": [
     {
       "matchId": "25-26-prem-afc-bournemouth-vs-leeds-united",
       "season": "2025-2026",
