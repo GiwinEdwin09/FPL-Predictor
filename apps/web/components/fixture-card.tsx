@@ -1,6 +1,8 @@
+import type { ReactNode } from "react";
 import Image from "next/image";
 
 import type { UpcomingFixture } from "@/lib/dashboard";
+import type { FixtureProbabilities } from "@/lib/lineup";
 
 function formatPercent(value: number) {
   return `${Math.round(value * 100)}%`;
@@ -36,11 +38,20 @@ function TeamBadge({
   return <Image src={badgePath} alt={name} width={84} height={84} className="club-mark-image" />;
 }
 
-export function FixtureCard({ fixture }: { fixture: UpcomingFixture }) {
+export function FixtureCard({
+  fixture,
+  probabilitiesOverride,
+  children,
+}: {
+  fixture: UpcomingFixture;
+  probabilitiesOverride?: FixtureProbabilities;
+  children?: ReactNode;
+}) {
+  const probabilities = probabilitiesOverride ?? fixture.probabilities;
   const bars = [
-    { label: fixture.homeTeam.shortName, value: fixture.probabilities.homeWin, tone: "var(--tone-home)" },
-    { label: "Draw", value: fixture.probabilities.draw, tone: "var(--tone-draw)" },
-    { label: fixture.awayTeam.shortName, value: fixture.probabilities.awayWin, tone: "var(--tone-away)" },
+    { label: fixture.homeTeam.shortName, value: probabilities.homeWin, tone: "var(--tone-home)" },
+    { label: "Draw", value: probabilities.draw, tone: "var(--tone-draw)" },
+    { label: fixture.awayTeam.shortName, value: probabilities.awayWin, tone: "var(--tone-away)" },
   ];
 
   return (
@@ -118,6 +129,8 @@ export function FixtureCard({ fixture }: { fixture: UpcomingFixture }) {
           </strong>
         </div>
       </div>
+
+      {children}
     </article>
   );
 }

@@ -420,6 +420,255 @@ a {
   font-size: 1.05rem;
 }
 
+.fixture-actions {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(72, 52, 34, 0.08);
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.fixture-actions strong {
+  display: block;
+  font-size: 0.98rem;
+}
+
+.fixture-actions p {
+  margin: 0.3rem 0 0;
+  color: var(--muted);
+  max-width: 42rem;
+}
+
+.fixture-action-buttons {
+  display: flex;
+  gap: 0.65rem;
+  flex-wrap: wrap;
+}
+
+.lineup-toggle-button,
+.lineup-reset-button {
+  border: 1px solid rgba(72, 52, 34, 0.12);
+  background: rgba(255, 255, 255, 0.86);
+  color: var(--text);
+  border-radius: 999px;
+  padding: 0.72rem 1rem;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.lineup-toggle-button {
+  background: #245f58;
+  color: white;
+}
+
+.lineup-reset-button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.lineup-builder-shell {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(72, 52, 34, 0.08);
+  display: grid;
+  gap: 1rem;
+}
+
+.lineup-status,
+.lineup-error {
+  margin: 0;
+  padding: 0.9rem 1rem;
+  border-radius: 1rem;
+  background: rgba(255, 255, 255, 0.82);
+  border: 1px solid rgba(72, 52, 34, 0.08);
+}
+
+.lineup-error {
+  color: #9a3412;
+}
+
+.simulation-summary-card,
+.lineup-pitch-card,
+.lineup-controls-card {
+  border-radius: 1.4rem;
+  background: rgba(255, 255, 255, 0.74);
+  border: 1px solid rgba(72, 52, 34, 0.08);
+  padding: 1rem;
+}
+
+.simulation-summary-topline {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+.simulation-bars {
+  margin-top: 0.85rem;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+
+.simulation-bars div {
+  padding: 0.8rem;
+  border-radius: 1rem;
+  background: rgba(255, 251, 245, 0.9);
+  border: 1px solid rgba(72, 52, 34, 0.08);
+}
+
+.simulation-bars span,
+.simulation-adjustment-note,
+.lineup-controls-note,
+.lineup-select-row small {
+  color: var(--muted);
+}
+
+.simulation-bars span {
+  display: block;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.simulation-bars strong {
+  display: block;
+  margin-top: 0.45rem;
+  font-family: var(--font-display), sans-serif;
+  font-size: 1.6rem;
+}
+
+.simulation-adjustment-note {
+  margin: 0.85rem 0 0;
+  line-height: 1.55;
+}
+
+.lineup-builder-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.lineup-column {
+  display: grid;
+  gap: 1rem;
+}
+
+.lineup-pitch {
+  display: grid;
+  gap: 0.75rem;
+  padding: 1rem;
+  border-radius: 1.2rem;
+  background:
+    linear-gradient(180deg, rgba(20, 83, 45, 0.95), rgba(22, 101, 52, 0.95)),
+    repeating-linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.04) 0,
+      rgba(255, 255, 255, 0.04) 10%,
+      rgba(255, 255, 255, 0) 10%,
+      rgba(255, 255, 255, 0) 20%
+    );
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+}
+
+.pitch-row {
+  display: grid;
+  grid-template-columns: 5.2rem minmax(0, 1fr);
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.pitch-row-label {
+  font-size: 0.76rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.pitch-row-players {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.pitch-marker {
+  min-width: 5.6rem;
+  padding: 0.55rem 0.6rem;
+  border-radius: 999px;
+  background: rgba(255, 251, 245, 0.92);
+  border: 1px solid rgba(72, 52, 34, 0.12);
+  text-align: center;
+}
+
+.pitch-marker strong,
+.pitch-marker span {
+  display: block;
+}
+
+.pitch-marker strong {
+  font-size: 0.82rem;
+}
+
+.pitch-marker span {
+  margin-top: 0.2rem;
+  font-size: 0.72rem;
+  color: var(--muted);
+}
+
+.lineup-controls-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+.lineup-controls-header h3 {
+  margin: 0;
+  font-family: var(--font-display), sans-serif;
+  font-size: 1.45rem;
+}
+
+.lineup-controls-list {
+  margin-top: 0.9rem;
+  display: grid;
+  gap: 0.7rem;
+}
+
+.lineup-select-row {
+  display: grid;
+  gap: 0.45rem;
+}
+
+.lineup-select-row span {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: baseline;
+}
+
+.lineup-select-row strong {
+  font-size: 0.95rem;
+}
+
+.lineup-select-row small {
+  font-size: 0.78rem;
+}
+
+.lineup-select-row select {
+  width: 100%;
+  border-radius: 0.95rem;
+  border: 1px solid rgba(72, 52, 34, 0.12);
+  background: rgba(255, 255, 255, 0.92);
+  padding: 0.8rem 0.9rem;
+  font: inherit;
+  color: var(--text);
+}
+
 .fixture-clubs {
   display: grid;
   grid-template-columns: 1fr auto 1fr;
@@ -679,6 +928,10 @@ a {
   .week-panel-header {
     grid-template-columns: 1fr auto auto;
   }
+
+  .lineup-builder-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media (max-width: 720px) {
@@ -737,5 +990,20 @@ a {
   .week-arrow {
     width: 100%;
     border-radius: 999px;
+  }
+
+  .simulation-bars {
+    grid-template-columns: 1fr;
+  }
+
+  .pitch-row {
+    grid-template-columns: 1fr;
+  }
+
+  .lineup-controls-header,
+  .lineup-select-row span,
+  .fixture-actions {
+    display: grid;
+    grid-template-columns: 1fr;
   }
 }

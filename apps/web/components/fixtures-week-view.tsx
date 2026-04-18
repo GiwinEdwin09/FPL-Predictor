@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from "react";
 
-import { FixtureCard } from "@/components/fixture-card";
+import { CustomizableFutureFixtureCard } from "@/components/customizable-future-fixture-card";
 import type { UpcomingFixture } from "@/lib/dashboard";
 
 type FixturesWeekViewProps = {
@@ -94,7 +94,7 @@ export function FixturesWeekView({ fixtures }: FixturesWeekViewProps) {
 
       <div className="fixtures-week-scroll">
         {fixturesForWeek.map((fixture) => (
-          <FixtureCard key={fixture.matchId} fixture={fixture} />
+          <CustomizableFutureFixtureCard key={fixture.matchId} fixture={fixture} />
         ))}
       </div>
     </section>
