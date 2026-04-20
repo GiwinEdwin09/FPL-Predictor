@@ -500,6 +500,10 @@ a {
   padding: 1rem;
 }
 
+.lineup-skeleton-card {
+  overflow: hidden;
+}
+
 .simulation-summary-topline {
   display: flex;
   justify-content: space-between;
@@ -574,6 +578,11 @@ a {
       rgba(255, 255, 255, 0) 20%
     );
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+}
+
+.lineup-pitch-skeleton {
+  min-height: 16rem;
+  align-content: center;
 }
 
 .pitch-row {
@@ -667,6 +676,52 @@ a {
   padding: 0.8rem 0.9rem;
   font: inherit;
   color: var(--text);
+}
+
+.skeleton-line,
+.skeleton-pill {
+  position: relative;
+  overflow: hidden;
+  background: rgba(72, 52, 34, 0.08);
+}
+
+.skeleton-line::after,
+.skeleton-pill::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.45), transparent);
+  animation: shimmer 1.4s infinite;
+}
+
+.skeleton-line {
+  height: 1rem;
+  border-radius: 999px;
+}
+
+.skeleton-line-title {
+  height: 1.4rem;
+  width: 58%;
+  margin-bottom: 1rem;
+}
+
+.skeleton-pill-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+}
+
+.skeleton-pill {
+  width: 5.8rem;
+  height: 3.1rem;
+  border-radius: 999px;
+}
+
+@keyframes shimmer {
+  100% {
+    transform: translateX(100%);
+  }
 }
 
 .fixture-clubs {

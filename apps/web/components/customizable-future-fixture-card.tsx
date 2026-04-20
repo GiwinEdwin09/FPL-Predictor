@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 import { FixtureCard } from "@/components/fixture-card";
 import type { UpcomingFixture } from "@/lib/dashboard";
@@ -13,6 +13,9 @@ type CustomizableFutureFixtureCardProps = {
 type PositionBucket = "goalkeeper" | "defender" | "midfielder" | "forward" | "unknown";
 
 const POSITION_ROWS: PositionBucket[] = ["goalkeeper", "defender", "midfielder", "forward"];
+const LINEUP_CONTEXT_TIMEOUT_MS = 12000;
+const SIMULATION_TIMEOUT_MS = 10000;
+const lineupContextCache = new Map<string, FixtureLineupContext>();
 
 function bucketPosition(position: string | null | undefined): PositionBucket {
   const normalized = (position ?? "").trim().toLowerCase();
@@ -86,6 +89,37 @@ function probabilitySummary(simulation: FixtureSimulation | null, fixture: Upcom
     probabilities: simulation.simulatedMatch.probabilities,
     note: "These probabilities are recalculated live from the lineup you selected.",
   };
+}
+
+function fetchWithTimeout(input: RequestInfo | URL, init: RequestInit, timeoutMs: number) {
+  const controller = new AbortController();
+  let didTimeout = false;
+  const timer = window.setTimeout(() => {
+    didTimeout = true;
+    controller.abort();
+  }, timeoutMs);
+
+  return fetch(input, {
+    ...init,
+    signal: controller.signal,
+  })
+    .catch((error) => {
+      if (didTimeout) {
+        throw new DOMException("Request timed out", "TimeoutError");
+      }
+      throw error;
+    })
+    .finally(() => {
+      window.clearTimeout(timer);
+    });
+}
+
+function timeoutMessage(kind: "lineup" | "simulation", timeoutMs: number) {
+  const seconds = Math.round(timeoutMs / 1000);
+  if (kind === "lineup") {
+    return `Lineup loading timed out after ${seconds}s. The backend is probably reachable, but it is responding too slowly right now.`;
+  }
+  return `Simulation timed out after ${seconds}s. This is a good signal to check runtime latency rather than guessing whether the UI is broken.`;
 }
 
 function PitchMap({
@@ -177,52 +211,67 @@ function LineupControls({
 
 export function CustomizableFutureFixtureCard({ fixture }: CustomizableFutureFixtureCardProps) {
   const [open, setOpen] = useState(false);
-  const [context, setContext] = useState<FixtureLineupContext | null>(null);
+  const [context, setContext] = useState<FixtureLineupContext | null>(lineupContextCache.get(fixture.matchId) ?? null);
   const [simulation, setSimulation] = useState<FixtureSimulation | null>(null);
   const [homeSelectedIds, setHomeSelectedIds] = useState<number[]>([]);
   const [awaySelectedIds, setAwaySelectedIds] = useState<number[]>([]);
   const [loadingContext, setLoadingContext] = useState(false);
   const [simulating, setSimulating] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const hasPrefetched = useRef(false);
 
-  useEffect(() => {
-    if (!open || context !== null || loadingContext) {
+  async function ensureContextLoaded() {
+    if (lineupContextCache.has(fixture.matchId)) {
+      const cached = lineupContextCache.get(fixture.matchId)!;
+      setContext(cached);
+      if (homeSelectedIds.length === 0) {
+        setHomeSelectedIds(cached.home.lineup.map((player) => player.playerId));
+      }
+      if (awaySelectedIds.length === 0) {
+        setAwaySelectedIds(cached.away.lineup.map((player) => player.playerId));
+      }
       return;
     }
 
-    const controller = new AbortController();
-
-    async function loadContext() {
-      setLoadingContext(true);
-      setError(null);
-      try {
-        const response = await fetch(`/api/fixtures/${fixture.matchId}/lineup-context`, {
-          cache: "no-store",
-          signal: controller.signal,
-        });
-        if (!response.ok) {
-          throw new Error(`Failed to load lineup context (${response.status}).`);
-        }
-        const payload = (await response.json()) as FixtureLineupContext;
-        setContext(payload);
-        setHomeSelectedIds(payload.home.lineup.map((player) => player.playerId));
-        setAwaySelectedIds(payload.away.lineup.map((player) => player.playerId));
-      } catch (loadError) {
-        if (controller.signal.aborted) {
-          return;
-        }
-        setError(loadError instanceof Error ? loadError.message : "Unable to load lineup context.");
-      } finally {
-        if (!controller.signal.aborted) {
-          setLoadingContext(false);
-        }
-      }
+    if (loadingContext) {
+      return;
     }
 
-    void loadContext();
+    setLoadingContext(true);
+    setError(null);
+    try {
+      const response = await fetchWithTimeout(
+        `/api/fixtures/${fixture.matchId}/lineup-context`,
+        {
+          cache: "no-store",
+        },
+        LINEUP_CONTEXT_TIMEOUT_MS,
+      );
+      if (!response.ok) {
+        throw new Error(`Failed to load lineup context (${response.status}).`);
+      }
+      const payload = (await response.json()) as FixtureLineupContext;
+      lineupContextCache.set(fixture.matchId, payload);
+      setContext(payload);
+      setHomeSelectedIds(payload.home.lineup.map((player) => player.playerId));
+      setAwaySelectedIds(payload.away.lineup.map((player) => player.playerId));
+    } catch (loadError) {
+      if (loadError instanceof DOMException && loadError.name === "TimeoutError") {
+        setError(timeoutMessage("lineup", LINEUP_CONTEXT_TIMEOUT_MS));
+      } else {
+        setError(loadError instanceof Error ? loadError.message : "Unable to load lineup context.");
+      }
+    } finally {
+      setLoadingContext(false);
+    }
+  }
 
-    return () => controller.abort();
-  }, [context, fixture.matchId, loadingContext, open]);
+  useEffect(() => {
+    if (!open || context !== null) {
+      return;
+    }
+    void ensureContextLoaded();
+  }, [context, open]);
 
   useEffect(() => {
     if (!open || context === null) {
@@ -236,45 +285,43 @@ export function CustomizableFutureFixtureCard({ fixture }: CustomizableFutureFix
       return;
     }
 
-    const controller = new AbortController();
-
     async function runSimulation() {
       setSimulating(true);
       setError(null);
       try {
-        const response = await fetch("/api/predict/simulate", {
-          method: "POST",
-          cache: "no-store",
-          signal: controller.signal,
-          headers: {
-            "content-type": "application/json",
+        const response = await fetchWithTimeout(
+          "/api/predict/simulate",
+          {
+            method: "POST",
+            cache: "no-store",
+            headers: {
+              "content-type": "application/json",
+            },
+            body: JSON.stringify({
+              matchId: fixture.matchId,
+              homePlayerIds: homeSelectedIds,
+              awayPlayerIds: awaySelectedIds,
+            }),
           },
-          body: JSON.stringify({
-            matchId: fixture.matchId,
-            homePlayerIds: homeSelectedIds,
-            awayPlayerIds: awaySelectedIds,
-          }),
-        });
+          SIMULATION_TIMEOUT_MS,
+        );
         if (!response.ok) {
           throw new Error(`Failed to simulate lineup (${response.status}).`);
         }
         const payload = (await response.json()) as FixtureSimulation;
         setSimulation(payload);
       } catch (simulationError) {
-        if (controller.signal.aborted) {
-          return;
+        if (simulationError instanceof DOMException && simulationError.name === "TimeoutError") {
+          setError(timeoutMessage("simulation", SIMULATION_TIMEOUT_MS));
+        } else {
+          setError(simulationError instanceof Error ? simulationError.message : "Unable to run lineup simulation.");
         }
-        setError(simulationError instanceof Error ? simulationError.message : "Unable to run lineup simulation.");
       } finally {
-        if (!controller.signal.aborted) {
-          setSimulating(false);
-        }
+        setSimulating(false);
       }
     }
 
     void runSimulation();
-
-    return () => controller.abort();
   }, [awaySelectedIds, context, fixture.matchId, homeSelectedIds, open]);
 
   const summary = useMemo(() => probabilitySummary(simulation, fixture), [fixture, simulation]);
@@ -287,6 +334,12 @@ export function CustomizableFutureFixtureCard({ fixture }: CustomizableFutureFix
     [awaySelectedIds, context],
   );
 
+  const prefetchedSummary = loadingContext
+    ? "Fetching projected XI from the live backend..."
+    : context
+      ? "Projected XI is cached for this fixture."
+      : "Open the lineup tool to fetch the projected XI from the live backend.";
+
   return (
     <FixtureCard
       fixture={fixture}
@@ -295,7 +348,7 @@ export function CustomizableFutureFixtureCard({ fixture }: CustomizableFutureFix
       <div className="fixture-actions">
         <div>
           <strong>{summary.title}</strong>
-          <p>{summary.note}</p>
+          <p>{open ? summary.note : prefetchedSummary}</p>
         </div>
         <div className="fixture-action-buttons">
           {context ? (
@@ -314,7 +367,28 @@ export function CustomizableFutureFixtureCard({ fixture }: CustomizableFutureFix
               Reset XI
             </button>
           ) : null}
-          <button className="lineup-toggle-button" onClick={() => setOpen((current) => !current)}>
+          <button
+            className="lineup-toggle-button"
+            onMouseEnter={() => {
+              if (!hasPrefetched.current) {
+                hasPrefetched.current = true;
+                void ensureContextLoaded();
+              }
+            }}
+            onFocus={() => {
+              if (!hasPrefetched.current) {
+                hasPrefetched.current = true;
+                void ensureContextLoaded();
+              }
+            }}
+            onClick={() => {
+              hasPrefetched.current = true;
+              setOpen((current) => !current);
+              if (context === null) {
+                void ensureContextLoaded();
+              }
+            }}
+          >
             {open ? "Hide Lineup Tool" : "Customize Lineup"}
           </button>
         </div>
@@ -322,16 +396,56 @@ export function CustomizableFutureFixtureCard({ fixture }: CustomizableFutureFix
 
       {open ? (
         <section className="lineup-builder-shell">
-          {loadingContext ? <p className="lineup-status">Loading projected lineups...</p> : null}
+          {loadingContext ? <p className="lineup-status">Loading projected lineups. Timeout test is {LINEUP_CONTEXT_TIMEOUT_MS / 1000}s.</p> : null}
           {simulating ? <p className="lineup-status">Updating your forecast...</p> : null}
           {error ? <p className="lineup-error">{error}</p> : null}
+
+          {loadingContext && context === null ? (
+            <div className="lineup-builder-grid">
+              <div className="lineup-column">
+                <section className="lineup-pitch-card lineup-skeleton-card">
+                  <div className="skeleton-line skeleton-line-title" />
+                  <div className="lineup-pitch lineup-pitch-skeleton">
+                    <div className="skeleton-pill-row">
+                      <span className="skeleton-pill" />
+                      <span className="skeleton-pill" />
+                      <span className="skeleton-pill" />
+                    </div>
+                    <div className="skeleton-pill-row">
+                      <span className="skeleton-pill" />
+                      <span className="skeleton-pill" />
+                      <span className="skeleton-pill" />
+                      <span className="skeleton-pill" />
+                    </div>
+                    <div className="skeleton-pill-row">
+                      <span className="skeleton-pill" />
+                      <span className="skeleton-pill" />
+                      <span className="skeleton-pill" />
+                    </div>
+                  </div>
+                </section>
+              </div>
+              <div className="lineup-column">
+                <section className="lineup-controls-card lineup-skeleton-card">
+                  <div className="skeleton-line skeleton-line-title" />
+                  <div className="skeleton-line" />
+                  <div className="skeleton-line" />
+                  <div className="skeleton-line" />
+                  <div className="skeleton-line" />
+                </section>
+              </div>
+            </div>
+          ) : null}
 
           {context ? (
             <>
               <div className="simulation-summary-card">
                 <div className="simulation-summary-topline">
                   <span>Your runtime forecast</span>
-                  <span>{simulation?.simulationMode ?? "projected-default-lineup"}</span>
+                  <span>
+                    {simulation?.simulationMode ?? "projected-default-lineup"}
+                    {simulating ? " · refreshing" : ""}
+                  </span>
                 </div>
                 <div className="simulation-bars">
                   <div>
