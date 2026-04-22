@@ -1,5 +1,5 @@
 {
-  "refreshed_at_utc": "2026-04-21T18:40:14.202025+00:00",
+  "refreshed_at_utc": "2026-04-22T07:12:42.526705+00:00",
   "data_changed": true,
   "sync_state_path": "data/sync_state.json",
   "prediction_feature_table_path": "data/features/match_pre_match_features.csv",
@@ -8,7 +8,7 @@
   "metrics_path": "data/models/model_v2_metrics.json",
   "dashboard_path": "apps/web/public/data/dashboard.json",
   "updated_datasets": {
-    "teams": [
+    "matches": [
       "2025-2026"
     ],
     "players": [
