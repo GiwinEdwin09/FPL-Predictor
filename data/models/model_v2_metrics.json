@@ -31,8 +31,8 @@
   "calibration_cutoff_utc": "2026-02-21T12:30:00+00:00",
   "metrics": {
     "accuracy": 0.4074074074074074,
-    "multiclass_log_loss": 1.1330560191521344,
-    "multiclass_brier_score": 0.6858044121104593
+    "multiclass_log_loss": 1.1359693567575933,
+    "multiclass_brier_score": 0.6875717789434108
   },
   "feature_columns": [
     "is_cup_match",
