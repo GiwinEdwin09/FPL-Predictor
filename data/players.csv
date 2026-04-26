@@ -1281,6 +1281,7 @@ player_code,player_id,first_name,second_name,web_name,team_code,position,source_
 647681,692,Giovanni,Leoni,Leoni,14,Defender,2025-2026
 596042,746,Kieran,Morrison,Morrison,14,Midfielder,2025-2026
 519440,760,Wellity,Lucky,Lucky,14,Defender,2025-2026
+677945,830,Will,Wright,Wright,14,Forward,2025-2026
 437730,82,Antoine,Semenyo,Semenyo,43,Midfielder,2025-2026
 432720,182,James,Trafford,Trafford,43,Goalkeeper,2025-2026
 209036,260,Marc,Guéhi,Guéhi,43,Defender,2025-2026
@@ -1306,7 +1307,6 @@ player_code,player_id,first_name,second_name,web_name,team_code,position,source_
 430871,450,Matheus,Santos Carneiro da Cunha,Cunha,1,Midfielder,2025-2026
 467169,454,Antony,dos Santos,Antony,1,Midfielder,2025-2026
 61256,457,Carlos Henrique,Casimiro,Casemiro,1,Midfielder,2025-2026
-232112,459,Manuel,Ugarte Ribeiro,Ugarte,1,Midfielder,2025-2026
 477555,424,Oscar,Bobb,Bobb,54,Midfielder,2025-2026
 492777,375,Conor,Bradley,Bradley,14,Defender,2025-2026
 126184,405,Nathan,Aké,Aké,43,Defender,2025-2026
@@ -1349,6 +1349,7 @@ player_code,player_id,first_name,second_name,web_name,team_code,position,source_
 493250,452,Amad,Diallo,Amad,1,Midfielder,2025-2026
 184341,455,Mason,Mount,Mount,1,Midfielder,2025-2026
 516895,458,Kobbie,Mainoo,Mainoo,1,Midfielder,2025-2026
+232112,459,Manuel,Ugarte Ribeiro,Ugarte,1,Midfielder,2025-2026
 490881,460,Toby,Collyer,Collyer,1,Midfielder,2025-2026
 556639,461,Jayce,Fitzgerald,Fitzgerald,1,Midfielder,2025-2026
 547037,462,Jack,Fletcher,J.Fletcher,1,Midfielder,2025-2026
@@ -1358,7 +1359,6 @@ player_code,player_id,first_name,second_name,web_name,team_code,position,source_
 458249,466,Joshua,Zirkzee,Zirkzee,1,Forward,2025-2026
 596047,467,Chido,Obi,Obi,1,Forward,2025-2026
 167512,539,Luke,O'Nien,O'Nien,56,Defender,2025-2026
-214590,610,Aaron,Wan-Bissaka,Wan-Bissaka,21,Defender,2025-2026
 499309,252,Marc,Guiu Paz,Marc Guiu,8,Forward,2025-2026
 575034,468,Ethan,Wheatley,Wheatley,1,Forward,2025-2026
 485711,681,Benjamin,Sesko,Šeško,1,Forward,2025-2026
@@ -1559,6 +1559,7 @@ player_code,player_id,first_name,second_name,web_name,team_code,position,source_
 536109,608,Ollie,Scarles,Scarles,21,Defender,2025-2026
 462116,609,Jean-Clair,Todibo,Todibo,21,Defender,2025-2026
 247412,654,Jørgen,Strand Larsen,Strand Larsen,31,Forward,2025-2026
+214590,610,Aaron,Wan-Bissaka,Wan-Bissaka,21,Defender,2025-2026
 518438,611,Kaelan,Casey,Casey,21,Defender,2025-2026
 224024,612,Lucas,Tolentino Coelho de Lima,L.Paquetá,21,Midfielder,2025-2026
 215439,613,Tomáš,Souček,Souček,21,Midfielder,2025-2026
