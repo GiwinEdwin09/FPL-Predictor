@@ -1,21 +1,11 @@
 {
-  "refreshed_at_utc": "2026-04-27T18:49:59.845141+00:00",
-  "data_changed": true,
+  "refreshed_at_utc": "2026-04-28T07:53:49.425319+00:00",
+  "data_changed": false,
   "sync_state_path": "data/sync_state.json",
-  "prediction_feature_table_path": "data/features/match_pre_match_features.csv",
-  "training_feature_table_path": "data/features/all_match_pre_match_features.csv",
-  "model_path": "data/models/model_v2.json",
-  "metrics_path": "data/models/model_v2_metrics.json",
-  "dashboard_path": "apps/web/public/data/dashboard.json",
-  "updated_datasets": {
-    "players": [
-      "2025-2026"
-    ],
-    "playerstats": [
-      "2025-2026"
-    ],
-    "playermatchstats": [
-      "2025-2026"
-    ]
-  }
+  "prediction_feature_table_path": null,
+  "training_feature_table_path": null,
+  "model_path": null,
+  "metrics_path": null,
+  "dashboard_path": null,
+  "updated_datasets": {}
 }
