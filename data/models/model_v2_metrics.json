@@ -26,13 +26,13 @@
     "validation_cutoff_utc": "2026-03-14T14:00:00+00:00",
     "latest_finished_kickoff_utc": "2026-04-11T14:00:00+00:00"
   },
-  "calibration_temperature": 2.5,
+  "calibration_temperature": 2.6,
   "calibration_rows": 31,
   "calibration_cutoff_utc": "2026-02-21T12:30:00+00:00",
   "metrics": {
-    "accuracy": 0.4074074074074074,
-    "multiclass_log_loss": 1.1528850038502874,
-    "multiclass_brier_score": 0.6960611484733206
+    "accuracy": 0.37037037037037035,
+    "multiclass_log_loss": 1.1473157880681282,
+    "multiclass_brier_score": 0.6940986892963976
   },
   "feature_columns": [
     "is_cup_match",
