@@ -1,0 +1,17 @@
+services:
+  - name: fpl-predictor-api
+    type: web
+    runtime: docker
+    plan: free
+    region: oregon
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    healthCheckPath: /health
+    autoDeployTrigger: commit
+    envVars:
+      - key: ADMIN_TOKEN
+        sync: false
+      - key: CORS_ALLOW_ORIGINS
+        sync: false
+      - key: DASHBOARD_CACHE_PATH
+        value: /tmp/dashboard.json

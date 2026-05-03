@@ -10,6 +10,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
 
 from fpl_predictor.live_inference import InferencePaths, LiveInferenceService
+from fpl_predictor.runtime_assets import ensure_runtime_assets
 
 
 def env_path(name: str, default: str) -> Path:
@@ -31,6 +32,24 @@ def require_admin_token(admin_token: str | None, provided_token: str | None) -> 
 
 def dashboard_cache_path() -> Path:
     return env_path("DASHBOARD_CACHE_PATH", "apps/web/public/data/dashboard.json")
+
+
+def prediction_feature_table_path() -> Path:
+    return env_path("PREDICTION_FEATURE_TABLE_PATH", "data/features/match_pre_match_features.csv")
+
+
+def training_feature_table_path() -> Path:
+    return env_path("TRAINING_FEATURE_TABLE_PATH", "data/features/all_match_pre_match_features.csv")
+
+
+def bootstrap_runtime_assets_enabled() -> bool:
+    configured = os.getenv("BOOTSTRAP_RUNTIME_ASSETS", "1").strip().casefold()
+    return configured not in {"0", "false", "no", "off"}
+
+
+def refresh_runtime_assets_on_startup() -> bool:
+    configured = os.getenv("REFRESH_RUNTIME_ASSETS_ON_STARTUP", "0").strip().casefold()
+    return configured in {"1", "true", "yes", "on"}
 
 
 def load_cached_dashboard(cache_path: Path) -> dict[str, Any]:
@@ -91,6 +110,18 @@ def create_app() -> FastAPI:
         allow_methods=["*"],
         allow_headers=["*"],
     )
+
+    @app.on_event("startup")
+    def bootstrap_runtime_assets() -> None:
+        if not bootstrap_runtime_assets_enabled():
+            return
+        ensure_runtime_assets(
+            inference_paths(),
+            prediction_feature_table_path=prediction_feature_table_path(),
+            training_feature_table_path=training_feature_table_path(),
+            dashboard_output_path=dashboard_cache_path(),
+            force_sync=refresh_runtime_assets_on_startup(),
+        )
 
     @app.get("/health")
     def health() -> dict[str, str]:

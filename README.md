@@ -57,17 +57,17 @@ It highlights the most useful summary stats, including:
 
 The product is currently split across:
 
-- [apps/web](/Users/giwin/Documents/FPLpred/FPL-Predictor/apps/web): Next.js frontend
-- [apps/api](/Users/giwin/Documents/FPLpred/FPL-Predictor/apps/api): FastAPI backend entrypoint
-- [src/fpl_predictor](/Users/giwin/Documents/FPLpred/FPL-Predictor/src/fpl_predictor): shared ingestion, feature, training, and export logic
-- [data](/Users/giwin/Documents/FPLpred/FPL-Predictor/data): synced datasets, features, models, and reference artifacts
+- [apps/web](./apps/web): Next.js frontend
+- [apps/api](./apps/api): FastAPI backend entrypoint
+- [src/fpl_predictor](./src/fpl_predictor): shared ingestion, feature, training, and export logic
+- [data](./data): synced datasets, features, models, and reference artifacts
 
 ## Deployment
 
 Current deployment shape:
 
 - frontend on Vercel
-- backend on Railway
+- backend on Render via Docker
 
 The frontend can either:
 
@@ -78,7 +78,7 @@ The frontend can either:
 
 All implementation notes, build steps, model metrics, ingestion details, and deployment instructions now live in:
 
-- [Build progress/README.md](/Users/giwin/Documents/FPLpred/FPL-Predictor/Build%20progress/README.md)
+- [Build progress/README.md](./Build%20progress/README.md)
 
 ## Status
 

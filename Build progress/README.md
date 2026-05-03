@@ -4,7 +4,7 @@
 
 This document tracks the technical build progress for the Premier League Predictor project: data ingestion, feature engineering, model training, frontend delivery, backend API work, and deployment notes.
 
-The product-facing overview now lives in the root [README.md](/Users/giwin/Documents/FPLpred/FPL-Predictor/README.md).
+The product-facing overview now lives in the root [README.md](../README.md).
 
 ## Phase 1: Automated Data Ingestion
 
@@ -250,9 +250,9 @@ Useful environment variables:
 
 The scheduled refresh pipeline now lives in:
 
-- [src/fpl_predictor/automation.py](/Users/giwin/Documents/FPLpred/FPL-Predictor/src/fpl_predictor/automation.py)
-- [scripts/run_refresh_pipeline.py](/Users/giwin/Documents/FPLpred/FPL-Predictor/scripts/run_refresh_pipeline.py)
-- [scheduled-refresh.yml](/Users/giwin/Documents/FPLpred/FPL-Predictor/.github/workflows/scheduled-refresh.yml)
+- [src/fpl_predictor/automation.py](../src/fpl_predictor/automation.py)
+- [scripts/run_refresh_pipeline.py](../scripts/run_refresh_pipeline.py)
+- [scheduled-refresh.yml](../.github/workflows/scheduled-refresh.yml)
 
 What it does:
 
@@ -275,9 +275,10 @@ Schedule:
 - set project root to `apps/web`
 - optionally set `API_BASE_URL=https://your-api-host`
 
-### Railway
+### Render
 
-- backend runs well through Docker rather than Railpack autodetection
+- create a Docker-based web service from this repository
 - healthcheck path: `/health`
-- public domain should be used by Vercel for `API_BASE_URL`
-- private domain is only for internal Railway service-to-service traffic
+- let Render provide the runtime `PORT` value and keep the app bound to `0.0.0.0`
+- use the public `onrender.com` URL for Vercel's `API_BASE_URL`
+- set `CORS_ALLOW_ORIGINS` to the Vercel production URL without a trailing slash

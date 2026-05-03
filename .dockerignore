@@ -6,6 +6,10 @@ __pycache__/
 *.pyo
 *.pyd
 .pytest_cache/
+.env
+.env.*
+venv/
+.venv/
 
 apps/web/.next/
 apps/web/node_modules/
@@ -14,4 +18,10 @@ node_modules/
 tests/
 scripts/
 TeamImages/
+data/raw/
+data/features/
+data/models/
 data/reference/
+data/automation/
+data/*.csv
+data/*.json
