@@ -30,8 +30,9 @@ def test_split_train_validation_uses_recent_2025_2026_window() -> None:
     frame = pd.DataFrame(
         [
             {
-                "match_id": "old-season",
+                "match_id": "24-25-prem-old-season",
                 "source_season": "2024-2025",
+                "tournament": "prem",
                 "kickoff_time": "2025-05-10T15:00:00Z",
                 "source_gameweek": np.nan,
                 "gameweek": 37,
@@ -39,8 +40,9 @@ def test_split_train_validation_uses_recent_2025_2026_window() -> None:
                 "target": 0,
             },
             {
-                "match_id": "gw27",
+                "match_id": "25-26-prem-gw27",
                 "source_season": "2025-2026",
+                "tournament": "prem",
                 "kickoff_time": "2026-02-21T15:00:00Z",
                 "source_gameweek": 27,
                 "gameweek": 27,
@@ -48,8 +50,9 @@ def test_split_train_validation_uses_recent_2025_2026_window() -> None:
                 "target": 0,
             },
             {
-                "match_id": "gw28",
+                "match_id": "25-26-prem-gw28",
                 "source_season": "2025-2026",
+                "tournament": "prem",
                 "kickoff_time": "2026-02-28T15:00:00Z",
                 "source_gameweek": 28,
                 "gameweek": 28,
@@ -57,8 +60,9 @@ def test_split_train_validation_uses_recent_2025_2026_window() -> None:
                 "target": 1,
             },
             {
-                "match_id": "gw31",
+                "match_id": "25-26-prem-gw31",
                 "source_season": "2025-2026",
+                "tournament": "prem",
                 "kickoff_time": "2026-03-22T14:15:00Z",
                 "source_gameweek": 31,
                 "gameweek": 31,
@@ -71,8 +75,8 @@ def test_split_train_validation_uses_recent_2025_2026_window() -> None:
 
     train, validation, summary = split_train_validation(frame)
 
-    assert train["match_id"].tolist() == ["old-season", "gw27"]
-    assert validation["match_id"].tolist() == ["gw28", "gw31"]
+    assert train["match_id"].tolist() == ["24-25-prem-old-season", "25-26-prem-gw27"]
+    assert validation["match_id"].tolist() == ["25-26-prem-gw28", "25-26-prem-gw31"]
     assert summary.train_rows == 2
     assert summary.validation_rows == 2
 
