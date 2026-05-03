@@ -1,9 +1,32 @@
 # FPL-Predictor
 
+[![Live Site](https://img.shields.io/badge/Live%20Site-Vercel-000000?logo=vercel&logoColor=white)](https://fpl-predictor-bay.vercel.app/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE)
+
 FPL-Predictor is a Premier League forecasting product built on top of the
 [FPL Core Insights](https://github.com/olbauday/FPL-Core-Insights) data source.
 It combines football data engineering, an XGBoost match model, a FastAPI backend,
 and a Next.js frontend to turn raw match updates into a browsable prediction site.
+
+## System Flow
+
+| Layer | Responsibility |
+| --- | --- |
+| `FPL-Core-Insights` | Upstream source for teams, players, matches, player stats, and player match stats |
+| `src/fpl_predictor/data_ingestion.py` | Pulls and normalizes season data from GitHub raw URLs |
+| `src/fpl_predictor/feature_factory.py` | Builds leakage-safe rolling pre-match features |
+| `src/fpl_predictor/model_training.py` | Trains and calibrates the XGBoost outcome model |
+| `apps/api` + `FastAPI` | Serves live predictions, history, and lineup simulation APIs |
+| `apps/web` + `Next.js` | Renders the public site for predictions and historical match browsing |
+
+```mermaid
+flowchart LR
+    A["FPL-Core-Insights"] --> B["Data Ingestion"]
+    B --> C["Rolling Feature Factory"]
+    C --> D["XGBoost Model"]
+    D --> E["FastAPI Backend"]
+    E --> F["Next.js Frontend"]
+```
 
 ## What The Product Does
 
@@ -66,7 +89,7 @@ The product is currently split across:
 
 Current deployment shape:
 
-- frontend on Vercel
+- frontend on Vercel: [fpl-predictor-bay.vercel.app](https://fpl-predictor-bay.vercel.app/)
 - backend on Render via Docker
 
 The frontend can either:
@@ -78,7 +101,7 @@ The frontend can either:
 
 All implementation notes, build steps, model metrics, ingestion details, and deployment instructions now live in:
 
-- [Build progress/README.md](./Build%20progress/README.md)
+- [build-progress/README.md](./build-progress/README.md)
 
 ## Status
 
