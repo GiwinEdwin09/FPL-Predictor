@@ -96,6 +96,22 @@ export type DashboardData = {
 
 const dashboardPath = path.join(process.cwd(), "public", "data", "dashboard.json");
 
+export type DashboardLoadResult =
+  | { ok: true; data: DashboardData }
+  | { ok: false; errorMessage: string };
+
+function dashboardLoadErrorMessage(error: unknown, usingApi: boolean): string {
+  if (!usingApi) {
+    return "Unable to load dashboard data from the local fallback snapshot right now.";
+  }
+
+  if (error instanceof Error && error.message.includes("Failed to load dashboard from API")) {
+    return "Unable to load predictions right now because the live backend is unavailable. Try again shortly.";
+  }
+
+  return "Unable to load live dashboard data right now. Try again shortly.";
+}
+
 export async function loadDashboardData(): Promise<DashboardData> {
   const apiBaseUrl = process.env.API_BASE_URL;
   if (apiBaseUrl) {
@@ -110,4 +126,17 @@ export async function loadDashboardData(): Promise<DashboardData> {
 
   const raw = await fs.readFile(dashboardPath, "utf-8");
   return JSON.parse(raw) as DashboardData;
+}
+
+export async function loadDashboardResult(): Promise<DashboardLoadResult> {
+  const usingApi = Boolean(process.env.API_BASE_URL);
+  try {
+    const data = await loadDashboardData();
+    return { ok: true, data };
+  } catch (error) {
+    return {
+      ok: false,
+      errorMessage: dashboardLoadErrorMessage(error, usingApi),
+    };
+  }
 }
