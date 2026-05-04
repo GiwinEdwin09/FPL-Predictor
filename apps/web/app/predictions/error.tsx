@@ -7,14 +7,17 @@ type PredictionsErrorProps = {
 
 export default function PredictionsError({ error, reset }: PredictionsErrorProps) {
   return (
-    <main className="page-shell">
-      <section className="section-header section-header-page">
-        <div>
-          <p className="eyebrow">Predictions</p>
-          <h1 className="page-title">Upcoming Premier League fixtures, one gameweek at a time.</h1>
-          <p className="hero-text">The live prediction page hit an unexpected issue while loading.</p>
+    <div className="page-shell">
+      <header className="page-head">
+        <div className="page-head-row">
+          <span className="page-eyebrow">
+            <span className="page-eyebrow-dot" aria-hidden="true" />
+            Predictions
+          </span>
         </div>
-      </section>
+        <h1 className="page-title">Upcoming fixtures, one gameweek at a time.</h1>
+        <p className="page-lede">The live prediction page hit an unexpected issue while loading.</p>
+      </header>
 
       <section className="page-state-card page-state-error" role="alert">
         <h2>Unable to load predictions</h2>
@@ -23,6 +26,6 @@ export default function PredictionsError({ error, reset }: PredictionsErrorProps
           Try again
         </button>
       </section>
-    </main>
+    </div>
   );
 }

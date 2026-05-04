@@ -33,7 +33,7 @@ function ClubLogo({
     return <div className="history-club-mark history-club-mark-fallback">{name.slice(0, 3).toUpperCase()}</div>;
   }
 
-  return <Image src={badgePath} alt={name} width={72} height={72} className="history-club-mark-image" />;
+  return <Image src={badgePath} alt={name} width={44} height={44} className="history-club-mark-image" />;
 }
 
 type GroupKey = {

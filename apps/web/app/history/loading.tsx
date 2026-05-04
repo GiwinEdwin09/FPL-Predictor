@@ -1,18 +1,22 @@
 export default function HistoryLoading() {
   return (
-    <main className="page-shell">
-      <section className="section-header section-header-page">
-        <div>
-          <p className="eyebrow">History</p>
-          <h1 className="page-title">Finished matches with the stats that matter most.</h1>
-          <p className="hero-text">Loading completed fixtures and their key match summaries.</p>
+    <div className="page-shell">
+      <header className="page-head">
+        <div className="page-head-row">
+          <span className="page-eyebrow">
+            <span className="page-eyebrow-dot" aria-hidden="true" />
+            History
+          </span>
+          <span className="page-eyebrow page-eyebrow-light">Loading…</span>
         </div>
-      </section>
+        <h1 className="page-title">Finished matches with the stats that matter most.</h1>
+        <p className="page-lede">Loading completed fixtures and their key match summaries.</p>
+      </header>
 
       <section className="week-panel">
         <div className="week-panel-header week-panel-header-simple">
           <div className="week-heading">
-            <p className="eyebrow">Loading</p>
+            <p>Loading</p>
             <h2>Preparing historical gameweeks</h2>
             <p>Fetching the latest completed match archive.</p>
           </div>
@@ -34,6 +38,6 @@ export default function HistoryLoading() {
           ))}
         </div>
       </section>
-    </main>
+    </div>
   );
 }

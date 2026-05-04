@@ -35,7 +35,7 @@ function TeamBadge({
     return <div className="club-mark club-mark-fallback">{name.slice(0, 3).toUpperCase()}</div>;
   }
 
-  return <Image src={badgePath} alt={name} width={84} height={84} className="club-mark-image" />;
+  return <Image src={badgePath} alt={name} width={56} height={56} className="club-mark-image" />;
 }
 
 export function FixtureCard({
@@ -49,16 +49,16 @@ export function FixtureCard({
 }) {
   const probabilities = probabilitiesOverride ?? fixture.probabilities;
   const bars = [
-    { label: fixture.homeTeam.shortName, value: probabilities.homeWin, tone: "var(--tone-home)" },
-    { label: "Draw", value: probabilities.draw, tone: "var(--tone-draw)" },
-    { label: fixture.awayTeam.shortName, value: probabilities.awayWin, tone: "var(--tone-away)" },
+    { label: fixture.homeTeam.shortName, value: probabilities.homeWin, tone: "var(--signal-home)" },
+    { label: "Draw", value: probabilities.draw, tone: "var(--signal-draw)" },
+    { label: fixture.awayTeam.shortName, value: probabilities.awayWin, tone: "var(--signal-away)" },
   ];
 
   return (
     <article className="fixture-card">
       <div className="fixture-card-topline">
-        <span>GW {fixture.gameweek ?? "TBD"}</span>
-        <span>{formatKickoff(fixture.kickoffTime)}</span>
+        <span className="fixture-card-gw">GW {fixture.gameweek ?? "TBD"}</span>
+        <span className="fixture-card-time">{formatKickoff(fixture.kickoffTime)}</span>
       </div>
 
       {fixture.finished ? (

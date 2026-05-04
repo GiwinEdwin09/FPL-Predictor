@@ -1,13 +1,17 @@
 export default function PredictionsLoading() {
   return (
-    <main className="page-shell">
-      <section className="section-header section-header-page">
-        <div>
-          <p className="eyebrow">Predictions</p>
-          <h1 className="page-title">Upcoming Premier League fixtures, one gameweek at a time.</h1>
-          <p className="hero-text">Fetching the latest prediction view and grouping the next rounds for you.</p>
+    <div className="page-shell">
+      <header className="page-head">
+        <div className="page-head-row">
+          <span className="page-eyebrow">
+            <span className="page-eyebrow-dot" aria-hidden="true" />
+            Predictions
+          </span>
+          <span className="page-eyebrow page-eyebrow-light">Loading…</span>
         </div>
-      </section>
+        <h1 className="page-title">Upcoming fixtures, one gameweek at a time.</h1>
+        <p className="page-lede">Pulling the latest probabilities and grouping fixtures into rounds.</p>
+      </header>
 
       <div className="tab-bar">
         <span className="tab-button tab-button-disabled">Current Gameweek</span>
@@ -18,13 +22,13 @@ export default function PredictionsLoading() {
       <section className="week-panel">
         <div className="week-panel-header week-panel-header-simple">
           <div className="week-heading">
-            <p className="eyebrow">Loading</p>
+            <p>Loading</p>
             <h2>Preparing prediction fixtures</h2>
-            <p>Pulling the latest probabilities from the backend.</p>
+            <p>Fetching the latest forecasts from the backend.</p>
           </div>
         </div>
 
-        <div className="fixture-grid">
+        <div className="fixtures-week-scroll">
           {Array.from({ length: 3 }).map((_, index) => (
             <article key={index} className="fixture-card skeleton-card">
               <div className="skeleton-line skeleton-line-short" />
@@ -39,6 +43,6 @@ export default function PredictionsLoading() {
           ))}
         </div>
       </section>
-    </main>
+    </div>
   );
 }

@@ -7,14 +7,17 @@ type HistoryErrorProps = {
 
 export default function HistoryError({ error, reset }: HistoryErrorProps) {
   return (
-    <main className="page-shell">
-      <section className="section-header section-header-page">
-        <div>
-          <p className="eyebrow">History</p>
-          <h1 className="page-title">Finished matches with the stats that matter most.</h1>
-          <p className="hero-text">The historical results page hit an unexpected issue while loading.</p>
+    <div className="page-shell">
+      <header className="page-head">
+        <div className="page-head-row">
+          <span className="page-eyebrow">
+            <span className="page-eyebrow-dot" aria-hidden="true" />
+            History
+          </span>
         </div>
-      </section>
+        <h1 className="page-title">Finished matches with the stats that matter most.</h1>
+        <p className="page-lede">The historical results page hit an unexpected issue while loading.</p>
+      </header>
 
       <section className="page-state-card page-state-error" role="alert">
         <h2>Unable to load match history</h2>
@@ -23,6 +26,6 @@ export default function HistoryError({ error, reset }: HistoryErrorProps) {
           Try again
         </button>
       </section>
-    </main>
+    </div>
   );
 }
