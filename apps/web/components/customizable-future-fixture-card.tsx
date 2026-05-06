@@ -13,8 +13,8 @@ type CustomizableFutureFixtureCardProps = {
 type PositionBucket = "goalkeeper" | "defender" | "midfielder" | "forward" | "unknown";
 
 const POSITION_ROWS: PositionBucket[] = ["goalkeeper", "defender", "midfielder", "forward"];
-const LINEUP_CONTEXT_TIMEOUT_MS = 12000;
-const SIMULATION_TIMEOUT_MS = 10000;
+const LINEUP_CONTEXT_TIMEOUT_MS = 20000;
+const SIMULATION_TIMEOUT_MS = 15000;
 const lineupContextCache = new Map<string, FixtureLineupContext>();
 
 function bucketPosition(position: string | null | undefined): PositionBucket {

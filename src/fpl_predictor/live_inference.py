@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from copy import deepcopy
 from dataclasses import dataclass
 from datetime import UTC, datetime
 from pathlib import Path
@@ -151,6 +152,24 @@ class LiveInferenceService:
     def __init__(self, paths: InferencePaths) -> None:
         self.paths = paths
         self._state: RuntimeState | None = None
+        self._projected_lineup_cache: dict[tuple[Any, ...], dict[str, Any]] = {}
+        self._fixture_lineup_context_cache: dict[tuple[Any, ...], dict[str, Any]] = {}
+        self._player_form_metrics_cache: dict[tuple[Any, ...], dict[str, float]] = {}
+        self._lineup_metrics_cache: dict[tuple[Any, ...], dict[str, float]] = {}
+
+    def _reset_caches(self) -> None:
+        self._projected_lineup_cache.clear()
+        self._fixture_lineup_context_cache.clear()
+        self._player_form_metrics_cache.clear()
+        self._lineup_metrics_cache.clear()
+
+    def _cutoff_cache_key(
+        self,
+        cutoff_kickoff: pd.Timestamp | None,
+        cutoff_gameweek: int | None,
+    ) -> tuple[str | None, int | None]:
+        kickoff_key = cutoff_kickoff.isoformat() if cutoff_kickoff is not None and pd.notna(cutoff_kickoff) else None
+        return kickoff_key, cutoff_gameweek
 
     def _signature(self) -> tuple[tuple[str, int], ...]:
         raw_root = self.paths.data_dir / "raw"
@@ -242,6 +261,7 @@ class LiveInferenceService:
         signature = self._signature()
         if refresh or self._state is None or self._state.signature != signature:
             self._state = self._load_state(signature)
+            self._reset_caches()
         return self._state
 
     def refresh(self) -> RuntimeState:
@@ -518,6 +538,16 @@ class LiveInferenceService:
         refresh: bool = False,
     ) -> dict[str, Any]:
         state = self.state(refresh=refresh)
+        lineup_key = (
+            state.signature,
+            season,
+            team_id,
+            *self._cutoff_cache_key(cutoff_kickoff, cutoff_gameweek),
+        )
+        cached = self._projected_lineup_cache.get(lineup_key)
+        if cached is not None:
+            return deepcopy(cached)
+
         candidates = self._team_candidates(
             state,
             season=season,
@@ -530,11 +560,13 @@ class LiveInferenceService:
         lineup_rows["selection_order"] = lineup_rows["player_id"].map({player_id: idx for idx, player_id in enumerate(lineup_ids)})
         lineup_rows = lineup_rows.sort_values("selection_order", kind="stable")
 
-        return {
+        payload = {
             "team": serialize_team(state.team_lookup, season, team_id),
             "lineup": [self._candidate_payload(row) for _, row in lineup_rows.iterrows()],
             "roster": [self._candidate_payload(row) for _, row in candidates.head(25).iterrows()],
         }
+        self._projected_lineup_cache[lineup_key] = payload
+        return deepcopy(payload)
 
     def fixture_lineup_context(self, match_id: str, *, refresh: bool = False) -> dict[str, Any]:
         state, fixture_row, baseline_fixture = self._baseline_fixture(match_id, refresh=refresh)
@@ -542,7 +574,16 @@ class LiveInferenceService:
         season = str(fixture_row["source_season"])
         home_team_id = int(fixture_row["home_team"])
         away_team_id = int(fixture_row["away_team"])
-        return {
+        context_key = (
+            state.signature,
+            match_id,
+            *self._cutoff_cache_key(kickoff, gameweek),
+        )
+        cached = self._fixture_lineup_context_cache.get(context_key)
+        if cached is not None:
+            return deepcopy(cached)
+
+        payload = {
             "match": baseline_fixture,
             "home": self.projected_lineup(
                 season=season,
@@ -559,6 +600,8 @@ class LiveInferenceService:
                 refresh=False,
             ),
         }
+        self._fixture_lineup_context_cache[context_key] = payload
+        return deepcopy(payload)
 
     def _player_form_metrics(
         self,
@@ -570,13 +613,26 @@ class LiveInferenceService:
         cutoff_kickoff: pd.Timestamp | None,
         cutoff_gameweek: int | None,
     ) -> dict[str, float]:
+        metrics_key = (
+            state.signature,
+            season,
+            team_id,
+            player_id,
+            *self._cutoff_cache_key(cutoff_kickoff, cutoff_gameweek),
+        )
+        cached = self._player_form_metrics_cache.get(metrics_key)
+        if cached is not None:
+            return cached.copy()
+
         rows = state.player_matches.loc[
             (state.player_matches["source_season"] == season)
             & (state.player_matches["team_code"] == team_id)
             & (state.player_matches["player_id"] == player_id)
         ].copy()
         if rows.empty:
-            return {"matches": 0.0}
+            payload = {"matches": 0.0}
+            self._player_form_metrics_cache[metrics_key] = payload
+            return payload.copy()
 
         rows = rows.loc[
             rows.apply(
@@ -590,7 +646,9 @@ class LiveInferenceService:
             )
         ].copy()
         if rows.empty:
-            return {"matches": 0.0}
+            payload = {"matches": 0.0}
+            self._player_form_metrics_cache[metrics_key] = payload
+            return payload.copy()
 
         rows = rows.sort_values(
             ["kickoff_time", "match_source_gameweek", "match_id"],
@@ -608,7 +666,7 @@ class LiveInferenceService:
             + rows["clearances"].fillna(0)
             + rows["blocks"].fillna(0)
         ).sum()
-        return {
+        payload = {
             "matches": float(len(rows)),
             "xg_p90": float(rows["xg"].fillna(0).sum()) * 90.0 / total_minutes,
             "shots_on_target_p90": float(rows["shots_on_target"].fillna(0).sum()) * 90.0 / total_minutes,
@@ -617,6 +675,8 @@ class LiveInferenceService:
             "tackles_won_p90": float(rows["tackles_won"].fillna(0).sum()) * 90.0 / total_minutes,
             "defensive_actions_p90": float(defensive_total) * 90.0 / total_minutes,
         }
+        self._player_form_metrics_cache[metrics_key] = payload
+        return payload.copy()
 
     def _lineup_metrics(
         self,
@@ -628,6 +688,17 @@ class LiveInferenceService:
         cutoff_kickoff: pd.Timestamp | None,
         cutoff_gameweek: int | None,
     ) -> dict[str, float]:
+        metrics_key = (
+            state.signature,
+            season,
+            team_id,
+            tuple(player_ids),
+            *self._cutoff_cache_key(cutoff_kickoff, cutoff_gameweek),
+        )
+        cached = self._lineup_metrics_cache.get(metrics_key)
+        if cached is not None:
+            return cached.copy()
+
         totals = {
             "attack_strength": 0.0,
             "finishing_strength": 0.0,
@@ -654,7 +725,8 @@ class LiveInferenceService:
             totals["touch_strength"] += metrics.get("touches_box_p90", 0.0)
             totals["tackle_strength"] += metrics.get("tackles_won_p90", 0.0)
             totals["defensive_strength"] += metrics.get("defensive_actions_p90", 0.0)
-        return totals
+        self._lineup_metrics_cache[metrics_key] = totals
+        return totals.copy()
 
     def _scaled_feature(
         self,
