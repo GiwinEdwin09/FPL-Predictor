@@ -112,20 +112,45 @@ function dashboardLoadErrorMessage(error: unknown, usingApi: boolean): string {
   return "Unable to load live dashboard data right now. Try again shortly.";
 }
 
-export async function loadDashboardData(): Promise<DashboardData> {
-  const apiBaseUrl = process.env.API_BASE_URL;
-  if (apiBaseUrl) {
-    const response = await fetch(`${apiBaseUrl.replace(/\/$/, "")}/api/dashboard`, {
-      cache: "no-store",
-    });
-    if (!response.ok) {
-      throw new Error(`Failed to load dashboard from API: ${response.status}`);
-    }
-    return (await response.json()) as DashboardData;
+async function loadDashboardFromApi(apiBaseUrl: string): Promise<DashboardData> {
+  const response = await fetch(`${apiBaseUrl.replace(/\/$/, "")}/api/dashboard`, {
+    cache: "no-store",
+  });
+  if (!response.ok) {
+    throw new Error(`Failed to load dashboard from API: ${response.status}`);
   }
+  return (await response.json()) as DashboardData;
+}
 
+async function loadDashboardFromFile(): Promise<DashboardData> {
   const raw = await fs.readFile(dashboardPath, "utf-8");
   return JSON.parse(raw) as DashboardData;
+}
+
+function dashboardSourceMode(): "static" | "api" {
+  return process.env.DASHBOARD_SOURCE === "api" ? "api" : "static";
+}
+
+export async function loadDashboardData(): Promise<DashboardData> {
+  const apiBaseUrl = process.env.API_BASE_URL;
+  const sourceMode = dashboardSourceMode();
+
+  if (sourceMode === "api" && apiBaseUrl) {
+    try {
+      return await loadDashboardFromApi(apiBaseUrl);
+    } catch {
+      return await loadDashboardFromFile();
+    }
+  }
+
+  try {
+    return await loadDashboardFromFile();
+  } catch {
+    if (apiBaseUrl) {
+      return await loadDashboardFromApi(apiBaseUrl);
+    }
+    throw new Error("No dashboard source is available.");
+  }
 }
 
 export async function loadDashboardResult(): Promise<DashboardLoadResult> {

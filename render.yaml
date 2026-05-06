@@ -11,7 +11,11 @@ services:
     envVars:
       - key: ADMIN_TOKEN
         sync: false
+      - key: BOOTSTRAP_RUNTIME_ASSETS
+        value: "0"
       - key: CORS_ALLOW_ORIGINS
         sync: false
       - key: DASHBOARD_CACHE_PATH
         value: /tmp/dashboard.json
+      - key: REFRESH_RUNTIME_ASSETS_ON_STARTUP
+        value: "0"

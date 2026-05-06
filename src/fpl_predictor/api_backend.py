@@ -43,7 +43,7 @@ def training_feature_table_path() -> Path:
 
 
 def bootstrap_runtime_assets_enabled() -> bool:
-    configured = os.getenv("BOOTSTRAP_RUNTIME_ASSETS", "1").strip().casefold()
+    configured = os.getenv("BOOTSTRAP_RUNTIME_ASSETS", "0").strip().casefold()
     return configured not in {"0", "false", "no", "off"}
 
 
@@ -81,11 +81,23 @@ def get_inference_service() -> LiveInferenceService:
     return _service
 
 
+def reset_inference_service() -> None:
+    global _service
+    _service = None
+
+
 def generate_dashboard(cache_path: Path) -> dict[str, Any]:
     payload = get_inference_service().dashboard_payload(refresh=True)
     cache_path.parent.mkdir(parents=True, exist_ok=True)
     cache_path.write_text(json.dumps(payload, indent=2), encoding="utf-8")
     return payload
+
+
+def get_cached_or_generated_dashboard() -> dict[str, Any]:
+    cache_path = dashboard_cache_path()
+    if cache_path.exists():
+        return load_cached_dashboard(cache_path)
+    return generate_dashboard(cache_path)
 
 
 class SimulationRequest(BaseModel):
@@ -131,7 +143,7 @@ def create_app() -> FastAPI:
     def dashboard(refresh: bool = Query(default=False)) -> dict[str, Any]:
         if refresh:
             return generate_dashboard(dashboard_cache_path())
-        return get_inference_service().dashboard_payload()
+        return get_cached_or_generated_dashboard()
 
     @app.get("/api/predictions/upcoming")
     def upcoming_predictions(
@@ -195,7 +207,15 @@ def create_app() -> FastAPI:
     @app.post("/api/admin/refresh")
     def refresh_dashboard(x_admin_token: str | None = Header(default=None)) -> dict[str, Any]:
         require_admin_token(os.getenv("ADMIN_TOKEN"), x_admin_token)
-        payload = generate_dashboard(dashboard_cache_path())
+        ensure_runtime_assets(
+            inference_paths(),
+            prediction_feature_table_path=prediction_feature_table_path(),
+            training_feature_table_path=training_feature_table_path(),
+            dashboard_output_path=dashboard_cache_path(),
+            force_sync=True,
+        )
+        reset_inference_service()
+        payload = get_cached_or_generated_dashboard()
         return {
             "status": "refreshed",
             "generatedAtUtc": payload["generatedAtUtc"],
