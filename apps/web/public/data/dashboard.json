@@ -1,5 +1,5 @@
 {
-  "generatedAtUtc": "2026-05-13T08:16:48.669026+00:00",
+  "generatedAtUtc": "2026-05-13T19:17:17.031144+00:00",
   "currentSeason": "2025-2026",
   "model": {
     "version": "model_v2",
@@ -93,18 +93,18 @@
         "away": null
       },
       "probabilities": {
-        "homeWin": 0.7117,
-        "draw": 0.1479,
-        "awayWin": 0.1404
+        "homeWin": 0.7059,
+        "draw": 0.1582,
+        "awayWin": 0.1359
       },
       "context": {
         "homeElo": 2053.0,
         "awayElo": 1659.0,
         "homeDaysRest": null,
         "awayDaysRest": null,
-        "homeLast5Xg": 1.52,
+        "homeLast5Xg": 1.48,
         "awayLast5Xg": 1.18,
-        "homeLast5Xga": 0.97,
+        "homeLast5Xga": 0.93,
         "awayLast5Xga": 2.14,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
@@ -177,9 +177,9 @@
         "away": null
       },
       "probabilities": {
-        "homeWin": 0.4757,
-        "draw": 0.2794,
-        "awayWin": 0.2449
+        "homeWin": 0.4779,
+        "draw": 0.2836,
+        "awayWin": 0.2385
       },
       "context": {
         "homeElo": 1838.0,
@@ -219,9 +219,9 @@
         "away": null
       },
       "probabilities": {
-        "homeWin": 0.3762,
-        "draw": 0.2848,
-        "awayWin": 0.339
+        "homeWin": 0.3367,
+        "draw": 0.1919,
+        "awayWin": 0.4715
       },
       "context": {
         "homeElo": 1828.0,
@@ -229,7 +229,7 @@
         "homeDaysRest": null,
         "awayDaysRest": null,
         "homeLast5Xg": 1.15,
-        "awayLast5Xg": 1.38,
+        "awayLast5Xg": 1.47,
         "homeLast5Xga": 1.49,
         "awayLast5Xga": 1.24,
         "homeLast5Matches": 5,
@@ -303,18 +303,18 @@
         "away": null
       },
       "probabilities": {
-        "homeWin": 0.4165,
-        "draw": 0.2363,
-        "awayWin": 0.3472
+        "homeWin": 0.3969,
+        "draw": 0.2866,
+        "awayWin": 0.3165
       },
       "context": {
         "homeElo": 1799.0,
         "awayElo": 1854.0,
         "homeDaysRest": null,
         "awayDaysRest": null,
-        "homeLast5Xg": 1.4,
+        "homeLast5Xg": 1.44,
         "awayLast5Xg": 1.79,
-        "homeLast5Xga": 0.77,
+        "homeLast5Xga": 0.85,
         "awayLast5Xga": 1.29,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
@@ -387,9 +387,9 @@
         "away": null
       },
       "probabilities": {
-        "homeWin": 0.3325,
-        "draw": 0.2888,
-        "awayWin": 0.3787
+        "homeWin": 0.3451,
+        "draw": 0.2935,
+        "awayWin": 0.3613
       },
       "context": {
         "homeElo": 1837.0,
@@ -397,9 +397,9 @@
         "homeDaysRest": null,
         "awayDaysRest": null,
         "homeLast5Xg": 2.25,
-        "awayLast5Xg": 1.32,
+        "awayLast5Xg": 1.29,
         "homeLast5Xga": 1.48,
-        "awayLast5Xga": 1.47,
+        "awayLast5Xga": 1.44,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
       }
@@ -555,9 +555,9 @@
         "away": null
       },
       "probabilities": {
-        "homeWin": 0.2882,
-        "draw": 0.2257,
-        "awayWin": 0.4861
+        "homeWin": 0.2879,
+        "draw": 0.2282,
+        "awayWin": 0.4839
       },
       "context": {
         "homeElo": 1799.0,
@@ -565,9 +565,9 @@
         "homeDaysRest": null,
         "awayDaysRest": null,
         "homeLast5Xg": 1.59,
-        "awayLast5Xg": 1.52,
+        "awayLast5Xg": 1.48,
         "homeLast5Xga": 1.67,
-        "awayLast5Xga": 0.97,
+        "awayLast5Xga": 0.93,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
       }
@@ -639,9 +639,9 @@
         "away": null
       },
       "probabilities": {
-        "homeWin": 0.4633,
-        "draw": 0.2554,
-        "awayWin": 0.2813
+        "homeWin": 0.4661,
+        "draw": 0.2499,
+        "awayWin": 0.284
       },
       "context": {
         "homeElo": 1925.0,
@@ -807,16 +807,16 @@
         "away": null
       },
       "probabilities": {
-        "homeWin": 0.3789,
-        "draw": 0.2434,
-        "awayWin": 0.3777
+        "homeWin": 0.3545,
+        "draw": 0.2976,
+        "awayWin": 0.3479
       },
       "context": {
         "homeElo": 1771.0,
         "awayElo": 1824.0,
         "homeDaysRest": null,
         "awayDaysRest": null,
-        "homeLast5Xg": 1.38,
+        "homeLast5Xg": 1.47,
         "awayLast5Xg": 1.69,
         "homeLast5Xga": 1.24,
         "awayLast5Xga": 1.81,
@@ -849,19 +849,19 @@
         "away": null
       },
       "probabilities": {
-        "homeWin": 0.2343,
-        "draw": 0.3975,
-        "awayWin": 0.3681
+        "homeWin": 0.3095,
+        "draw": 0.3539,
+        "awayWin": 0.3366
       },
       "context": {
         "homeElo": 1760.0,
         "awayElo": 1799.0,
         "homeDaysRest": null,
         "awayDaysRest": null,
-        "homeLast5Xg": 1.32,
-        "awayLast5Xg": 1.4,
-        "homeLast5Xga": 1.47,
-        "awayLast5Xga": 0.77,
+        "homeLast5Xg": 1.29,
+        "awayLast5Xg": 1.44,
+        "homeLast5Xga": 1.44,
+        "awayLast5Xga": 0.85,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
       }
@@ -906,50 +906,6 @@
         "awayLast5Xg": 1.32,
         "homeLast5Xga": 0.95,
         "awayLast5Xga": 1.34,
-        "homeLast5Matches": 5,
-        "awayLast5Matches": 5
-      },
-      "status": "postponed",
-      "statusReason": "Awaiting a confirmed kickoff time from the source data."
-    },
-    {
-      "matchId": "25-26-prem-tottenham-hotspur-vs-leeds-united",
-      "season": "2025-2026",
-      "gameweek": 36,
-      "kickoffTime": null,
-      "homeTeam": {
-        "id": 6,
-        "name": "Tottenham Hotspur",
-        "shortName": "TOT",
-        "badgeSlug": "tottenham",
-        "badgePath": "/teams/tottenham.football-logos.cc.png"
-      },
-      "awayTeam": {
-        "id": 2,
-        "name": "Leeds United",
-        "shortName": "LEE",
-        "badgeSlug": "leeds-united",
-        "badgePath": "/teams/leeds-united.football-logos.cc.png"
-      },
-      "finished": false,
-      "score": {
-        "home": null,
-        "away": null
-      },
-      "probabilities": {
-        "homeWin": 0.2754,
-        "draw": 0.3563,
-        "awayWin": 0.3683
-      },
-      "context": {
-        "homeElo": 1771.0,
-        "awayElo": 1799.0,
-        "homeDaysRest": null,
-        "awayDaysRest": null,
-        "homeLast5Xg": 1.38,
-        "awayLast5Xg": 1.4,
-        "homeLast5Xga": 1.24,
-        "awayLast5Xga": 0.77,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
       },
@@ -35871,8 +35827,8 @@
       },
       "stats": {
         "xg": {
-          "home": 1.32,
-          "away": 1.36
+          "home": 1.15,
+          "away": 1.18
         },
         "shotsOnTarget": {
           "home": 3,
@@ -35894,6 +35850,55 @@
         "awayLast5Xg": 1.55
       },
       "matchUrl": "/matches/west-ham-united-vs-arsenal/2tnw09#4813734"
+    },
+    {
+      "matchId": "25-26-prem-tottenham-hotspur-vs-leeds-united",
+      "season": "2025-2026",
+      "gameweek": 36,
+      "kickoffTime": null,
+      "homeTeam": {
+        "id": 6,
+        "name": "Tottenham Hotspur",
+        "shortName": "TOT",
+        "badgeSlug": "tottenham",
+        "badgePath": "/teams/tottenham.football-logos.cc.png"
+      },
+      "awayTeam": {
+        "id": 2,
+        "name": "Leeds United",
+        "shortName": "LEE",
+        "badgeSlug": "leeds-united",
+        "badgePath": "/teams/leeds-united.football-logos.cc.png"
+      },
+      "score": {
+        "home": 1,
+        "away": 1
+      },
+      "stats": {
+        "xg": {
+          "home": 1.27,
+          "away": 1.34
+        },
+        "shotsOnTarget": {
+          "home": 3,
+          "away": 4
+        },
+        "bigChances": {
+          "home": 2,
+          "away": 2
+        },
+        "possession": {
+          "home": 57.0,
+          "away": 43.0
+        }
+      },
+      "preMatch": {
+        "homeElo": 1771.0,
+        "awayElo": 1799.0,
+        "homeLast5Xg": 1.38,
+        "awayLast5Xg": 1.4
+      },
+      "matchUrl": "/matches/leeds-united-vs-tottenham-hotspur/2ejdsf#4813733"
     },
     {
       "matchId": "25-26-prem-sunderland-vs-manchester-united",
@@ -36030,8 +36035,8 @@
           "away": 2
         },
         "possession": {
-          "home": 59.0,
-          "away": 41.0
+          "home": 58.0,
+          "away": 42.0
         }
       },
       "preMatch": {
