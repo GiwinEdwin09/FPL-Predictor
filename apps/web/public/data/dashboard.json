@@ -1,13 +1,13 @@
 {
-  "generatedAtUtc": "2026-05-14T19:18:37.307600+00:00",
+  "generatedAtUtc": "2026-05-15T08:21:59.277768+00:00",
   "currentSeason": "2025-2026",
   "model": {
     "version": "model_v2",
-    "calibrationTemperature": 2.7,
+    "calibrationTemperature": 2.9000000000000004,
     "metrics": {
       "accuracy": 0.37037037037037035,
-      "multiclass_log_loss": 1.1273253058102661,
-      "multiclass_brier_score": 0.6803065186278268
+      "multiclass_log_loss": 1.1267072251030432,
+      "multiclass_brier_score": 0.6810212709509764
     },
     "split": {
       "train_rows": 796,
@@ -51,9 +51,9 @@
         "away": null
       },
       "probabilities": {
-        "homeWin": 0.4015,
-        "draw": 0.3519,
-        "awayWin": 0.2466
+        "homeWin": 0.3954,
+        "draw": 0.349,
+        "awayWin": 0.2556
       },
       "context": {
         "homeElo": 1858.0,
@@ -93,9 +93,9 @@
         "away": null
       },
       "probabilities": {
-        "homeWin": 0.7059,
-        "draw": 0.1582,
-        "awayWin": 0.1359
+        "homeWin": 0.688,
+        "draw": 0.1696,
+        "awayWin": 0.1424
       },
       "context": {
         "homeElo": 2053.0,
@@ -135,9 +135,9 @@
         "away": null
       },
       "probabilities": {
-        "homeWin": 0.4058,
-        "draw": 0.1354,
-        "awayWin": 0.4589
+        "homeWin": 0.3857,
+        "draw": 0.1502,
+        "awayWin": 0.4642
       },
       "context": {
         "homeElo": 1875.0,
@@ -177,9 +177,9 @@
         "away": null
       },
       "probabilities": {
-        "homeWin": 0.4393,
-        "draw": 0.2676,
-        "awayWin": 0.2931
+        "homeWin": 0.4307,
+        "draw": 0.2661,
+        "awayWin": 0.3032
       },
       "context": {
         "homeElo": 1838.0,
@@ -219,9 +219,9 @@
         "away": null
       },
       "probabilities": {
-        "homeWin": 0.3367,
-        "draw": 0.1919,
-        "awayWin": 0.4715
+        "homeWin": 0.3408,
+        "draw": 0.1865,
+        "awayWin": 0.4727
       },
       "context": {
         "homeElo": 1828.0,
@@ -261,9 +261,9 @@
         "away": null
       },
       "probabilities": {
-        "homeWin": 0.3894,
-        "draw": 0.388,
-        "awayWin": 0.2226
+        "homeWin": 0.3957,
+        "draw": 0.3649,
+        "awayWin": 0.2394
       },
       "context": {
         "homeElo": 1824.0,
@@ -303,9 +303,9 @@
         "away": null
       },
       "probabilities": {
-        "homeWin": 0.3969,
-        "draw": 0.2866,
-        "awayWin": 0.3165
+        "homeWin": 0.3826,
+        "draw": 0.308,
+        "awayWin": 0.3094
       },
       "context": {
         "homeElo": 1799.0,
@@ -345,9 +345,9 @@
         "away": null
       },
       "probabilities": {
-        "homeWin": 0.4325,
-        "draw": 0.324,
-        "awayWin": 0.2435
+        "homeWin": 0.4123,
+        "draw": 0.3268,
+        "awayWin": 0.2609
       },
       "context": {
         "homeElo": 1897.0,
@@ -387,9 +387,9 @@
         "away": null
       },
       "probabilities": {
-        "homeWin": 0.3451,
-        "draw": 0.2935,
-        "awayWin": 0.3613
+        "homeWin": 0.3544,
+        "draw": 0.2686,
+        "awayWin": 0.3769
       },
       "context": {
         "homeElo": 1837.0,
@@ -429,9 +429,9 @@
         "away": null
       },
       "probabilities": {
-        "homeWin": 0.2556,
-        "draw": 0.3204,
-        "awayWin": 0.424
+        "homeWin": 0.2429,
+        "draw": 0.3342,
+        "awayWin": 0.4229
       },
       "context": {
         "homeElo": 1678.0,
@@ -471,9 +471,9 @@
         "away": null
       },
       "probabilities": {
-        "homeWin": 0.4584,
-        "draw": 0.2801,
-        "awayWin": 0.2615
+        "homeWin": 0.4619,
+        "draw": 0.2699,
+        "awayWin": 0.2682
       },
       "context": {
         "homeElo": 1854.0,
@@ -513,9 +513,9 @@
         "away": null
       },
       "probabilities": {
-        "homeWin": 0.433,
-        "draw": 0.2277,
-        "awayWin": 0.3394
+        "homeWin": 0.3902,
+        "draw": 0.2477,
+        "awayWin": 0.3621
       },
       "context": {
         "homeElo": 1659.0,
@@ -555,9 +555,9 @@
         "away": null
       },
       "probabilities": {
-        "homeWin": 0.2521,
-        "draw": 0.2353,
-        "awayWin": 0.5126
+        "homeWin": 0.2574,
+        "draw": 0.2461,
+        "awayWin": 0.4964
       },
       "context": {
         "homeElo": 1799.0,
@@ -597,9 +597,9 @@
         "away": null
       },
       "probabilities": {
-        "homeWin": 0.4326,
-        "draw": 0.2659,
-        "awayWin": 0.3015
+        "homeWin": 0.4373,
+        "draw": 0.2567,
+        "awayWin": 0.306
       },
       "context": {
         "homeElo": 1808.0,
@@ -639,9 +639,9 @@
         "away": null
       },
       "probabilities": {
-        "homeWin": 0.4661,
-        "draw": 0.2499,
-        "awayWin": 0.284
+        "homeWin": 0.4463,
+        "draw": 0.2379,
+        "awayWin": 0.3158
       },
       "context": {
         "homeElo": 1925.0,
@@ -681,9 +681,9 @@
         "away": null
       },
       "probabilities": {
-        "homeWin": 0.5132,
-        "draw": 0.2912,
-        "awayWin": 0.1956
+        "homeWin": 0.5097,
+        "draw": 0.2725,
+        "awayWin": 0.2178
       },
       "context": {
         "homeElo": 1967.0,
@@ -723,9 +723,9 @@
         "away": null
       },
       "probabilities": {
-        "homeWin": 0.3843,
-        "draw": 0.3158,
-        "awayWin": 0.2999
+        "homeWin": 0.378,
+        "draw": 0.3282,
+        "awayWin": 0.2938
       },
       "context": {
         "homeElo": 1842.0,
@@ -765,9 +765,9 @@
         "away": null
       },
       "probabilities": {
-        "homeWin": 0.3172,
-        "draw": 0.2614,
-        "awayWin": 0.4214
+        "homeWin": 0.2894,
+        "draw": 0.2999,
+        "awayWin": 0.4106
       },
       "context": {
         "homeElo": 1700.0,
@@ -807,9 +807,9 @@
         "away": null
       },
       "probabilities": {
-        "homeWin": 0.3545,
-        "draw": 0.2976,
-        "awayWin": 0.3479
+        "homeWin": 0.3818,
+        "draw": 0.3129,
+        "awayWin": 0.3053
       },
       "context": {
         "homeElo": 1771.0,
@@ -849,9 +849,9 @@
         "away": null
       },
       "probabilities": {
-        "homeWin": 0.3095,
-        "draw": 0.3539,
-        "awayWin": 0.3366
+        "homeWin": 0.2934,
+        "draw": 0.3639,
+        "awayWin": 0.3428
       },
       "context": {
         "homeElo": 1760.0,
