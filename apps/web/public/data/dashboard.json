@@ -1,5 +1,5 @@
 {
-  "generatedAtUtc": "2026-05-18T08:57:16.787305+00:00",
+  "generatedAtUtc": "2026-05-18T19:12:42.608889+00:00",
   "currentSeason": "2025-2026",
   "model": {
     "version": "model_v2",
@@ -93,9 +93,9 @@
         "away": null
       },
       "probabilities": {
-        "homeWin": 0.3962,
-        "draw": 0.2443,
-        "awayWin": 0.3595
+        "homeWin": 0.3923,
+        "draw": 0.2419,
+        "awayWin": 0.3658
       },
       "context": {
         "homeElo": 1665.0,
@@ -189,7 +189,7 @@
         "homeLast5Xg": 1.1,
         "awayLast5Xg": 2.33,
         "homeLast5Xga": 1.59,
-        "awayLast5Xga": 1.1,
+        "awayLast5Xga": 1.12,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
       }
@@ -345,18 +345,18 @@
         "away": null
       },
       "probabilities": {
-        "homeWin": 0.2518,
-        "draw": 0.2954,
-        "awayWin": 0.4529
+        "homeWin": 0.263,
+        "draw": 0.2906,
+        "awayWin": 0.4464
       },
       "context": {
         "homeElo": 1706.0,
         "awayElo": 1833.0,
         "homeDaysRest": null,
         "awayDaysRest": null,
-        "homeLast5Xg": 0.93,
+        "homeLast5Xg": 0.94,
         "awayLast5Xg": 1.15,
-        "homeLast5Xga": 1.07,
+        "homeLast5Xga": 1.06,
         "awayLast5Xga": 1.49,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
@@ -387,9 +387,9 @@
         "away": null
       },
       "probabilities": {
-        "homeWin": 0.3905,
-        "draw": 0.2953,
-        "awayWin": 0.3143
+        "homeWin": 0.3919,
+        "draw": 0.2964,
+        "awayWin": 0.3117
       },
       "context": {
         "homeElo": 1772.0,
@@ -429,16 +429,16 @@
         "away": null
       },
       "probabilities": {
-        "homeWin": 0.3043,
-        "draw": 0.3394,
-        "awayWin": 0.3563
+        "homeWin": 0.306,
+        "draw": 0.3353,
+        "awayWin": 0.3587
       },
       "context": {
         "homeElo": 1758.0,
         "awayElo": 1801.0,
         "homeDaysRest": null,
         "awayDaysRest": null,
-        "homeLast5Xg": 1.29,
+        "homeLast5Xg": 1.31,
         "awayLast5Xg": 1.29,
         "homeLast5Xga": 1.44,
         "awayLast5Xga": 1.33,
@@ -35544,8 +35544,8 @@
       },
       "stats": {
         "xg": {
-          "home": 1.7,
-          "away": 0.88
+          "home": 1.73,
+          "away": 0.95
         },
         "shotsOnTarget": {
           "home": 7,
@@ -35556,8 +35556,8 @@
           "away": 1
         },
         "possession": {
-          "home": 56.0,
-          "away": 44.0
+          "home": 55.0,
+          "away": 45.0
         }
       },
       "preMatch": {
@@ -35691,8 +35691,8 @@
       },
       "stats": {
         "xg": {
-          "home": 1.07,
-          "away": 0.73
+          "home": 1.04,
+          "away": 0.76
         },
         "shotsOnTarget": {
           "home": 4,
@@ -35700,7 +35700,7 @@
         },
         "bigChances": {
           "home": 2,
-          "away": 3
+          "away": 2
         },
         "possession": {
           "home": 48.0,
