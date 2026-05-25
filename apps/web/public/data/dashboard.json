@@ -1,5 +1,5 @@
 {
-  "generatedAtUtc": "2026-05-24T18:37:53.632702+00:00",
+  "generatedAtUtc": "2026-05-25T09:12:40.621258+00:00",
   "currentSeason": "2025-2026",
   "model": {
     "version": "model_v2",
@@ -26,96 +26,7 @@
   "currentGameweek": null,
   "currentGameweekFixtures": [],
   "upcomingFixtures": [],
-  "postponedFixtures": [
-    {
-      "matchId": "25-26-prem-brighton-hove-albion-vs-manchester-united",
-      "season": "2025-2026",
-      "gameweek": 38,
-      "kickoffTime": null,
-      "homeTeam": {
-        "id": 36,
-        "name": "Brighton & Hove Albion",
-        "shortName": "BHA",
-        "badgeSlug": "brighton",
-        "badgePath": "/teams/brighton.football-logos.cc.png"
-      },
-      "awayTeam": {
-        "id": 1,
-        "name": "Manchester United",
-        "shortName": "MUN",
-        "badgeSlug": "manchester-united",
-        "badgePath": "/teams/manchester-united.football-logos.cc.png"
-      },
-      "finished": false,
-      "score": {
-        "home": 0,
-        "away": 3
-      },
-      "probabilities": {
-        "homeWin": 0.3816,
-        "draw": 0.2629,
-        "awayWin": 0.3555
-      },
-      "context": {
-        "homeElo": null,
-        "awayElo": null,
-        "homeDaysRest": null,
-        "awayDaysRest": null,
-        "homeLast5Xg": 2.06,
-        "awayLast5Xg": 2.03,
-        "homeLast5Xga": 1.19,
-        "awayLast5Xga": 1.55,
-        "homeLast5Matches": 5,
-        "awayLast5Matches": 5
-      },
-      "status": "postponed",
-      "statusReason": "Awaiting a confirmed kickoff time from the source data."
-    },
-    {
-      "matchId": "25-26-prem-liverpool-vs-brentford",
-      "season": "2025-2026",
-      "gameweek": 38,
-      "kickoffTime": null,
-      "homeTeam": {
-        "id": 14,
-        "name": "Liverpool",
-        "shortName": "LIV",
-        "badgeSlug": "liverpool",
-        "badgePath": "/teams/liverpool.football-logos.cc.png"
-      },
-      "awayTeam": {
-        "id": 94,
-        "name": "Brentford",
-        "shortName": "BRE",
-        "badgeSlug": "brentford",
-        "badgePath": "/teams/brentford.football-logos.cc.png"
-      },
-      "finished": false,
-      "score": {
-        "home": 1,
-        "away": 1
-      },
-      "probabilities": {
-        "homeWin": 0.257,
-        "draw": 0.1794,
-        "awayWin": 0.5636
-      },
-      "context": {
-        "homeElo": null,
-        "awayElo": null,
-        "homeDaysRest": null,
-        "awayDaysRest": null,
-        "homeLast5Xg": 1.05,
-        "awayLast5Xg": 1.65,
-        "homeLast5Xga": 1.78,
-        "awayLast5Xga": 1.7,
-        "homeLast5Matches": 5,
-        "awayLast5Matches": 5
-      },
-      "status": "postponed",
-      "statusReason": "Awaiting a confirmed kickoff time from the source data."
-    }
-  ],
+  "postponedFixtures": [],
   "historicalMatches": [
     {
       "matchId": "25-26-prem-west-ham-united-vs-wolverhampton-wanderers",
@@ -35025,25 +34936,25 @@
         "badgePath": "/teams/leeds-united.football-logos.cc.png"
       },
       "score": {
-        "home": 2,
+        "home": 3,
         "away": 0
       },
       "stats": {
         "xg": {
-          "home": null,
-          "away": null
+          "home": 2.57,
+          "away": 1.57
         },
         "shotsOnTarget": {
-          "home": null,
-          "away": null
+          "home": 9,
+          "away": 3
         },
         "bigChances": {
-          "home": null,
-          "away": null
+          "home": 4,
+          "away": 2
         },
         "possession": {
-          "home": null,
-          "away": null
+          "home": 42.0,
+          "away": 58.0
         }
       },
       "preMatch": {
@@ -35079,20 +34990,20 @@
       },
       "stats": {
         "xg": {
-          "home": null,
-          "away": null
+          "home": 0.99,
+          "away": 0.38
         },
         "shotsOnTarget": {
-          "home": null,
-          "away": null
+          "home": 2,
+          "away": 1
         },
         "bigChances": {
-          "home": null,
-          "away": null
+          "home": 2,
+          "away": 0
         },
         "possession": {
-          "home": null,
-          "away": null
+          "home": 50.0,
+          "away": 50.0
         }
       },
       "preMatch": {
@@ -35128,20 +35039,20 @@
       },
       "stats": {
         "xg": {
-          "home": null,
-          "away": null
+          "home": 1.93,
+          "away": 0.9
         },
         "shotsOnTarget": {
-          "home": null,
-          "away": null
+          "home": 6,
+          "away": 3
         },
         "bigChances": {
-          "home": null,
-          "away": null
+          "home": 2,
+          "away": 2
         },
         "possession": {
-          "home": null,
-          "away": null
+          "home": 45.0,
+          "away": 55.0
         }
       },
       "preMatch": {
@@ -35177,20 +35088,20 @@
       },
       "stats": {
         "xg": {
-          "home": null,
-          "away": null
+          "home": 1.87,
+          "away": 1.0
         },
         "shotsOnTarget": {
-          "home": null,
-          "away": null
+          "home": 5,
+          "away": 4
         },
         "bigChances": {
-          "home": null,
-          "away": null
+          "home": 3,
+          "away": 2
         },
         "possession": {
-          "home": null,
-          "away": null
+          "home": 45.0,
+          "away": 55.0
         }
       },
       "preMatch": {
@@ -35226,20 +35137,20 @@
       },
       "stats": {
         "xg": {
-          "home": null,
-          "away": null
+          "home": 1.25,
+          "away": 1.67
         },
         "shotsOnTarget": {
-          "home": null,
-          "away": null
+          "home": 3,
+          "away": 5
         },
         "bigChances": {
-          "home": null,
-          "away": null
+          "home": 2,
+          "away": 4
         },
         "possession": {
-          "home": null,
-          "away": null
+          "home": 52.0,
+          "away": 48.0
         }
       },
       "preMatch": {
@@ -35249,6 +35160,55 @@
         "awayLast5Xg": 1.19
       },
       "matchUrl": "/matches/manchester-city-vs-aston-villa/2w74gq#4813750"
+    },
+    {
+      "matchId": "25-26-prem-liverpool-vs-brentford",
+      "season": "2025-2026",
+      "gameweek": 38,
+      "kickoffTime": null,
+      "homeTeam": {
+        "id": 14,
+        "name": "Liverpool",
+        "shortName": "LIV",
+        "badgeSlug": "liverpool",
+        "badgePath": "/teams/liverpool.football-logos.cc.png"
+      },
+      "awayTeam": {
+        "id": 94,
+        "name": "Brentford",
+        "shortName": "BRE",
+        "badgeSlug": "brentford",
+        "badgePath": "/teams/brentford.football-logos.cc.png"
+      },
+      "score": {
+        "home": 1,
+        "away": 1
+      },
+      "stats": {
+        "xg": {
+          "home": 2.9,
+          "away": 1.32
+        },
+        "shotsOnTarget": {
+          "home": 8,
+          "away": 2
+        },
+        "bigChances": {
+          "home": 4,
+          "away": 2
+        },
+        "possession": {
+          "home": 60.0,
+          "away": 40.0
+        }
+      },
+      "preMatch": {
+        "homeElo": null,
+        "awayElo": null,
+        "homeLast5Xg": 1.05,
+        "awayLast5Xg": 1.65
+      },
+      "matchUrl": "/matches/liverpool-vs-brentford/2uusjv#4813749"
     },
     {
       "matchId": "25-26-prem-fulham-vs-newcastle-united",
@@ -35275,20 +35235,20 @@
       },
       "stats": {
         "xg": {
-          "home": null,
-          "away": null
+          "home": 1.69,
+          "away": 0.25
         },
         "shotsOnTarget": {
-          "home": null,
-          "away": null
+          "home": 6,
+          "away": 2
         },
         "bigChances": {
-          "home": null,
-          "away": null
+          "home": 3,
+          "away": 0
         },
         "possession": {
-          "home": null,
-          "away": null
+          "home": 46.0,
+          "away": 54.0
         }
       },
       "preMatch": {
@@ -35319,25 +35279,25 @@
         "badgePath": "/teams/arsenal.football-logos.cc.png"
       },
       "score": {
-        "home": 0,
+        "home": 1,
         "away": 2
       },
       "stats": {
         "xg": {
-          "home": null,
-          "away": null
+          "home": 1.11,
+          "away": 2.56
         },
         "shotsOnTarget": {
-          "home": null,
-          "away": null
+          "home": 3,
+          "away": 7
         },
         "bigChances": {
-          "home": null,
-          "away": null
+          "home": 2,
+          "away": 8
         },
         "possession": {
-          "home": null,
-          "away": null
+          "home": 39.0,
+          "away": 61.0
         }
       },
       "preMatch": {
@@ -35373,20 +35333,20 @@
       },
       "stats": {
         "xg": {
-          "home": null,
-          "away": null
+          "home": 1.06,
+          "away": 2.05
         },
         "shotsOnTarget": {
-          "home": null,
-          "away": null
+          "home": 8,
+          "away": 4
         },
         "bigChances": {
-          "home": null,
-          "away": null
+          "home": 2,
+          "away": 4
         },
         "possession": {
-          "home": null,
-          "away": null
+          "home": 70.0,
+          "away": 30.0
         }
       },
       "preMatch": {
@@ -35396,6 +35356,55 @@
         "awayLast5Xg": 0.98
       },
       "matchUrl": "/matches/burnley-vs-wolverhampton-wanderers/2byja7#4813746"
+    },
+    {
+      "matchId": "25-26-prem-brighton-hove-albion-vs-manchester-united",
+      "season": "2025-2026",
+      "gameweek": 38,
+      "kickoffTime": null,
+      "homeTeam": {
+        "id": 36,
+        "name": "Brighton & Hove Albion",
+        "shortName": "BHA",
+        "badgeSlug": "brighton",
+        "badgePath": "/teams/brighton.football-logos.cc.png"
+      },
+      "awayTeam": {
+        "id": 1,
+        "name": "Manchester United",
+        "shortName": "MUN",
+        "badgeSlug": "manchester-united",
+        "badgePath": "/teams/manchester-united.football-logos.cc.png"
+      },
+      "score": {
+        "home": 0,
+        "away": 3
+      },
+      "stats": {
+        "xg": {
+          "home": 0.81,
+          "away": 1.82
+        },
+        "shotsOnTarget": {
+          "home": 2,
+          "away": 7
+        },
+        "bigChances": {
+          "home": 0,
+          "away": 4
+        },
+        "possession": {
+          "home": 51.0,
+          "away": 49.0
+        }
+      },
+      "preMatch": {
+        "homeElo": null,
+        "awayElo": null,
+        "homeLast5Xg": 2.06,
+        "awayLast5Xg": 2.03
+      },
+      "matchUrl": "/matches/brighton-hove-albion-vs-manchester-united/3goccs#4813745"
     },
     {
       "matchId": "25-26-prem-wolverhampton-wanderers-vs-fulham",
