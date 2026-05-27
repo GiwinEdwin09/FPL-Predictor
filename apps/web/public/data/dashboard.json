@@ -1,5 +1,5 @@
 {
-  "generatedAtUtc": "2026-05-27T08:52:37.770225+00:00",
+  "generatedAtUtc": "2026-05-27T19:37:13.190493+00:00",
   "currentSeason": "2025-2026",
   "model": {
     "version": "model_v2",
@@ -34958,8 +34958,8 @@
         }
       },
       "preMatch": {
-        "homeElo": null,
-        "awayElo": null,
+        "homeElo": 1768.0,
+        "awayElo": 1796.0,
         "homeLast5Xg": 1.31,
         "awayLast5Xg": 1.29
       },
@@ -34990,15 +34990,15 @@
       },
       "stats": {
         "xg": {
-          "home": 0.99,
-          "away": 0.38
+          "home": 1.15,
+          "away": 0.41
         },
         "shotsOnTarget": {
           "home": 2,
           "away": 1
         },
         "bigChances": {
-          "home": 2,
+          "home": 3,
           "away": 0
         },
         "possession": {
@@ -35007,8 +35007,8 @@
         }
       },
       "preMatch": {
-        "homeElo": null,
-        "awayElo": null,
+        "homeElo": 1776.0,
+        "awayElo": 1803.0,
         "homeLast5Xg": 1.1,
         "awayLast5Xg": 1.67
       },
@@ -35056,8 +35056,8 @@
         }
       },
       "preMatch": {
-        "homeElo": null,
-        "awayElo": null,
+        "homeElo": 1735.0,
+        "awayElo": 1830.0,
         "homeLast5Xg": 0.94,
         "awayLast5Xg": 1.05
       },
@@ -35105,8 +35105,8 @@
         }
       },
       "preMatch": {
-        "homeElo": null,
-        "awayElo": null,
+        "homeElo": 1821.0,
+        "awayElo": 1871.0,
         "homeLast5Xg": 1.71,
         "awayLast5Xg": 1.63
       },
@@ -35154,8 +35154,8 @@
         }
       },
       "preMatch": {
-        "homeElo": null,
-        "awayElo": null,
+        "homeElo": 1970.0,
+        "awayElo": 1920.0,
         "homeLast5Xg": 1.66,
         "awayLast5Xg": 1.19
       },
@@ -35203,8 +35203,8 @@
         }
       },
       "preMatch": {
-        "homeElo": null,
-        "awayElo": null,
+        "homeElo": 1910.0,
+        "awayElo": 1836.0,
         "homeLast5Xg": 1.05,
         "awayLast5Xg": 1.65
       },
@@ -35252,8 +35252,8 @@
         }
       },
       "preMatch": {
-        "homeElo": null,
-        "awayElo": null,
+        "homeElo": 1812.0,
+        "awayElo": 1837.0,
         "homeLast5Xg": 1.1,
         "awayLast5Xg": 2.33
       },
@@ -35284,25 +35284,25 @@
       },
       "stats": {
         "xg": {
-          "home": 1.11,
-          "away": 2.56
+          "home": 0.98,
+          "away": 2.53
         },
         "shotsOnTarget": {
           "home": 3,
           "away": 7
         },
         "bigChances": {
-          "home": 2,
-          "away": 8
+          "home": 3,
+          "away": 7
         },
         "possession": {
-          "home": 39.0,
-          "away": 61.0
+          "home": 40.0,
+          "away": 60.0
         }
       },
       "preMatch": {
-        "homeElo": null,
-        "awayElo": null,
+        "homeElo": 1797.0,
+        "awayElo": 2066.0,
         "homeLast5Xg": 1.4,
         "awayLast5Xg": 1.68
       },
@@ -35350,8 +35350,8 @@
         }
       },
       "preMatch": {
-        "homeElo": null,
-        "awayElo": null,
+        "homeElo": 1665.0,
+        "awayElo": 1679.0,
         "homeLast5Xg": 0.93,
         "awayLast5Xg": 0.98
       },
@@ -35382,8 +35382,8 @@
       },
       "stats": {
         "xg": {
-          "home": 0.81,
-          "away": 1.82
+          "home": 0.79,
+          "away": 1.66
         },
         "shotsOnTarget": {
           "home": 2,
@@ -35394,13 +35394,13 @@
           "away": 4
         },
         "possession": {
-          "home": 51.0,
-          "away": 49.0
+          "home": 52.0,
+          "away": 48.0
         }
       },
       "preMatch": {
-        "homeElo": null,
-        "awayElo": null,
+        "homeElo": 1841.0,
+        "awayElo": 1914.0,
         "homeLast5Xg": 2.06,
         "awayLast5Xg": 2.03
       },
@@ -35448,8 +35448,8 @@
         }
       },
       "preMatch": {
-        "homeElo": null,
-        "awayElo": null,
+        "homeElo": 1679.0,
+        "awayElo": 1812.0,
         "homeLast5Xg": 0.98,
         "awayLast5Xg": 1.41
       },
@@ -35497,8 +35497,8 @@
         }
       },
       "preMatch": {
-        "homeElo": null,
-        "awayElo": null,
+        "homeElo": 1837.0,
+        "awayElo": 1768.0,
         "homeLast5Xg": 2.25,
         "awayLast5Xg": 1.29
       },
@@ -35546,8 +35546,8 @@
         }
       },
       "preMatch": {
-        "homeElo": null,
-        "awayElo": null,
+        "homeElo": 1914.0,
+        "awayElo": 1821.0,
         "homeLast5Xg": 1.47,
         "awayLast5Xg": 1.56
       },
@@ -35595,8 +35595,8 @@
         }
       },
       "preMatch": {
-        "homeElo": null,
-        "awayElo": null,
+        "homeElo": 1796.0,
+        "awayElo": 1841.0,
         "homeLast5Xg": 1.44,
         "awayLast5Xg": 1.79
       },
@@ -35644,8 +35644,8 @@
         }
       },
       "preMatch": {
-        "homeElo": null,
-        "awayElo": null,
+        "homeElo": 1803.0,
+        "awayElo": 1735.0,
         "homeLast5Xg": 1.69,
         "awayLast5Xg": 1.28
       },
@@ -35693,8 +35693,8 @@
         }
       },
       "preMatch": {
-        "homeElo": null,
-        "awayElo": null,
+        "homeElo": 1830.0,
+        "awayElo": 1776.0,
         "homeLast5Xg": 1.15,
         "awayLast5Xg": 1.47
       },
@@ -35742,8 +35742,8 @@
         }
       },
       "preMatch": {
-        "homeElo": null,
-        "awayElo": null,
+        "homeElo": 1836.0,
+        "awayElo": 1797.0,
         "homeLast5Xg": 1.4,
         "awayLast5Xg": 1.29
       },
@@ -35791,8 +35791,8 @@
         }
       },
       "preMatch": {
-        "homeElo": null,
-        "awayElo": null,
+        "homeElo": 1920.0,
+        "awayElo": 1910.0,
         "homeLast5Xg": 1.01,
         "awayLast5Xg": 1.21
       },
@@ -35840,8 +35840,8 @@
         }
       },
       "preMatch": {
-        "homeElo": null,
-        "awayElo": null,
+        "homeElo": 2066.0,
+        "awayElo": 1665.0,
         "homeLast5Xg": 1.48,
         "awayLast5Xg": 1.18
       },
@@ -35889,8 +35889,8 @@
         }
       },
       "preMatch": {
-        "homeElo": null,
-        "awayElo": null,
+        "homeElo": 1871.0,
+        "awayElo": 1970.0,
         "homeLast5Xg": 1.69,
         "awayLast5Xg": 1.95
       },
@@ -35938,8 +35938,8 @@
         }
       },
       "preMatch": {
-        "homeElo": null,
-        "awayElo": null,
+        "homeElo": 1768.0,
+        "awayElo": 2066.0,
         "homeLast5Xg": 1.17,
         "awayLast5Xg": 1.55
       },
@@ -35987,8 +35987,8 @@
         }
       },
       "preMatch": {
-        "homeElo": null,
-        "awayElo": null,
+        "homeElo": 1776.0,
+        "awayElo": 1796.0,
         "homeLast5Xg": 1.38,
         "awayLast5Xg": 1.4
       },
@@ -36036,8 +36036,8 @@
         }
       },
       "preMatch": {
-        "homeElo": null,
-        "awayElo": null,
+        "homeElo": 1735.0,
+        "awayElo": 1914.0,
         "homeLast5Xg": 1.21,
         "awayLast5Xg": 1.57
       },
@@ -36085,8 +36085,8 @@
         }
       },
       "preMatch": {
-        "homeElo": null,
-        "awayElo": null,
+        "homeElo": 1821.0,
+        "awayElo": 1837.0,
         "homeLast5Xg": 1.34,
         "awayLast5Xg": 2.04
       },
@@ -36134,8 +36134,8 @@
         }
       },
       "preMatch": {
-        "homeElo": null,
-        "awayElo": null,
+        "homeElo": 1970.0,
+        "awayElo": 1797.0,
         "homeLast5Xg": 1.9,
         "awayLast5Xg": 1.33
       },
@@ -36183,8 +36183,8 @@
         }
       },
       "preMatch": {
-        "homeElo": null,
-        "awayElo": null,
+        "homeElo": 1970.0,
+        "awayElo": 1836.0,
         "homeLast5Xg": 1.9,
         "awayLast5Xg": 1.86
       },
@@ -36232,8 +36232,8 @@
         }
       },
       "preMatch": {
-        "homeElo": null,
-        "awayElo": null,
+        "homeElo": 1910.0,
+        "awayElo": 1830.0,
         "homeLast5Xg": 1.13,
         "awayLast5Xg": 1.24
       },
@@ -36281,8 +36281,8 @@
         }
       },
       "preMatch": {
-        "homeElo": null,
-        "awayElo": null,
+        "homeElo": 1812.0,
+        "awayElo": 1871.0,
         "homeLast5Xg": 1.35,
         "awayLast5Xg": 1.91
       },
@@ -36330,8 +36330,8 @@
         }
       },
       "preMatch": {
-        "homeElo": null,
-        "awayElo": null,
+        "homeElo": 1797.0,
+        "awayElo": 1803.0,
         "homeLast5Xg": 1.33,
         "awayLast5Xg": 1.59
       },
@@ -36379,8 +36379,8 @@
         }
       },
       "preMatch": {
-        "homeElo": null,
-        "awayElo": null,
+        "homeElo": 1665.0,
+        "awayElo": 1920.0,
         "homeLast5Xg": 0.98,
         "awayLast5Xg": 0.98
       },
@@ -36428,8 +36428,8 @@
         }
       },
       "preMatch": {
-        "homeElo": null,
-        "awayElo": null,
+        "homeElo": 1841.0,
+        "awayElo": 1679.0,
         "homeLast5Xg": 1.63,
         "awayLast5Xg": 0.97
       },
@@ -36477,8 +36477,8 @@
         }
       },
       "preMatch": {
-        "homeElo": null,
-        "awayElo": null,
+        "homeElo": 1679.0,
+        "awayElo": 1735.0,
         "homeLast5Xg": 0.8,
         "awayLast5Xg": 1.25
       },
@@ -36526,8 +36526,8 @@
         }
       },
       "preMatch": {
-        "homeElo": null,
-        "awayElo": null,
+        "homeElo": 1837.0,
+        "awayElo": 1841.0,
         "homeLast5Xg": 1.64,
         "awayLast5Xg": 1.58
       },
@@ -36575,8 +36575,8 @@
         }
       },
       "preMatch": {
-        "homeElo": null,
-        "awayElo": null,
+        "homeElo": 1914.0,
+        "awayElo": 1910.0,
         "homeLast5Xg": 1.4,
         "awayLast5Xg": 1.27
       },
@@ -36624,8 +36624,8 @@
         }
       },
       "preMatch": {
-        "homeElo": null,
-        "awayElo": null,
+        "homeElo": 1796.0,
+        "awayElo": 1665.0,
         "homeLast5Xg": 1.37,
         "awayLast5Xg": 1.06
       },
@@ -36673,8 +36673,8 @@
         }
       },
       "preMatch": {
-        "homeElo": null,
-        "awayElo": null,
+        "homeElo": 1803.0,
+        "awayElo": 1970.0,
         "homeLast5Xg": 1.3,
         "awayLast5Xg": 2.02
       },
@@ -36722,8 +36722,8 @@
         }
       },
       "preMatch": {
-        "homeElo": null,
-        "awayElo": null,
+        "homeElo": 1830.0,
+        "awayElo": 1821.0,
         "homeLast5Xg": 1.08,
         "awayLast5Xg": 1.26
       },
@@ -36771,8 +36771,8 @@
         }
       },
       "preMatch": {
-        "homeElo": null,
-        "awayElo": null,
+        "homeElo": 1836.0,
+        "awayElo": 1768.0,
         "homeLast5Xg": 1.49,
         "awayLast5Xg": 1.2
       },
@@ -36820,8 +36820,8 @@
         }
       },
       "preMatch": {
-        "homeElo": null,
-        "awayElo": null,
+        "homeElo": 1920.0,
+        "awayElo": 1776.0,
         "homeLast5Xg": 0.77,
         "awayLast5Xg": 1.43
       },
@@ -36869,8 +36869,8 @@
         }
       },
       "preMatch": {
-        "homeElo": null,
-        "awayElo": null,
+        "homeElo": 2066.0,
+        "awayElo": 1812.0,
         "homeLast5Xg": 0.73,
         "awayLast5Xg": 1.46
       },
@@ -36918,8 +36918,8 @@
         }
       },
       "preMatch": {
-        "homeElo": null,
-        "awayElo": null,
+        "homeElo": 1871.0,
+        "awayElo": 1797.0,
         "homeLast5Xg": 1.83,
         "awayLast5Xg": 1.04
       },
@@ -36967,8 +36967,8 @@
         }
       },
       "preMatch": {
-        "homeElo": null,
-        "awayElo": null,
+        "homeElo": 1679.0,
+        "awayElo": 1776.0,
         "homeLast5Xg": 0.98,
         "awayLast5Xg": 1.49
       },
@@ -37016,8 +37016,8 @@
         }
       },
       "preMatch": {
-        "homeElo": null,
-        "awayElo": null,
+        "homeElo": 1768.0,
+        "awayElo": 1803.0,
         "homeLast5Xg": 1.34,
         "awayLast5Xg": 1.44
       },
@@ -37065,8 +37065,8 @@
         }
       },
       "preMatch": {
-        "homeElo": null,
-        "awayElo": null,
+        "homeElo": 1735.0,
+        "awayElo": 1821.0,
         "homeLast5Xg": 1.39,
         "awayLast5Xg": 1.14
       },
@@ -37114,8 +37114,8 @@
         }
       },
       "preMatch": {
-        "homeElo": null,
-        "awayElo": null,
+        "homeElo": 1914.0,
+        "awayElo": 1836.0,
         "homeLast5Xg": 1.53,
         "awayLast5Xg": 1.7
       },
@@ -37163,8 +37163,8 @@
         }
       },
       "preMatch": {
-        "homeElo": null,
-        "awayElo": null,
+        "homeElo": 1910.0,
+        "awayElo": 1797.0,
         "homeLast5Xg": 1.25,
         "awayLast5Xg": 0.84
       },
@@ -37212,8 +37212,8 @@
         }
       },
       "preMatch": {
-        "homeElo": null,
-        "awayElo": null,
+        "homeElo": 1812.0,
+        "awayElo": 1920.0,
         "homeLast5Xg": 1.65,
         "awayLast5Xg": 0.79
       },
@@ -37261,8 +37261,8 @@
         }
       },
       "preMatch": {
-        "homeElo": null,
-        "awayElo": null,
+        "homeElo": 2066.0,
+        "awayElo": 1837.0,
         "homeLast5Xg": 0.81,
         "awayLast5Xg": 1.69
       },
