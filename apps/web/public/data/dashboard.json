@@ -1,13 +1,13 @@
 {
-  "generatedAtUtc": "2026-06-11T19:58:27.741556+00:00",
+  "generatedAtUtc": "2026-06-12T09:42:53.162373+00:00",
   "currentSeason": "2025-2026",
   "model": {
     "version": "model_v2",
     "calibrationTemperature": 2.5,
     "metrics": {
-      "accuracy": 0.4444444444444444,
-      "multiclass_log_loss": 1.143040739220649,
-      "multiclass_brier_score": 0.6894575585375018
+      "accuracy": 0.4074074074074074,
+      "multiclass_log_loss": 1.1290387500366883,
+      "multiclass_brier_score": 0.6795594617411409
     },
     "split": {
       "train_rows": 796,
