@@ -1,13 +1,13 @@
 {
-  "generatedAtUtc": "2026-06-16T20:24:34.057446+00:00",
+  "generatedAtUtc": "2026-06-17T10:14:42.748186+00:00",
   "currentSeason": "2025-2026",
   "model": {
     "version": "model_v2",
-    "calibrationTemperature": 2.5,
+    "calibrationTemperature": 2.7,
     "metrics": {
-      "accuracy": 0.4074074074074074,
-      "multiclass_log_loss": 1.1290387500366883,
-      "multiclass_brier_score": 0.6795594617411409
+      "accuracy": 0.37037037037037035,
+      "multiclass_log_loss": 1.1493288455087962,
+      "multiclass_brier_score": 0.6939339552761867
     },
     "split": {
       "train_rows": 796,
@@ -35350,8 +35350,8 @@
         }
       },
       "preMatch": {
-        "homeElo": 1666.0,
-        "awayElo": 1680.0,
+        "homeElo": null,
+        "awayElo": null,
         "homeLast5Xg": 0.93,
         "awayLast5Xg": 0.98
       },
@@ -35399,8 +35399,8 @@
         }
       },
       "preMatch": {
-        "homeElo": 1842.0,
-        "awayElo": 1915.0,
+        "homeElo": null,
+        "awayElo": null,
         "homeLast5Xg": 2.06,
         "awayLast5Xg": 2.03
       },
