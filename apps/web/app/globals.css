@@ -2367,6 +2367,247 @@ button {
 }
 
 /* ==========================================================================
+   Teams (standings + club pages)
+   ========================================================================== */
+
+.standings-table-wrap {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  overflow-x: auto;
+}
+
+.standings-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+  min-width: 560px;
+}
+
+.standings-table th {
+  text-align: left;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  padding: 0.85rem 0.6rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.standings-table td {
+  padding: 0.55rem 0.6rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.standings-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.standings-table tbody tr:hover {
+  background: var(--surface-2);
+}
+
+.standings-rank {
+  width: 2.2rem;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+.standings-num {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.standings-points {
+  font-family: var(--font-display);
+  font-weight: 700;
+}
+
+.standings-club {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-weight: 600;
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.standings-club:hover {
+  color: var(--brand);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.team-badge,
+.team-badge-fallback {
+  width: 34px;
+  height: 34px;
+  display: inline-grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--paper-deep);
+  font-size: 0.62rem;
+  font-weight: 700;
+  color: var(--brand);
+  flex-shrink: 0;
+}
+
+.team-badge-image {
+  object-fit: contain;
+}
+
+.team-breadcrumb {
+  margin-bottom: 1.25rem;
+}
+
+.team-hero {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.team-hero-brand {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.team-hero-badge {
+  width: 72px;
+  height: 72px;
+  font-size: 1.05rem;
+}
+
+.team-hero-name {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.7rem, 4vw, 2.4rem);
+  letter-spacing: -0.02em;
+}
+
+.team-form-strip {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-top: 0.4rem;
+}
+
+.result-chip {
+  display: inline-grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.72rem;
+}
+
+.result-win {
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+
+.result-draw {
+  background: var(--paper-deep);
+  color: var(--muted-strong);
+}
+
+.result-loss {
+  background: var(--brand);
+  color: #ffffff;
+}
+
+.chart-legend {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.chart-legend h3 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.05rem;
+  letter-spacing: -0.01em;
+}
+
+.chart-legend-items {
+  display: inline-flex;
+  gap: 0.9rem;
+}
+
+.chart-legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.78rem;
+  color: var(--muted-strong);
+}
+
+.chart-legend-swatch {
+  width: 12px;
+  height: 4px;
+  border-radius: 2px;
+}
+
+.team-results-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.5rem;
+}
+
+.team-result-row {
+  display: grid;
+  grid-template-columns: auto auto 1fr auto auto;
+  align-items: center;
+  gap: 0.9rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  padding: 0.6rem 0.9rem;
+  font-size: 0.88rem;
+}
+
+.team-result-meta {
+  color: var(--muted);
+  font-size: 0.8rem;
+  white-space: nowrap;
+}
+
+.team-result-fixture {
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.model-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.model-dot-hit {
+  background: var(--accent-deep);
+}
+
+.model-dot-miss {
+  background: var(--border-strong);
+}
+
+/* ==========================================================================
    Responsive
    ========================================================================== */
 
@@ -2493,5 +2734,17 @@ button {
     grid-column: 1 / -1;
     justify-items: start;
     text-align: left;
+  }
+
+  .standings-hide-sm {
+    display: none;
+  }
+
+  .standings-table {
+    min-width: 0;
+  }
+
+  .team-result-meta {
+    display: none;
   }
 }
