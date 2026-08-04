@@ -293,6 +293,8 @@ class LiveInferenceService:
                 state.matches,
                 state.features,
                 team_lookup=state.team_lookup,
+                model=state.model,
+                temperature=state.temperature,
             ),
         }
 

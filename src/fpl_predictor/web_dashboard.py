@@ -14,6 +14,7 @@ from fpl_predictor.model_training import (
     add_sorting_columns,
     apply_temperature,
     is_premier_league_frame,
+    load_prediction_feature_frame,
 )
 
 CURRENT_SEASON = "2025-2026"
@@ -192,6 +193,14 @@ def is_postponed_match(
     return gameweek <= latest_completed_gw
 
 
+def serialize_probabilities(probability: Any) -> dict[str, float]:
+    return {
+        "homeWin": round(float(probability[0]), 4),
+        "draw": round(float(probability[1]), 4),
+        "awayWin": round(float(probability[2]), 4),
+    }
+
+
 def serialize_prediction_fixture(
     row: dict[str, Any],
     probability: Any,
@@ -217,11 +226,7 @@ def serialize_prediction_fixture(
             "home": coerce_int(row.get("home_score")),
             "away": coerce_int(row.get("away_score")),
         },
-        "probabilities": {
-            "homeWin": round(float(probability[0]), 4),
-            "draw": round(float(probability[1]), 4),
-            "awayWin": round(float(probability[2]), 4),
-        },
+        "probabilities": serialize_probabilities(probability),
         "context": {
             "homeElo": coerce_float(row.get("home_current_elo"), 0),
             "awayElo": coerce_float(row.get("away_current_elo"), 0),
@@ -378,10 +383,36 @@ def build_prediction_groups(
     )
 
 
+def build_history_probabilities(
+    history_match_ids: list[Any],
+    feature_lookup: pd.DataFrame,
+    model: Any,
+    temperature: float,
+) -> dict[str, Any]:
+    batch_rows: list[pd.Series] = []
+    batch_ids: list[str] = []
+    for match_id in dict.fromkeys(history_match_ids):
+        if match_id not in feature_lookup.index:
+            continue
+        match_rows = feature_lookup.loc[[match_id]]
+        batch_rows.append(match_rows.iloc[0])
+        batch_ids.append(match_id)
+
+    if not batch_rows:
+        return {}
+
+    batch = pd.DataFrame(batch_rows)
+    probabilities = model.predict_proba(batch.loc[:, FEATURE_COLUMNS])
+    probabilities = apply_temperature(probabilities, temperature)
+    return dict(zip(batch_ids, probabilities, strict=True))
+
+
 def build_historical_matches_from_frames(
     matches: pd.DataFrame,
     features: pd.DataFrame,
     team_lookup: dict[tuple[str, int], dict[str, Any]],
+    model: Any | None = None,
+    temperature: float = 1.0,
     limit: int | None = RECENT_HISTORY_LIMIT,
 ) -> list[dict[str, Any]]:
     feature_lookup = features.set_index("match_id", drop=False)
@@ -394,12 +425,20 @@ def build_historical_matches_from_frames(
         kind="stable",
     )
 
+    probabilities_by_match = (
+        build_history_probabilities(list(history["match_id"]), feature_lookup, model, temperature)
+        if model is not None
+        else {}
+    )
+
     items: list[dict[str, Any]] = []
     selected_history = history if limit is None else history.head(limit)
     for row in selected_history.to_dict(orient="records"):
         pre_match = feature_lookup.loc[row["match_id"]] if row["match_id"] in feature_lookup.index else None
         if isinstance(pre_match, pd.DataFrame):
             pre_match = pre_match.iloc[0]
+
+        probability = probabilities_by_match.get(row["match_id"])
 
         items.append(
             {
@@ -437,6 +476,7 @@ def build_historical_matches_from_frames(
                     "homeLast5Xg": coerce_float(pre_match.get("home_last5_avg_xg")) if pre_match is not None else None,
                     "awayLast5Xg": coerce_float(pre_match.get("away_last5_avg_xg")) if pre_match is not None else None,
                 },
+                "probabilities": serialize_probabilities(probability) if probability is not None else None,
                 "matchUrl": row.get("match_url"),
             }
         )
@@ -447,15 +487,18 @@ def build_historical_matches(
     matches_path: Path,
     feature_table_path: Path,
     team_lookup: dict[tuple[str, int], dict[str, Any]],
+    model: Any | None = None,
+    temperature: float = 1.0,
     limit: int | None = RECENT_HISTORY_LIMIT,
 ) -> list[dict[str, Any]]:
     matches = pd.read_csv(matches_path)
-    features = pd.read_csv(feature_table_path)
-    features = add_sorting_columns(features)
+    features = load_prediction_feature_frame(feature_table_path)
     return build_historical_matches_from_frames(
         matches,
         features,
         team_lookup=team_lookup,
+        model=model,
+        temperature=temperature,
         limit=limit,
     )
 
@@ -469,12 +512,15 @@ def build_dashboard_payload(
 ) -> dict[str, Any]:
     team_lookup = load_team_lookup(data_dir)
     temperature, model_metadata = load_model_metadata(metrics_path)
-    current_gameweek, current_fixtures, upcoming_fixtures, postponed_fixtures = build_prediction_groups(
-        feature_table_path=feature_table_path,
-        model_path=model_path,
-        metrics_path=metrics_path,
+    model = load_model(model_path)
+    features = load_prediction_feature_frame(feature_table_path)
+    current_gameweek, current_fixtures, upcoming_fixtures, postponed_fixtures = build_prediction_groups_from_frame(
+        features,
+        model=model,
+        temperature=temperature,
         team_lookup=team_lookup,
     )
+    matches = pd.read_csv(matches_path)
 
     return {
         "generatedAtUtc": datetime.now(UTC).isoformat(),
@@ -490,10 +536,12 @@ def build_dashboard_payload(
         "currentGameweekFixtures": current_fixtures,
         "upcomingFixtures": upcoming_fixtures,
         "postponedFixtures": postponed_fixtures,
-        "historicalMatches": build_historical_matches(
-            matches_path=matches_path,
-            feature_table_path=feature_table_path,
+        "historicalMatches": build_historical_matches_from_frames(
+            matches,
+            features,
             team_lookup=team_lookup,
+            model=model,
+            temperature=temperature,
         ),
     }
 

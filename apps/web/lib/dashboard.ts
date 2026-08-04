@@ -65,6 +65,11 @@ export type HistoricalMatch = {
     homeLast5Xg: number | null;
     awayLast5Xg: number | null;
   };
+  probabilities: {
+    homeWin: number;
+    draw: number;
+    awayWin: number;
+  } | null;
   matchUrl: string | null;
 };
 
