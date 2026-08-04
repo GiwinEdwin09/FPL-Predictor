@@ -1,26 +1,26 @@
 {
-  "generatedAtUtc": "2026-07-29T08:05:34.799198+00:00",
+  "generatedAtUtc": "2026-08-04T05:43:13.360212+00:00",
   "currentSeason": "2025-2026",
   "model": {
     "version": "model_v2",
-    "calibrationTemperature": 2.9000000000000004,
+    "calibrationTemperature": 2.4000000000000004,
     "metrics": {
-      "accuracy": 0.37037037037037035,
-      "multiclass_log_loss": 1.131875427771016,
-      "multiclass_brier_score": 0.6840231563643853
+      "accuracy": 0.3333333333333333,
+      "multiclass_log_loss": 1.0836163755903248,
+      "multiclass_brier_score": 0.6568264353235383
     },
     "split": {
-      "train_rows": 796,
-      "validation_rows": 27,
-      "validation_cutoff_utc": "2026-03-14T14:00:00+00:00",
-      "latest_finished_kickoff_utc": "2026-04-11T14:00:00+00:00"
+      "train_rows": 853,
+      "validation_rows": 42,
+      "validation_cutoff_utc": "2026-04-26T15:00:00+00:00",
+      "latest_finished_kickoff_utc": "2026-05-24T15:00:00+00:00"
     },
     "competitionDistributionTrain": {
-      "prem": 685,
-      "champions-league": 50,
-      "efl-cup": 37,
-      "europa-league": 16,
-      "conference-league": 8
+      "prem": 718,
+      "champions-league": 63,
+      "efl-cup": 38,
+      "europa-league": 23,
+      "conference-league": 11
     }
   },
   "currentGameweek": null,
@@ -29,16 +29,408 @@
   "postponedFixtures": [],
   "historicalMatches": [
     {
-      "matchId": "25-26-prem-west-ham-united-vs-wolverhampton-wanderers",
+      "matchId": "25-26-prem-west-ham-united-vs-leeds-united",
       "season": "2025-2026",
-      "gameweek": 32,
-      "kickoffTime": "2026-04-11T14:00:00+00:00",
+      "gameweek": 38,
+      "kickoffTime": "2026-05-24T15:00:00+00:00",
       "homeTeam": {
         "id": 21,
         "name": "West Ham United",
         "shortName": "WHU",
         "badgeSlug": "west-ham",
         "badgePath": "/teams/west-ham.football-logos.cc.png"
+      },
+      "awayTeam": {
+        "id": 2,
+        "name": "Leeds United",
+        "shortName": "LEE",
+        "badgeSlug": "leeds-united",
+        "badgePath": "/teams/leeds-united.football-logos.cc.png"
+      },
+      "score": {
+        "home": 3,
+        "away": 0
+      },
+      "stats": {
+        "xg": {
+          "home": 2.61,
+          "away": 1.59
+        },
+        "shotsOnTarget": {
+          "home": 9,
+          "away": 3
+        },
+        "bigChances": {
+          "home": 4,
+          "away": 2
+        },
+        "possession": {
+          "home": 42.0,
+          "away": 58.0
+        }
+      },
+      "preMatch": {
+        "homeElo": 1769.0,
+        "awayElo": 1797.0,
+        "homeLast5Xg": 0.96,
+        "awayLast5Xg": 1.4
+      },
+      "matchUrl": "/matches/leeds-united-vs-west-ham-united/2f8a75#4813754"
+    },
+    {
+      "matchId": "25-26-prem-tottenham-hotspur-vs-everton",
+      "season": "2025-2026",
+      "gameweek": 38,
+      "kickoffTime": "2026-05-24T15:00:00+00:00",
+      "homeTeam": {
+        "id": 6,
+        "name": "Tottenham Hotspur",
+        "shortName": "TOT",
+        "badgeSlug": "tottenham",
+        "badgePath": "/teams/tottenham.football-logos.cc.png"
+      },
+      "awayTeam": {
+        "id": 11,
+        "name": "Everton",
+        "shortName": "EVE",
+        "badgeSlug": "everton",
+        "badgePath": "/teams/everton.football-logos.cc.png"
+      },
+      "score": {
+        "home": 1,
+        "away": 0
+      },
+      "stats": {
+        "xg": {
+          "home": 1.15,
+          "away": 0.41
+        },
+        "shotsOnTarget": {
+          "home": 2,
+          "away": 1
+        },
+        "bigChances": {
+          "home": 3,
+          "away": 0
+        },
+        "possession": {
+          "home": 50.0,
+          "away": 50.0
+        }
+      },
+      "preMatch": {
+        "homeElo": 1777.0,
+        "awayElo": 1803.0,
+        "homeLast5Xg": 1.11,
+        "awayLast5Xg": 1.52
+      },
+      "matchUrl": "/matches/tottenham-hotspur-vs-everton/2gmqxt#4813753"
+    },
+    {
+      "matchId": "25-26-prem-sunderland-vs-chelsea",
+      "season": "2025-2026",
+      "gameweek": 38,
+      "kickoffTime": "2026-05-24T15:00:00+00:00",
+      "homeTeam": {
+        "id": 56,
+        "name": "Sunderland",
+        "shortName": "SUN",
+        "badgeSlug": "sunderland",
+        "badgePath": "/teams/sunderland.football-logos.cc.png"
+      },
+      "awayTeam": {
+        "id": 8,
+        "name": "Chelsea",
+        "shortName": "CHE",
+        "badgeSlug": "chelsea",
+        "badgePath": "/teams/chelsea.football-logos.cc.png"
+      },
+      "score": {
+        "home": 2,
+        "away": 1
+      },
+      "stats": {
+        "xg": {
+          "home": 1.84,
+          "away": 0.89
+        },
+        "shotsOnTarget": {
+          "home": 6,
+          "away": 3
+        },
+        "bigChances": {
+          "home": 2,
+          "away": 2
+        },
+        "possession": {
+          "home": 44.0,
+          "away": 56.0
+        }
+      },
+      "preMatch": {
+        "homeElo": 1736.0,
+        "awayElo": 1831.0,
+        "homeLast5Xg": 1.02,
+        "awayLast5Xg": 1.04
+      },
+      "matchUrl": "/matches/chelsea-vs-sunderland/2dayh4#4813752"
+    },
+    {
+      "matchId": "25-26-prem-nottingham-forest-vs-afc-bournemouth",
+      "season": "2025-2026",
+      "gameweek": 38,
+      "kickoffTime": "2026-05-24T15:00:00+00:00",
+      "homeTeam": {
+        "id": 17,
+        "name": "Nottingham Forest",
+        "shortName": "NFO",
+        "badgeSlug": "nottingham-forest",
+        "badgePath": "/teams/nottingham-forest.football-logos.cc.png"
+      },
+      "awayTeam": {
+        "id": 91,
+        "name": "AFC Bournemouth",
+        "shortName": "BOU",
+        "badgeSlug": "bournemouth",
+        "badgePath": "/teams/bournemouth.football-logos.cc.png"
+      },
+      "score": {
+        "home": 1,
+        "away": 1
+      },
+      "stats": {
+        "xg": {
+          "home": 1.73,
+          "away": 0.95
+        },
+        "shotsOnTarget": {
+          "home": 5,
+          "away": 4
+        },
+        "bigChances": {
+          "home": 4,
+          "away": 1
+        },
+        "possession": {
+          "home": 45.0,
+          "away": 55.0
+        }
+      },
+      "preMatch": {
+        "homeElo": 1822.0,
+        "awayElo": 1872.0,
+        "homeLast5Xg": 1.46,
+        "awayLast5Xg": 1.96
+      },
+      "matchUrl": "/matches/afc-bournemouth-vs-nottingham-forest/2y4tjb#4813751"
+    },
+    {
+      "matchId": "25-26-prem-manchester-city-vs-aston-villa",
+      "season": "2025-2026",
+      "gameweek": 38,
+      "kickoffTime": "2026-05-24T15:00:00+00:00",
+      "homeTeam": {
+        "id": 43,
+        "name": "Manchester City",
+        "shortName": "MCI",
+        "badgeSlug": "manchester-city",
+        "badgePath": "/teams/manchester-city.football-logos.cc.png"
+      },
+      "awayTeam": {
+        "id": 7,
+        "name": "Aston Villa",
+        "shortName": "AVL",
+        "badgeSlug": "aston-villa",
+        "badgePath": "/teams/aston-villa.football-logos.cc.png"
+      },
+      "score": {
+        "home": 1,
+        "away": 2
+      },
+      "stats": {
+        "xg": {
+          "home": 1.34,
+          "away": 1.77
+        },
+        "shotsOnTarget": {
+          "home": 3,
+          "away": 5
+        },
+        "bigChances": {
+          "home": 2,
+          "away": 4
+        },
+        "possession": {
+          "home": 52.0,
+          "away": 48.0
+        }
+      },
+      "preMatch": {
+        "homeElo": 1971.0,
+        "awayElo": 1921.0,
+        "homeLast5Xg": 2.2,
+        "awayLast5Xg": 1.48
+      },
+      "matchUrl": "/matches/manchester-city-vs-aston-villa/2w74gq#4813750"
+    },
+    {
+      "matchId": "25-26-prem-liverpool-vs-brentford",
+      "season": "2025-2026",
+      "gameweek": 38,
+      "kickoffTime": "2026-05-24T15:00:00+00:00",
+      "homeTeam": {
+        "id": 14,
+        "name": "Liverpool",
+        "shortName": "LIV",
+        "badgeSlug": "liverpool",
+        "badgePath": "/teams/liverpool.football-logos.cc.png"
+      },
+      "awayTeam": {
+        "id": 94,
+        "name": "Brentford",
+        "shortName": "BRE",
+        "badgeSlug": "brentford",
+        "badgePath": "/teams/brentford.football-logos.cc.png"
+      },
+      "score": {
+        "home": 1,
+        "away": 1
+      },
+      "stats": {
+        "xg": {
+          "home": 3.04,
+          "away": 1.56
+        },
+        "shotsOnTarget": {
+          "home": 8,
+          "away": 2
+        },
+        "bigChances": {
+          "home": 4,
+          "away": 3
+        },
+        "possession": {
+          "home": 60.0,
+          "away": 40.0
+        }
+      },
+      "preMatch": {
+        "homeElo": 1911.0,
+        "awayElo": 1837.0,
+        "homeLast5Xg": 1.09,
+        "awayLast5Xg": 1.36
+      },
+      "matchUrl": "/matches/liverpool-vs-brentford/2uusjv#4813749"
+    },
+    {
+      "matchId": "25-26-prem-fulham-vs-newcastle-united",
+      "season": "2025-2026",
+      "gameweek": 38,
+      "kickoffTime": "2026-05-24T15:00:00+00:00",
+      "homeTeam": {
+        "id": 54,
+        "name": "Fulham",
+        "shortName": "FUL",
+        "badgeSlug": "fulham",
+        "badgePath": "/teams/fulham.football-logos.cc.png"
+      },
+      "awayTeam": {
+        "id": 4,
+        "name": "Newcastle United",
+        "shortName": "NEW",
+        "badgeSlug": "newcastle",
+        "badgePath": "/teams/newcastle.football-logos.cc.png"
+      },
+      "score": {
+        "home": 2,
+        "away": 0
+      },
+      "stats": {
+        "xg": {
+          "home": 1.81,
+          "away": 0.31
+        },
+        "shotsOnTarget": {
+          "home": 6,
+          "away": 2
+        },
+        "bigChances": {
+          "home": 1,
+          "away": 0
+        },
+        "possession": {
+          "home": 45.0,
+          "away": 55.0
+        }
+      },
+      "preMatch": {
+        "homeElo": 1813.0,
+        "awayElo": 1838.0,
+        "homeLast5Xg": 1.05,
+        "awayLast5Xg": 1.79
+      },
+      "matchUrl": "/matches/fulham-vs-newcastle-united/3crcfp#4813748"
+    },
+    {
+      "matchId": "25-26-prem-crystal-palace-vs-arsenal",
+      "season": "2025-2026",
+      "gameweek": 38,
+      "kickoffTime": "2026-05-24T15:00:00+00:00",
+      "homeTeam": {
+        "id": 31,
+        "name": "Crystal Palace",
+        "shortName": "CRY",
+        "badgeSlug": "crystal-palace",
+        "badgePath": "/teams/crystal-palace.football-logos.cc.png"
+      },
+      "awayTeam": {
+        "id": 3,
+        "name": "Arsenal",
+        "shortName": "ARS",
+        "badgeSlug": "arsenal",
+        "badgePath": "/teams/arsenal.football-logos.cc.png"
+      },
+      "score": {
+        "home": 1,
+        "away": 2
+      },
+      "stats": {
+        "xg": {
+          "home": 0.98,
+          "away": 2.53
+        },
+        "shotsOnTarget": {
+          "home": 3,
+          "away": 7
+        },
+        "bigChances": {
+          "home": 3,
+          "away": 7
+        },
+        "possession": {
+          "home": 40.0,
+          "away": 60.0
+        }
+      },
+      "preMatch": {
+        "homeElo": 1804.0,
+        "awayElo": 2064.0,
+        "homeLast5Xg": 1.63,
+        "awayLast5Xg": 1.56
+      },
+      "matchUrl": "/matches/arsenal-vs-crystal-palace/36ytc8#4813747"
+    },
+    {
+      "matchId": "25-26-prem-burnley-vs-wolverhampton-wanderers",
+      "season": "2025-2026",
+      "gameweek": 38,
+      "kickoffTime": "2026-05-24T15:00:00+00:00",
+      "homeTeam": {
+        "id": 90,
+        "name": "Burnley",
+        "shortName": "BUR",
+        "badgeSlug": "burnley",
+        "badgePath": "/teams/burnley.football-logos.cc.png"
       },
       "awayTeam": {
         "id": 39,
@@ -48,21 +440,119 @@
         "badgePath": "/teams/wolves.football-logos.cc.png"
       },
       "score": {
-        "home": 4,
-        "away": 0
+        "home": 1,
+        "away": 1
       },
       "stats": {
         "xg": {
-          "home": 2.35,
-          "away": 0.59
+          "home": 0.98,
+          "away": 2.09
         },
         "shotsOnTarget": {
-          "home": 7,
+          "home": 8,
+          "away": 4
+        },
+        "bigChances": {
+          "home": 2,
+          "away": 4
+        },
+        "possession": {
+          "home": 70.0,
+          "away": 30.0
+        }
+      },
+      "preMatch": {
+        "homeElo": 1666.0,
+        "awayElo": 1680.0,
+        "homeLast5Xg": 0.71,
+        "awayLast5Xg": 0.98
+      },
+      "matchUrl": "/matches/burnley-vs-wolverhampton-wanderers/2byja7#4813746"
+    },
+    {
+      "matchId": "25-26-prem-brighton-hove-albion-vs-manchester-united",
+      "season": "2025-2026",
+      "gameweek": 38,
+      "kickoffTime": "2026-05-24T15:00:00+00:00",
+      "homeTeam": {
+        "id": 36,
+        "name": "Brighton & Hove Albion",
+        "shortName": "BHA",
+        "badgeSlug": "brighton",
+        "badgePath": "/teams/brighton.football-logos.cc.png"
+      },
+      "awayTeam": {
+        "id": 1,
+        "name": "Manchester United",
+        "shortName": "MUN",
+        "badgeSlug": "manchester-united",
+        "badgePath": "/teams/manchester-united.football-logos.cc.png"
+      },
+      "score": {
+        "home": 0,
+        "away": 3
+      },
+      "stats": {
+        "xg": {
+          "home": 0.79,
+          "away": 1.66
+        },
+        "shotsOnTarget": {
+          "home": 2,
+          "away": 7
+        },
+        "bigChances": {
+          "home": 0,
+          "away": 4
+        },
+        "possession": {
+          "home": 52.0,
+          "away": 48.0
+        }
+      },
+      "preMatch": {
+        "homeElo": 1842.0,
+        "awayElo": 1915.0,
+        "homeLast5Xg": 1.83,
+        "awayLast5Xg": 1.84
+      },
+      "matchUrl": "/matches/brighton-hove-albion-vs-manchester-united/3goccs#4813745"
+    },
+    {
+      "matchId": "25-26-prem-chelsea-vs-tottenham-hotspur",
+      "season": "2025-2026",
+      "gameweek": 37,
+      "kickoffTime": "2026-05-19T19:15:00+00:00",
+      "homeTeam": {
+        "id": 8,
+        "name": "Chelsea",
+        "shortName": "CHE",
+        "badgeSlug": "chelsea",
+        "badgePath": "/teams/chelsea.football-logos.cc.png"
+      },
+      "awayTeam": {
+        "id": 6,
+        "name": "Tottenham Hotspur",
+        "shortName": "TOT",
+        "badgeSlug": "tottenham",
+        "badgePath": "/teams/tottenham.football-logos.cc.png"
+      },
+      "score": {
+        "home": 2,
+        "away": 1
+      },
+      "stats": {
+        "xg": {
+          "home": 0.63,
+          "away": 1.27
+        },
+        "shotsOnTarget": {
+          "home": 4,
           "away": 3
         },
         "bigChances": {
-          "home": 6,
-          "away": 0
+          "home": 1,
+          "away": 4
         },
         "possession": {
           "home": 44.0,
@@ -70,18 +560,2566 @@
         }
       },
       "preMatch": {
-        "homeElo": 1744.0,
-        "awayElo": 1669.0,
-        "homeLast5Xg": 1.52,
-        "awayLast5Xg": 0.92
+        "homeElo": 1831.0,
+        "awayElo": 1777.0,
+        "homeLast5Xg": 1.15,
+        "awayLast5Xg": 1.02
       },
-      "matchUrl": "/matches/wolverhampton-wanderers-vs-west-ham-united/2gnhk2#4813694"
+      "matchUrl": "/matches/chelsea-vs-tottenham-hotspur/2eggkj#4813739"
+    },
+    {
+      "matchId": "25-26-prem-afc-bournemouth-vs-manchester-city",
+      "season": "2025-2026",
+      "gameweek": 37,
+      "kickoffTime": "2026-05-19T18:30:00+00:00",
+      "homeTeam": {
+        "id": 91,
+        "name": "AFC Bournemouth",
+        "shortName": "BOU",
+        "badgeSlug": "bournemouth",
+        "badgePath": "/teams/bournemouth.football-logos.cc.png"
+      },
+      "awayTeam": {
+        "id": 43,
+        "name": "Manchester City",
+        "shortName": "MCI",
+        "badgeSlug": "manchester-city",
+        "badgePath": "/teams/manchester-city.football-logos.cc.png"
+      },
+      "score": {
+        "home": 1,
+        "away": 1
+      },
+      "stats": {
+        "xg": {
+          "home": 2.25,
+          "away": 1.48
+        },
+        "shotsOnTarget": {
+          "home": 2,
+          "away": 5
+        },
+        "bigChances": {
+          "home": 3,
+          "away": 1
+        },
+        "possession": {
+          "home": 46.0,
+          "away": 54.0
+        }
+      },
+      "preMatch": {
+        "homeElo": 1872.0,
+        "awayElo": 1971.0,
+        "homeLast5Xg": 1.75,
+        "awayLast5Xg": 2.18
+      },
+      "matchUrl": "/matches/manchester-city-vs-afc-bournemouth/2feiv3#4813735"
+    },
+    {
+      "matchId": "25-26-prem-arsenal-vs-burnley",
+      "season": "2025-2026",
+      "gameweek": 37,
+      "kickoffTime": "2026-05-18T19:00:00+00:00",
+      "homeTeam": {
+        "id": 3,
+        "name": "Arsenal",
+        "shortName": "ARS",
+        "badgeSlug": "arsenal",
+        "badgePath": "/teams/arsenal.football-logos.cc.png"
+      },
+      "awayTeam": {
+        "id": 90,
+        "name": "Burnley",
+        "shortName": "BUR",
+        "badgeSlug": "burnley",
+        "badgePath": "/teams/burnley.football-logos.cc.png"
+      },
+      "score": {
+        "home": 1,
+        "away": 0
+      },
+      "stats": {
+        "xg": {
+          "home": 1.29,
+          "away": 0.19
+        },
+        "shotsOnTarget": {
+          "home": 3,
+          "away": 0
+        },
+        "bigChances": {
+          "home": 1,
+          "away": 0
+        },
+        "possession": {
+          "home": 60.0,
+          "away": 40.0
+        }
+      },
+      "preMatch": {
+        "homeElo": 2064.0,
+        "awayElo": 1666.0,
+        "homeLast5Xg": 1.77,
+        "awayLast5Xg": 0.85
+      },
+      "matchUrl": "/matches/burnley-vs-arsenal/2omsup#4813736"
+    },
+    {
+      "matchId": "25-26-prem-newcastle-united-vs-west-ham-united",
+      "season": "2025-2026",
+      "gameweek": 37,
+      "kickoffTime": "2026-05-17T16:30:00+00:00",
+      "homeTeam": {
+        "id": 4,
+        "name": "Newcastle United",
+        "shortName": "NEW",
+        "badgeSlug": "newcastle",
+        "badgePath": "/teams/newcastle.football-logos.cc.png"
+      },
+      "awayTeam": {
+        "id": 21,
+        "name": "West Ham United",
+        "shortName": "WHU",
+        "badgeSlug": "west-ham",
+        "badgePath": "/teams/west-ham.football-logos.cc.png"
+      },
+      "score": {
+        "home": 3,
+        "away": 1
+      },
+      "stats": {
+        "xg": {
+          "home": 1.73,
+          "away": 0.95
+        },
+        "shotsOnTarget": {
+          "home": 7,
+          "away": 8
+        },
+        "bigChances": {
+          "home": 3,
+          "away": 1
+        },
+        "possession": {
+          "home": 55.0,
+          "away": 45.0
+        }
+      },
+      "preMatch": {
+        "homeElo": 1838.0,
+        "awayElo": 1769.0,
+        "homeLast5Xg": 1.67,
+        "awayLast5Xg": 1.24
+      },
+      "matchUrl": "/matches/west-ham-united-vs-newcastle-united/2yilb8#4813743"
+    },
+    {
+      "matchId": "25-26-prem-wolverhampton-wanderers-vs-fulham",
+      "season": "2025-2026",
+      "gameweek": 37,
+      "kickoffTime": "2026-05-17T14:00:00+00:00",
+      "homeTeam": {
+        "id": 39,
+        "name": "Wolverhampton Wanderers",
+        "shortName": "WOL",
+        "badgeSlug": "wolves",
+        "badgePath": "/teams/wolves.football-logos.cc.png"
+      },
+      "awayTeam": {
+        "id": 54,
+        "name": "Fulham",
+        "shortName": "FUL",
+        "badgeSlug": "fulham",
+        "badgePath": "/teams/fulham.football-logos.cc.png"
+      },
+      "score": {
+        "home": 1,
+        "away": 1
+      },
+      "stats": {
+        "xg": {
+          "home": 1.4,
+          "away": 1.59
+        },
+        "shotsOnTarget": {
+          "home": 3,
+          "away": 5
+        },
+        "bigChances": {
+          "home": 3,
+          "away": 2
+        },
+        "possession": {
+          "home": 31.0,
+          "away": 69.0
+        }
+      },
+      "preMatch": {
+        "homeElo": 1680.0,
+        "awayElo": 1813.0,
+        "homeLast5Xg": 0.81,
+        "awayLast5Xg": 0.94
+      },
+      "matchUrl": "/matches/wolverhampton-wanderers-vs-fulham/2tookg#4813744"
+    },
+    {
+      "matchId": "25-26-prem-leeds-united-vs-brighton-hove-albion",
+      "season": "2025-2026",
+      "gameweek": 37,
+      "kickoffTime": "2026-05-17T14:00:00+00:00",
+      "homeTeam": {
+        "id": 2,
+        "name": "Leeds United",
+        "shortName": "LEE",
+        "badgeSlug": "leeds-united",
+        "badgePath": "/teams/leeds-united.football-logos.cc.png"
+      },
+      "awayTeam": {
+        "id": 36,
+        "name": "Brighton & Hove Albion",
+        "shortName": "BHA",
+        "badgeSlug": "brighton",
+        "badgePath": "/teams/brighton.football-logos.cc.png"
+      },
+      "score": {
+        "home": 1,
+        "away": 0
+      },
+      "stats": {
+        "xg": {
+          "home": 0.39,
+          "away": 3.06
+        },
+        "shotsOnTarget": {
+          "home": 1,
+          "away": 8
+        },
+        "bigChances": {
+          "home": 1,
+          "away": 3
+        },
+        "possession": {
+          "home": 34.0,
+          "away": 66.0
+        }
+      },
+      "preMatch": {
+        "homeElo": 1797.0,
+        "awayElo": 1842.0,
+        "homeLast5Xg": 1.84,
+        "awayLast5Xg": 1.61
+      },
+      "matchUrl": "/matches/leeds-united-vs-brighton-hove-albion/2vqp9d#4813741"
+    },
+    {
+      "matchId": "25-26-prem-everton-vs-sunderland",
+      "season": "2025-2026",
+      "gameweek": 37,
+      "kickoffTime": "2026-05-17T14:00:00+00:00",
+      "homeTeam": {
+        "id": 11,
+        "name": "Everton",
+        "shortName": "EVE",
+        "badgeSlug": "everton",
+        "badgePath": "/teams/everton.football-logos.cc.png"
+      },
+      "awayTeam": {
+        "id": 56,
+        "name": "Sunderland",
+        "shortName": "SUN",
+        "badgeSlug": "sunderland",
+        "badgePath": "/teams/sunderland.football-logos.cc.png"
+      },
+      "score": {
+        "home": 1,
+        "away": 3
+      },
+      "stats": {
+        "xg": {
+          "home": 1.04,
+          "away": 0.76
+        },
+        "shotsOnTarget": {
+          "home": 4,
+          "away": 3
+        },
+        "bigChances": {
+          "home": 2,
+          "away": 2
+        },
+        "possession": {
+          "home": 48.0,
+          "away": 52.0
+        }
+      },
+      "preMatch": {
+        "homeElo": 1803.0,
+        "awayElo": 1736.0,
+        "homeLast5Xg": 1.62,
+        "awayLast5Xg": 1.13
+      },
+      "matchUrl": "/matches/sunderland-vs-everton/2fgq72#4813740"
+    },
+    {
+      "matchId": "25-26-prem-brentford-vs-crystal-palace",
+      "season": "2025-2026",
+      "gameweek": 37,
+      "kickoffTime": "2026-05-17T14:00:00+00:00",
+      "homeTeam": {
+        "id": 94,
+        "name": "Brentford",
+        "shortName": "BRE",
+        "badgeSlug": "brentford",
+        "badgePath": "/teams/brentford.football-logos.cc.png"
+      },
+      "awayTeam": {
+        "id": 31,
+        "name": "Crystal Palace",
+        "shortName": "CRY",
+        "badgeSlug": "crystal-palace",
+        "badgePath": "/teams/crystal-palace.football-logos.cc.png"
+      },
+      "score": {
+        "home": 2,
+        "away": 2
+      },
+      "stats": {
+        "xg": {
+          "home": 1.71,
+          "away": 1.72
+        },
+        "shotsOnTarget": {
+          "home": 3,
+          "away": 5
+        },
+        "bigChances": {
+          "home": 1,
+          "away": 2
+        },
+        "possession": {
+          "home": 58.0,
+          "away": 42.0
+        }
+      },
+      "preMatch": {
+        "homeElo": 1837.0,
+        "awayElo": 1804.0,
+        "homeLast5Xg": 1.59,
+        "awayLast5Xg": 1.43
+      },
+      "matchUrl": "/matches/crystal-palace-vs-brentford/38a4jj#4813738"
+    },
+    {
+      "matchId": "25-26-prem-manchester-united-vs-nottingham-forest",
+      "season": "2025-2026",
+      "gameweek": 37,
+      "kickoffTime": "2026-05-17T11:30:00+00:00",
+      "homeTeam": {
+        "id": 1,
+        "name": "Manchester United",
+        "shortName": "MUN",
+        "badgeSlug": "manchester-united",
+        "badgePath": "/teams/manchester-united.football-logos.cc.png"
+      },
+      "awayTeam": {
+        "id": 17,
+        "name": "Nottingham Forest",
+        "shortName": "NFO",
+        "badgeSlug": "nottingham-forest",
+        "badgePath": "/teams/nottingham-forest.football-logos.cc.png"
+      },
+      "score": {
+        "home": 3,
+        "away": 2
+      },
+      "stats": {
+        "xg": {
+          "home": 4.57,
+          "away": 1.88
+        },
+        "shotsOnTarget": {
+          "home": 8,
+          "away": 4
+        },
+        "bigChances": {
+          "home": 7,
+          "away": 4
+        },
+        "possession": {
+          "home": 48.0,
+          "away": 52.0
+        }
+      },
+      "preMatch": {
+        "homeElo": 1915.0,
+        "awayElo": 1822.0,
+        "homeLast5Xg": 1.18,
+        "awayLast5Xg": 1.32
+      },
+      "matchUrl": "/matches/nottingham-forest-vs-manchester-united/3gnwkc#4813742"
+    },
+    {
+      "matchId": "25-26-prem-aston-villa-vs-liverpool",
+      "season": "2025-2026",
+      "gameweek": 37,
+      "kickoffTime": "2026-05-15T19:00:00+00:00",
+      "homeTeam": {
+        "id": 7,
+        "name": "Aston Villa",
+        "shortName": "AVL",
+        "badgeSlug": "aston-villa",
+        "badgePath": "/teams/aston-villa.football-logos.cc.png"
+      },
+      "awayTeam": {
+        "id": 14,
+        "name": "Liverpool",
+        "shortName": "LIV",
+        "badgeSlug": "liverpool",
+        "badgePath": "/teams/liverpool.football-logos.cc.png"
+      },
+      "score": {
+        "home": 4,
+        "away": 2
+      },
+      "stats": {
+        "xg": {
+          "home": 1.85,
+          "away": 1.43
+        },
+        "shotsOnTarget": {
+          "home": 9,
+          "away": 5
+        },
+        "bigChances": {
+          "home": 5,
+          "away": 3
+        },
+        "possession": {
+          "home": 45.0,
+          "away": 55.0
+        }
+      },
+      "preMatch": {
+        "homeElo": 1921.0,
+        "awayElo": 1911.0,
+        "homeLast5Xg": 1.31,
+        "awayLast5Xg": 1.12
+      },
+      "matchUrl": "/matches/liverpool-vs-aston-villa/2ydbmv#4813737"
+    },
+    {
+      "matchId": "25-26-prem-manchester-city-vs-crystal-palace",
+      "season": "2025-2026",
+      "gameweek": 36,
+      "kickoffTime": "2026-05-13T19:00:00+00:00",
+      "homeTeam": {
+        "id": 43,
+        "name": "Manchester City",
+        "shortName": "MCI",
+        "badgeSlug": "manchester-city",
+        "badgePath": "/teams/manchester-city.football-logos.cc.png"
+      },
+      "awayTeam": {
+        "id": 31,
+        "name": "Crystal Palace",
+        "shortName": "CRY",
+        "badgeSlug": "crystal-palace",
+        "badgePath": "/teams/crystal-palace.football-logos.cc.png"
+      },
+      "score": {
+        "home": 3,
+        "away": 0
+      },
+      "stats": {
+        "xg": {
+          "home": 1.66,
+          "away": 0.73
+        },
+        "shotsOnTarget": {
+          "home": 4,
+          "away": 2
+        },
+        "bigChances": {
+          "home": 3,
+          "away": 0
+        },
+        "possession": {
+          "home": 73.0,
+          "away": 27.0
+        }
+      },
+      "preMatch": {
+        "homeElo": 1971.0,
+        "awayElo": 1804.0,
+        "homeLast5Xg": 2.31,
+        "awayLast5Xg": 1.8
+      },
+      "matchUrl": "/matches/manchester-city-vs-crystal-palace/2ri9zd#4813681"
+    },
+    {
+      "matchId": "25-26-prem-tottenham-hotspur-vs-leeds-united",
+      "season": "2025-2026",
+      "gameweek": 36,
+      "kickoffTime": "2026-05-11T19:00:00+00:00",
+      "homeTeam": {
+        "id": 6,
+        "name": "Tottenham Hotspur",
+        "shortName": "TOT",
+        "badgeSlug": "tottenham",
+        "badgePath": "/teams/tottenham.football-logos.cc.png"
+      },
+      "awayTeam": {
+        "id": 2,
+        "name": "Leeds United",
+        "shortName": "LEE",
+        "badgeSlug": "leeds-united",
+        "badgePath": "/teams/leeds-united.football-logos.cc.png"
+      },
+      "score": {
+        "home": 1,
+        "away": 1
+      },
+      "stats": {
+        "xg": {
+          "home": 1.27,
+          "away": 1.34
+        },
+        "shotsOnTarget": {
+          "home": 3,
+          "away": 4
+        },
+        "bigChances": {
+          "home": 2,
+          "away": 2
+        },
+        "possession": {
+          "home": 57.0,
+          "away": 43.0
+        }
+      },
+      "preMatch": {
+        "homeElo": 1777.0,
+        "awayElo": 1797.0,
+        "homeLast5Xg": 1.02,
+        "awayLast5Xg": 1.67
+      },
+      "matchUrl": "/matches/leeds-united-vs-tottenham-hotspur/2ejdsf#4813733"
+    },
+    {
+      "matchId": "25-26-prem-west-ham-united-vs-arsenal",
+      "season": "2025-2026",
+      "gameweek": 36,
+      "kickoffTime": "2026-05-10T15:30:00+00:00",
+      "homeTeam": {
+        "id": 21,
+        "name": "West Ham United",
+        "shortName": "WHU",
+        "badgeSlug": "west-ham",
+        "badgePath": "/teams/west-ham.football-logos.cc.png"
+      },
+      "awayTeam": {
+        "id": 3,
+        "name": "Arsenal",
+        "shortName": "ARS",
+        "badgeSlug": "arsenal",
+        "badgePath": "/teams/arsenal.football-logos.cc.png"
+      },
+      "score": {
+        "home": 0,
+        "away": 1
+      },
+      "stats": {
+        "xg": {
+          "home": 1.15,
+          "away": 1.18
+        },
+        "shotsOnTarget": {
+          "home": 3,
+          "away": 4
+        },
+        "bigChances": {
+          "home": 2,
+          "away": 3
+        },
+        "possession": {
+          "home": 36.0,
+          "away": 64.0
+        }
+      },
+      "preMatch": {
+        "homeElo": 1769.0,
+        "awayElo": 2064.0,
+        "homeLast5Xg": 1.18,
+        "awayLast5Xg": 2.07
+      },
+      "matchUrl": "/matches/west-ham-united-vs-arsenal/2tnw09#4813734"
+    },
+    {
+      "matchId": "25-26-prem-nottingham-forest-vs-newcastle-united",
+      "season": "2025-2026",
+      "gameweek": 36,
+      "kickoffTime": "2026-05-10T13:00:00+00:00",
+      "homeTeam": {
+        "id": 17,
+        "name": "Nottingham Forest",
+        "shortName": "NFO",
+        "badgeSlug": "nottingham-forest",
+        "badgePath": "/teams/nottingham-forest.football-logos.cc.png"
+      },
+      "awayTeam": {
+        "id": 4,
+        "name": "Newcastle United",
+        "shortName": "NEW",
+        "badgeSlug": "newcastle",
+        "badgePath": "/teams/newcastle.football-logos.cc.png"
+      },
+      "score": {
+        "home": 1,
+        "away": 1
+      },
+      "stats": {
+        "xg": {
+          "home": 1.1,
+          "away": 1.48
+        },
+        "shotsOnTarget": {
+          "home": 6,
+          "away": 6
+        },
+        "bigChances": {
+          "home": 2,
+          "away": 4
+        },
+        "possession": {
+          "home": 46.0,
+          "away": 54.0
+        }
+      },
+      "preMatch": {
+        "homeElo": 1822.0,
+        "awayElo": 1838.0,
+        "homeLast5Xg": 1.37,
+        "awayLast5Xg": 1.63
+      },
+      "matchUrl": "/matches/nottingham-forest-vs-newcastle-united/3gocct#4813731"
+    },
+    {
+      "matchId": "25-26-prem-crystal-palace-vs-everton",
+      "season": "2025-2026",
+      "gameweek": 36,
+      "kickoffTime": "2026-05-10T13:00:00+00:00",
+      "homeTeam": {
+        "id": 31,
+        "name": "Crystal Palace",
+        "shortName": "CRY",
+        "badgeSlug": "crystal-palace",
+        "badgePath": "/teams/crystal-palace.football-logos.cc.png"
+      },
+      "awayTeam": {
+        "id": 11,
+        "name": "Everton",
+        "shortName": "EVE",
+        "badgeSlug": "everton",
+        "badgePath": "/teams/everton.football-logos.cc.png"
+      },
+      "score": {
+        "home": 2,
+        "away": 2
+      },
+      "stats": {
+        "xg": {
+          "home": 2.56,
+          "away": 1.59
+        },
+        "shotsOnTarget": {
+          "home": 8,
+          "away": 6
+        },
+        "bigChances": {
+          "home": 6,
+          "away": 4
+        },
+        "possession": {
+          "home": 59.0,
+          "away": 41.0
+        }
+      },
+      "preMatch": {
+        "homeElo": 1804.0,
+        "awayElo": 1803.0,
+        "homeLast5Xg": 1.42,
+        "awayLast5Xg": 1.53
+      },
+      "matchUrl": "/matches/everton-vs-crystal-palace/2tttz7#4813727"
+    },
+    {
+      "matchId": "25-26-prem-burnley-vs-aston-villa",
+      "season": "2025-2026",
+      "gameweek": 36,
+      "kickoffTime": "2026-05-10T13:00:00+00:00",
+      "homeTeam": {
+        "id": 90,
+        "name": "Burnley",
+        "shortName": "BUR",
+        "badgeSlug": "burnley",
+        "badgePath": "/teams/burnley.football-logos.cc.png"
+      },
+      "awayTeam": {
+        "id": 7,
+        "name": "Aston Villa",
+        "shortName": "AVL",
+        "badgeSlug": "aston-villa",
+        "badgePath": "/teams/aston-villa.football-logos.cc.png"
+      },
+      "score": {
+        "home": 2,
+        "away": 2
+      },
+      "stats": {
+        "xg": {
+          "home": 1.79,
+          "away": 1.44
+        },
+        "shotsOnTarget": {
+          "home": 6,
+          "away": 7
+        },
+        "bigChances": {
+          "home": 3,
+          "away": 3
+        },
+        "possession": {
+          "home": 34.0,
+          "away": 66.0
+        }
+      },
+      "preMatch": {
+        "homeElo": 1666.0,
+        "awayElo": 1921.0,
+        "homeLast5Xg": 0.74,
+        "awayLast5Xg": 1.36
+      },
+      "matchUrl": "/matches/burnley-vs-aston-villa/2t9lxd#4813726"
+    },
+    {
+      "matchId": "25-26-prem-manchester-city-vs-brentford",
+      "season": "2025-2026",
+      "gameweek": 36,
+      "kickoffTime": "2026-05-09T16:30:00+00:00",
+      "homeTeam": {
+        "id": 43,
+        "name": "Manchester City",
+        "shortName": "MCI",
+        "badgeSlug": "manchester-city",
+        "badgePath": "/teams/manchester-city.football-logos.cc.png"
+      },
+      "awayTeam": {
+        "id": 94,
+        "name": "Brentford",
+        "shortName": "BRE",
+        "badgeSlug": "brentford",
+        "badgePath": "/teams/brentford.football-logos.cc.png"
+      },
+      "score": {
+        "home": 3,
+        "away": 0
+      },
+      "stats": {
+        "xg": {
+          "home": 2.98,
+          "away": 0.24
+        },
+        "shotsOnTarget": {
+          "home": 10,
+          "away": 2
+        },
+        "bigChances": {
+          "home": 6,
+          "away": 2
+        },
+        "possession": {
+          "home": 58.0,
+          "away": 42.0
+        }
+      },
+      "preMatch": {
+        "homeElo": 1971.0,
+        "awayElo": 1837.0,
+        "homeLast5Xg": 2.13,
+        "awayLast5Xg": 1.63
+      },
+      "matchUrl": "/matches/manchester-city-vs-brentford/2spwom#4813730"
+    },
+    {
+      "matchId": "25-26-prem-sunderland-vs-manchester-united",
+      "season": "2025-2026",
+      "gameweek": 36,
+      "kickoffTime": "2026-05-09T14:00:00+00:00",
+      "homeTeam": {
+        "id": 56,
+        "name": "Sunderland",
+        "shortName": "SUN",
+        "badgeSlug": "sunderland",
+        "badgePath": "/teams/sunderland.football-logos.cc.png"
+      },
+      "awayTeam": {
+        "id": 1,
+        "name": "Manchester United",
+        "shortName": "MUN",
+        "badgeSlug": "manchester-united",
+        "badgePath": "/teams/manchester-united.football-logos.cc.png"
+      },
+      "score": {
+        "home": 0,
+        "away": 0
+      },
+      "stats": {
+        "xg": {
+          "home": 1.25,
+          "away": 0.62
+        },
+        "shotsOnTarget": {
+          "home": 4,
+          "away": 1
+        },
+        "bigChances": {
+          "home": 2,
+          "away": 0
+        },
+        "possession": {
+          "home": 51.0,
+          "away": 49.0
+        }
+      },
+      "preMatch": {
+        "homeElo": 1736.0,
+        "awayElo": 1915.0,
+        "homeLast5Xg": 1.37,
+        "awayLast5Xg": 1.41
+      },
+      "matchUrl": "/matches/sunderland-vs-manchester-united/2wgr5i#4813732"
+    },
+    {
+      "matchId": "25-26-prem-fulham-vs-afc-bournemouth",
+      "season": "2025-2026",
+      "gameweek": 36,
+      "kickoffTime": "2026-05-09T14:00:00+00:00",
+      "homeTeam": {
+        "id": 54,
+        "name": "Fulham",
+        "shortName": "FUL",
+        "badgeSlug": "fulham",
+        "badgePath": "/teams/fulham.football-logos.cc.png"
+      },
+      "awayTeam": {
+        "id": 91,
+        "name": "AFC Bournemouth",
+        "shortName": "BOU",
+        "badgeSlug": "bournemouth",
+        "badgePath": "/teams/bournemouth.football-logos.cc.png"
+      },
+      "score": {
+        "home": 0,
+        "away": 1
+      },
+      "stats": {
+        "xg": {
+          "home": 1.33,
+          "away": 0.82
+        },
+        "shotsOnTarget": {
+          "home": 2,
+          "away": 5
+        },
+        "bigChances": {
+          "home": 1,
+          "away": 2
+        },
+        "possession": {
+          "home": 60.0,
+          "away": 40.0
+        }
+      },
+      "preMatch": {
+        "homeElo": 1813.0,
+        "awayElo": 1872.0,
+        "homeLast5Xg": 1.3,
+        "awayLast5Xg": 1.94
+      },
+      "matchUrl": "/matches/afc-bournemouth-vs-fulham/2uiul6#4813728"
+    },
+    {
+      "matchId": "25-26-prem-brighton-hove-albion-vs-wolverhampton-wanderers",
+      "season": "2025-2026",
+      "gameweek": 36,
+      "kickoffTime": "2026-05-09T14:00:00+00:00",
+      "homeTeam": {
+        "id": 36,
+        "name": "Brighton & Hove Albion",
+        "shortName": "BHA",
+        "badgeSlug": "brighton",
+        "badgePath": "/teams/brighton.football-logos.cc.png"
+      },
+      "awayTeam": {
+        "id": 39,
+        "name": "Wolverhampton Wanderers",
+        "shortName": "WOL",
+        "badgeSlug": "wolves",
+        "badgePath": "/teams/wolves.football-logos.cc.png"
+      },
+      "score": {
+        "home": 3,
+        "away": 0
+      },
+      "stats": {
+        "xg": {
+          "home": 1.62,
+          "away": 0.49
+        },
+        "shotsOnTarget": {
+          "home": 6,
+          "away": 1
+        },
+        "bigChances": {
+          "home": 4,
+          "away": 2
+        },
+        "possession": {
+          "home": 72.0,
+          "away": 28.0
+        }
+      },
+      "preMatch": {
+        "homeElo": 1842.0,
+        "awayElo": 1680.0,
+        "homeLast5Xg": 1.72,
+        "awayLast5Xg": 0.99
+      },
+      "matchUrl": "/matches/wolverhampton-wanderers-vs-brighton-hove-albion/2xaiyv#4813725"
+    },
+    {
+      "matchId": "25-26-prem-liverpool-vs-chelsea",
+      "season": "2025-2026",
+      "gameweek": 36,
+      "kickoffTime": "2026-05-09T11:30:00+00:00",
+      "homeTeam": {
+        "id": 14,
+        "name": "Liverpool",
+        "shortName": "LIV",
+        "badgeSlug": "liverpool",
+        "badgePath": "/teams/liverpool.football-logos.cc.png"
+      },
+      "awayTeam": {
+        "id": 8,
+        "name": "Chelsea",
+        "shortName": "CHE",
+        "badgeSlug": "chelsea",
+        "badgePath": "/teams/chelsea.football-logos.cc.png"
+      },
+      "score": {
+        "home": 1,
+        "away": 1
+      },
+      "stats": {
+        "xg": {
+          "home": 0.56,
+          "away": 0.5
+        },
+        "shotsOnTarget": {
+          "home": 3,
+          "away": 3
+        },
+        "bigChances": {
+          "home": 1,
+          "away": 1
+        },
+        "possession": {
+          "home": 48.0,
+          "away": 52.0
+        }
+      },
+      "preMatch": {
+        "homeElo": 1911.0,
+        "awayElo": 1831.0,
+        "homeLast5Xg": 1.22,
+        "awayLast5Xg": 1.23
+      },
+      "matchUrl": "/matches/chelsea-vs-liverpool/2f3vr7#4813729"
+    },
+    {
+      "matchId": "25-26-prem-everton-vs-manchester-city",
+      "season": "2025-2026",
+      "gameweek": 35,
+      "kickoffTime": "2026-05-04T19:00:00+00:00",
+      "homeTeam": {
+        "id": 11,
+        "name": "Everton",
+        "shortName": "EVE",
+        "badgeSlug": "everton",
+        "badgePath": "/teams/everton.football-logos.cc.png"
+      },
+      "awayTeam": {
+        "id": 43,
+        "name": "Manchester City",
+        "shortName": "MCI",
+        "badgeSlug": "manchester-city",
+        "badgePath": "/teams/manchester-city.football-logos.cc.png"
+      },
+      "score": {
+        "home": 3,
+        "away": 3
+      },
+      "stats": {
+        "xg": {
+          "home": 2.72,
+          "away": 1.54
+        },
+        "shotsOnTarget": {
+          "home": 6,
+          "away": 4
+        },
+        "bigChances": {
+          "home": 4,
+          "away": 1
+        },
+        "possession": {
+          "home": 24.0,
+          "away": 76.0
+        }
+      },
+      "preMatch": {
+        "homeElo": 1803.0,
+        "awayElo": 1971.0,
+        "homeLast5Xg": 1.2,
+        "awayLast5Xg": 2.25
+      },
+      "matchUrl": "/matches/manchester-city-vs-everton/2fauom#4813720"
+    },
+    {
+      "matchId": "25-26-prem-chelsea-vs-nottingham-forest",
+      "season": "2025-2026",
+      "gameweek": 35,
+      "kickoffTime": "2026-05-04T14:00:00+00:00",
+      "homeTeam": {
+        "id": 8,
+        "name": "Chelsea",
+        "shortName": "CHE",
+        "badgeSlug": "chelsea",
+        "badgePath": "/teams/chelsea.football-logos.cc.png"
+      },
+      "awayTeam": {
+        "id": 17,
+        "name": "Nottingham Forest",
+        "shortName": "NFO",
+        "badgeSlug": "nottingham-forest",
+        "badgePath": "/teams/nottingham-forest.football-logos.cc.png"
+      },
+      "score": {
+        "home": 1,
+        "away": 3
+      },
+      "stats": {
+        "xg": {
+          "home": 2.15,
+          "away": 2.05
+        },
+        "shotsOnTarget": {
+          "home": 5,
+          "away": 4
+        },
+        "bigChances": {
+          "home": 2,
+          "away": 3
+        },
+        "possession": {
+          "home": 67.0,
+          "away": 33.0
+        }
+      },
+      "preMatch": {
+        "homeElo": 1831.0,
+        "awayElo": 1822.0,
+        "homeLast5Xg": 1.08,
+        "awayLast5Xg": 1.15
+      },
+      "matchUrl": "/matches/chelsea-vs-nottingham-forest/2vn3ne#4813719"
+    },
+    {
+      "matchId": "25-26-prem-aston-villa-vs-tottenham-hotspur",
+      "season": "2025-2026",
+      "gameweek": 35,
+      "kickoffTime": "2026-05-03T18:00:00+00:00",
+      "homeTeam": {
+        "id": 7,
+        "name": "Aston Villa",
+        "shortName": "AVL",
+        "badgeSlug": "aston-villa",
+        "badgePath": "/teams/aston-villa.football-logos.cc.png"
+      },
+      "awayTeam": {
+        "id": 6,
+        "name": "Tottenham Hotspur",
+        "shortName": "TOT",
+        "badgeSlug": "tottenham",
+        "badgePath": "/teams/tottenham.football-logos.cc.png"
+      },
+      "score": {
+        "home": 1,
+        "away": 2
+      },
+      "stats": {
+        "xg": {
+          "home": 0.32,
+          "away": 0.99
+        },
+        "shotsOnTarget": {
+          "home": 1,
+          "away": 5
+        },
+        "bigChances": {
+          "home": 1,
+          "away": 2
+        },
+        "possession": {
+          "home": 45.0,
+          "away": 55.0
+        }
+      },
+      "preMatch": {
+        "homeElo": 1921.0,
+        "awayElo": 1777.0,
+        "homeLast5Xg": 1.5,
+        "awayLast5Xg": 1.06
+      },
+      "matchUrl": "/matches/tottenham-hotspur-vs-aston-villa/2xnfpj#4813717"
+    },
+    {
+      "matchId": "25-26-prem-manchester-united-vs-liverpool",
+      "season": "2025-2026",
+      "gameweek": 35,
+      "kickoffTime": "2026-05-03T14:30:00+00:00",
+      "homeTeam": {
+        "id": 1,
+        "name": "Manchester United",
+        "shortName": "MUN",
+        "badgeSlug": "manchester-united",
+        "badgePath": "/teams/manchester-united.football-logos.cc.png"
+      },
+      "awayTeam": {
+        "id": 14,
+        "name": "Liverpool",
+        "shortName": "LIV",
+        "badgeSlug": "liverpool",
+        "badgePath": "/teams/liverpool.football-logos.cc.png"
+      },
+      "score": {
+        "home": 3,
+        "away": 2
+      },
+      "stats": {
+        "xg": {
+          "home": 2.34,
+          "away": 0.88
+        },
+        "shotsOnTarget": {
+          "home": 6,
+          "away": 5
+        },
+        "bigChances": {
+          "home": 3,
+          "away": 1
+        },
+        "possession": {
+          "home": 37.0,
+          "away": 63.0
+        }
+      },
+      "preMatch": {
+        "homeElo": 1915.0,
+        "awayElo": 1911.0,
+        "homeLast5Xg": 1.16,
+        "awayLast5Xg": 1.38
+      },
+      "matchUrl": "/matches/liverpool-vs-manchester-united/2ygkcb#4813722"
+    },
+    {
+      "matchId": "25-26-prem-afc-bournemouth-vs-crystal-palace",
+      "season": "2025-2026",
+      "gameweek": 35,
+      "kickoffTime": "2026-05-03T13:00:00+00:00",
+      "homeTeam": {
+        "id": 91,
+        "name": "AFC Bournemouth",
+        "shortName": "BOU",
+        "badgeSlug": "bournemouth",
+        "badgePath": "/teams/bournemouth.football-logos.cc.png"
+      },
+      "awayTeam": {
+        "id": 31,
+        "name": "Crystal Palace",
+        "shortName": "CRY",
+        "badgeSlug": "crystal-palace",
+        "badgePath": "/teams/crystal-palace.football-logos.cc.png"
+      },
+      "score": {
+        "home": 3,
+        "away": 0
+      },
+      "stats": {
+        "xg": {
+          "home": 2.08,
+          "away": 0.89
+        },
+        "shotsOnTarget": {
+          "home": 5,
+          "away": 1
+        },
+        "bigChances": {
+          "home": 2,
+          "away": 1
+        },
+        "possession": {
+          "home": 50.0,
+          "away": 50.0
+        }
+      },
+      "preMatch": {
+        "homeElo": 1872.0,
+        "awayElo": 1804.0,
+        "homeLast5Xg": 2.04,
+        "awayLast5Xg": 1.6
+      },
+      "matchUrl": "/matches/afc-bournemouth-vs-crystal-palace/2txspy#4813715"
+    },
+    {
+      "matchId": "25-26-prem-arsenal-vs-fulham",
+      "season": "2025-2026",
+      "gameweek": 35,
+      "kickoffTime": "2026-05-02T16:30:00+00:00",
+      "homeTeam": {
+        "id": 3,
+        "name": "Arsenal",
+        "shortName": "ARS",
+        "badgeSlug": "arsenal",
+        "badgePath": "/teams/arsenal.football-logos.cc.png"
+      },
+      "awayTeam": {
+        "id": 54,
+        "name": "Fulham",
+        "shortName": "FUL",
+        "badgeSlug": "fulham",
+        "badgePath": "/teams/fulham.football-logos.cc.png"
+      },
+      "score": {
+        "home": 3,
+        "away": 0
+      },
+      "stats": {
+        "xg": {
+          "home": 3.22,
+          "away": 0.37
+        },
+        "shotsOnTarget": {
+          "home": 9,
+          "away": 1
+        },
+        "bigChances": {
+          "home": 6,
+          "away": 0
+        },
+        "possession": {
+          "home": 54.0,
+          "away": 46.0
+        }
+      },
+      "preMatch": {
+        "homeElo": 2064.0,
+        "awayElo": 1813.0,
+        "homeLast5Xg": 1.52,
+        "awayLast5Xg": 1.43
+      },
+      "matchUrl": "/matches/arsenal-vs-fulham/37l643#4813716"
+    },
+    {
+      "matchId": "25-26-prem-wolverhampton-wanderers-vs-sunderland",
+      "season": "2025-2026",
+      "gameweek": 35,
+      "kickoffTime": "2026-05-02T14:00:00+00:00",
+      "homeTeam": {
+        "id": 39,
+        "name": "Wolverhampton Wanderers",
+        "shortName": "WOL",
+        "badgeSlug": "wolves",
+        "badgePath": "/teams/wolves.football-logos.cc.png"
+      },
+      "awayTeam": {
+        "id": 56,
+        "name": "Sunderland",
+        "shortName": "SUN",
+        "badgeSlug": "sunderland",
+        "badgePath": "/teams/sunderland.football-logos.cc.png"
+      },
+      "score": {
+        "home": 1,
+        "away": 1
+      },
+      "stats": {
+        "xg": {
+          "home": 1.72,
+          "away": 0.66
+        },
+        "shotsOnTarget": {
+          "home": 7,
+          "away": 2
+        },
+        "bigChances": {
+          "home": 3,
+          "away": 1
+        },
+        "possession": {
+          "home": 58.0,
+          "away": 42.0
+        }
+      },
+      "preMatch": {
+        "homeElo": 1680.0,
+        "awayElo": 1736.0,
+        "homeLast5Xg": 0.74,
+        "awayLast5Xg": 1.42
+      },
+      "matchUrl": "/matches/sunderland-vs-wolverhampton-wanderers/2esixh#4813724"
+    },
+    {
+      "matchId": "25-26-prem-newcastle-united-vs-brighton-hove-albion",
+      "season": "2025-2026",
+      "gameweek": 35,
+      "kickoffTime": "2026-05-02T14:00:00+00:00",
+      "homeTeam": {
+        "id": 4,
+        "name": "Newcastle United",
+        "shortName": "NEW",
+        "badgeSlug": "newcastle",
+        "badgePath": "/teams/newcastle.football-logos.cc.png"
+      },
+      "awayTeam": {
+        "id": 36,
+        "name": "Brighton & Hove Albion",
+        "shortName": "BHA",
+        "badgeSlug": "brighton",
+        "badgePath": "/teams/brighton.football-logos.cc.png"
+      },
+      "score": {
+        "home": 3,
+        "away": 1
+      },
+      "stats": {
+        "xg": {
+          "home": 3.16,
+          "away": 1.53
+        },
+        "shotsOnTarget": {
+          "home": 6,
+          "away": 4
+        },
+        "bigChances": {
+          "home": 5,
+          "away": 4
+        },
+        "possession": {
+          "home": 32.0,
+          "away": 68.0
+        }
+      },
+      "preMatch": {
+        "homeElo": 1838.0,
+        "awayElo": 1842.0,
+        "homeLast5Xg": 1.28,
+        "awayLast5Xg": 1.75
+      },
+      "matchUrl": "/matches/brighton-hove-albion-vs-newcastle-united/3gos5a#4813723"
+    },
+    {
+      "matchId": "25-26-prem-brentford-vs-west-ham-united",
+      "season": "2025-2026",
+      "gameweek": 35,
+      "kickoffTime": "2026-05-02T14:00:00+00:00",
+      "homeTeam": {
+        "id": 94,
+        "name": "Brentford",
+        "shortName": "BRE",
+        "badgeSlug": "brentford",
+        "badgePath": "/teams/brentford.football-logos.cc.png"
+      },
+      "awayTeam": {
+        "id": 21,
+        "name": "West Ham United",
+        "shortName": "WHU",
+        "badgeSlug": "west-ham",
+        "badgePath": "/teams/west-ham.football-logos.cc.png"
+      },
+      "score": {
+        "home": 3,
+        "away": 0
+      },
+      "stats": {
+        "xg": {
+          "home": 2.27,
+          "away": 0.92
+        },
+        "shotsOnTarget": {
+          "home": 6,
+          "away": 4
+        },
+        "bigChances": {
+          "home": 4,
+          "away": 1
+        },
+        "possession": {
+          "home": 48.0,
+          "away": 52.0
+        }
+      },
+      "preMatch": {
+        "homeElo": 1837.0,
+        "awayElo": 1769.0,
+        "homeLast5Xg": 1.69,
+        "awayLast5Xg": 1.1
+      },
+      "matchUrl": "/matches/west-ham-united-vs-brentford/2uwdxd#4813718"
+    },
+    {
+      "matchId": "25-26-prem-leeds-united-vs-burnley",
+      "season": "2025-2026",
+      "gameweek": 35,
+      "kickoffTime": "2026-05-01T19:00:00+00:00",
+      "homeTeam": {
+        "id": 2,
+        "name": "Leeds United",
+        "shortName": "LEE",
+        "badgeSlug": "leeds-united",
+        "badgePath": "/teams/leeds-united.football-logos.cc.png"
+      },
+      "awayTeam": {
+        "id": 90,
+        "name": "Burnley",
+        "shortName": "BUR",
+        "badgeSlug": "burnley",
+        "badgePath": "/teams/burnley.football-logos.cc.png"
+      },
+      "score": {
+        "home": 3,
+        "away": 1
+      },
+      "stats": {
+        "xg": {
+          "home": 1.64,
+          "away": 0.57
+        },
+        "shotsOnTarget": {
+          "home": 8,
+          "away": 3
+        },
+        "bigChances": {
+          "home": 2,
+          "away": 0
+        },
+        "possession": {
+          "home": 48.0,
+          "away": 52.0
+        }
+      },
+      "preMatch": {
+        "homeElo": 1797.0,
+        "awayElo": 1666.0,
+        "homeLast5Xg": 1.57,
+        "awayLast5Xg": 0.9
+      },
+      "matchUrl": "/matches/burnley-vs-leeds-united/2akph4#4813721"
+    },
+    {
+      "matchId": "25-26-prem-manchester-united-vs-brentford",
+      "season": "2025-2026",
+      "gameweek": 34,
+      "kickoffTime": "2026-04-27T19:00:00+00:00",
+      "homeTeam": {
+        "id": 1,
+        "name": "Manchester United",
+        "shortName": "MUN",
+        "badgeSlug": "manchester-united",
+        "badgePath": "/teams/manchester-united.football-logos.cc.png"
+      },
+      "awayTeam": {
+        "id": 94,
+        "name": "Brentford",
+        "shortName": "BRE",
+        "badgeSlug": "brentford",
+        "badgePath": "/teams/brentford.football-logos.cc.png"
+      },
+      "score": {
+        "home": 2,
+        "away": 1
+      },
+      "stats": {
+        "xg": {
+          "home": 1.36,
+          "away": 1.17
+        },
+        "shotsOnTarget": {
+          "home": 6,
+          "away": 4
+        },
+        "bigChances": {
+          "home": 4,
+          "away": 2
+        },
+        "possession": {
+          "home": 45.0,
+          "away": 55.0
+        }
+      },
+      "preMatch": {
+        "homeElo": 1915.0,
+        "awayElo": 1837.0,
+        "homeLast5Xg": 1.18,
+        "awayLast5Xg": 1.54
+      },
+      "matchUrl": "/matches/brentford-vs-manchester-united/3dfzjk#4813711"
+    },
+    {
+      "matchId": "25-26-prem-arsenal-vs-newcastle-united",
+      "season": "2025-2026",
+      "gameweek": 34,
+      "kickoffTime": "2026-04-25T16:30:00+00:00",
+      "homeTeam": {
+        "id": 3,
+        "name": "Arsenal",
+        "shortName": "ARS",
+        "badgeSlug": "arsenal",
+        "badgePath": "/teams/arsenal.football-logos.cc.png"
+      },
+      "awayTeam": {
+        "id": 4,
+        "name": "Newcastle United",
+        "shortName": "NEW",
+        "badgeSlug": "newcastle",
+        "badgePath": "/teams/newcastle.football-logos.cc.png"
+      },
+      "score": {
+        "home": 1,
+        "away": 0
+      },
+      "stats": {
+        "xg": {
+          "home": 0.49,
+          "away": 1.0
+        },
+        "shotsOnTarget": {
+          "home": 4,
+          "away": 3
+        },
+        "bigChances": {
+          "home": 0,
+          "away": 2
+        },
+        "possession": {
+          "home": 45.0,
+          "away": 55.0
+        }
+      },
+      "preMatch": {
+        "homeElo": 2064.0,
+        "awayElo": 1838.0,
+        "homeLast5Xg": 1.65,
+        "awayLast5Xg": 1.58
+      },
+      "matchUrl": "/matches/arsenal-vs-newcastle-united/3c42by#4813706"
+    },
+    {
+      "matchId": "25-26-prem-wolverhampton-wanderers-vs-tottenham-hotspur",
+      "season": "2025-2026",
+      "gameweek": 34,
+      "kickoffTime": "2026-04-25T14:00:00+00:00",
+      "homeTeam": {
+        "id": 39,
+        "name": "Wolverhampton Wanderers",
+        "shortName": "WOL",
+        "badgeSlug": "wolves",
+        "badgePath": "/teams/wolves.football-logos.cc.png"
+      },
+      "awayTeam": {
+        "id": 6,
+        "name": "Tottenham Hotspur",
+        "shortName": "TOT",
+        "badgeSlug": "tottenham",
+        "badgePath": "/teams/tottenham.football-logos.cc.png"
+      },
+      "score": {
+        "home": 0,
+        "away": 1
+      },
+      "stats": {
+        "xg": {
+          "home": 0.7,
+          "away": 0.92
+        },
+        "shotsOnTarget": {
+          "home": 2,
+          "away": 2
+        },
+        "bigChances": {
+          "home": 1,
+          "away": 2
+        },
+        "possession": {
+          "home": 41.0,
+          "away": 59.0
+        }
+      },
+      "preMatch": {
+        "homeElo": 1680.0,
+        "awayElo": 1777.0,
+        "homeLast5Xg": 0.77,
+        "awayLast5Xg": 1.19
+      },
+      "matchUrl": "/matches/tottenham-hotspur-vs-wolverhampton-wanderers/2fydv8#4813714"
+    },
+    {
+      "matchId": "25-26-prem-west-ham-united-vs-everton",
+      "season": "2025-2026",
+      "gameweek": 34,
+      "kickoffTime": "2026-04-25T14:00:00+00:00",
+      "homeTeam": {
+        "id": 21,
+        "name": "West Ham United",
+        "shortName": "WHU",
+        "badgeSlug": "west-ham",
+        "badgePath": "/teams/west-ham.football-logos.cc.png"
+      },
+      "awayTeam": {
+        "id": 11,
+        "name": "Everton",
+        "shortName": "EVE",
+        "badgeSlug": "everton",
+        "badgePath": "/teams/everton.football-logos.cc.png"
+      },
+      "score": {
+        "home": 2,
+        "away": 1
+      },
+      "stats": {
+        "xg": {
+          "home": 1.17,
+          "away": 1.45
+        },
+        "shotsOnTarget": {
+          "home": 3,
+          "away": 3
+        },
+        "bigChances": {
+          "home": 3,
+          "away": 1
+        },
+        "possession": {
+          "home": 44.0,
+          "away": 56.0
+        }
+      },
+      "preMatch": {
+        "homeElo": 1769.0,
+        "awayElo": 1803.0,
+        "homeLast5Xg": 1.09,
+        "awayLast5Xg": 1.17
+      },
+      "matchUrl": "/matches/west-ham-united-vs-everton/2hby1v#4813713"
+    },
+    {
+      "matchId": "25-26-prem-liverpool-vs-crystal-palace",
+      "season": "2025-2026",
+      "gameweek": 34,
+      "kickoffTime": "2026-04-25T14:00:00+00:00",
+      "homeTeam": {
+        "id": 14,
+        "name": "Liverpool",
+        "shortName": "LIV",
+        "badgeSlug": "liverpool",
+        "badgePath": "/teams/liverpool.football-logos.cc.png"
+      },
+      "awayTeam": {
+        "id": 31,
+        "name": "Crystal Palace",
+        "shortName": "CRY",
+        "badgeSlug": "crystal-palace",
+        "badgePath": "/teams/crystal-palace.football-logos.cc.png"
+      },
+      "score": {
+        "home": 3,
+        "away": 1
+      },
+      "stats": {
+        "xg": {
+          "home": 1.14,
+          "away": 2.26
+        },
+        "shotsOnTarget": {
+          "home": 3,
+          "away": 7
+        },
+        "bigChances": {
+          "home": 3,
+          "away": 5
+        },
+        "possession": {
+          "home": 53.0,
+          "away": 47.0
+        }
+      },
+      "preMatch": {
+        "homeElo": 1911.0,
+        "awayElo": 1804.0,
+        "homeLast5Xg": 1.53,
+        "awayLast5Xg": 1.22
+      },
+      "matchUrl": "/matches/liverpool-vs-crystal-palace/2tmp8g#4813710"
+    },
+    {
+      "matchId": "25-26-prem-fulham-vs-aston-villa",
+      "season": "2025-2026",
+      "gameweek": 34,
+      "kickoffTime": "2026-04-25T11:30:00+00:00",
+      "homeTeam": {
+        "id": 54,
+        "name": "Fulham",
+        "shortName": "FUL",
+        "badgeSlug": "fulham",
+        "badgePath": "/teams/fulham.football-logos.cc.png"
+      },
+      "awayTeam": {
+        "id": 7,
+        "name": "Aston Villa",
+        "shortName": "AVL",
+        "badgeSlug": "aston-villa",
+        "badgePath": "/teams/aston-villa.football-logos.cc.png"
+      },
+      "score": {
+        "home": 1,
+        "away": 0
+      },
+      "stats": {
+        "xg": {
+          "home": 1.18,
+          "away": 0.93
+        },
+        "shotsOnTarget": {
+          "home": 6,
+          "away": 1
+        },
+        "bigChances": {
+          "home": 2,
+          "away": 1
+        },
+        "possession": {
+          "home": 39.0,
+          "away": 61.0
+        }
+      },
+      "preMatch": {
+        "homeElo": 1813.0,
+        "awayElo": 1921.0,
+        "homeLast5Xg": 1.38,
+        "awayLast5Xg": 1.47
+      },
+      "matchUrl": "/matches/fulham-vs-aston-villa/3cnglp#4813709"
+    },
+    {
+      "matchId": "25-26-prem-sunderland-vs-nottingham-forest",
+      "season": "2025-2026",
+      "gameweek": 34,
+      "kickoffTime": "2026-04-24T19:00:00+00:00",
+      "homeTeam": {
+        "id": 56,
+        "name": "Sunderland",
+        "shortName": "SUN",
+        "badgeSlug": "sunderland",
+        "badgePath": "/teams/sunderland.football-logos.cc.png"
+      },
+      "awayTeam": {
+        "id": 17,
+        "name": "Nottingham Forest",
+        "shortName": "NFO",
+        "badgeSlug": "nottingham-forest",
+        "badgePath": "/teams/nottingham-forest.football-logos.cc.png"
+      },
+      "score": {
+        "home": 0,
+        "away": 5
+      },
+      "stats": {
+        "xg": {
+          "home": 0.7,
+          "away": 1.1
+        },
+        "shotsOnTarget": {
+          "home": 4,
+          "away": 6
+        },
+        "bigChances": {
+          "home": 0,
+          "away": 3
+        },
+        "possession": {
+          "home": 61.0,
+          "away": 39.0
+        }
+      },
+      "preMatch": {
+        "homeElo": 1736.0,
+        "awayElo": 1822.0,
+        "homeLast5Xg": 1.45,
+        "awayLast5Xg": 1.12
+      },
+      "matchUrl": "/matches/sunderland-vs-nottingham-forest/2vtwiu#4813712"
+    },
+    {
+      "matchId": "25-26-prem-burnley-vs-manchester-city",
+      "season": "2025-2026",
+      "gameweek": 33,
+      "kickoffTime": "2026-04-22T19:00:00+00:00",
+      "homeTeam": {
+        "id": 90,
+        "name": "Burnley",
+        "shortName": "BUR",
+        "badgeSlug": "burnley",
+        "badgePath": "/teams/burnley.football-logos.cc.png"
+      },
+      "awayTeam": {
+        "id": 43,
+        "name": "Manchester City",
+        "shortName": "MCI",
+        "badgeSlug": "manchester-city",
+        "badgePath": "/teams/manchester-city.football-logos.cc.png"
+      },
+      "score": {
+        "home": 0,
+        "away": 1
+      },
+      "stats": {
+        "xg": {
+          "home": 0.63,
+          "away": 3.36
+        },
+        "shotsOnTarget": {
+          "home": 1,
+          "away": 9
+        },
+        "bigChances": {
+          "home": 1,
+          "away": 4
+        },
+        "possession": {
+          "home": 34.0,
+          "away": 66.0
+        }
+      },
+      "preMatch": {
+        "homeElo": 1666.0,
+        "awayElo": 1966.0,
+        "homeLast5Xg": 0.93,
+        "awayLast5Xg": 1.98
+      },
+      "matchUrl": "/matches/burnley-vs-manchester-city/2ai7j8#4813708"
+    },
+    {
+      "matchId": "25-26-prem-afc-bournemouth-vs-leeds-united",
+      "season": "2025-2026",
+      "gameweek": 33,
+      "kickoffTime": "2026-04-22T19:00:00+00:00",
+      "homeTeam": {
+        "id": 91,
+        "name": "AFC Bournemouth",
+        "shortName": "BOU",
+        "badgeSlug": "bournemouth",
+        "badgePath": "/teams/bournemouth.football-logos.cc.png"
+      },
+      "awayTeam": {
+        "id": 2,
+        "name": "Leeds United",
+        "shortName": "LEE",
+        "badgeSlug": "leeds-united",
+        "badgePath": "/teams/leeds-united.football-logos.cc.png"
+      },
+      "score": {
+        "home": 2,
+        "away": 2
+      },
+      "stats": {
+        "xg": {
+          "home": 1.65,
+          "away": 0.81
+        },
+        "shotsOnTarget": {
+          "home": 7,
+          "away": 3
+        },
+        "bigChances": {
+          "home": 4,
+          "away": 1
+        },
+        "possession": {
+          "home": 60.0,
+          "away": 40.0
+        }
+      },
+      "preMatch": {
+        "homeElo": 1849.0,
+        "awayElo": 1789.0,
+        "homeLast5Xg": 2.09,
+        "awayLast5Xg": 1.64
+      },
+      "matchUrl": "/matches/leeds-united-vs-afc-bournemouth/2fh3fh#4813705"
+    },
+    {
+      "matchId": "25-26-prem-brighton-hove-albion-vs-chelsea",
+      "season": "2025-2026",
+      "gameweek": 33,
+      "kickoffTime": "2026-04-21T19:00:00+00:00",
+      "homeTeam": {
+        "id": 36,
+        "name": "Brighton & Hove Albion",
+        "shortName": "BHA",
+        "badgeSlug": "brighton",
+        "badgePath": "/teams/brighton.football-logos.cc.png"
+      },
+      "awayTeam": {
+        "id": 8,
+        "name": "Chelsea",
+        "shortName": "CHE",
+        "badgeSlug": "chelsea",
+        "badgePath": "/teams/chelsea.football-logos.cc.png"
+      },
+      "score": {
+        "home": 3,
+        "away": 0
+      },
+      "stats": {
+        "xg": {
+          "home": 2.14,
+          "away": 0.37
+        },
+        "shotsOnTarget": {
+          "home": 9,
+          "away": 0
+        },
+        "bigChances": {
+          "home": 5,
+          "away": 0
+        },
+        "possession": {
+          "home": 53.0,
+          "away": 47.0
+        }
+      },
+      "preMatch": {
+        "homeElo": 1852.0,
+        "awayElo": 1852.0,
+        "homeLast5Xg": 1.48,
+        "awayLast5Xg": 1.73
+      },
+      "matchUrl": "/matches/chelsea-vs-brighton-hove-albion/2vni1p#4813707"
+    },
+    {
+      "matchId": "25-26-prem-crystal-palace-vs-west-ham-united",
+      "season": "2025-2026",
+      "gameweek": 33,
+      "kickoffTime": "2026-04-20T19:00:00+00:00",
+      "homeTeam": {
+        "id": 31,
+        "name": "Crystal Palace",
+        "shortName": "CRY",
+        "badgeSlug": "crystal-palace",
+        "badgePath": "/teams/crystal-palace.football-logos.cc.png"
+      },
+      "awayTeam": {
+        "id": 21,
+        "name": "West Ham United",
+        "shortName": "WHU",
+        "badgeSlug": "west-ham",
+        "badgePath": "/teams/west-ham.football-logos.cc.png"
+      },
+      "score": {
+        "home": 0,
+        "away": 0
+      },
+      "stats": {
+        "xg": {
+          "home": 0.73,
+          "away": 0.61
+        },
+        "shotsOnTarget": {
+          "home": 1,
+          "away": 4
+        },
+        "bigChances": {
+          "home": 1,
+          "away": 1
+        },
+        "possession": {
+          "home": 54.0,
+          "away": 46.0
+        }
+      },
+      "preMatch": {
+        "homeElo": 1811.0,
+        "awayElo": 1759.0,
+        "homeLast5Xg": 1.48,
+        "awayLast5Xg": 1.34
+      },
+      "matchUrl": "/matches/west-ham-united-vs-crystal-palace/2toa9m#4813698"
+    },
+    {
+      "matchId": "25-26-prem-manchester-city-vs-arsenal",
+      "season": "2025-2026",
+      "gameweek": 33,
+      "kickoffTime": "2026-04-19T15:30:00+00:00",
+      "homeTeam": {
+        "id": 43,
+        "name": "Manchester City",
+        "shortName": "MCI",
+        "badgeSlug": "manchester-city",
+        "badgePath": "/teams/manchester-city.football-logos.cc.png"
+      },
+      "awayTeam": {
+        "id": 3,
+        "name": "Arsenal",
+        "shortName": "ARS",
+        "badgeSlug": "arsenal",
+        "badgePath": "/teams/arsenal.football-logos.cc.png"
+      },
+      "score": {
+        "home": 2,
+        "away": 1
+      },
+      "stats": {
+        "xg": {
+          "home": 1.36,
+          "away": 1.62
+        },
+        "shotsOnTarget": {
+          "home": 5,
+          "away": 3
+        },
+        "bigChances": {
+          "home": 5,
+          "away": 5
+        },
+        "possession": {
+          "home": 59.0,
+          "away": 41.0
+        }
+      },
+      "preMatch": {
+        "homeElo": 1966.0,
+        "awayElo": 2044.0,
+        "homeLast5Xg": 1.98,
+        "awayLast5Xg": 1.74
+      },
+      "matchUrl": "/matches/manchester-city-vs-arsenal/2rhvvi#4813701"
+    },
+    {
+      "matchId": "25-26-prem-nottingham-forest-vs-burnley",
+      "season": "2025-2026",
+      "gameweek": 33,
+      "kickoffTime": "2026-04-19T13:00:00+00:00",
+      "homeTeam": {
+        "id": 17,
+        "name": "Nottingham Forest",
+        "shortName": "NFO",
+        "badgeSlug": "nottingham-forest",
+        "badgePath": "/teams/nottingham-forest.football-logos.cc.png"
+      },
+      "awayTeam": {
+        "id": 90,
+        "name": "Burnley",
+        "shortName": "BUR",
+        "badgeSlug": "burnley",
+        "badgePath": "/teams/burnley.football-logos.cc.png"
+      },
+      "score": {
+        "home": 4,
+        "away": 1
+      },
+      "stats": {
+        "xg": {
+          "home": 1.19,
+          "away": 0.36
+        },
+        "shotsOnTarget": {
+          "home": 4,
+          "away": 3
+        },
+        "bigChances": {
+          "home": 2,
+          "away": 1
+        },
+        "possession": {
+          "home": 51.0,
+          "away": 49.0
+        }
+      },
+      "preMatch": {
+        "homeElo": 1809.0,
+        "awayElo": 1666.0,
+        "homeLast5Xg": 1.07,
+        "awayLast5Xg": 1.06
+      },
+      "matchUrl": "/matches/burnley-vs-nottingham-forest/2sq9j2#4813703"
+    },
+    {
+      "matchId": "25-26-prem-everton-vs-liverpool",
+      "season": "2025-2026",
+      "gameweek": 33,
+      "kickoffTime": "2026-04-19T13:00:00+00:00",
+      "homeTeam": {
+        "id": 11,
+        "name": "Everton",
+        "shortName": "EVE",
+        "badgeSlug": "everton",
+        "badgePath": "/teams/everton.football-logos.cc.png"
+      },
+      "awayTeam": {
+        "id": 14,
+        "name": "Liverpool",
+        "shortName": "LIV",
+        "badgeSlug": "liverpool",
+        "badgePath": "/teams/liverpool.football-logos.cc.png"
+      },
+      "score": {
+        "home": 1,
+        "away": 2
+      },
+      "stats": {
+        "xg": {
+          "home": 0.79,
+          "away": 1.45
+        },
+        "shotsOnTarget": {
+          "home": 4,
+          "away": 6
+        },
+        "bigChances": {
+          "home": 2,
+          "away": 2
+        },
+        "possession": {
+          "home": 44.0,
+          "away": 56.0
+        }
+      },
+      "preMatch": {
+        "homeElo": 1829.0,
+        "awayElo": 1926.0,
+        "homeLast5Xg": 1.44,
+        "awayLast5Xg": 1.61
+      },
+      "matchUrl": "/matches/liverpool-vs-everton/2hagld#4813699"
+    },
+    {
+      "matchId": "25-26-prem-aston-villa-vs-sunderland",
+      "season": "2025-2026",
+      "gameweek": 33,
+      "kickoffTime": "2026-04-19T13:00:00+00:00",
+      "homeTeam": {
+        "id": 7,
+        "name": "Aston Villa",
+        "shortName": "AVL",
+        "badgeSlug": "aston-villa",
+        "badgePath": "/teams/aston-villa.football-logos.cc.png"
+      },
+      "awayTeam": {
+        "id": 56,
+        "name": "Sunderland",
+        "shortName": "SUN",
+        "badgeSlug": "sunderland",
+        "badgePath": "/teams/sunderland.football-logos.cc.png"
+      },
+      "score": {
+        "home": 4,
+        "away": 3
+      },
+      "stats": {
+        "xg": {
+          "home": 2.84,
+          "away": 1.73
+        },
+        "shotsOnTarget": {
+          "home": 7,
+          "away": 7
+        },
+        "bigChances": {
+          "home": 7,
+          "away": 3
+        },
+        "possession": {
+          "home": 50.0,
+          "away": 50.0
+        }
+      },
+      "preMatch": {
+        "homeElo": 1899.0,
+        "awayElo": 1713.0,
+        "homeLast5Xg": 1.1,
+        "awayLast5Xg": 1.39
+      },
+      "matchUrl": "/matches/sunderland-vs-aston-villa/2wdjjm#4813695"
+    },
+    {
+      "matchId": "25-26-prem-chelsea-vs-manchester-united",
+      "season": "2025-2026",
+      "gameweek": 33,
+      "kickoffTime": "2026-04-18T19:00:00+00:00",
+      "homeTeam": {
+        "id": 8,
+        "name": "Chelsea",
+        "shortName": "CHE",
+        "badgeSlug": "chelsea",
+        "badgePath": "/teams/chelsea.football-logos.cc.png"
+      },
+      "awayTeam": {
+        "id": 1,
+        "name": "Manchester United",
+        "shortName": "MUN",
+        "badgeSlug": "manchester-united",
+        "badgePath": "/teams/manchester-united.football-logos.cc.png"
+      },
+      "score": {
+        "home": 0,
+        "away": 1
+      },
+      "stats": {
+        "xg": {
+          "home": 1.57,
+          "away": 0.29
+        },
+        "shotsOnTarget": {
+          "home": 3,
+          "away": 1
+        },
+        "bigChances": {
+          "home": 0,
+          "away": 1
+        },
+        "possession": {
+          "home": 59.0,
+          "away": 41.0
+        }
+      },
+      "preMatch": {
+        "homeElo": 1852.0,
+        "awayElo": 1881.0,
+        "homeLast5Xg": 1.62,
+        "awayLast5Xg": 1.53
+      },
+      "matchUrl": "/matches/chelsea-vs-manchester-united/2w9xj5#4813697"
+    },
+    {
+      "matchId": "25-26-prem-tottenham-hotspur-vs-brighton-hove-albion",
+      "season": "2025-2026",
+      "gameweek": 33,
+      "kickoffTime": "2026-04-18T16:30:00+00:00",
+      "homeTeam": {
+        "id": 6,
+        "name": "Tottenham Hotspur",
+        "shortName": "TOT",
+        "badgeSlug": "tottenham",
+        "badgePath": "/teams/tottenham.football-logos.cc.png"
+      },
+      "awayTeam": {
+        "id": 36,
+        "name": "Brighton & Hove Albion",
+        "shortName": "BHA",
+        "badgeSlug": "brighton",
+        "badgePath": "/teams/brighton.football-logos.cc.png"
+      },
+      "score": {
+        "home": 2,
+        "away": 2
+      },
+      "stats": {
+        "xg": {
+          "home": 1.09,
+          "away": 0.82
+        },
+        "shotsOnTarget": {
+          "home": 6,
+          "away": 3
+        },
+        "bigChances": {
+          "home": 3,
+          "away": 2
+        },
+        "possession": {
+          "home": 42.0,
+          "away": 58.0
+        }
+      },
+      "preMatch": {
+        "homeElo": 1750.0,
+        "awayElo": 1852.0,
+        "homeLast5Xg": 1.15,
+        "awayLast5Xg": 1.58
+      },
+      "matchUrl": "/matches/tottenham-hotspur-vs-brighton-hove-albion/2x42vj#4813704"
+    },
+    {
+      "matchId": "25-26-prem-newcastle-united-vs-afc-bournemouth",
+      "season": "2025-2026",
+      "gameweek": 33,
+      "kickoffTime": "2026-04-18T14:00:00+00:00",
+      "homeTeam": {
+        "id": 4,
+        "name": "Newcastle United",
+        "shortName": "NEW",
+        "badgeSlug": "newcastle",
+        "badgePath": "/teams/newcastle.football-logos.cc.png"
+      },
+      "awayTeam": {
+        "id": 91,
+        "name": "AFC Bournemouth",
+        "shortName": "BOU",
+        "badgeSlug": "bournemouth",
+        "badgePath": "/teams/bournemouth.football-logos.cc.png"
+      },
+      "score": {
+        "home": 1,
+        "away": 2
+      },
+      "stats": {
+        "xg": {
+          "home": 1.59,
+          "away": 2.99
+        },
+        "shotsOnTarget": {
+          "home": 3,
+          "away": 3
+        },
+        "bigChances": {
+          "home": 2,
+          "away": 4
+        },
+        "possession": {
+          "home": 54.0,
+          "away": 46.0
+        }
+      },
+      "preMatch": {
+        "homeElo": 1827.0,
+        "awayElo": 1849.0,
+        "homeLast5Xg": 1.46,
+        "awayLast5Xg": 1.83
+      },
+      "matchUrl": "/matches/afc-bournemouth-vs-newcastle-united/2ysbu8#4813702"
+    },
+    {
+      "matchId": "25-26-prem-leeds-united-vs-wolverhampton-wanderers",
+      "season": "2025-2026",
+      "gameweek": 33,
+      "kickoffTime": "2026-04-18T14:00:00+00:00",
+      "homeTeam": {
+        "id": 2,
+        "name": "Leeds United",
+        "shortName": "LEE",
+        "badgeSlug": "leeds-united",
+        "badgePath": "/teams/leeds-united.football-logos.cc.png"
+      },
+      "awayTeam": {
+        "id": 39,
+        "name": "Wolverhampton Wanderers",
+        "shortName": "WOL",
+        "badgeSlug": "wolves",
+        "badgePath": "/teams/wolves.football-logos.cc.png"
+      },
+      "score": {
+        "home": 3,
+        "away": 0
+      },
+      "stats": {
+        "xg": {
+          "home": 2.82,
+          "away": 0.57
+        },
+        "shotsOnTarget": {
+          "home": 6,
+          "away": 2
+        },
+        "bigChances": {
+          "home": 7,
+          "away": 2
+        },
+        "possession": {
+          "home": 56.0,
+          "away": 44.0
+        }
+      },
+      "preMatch": {
+        "homeElo": 1789.0,
+        "awayElo": 1684.0,
+        "homeLast5Xg": 1.37,
+        "awayLast5Xg": 0.98
+      },
+      "matchUrl": "/matches/leeds-united-vs-wolverhampton-wanderers/2ep8dz#4813700"
+    },
+    {
+      "matchId": "25-26-prem-brentford-vs-fulham",
+      "season": "2025-2026",
+      "gameweek": 33,
+      "kickoffTime": "2026-04-18T11:30:00+00:00",
+      "homeTeam": {
+        "id": 94,
+        "name": "Brentford",
+        "shortName": "BRE",
+        "badgeSlug": "brentford",
+        "badgePath": "/teams/brentford.football-logos.cc.png"
+      },
+      "awayTeam": {
+        "id": 54,
+        "name": "Fulham",
+        "shortName": "FUL",
+        "badgeSlug": "fulham",
+        "badgePath": "/teams/fulham.football-logos.cc.png"
+      },
+      "score": {
+        "home": 0,
+        "away": 0
+      },
+      "stats": {
+        "xg": {
+          "home": 1.43,
+          "away": 0.77
+        },
+        "shotsOnTarget": {
+          "home": 4,
+          "away": 0
+        },
+        "bigChances": {
+          "home": 4,
+          "away": 1
+        },
+        "possession": {
+          "home": 48.0,
+          "away": 52.0
+        }
+      },
+      "preMatch": {
+        "homeElo": 1833.0,
+        "awayElo": 1801.0,
+        "homeLast5Xg": 1.7,
+        "awayLast5Xg": 1.65
+      },
+      "matchUrl": "/matches/fulham-vs-brentford/38wlut#4813696"
+    },
+    {
+      "matchId": "25-26-prem-manchester-united-vs-leeds-united",
+      "season": "2025-2026",
+      "gameweek": 32,
+      "kickoffTime": "2026-04-13T19:00:00+00:00",
+      "homeTeam": {
+        "id": 1,
+        "name": "Manchester United",
+        "shortName": "MUN",
+        "badgeSlug": "manchester-united",
+        "badgePath": "/teams/manchester-united.football-logos.cc.png"
+      },
+      "awayTeam": {
+        "id": 2,
+        "name": "Leeds United",
+        "shortName": "LEE",
+        "badgeSlug": "leeds-united",
+        "badgePath": "/teams/leeds-united.football-logos.cc.png"
+      },
+      "score": {
+        "home": 1,
+        "away": 2
+      },
+      "stats": {
+        "xg": {
+          "home": 1.27,
+          "away": 2.57
+        },
+        "shotsOnTarget": {
+          "home": 9,
+          "away": 6
+        },
+        "bigChances": {
+          "home": 1,
+          "away": 4
+        },
+        "possession": {
+          "home": 53.0,
+          "away": 47.0
+        }
+      },
+      "preMatch": {
+        "homeElo": 1881.0,
+        "awayElo": 1780.0,
+        "homeLast5Xg": 1.53,
+        "awayLast5Xg": 1.13
+      },
+      "matchUrl": "/matches/leeds-united-vs-manchester-united/2wd539#4813691"
+    },
+    {
+      "matchId": "25-26-prem-chelsea-vs-manchester-city",
+      "season": "2025-2026",
+      "gameweek": 32,
+      "kickoffTime": "2026-04-12T15:30:00+00:00",
+      "homeTeam": {
+        "id": 8,
+        "name": "Chelsea",
+        "shortName": "CHE",
+        "badgeSlug": "chelsea",
+        "badgePath": "/teams/chelsea.football-logos.cc.png"
+      },
+      "awayTeam": {
+        "id": 43,
+        "name": "Manchester City",
+        "shortName": "MCI",
+        "badgeSlug": "manchester-city",
+        "badgePath": "/teams/manchester-city.football-logos.cc.png"
+      },
+      "score": {
+        "home": 0,
+        "away": 3
+      },
+      "stats": {
+        "xg": {
+          "home": 1.14,
+          "away": 2.29
+        },
+        "shotsOnTarget": {
+          "home": 3,
+          "away": 8
+        },
+        "bigChances": {
+          "home": 1,
+          "away": 3
+        },
+        "possession": {
+          "home": 37.0,
+          "away": 63.0
+        }
+      },
+      "preMatch": {
+        "homeElo": 1930.0,
+        "awayElo": 1974.0,
+        "homeLast5Xg": 1.79,
+        "awayLast5Xg": 1.79
+      },
+      "matchUrl": "/matches/chelsea-vs-manchester-city/2d55kw#4813688"
     },
     {
       "matchId": "25-26-prem-sunderland-vs-tottenham-hotspur",
       "season": "2025-2026",
       "gameweek": 32,
-      "kickoffTime": "2026-04-11T14:00:00+00:00",
+      "kickoffTime": "2026-04-12T13:00:00+00:00",
       "homeTeam": {
         "id": 56,
         "name": "Sunderland",
@@ -130,7 +3168,7 @@
       "matchId": "25-26-prem-nottingham-forest-vs-aston-villa",
       "season": "2025-2026",
       "gameweek": 32,
-      "kickoffTime": "2026-04-11T14:00:00+00:00",
+      "kickoffTime": "2026-04-12T13:00:00+00:00",
       "homeTeam": {
         "id": 17,
         "name": "Nottingham Forest",
@@ -176,108 +3214,10 @@
       "matchUrl": "/matches/nottingham-forest-vs-aston-villa/3gke9k#4813692"
     },
     {
-      "matchId": "25-26-prem-manchester-united-vs-leeds-united",
-      "season": "2025-2026",
-      "gameweek": 32,
-      "kickoffTime": "2026-04-11T14:00:00+00:00",
-      "homeTeam": {
-        "id": 1,
-        "name": "Manchester United",
-        "shortName": "MUN",
-        "badgeSlug": "manchester-united",
-        "badgePath": "/teams/manchester-united.football-logos.cc.png"
-      },
-      "awayTeam": {
-        "id": 2,
-        "name": "Leeds United",
-        "shortName": "LEE",
-        "badgeSlug": "leeds-united",
-        "badgePath": "/teams/leeds-united.football-logos.cc.png"
-      },
-      "score": {
-        "home": 1,
-        "away": 2
-      },
-      "stats": {
-        "xg": {
-          "home": 1.27,
-          "away": 2.57
-        },
-        "shotsOnTarget": {
-          "home": 9,
-          "away": 6
-        },
-        "bigChances": {
-          "home": 1,
-          "away": 4
-        },
-        "possession": {
-          "home": 53.0,
-          "away": 47.0
-        }
-      },
-      "preMatch": {
-        "homeElo": 1881.0,
-        "awayElo": 1780.0,
-        "homeLast5Xg": 1.53,
-        "awayLast5Xg": 1.13
-      },
-      "matchUrl": "/matches/leeds-united-vs-manchester-united/2wd539#4813691"
-    },
-    {
-      "matchId": "25-26-prem-liverpool-vs-fulham",
-      "season": "2025-2026",
-      "gameweek": 32,
-      "kickoffTime": "2026-04-11T14:00:00+00:00",
-      "homeTeam": {
-        "id": 14,
-        "name": "Liverpool",
-        "shortName": "LIV",
-        "badgeSlug": "liverpool",
-        "badgePath": "/teams/liverpool.football-logos.cc.png"
-      },
-      "awayTeam": {
-        "id": 54,
-        "name": "Fulham",
-        "shortName": "FUL",
-        "badgeSlug": "fulham",
-        "badgePath": "/teams/fulham.football-logos.cc.png"
-      },
-      "score": {
-        "home": 2,
-        "away": 0
-      },
-      "stats": {
-        "xg": {
-          "home": 1.59,
-          "away": 1.04
-        },
-        "shotsOnTarget": {
-          "home": 5,
-          "away": 4
-        },
-        "bigChances": {
-          "home": 4,
-          "away": 2
-        },
-        "possession": {
-          "home": 53.0,
-          "away": 47.0
-        }
-      },
-      "preMatch": {
-        "homeElo": 1949.0,
-        "awayElo": 1808.0,
-        "homeLast5Xg": 1.64,
-        "awayLast5Xg": 1.82
-      },
-      "matchUrl": "/matches/liverpool-vs-fulham/2u7pyg#4813690"
-    },
-    {
       "matchId": "25-26-prem-crystal-palace-vs-newcastle-united",
       "season": "2025-2026",
       "gameweek": 32,
-      "kickoffTime": "2026-04-11T14:00:00+00:00",
+      "kickoffTime": "2026-04-12T13:00:00+00:00",
       "homeTeam": {
         "id": 31,
         "name": "Crystal Palace",
@@ -323,53 +3263,53 @@
       "matchUrl": "/matches/crystal-palace-vs-newcastle-united/3c4hty#4813689"
     },
     {
-      "matchId": "25-26-prem-chelsea-vs-manchester-city",
+      "matchId": "25-26-prem-liverpool-vs-fulham",
       "season": "2025-2026",
       "gameweek": 32,
-      "kickoffTime": "2026-04-11T14:00:00+00:00",
+      "kickoffTime": "2026-04-11T16:30:00+00:00",
       "homeTeam": {
-        "id": 8,
-        "name": "Chelsea",
-        "shortName": "CHE",
-        "badgeSlug": "chelsea",
-        "badgePath": "/teams/chelsea.football-logos.cc.png"
+        "id": 14,
+        "name": "Liverpool",
+        "shortName": "LIV",
+        "badgeSlug": "liverpool",
+        "badgePath": "/teams/liverpool.football-logos.cc.png"
       },
       "awayTeam": {
-        "id": 43,
-        "name": "Manchester City",
-        "shortName": "MCI",
-        "badgeSlug": "manchester-city",
-        "badgePath": "/teams/manchester-city.football-logos.cc.png"
+        "id": 54,
+        "name": "Fulham",
+        "shortName": "FUL",
+        "badgeSlug": "fulham",
+        "badgePath": "/teams/fulham.football-logos.cc.png"
       },
       "score": {
-        "home": 0,
-        "away": 3
+        "home": 2,
+        "away": 0
       },
       "stats": {
         "xg": {
-          "home": 1.14,
-          "away": 2.29
+          "home": 1.59,
+          "away": 1.04
         },
         "shotsOnTarget": {
-          "home": 3,
-          "away": 8
+          "home": 5,
+          "away": 4
         },
         "bigChances": {
-          "home": 1,
-          "away": 3
+          "home": 4,
+          "away": 2
         },
         "possession": {
-          "home": 37.0,
-          "away": 63.0
+          "home": 53.0,
+          "away": 47.0
         }
       },
       "preMatch": {
-        "homeElo": 1930.0,
-        "awayElo": 1974.0,
-        "homeLast5Xg": 1.79,
-        "awayLast5Xg": 1.79
+        "homeElo": 1949.0,
+        "awayElo": 1808.0,
+        "homeLast5Xg": 1.64,
+        "awayLast5Xg": 1.82
       },
-      "matchUrl": "/matches/chelsea-vs-manchester-city/2d55kw#4813688"
+      "matchUrl": "/matches/liverpool-vs-fulham/2u7pyg#4813690"
     },
     {
       "matchId": "25-26-prem-burnley-vs-brighton-hove-albion",
@@ -473,7 +3413,7 @@
       "matchId": "25-26-prem-arsenal-vs-afc-bournemouth",
       "season": "2025-2026",
       "gameweek": 32,
-      "kickoffTime": "2026-04-11T14:00:00+00:00",
+      "kickoffTime": "2026-04-11T11:30:00+00:00",
       "homeTeam": {
         "id": 3,
         "name": "Arsenal",
@@ -517,6 +3457,55 @@
         "awayLast5Xg": 1.73
       },
       "matchUrl": "/matches/afc-bournemouth-vs-arsenal/2txefx#4813685"
+    },
+    {
+      "matchId": "25-26-prem-west-ham-united-vs-wolverhampton-wanderers",
+      "season": "2025-2026",
+      "gameweek": 32,
+      "kickoffTime": "2026-04-10T19:00:00+00:00",
+      "homeTeam": {
+        "id": 21,
+        "name": "West Ham United",
+        "shortName": "WHU",
+        "badgeSlug": "west-ham",
+        "badgePath": "/teams/west-ham.football-logos.cc.png"
+      },
+      "awayTeam": {
+        "id": 39,
+        "name": "Wolverhampton Wanderers",
+        "shortName": "WOL",
+        "badgeSlug": "wolves",
+        "badgePath": "/teams/wolves.football-logos.cc.png"
+      },
+      "score": {
+        "home": 4,
+        "away": 0
+      },
+      "stats": {
+        "xg": {
+          "home": 2.35,
+          "away": 0.59
+        },
+        "shotsOnTarget": {
+          "home": 7,
+          "away": 3
+        },
+        "bigChances": {
+          "home": 6,
+          "away": 0
+        },
+        "possession": {
+          "home": 44.0,
+          "away": 56.0
+        }
+      },
+      "preMatch": {
+        "homeElo": 1744.0,
+        "awayElo": 1669.0,
+        "homeLast5Xg": 1.52,
+        "awayLast5Xg": 0.92
+      },
+      "matchUrl": "/matches/wolverhampton-wanderers-vs-west-ham-united/2gnhk2#4813694"
     },
     {
       "matchId": "25-26-prem-tottenham-hotspur-vs-nottingham-forest",
@@ -816,7 +3805,7 @@
       "matchId": "25-26-prem-brighton-hove-albion-vs-liverpool",
       "season": "2025-2026",
       "gameweek": 31,
-      "kickoffTime": "2026-03-21T12:30:00+00:00",
+      "kickoffTime": "2026-03-21T12:45:00+00:00",
       "homeTeam": {
         "id": 36,
         "name": "Brighton & Hove Albion",
@@ -1009,6 +3998,55 @@
       "matchUrl": "/matches/tottenham-hotspur-vs-liverpool/2gg3ek#4813670"
     },
     {
+      "matchId": "25-26-prem-nottingham-forest-vs-fulham",
+      "season": "2025-2026",
+      "gameweek": 30,
+      "kickoffTime": "2026-03-15T14:00:00+00:00",
+      "homeTeam": {
+        "id": 17,
+        "name": "Nottingham Forest",
+        "shortName": "NFO",
+        "badgeSlug": "nottingham-forest",
+        "badgePath": "/teams/nottingham-forest.football-logos.cc.png"
+      },
+      "awayTeam": {
+        "id": 54,
+        "name": "Fulham",
+        "shortName": "FUL",
+        "badgeSlug": "fulham",
+        "badgePath": "/teams/fulham.football-logos.cc.png"
+      },
+      "score": {
+        "home": 0,
+        "away": 0
+      },
+      "stats": {
+        "xg": {
+          "home": 0.95,
+          "away": 1.03
+        },
+        "shotsOnTarget": {
+          "home": 2,
+          "away": 1
+        },
+        "bigChances": {
+          "home": 1,
+          "away": 1
+        },
+        "possession": {
+          "home": 46.0,
+          "away": 54.0
+        }
+      },
+      "preMatch": {
+        "homeElo": 1785.0,
+        "awayElo": 1808.0,
+        "homeLast5Xg": 1.39,
+        "awayLast5Xg": 1.66
+      },
+      "matchUrl": "/matches/fulham-vs-nottingham-forest/3c2cdu#4813672"
+    },
+    {
       "matchId": "25-26-prem-manchester-united-vs-aston-villa",
       "season": "2025-2026",
       "gameweek": 30,
@@ -1058,53 +4096,102 @@
       "matchUrl": "/matches/aston-villa-vs-manchester-united/3h9f6s#4813671"
     },
     {
-      "matchId": "25-26-prem-arsenal-vs-everton",
+      "matchId": "25-26-prem-crystal-palace-vs-leeds-united",
       "season": "2025-2026",
       "gameweek": 30,
       "kickoffTime": "2026-03-15T14:00:00+00:00",
       "homeTeam": {
-        "id": 3,
-        "name": "Arsenal",
-        "shortName": "ARS",
-        "badgeSlug": "arsenal",
-        "badgePath": "/teams/arsenal.football-logos.cc.png"
+        "id": 31,
+        "name": "Crystal Palace",
+        "shortName": "CRY",
+        "badgeSlug": "crystal-palace",
+        "badgePath": "/teams/crystal-palace.football-logos.cc.png"
       },
       "awayTeam": {
-        "id": 11,
-        "name": "Everton",
-        "shortName": "EVE",
-        "badgeSlug": "everton",
-        "badgePath": "/teams/everton.football-logos.cc.png"
+        "id": 2,
+        "name": "Leeds United",
+        "shortName": "LEE",
+        "badgeSlug": "leeds-united",
+        "badgePath": "/teams/leeds-united.football-logos.cc.png"
       },
       "score": {
-        "home": 2,
+        "home": 0,
         "away": 0
       },
       "stats": {
         "xg": {
-          "home": 2.7,
-          "away": 1.05
+          "home": 0.67,
+          "away": 1.12
         },
         "shotsOnTarget": {
-          "home": 7,
+          "home": 0,
           "away": 3
         },
         "bigChances": {
-          "home": 2,
-          "away": 2
+          "home": 0,
+          "away": 1
         },
         "possession": {
-          "home": 64.0,
-          "away": 36.0
+          "home": 67.0,
+          "away": 33.0
         }
       },
       "preMatch": {
-        "homeElo": 2065.0,
-        "awayElo": 1832.0,
-        "homeLast5Xg": 1.17,
-        "awayLast5Xg": 1.78
+        "homeElo": 1806.0,
+        "awayElo": 1780.0,
+        "homeLast5Xg": 1.42,
+        "awayLast5Xg": 1.59
       },
-      "matchUrl": "/matches/everton-vs-arsenal/2ttfpg#4813665"
+      "matchUrl": "/matches/leeds-united-vs-crystal-palace/2rl0qz#4813669"
+    },
+    {
+      "matchId": "25-26-prem-west-ham-united-vs-manchester-city",
+      "season": "2025-2026",
+      "gameweek": 30,
+      "kickoffTime": "2026-03-14T20:00:00+00:00",
+      "homeTeam": {
+        "id": 21,
+        "name": "West Ham United",
+        "shortName": "WHU",
+        "badgeSlug": "west-ham",
+        "badgePath": "/teams/west-ham.football-logos.cc.png"
+      },
+      "awayTeam": {
+        "id": 43,
+        "name": "Manchester City",
+        "shortName": "MCI",
+        "badgeSlug": "manchester-city",
+        "badgePath": "/teams/manchester-city.football-logos.cc.png"
+      },
+      "score": {
+        "home": 1,
+        "away": 1
+      },
+      "stats": {
+        "xg": {
+          "home": 0.54,
+          "away": 2.12
+        },
+        "shotsOnTarget": {
+          "home": 1,
+          "away": 6
+        },
+        "bigChances": {
+          "home": 1,
+          "away": 1
+        },
+        "possession": {
+          "home": 29.0,
+          "away": 71.0
+        }
+      },
+      "preMatch": {
+        "homeElo": 1744.0,
+        "awayElo": 1974.0,
+        "homeLast5Xg": 1.67,
+        "awayLast5Xg": 1.92
+      },
+      "matchUrl": "/matches/manchester-city-vs-west-ham-united/2f5prf#4813674"
     },
     {
       "matchId": "25-26-prem-chelsea-vs-newcastle-united",
@@ -1156,6 +4243,55 @@
       "matchUrl": "/matches/chelsea-vs-newcastle-united/2wabz1#4813668"
     },
     {
+      "matchId": "25-26-prem-arsenal-vs-everton",
+      "season": "2025-2026",
+      "gameweek": 30,
+      "kickoffTime": "2026-03-14T17:30:00+00:00",
+      "homeTeam": {
+        "id": 3,
+        "name": "Arsenal",
+        "shortName": "ARS",
+        "badgeSlug": "arsenal",
+        "badgePath": "/teams/arsenal.football-logos.cc.png"
+      },
+      "awayTeam": {
+        "id": 11,
+        "name": "Everton",
+        "shortName": "EVE",
+        "badgeSlug": "everton",
+        "badgePath": "/teams/everton.football-logos.cc.png"
+      },
+      "score": {
+        "home": 2,
+        "away": 0
+      },
+      "stats": {
+        "xg": {
+          "home": 2.7,
+          "away": 1.05
+        },
+        "shotsOnTarget": {
+          "home": 7,
+          "away": 3
+        },
+        "bigChances": {
+          "home": 2,
+          "away": 2
+        },
+        "possession": {
+          "home": 64.0,
+          "away": 36.0
+        }
+      },
+      "preMatch": {
+        "homeElo": 2065.0,
+        "awayElo": 1832.0,
+        "homeLast5Xg": 1.17,
+        "awayLast5Xg": 1.78
+      },
+      "matchUrl": "/matches/everton-vs-arsenal/2ttfpg#4813665"
+    },
+    {
       "matchId": "25-26-prem-sunderland-vs-brighton-hove-albion",
       "season": "2025-2026",
       "gameweek": 30,
@@ -1205,104 +4341,6 @@
       "matchUrl": "/matches/sunderland-vs-brighton-hove-albion/2vuaxm#4813673"
     },
     {
-      "matchId": "25-26-prem-nottingham-forest-vs-fulham",
-      "season": "2025-2026",
-      "gameweek": 30,
-      "kickoffTime": "2026-03-14T15:00:00+00:00",
-      "homeTeam": {
-        "id": 17,
-        "name": "Nottingham Forest",
-        "shortName": "NFO",
-        "badgeSlug": "nottingham-forest",
-        "badgePath": "/teams/nottingham-forest.football-logos.cc.png"
-      },
-      "awayTeam": {
-        "id": 54,
-        "name": "Fulham",
-        "shortName": "FUL",
-        "badgeSlug": "fulham",
-        "badgePath": "/teams/fulham.football-logos.cc.png"
-      },
-      "score": {
-        "home": 0,
-        "away": 0
-      },
-      "stats": {
-        "xg": {
-          "home": 0.95,
-          "away": 1.03
-        },
-        "shotsOnTarget": {
-          "home": 2,
-          "away": 1
-        },
-        "bigChances": {
-          "home": 1,
-          "away": 1
-        },
-        "possession": {
-          "home": 46.0,
-          "away": 54.0
-        }
-      },
-      "preMatch": {
-        "homeElo": 1785.0,
-        "awayElo": 1808.0,
-        "homeLast5Xg": 1.39,
-        "awayLast5Xg": 1.66
-      },
-      "matchUrl": "/matches/fulham-vs-nottingham-forest/3c2cdu#4813672"
-    },
-    {
-      "matchId": "25-26-prem-crystal-palace-vs-leeds-united",
-      "season": "2025-2026",
-      "gameweek": 30,
-      "kickoffTime": "2026-03-14T15:00:00+00:00",
-      "homeTeam": {
-        "id": 31,
-        "name": "Crystal Palace",
-        "shortName": "CRY",
-        "badgeSlug": "crystal-palace",
-        "badgePath": "/teams/crystal-palace.football-logos.cc.png"
-      },
-      "awayTeam": {
-        "id": 2,
-        "name": "Leeds United",
-        "shortName": "LEE",
-        "badgeSlug": "leeds-united",
-        "badgePath": "/teams/leeds-united.football-logos.cc.png"
-      },
-      "score": {
-        "home": 0,
-        "away": 0
-      },
-      "stats": {
-        "xg": {
-          "home": 0.67,
-          "away": 1.12
-        },
-        "shotsOnTarget": {
-          "home": 0,
-          "away": 3
-        },
-        "bigChances": {
-          "home": 0,
-          "away": 1
-        },
-        "possession": {
-          "home": 67.0,
-          "away": 33.0
-        }
-      },
-      "preMatch": {
-        "homeElo": 1806.0,
-        "awayElo": 1780.0,
-        "homeLast5Xg": 1.42,
-        "awayLast5Xg": 1.59
-      },
-      "matchUrl": "/matches/leeds-united-vs-crystal-palace/2rl0qz#4813669"
-    },
-    {
       "matchId": "25-26-prem-burnley-vs-afc-bournemouth",
       "season": "2025-2026",
       "gameweek": 30,
@@ -1350,55 +4388,6 @@
         "awayLast5Xg": 1.54
       },
       "matchUrl": "/matches/burnley-vs-afc-bournemouth/2cpydh#4813667"
-    },
-    {
-      "matchId": "25-26-prem-west-ham-united-vs-manchester-city",
-      "season": "2025-2026",
-      "gameweek": 30,
-      "kickoffTime": "2026-03-14T12:30:00+00:00",
-      "homeTeam": {
-        "id": 21,
-        "name": "West Ham United",
-        "shortName": "WHU",
-        "badgeSlug": "west-ham",
-        "badgePath": "/teams/west-ham.football-logos.cc.png"
-      },
-      "awayTeam": {
-        "id": 43,
-        "name": "Manchester City",
-        "shortName": "MCI",
-        "badgeSlug": "manchester-city",
-        "badgePath": "/teams/manchester-city.football-logos.cc.png"
-      },
-      "score": {
-        "home": 1,
-        "away": 1
-      },
-      "stats": {
-        "xg": {
-          "home": 0.54,
-          "away": 2.12
-        },
-        "shotsOnTarget": {
-          "home": 1,
-          "away": 6
-        },
-        "bigChances": {
-          "home": 1,
-          "away": 1
-        },
-        "possession": {
-          "home": 29.0,
-          "away": 71.0
-        }
-      },
-      "preMatch": {
-        "homeElo": 1744.0,
-        "awayElo": 1974.0,
-        "homeLast5Xg": 1.67,
-        "awayLast5Xg": 1.92
-      },
-      "matchUrl": "/matches/manchester-city-vs-west-ham-united/2f5prf#4813674"
     },
     {
       "matchId": "25-26-prem-tottenham-hotspur-vs-crystal-palace",
@@ -3018,6 +6007,55 @@
       "matchUrl": "/matches/sunderland-vs-liverpool/2fa48t#4813632"
     },
     {
+      "matchId": "25-26-prem-crystal-palace-vs-burnley",
+      "season": "2025-2026",
+      "gameweek": 26,
+      "kickoffTime": "2026-02-11T19:40:00+00:00",
+      "homeTeam": {
+        "id": 31,
+        "name": "Crystal Palace",
+        "shortName": "CRY",
+        "badgeSlug": "crystal-palace",
+        "badgePath": "/teams/crystal-palace.football-logos.cc.png"
+      },
+      "awayTeam": {
+        "id": 90,
+        "name": "Burnley",
+        "shortName": "BUR",
+        "badgeSlug": "burnley",
+        "badgePath": "/teams/burnley.football-logos.cc.png"
+      },
+      "score": {
+        "home": 2,
+        "away": 3
+      },
+      "stats": {
+        "xg": {
+          "home": 1.8,
+          "away": 0.53
+        },
+        "shotsOnTarget": {
+          "home": 3,
+          "away": 3
+        },
+        "bigChances": {
+          "home": 3,
+          "away": 1
+        },
+        "possession": {
+          "home": 64.0,
+          "away": 36.0
+        }
+      },
+      "preMatch": {
+        "homeElo": 1806.0,
+        "awayElo": 1685.0,
+        "homeLast5Xg": 1.39,
+        "awayLast5Xg": 0.7
+      },
+      "matchUrl": "/matches/burnley-vs-crystal-palace/2on6r7#4813628"
+    },
+    {
       "matchId": "25-26-prem-nottingham-forest-vs-wolverhampton-wanderers",
       "season": "2025-2026",
       "gameweek": 26,
@@ -3114,55 +6152,6 @@
         "awayLast5Xg": 1.31
       },
       "matchUrl": "/matches/manchester-city-vs-fulham/2s32rr#4813630"
-    },
-    {
-      "matchId": "25-26-prem-crystal-palace-vs-burnley",
-      "season": "2025-2026",
-      "gameweek": 26,
-      "kickoffTime": "2026-02-11T19:30:00+00:00",
-      "homeTeam": {
-        "id": 31,
-        "name": "Crystal Palace",
-        "shortName": "CRY",
-        "badgeSlug": "crystal-palace",
-        "badgePath": "/teams/crystal-palace.football-logos.cc.png"
-      },
-      "awayTeam": {
-        "id": 90,
-        "name": "Burnley",
-        "shortName": "BUR",
-        "badgeSlug": "burnley",
-        "badgePath": "/teams/burnley.football-logos.cc.png"
-      },
-      "score": {
-        "home": 2,
-        "away": 3
-      },
-      "stats": {
-        "xg": {
-          "home": 1.8,
-          "away": 0.53
-        },
-        "shotsOnTarget": {
-          "home": 3,
-          "away": 3
-        },
-        "bigChances": {
-          "home": 3,
-          "away": 1
-        },
-        "possession": {
-          "home": 64.0,
-          "away": 36.0
-        }
-      },
-      "preMatch": {
-        "homeElo": 1806.0,
-        "awayElo": 1685.0,
-        "homeLast5Xg": 1.39,
-        "awayLast5Xg": 0.7
-      },
-      "matchUrl": "/matches/burnley-vs-crystal-palace/2on6r7#4813628"
     },
     {
       "matchId": "25-26-prem-aston-villa-vs-brighton-hove-albion",
@@ -10803,8 +13792,8 @@
       "preMatch": {
         "homeElo": 1634.0,
         "awayElo": 1792.0,
-        "homeLast5Xg": 1.21,
-        "awayLast5Xg": 1.22
+        "homeLast5Xg": 1.07,
+        "awayLast5Xg": 1.23
       },
       "matchUrl": "/matches/sunderland-vs-everton/2fgq72#4813472"
     },
@@ -10853,7 +13842,7 @@
         "homeElo": 1969.0,
         "awayElo": 1847.0,
         "homeLast5Xg": 1.16,
-        "awayLast5Xg": 1.51
+        "awayLast5Xg": 1.0
       },
       "matchUrl": "/matches/manchester-city-vs-afc-bournemouth/2feiv3#4813470"
     },
@@ -10901,7 +13890,7 @@
       "preMatch": {
         "homeElo": 1710.0,
         "awayElo": 1885.0,
-        "homeLast5Xg": 0.66,
+        "homeLast5Xg": 0.67,
         "awayLast5Xg": 1.64
       },
       "matchUrl": "/matches/west-ham-united-vs-newcastle-united/2yilb8#4813474"
@@ -11049,7 +14038,7 @@
         "homeElo": 1754.0,
         "awayElo": 1829.0,
         "homeLast5Xg": 1.36,
-        "awayLast5Xg": 1.37
+        "awayLast5Xg": 1.68
       },
       "matchUrl": "/matches/nottingham-forest-vs-manchester-united/3gnwkc#4813471"
     },
@@ -11195,7 +14184,7 @@
       "preMatch": {
         "homeElo": 1735.0,
         "awayElo": 2033.0,
-        "homeLast5Xg": 0.61,
+        "homeLast5Xg": 0.68,
         "awayLast5Xg": 1.57
       },
       "matchUrl": "/matches/burnley-vs-arsenal/2omsup#4813466"
@@ -11245,7 +14234,7 @@
         "homeElo": 1832.0,
         "awayElo": 1733.0,
         "homeLast5Xg": 1.29,
-        "awayLast5Xg": 2.09
+        "awayLast5Xg": 1.62
       },
       "matchUrl": "/matches/leeds-united-vs-brighton-hove-albion/2vqp9d#4813465"
     },
@@ -11293,7 +14282,7 @@
       "preMatch": {
         "homeElo": 1808.0,
         "awayElo": 1814.0,
-        "homeLast5Xg": 1.04,
+        "homeLast5Xg": 1.02,
         "awayLast5Xg": 1.42
       },
       "matchUrl": "/matches/tottenham-hotspur-vs-everton/2gmqxt#4813460"
@@ -11342,8 +14331,8 @@
       "preMatch": {
         "homeElo": 1699.0,
         "awayElo": 1726.0,
-        "homeLast5Xg": 0.9,
-        "awayLast5Xg": 0.45
+        "homeLast5Xg": 1.14,
+        "awayLast5Xg": 0.56
       },
       "matchUrl": "/matches/burnley-vs-wolverhampton-wanderers/2byja7#4813464"
     },
@@ -11489,8 +14478,8 @@
       "preMatch": {
         "homeElo": 1840.0,
         "awayElo": 1761.0,
-        "homeLast5Xg": 1.72,
-        "awayLast5Xg": 1.52
+        "homeLast5Xg": 1.18,
+        "awayLast5Xg": 1.38
       },
       "matchUrl": "/matches/afc-bournemouth-vs-nottingham-forest/2y4tjb#4813455"
     },
@@ -11538,7 +14527,7 @@
       "preMatch": {
         "homeElo": 1810.0,
         "awayElo": 1986.0,
-        "homeLast5Xg": 1.42,
+        "homeLast5Xg": 1.28,
         "awayLast5Xg": 1.7
       },
       "matchUrl": "/matches/liverpool-vs-brentford/2uusjv#4813458"
@@ -11587,8 +14576,8 @@
       "preMatch": {
         "homeElo": 1818.0,
         "awayElo": 1843.0,
-        "homeLast5Xg": 1.48,
-        "awayLast5Xg": 1.41
+        "homeLast5Xg": 1.72,
+        "awayLast5Xg": 1.16
       },
       "matchUrl": "/matches/brighton-hove-albion-vs-manchester-united/3goccs#4813462"
     },
@@ -11637,7 +14626,7 @@
         "homeElo": 1880.0,
         "awayElo": 1780.0,
         "homeLast5Xg": 1.34,
-        "awayLast5Xg": 0.67
+        "awayLast5Xg": 0.72
       },
       "matchUrl": "/matches/fulham-vs-newcastle-united/3crcfp#4813463"
     },
@@ -11686,7 +14675,7 @@
         "homeElo": 1912.0,
         "awayElo": 1619.0,
         "homeLast5Xg": 1.28,
-        "awayLast5Xg": 1.16
+        "awayLast5Xg": 0.88
       },
       "matchUrl": "/matches/chelsea-vs-sunderland/2dayh4#4813459"
     },
@@ -11734,7 +14723,7 @@
       "preMatch": {
         "homeElo": 1733.0,
         "awayElo": 1724.0,
-        "homeLast5Xg": 1.96,
+        "homeLast5Xg": 1.48,
         "awayLast5Xg": 0.66
       },
       "matchUrl": "/matches/leeds-united-vs-west-ham-united/2f8a75#4813461"
@@ -11783,7 +14772,7 @@
       "preMatch": {
         "homeElo": 1725.0,
         "awayElo": 1798.0,
-        "homeLast5Xg": 0.71,
+        "homeLast5Xg": 1.07,
         "awayLast5Xg": 1.09
       },
       "matchUrl": "/matches/west-ham-united-vs-brentford/2uwdxd#4813454"
@@ -11832,8 +14821,8 @@
       "preMatch": {
         "homeElo": 1988.0,
         "awayElo": 1802.0,
-        "homeLast5Xg": 1.75,
-        "awayLast5Xg": 1.51
+        "homeLast5Xg": 1.64,
+        "awayLast5Xg": 2.18
       },
       "matchUrl": "/matches/liverpool-vs-manchester-united/2ygkcb#4813449"
     },
@@ -11881,8 +14870,8 @@
       "preMatch": {
         "homeElo": 1818.0,
         "awayElo": 1869.0,
-        "homeLast5Xg": 1.15,
-        "awayLast5Xg": 1.47
+        "homeLast5Xg": 1.17,
+        "awayLast5Xg": 1.02
       },
       "matchUrl": "/matches/tottenham-hotspur-vs-aston-villa/2xnfpj#4813453"
     },
@@ -11930,8 +14919,8 @@
       "preMatch": {
         "homeElo": 1781.0,
         "awayElo": 2018.0,
-        "homeLast5Xg": 0.79,
-        "awayLast5Xg": 1.4
+        "homeLast5Xg": 0.8,
+        "awayLast5Xg": 1.26
       },
       "matchUrl": "/matches/arsenal-vs-fulham/37l643#4813448"
     },
@@ -11979,8 +14968,8 @@
       "preMatch": {
         "homeElo": 1602.0,
         "awayElo": 1710.0,
-        "homeLast5Xg": 1.1,
-        "awayLast5Xg": 1.09
+        "homeLast5Xg": 1.06,
+        "awayLast5Xg": 1.08
       },
       "matchUrl": "/matches/sunderland-vs-wolverhampton-wanderers/2esixh#4813452"
     },
@@ -12028,8 +15017,8 @@
       "preMatch": {
         "homeElo": 1964.0,
         "awayElo": 1810.0,
-        "homeLast5Xg": 1.81,
-        "awayLast5Xg": 1.02
+        "homeLast5Xg": 1.09,
+        "awayLast5Xg": 1.27
       },
       "matchUrl": "/matches/manchester-city-vs-everton/2fauom#4813450"
     },
@@ -12077,8 +15066,8 @@
       "preMatch": {
         "homeElo": 1861.0,
         "awayElo": 1836.0,
-        "homeLast5Xg": 1.59,
-        "awayLast5Xg": 1.41
+        "homeLast5Xg": 1.73,
+        "awayLast5Xg": 1.09
       },
       "matchUrl": "/matches/afc-bournemouth-vs-crystal-palace/2txspy#4813447"
     },
@@ -12127,7 +15116,7 @@
         "homeElo": 1713.0,
         "awayElo": 1734.0,
         "homeLast5Xg": 0.5,
-        "awayLast5Xg": 1.53
+        "awayLast5Xg": 1.1
       },
       "matchUrl": "/matches/burnley-vs-leeds-united/2akph4#4813446"
     },
@@ -12175,8 +15164,8 @@
       "preMatch": {
         "homeElo": 1832.0,
         "awayElo": 1879.0,
-        "homeLast5Xg": 1.3,
-        "awayLast5Xg": 1.38
+        "homeLast5Xg": 1.1,
+        "awayLast5Xg": 1.09
       },
       "matchUrl": "/matches/brighton-hove-albion-vs-newcastle-united/3gos5a#4813445"
     },
@@ -12224,8 +15213,8 @@
       "preMatch": {
         "homeElo": 1760.0,
         "awayElo": 1897.0,
-        "homeLast5Xg": 1.15,
-        "awayLast5Xg": 1.12
+        "homeLast5Xg": 1.13,
+        "awayLast5Xg": 1.17
       },
       "matchUrl": "/matches/chelsea-vs-nottingham-forest/2vn3ne#4813451"
     },
@@ -12273,8 +15262,8 @@
       "preMatch": {
         "homeElo": 1803.0,
         "awayElo": 1959.0,
-        "homeLast5Xg": 1.24,
-        "awayLast5Xg": 1.69
+        "homeLast5Xg": 1.19,
+        "awayLast5Xg": 0.95
       },
       "matchUrl": "/matches/manchester-city-vs-brentford/2spwom#4813438"
     },
@@ -12322,7 +15311,7 @@
       "preMatch": {
         "homeElo": 1707.0,
         "awayElo": 1835.0,
-        "homeLast5Xg": 1.08,
+        "homeLast5Xg": 1.19,
         "awayLast5Xg": 1.38
       },
       "matchUrl": "/matches/wolverhampton-wanderers-vs-brighton-hove-albion/2xaiyv#4813444"
@@ -12371,8 +15360,8 @@
       "preMatch": {
         "homeElo": 1873.0,
         "awayElo": 1766.0,
-        "homeLast5Xg": 0.71,
-        "awayLast5Xg": 1.31
+        "homeLast5Xg": 0.66,
+        "awayLast5Xg": 1.22
       },
       "matchUrl": "/matches/nottingham-forest-vs-newcastle-united/3gocct#4813443"
     },
@@ -12420,8 +15409,8 @@
       "preMatch": {
         "homeElo": 1801.0,
         "awayElo": 1870.0,
-        "homeLast5Xg": 1.03,
-        "awayLast5Xg": 1.57
+        "homeLast5Xg": 1.25,
+        "awayLast5Xg": 1.78
       },
       "matchUrl": "/matches/everton-vs-crystal-palace/2tttz7#4813440"
     },
@@ -12469,8 +15458,8 @@
       "preMatch": {
         "homeElo": 1865.0,
         "awayElo": 1717.0,
-        "homeLast5Xg": 1.36,
-        "awayLast5Xg": 0.59
+        "homeLast5Xg": 0.9,
+        "awayLast5Xg": 0.66
       },
       "matchUrl": "/matches/burnley-vs-aston-villa/2t9lxd#4813437"
     },
@@ -12518,8 +15507,8 @@
       "preMatch": {
         "homeElo": 1888.0,
         "awayElo": 1998.0,
-        "homeLast5Xg": 1.27,
-        "awayLast5Xg": 1.54
+        "homeLast5Xg": 1.39,
+        "awayLast5Xg": 1.37
       },
       "matchUrl": "/matches/chelsea-vs-liverpool/2f3vr7#4813439"
     },
@@ -12567,8 +15556,8 @@
       "preMatch": {
         "homeElo": 1798.0,
         "awayElo": 1607.0,
-        "homeLast5Xg": 1.87,
-        "awayLast5Xg": 1.27
+        "homeLast5Xg": 2.16,
+        "awayLast5Xg": 0.99
       },
       "matchUrl": "/matches/sunderland-vs-manchester-united/2wgr5i#4813442"
     },
@@ -12616,8 +15605,8 @@
       "preMatch": {
         "homeElo": 2016.0,
         "awayElo": 1728.0,
-        "homeLast5Xg": 1.03,
-        "awayLast5Xg": 1.1
+        "homeLast5Xg": 0.77,
+        "awayLast5Xg": 1.4
       },
       "matchUrl": "/matches/west-ham-united-vs-arsenal/2tnw09#4813436"
     },
@@ -12665,8 +15654,8 @@
       "preMatch": {
         "homeElo": 1742.0,
         "awayElo": 1812.0,
-        "homeLast5Xg": 1.35,
-        "awayLast5Xg": 1.29
+        "homeLast5Xg": 0.79,
+        "awayLast5Xg": 1.16
       },
       "matchUrl": "/matches/leeds-united-vs-tottenham-hotspur/2ejdsf#4813441"
     },
@@ -12714,8 +15703,8 @@
       "preMatch": {
         "homeElo": 1828.0,
         "awayElo": 1790.0,
-        "homeLast5Xg": 1.47,
-        "awayLast5Xg": 0.78
+        "homeLast5Xg": 1.06,
+        "awayLast5Xg": 0.83
       },
       "matchUrl": "/matches/afc-bournemouth-vs-fulham/2uiul6#4813435"
     },
@@ -12763,8 +15752,8 @@
       "preMatch": {
         "homeElo": 1804.0,
         "awayElo": 1723.0,
-        "homeLast5Xg": 1.27,
-        "awayLast5Xg": 1.28
+        "homeLast5Xg": 1.15,
+        "awayLast5Xg": 1.31
       },
       "matchUrl": "/matches/west-ham-united-vs-everton/2hby1v#4813429"
     },
@@ -12812,8 +15801,8 @@
       "preMatch": {
         "homeElo": 1861.0,
         "awayElo": 2008.0,
-        "homeLast5Xg": 0.99,
-        "awayLast5Xg": 0.96
+        "homeLast5Xg": 0.76,
+        "awayLast5Xg": 0.73
       },
       "matchUrl": "/matches/arsenal-vs-newcastle-united/3c42by#4813432"
     },
@@ -12861,8 +15850,8 @@
       "preMatch": {
         "homeElo": 1847.0,
         "awayElo": 1797.0,
-        "homeLast5Xg": 1.18,
-        "awayLast5Xg": 0.8
+        "homeLast5Xg": 0.85,
+        "awayLast5Xg": 0.72
       },
       "matchUrl": "/matches/fulham-vs-aston-villa/3cnglp#4813425"
     },
@@ -12910,8 +15899,8 @@
       "preMatch": {
         "homeElo": 1817.0,
         "awayElo": 1703.0,
-        "homeLast5Xg": 0.96,
-        "awayLast5Xg": 1.07
+        "homeLast5Xg": 0.78,
+        "awayLast5Xg": 1.24
       },
       "matchUrl": "/matches/tottenham-hotspur-vs-wolverhampton-wanderers/2fydv8#4813434"
     },
@@ -12959,8 +15948,8 @@
       "preMatch": {
         "homeElo": 1793.0,
         "awayElo": 1592.0,
-        "homeLast5Xg": 0.74,
-        "awayLast5Xg": 1.01
+        "homeLast5Xg": 0.65,
+        "awayLast5Xg": 0.82
       },
       "matchUrl": "/matches/sunderland-vs-nottingham-forest/2vtwiu#4813433"
     },
@@ -13008,8 +15997,8 @@
       "preMatch": {
         "homeElo": 1957.0,
         "awayElo": 1721.0,
-        "homeLast5Xg": 1.2,
-        "awayLast5Xg": 0.54
+        "homeLast5Xg": 1.15,
+        "awayLast5Xg": 0.73
       },
       "matchUrl": "/matches/burnley-vs-manchester-city/2ai7j8#4813431"
     },
@@ -13057,8 +16046,8 @@
       "preMatch": {
         "homeElo": 1739.0,
         "awayElo": 1828.0,
-        "homeLast5Xg": 1.12,
-        "awayLast5Xg": 1.63
+        "homeLast5Xg": 0.46,
+        "awayLast5Xg": 1.16
       },
       "matchUrl": "/matches/leeds-united-vs-afc-bournemouth/2fh3fh#4813430"
     },
@@ -13106,8 +16095,8 @@
       "preMatch": {
         "homeElo": 1842.0,
         "awayElo": 1974.0,
-        "homeLast5Xg": 1.78,
-        "awayLast5Xg": 1.5
+        "homeLast5Xg": 1.86,
+        "awayLast5Xg": 1.31
       },
       "matchUrl": "/matches/liverpool-vs-crystal-palace/2tmp8g#4813428"
     },
@@ -13155,8 +16144,8 @@
       "preMatch": {
         "homeElo": 1899.0,
         "awayElo": 1818.0,
-        "homeLast5Xg": 1.24,
-        "awayLast5Xg": 1.05
+        "homeLast5Xg": 1.57,
+        "awayLast5Xg": 1.26
       },
       "matchUrl": "/matches/chelsea-vs-brighton-hove-albion/2vni1p#4813427"
     },
@@ -13204,647 +16193,10 @@
       "preMatch": {
         "homeElo": 1792.0,
         "awayElo": 1808.0,
-        "homeLast5Xg": 1.07,
-        "awayLast5Xg": 1.81
-      },
-      "matchUrl": "/matches/brentford-vs-manchester-united/3dfzjk#4813426"
-    },
-    {
-      "matchId": "25-26-prem-tottenham-hotspur-vs-brighton-hove-albion",
-      "season": "2025-2026",
-      "gameweek": 33,
-      "kickoffTime": "2025-09-25T19:00:00+00:00",
-      "homeTeam": {
-        "id": 6,
-        "name": "Tottenham Hotspur",
-        "shortName": "TOT",
-        "badgeSlug": "tottenham",
-        "badgePath": "/teams/tottenham.football-logos.cc.png"
-      },
-      "awayTeam": {
-        "id": 36,
-        "name": "Brighton & Hove Albion",
-        "shortName": "BHA",
-        "badgeSlug": "brighton",
-        "badgePath": "/teams/brighton.football-logos.cc.png"
-      },
-      "score": {
-        "home": 2,
-        "away": 2
-      },
-      "stats": {
-        "xg": {
-          "home": 1.09,
-          "away": 0.82
-        },
-        "shotsOnTarget": {
-          "home": 6,
-          "away": 3
-        },
-        "bigChances": {
-          "home": 3,
-          "away": 2
-        },
-        "possession": {
-          "home": 42.0,
-          "away": 58.0
-        }
-      },
-      "preMatch": {
-        "homeElo": 1750.0,
-        "awayElo": 1852.0,
-        "homeLast5Xg": 0.78,
-        "awayLast5Xg": 1.26
-      },
-      "matchUrl": "/matches/tottenham-hotspur-vs-brighton-hove-albion/2x42vj#4813704"
-    },
-    {
-      "matchId": "25-26-prem-nottingham-forest-vs-burnley",
-      "season": "2025-2026",
-      "gameweek": 33,
-      "kickoffTime": "2025-09-25T19:00:00+00:00",
-      "homeTeam": {
-        "id": 17,
-        "name": "Nottingham Forest",
-        "shortName": "NFO",
-        "badgeSlug": "nottingham-forest",
-        "badgePath": "/teams/nottingham-forest.football-logos.cc.png"
-      },
-      "awayTeam": {
-        "id": 90,
-        "name": "Burnley",
-        "shortName": "BUR",
-        "badgeSlug": "burnley",
-        "badgePath": "/teams/burnley.football-logos.cc.png"
-      },
-      "score": {
-        "home": 4,
-        "away": 1
-      },
-      "stats": {
-        "xg": {
-          "home": 1.19,
-          "away": 0.36
-        },
-        "shotsOnTarget": {
-          "home": 4,
-          "away": 3
-        },
-        "bigChances": {
-          "home": 2,
-          "away": 1
-        },
-        "possession": {
-          "home": 51.0,
-          "away": 49.0
-        }
-      },
-      "preMatch": {
-        "homeElo": 1809.0,
-        "awayElo": 1666.0,
-        "homeLast5Xg": 0.65,
-        "awayLast5Xg": 0.73
-      },
-      "matchUrl": "/matches/burnley-vs-nottingham-forest/2sq9j2#4813703"
-    },
-    {
-      "matchId": "25-26-prem-newcastle-united-vs-afc-bournemouth",
-      "season": "2025-2026",
-      "gameweek": 33,
-      "kickoffTime": "2025-09-25T19:00:00+00:00",
-      "homeTeam": {
-        "id": 4,
-        "name": "Newcastle United",
-        "shortName": "NEW",
-        "badgeSlug": "newcastle",
-        "badgePath": "/teams/newcastle.football-logos.cc.png"
-      },
-      "awayTeam": {
-        "id": 91,
-        "name": "AFC Bournemouth",
-        "shortName": "BOU",
-        "badgeSlug": "bournemouth",
-        "badgePath": "/teams/bournemouth.football-logos.cc.png"
-      },
-      "score": {
-        "home": 1,
-        "away": 2
-      },
-      "stats": {
-        "xg": {
-          "home": 1.59,
-          "away": 2.99
-        },
-        "shotsOnTarget": {
-          "home": 3,
-          "away": 3
-        },
-        "bigChances": {
-          "home": 2,
-          "away": 4
-        },
-        "possession": {
-          "home": 54.0,
-          "away": 46.0
-        }
-      },
-      "preMatch": {
-        "homeElo": 1827.0,
-        "awayElo": 1849.0,
-        "homeLast5Xg": 0.76,
-        "awayLast5Xg": 1.16
-      },
-      "matchUrl": "/matches/afc-bournemouth-vs-newcastle-united/2ysbu8#4813702"
-    },
-    {
-      "matchId": "25-26-prem-manchester-city-vs-arsenal",
-      "season": "2025-2026",
-      "gameweek": 33,
-      "kickoffTime": "2025-09-25T19:00:00+00:00",
-      "homeTeam": {
-        "id": 43,
-        "name": "Manchester City",
-        "shortName": "MCI",
-        "badgeSlug": "manchester-city",
-        "badgePath": "/teams/manchester-city.football-logos.cc.png"
-      },
-      "awayTeam": {
-        "id": 3,
-        "name": "Arsenal",
-        "shortName": "ARS",
-        "badgeSlug": "arsenal",
-        "badgePath": "/teams/arsenal.football-logos.cc.png"
-      },
-      "score": {
-        "home": 2,
-        "away": 1
-      },
-      "stats": {
-        "xg": {
-          "home": 1.36,
-          "away": 1.62
-        },
-        "shotsOnTarget": {
-          "home": 5,
-          "away": 3
-        },
-        "bigChances": {
-          "home": 5,
-          "away": 5
-        },
-        "possession": {
-          "home": 59.0,
-          "away": 41.0
-        }
-      },
-      "preMatch": {
-        "homeElo": 1966.0,
-        "awayElo": 2044.0,
-        "homeLast5Xg": 1.15,
-        "awayLast5Xg": 0.73
-      },
-      "matchUrl": "/matches/manchester-city-vs-arsenal/2rhvvi#4813701"
-    },
-    {
-      "matchId": "25-26-prem-leeds-united-vs-wolverhampton-wanderers",
-      "season": "2025-2026",
-      "gameweek": 33,
-      "kickoffTime": "2025-09-25T19:00:00+00:00",
-      "homeTeam": {
-        "id": 2,
-        "name": "Leeds United",
-        "shortName": "LEE",
-        "badgeSlug": "leeds-united",
-        "badgePath": "/teams/leeds-united.football-logos.cc.png"
-      },
-      "awayTeam": {
-        "id": 39,
-        "name": "Wolverhampton Wanderers",
-        "shortName": "WOL",
-        "badgeSlug": "wolves",
-        "badgePath": "/teams/wolves.football-logos.cc.png"
-      },
-      "score": {
-        "home": 3,
-        "away": 0
-      },
-      "stats": {
-        "xg": {
-          "home": 2.82,
-          "away": 0.57
-        },
-        "shotsOnTarget": {
-          "home": 6,
-          "away": 2
-        },
-        "bigChances": {
-          "home": 7,
-          "away": 2
-        },
-        "possession": {
-          "home": 56.0,
-          "away": 44.0
-        }
-      },
-      "preMatch": {
-        "homeElo": 1789.0,
-        "awayElo": 1684.0,
-        "homeLast5Xg": 0.46,
-        "awayLast5Xg": 1.24
-      },
-      "matchUrl": "/matches/leeds-united-vs-wolverhampton-wanderers/2ep8dz#4813700"
-    },
-    {
-      "matchId": "25-26-prem-everton-vs-liverpool",
-      "season": "2025-2026",
-      "gameweek": 33,
-      "kickoffTime": "2025-09-25T19:00:00+00:00",
-      "homeTeam": {
-        "id": 11,
-        "name": "Everton",
-        "shortName": "EVE",
-        "badgeSlug": "everton",
-        "badgePath": "/teams/everton.football-logos.cc.png"
-      },
-      "awayTeam": {
-        "id": 14,
-        "name": "Liverpool",
-        "shortName": "LIV",
-        "badgeSlug": "liverpool",
-        "badgePath": "/teams/liverpool.football-logos.cc.png"
-      },
-      "score": {
-        "home": 1,
-        "away": 2
-      },
-      "stats": {
-        "xg": {
-          "home": 0.79,
-          "away": 1.45
-        },
-        "shotsOnTarget": {
-          "home": 4,
-          "away": 6
-        },
-        "bigChances": {
-          "home": 2,
-          "away": 2
-        },
-        "possession": {
-          "home": 44.0,
-          "away": 56.0
-        }
-      },
-      "preMatch": {
-        "homeElo": 1829.0,
-        "awayElo": 1926.0,
-        "homeLast5Xg": 1.15,
-        "awayLast5Xg": 1.31
-      },
-      "matchUrl": "/matches/liverpool-vs-everton/2hagld#4813699"
-    },
-    {
-      "matchId": "25-26-prem-crystal-palace-vs-west-ham-united",
-      "season": "2025-2026",
-      "gameweek": 33,
-      "kickoffTime": "2025-09-25T19:00:00+00:00",
-      "homeTeam": {
-        "id": 31,
-        "name": "Crystal Palace",
-        "shortName": "CRY",
-        "badgeSlug": "crystal-palace",
-        "badgePath": "/teams/crystal-palace.football-logos.cc.png"
-      },
-      "awayTeam": {
-        "id": 21,
-        "name": "West Ham United",
-        "shortName": "WHU",
-        "badgeSlug": "west-ham",
-        "badgePath": "/teams/west-ham.football-logos.cc.png"
-      },
-      "score": {
-        "home": 0,
-        "away": 0
-      },
-      "stats": {
-        "xg": {
-          "home": 0.73,
-          "away": 0.61
-        },
-        "shotsOnTarget": {
-          "home": 1,
-          "away": 4
-        },
-        "bigChances": {
-          "home": 1,
-          "away": 1
-        },
-        "possession": {
-          "home": 54.0,
-          "away": 46.0
-        }
-      },
-      "preMatch": {
-        "homeElo": 1811.0,
-        "awayElo": 1759.0,
-        "homeLast5Xg": 1.86,
-        "awayLast5Xg": 1.31
-      },
-      "matchUrl": "/matches/west-ham-united-vs-crystal-palace/2toa9m#4813698"
-    },
-    {
-      "matchId": "25-26-prem-chelsea-vs-manchester-united",
-      "season": "2025-2026",
-      "gameweek": 33,
-      "kickoffTime": "2025-09-25T19:00:00+00:00",
-      "homeTeam": {
-        "id": 8,
-        "name": "Chelsea",
-        "shortName": "CHE",
-        "badgeSlug": "chelsea",
-        "badgePath": "/teams/chelsea.football-logos.cc.png"
-      },
-      "awayTeam": {
-        "id": 1,
-        "name": "Manchester United",
-        "shortName": "MUN",
-        "badgeSlug": "manchester-united",
-        "badgePath": "/teams/manchester-united.football-logos.cc.png"
-      },
-      "score": {
-        "home": 0,
-        "away": 1
-      },
-      "stats": {
-        "xg": {
-          "home": 1.57,
-          "away": 0.29
-        },
-        "shotsOnTarget": {
-          "home": 3,
-          "away": 1
-        },
-        "bigChances": {
-          "home": 0,
-          "away": 1
-        },
-        "possession": {
-          "home": 59.0,
-          "away": 41.0
-        }
-      },
-      "preMatch": {
-        "homeElo": 1852.0,
-        "awayElo": 1881.0,
-        "homeLast5Xg": 1.57,
+        "homeLast5Xg": 1.12,
         "awayLast5Xg": 2.07
       },
-      "matchUrl": "/matches/chelsea-vs-manchester-united/2w9xj5#4813697"
-    },
-    {
-      "matchId": "25-26-prem-burnley-vs-manchester-city",
-      "season": "2025-2026",
-      "gameweek": 33,
-      "kickoffTime": "2025-09-25T19:00:00+00:00",
-      "homeTeam": {
-        "id": 90,
-        "name": "Burnley",
-        "shortName": "BUR",
-        "badgeSlug": "burnley",
-        "badgePath": "/teams/burnley.football-logos.cc.png"
-      },
-      "awayTeam": {
-        "id": 43,
-        "name": "Manchester City",
-        "shortName": "MCI",
-        "badgeSlug": "manchester-city",
-        "badgePath": "/teams/manchester-city.football-logos.cc.png"
-      },
-      "score": {
-        "home": 0,
-        "away": 1
-      },
-      "stats": {
-        "xg": {
-          "home": 0.63,
-          "away": 3.36
-        },
-        "shotsOnTarget": {
-          "home": 1,
-          "away": 9
-        },
-        "bigChances": {
-          "home": 1,
-          "away": 4
-        },
-        "possession": {
-          "home": 34.0,
-          "away": 66.0
-        }
-      },
-      "preMatch": {
-        "homeElo": 1666.0,
-        "awayElo": 1966.0,
-        "homeLast5Xg": 0.73,
-        "awayLast5Xg": 1.15
-      },
-      "matchUrl": "/matches/burnley-vs-manchester-city/2ai7j8#4813708"
-    },
-    {
-      "matchId": "25-26-prem-brighton-hove-albion-vs-chelsea",
-      "season": "2025-2026",
-      "gameweek": 33,
-      "kickoffTime": "2025-09-25T19:00:00+00:00",
-      "homeTeam": {
-        "id": 36,
-        "name": "Brighton & Hove Albion",
-        "shortName": "BHA",
-        "badgeSlug": "brighton",
-        "badgePath": "/teams/brighton.football-logos.cc.png"
-      },
-      "awayTeam": {
-        "id": 8,
-        "name": "Chelsea",
-        "shortName": "CHE",
-        "badgeSlug": "chelsea",
-        "badgePath": "/teams/chelsea.football-logos.cc.png"
-      },
-      "score": {
-        "home": 3,
-        "away": 0
-      },
-      "stats": {
-        "xg": {
-          "home": 2.14,
-          "away": 0.37
-        },
-        "shotsOnTarget": {
-          "home": 9,
-          "away": 0
-        },
-        "bigChances": {
-          "home": 5,
-          "away": 0
-        },
-        "possession": {
-          "home": 53.0,
-          "away": 47.0
-        }
-      },
-      "preMatch": {
-        "homeElo": 1852.0,
-        "awayElo": 1852.0,
-        "homeLast5Xg": 1.26,
-        "awayLast5Xg": 1.57
-      },
-      "matchUrl": "/matches/chelsea-vs-brighton-hove-albion/2vni1p#4813707"
-    },
-    {
-      "matchId": "25-26-prem-brentford-vs-fulham",
-      "season": "2025-2026",
-      "gameweek": 33,
-      "kickoffTime": "2025-09-25T19:00:00+00:00",
-      "homeTeam": {
-        "id": 94,
-        "name": "Brentford",
-        "shortName": "BRE",
-        "badgeSlug": "brentford",
-        "badgePath": "/teams/brentford.football-logos.cc.png"
-      },
-      "awayTeam": {
-        "id": 54,
-        "name": "Fulham",
-        "shortName": "FUL",
-        "badgeSlug": "fulham",
-        "badgePath": "/teams/fulham.football-logos.cc.png"
-      },
-      "score": {
-        "home": 0,
-        "away": 0
-      },
-      "stats": {
-        "xg": {
-          "home": 1.43,
-          "away": 0.77
-        },
-        "shotsOnTarget": {
-          "home": 4,
-          "away": 0
-        },
-        "bigChances": {
-          "home": 4,
-          "away": 1
-        },
-        "possession": {
-          "home": 48.0,
-          "away": 52.0
-        }
-      },
-      "preMatch": {
-        "homeElo": 1833.0,
-        "awayElo": 1801.0,
-        "homeLast5Xg": 1.12,
-        "awayLast5Xg": 0.72
-      },
-      "matchUrl": "/matches/fulham-vs-brentford/38wlut#4813696"
-    },
-    {
-      "matchId": "25-26-prem-aston-villa-vs-sunderland",
-      "season": "2025-2026",
-      "gameweek": 33,
-      "kickoffTime": "2025-09-25T19:00:00+00:00",
-      "homeTeam": {
-        "id": 7,
-        "name": "Aston Villa",
-        "shortName": "AVL",
-        "badgeSlug": "aston-villa",
-        "badgePath": "/teams/aston-villa.football-logos.cc.png"
-      },
-      "awayTeam": {
-        "id": 56,
-        "name": "Sunderland",
-        "shortName": "SUN",
-        "badgeSlug": "sunderland",
-        "badgePath": "/teams/sunderland.football-logos.cc.png"
-      },
-      "score": {
-        "home": 4,
-        "away": 3
-      },
-      "stats": {
-        "xg": {
-          "home": 2.84,
-          "away": 1.73
-        },
-        "shotsOnTarget": {
-          "home": 7,
-          "away": 7
-        },
-        "bigChances": {
-          "home": 7,
-          "away": 3
-        },
-        "possession": {
-          "home": 50.0,
-          "away": 50.0
-        }
-      },
-      "preMatch": {
-        "homeElo": 1899.0,
-        "awayElo": 1713.0,
-        "homeLast5Xg": 0.85,
-        "awayLast5Xg": 0.82
-      },
-      "matchUrl": "/matches/sunderland-vs-aston-villa/2wdjjm#4813695"
-    },
-    {
-      "matchId": "25-26-prem-afc-bournemouth-vs-leeds-united",
-      "season": "2025-2026",
-      "gameweek": 33,
-      "kickoffTime": "2025-09-25T19:00:00+00:00",
-      "homeTeam": {
-        "id": 91,
-        "name": "AFC Bournemouth",
-        "shortName": "BOU",
-        "badgeSlug": "bournemouth",
-        "badgePath": "/teams/bournemouth.football-logos.cc.png"
-      },
-      "awayTeam": {
-        "id": 2,
-        "name": "Leeds United",
-        "shortName": "LEE",
-        "badgeSlug": "leeds-united",
-        "badgePath": "/teams/leeds-united.football-logos.cc.png"
-      },
-      "score": {
-        "home": 2,
-        "away": 2
-      },
-      "stats": {
-        "xg": {
-          "home": 1.65,
-          "away": 0.81
-        },
-        "shotsOnTarget": {
-          "home": 7,
-          "away": 3
-        },
-        "bigChances": {
-          "home": 4,
-          "away": 1
-        },
-        "possession": {
-          "home": 60.0,
-          "away": 40.0
-        }
-      },
-      "preMatch": {
-        "homeElo": 1849.0,
-        "awayElo": 1789.0,
-        "homeLast5Xg": 1.16,
-        "awayLast5Xg": 0.46
-      },
-      "matchUrl": "/matches/leeds-united-vs-afc-bournemouth/2fh3fh#4813705"
+      "matchUrl": "/matches/brentford-vs-manchester-united/3dfzjk#4813426"
     },
     {
       "matchId": "25-26-prem-arsenal-vs-manchester-city",
@@ -34915,2358 +37267,6 @@
         "awayLast5Xg": null
       },
       "matchUrl": "/matches/fulham-vs-manchester-united/3cqww9#4506263"
-    },
-    {
-      "matchId": "25-26-prem-west-ham-united-vs-leeds-united",
-      "season": "2025-2026",
-      "gameweek": 38,
-      "kickoffTime": null,
-      "homeTeam": {
-        "id": 21,
-        "name": "West Ham United",
-        "shortName": "WHU",
-        "badgeSlug": "west-ham",
-        "badgePath": "/teams/west-ham.football-logos.cc.png"
-      },
-      "awayTeam": {
-        "id": 2,
-        "name": "Leeds United",
-        "shortName": "LEE",
-        "badgeSlug": "leeds-united",
-        "badgePath": "/teams/leeds-united.football-logos.cc.png"
-      },
-      "score": {
-        "home": 3,
-        "away": 0
-      },
-      "stats": {
-        "xg": {
-          "home": 2.61,
-          "away": 1.59
-        },
-        "shotsOnTarget": {
-          "home": 9,
-          "away": 3
-        },
-        "bigChances": {
-          "home": 4,
-          "away": 2
-        },
-        "possession": {
-          "home": 42.0,
-          "away": 58.0
-        }
-      },
-      "preMatch": {
-        "homeElo": 1769.0,
-        "awayElo": 1797.0,
-        "homeLast5Xg": 1.31,
-        "awayLast5Xg": 1.29
-      },
-      "matchUrl": "/matches/leeds-united-vs-west-ham-united/2f8a75#4813754"
-    },
-    {
-      "matchId": "25-26-prem-tottenham-hotspur-vs-everton",
-      "season": "2025-2026",
-      "gameweek": 38,
-      "kickoffTime": null,
-      "homeTeam": {
-        "id": 6,
-        "name": "Tottenham Hotspur",
-        "shortName": "TOT",
-        "badgeSlug": "tottenham",
-        "badgePath": "/teams/tottenham.football-logos.cc.png"
-      },
-      "awayTeam": {
-        "id": 11,
-        "name": "Everton",
-        "shortName": "EVE",
-        "badgeSlug": "everton",
-        "badgePath": "/teams/everton.football-logos.cc.png"
-      },
-      "score": {
-        "home": 1,
-        "away": 0
-      },
-      "stats": {
-        "xg": {
-          "home": 1.15,
-          "away": 0.41
-        },
-        "shotsOnTarget": {
-          "home": 2,
-          "away": 1
-        },
-        "bigChances": {
-          "home": 3,
-          "away": 0
-        },
-        "possession": {
-          "home": 50.0,
-          "away": 50.0
-        }
-      },
-      "preMatch": {
-        "homeElo": 1777.0,
-        "awayElo": 1803.0,
-        "homeLast5Xg": 1.1,
-        "awayLast5Xg": 1.67
-      },
-      "matchUrl": "/matches/tottenham-hotspur-vs-everton/2gmqxt#4813753"
-    },
-    {
-      "matchId": "25-26-prem-sunderland-vs-chelsea",
-      "season": "2025-2026",
-      "gameweek": 38,
-      "kickoffTime": null,
-      "homeTeam": {
-        "id": 56,
-        "name": "Sunderland",
-        "shortName": "SUN",
-        "badgeSlug": "sunderland",
-        "badgePath": "/teams/sunderland.football-logos.cc.png"
-      },
-      "awayTeam": {
-        "id": 8,
-        "name": "Chelsea",
-        "shortName": "CHE",
-        "badgeSlug": "chelsea",
-        "badgePath": "/teams/chelsea.football-logos.cc.png"
-      },
-      "score": {
-        "home": 2,
-        "away": 1
-      },
-      "stats": {
-        "xg": {
-          "home": 1.84,
-          "away": 0.89
-        },
-        "shotsOnTarget": {
-          "home": 6,
-          "away": 3
-        },
-        "bigChances": {
-          "home": 2,
-          "away": 2
-        },
-        "possession": {
-          "home": 44.0,
-          "away": 56.0
-        }
-      },
-      "preMatch": {
-        "homeElo": 1736.0,
-        "awayElo": 1831.0,
-        "homeLast5Xg": 0.94,
-        "awayLast5Xg": 1.05
-      },
-      "matchUrl": "/matches/chelsea-vs-sunderland/2dayh4#4813752"
-    },
-    {
-      "matchId": "25-26-prem-nottingham-forest-vs-afc-bournemouth",
-      "season": "2025-2026",
-      "gameweek": 38,
-      "kickoffTime": null,
-      "homeTeam": {
-        "id": 17,
-        "name": "Nottingham Forest",
-        "shortName": "NFO",
-        "badgeSlug": "nottingham-forest",
-        "badgePath": "/teams/nottingham-forest.football-logos.cc.png"
-      },
-      "awayTeam": {
-        "id": 91,
-        "name": "AFC Bournemouth",
-        "shortName": "BOU",
-        "badgeSlug": "bournemouth",
-        "badgePath": "/teams/bournemouth.football-logos.cc.png"
-      },
-      "score": {
-        "home": 1,
-        "away": 1
-      },
-      "stats": {
-        "xg": {
-          "home": 1.73,
-          "away": 0.95
-        },
-        "shotsOnTarget": {
-          "home": 5,
-          "away": 4
-        },
-        "bigChances": {
-          "home": 4,
-          "away": 1
-        },
-        "possession": {
-          "home": 45.0,
-          "away": 55.0
-        }
-      },
-      "preMatch": {
-        "homeElo": 1822.0,
-        "awayElo": 1872.0,
-        "homeLast5Xg": 1.71,
-        "awayLast5Xg": 1.63
-      },
-      "matchUrl": "/matches/afc-bournemouth-vs-nottingham-forest/2y4tjb#4813751"
-    },
-    {
-      "matchId": "25-26-prem-manchester-city-vs-aston-villa",
-      "season": "2025-2026",
-      "gameweek": 38,
-      "kickoffTime": null,
-      "homeTeam": {
-        "id": 43,
-        "name": "Manchester City",
-        "shortName": "MCI",
-        "badgeSlug": "manchester-city",
-        "badgePath": "/teams/manchester-city.football-logos.cc.png"
-      },
-      "awayTeam": {
-        "id": 7,
-        "name": "Aston Villa",
-        "shortName": "AVL",
-        "badgeSlug": "aston-villa",
-        "badgePath": "/teams/aston-villa.football-logos.cc.png"
-      },
-      "score": {
-        "home": 1,
-        "away": 2
-      },
-      "stats": {
-        "xg": {
-          "home": 1.34,
-          "away": 1.77
-        },
-        "shotsOnTarget": {
-          "home": 3,
-          "away": 5
-        },
-        "bigChances": {
-          "home": 2,
-          "away": 4
-        },
-        "possession": {
-          "home": 52.0,
-          "away": 48.0
-        }
-      },
-      "preMatch": {
-        "homeElo": 1971.0,
-        "awayElo": 1921.0,
-        "homeLast5Xg": 1.66,
-        "awayLast5Xg": 1.19
-      },
-      "matchUrl": "/matches/manchester-city-vs-aston-villa/2w74gq#4813750"
-    },
-    {
-      "matchId": "25-26-prem-liverpool-vs-brentford",
-      "season": "2025-2026",
-      "gameweek": 38,
-      "kickoffTime": null,
-      "homeTeam": {
-        "id": 14,
-        "name": "Liverpool",
-        "shortName": "LIV",
-        "badgeSlug": "liverpool",
-        "badgePath": "/teams/liverpool.football-logos.cc.png"
-      },
-      "awayTeam": {
-        "id": 94,
-        "name": "Brentford",
-        "shortName": "BRE",
-        "badgeSlug": "brentford",
-        "badgePath": "/teams/brentford.football-logos.cc.png"
-      },
-      "score": {
-        "home": 1,
-        "away": 1
-      },
-      "stats": {
-        "xg": {
-          "home": 3.04,
-          "away": 1.56
-        },
-        "shotsOnTarget": {
-          "home": 8,
-          "away": 2
-        },
-        "bigChances": {
-          "home": 4,
-          "away": 3
-        },
-        "possession": {
-          "home": 60.0,
-          "away": 40.0
-        }
-      },
-      "preMatch": {
-        "homeElo": 1911.0,
-        "awayElo": 1837.0,
-        "homeLast5Xg": 1.05,
-        "awayLast5Xg": 1.65
-      },
-      "matchUrl": "/matches/liverpool-vs-brentford/2uusjv#4813749"
-    },
-    {
-      "matchId": "25-26-prem-fulham-vs-newcastle-united",
-      "season": "2025-2026",
-      "gameweek": 38,
-      "kickoffTime": null,
-      "homeTeam": {
-        "id": 54,
-        "name": "Fulham",
-        "shortName": "FUL",
-        "badgeSlug": "fulham",
-        "badgePath": "/teams/fulham.football-logos.cc.png"
-      },
-      "awayTeam": {
-        "id": 4,
-        "name": "Newcastle United",
-        "shortName": "NEW",
-        "badgeSlug": "newcastle",
-        "badgePath": "/teams/newcastle.football-logos.cc.png"
-      },
-      "score": {
-        "home": 2,
-        "away": 0
-      },
-      "stats": {
-        "xg": {
-          "home": 1.81,
-          "away": 0.31
-        },
-        "shotsOnTarget": {
-          "home": 6,
-          "away": 2
-        },
-        "bigChances": {
-          "home": 1,
-          "away": 0
-        },
-        "possession": {
-          "home": 45.0,
-          "away": 55.0
-        }
-      },
-      "preMatch": {
-        "homeElo": 1813.0,
-        "awayElo": 1838.0,
-        "homeLast5Xg": 1.1,
-        "awayLast5Xg": 2.33
-      },
-      "matchUrl": "/matches/fulham-vs-newcastle-united/3crcfp#4813748"
-    },
-    {
-      "matchId": "25-26-prem-crystal-palace-vs-arsenal",
-      "season": "2025-2026",
-      "gameweek": 38,
-      "kickoffTime": null,
-      "homeTeam": {
-        "id": 31,
-        "name": "Crystal Palace",
-        "shortName": "CRY",
-        "badgeSlug": "crystal-palace",
-        "badgePath": "/teams/crystal-palace.football-logos.cc.png"
-      },
-      "awayTeam": {
-        "id": 3,
-        "name": "Arsenal",
-        "shortName": "ARS",
-        "badgeSlug": "arsenal",
-        "badgePath": "/teams/arsenal.football-logos.cc.png"
-      },
-      "score": {
-        "home": 1,
-        "away": 2
-      },
-      "stats": {
-        "xg": {
-          "home": 0.98,
-          "away": 2.53
-        },
-        "shotsOnTarget": {
-          "home": 3,
-          "away": 7
-        },
-        "bigChances": {
-          "home": 3,
-          "away": 7
-        },
-        "possession": {
-          "home": 40.0,
-          "away": 60.0
-        }
-      },
-      "preMatch": {
-        "homeElo": 1804.0,
-        "awayElo": 2064.0,
-        "homeLast5Xg": 1.4,
-        "awayLast5Xg": 1.68
-      },
-      "matchUrl": "/matches/arsenal-vs-crystal-palace/36ytc8#4813747"
-    },
-    {
-      "matchId": "25-26-prem-burnley-vs-wolverhampton-wanderers",
-      "season": "2025-2026",
-      "gameweek": 38,
-      "kickoffTime": null,
-      "homeTeam": {
-        "id": 90,
-        "name": "Burnley",
-        "shortName": "BUR",
-        "badgeSlug": "burnley",
-        "badgePath": "/teams/burnley.football-logos.cc.png"
-      },
-      "awayTeam": {
-        "id": 39,
-        "name": "Wolverhampton Wanderers",
-        "shortName": "WOL",
-        "badgeSlug": "wolves",
-        "badgePath": "/teams/wolves.football-logos.cc.png"
-      },
-      "score": {
-        "home": 1,
-        "away": 1
-      },
-      "stats": {
-        "xg": {
-          "home": 0.98,
-          "away": 2.09
-        },
-        "shotsOnTarget": {
-          "home": 8,
-          "away": 4
-        },
-        "bigChances": {
-          "home": 2,
-          "away": 4
-        },
-        "possession": {
-          "home": 70.0,
-          "away": 30.0
-        }
-      },
-      "preMatch": {
-        "homeElo": 1666.0,
-        "awayElo": 1680.0,
-        "homeLast5Xg": 0.93,
-        "awayLast5Xg": 0.98
-      },
-      "matchUrl": "/matches/burnley-vs-wolverhampton-wanderers/2byja7#4813746"
-    },
-    {
-      "matchId": "25-26-prem-brighton-hove-albion-vs-manchester-united",
-      "season": "2025-2026",
-      "gameweek": 38,
-      "kickoffTime": null,
-      "homeTeam": {
-        "id": 36,
-        "name": "Brighton & Hove Albion",
-        "shortName": "BHA",
-        "badgeSlug": "brighton",
-        "badgePath": "/teams/brighton.football-logos.cc.png"
-      },
-      "awayTeam": {
-        "id": 1,
-        "name": "Manchester United",
-        "shortName": "MUN",
-        "badgeSlug": "manchester-united",
-        "badgePath": "/teams/manchester-united.football-logos.cc.png"
-      },
-      "score": {
-        "home": 0,
-        "away": 3
-      },
-      "stats": {
-        "xg": {
-          "home": 0.79,
-          "away": 1.66
-        },
-        "shotsOnTarget": {
-          "home": 2,
-          "away": 7
-        },
-        "bigChances": {
-          "home": 0,
-          "away": 4
-        },
-        "possession": {
-          "home": 52.0,
-          "away": 48.0
-        }
-      },
-      "preMatch": {
-        "homeElo": 1842.0,
-        "awayElo": 1915.0,
-        "homeLast5Xg": 2.06,
-        "awayLast5Xg": 2.03
-      },
-      "matchUrl": "/matches/brighton-hove-albion-vs-manchester-united/3goccs#4813745"
-    },
-    {
-      "matchId": "25-26-prem-wolverhampton-wanderers-vs-fulham",
-      "season": "2025-2026",
-      "gameweek": 37,
-      "kickoffTime": null,
-      "homeTeam": {
-        "id": 39,
-        "name": "Wolverhampton Wanderers",
-        "shortName": "WOL",
-        "badgeSlug": "wolves",
-        "badgePath": "/teams/wolves.football-logos.cc.png"
-      },
-      "awayTeam": {
-        "id": 54,
-        "name": "Fulham",
-        "shortName": "FUL",
-        "badgeSlug": "fulham",
-        "badgePath": "/teams/fulham.football-logos.cc.png"
-      },
-      "score": {
-        "home": 1,
-        "away": 1
-      },
-      "stats": {
-        "xg": {
-          "home": 1.4,
-          "away": 1.59
-        },
-        "shotsOnTarget": {
-          "home": 3,
-          "away": 5
-        },
-        "bigChances": {
-          "home": 3,
-          "away": 2
-        },
-        "possession": {
-          "home": 31.0,
-          "away": 69.0
-        }
-      },
-      "preMatch": {
-        "homeElo": 1680.0,
-        "awayElo": 1813.0,
-        "homeLast5Xg": 0.98,
-        "awayLast5Xg": 1.41
-      },
-      "matchUrl": "/matches/wolverhampton-wanderers-vs-fulham/2tookg#4813744"
-    },
-    {
-      "matchId": "25-26-prem-newcastle-united-vs-west-ham-united",
-      "season": "2025-2026",
-      "gameweek": 37,
-      "kickoffTime": null,
-      "homeTeam": {
-        "id": 4,
-        "name": "Newcastle United",
-        "shortName": "NEW",
-        "badgeSlug": "newcastle",
-        "badgePath": "/teams/newcastle.football-logos.cc.png"
-      },
-      "awayTeam": {
-        "id": 21,
-        "name": "West Ham United",
-        "shortName": "WHU",
-        "badgeSlug": "west-ham",
-        "badgePath": "/teams/west-ham.football-logos.cc.png"
-      },
-      "score": {
-        "home": 3,
-        "away": 1
-      },
-      "stats": {
-        "xg": {
-          "home": 1.73,
-          "away": 0.95
-        },
-        "shotsOnTarget": {
-          "home": 7,
-          "away": 8
-        },
-        "bigChances": {
-          "home": 3,
-          "away": 1
-        },
-        "possession": {
-          "home": 55.0,
-          "away": 45.0
-        }
-      },
-      "preMatch": {
-        "homeElo": 1838.0,
-        "awayElo": 1769.0,
-        "homeLast5Xg": 2.25,
-        "awayLast5Xg": 1.29
-      },
-      "matchUrl": "/matches/west-ham-united-vs-newcastle-united/2yilb8#4813743"
-    },
-    {
-      "matchId": "25-26-prem-manchester-united-vs-nottingham-forest",
-      "season": "2025-2026",
-      "gameweek": 37,
-      "kickoffTime": null,
-      "homeTeam": {
-        "id": 1,
-        "name": "Manchester United",
-        "shortName": "MUN",
-        "badgeSlug": "manchester-united",
-        "badgePath": "/teams/manchester-united.football-logos.cc.png"
-      },
-      "awayTeam": {
-        "id": 17,
-        "name": "Nottingham Forest",
-        "shortName": "NFO",
-        "badgeSlug": "nottingham-forest",
-        "badgePath": "/teams/nottingham-forest.football-logos.cc.png"
-      },
-      "score": {
-        "home": 3,
-        "away": 2
-      },
-      "stats": {
-        "xg": {
-          "home": 4.57,
-          "away": 1.88
-        },
-        "shotsOnTarget": {
-          "home": 8,
-          "away": 4
-        },
-        "bigChances": {
-          "home": 7,
-          "away": 4
-        },
-        "possession": {
-          "home": 48.0,
-          "away": 52.0
-        }
-      },
-      "preMatch": {
-        "homeElo": 1915.0,
-        "awayElo": 1822.0,
-        "homeLast5Xg": 1.47,
-        "awayLast5Xg": 1.56
-      },
-      "matchUrl": "/matches/nottingham-forest-vs-manchester-united/3gnwkc#4813742"
-    },
-    {
-      "matchId": "25-26-prem-leeds-united-vs-brighton-hove-albion",
-      "season": "2025-2026",
-      "gameweek": 37,
-      "kickoffTime": null,
-      "homeTeam": {
-        "id": 2,
-        "name": "Leeds United",
-        "shortName": "LEE",
-        "badgeSlug": "leeds-united",
-        "badgePath": "/teams/leeds-united.football-logos.cc.png"
-      },
-      "awayTeam": {
-        "id": 36,
-        "name": "Brighton & Hove Albion",
-        "shortName": "BHA",
-        "badgeSlug": "brighton",
-        "badgePath": "/teams/brighton.football-logos.cc.png"
-      },
-      "score": {
-        "home": 1,
-        "away": 0
-      },
-      "stats": {
-        "xg": {
-          "home": 0.39,
-          "away": 3.06
-        },
-        "shotsOnTarget": {
-          "home": 1,
-          "away": 8
-        },
-        "bigChances": {
-          "home": 1,
-          "away": 3
-        },
-        "possession": {
-          "home": 34.0,
-          "away": 66.0
-        }
-      },
-      "preMatch": {
-        "homeElo": 1797.0,
-        "awayElo": 1842.0,
-        "homeLast5Xg": 1.44,
-        "awayLast5Xg": 1.79
-      },
-      "matchUrl": "/matches/leeds-united-vs-brighton-hove-albion/2vqp9d#4813741"
-    },
-    {
-      "matchId": "25-26-prem-everton-vs-sunderland",
-      "season": "2025-2026",
-      "gameweek": 37,
-      "kickoffTime": null,
-      "homeTeam": {
-        "id": 11,
-        "name": "Everton",
-        "shortName": "EVE",
-        "badgeSlug": "everton",
-        "badgePath": "/teams/everton.football-logos.cc.png"
-      },
-      "awayTeam": {
-        "id": 56,
-        "name": "Sunderland",
-        "shortName": "SUN",
-        "badgeSlug": "sunderland",
-        "badgePath": "/teams/sunderland.football-logos.cc.png"
-      },
-      "score": {
-        "home": 1,
-        "away": 3
-      },
-      "stats": {
-        "xg": {
-          "home": 1.04,
-          "away": 0.76
-        },
-        "shotsOnTarget": {
-          "home": 4,
-          "away": 3
-        },
-        "bigChances": {
-          "home": 2,
-          "away": 2
-        },
-        "possession": {
-          "home": 48.0,
-          "away": 52.0
-        }
-      },
-      "preMatch": {
-        "homeElo": 1803.0,
-        "awayElo": 1736.0,
-        "homeLast5Xg": 1.69,
-        "awayLast5Xg": 1.28
-      },
-      "matchUrl": "/matches/sunderland-vs-everton/2fgq72#4813740"
-    },
-    {
-      "matchId": "25-26-prem-chelsea-vs-tottenham-hotspur",
-      "season": "2025-2026",
-      "gameweek": 37,
-      "kickoffTime": null,
-      "homeTeam": {
-        "id": 8,
-        "name": "Chelsea",
-        "shortName": "CHE",
-        "badgeSlug": "chelsea",
-        "badgePath": "/teams/chelsea.football-logos.cc.png"
-      },
-      "awayTeam": {
-        "id": 6,
-        "name": "Tottenham Hotspur",
-        "shortName": "TOT",
-        "badgeSlug": "tottenham",
-        "badgePath": "/teams/tottenham.football-logos.cc.png"
-      },
-      "score": {
-        "home": 2,
-        "away": 1
-      },
-      "stats": {
-        "xg": {
-          "home": 0.63,
-          "away": 1.27
-        },
-        "shotsOnTarget": {
-          "home": 4,
-          "away": 3
-        },
-        "bigChances": {
-          "home": 1,
-          "away": 4
-        },
-        "possession": {
-          "home": 44.0,
-          "away": 56.0
-        }
-      },
-      "preMatch": {
-        "homeElo": 1831.0,
-        "awayElo": 1777.0,
-        "homeLast5Xg": 1.15,
-        "awayLast5Xg": 1.47
-      },
-      "matchUrl": "/matches/chelsea-vs-tottenham-hotspur/2eggkj#4813739"
-    },
-    {
-      "matchId": "25-26-prem-brentford-vs-crystal-palace",
-      "season": "2025-2026",
-      "gameweek": 37,
-      "kickoffTime": null,
-      "homeTeam": {
-        "id": 94,
-        "name": "Brentford",
-        "shortName": "BRE",
-        "badgeSlug": "brentford",
-        "badgePath": "/teams/brentford.football-logos.cc.png"
-      },
-      "awayTeam": {
-        "id": 31,
-        "name": "Crystal Palace",
-        "shortName": "CRY",
-        "badgeSlug": "crystal-palace",
-        "badgePath": "/teams/crystal-palace.football-logos.cc.png"
-      },
-      "score": {
-        "home": 2,
-        "away": 2
-      },
-      "stats": {
-        "xg": {
-          "home": 1.71,
-          "away": 1.72
-        },
-        "shotsOnTarget": {
-          "home": 3,
-          "away": 5
-        },
-        "bigChances": {
-          "home": 1,
-          "away": 2
-        },
-        "possession": {
-          "home": 58.0,
-          "away": 42.0
-        }
-      },
-      "preMatch": {
-        "homeElo": 1837.0,
-        "awayElo": 1804.0,
-        "homeLast5Xg": 1.4,
-        "awayLast5Xg": 1.29
-      },
-      "matchUrl": "/matches/crystal-palace-vs-brentford/38a4jj#4813738"
-    },
-    {
-      "matchId": "25-26-prem-aston-villa-vs-liverpool",
-      "season": "2025-2026",
-      "gameweek": 37,
-      "kickoffTime": null,
-      "homeTeam": {
-        "id": 7,
-        "name": "Aston Villa",
-        "shortName": "AVL",
-        "badgeSlug": "aston-villa",
-        "badgePath": "/teams/aston-villa.football-logos.cc.png"
-      },
-      "awayTeam": {
-        "id": 14,
-        "name": "Liverpool",
-        "shortName": "LIV",
-        "badgeSlug": "liverpool",
-        "badgePath": "/teams/liverpool.football-logos.cc.png"
-      },
-      "score": {
-        "home": 4,
-        "away": 2
-      },
-      "stats": {
-        "xg": {
-          "home": 1.85,
-          "away": 1.43
-        },
-        "shotsOnTarget": {
-          "home": 9,
-          "away": 5
-        },
-        "bigChances": {
-          "home": 5,
-          "away": 3
-        },
-        "possession": {
-          "home": 45.0,
-          "away": 55.0
-        }
-      },
-      "preMatch": {
-        "homeElo": 1921.0,
-        "awayElo": 1911.0,
-        "homeLast5Xg": 1.01,
-        "awayLast5Xg": 1.21
-      },
-      "matchUrl": "/matches/liverpool-vs-aston-villa/2ydbmv#4813737"
-    },
-    {
-      "matchId": "25-26-prem-arsenal-vs-burnley",
-      "season": "2025-2026",
-      "gameweek": 37,
-      "kickoffTime": null,
-      "homeTeam": {
-        "id": 3,
-        "name": "Arsenal",
-        "shortName": "ARS",
-        "badgeSlug": "arsenal",
-        "badgePath": "/teams/arsenal.football-logos.cc.png"
-      },
-      "awayTeam": {
-        "id": 90,
-        "name": "Burnley",
-        "shortName": "BUR",
-        "badgeSlug": "burnley",
-        "badgePath": "/teams/burnley.football-logos.cc.png"
-      },
-      "score": {
-        "home": 1,
-        "away": 0
-      },
-      "stats": {
-        "xg": {
-          "home": 1.29,
-          "away": 0.19
-        },
-        "shotsOnTarget": {
-          "home": 3,
-          "away": 0
-        },
-        "bigChances": {
-          "home": 1,
-          "away": 0
-        },
-        "possession": {
-          "home": 60.0,
-          "away": 40.0
-        }
-      },
-      "preMatch": {
-        "homeElo": 2064.0,
-        "awayElo": 1666.0,
-        "homeLast5Xg": 1.48,
-        "awayLast5Xg": 1.18
-      },
-      "matchUrl": "/matches/burnley-vs-arsenal/2omsup#4813736"
-    },
-    {
-      "matchId": "25-26-prem-afc-bournemouth-vs-manchester-city",
-      "season": "2025-2026",
-      "gameweek": 37,
-      "kickoffTime": null,
-      "homeTeam": {
-        "id": 91,
-        "name": "AFC Bournemouth",
-        "shortName": "BOU",
-        "badgeSlug": "bournemouth",
-        "badgePath": "/teams/bournemouth.football-logos.cc.png"
-      },
-      "awayTeam": {
-        "id": 43,
-        "name": "Manchester City",
-        "shortName": "MCI",
-        "badgeSlug": "manchester-city",
-        "badgePath": "/teams/manchester-city.football-logos.cc.png"
-      },
-      "score": {
-        "home": 1,
-        "away": 1
-      },
-      "stats": {
-        "xg": {
-          "home": 2.25,
-          "away": 1.48
-        },
-        "shotsOnTarget": {
-          "home": 2,
-          "away": 5
-        },
-        "bigChances": {
-          "home": 3,
-          "away": 1
-        },
-        "possession": {
-          "home": 46.0,
-          "away": 54.0
-        }
-      },
-      "preMatch": {
-        "homeElo": 1872.0,
-        "awayElo": 1971.0,
-        "homeLast5Xg": 1.69,
-        "awayLast5Xg": 1.95
-      },
-      "matchUrl": "/matches/manchester-city-vs-afc-bournemouth/2feiv3#4813735"
-    },
-    {
-      "matchId": "25-26-prem-west-ham-united-vs-arsenal",
-      "season": "2025-2026",
-      "gameweek": 36,
-      "kickoffTime": null,
-      "homeTeam": {
-        "id": 21,
-        "name": "West Ham United",
-        "shortName": "WHU",
-        "badgeSlug": "west-ham",
-        "badgePath": "/teams/west-ham.football-logos.cc.png"
-      },
-      "awayTeam": {
-        "id": 3,
-        "name": "Arsenal",
-        "shortName": "ARS",
-        "badgeSlug": "arsenal",
-        "badgePath": "/teams/arsenal.football-logos.cc.png"
-      },
-      "score": {
-        "home": 0,
-        "away": 1
-      },
-      "stats": {
-        "xg": {
-          "home": 1.15,
-          "away": 1.18
-        },
-        "shotsOnTarget": {
-          "home": 3,
-          "away": 4
-        },
-        "bigChances": {
-          "home": 2,
-          "away": 3
-        },
-        "possession": {
-          "home": 36.0,
-          "away": 64.0
-        }
-      },
-      "preMatch": {
-        "homeElo": 1769.0,
-        "awayElo": 2064.0,
-        "homeLast5Xg": 1.17,
-        "awayLast5Xg": 1.55
-      },
-      "matchUrl": "/matches/west-ham-united-vs-arsenal/2tnw09#4813734"
-    },
-    {
-      "matchId": "25-26-prem-tottenham-hotspur-vs-leeds-united",
-      "season": "2025-2026",
-      "gameweek": 36,
-      "kickoffTime": null,
-      "homeTeam": {
-        "id": 6,
-        "name": "Tottenham Hotspur",
-        "shortName": "TOT",
-        "badgeSlug": "tottenham",
-        "badgePath": "/teams/tottenham.football-logos.cc.png"
-      },
-      "awayTeam": {
-        "id": 2,
-        "name": "Leeds United",
-        "shortName": "LEE",
-        "badgeSlug": "leeds-united",
-        "badgePath": "/teams/leeds-united.football-logos.cc.png"
-      },
-      "score": {
-        "home": 1,
-        "away": 1
-      },
-      "stats": {
-        "xg": {
-          "home": 1.27,
-          "away": 1.34
-        },
-        "shotsOnTarget": {
-          "home": 3,
-          "away": 4
-        },
-        "bigChances": {
-          "home": 2,
-          "away": 2
-        },
-        "possession": {
-          "home": 57.0,
-          "away": 43.0
-        }
-      },
-      "preMatch": {
-        "homeElo": 1777.0,
-        "awayElo": 1797.0,
-        "homeLast5Xg": 1.38,
-        "awayLast5Xg": 1.4
-      },
-      "matchUrl": "/matches/leeds-united-vs-tottenham-hotspur/2ejdsf#4813733"
-    },
-    {
-      "matchId": "25-26-prem-sunderland-vs-manchester-united",
-      "season": "2025-2026",
-      "gameweek": 36,
-      "kickoffTime": null,
-      "homeTeam": {
-        "id": 56,
-        "name": "Sunderland",
-        "shortName": "SUN",
-        "badgeSlug": "sunderland",
-        "badgePath": "/teams/sunderland.football-logos.cc.png"
-      },
-      "awayTeam": {
-        "id": 1,
-        "name": "Manchester United",
-        "shortName": "MUN",
-        "badgeSlug": "manchester-united",
-        "badgePath": "/teams/manchester-united.football-logos.cc.png"
-      },
-      "score": {
-        "home": 0,
-        "away": 0
-      },
-      "stats": {
-        "xg": {
-          "home": 1.25,
-          "away": 0.62
-        },
-        "shotsOnTarget": {
-          "home": 4,
-          "away": 1
-        },
-        "bigChances": {
-          "home": 2,
-          "away": 0
-        },
-        "possession": {
-          "home": 51.0,
-          "away": 49.0
-        }
-      },
-      "preMatch": {
-        "homeElo": 1736.0,
-        "awayElo": 1915.0,
-        "homeLast5Xg": 1.21,
-        "awayLast5Xg": 1.57
-      },
-      "matchUrl": "/matches/sunderland-vs-manchester-united/2wgr5i#4813732"
-    },
-    {
-      "matchId": "25-26-prem-nottingham-forest-vs-newcastle-united",
-      "season": "2025-2026",
-      "gameweek": 36,
-      "kickoffTime": null,
-      "homeTeam": {
-        "id": 17,
-        "name": "Nottingham Forest",
-        "shortName": "NFO",
-        "badgeSlug": "nottingham-forest",
-        "badgePath": "/teams/nottingham-forest.football-logos.cc.png"
-      },
-      "awayTeam": {
-        "id": 4,
-        "name": "Newcastle United",
-        "shortName": "NEW",
-        "badgeSlug": "newcastle",
-        "badgePath": "/teams/newcastle.football-logos.cc.png"
-      },
-      "score": {
-        "home": 1,
-        "away": 1
-      },
-      "stats": {
-        "xg": {
-          "home": 1.1,
-          "away": 1.48
-        },
-        "shotsOnTarget": {
-          "home": 6,
-          "away": 6
-        },
-        "bigChances": {
-          "home": 2,
-          "away": 4
-        },
-        "possession": {
-          "home": 46.0,
-          "away": 54.0
-        }
-      },
-      "preMatch": {
-        "homeElo": 1822.0,
-        "awayElo": 1838.0,
-        "homeLast5Xg": 1.34,
-        "awayLast5Xg": 2.04
-      },
-      "matchUrl": "/matches/nottingham-forest-vs-newcastle-united/3gocct#4813731"
-    },
-    {
-      "matchId": "25-26-prem-manchester-city-vs-crystal-palace",
-      "season": "2025-2026",
-      "gameweek": 36,
-      "kickoffTime": null,
-      "homeTeam": {
-        "id": 43,
-        "name": "Manchester City",
-        "shortName": "MCI",
-        "badgeSlug": "manchester-city",
-        "badgePath": "/teams/manchester-city.football-logos.cc.png"
-      },
-      "awayTeam": {
-        "id": 31,
-        "name": "Crystal Palace",
-        "shortName": "CRY",
-        "badgeSlug": "crystal-palace",
-        "badgePath": "/teams/crystal-palace.football-logos.cc.png"
-      },
-      "score": {
-        "home": 3,
-        "away": 0
-      },
-      "stats": {
-        "xg": {
-          "home": 1.66,
-          "away": 0.73
-        },
-        "shotsOnTarget": {
-          "home": 4,
-          "away": 2
-        },
-        "bigChances": {
-          "home": 3,
-          "away": 0
-        },
-        "possession": {
-          "home": 73.0,
-          "away": 27.0
-        }
-      },
-      "preMatch": {
-        "homeElo": 1971.0,
-        "awayElo": 1804.0,
-        "homeLast5Xg": 1.9,
-        "awayLast5Xg": 1.33
-      },
-      "matchUrl": "/matches/manchester-city-vs-crystal-palace/2ri9zd#4813681"
-    },
-    {
-      "matchId": "25-26-prem-manchester-city-vs-brentford",
-      "season": "2025-2026",
-      "gameweek": 36,
-      "kickoffTime": null,
-      "homeTeam": {
-        "id": 43,
-        "name": "Manchester City",
-        "shortName": "MCI",
-        "badgeSlug": "manchester-city",
-        "badgePath": "/teams/manchester-city.football-logos.cc.png"
-      },
-      "awayTeam": {
-        "id": 94,
-        "name": "Brentford",
-        "shortName": "BRE",
-        "badgeSlug": "brentford",
-        "badgePath": "/teams/brentford.football-logos.cc.png"
-      },
-      "score": {
-        "home": 3,
-        "away": 0
-      },
-      "stats": {
-        "xg": {
-          "home": 2.98,
-          "away": 0.24
-        },
-        "shotsOnTarget": {
-          "home": 10,
-          "away": 2
-        },
-        "bigChances": {
-          "home": 6,
-          "away": 2
-        },
-        "possession": {
-          "home": 58.0,
-          "away": 42.0
-        }
-      },
-      "preMatch": {
-        "homeElo": 1971.0,
-        "awayElo": 1837.0,
-        "homeLast5Xg": 1.9,
-        "awayLast5Xg": 1.86
-      },
-      "matchUrl": "/matches/manchester-city-vs-brentford/2spwom#4813730"
-    },
-    {
-      "matchId": "25-26-prem-liverpool-vs-chelsea",
-      "season": "2025-2026",
-      "gameweek": 36,
-      "kickoffTime": null,
-      "homeTeam": {
-        "id": 14,
-        "name": "Liverpool",
-        "shortName": "LIV",
-        "badgeSlug": "liverpool",
-        "badgePath": "/teams/liverpool.football-logos.cc.png"
-      },
-      "awayTeam": {
-        "id": 8,
-        "name": "Chelsea",
-        "shortName": "CHE",
-        "badgeSlug": "chelsea",
-        "badgePath": "/teams/chelsea.football-logos.cc.png"
-      },
-      "score": {
-        "home": 1,
-        "away": 1
-      },
-      "stats": {
-        "xg": {
-          "home": 0.56,
-          "away": 0.5
-        },
-        "shotsOnTarget": {
-          "home": 3,
-          "away": 3
-        },
-        "bigChances": {
-          "home": 1,
-          "away": 1
-        },
-        "possession": {
-          "home": 48.0,
-          "away": 52.0
-        }
-      },
-      "preMatch": {
-        "homeElo": 1911.0,
-        "awayElo": 1831.0,
-        "homeLast5Xg": 1.13,
-        "awayLast5Xg": 1.24
-      },
-      "matchUrl": "/matches/chelsea-vs-liverpool/2f3vr7#4813729"
-    },
-    {
-      "matchId": "25-26-prem-fulham-vs-afc-bournemouth",
-      "season": "2025-2026",
-      "gameweek": 36,
-      "kickoffTime": null,
-      "homeTeam": {
-        "id": 54,
-        "name": "Fulham",
-        "shortName": "FUL",
-        "badgeSlug": "fulham",
-        "badgePath": "/teams/fulham.football-logos.cc.png"
-      },
-      "awayTeam": {
-        "id": 91,
-        "name": "AFC Bournemouth",
-        "shortName": "BOU",
-        "badgeSlug": "bournemouth",
-        "badgePath": "/teams/bournemouth.football-logos.cc.png"
-      },
-      "score": {
-        "home": 0,
-        "away": 1
-      },
-      "stats": {
-        "xg": {
-          "home": 1.33,
-          "away": 0.82
-        },
-        "shotsOnTarget": {
-          "home": 2,
-          "away": 5
-        },
-        "bigChances": {
-          "home": 1,
-          "away": 2
-        },
-        "possession": {
-          "home": 60.0,
-          "away": 40.0
-        }
-      },
-      "preMatch": {
-        "homeElo": 1813.0,
-        "awayElo": 1872.0,
-        "homeLast5Xg": 1.35,
-        "awayLast5Xg": 1.91
-      },
-      "matchUrl": "/matches/afc-bournemouth-vs-fulham/2uiul6#4813728"
-    },
-    {
-      "matchId": "25-26-prem-crystal-palace-vs-everton",
-      "season": "2025-2026",
-      "gameweek": 36,
-      "kickoffTime": null,
-      "homeTeam": {
-        "id": 31,
-        "name": "Crystal Palace",
-        "shortName": "CRY",
-        "badgeSlug": "crystal-palace",
-        "badgePath": "/teams/crystal-palace.football-logos.cc.png"
-      },
-      "awayTeam": {
-        "id": 11,
-        "name": "Everton",
-        "shortName": "EVE",
-        "badgeSlug": "everton",
-        "badgePath": "/teams/everton.football-logos.cc.png"
-      },
-      "score": {
-        "home": 2,
-        "away": 2
-      },
-      "stats": {
-        "xg": {
-          "home": 2.56,
-          "away": 1.59
-        },
-        "shotsOnTarget": {
-          "home": 8,
-          "away": 6
-        },
-        "bigChances": {
-          "home": 6,
-          "away": 4
-        },
-        "possession": {
-          "home": 59.0,
-          "away": 41.0
-        }
-      },
-      "preMatch": {
-        "homeElo": 1804.0,
-        "awayElo": 1803.0,
-        "homeLast5Xg": 1.33,
-        "awayLast5Xg": 1.59
-      },
-      "matchUrl": "/matches/everton-vs-crystal-palace/2tttz7#4813727"
-    },
-    {
-      "matchId": "25-26-prem-burnley-vs-aston-villa",
-      "season": "2025-2026",
-      "gameweek": 36,
-      "kickoffTime": null,
-      "homeTeam": {
-        "id": 90,
-        "name": "Burnley",
-        "shortName": "BUR",
-        "badgeSlug": "burnley",
-        "badgePath": "/teams/burnley.football-logos.cc.png"
-      },
-      "awayTeam": {
-        "id": 7,
-        "name": "Aston Villa",
-        "shortName": "AVL",
-        "badgeSlug": "aston-villa",
-        "badgePath": "/teams/aston-villa.football-logos.cc.png"
-      },
-      "score": {
-        "home": 2,
-        "away": 2
-      },
-      "stats": {
-        "xg": {
-          "home": 1.79,
-          "away": 1.44
-        },
-        "shotsOnTarget": {
-          "home": 6,
-          "away": 7
-        },
-        "bigChances": {
-          "home": 3,
-          "away": 3
-        },
-        "possession": {
-          "home": 34.0,
-          "away": 66.0
-        }
-      },
-      "preMatch": {
-        "homeElo": 1666.0,
-        "awayElo": 1921.0,
-        "homeLast5Xg": 0.98,
-        "awayLast5Xg": 0.98
-      },
-      "matchUrl": "/matches/burnley-vs-aston-villa/2t9lxd#4813726"
-    },
-    {
-      "matchId": "25-26-prem-brighton-hove-albion-vs-wolverhampton-wanderers",
-      "season": "2025-2026",
-      "gameweek": 36,
-      "kickoffTime": null,
-      "homeTeam": {
-        "id": 36,
-        "name": "Brighton & Hove Albion",
-        "shortName": "BHA",
-        "badgeSlug": "brighton",
-        "badgePath": "/teams/brighton.football-logos.cc.png"
-      },
-      "awayTeam": {
-        "id": 39,
-        "name": "Wolverhampton Wanderers",
-        "shortName": "WOL",
-        "badgeSlug": "wolves",
-        "badgePath": "/teams/wolves.football-logos.cc.png"
-      },
-      "score": {
-        "home": 3,
-        "away": 0
-      },
-      "stats": {
-        "xg": {
-          "home": 1.62,
-          "away": 0.49
-        },
-        "shotsOnTarget": {
-          "home": 6,
-          "away": 1
-        },
-        "bigChances": {
-          "home": 4,
-          "away": 2
-        },
-        "possession": {
-          "home": 72.0,
-          "away": 28.0
-        }
-      },
-      "preMatch": {
-        "homeElo": 1842.0,
-        "awayElo": 1680.0,
-        "homeLast5Xg": 1.63,
-        "awayLast5Xg": 0.97
-      },
-      "matchUrl": "/matches/wolverhampton-wanderers-vs-brighton-hove-albion/2xaiyv#4813725"
-    },
-    {
-      "matchId": "25-26-prem-wolverhampton-wanderers-vs-sunderland",
-      "season": "2025-2026",
-      "gameweek": 35,
-      "kickoffTime": null,
-      "homeTeam": {
-        "id": 39,
-        "name": "Wolverhampton Wanderers",
-        "shortName": "WOL",
-        "badgeSlug": "wolves",
-        "badgePath": "/teams/wolves.football-logos.cc.png"
-      },
-      "awayTeam": {
-        "id": 56,
-        "name": "Sunderland",
-        "shortName": "SUN",
-        "badgeSlug": "sunderland",
-        "badgePath": "/teams/sunderland.football-logos.cc.png"
-      },
-      "score": {
-        "home": 1,
-        "away": 1
-      },
-      "stats": {
-        "xg": {
-          "home": 1.72,
-          "away": 0.66
-        },
-        "shotsOnTarget": {
-          "home": 7,
-          "away": 2
-        },
-        "bigChances": {
-          "home": 3,
-          "away": 1
-        },
-        "possession": {
-          "home": 58.0,
-          "away": 42.0
-        }
-      },
-      "preMatch": {
-        "homeElo": 1680.0,
-        "awayElo": 1736.0,
-        "homeLast5Xg": 0.8,
-        "awayLast5Xg": 1.25
-      },
-      "matchUrl": "/matches/sunderland-vs-wolverhampton-wanderers/2esixh#4813724"
-    },
-    {
-      "matchId": "25-26-prem-newcastle-united-vs-brighton-hove-albion",
-      "season": "2025-2026",
-      "gameweek": 35,
-      "kickoffTime": null,
-      "homeTeam": {
-        "id": 4,
-        "name": "Newcastle United",
-        "shortName": "NEW",
-        "badgeSlug": "newcastle",
-        "badgePath": "/teams/newcastle.football-logos.cc.png"
-      },
-      "awayTeam": {
-        "id": 36,
-        "name": "Brighton & Hove Albion",
-        "shortName": "BHA",
-        "badgeSlug": "brighton",
-        "badgePath": "/teams/brighton.football-logos.cc.png"
-      },
-      "score": {
-        "home": 3,
-        "away": 1
-      },
-      "stats": {
-        "xg": {
-          "home": 3.16,
-          "away": 1.53
-        },
-        "shotsOnTarget": {
-          "home": 6,
-          "away": 4
-        },
-        "bigChances": {
-          "home": 5,
-          "away": 4
-        },
-        "possession": {
-          "home": 32.0,
-          "away": 68.0
-        }
-      },
-      "preMatch": {
-        "homeElo": 1838.0,
-        "awayElo": 1842.0,
-        "homeLast5Xg": 1.64,
-        "awayLast5Xg": 1.58
-      },
-      "matchUrl": "/matches/brighton-hove-albion-vs-newcastle-united/3gos5a#4813723"
-    },
-    {
-      "matchId": "25-26-prem-manchester-united-vs-liverpool",
-      "season": "2025-2026",
-      "gameweek": 35,
-      "kickoffTime": null,
-      "homeTeam": {
-        "id": 1,
-        "name": "Manchester United",
-        "shortName": "MUN",
-        "badgeSlug": "manchester-united",
-        "badgePath": "/teams/manchester-united.football-logos.cc.png"
-      },
-      "awayTeam": {
-        "id": 14,
-        "name": "Liverpool",
-        "shortName": "LIV",
-        "badgeSlug": "liverpool",
-        "badgePath": "/teams/liverpool.football-logos.cc.png"
-      },
-      "score": {
-        "home": 3,
-        "away": 2
-      },
-      "stats": {
-        "xg": {
-          "home": 2.34,
-          "away": 0.88
-        },
-        "shotsOnTarget": {
-          "home": 6,
-          "away": 5
-        },
-        "bigChances": {
-          "home": 3,
-          "away": 1
-        },
-        "possession": {
-          "home": 37.0,
-          "away": 63.0
-        }
-      },
-      "preMatch": {
-        "homeElo": 1915.0,
-        "awayElo": 1911.0,
-        "homeLast5Xg": 1.4,
-        "awayLast5Xg": 1.27
-      },
-      "matchUrl": "/matches/liverpool-vs-manchester-united/2ygkcb#4813722"
-    },
-    {
-      "matchId": "25-26-prem-leeds-united-vs-burnley",
-      "season": "2025-2026",
-      "gameweek": 35,
-      "kickoffTime": null,
-      "homeTeam": {
-        "id": 2,
-        "name": "Leeds United",
-        "shortName": "LEE",
-        "badgeSlug": "leeds-united",
-        "badgePath": "/teams/leeds-united.football-logos.cc.png"
-      },
-      "awayTeam": {
-        "id": 90,
-        "name": "Burnley",
-        "shortName": "BUR",
-        "badgeSlug": "burnley",
-        "badgePath": "/teams/burnley.football-logos.cc.png"
-      },
-      "score": {
-        "home": 3,
-        "away": 1
-      },
-      "stats": {
-        "xg": {
-          "home": 1.64,
-          "away": 0.57
-        },
-        "shotsOnTarget": {
-          "home": 8,
-          "away": 3
-        },
-        "bigChances": {
-          "home": 2,
-          "away": 0
-        },
-        "possession": {
-          "home": 48.0,
-          "away": 52.0
-        }
-      },
-      "preMatch": {
-        "homeElo": 1797.0,
-        "awayElo": 1666.0,
-        "homeLast5Xg": 1.37,
-        "awayLast5Xg": 1.06
-      },
-      "matchUrl": "/matches/burnley-vs-leeds-united/2akph4#4813721"
-    },
-    {
-      "matchId": "25-26-prem-everton-vs-manchester-city",
-      "season": "2025-2026",
-      "gameweek": 35,
-      "kickoffTime": null,
-      "homeTeam": {
-        "id": 11,
-        "name": "Everton",
-        "shortName": "EVE",
-        "badgeSlug": "everton",
-        "badgePath": "/teams/everton.football-logos.cc.png"
-      },
-      "awayTeam": {
-        "id": 43,
-        "name": "Manchester City",
-        "shortName": "MCI",
-        "badgeSlug": "manchester-city",
-        "badgePath": "/teams/manchester-city.football-logos.cc.png"
-      },
-      "score": {
-        "home": 3,
-        "away": 3
-      },
-      "stats": {
-        "xg": {
-          "home": 2.72,
-          "away": 1.54
-        },
-        "shotsOnTarget": {
-          "home": 6,
-          "away": 4
-        },
-        "bigChances": {
-          "home": 4,
-          "away": 1
-        },
-        "possession": {
-          "home": 24.0,
-          "away": 76.0
-        }
-      },
-      "preMatch": {
-        "homeElo": 1803.0,
-        "awayElo": 1971.0,
-        "homeLast5Xg": 1.3,
-        "awayLast5Xg": 2.02
-      },
-      "matchUrl": "/matches/manchester-city-vs-everton/2fauom#4813720"
-    },
-    {
-      "matchId": "25-26-prem-chelsea-vs-nottingham-forest",
-      "season": "2025-2026",
-      "gameweek": 35,
-      "kickoffTime": null,
-      "homeTeam": {
-        "id": 8,
-        "name": "Chelsea",
-        "shortName": "CHE",
-        "badgeSlug": "chelsea",
-        "badgePath": "/teams/chelsea.football-logos.cc.png"
-      },
-      "awayTeam": {
-        "id": 17,
-        "name": "Nottingham Forest",
-        "shortName": "NFO",
-        "badgeSlug": "nottingham-forest",
-        "badgePath": "/teams/nottingham-forest.football-logos.cc.png"
-      },
-      "score": {
-        "home": 1,
-        "away": 3
-      },
-      "stats": {
-        "xg": {
-          "home": 2.15,
-          "away": 2.05
-        },
-        "shotsOnTarget": {
-          "home": 5,
-          "away": 4
-        },
-        "bigChances": {
-          "home": 2,
-          "away": 3
-        },
-        "possession": {
-          "home": 67.0,
-          "away": 33.0
-        }
-      },
-      "preMatch": {
-        "homeElo": 1831.0,
-        "awayElo": 1822.0,
-        "homeLast5Xg": 1.08,
-        "awayLast5Xg": 1.26
-      },
-      "matchUrl": "/matches/chelsea-vs-nottingham-forest/2vn3ne#4813719"
-    },
-    {
-      "matchId": "25-26-prem-brentford-vs-west-ham-united",
-      "season": "2025-2026",
-      "gameweek": 35,
-      "kickoffTime": null,
-      "homeTeam": {
-        "id": 94,
-        "name": "Brentford",
-        "shortName": "BRE",
-        "badgeSlug": "brentford",
-        "badgePath": "/teams/brentford.football-logos.cc.png"
-      },
-      "awayTeam": {
-        "id": 21,
-        "name": "West Ham United",
-        "shortName": "WHU",
-        "badgeSlug": "west-ham",
-        "badgePath": "/teams/west-ham.football-logos.cc.png"
-      },
-      "score": {
-        "home": 3,
-        "away": 0
-      },
-      "stats": {
-        "xg": {
-          "home": 2.27,
-          "away": 0.92
-        },
-        "shotsOnTarget": {
-          "home": 6,
-          "away": 4
-        },
-        "bigChances": {
-          "home": 4,
-          "away": 1
-        },
-        "possession": {
-          "home": 48.0,
-          "away": 52.0
-        }
-      },
-      "preMatch": {
-        "homeElo": 1837.0,
-        "awayElo": 1769.0,
-        "homeLast5Xg": 1.49,
-        "awayLast5Xg": 1.2
-      },
-      "matchUrl": "/matches/west-ham-united-vs-brentford/2uwdxd#4813718"
-    },
-    {
-      "matchId": "25-26-prem-aston-villa-vs-tottenham-hotspur",
-      "season": "2025-2026",
-      "gameweek": 35,
-      "kickoffTime": null,
-      "homeTeam": {
-        "id": 7,
-        "name": "Aston Villa",
-        "shortName": "AVL",
-        "badgeSlug": "aston-villa",
-        "badgePath": "/teams/aston-villa.football-logos.cc.png"
-      },
-      "awayTeam": {
-        "id": 6,
-        "name": "Tottenham Hotspur",
-        "shortName": "TOT",
-        "badgeSlug": "tottenham",
-        "badgePath": "/teams/tottenham.football-logos.cc.png"
-      },
-      "score": {
-        "home": 1,
-        "away": 2
-      },
-      "stats": {
-        "xg": {
-          "home": 0.32,
-          "away": 0.99
-        },
-        "shotsOnTarget": {
-          "home": 1,
-          "away": 5
-        },
-        "bigChances": {
-          "home": 1,
-          "away": 2
-        },
-        "possession": {
-          "home": 45.0,
-          "away": 55.0
-        }
-      },
-      "preMatch": {
-        "homeElo": 1921.0,
-        "awayElo": 1777.0,
-        "homeLast5Xg": 0.77,
-        "awayLast5Xg": 1.43
-      },
-      "matchUrl": "/matches/tottenham-hotspur-vs-aston-villa/2xnfpj#4813717"
-    },
-    {
-      "matchId": "25-26-prem-arsenal-vs-fulham",
-      "season": "2025-2026",
-      "gameweek": 35,
-      "kickoffTime": null,
-      "homeTeam": {
-        "id": 3,
-        "name": "Arsenal",
-        "shortName": "ARS",
-        "badgeSlug": "arsenal",
-        "badgePath": "/teams/arsenal.football-logos.cc.png"
-      },
-      "awayTeam": {
-        "id": 54,
-        "name": "Fulham",
-        "shortName": "FUL",
-        "badgeSlug": "fulham",
-        "badgePath": "/teams/fulham.football-logos.cc.png"
-      },
-      "score": {
-        "home": 3,
-        "away": 0
-      },
-      "stats": {
-        "xg": {
-          "home": 3.22,
-          "away": 0.37
-        },
-        "shotsOnTarget": {
-          "home": 9,
-          "away": 1
-        },
-        "bigChances": {
-          "home": 6,
-          "away": 0
-        },
-        "possession": {
-          "home": 54.0,
-          "away": 46.0
-        }
-      },
-      "preMatch": {
-        "homeElo": 2064.0,
-        "awayElo": 1813.0,
-        "homeLast5Xg": 0.73,
-        "awayLast5Xg": 1.46
-      },
-      "matchUrl": "/matches/arsenal-vs-fulham/37l643#4813716"
-    },
-    {
-      "matchId": "25-26-prem-afc-bournemouth-vs-crystal-palace",
-      "season": "2025-2026",
-      "gameweek": 35,
-      "kickoffTime": null,
-      "homeTeam": {
-        "id": 91,
-        "name": "AFC Bournemouth",
-        "shortName": "BOU",
-        "badgeSlug": "bournemouth",
-        "badgePath": "/teams/bournemouth.football-logos.cc.png"
-      },
-      "awayTeam": {
-        "id": 31,
-        "name": "Crystal Palace",
-        "shortName": "CRY",
-        "badgeSlug": "crystal-palace",
-        "badgePath": "/teams/crystal-palace.football-logos.cc.png"
-      },
-      "score": {
-        "home": 3,
-        "away": 0
-      },
-      "stats": {
-        "xg": {
-          "home": 2.08,
-          "away": 0.89
-        },
-        "shotsOnTarget": {
-          "home": 5,
-          "away": 1
-        },
-        "bigChances": {
-          "home": 2,
-          "away": 1
-        },
-        "possession": {
-          "home": 50.0,
-          "away": 50.0
-        }
-      },
-      "preMatch": {
-        "homeElo": 1872.0,
-        "awayElo": 1804.0,
-        "homeLast5Xg": 1.83,
-        "awayLast5Xg": 1.04
-      },
-      "matchUrl": "/matches/afc-bournemouth-vs-crystal-palace/2txspy#4813715"
-    },
-    {
-      "matchId": "25-26-prem-wolverhampton-wanderers-vs-tottenham-hotspur",
-      "season": "2025-2026",
-      "gameweek": 34,
-      "kickoffTime": null,
-      "homeTeam": {
-        "id": 39,
-        "name": "Wolverhampton Wanderers",
-        "shortName": "WOL",
-        "badgeSlug": "wolves",
-        "badgePath": "/teams/wolves.football-logos.cc.png"
-      },
-      "awayTeam": {
-        "id": 6,
-        "name": "Tottenham Hotspur",
-        "shortName": "TOT",
-        "badgeSlug": "tottenham",
-        "badgePath": "/teams/tottenham.football-logos.cc.png"
-      },
-      "score": {
-        "home": 0,
-        "away": 1
-      },
-      "stats": {
-        "xg": {
-          "home": 0.7,
-          "away": 0.92
-        },
-        "shotsOnTarget": {
-          "home": 2,
-          "away": 2
-        },
-        "bigChances": {
-          "home": 1,
-          "away": 2
-        },
-        "possession": {
-          "home": 41.0,
-          "away": 59.0
-        }
-      },
-      "preMatch": {
-        "homeElo": 1680.0,
-        "awayElo": 1777.0,
-        "homeLast5Xg": 0.98,
-        "awayLast5Xg": 1.49
-      },
-      "matchUrl": "/matches/tottenham-hotspur-vs-wolverhampton-wanderers/2fydv8#4813714"
-    },
-    {
-      "matchId": "25-26-prem-west-ham-united-vs-everton",
-      "season": "2025-2026",
-      "gameweek": 34,
-      "kickoffTime": null,
-      "homeTeam": {
-        "id": 21,
-        "name": "West Ham United",
-        "shortName": "WHU",
-        "badgeSlug": "west-ham",
-        "badgePath": "/teams/west-ham.football-logos.cc.png"
-      },
-      "awayTeam": {
-        "id": 11,
-        "name": "Everton",
-        "shortName": "EVE",
-        "badgeSlug": "everton",
-        "badgePath": "/teams/everton.football-logos.cc.png"
-      },
-      "score": {
-        "home": 2,
-        "away": 1
-      },
-      "stats": {
-        "xg": {
-          "home": 1.17,
-          "away": 1.45
-        },
-        "shotsOnTarget": {
-          "home": 3,
-          "away": 3
-        },
-        "bigChances": {
-          "home": 3,
-          "away": 1
-        },
-        "possession": {
-          "home": 44.0,
-          "away": 56.0
-        }
-      },
-      "preMatch": {
-        "homeElo": 1769.0,
-        "awayElo": 1803.0,
-        "homeLast5Xg": 1.34,
-        "awayLast5Xg": 1.44
-      },
-      "matchUrl": "/matches/west-ham-united-vs-everton/2hby1v#4813713"
-    },
-    {
-      "matchId": "25-26-prem-sunderland-vs-nottingham-forest",
-      "season": "2025-2026",
-      "gameweek": 34,
-      "kickoffTime": null,
-      "homeTeam": {
-        "id": 56,
-        "name": "Sunderland",
-        "shortName": "SUN",
-        "badgeSlug": "sunderland",
-        "badgePath": "/teams/sunderland.football-logos.cc.png"
-      },
-      "awayTeam": {
-        "id": 17,
-        "name": "Nottingham Forest",
-        "shortName": "NFO",
-        "badgeSlug": "nottingham-forest",
-        "badgePath": "/teams/nottingham-forest.football-logos.cc.png"
-      },
-      "score": {
-        "home": 0,
-        "away": 5
-      },
-      "stats": {
-        "xg": {
-          "home": 0.7,
-          "away": 1.1
-        },
-        "shotsOnTarget": {
-          "home": 4,
-          "away": 6
-        },
-        "bigChances": {
-          "home": 0,
-          "away": 3
-        },
-        "possession": {
-          "home": 61.0,
-          "away": 39.0
-        }
-      },
-      "preMatch": {
-        "homeElo": 1736.0,
-        "awayElo": 1822.0,
-        "homeLast5Xg": 1.39,
-        "awayLast5Xg": 1.14
-      },
-      "matchUrl": "/matches/sunderland-vs-nottingham-forest/2vtwiu#4813712"
-    },
-    {
-      "matchId": "25-26-prem-manchester-united-vs-brentford",
-      "season": "2025-2026",
-      "gameweek": 34,
-      "kickoffTime": null,
-      "homeTeam": {
-        "id": 1,
-        "name": "Manchester United",
-        "shortName": "MUN",
-        "badgeSlug": "manchester-united",
-        "badgePath": "/teams/manchester-united.football-logos.cc.png"
-      },
-      "awayTeam": {
-        "id": 94,
-        "name": "Brentford",
-        "shortName": "BRE",
-        "badgeSlug": "brentford",
-        "badgePath": "/teams/brentford.football-logos.cc.png"
-      },
-      "score": {
-        "home": 2,
-        "away": 1
-      },
-      "stats": {
-        "xg": {
-          "home": 1.36,
-          "away": 1.17
-        },
-        "shotsOnTarget": {
-          "home": 6,
-          "away": 4
-        },
-        "bigChances": {
-          "home": 4,
-          "away": 2
-        },
-        "possession": {
-          "home": 45.0,
-          "away": 55.0
-        }
-      },
-      "preMatch": {
-        "homeElo": 1915.0,
-        "awayElo": 1837.0,
-        "homeLast5Xg": 1.53,
-        "awayLast5Xg": 1.7
-      },
-      "matchUrl": "/matches/brentford-vs-manchester-united/3dfzjk#4813711"
-    },
-    {
-      "matchId": "25-26-prem-liverpool-vs-crystal-palace",
-      "season": "2025-2026",
-      "gameweek": 34,
-      "kickoffTime": null,
-      "homeTeam": {
-        "id": 14,
-        "name": "Liverpool",
-        "shortName": "LIV",
-        "badgeSlug": "liverpool",
-        "badgePath": "/teams/liverpool.football-logos.cc.png"
-      },
-      "awayTeam": {
-        "id": 31,
-        "name": "Crystal Palace",
-        "shortName": "CRY",
-        "badgeSlug": "crystal-palace",
-        "badgePath": "/teams/crystal-palace.football-logos.cc.png"
-      },
-      "score": {
-        "home": 3,
-        "away": 1
-      },
-      "stats": {
-        "xg": {
-          "home": 1.14,
-          "away": 2.26
-        },
-        "shotsOnTarget": {
-          "home": 3,
-          "away": 7
-        },
-        "bigChances": {
-          "home": 3,
-          "away": 5
-        },
-        "possession": {
-          "home": 53.0,
-          "away": 47.0
-        }
-      },
-      "preMatch": {
-        "homeElo": 1911.0,
-        "awayElo": 1804.0,
-        "homeLast5Xg": 1.25,
-        "awayLast5Xg": 0.84
-      },
-      "matchUrl": "/matches/liverpool-vs-crystal-palace/2tmp8g#4813710"
-    },
-    {
-      "matchId": "25-26-prem-fulham-vs-aston-villa",
-      "season": "2025-2026",
-      "gameweek": 34,
-      "kickoffTime": null,
-      "homeTeam": {
-        "id": 54,
-        "name": "Fulham",
-        "shortName": "FUL",
-        "badgeSlug": "fulham",
-        "badgePath": "/teams/fulham.football-logos.cc.png"
-      },
-      "awayTeam": {
-        "id": 7,
-        "name": "Aston Villa",
-        "shortName": "AVL",
-        "badgeSlug": "aston-villa",
-        "badgePath": "/teams/aston-villa.football-logos.cc.png"
-      },
-      "score": {
-        "home": 1,
-        "away": 0
-      },
-      "stats": {
-        "xg": {
-          "home": 1.18,
-          "away": 0.93
-        },
-        "shotsOnTarget": {
-          "home": 6,
-          "away": 1
-        },
-        "bigChances": {
-          "home": 2,
-          "away": 1
-        },
-        "possession": {
-          "home": 39.0,
-          "away": 61.0
-        }
-      },
-      "preMatch": {
-        "homeElo": 1813.0,
-        "awayElo": 1921.0,
-        "homeLast5Xg": 1.65,
-        "awayLast5Xg": 0.79
-      },
-      "matchUrl": "/matches/fulham-vs-aston-villa/3cnglp#4813709"
-    },
-    {
-      "matchId": "25-26-prem-arsenal-vs-newcastle-united",
-      "season": "2025-2026",
-      "gameweek": 34,
-      "kickoffTime": null,
-      "homeTeam": {
-        "id": 3,
-        "name": "Arsenal",
-        "shortName": "ARS",
-        "badgeSlug": "arsenal",
-        "badgePath": "/teams/arsenal.football-logos.cc.png"
-      },
-      "awayTeam": {
-        "id": 4,
-        "name": "Newcastle United",
-        "shortName": "NEW",
-        "badgeSlug": "newcastle",
-        "badgePath": "/teams/newcastle.football-logos.cc.png"
-      },
-      "score": {
-        "home": 1,
-        "away": 0
-      },
-      "stats": {
-        "xg": {
-          "home": 0.49,
-          "away": 1.0
-        },
-        "shotsOnTarget": {
-          "home": 4,
-          "away": 3
-        },
-        "bigChances": {
-          "home": 0,
-          "away": 2
-        },
-        "possession": {
-          "home": 45.0,
-          "away": 55.0
-        }
-      },
-      "preMatch": {
-        "homeElo": 2064.0,
-        "awayElo": 1838.0,
-        "homeLast5Xg": 0.81,
-        "awayLast5Xg": 1.69
-      },
-      "matchUrl": "/matches/arsenal-vs-newcastle-united/3c42by#4813706"
     }
   ]
 }

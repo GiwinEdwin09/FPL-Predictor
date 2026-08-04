@@ -176,13 +176,13 @@ def build_pre_match_feature_table(
     competition_scope: Literal["all", "premier_league"] = "premier_league",
 ) -> pd.DataFrame:
     working = matches.copy()
-    working["kickoff_time"] = pd.to_datetime(working["kickoff_time"], errors="coerce", format="mixed")
+    working["kickoff_time"] = pd.to_datetime(working["kickoff_time"], errors="coerce", utc=True, format="mixed")
     working["_ordering_gameweek"] = pd.to_numeric(
         working.get("source_gameweek", working.get("gameweek")),
         errors="coerce",
     ).fillna(pd.to_numeric(working.get("gameweek"), errors="coerce"))
     working["_kickoff_missing"] = working["kickoff_time"].isna()
-    working["_kickoff_sort"] = working["kickoff_time"].fillna(pd.Timestamp.max)
+    working["_kickoff_sort"] = working["kickoff_time"].fillna(pd.Timestamp.max.tz_localize("UTC"))
     working = working.sort_values(
         ["_kickoff_sort", "_kickoff_missing", "source_season", "_ordering_gameweek", "match_id"],
         kind="stable",

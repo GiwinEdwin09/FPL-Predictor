@@ -239,3 +239,87 @@ def test_build_pre_match_feature_table_can_emit_all_competitions() -> None:
     assert feature_table["match_id"].tolist() == ["cup1"]
     assert feature_table.iloc[0]["is_cup_match"] == 1
     assert feature_table.iloc[0]["is_european_match"] == 1
+
+
+def test_build_pre_match_feature_table_handles_mixed_timezone_kickoff_formats() -> None:
+    matches = pd.DataFrame(
+        [
+            {
+                "match_id": "old-season",
+                "source_season": "2024-2025",
+                "source_gameweek": 1,
+                "tournament": "Premier League",
+                "gameweek": 1,
+                "kickoff_time": "2025-05-11 15:00:00",
+                "finished": True,
+                "home_team": 1,
+                "away_team": 2,
+                "home_team_elo": 1500,
+                "away_team_elo": 1490,
+                "home_score": 1,
+                "away_score": 0,
+                "home_expected_goals_xg": 1.1,
+                "away_expected_goals_xg": 0.6,
+                "home_shots_on_target": 4,
+                "away_shots_on_target": 2,
+                "home_big_chances": 2,
+                "away_big_chances": 1,
+                "home_tackles_won": 9,
+                "away_tackles_won": 10,
+            },
+            {
+                "match_id": "new-season",
+                "source_season": "2025-2026",
+                "source_gameweek": 1,
+                "tournament": "prem",
+                "gameweek": 1,
+                "kickoff_time": "2025-08-16T16:30:00+00:00",
+                "finished": False,
+                "home_team": 1,
+                "away_team": 3,
+                "home_team_elo": 1510,
+                "away_team_elo": 1480,
+                "home_score": None,
+                "away_score": None,
+                "home_expected_goals_xg": None,
+                "away_expected_goals_xg": None,
+                "home_shots_on_target": None,
+                "away_shots_on_target": None,
+                "home_big_chances": None,
+                "away_big_chances": None,
+                "home_tackles_won": None,
+                "away_tackles_won": None,
+            },
+            {
+                "match_id": "no-kickoff",
+                "source_season": "2025-2026",
+                "source_gameweek": 2,
+                "tournament": "prem",
+                "gameweek": 2,
+                "kickoff_time": None,
+                "finished": False,
+                "home_team": 2,
+                "away_team": 3,
+                "home_team_elo": 1495,
+                "away_team_elo": 1485,
+                "home_score": None,
+                "away_score": None,
+                "home_expected_goals_xg": None,
+                "away_expected_goals_xg": None,
+                "home_shots_on_target": None,
+                "away_shots_on_target": None,
+                "home_big_chances": None,
+                "away_big_chances": None,
+                "home_tackles_won": None,
+                "away_tackles_won": None,
+            },
+        ]
+    )
+
+    feature_table = build_pre_match_feature_table(matches)
+
+    assert feature_table["match_id"].tolist() == ["old-season", "new-season", "no-kickoff"]
+    assert str(feature_table["kickoff_time"].dt.tz) == "UTC"
+    row = feature_table.loc[feature_table["match_id"] == "new-season"].iloc[0]
+    assert row["home_last5_matches"] == 1
+    assert row["home_days_rest"] == 97 + 1.5 / 24
