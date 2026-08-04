@@ -2608,6 +2608,92 @@ button {
 }
 
 /* ==========================================================================
+   Compare (head-to-head explorer)
+   ========================================================================== */
+
+.compare-selectors {
+  display: flex;
+  align-items: flex-end;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.compare-picker {
+  min-width: 220px;
+}
+
+.compare-swap {
+  margin-bottom: 0.35rem;
+}
+
+.compare-verdict {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 1rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-md);
+  padding: 1.5rem 1.75rem;
+}
+
+.compare-side {
+  display: grid;
+  justify-items: center;
+  gap: 0.35rem;
+  text-align: center;
+}
+
+.compare-side-name {
+  font-weight: 600;
+  font-size: 0.92rem;
+  color: var(--muted-strong);
+}
+
+.compare-side-wins {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(2.2rem, 6vw, 3.4rem);
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+
+.compare-middle {
+  display: grid;
+  justify-items: center;
+  gap: 0.2rem;
+  padding: 0 1rem;
+  border-left: 1px solid var(--border);
+  border-right: 1px solid var(--border);
+}
+
+.compare-draws {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.05rem;
+}
+
+.compare-played {
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+.compare-meeting-row {
+  grid-template-columns: auto 1fr auto auto;
+}
+
+.compare-meeting-fixture {
+  min-width: 0;
+}
+
+.compare-model-call {
+  font-size: 0.8rem;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+/* ==========================================================================
    Responsive
    ========================================================================== */
 
@@ -2746,5 +2832,13 @@ button {
 
   .team-result-meta {
     display: none;
+  }
+
+  .compare-meeting-row {
+    grid-template-columns: 1fr auto auto;
+  }
+
+  .compare-verdict {
+    padding: 1.1rem;
   }
 }
