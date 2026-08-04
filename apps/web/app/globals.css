@@ -2200,6 +2200,173 @@ button {
 }
 
 /* ==========================================================================
+   Insights (model report card)
+   ========================================================================== */
+
+.insights-stack {
+  display: grid;
+  gap: 2.25rem;
+}
+
+.insight-section {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.chart-frame {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  padding: 1.25rem;
+}
+
+.chart-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.chart-bar {
+  fill: var(--brand);
+}
+
+.chart-bar:hover {
+  fill: var(--accent-deep);
+}
+
+.chart-baseline {
+  stroke: var(--signal-draw);
+  stroke-width: 1.5;
+  stroke-dasharray: 5 4;
+}
+
+.chart-grid {
+  stroke: var(--border);
+  stroke-width: 1;
+}
+
+.chart-diagonal {
+  stroke: var(--muted);
+  stroke-width: 1.5;
+  stroke-dasharray: 6 5;
+}
+
+.chart-dot {
+  fill: var(--accent-deep);
+  fill-opacity: 0.75;
+  stroke: var(--accent-ink);
+  stroke-width: 1;
+}
+
+.chart-tick {
+  font-family: var(--font-body);
+  font-size: 11px;
+  fill: var(--muted);
+}
+
+.chart-axis-label {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 600;
+  fill: var(--muted-strong);
+}
+
+.chart-caption {
+  margin: 0.75rem 0 0;
+  font-size: 0.82rem;
+  color: var(--muted);
+}
+
+.upset-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.6rem;
+  counter-reset: upset;
+}
+
+.upset-row {
+  counter-increment: upset;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 1rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  padding: 0.85rem 1.1rem;
+}
+
+.upset-rank::before {
+  content: counter(upset);
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--paper-deep);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: var(--brand);
+}
+
+.upset-fixture {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.upset-team {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-weight: 600;
+  font-size: 0.92rem;
+}
+
+.upset-badge,
+.upset-badge-fallback {
+  width: 30px;
+  height: 30px;
+  display: inline-grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--paper-deep);
+  font-size: 0.6rem;
+  font-weight: 700;
+  color: var(--brand);
+}
+
+.upset-badge-image {
+  object-fit: contain;
+}
+
+.upset-score {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.05rem;
+  letter-spacing: -0.01em;
+}
+
+.upset-detail {
+  display: grid;
+  justify-items: end;
+  gap: 0.15rem;
+  font-size: 0.8rem;
+  color: var(--muted);
+  text-align: right;
+}
+
+.upset-detail strong {
+  color: var(--signal-draw);
+}
+
+/* ==========================================================================
    Responsive
    ========================================================================== */
 
@@ -2316,5 +2483,15 @@ button {
 
   .quiz-final-score strong {
     font-size: 1.7rem;
+  }
+
+  .upset-row {
+    grid-template-columns: auto 1fr;
+  }
+
+  .upset-detail {
+    grid-column: 1 / -1;
+    justify-items: start;
+    text-align: left;
   }
 }
