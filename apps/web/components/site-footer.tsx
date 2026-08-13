@@ -45,7 +45,11 @@ export function SiteFooter({ generatedAtUtc }: { generatedAtUtc: string | null }
 
         <div className="site-footer-meta">
           <span>
-            Data via the official{" "}
+            Data via{" "}
+            <a href="https://github.com/olbauday/FPL-Core-Insights" target="_blank" rel="noreferrer">
+              FPL Core Insights
+            </a>
+            , sourced in part from the official{" "}
             <a href="https://fantasy.premierleague.com/api/" target="_blank" rel="noreferrer">
               FPL API
             </a>
