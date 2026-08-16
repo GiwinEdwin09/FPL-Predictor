@@ -50,3 +50,19 @@ def test_team_lookup_ignores_missing_fotmob_name(tmp_path: Path) -> None:
     lookup = load_team_lookup(tmp_path)
 
     assert lookup[("2026-2027", 3)]["name"] == "Arsenal"
+
+
+def test_team_lookup_resolves_promoted_team_badges(tmp_path: Path) -> None:
+    season_dir = tmp_path / "raw" / "2026-2027"
+    season_dir.mkdir(parents=True)
+    pd.DataFrame(
+        [
+            {"code": 9, "name": "Coventry City", "short_name": "COV"},
+            {"code": 88, "name": "Hull City", "short_name": "HUL"},
+        ]
+    ).to_csv(season_dir / "teams.csv", index=False)
+
+    lookup = load_team_lookup(tmp_path)
+
+    assert lookup[("2026-2027", 9)]["badgePath"] == "/teams/coventry-city.football-logos.cc.png"
+    assert lookup[("2026-2027", 88)]["badgePath"] == "/teams/hull-city.football-logos.cc.png"
