@@ -21,6 +21,7 @@ from fpl_predictor.dixon_coles import (
 NUM_OUTCOMES = 3
 PROBABILITY_EPSILON = 1e-12
 DEFAULT_BLEND_GRID = tuple(round(value, 2) for value in np.linspace(0.0, 1.0, 11))
+DEFAULT_TEMPERATURE_GRID = np.linspace(0.75, 2.5, 15)
 DEFAULT_HALF_LIFE_DAYS = 550.0
 
 
@@ -73,30 +74,46 @@ def fit_regularized_xgboost(
     feature_columns: tuple[str, ...] | list[str],
     *,
     sample_weight: np.ndarray | None = None,
+    validation: pd.DataFrame | None = None,
+    validation_sample_weight: np.ndarray | None = None,
+    n_estimators: int = 250,
+    early_stopping_rounds: int = 50,
 ) -> Any:
     try:
         from xgboost import XGBClassifier
     except ModuleNotFoundError as exc:
         raise ModuleNotFoundError("xgboost is required for the regularized candidate model.") from exc
 
-    model = XGBClassifier(
-        objective="multi:softprob",
-        num_class=3,
-        n_estimators=250,
-        max_depth=3,
-        learning_rate=0.05,
-        subsample=0.8,
-        colsample_bytree=0.8,
-        reg_lambda=5.0,
-        min_child_weight=10.0,
-        eval_metric="mlogloss",
-        tree_method="hist",
-        random_state=42,
-    )
+    model_kwargs: dict[str, Any] = {
+        "objective": "multi:softprob",
+        "num_class": 3,
+        "n_estimators": n_estimators,
+        "max_depth": 3,
+        "learning_rate": 0.05,
+        "subsample": 0.8,
+        "colsample_bytree": 0.8,
+        "reg_lambda": 5.0,
+        "min_child_weight": 10.0,
+        "eval_metric": "mlogloss",
+        "tree_method": "hist",
+        "random_state": 42,
+    }
+    if validation is not None and not validation.empty:
+        model_kwargs["early_stopping_rounds"] = early_stopping_rounds
+    model = XGBClassifier(**model_kwargs)
+    fit_kwargs: dict[str, Any] = {}
+    if validation is not None and not validation.empty:
+        fit_kwargs["eval_set"] = [
+            (_feature_matrix(validation, feature_columns), validation["target"]),
+        ]
+        fit_kwargs["verbose"] = False
+        if validation_sample_weight is not None:
+            fit_kwargs["sample_weight_eval_set"] = [validation_sample_weight]
     model.fit(
         _feature_matrix(train, feature_columns),
         train["target"],
         sample_weight=sample_weight,
+        **fit_kwargs,
     )
     return model
 
@@ -154,7 +171,7 @@ def choose_blend_and_temperature(
     from sklearn.metrics import log_loss
 
     if temperature_grid is None:
-        temperature_grid = np.linspace(1.0, 5.0, 17)
+        temperature_grid = DEFAULT_TEMPERATURE_GRID
     best = (0.5, 1.0, float("inf"))
     for weight in blend_grid:
         blended = normalize_probabilities(weight * model_a + (1.0 - weight) * model_b)
@@ -180,8 +197,16 @@ class BlendPredictor:
         home_keys = frame[self.home_key_column] if self.home_key_column in frame.columns else frame["home_team"]
         away_keys = frame[self.away_key_column] if self.away_key_column in frame.columns else frame["away_team"]
         dixon = predict_dixon_coles(self.dixon_coles, home_keys, away_keys)
-        trees = sklearn_probabilities(self.tree_model, frame, self.feature_columns)
-        blended = normalize_probabilities(self.dixon_coles_weight * dixon + (1.0 - self.dixon_coles_weight) * trees)
+        if self.dixon_coles_weight >= 1.0:
+            blended = dixon
+        else:
+            trees = sklearn_probabilities(self.tree_model, frame, self.feature_columns)
+            if self.dixon_coles_weight <= 0.0:
+                blended = trees
+            else:
+                blended = normalize_probabilities(
+                    self.dixon_coles_weight * dixon + (1.0 - self.dixon_coles_weight) * trees
+                )
         if self.temperature == 1.0:
             return blended
         return apply_temperature(blended, self.temperature)

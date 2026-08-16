@@ -1,7 +1,14 @@
 import numpy as np
 import pandas as pd
 
-from fpl_predictor.dixon_coles import fit_dixon_coles, outcome_probabilities, predict_dixon_coles
+from fpl_predictor.dixon_coles import (
+    DixonColesParameters,
+    add_cold_start_teams,
+    dixon_coles_sample_weights,
+    fit_dixon_coles,
+    outcome_probabilities,
+    predict_dixon_coles,
+)
 
 
 def test_outcome_probabilities_are_normalized_and_favor_higher_lambda() -> None:
@@ -38,3 +45,35 @@ def test_dixon_coles_fit_assigns_higher_attack_to_stronger_side() -> None:
     assert attack["strong"] > attack["weak"]
     assert probabilities[0] > probabilities[2]
     assert np.isclose(probabilities.sum(), 1.0)
+
+
+def test_dixon_coles_combines_recency_and_competition_weights() -> None:
+    frame = pd.DataFrame(
+        {
+            "kickoff_time": ["2026-01-01T00:00:00Z", "2026-01-01T00:00:00Z"],
+            "sample_weight": [1.0, 0.4],
+        }
+    )
+
+    weights = dixon_coles_sample_weights(frame)
+
+    assert np.allclose(weights, [1.0, 0.4])
+
+
+def test_cold_start_teams_receive_explicit_conservative_priors() -> None:
+    parameters = DixonColesParameters(
+        teams=["arsenal", "chelsea"],
+        attack=[0.2, -0.2],
+        defence=[0.1, -0.1],
+        home_advantage=0.25,
+        rho=-0.05,
+        half_life_days=550.0,
+        log_likelihood=-10.0,
+    )
+
+    expanded, added = add_cold_start_teams(parameters, ["arsenal", "newly-promoted"])
+
+    assert added == ["newly-promoted"]
+    assert expanded.teams[-1] == "newly-promoted"
+    assert expanded.attack[-1] == -0.15
+    assert expanded.defence[-1] == -0.15

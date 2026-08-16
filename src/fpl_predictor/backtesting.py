@@ -143,9 +143,25 @@ def make_walk_forward_folds(
     if candidates.empty:
         return []
 
+    candidates["_evaluation_block"] = pd.to_numeric(
+        candidates["_ordering_gameweek"],
+        errors="coerce",
+    )
+    for season, season_rows in candidates.groupby("source_season", sort=False):
+        missing_round = season_rows["_evaluation_block"].isna()
+        if not missing_round.any():
+            continue
+        season_start = season_rows["kickoff_time"].min().normalize()
+        inferred = (
+            (season_rows.loc[missing_round, "kickoff_time"].dt.normalize() - season_start)
+            .dt.days.floordiv(7)
+            .add(1)
+        )
+        candidates.loc[inferred.index, "_evaluation_block"] = inferred
+
     grouped: list[tuple[pd.Timestamp, str, int, pd.DataFrame]] = []
     for (season, gameweek_value), validation in candidates.groupby(
-        ["source_season", "_ordering_gameweek"],
+        ["source_season", "_evaluation_block"],
         sort=False,
     ):
         if pd.isna(gameweek_value):
@@ -163,7 +179,11 @@ def make_walk_forward_folds(
         validation = validation.sort_values(["kickoff_time", "match_id"], kind="stable")
         folds.append(
             WalkForwardFold(
-                fold_id=f"{season}-GW{gameweek}",
+                fold_id=(
+                    f"{season}-GW{gameweek}"
+                    if validation["_ordering_gameweek"].notna().any()
+                    else f"{season}-B{gameweek}"
+                ),
                 season=season,
                 gameweek=gameweek,
                 cutoff_utc=cutoff.isoformat(),

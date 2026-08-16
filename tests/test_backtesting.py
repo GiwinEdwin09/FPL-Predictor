@@ -106,6 +106,46 @@ def test_walk_forward_folds_never_train_on_same_or_later_kickoffs() -> None:
     }
 
 
+def test_walk_forward_folds_infer_week_blocks_when_rounds_are_missing() -> None:
+    frame = pd.DataFrame(
+        [
+            {
+                "match_id": f"train-{index}",
+                "source_season": "2022-2023",
+                "tournament": "prem",
+                "kickoff_time": f"2023-05-0{index + 1}T15:00:00Z",
+                "_ordering_gameweek": np.nan,
+                "target": index % 3,
+            }
+            for index in range(3)
+        ]
+        + [
+            {
+                "match_id": "validation-1",
+                "source_season": "2023-2024",
+                "tournament": "prem",
+                "kickoff_time": "2023-08-11T19:00:00Z",
+                "_ordering_gameweek": np.nan,
+                "target": 0,
+            },
+            {
+                "match_id": "validation-2",
+                "source_season": "2023-2024",
+                "tournament": "prem",
+                "kickoff_time": "2023-08-19T15:00:00Z",
+                "_ordering_gameweek": np.nan,
+                "target": 2,
+            },
+        ]
+    )
+    frame["kickoff_time"] = pd.to_datetime(frame["kickoff_time"], utc=True)
+
+    folds = make_walk_forward_folds(frame, ["2023-2024"], min_train_rows=3)
+
+    assert [fold.fold_id for fold in folds] == ["2023-2024-B1", "2023-2024-B2"]
+    assert all(fold.train["kickoff_time"].max() < fold.validation["kickoff_time"].min() for fold in folds)
+
+
 def test_devig_decimal_odds_normalizes_valid_rows() -> None:
     probabilities = devig_decimal_odds(
         np.array(

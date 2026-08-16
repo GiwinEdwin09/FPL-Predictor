@@ -21,7 +21,7 @@ def test_choose_blend_and_temperature_recovers_the_better_model() -> None:
     weight, temperature, score = choose_blend_and_temperature(good, bad, targets)
 
     assert weight >= 0.8
-    assert temperature >= 1.0
+    assert temperature > 0.0
     assert np.isfinite(score)
 
 

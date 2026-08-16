@@ -137,13 +137,19 @@ def is_premier_league_frame(frame: pd.DataFrame) -> pd.Series:
     else:
         tournament_match = tournament.map(normalize_tournament).isin(PREMIER_LEAGUE_TOURNAMENTS)
 
+    competition = frame.get("competition_code")
+    if competition is None:
+        competition_match = pd.Series(False, index=frame.index)
+    else:
+        competition_match = competition.map(normalize_tournament).isin(PREMIER_LEAGUE_TOURNAMENTS)
+
     match_ids = frame.get("match_id")
     if match_ids is None:
         slug_match = pd.Series(False, index=frame.index)
     else:
         slug_match = match_ids.astype(str).str.contains("-prem-", na=False)
 
-    return tournament_match | slug_match
+    return tournament_match | competition_match | slug_match
 
 
 def build_target(frame: pd.DataFrame) -> pd.Series:

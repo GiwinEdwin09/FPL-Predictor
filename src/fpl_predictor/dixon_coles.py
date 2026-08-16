@@ -12,6 +12,8 @@ NUM_OUTCOMES = 3
 DEFAULT_HALF_LIFE_DAYS = 550.0
 MAX_GOALS = 8
 PROBABILITY_EPSILON = 1e-12
+COLD_START_ATTACK_ADJUSTMENT = -0.15
+COLD_START_DEFENCE_ADJUSTMENT = -0.15
 
 
 @dataclass
@@ -36,6 +38,19 @@ def time_decay_weights(kickoffs: pd.Series, half_life_days: float = DEFAULT_HALF
     if half_life_days <= 0:
         return np.ones(len(timestamps), dtype=float)
     return np.exp(-math_log_two() * days_ago / half_life_days)
+
+
+def dixon_coles_sample_weights(
+    frame: pd.DataFrame,
+    *,
+    half_life_days: float = DEFAULT_HALF_LIFE_DAYS,
+    sample_weight_column: str = "sample_weight",
+) -> np.ndarray:
+    weights = time_decay_weights(frame["kickoff_time"], half_life_days=half_life_days)
+    if sample_weight_column not in frame.columns:
+        return weights
+    competition = pd.to_numeric(frame[sample_weight_column], errors="coerce").fillna(1.0)
+    return weights * competition.clip(lower=0.0).to_numpy(dtype=float)
 
 
 def math_log_two() -> float:
@@ -139,7 +154,7 @@ def fit_dixon_coles(
     teams, home_index, away_index = _team_maps(working[home_key_column], working[away_key_column])
     home_goals = np.clip(pd.to_numeric(working["home_score"], errors="coerce").to_numpy(dtype=float), 0, MAX_GOALS)
     away_goals = np.clip(pd.to_numeric(working["away_score"], errors="coerce").to_numpy(dtype=float), 0, MAX_GOALS)
-    weights = time_decay_weights(working["kickoff_time"], half_life_days=half_life_days)
+    weights = dixon_coles_sample_weights(working, half_life_days=half_life_days)
 
     team_count = len(teams)
     parameter_count = 2 * team_count + 1
@@ -162,6 +177,8 @@ def fit_dixon_coles(
         bounds=[(None, None)] * (parameter_count - 2) + [(-1.0, 1.5), (-0.2, 0.2)],
         options={"maxiter": 150, "ftol": 1e-6},
     )
+    if not result.success:
+        raise RuntimeError(f"Dixon-Coles optimization failed: {result.message}")
     attack, defence, home_advantage, rho = unpack_parameters(result.x, team_count)
     return DixonColesParameters(
         teams=teams,
@@ -172,6 +189,31 @@ def fit_dixon_coles(
         half_life_days=float(half_life_days),
         log_likelihood=float(-result.fun),
     )
+
+
+def add_cold_start_teams(
+    parameters: DixonColesParameters,
+    team_keys: Iterable[Any],
+    *,
+    attack_adjustment: float = COLD_START_ATTACK_ADJUSTMENT,
+    defence_adjustment: float = COLD_START_DEFENCE_ADJUSTMENT,
+) -> tuple[DixonColesParameters, list[str]]:
+    known = set(parameters.teams)
+    missing = sorted({str(key) for key in team_keys if str(key) not in known})
+    if not missing:
+        return parameters, []
+    average_attack = float(np.mean(parameters.attack)) if parameters.attack else 0.0
+    average_defence = float(np.mean(parameters.defence)) if parameters.defence else 0.0
+    expanded = DixonColesParameters(
+        teams=[*parameters.teams, *missing],
+        attack=[*parameters.attack, *([average_attack + attack_adjustment] * len(missing))],
+        defence=[*parameters.defence, *([average_defence + defence_adjustment] * len(missing))],
+        home_advantage=parameters.home_advantage,
+        rho=parameters.rho,
+        half_life_days=parameters.half_life_days,
+        log_likelihood=parameters.log_likelihood,
+    )
+    return expanded, missing
 
 
 def outcome_probabilities(

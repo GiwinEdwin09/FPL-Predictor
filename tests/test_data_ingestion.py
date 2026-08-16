@@ -1,10 +1,24 @@
 from fpl_predictor.data_ingestion import (
     DATASET_CONFIGS,
     build_raw_url,
+    discover_available_seasons,
     extract_gameweek,
     find_season_dataset_paths,
     find_season_matches_paths,
+    select_recent_seasons,
 )
+
+
+def test_discovers_and_selects_recent_seasons_from_upstream_paths() -> None:
+    paths = [
+        "README.md",
+        "data/2024-2025/matches.csv",
+        "data/2025-2026/teams.csv",
+        "data/2026-2027/By Gameweek/GW1/matches.csv",
+    ]
+
+    assert discover_available_seasons(paths) == ["2024-2025", "2025-2026", "2026-2027"]
+    assert select_recent_seasons(paths, count=2) == ("2025-2026", "2026-2027")
 
 
 def test_extract_gameweek_reads_numeric_suffix() -> None:

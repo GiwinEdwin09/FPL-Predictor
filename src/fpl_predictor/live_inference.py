@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import json
 from copy import deepcopy
 from dataclasses import dataclass
 from datetime import UTC, datetime
@@ -13,10 +14,12 @@ from fpl_predictor.model_training import (
     FEATURE_COLUMNS,
     add_derived_features,
     add_sorting_columns,
+    load_prediction_feature_frame,
+    is_premier_league_frame,
 )
+from fpl_predictor.model_bundle import load_model_bundle
 from fpl_predictor.predictors import feature_columns_for_model, predict_match_probabilities
 from fpl_predictor.web_dashboard import (
-    CURRENT_SEASON,
     build_historical_matches_from_frames,
     build_prediction_groups_from_frame,
     coerce_float,
@@ -24,6 +27,7 @@ from fpl_predictor.web_dashboard import (
     load_model,
     load_model_metadata,
     load_team_lookup,
+    infer_current_season,
     serialize_prediction_fixture,
     serialize_team,
 )
@@ -53,6 +57,17 @@ class InferencePaths:
     playermatchstats_path: Path
     model_path: Path
     metrics_path: Path
+    prediction_feature_table_path: Path | None = None
+    bundle_path: Path | None = None
+
+
+@dataclass(frozen=True)
+class RuntimeArtifactPaths:
+    model_path: Path
+    metrics_path: Path
+    prediction_feature_table_path: Path | None
+    team_keys_path: Path | None
+    bundle_metadata: dict[str, Any] | None
 
 
 @dataclass
@@ -67,6 +82,7 @@ class RuntimeState:
     players: pd.DataFrame
     playerstats: pd.DataFrame
     player_matches: pd.DataFrame
+    bundle_metadata: dict[str, Any] | None
 
 
 def _mtime(path: Path) -> int:
@@ -172,6 +188,7 @@ class LiveInferenceService:
         return kickoff_key, cutoff_gameweek
 
     def _signature(self) -> tuple[tuple[str, int], ...]:
+        artifacts = self._resolve_artifact_paths(verify_hashes=False)
         raw_root = self.paths.data_dir / "raw"
         team_files = sorted(raw_root.glob("*/teams.csv"))
         watched = [
@@ -179,20 +196,144 @@ class LiveInferenceService:
             self.paths.players_path,
             self.paths.playerstats_path,
             self.paths.playermatchstats_path,
-            self.paths.model_path,
-            self.paths.metrics_path,
+            artifacts.model_path,
+            artifacts.metrics_path,
+            *(
+                [artifacts.prediction_feature_table_path]
+                if artifacts.prediction_feature_table_path is not None
+                else []
+            ),
+            *([artifacts.team_keys_path] if artifacts.team_keys_path is not None else []),
+            *([self.paths.bundle_path] if self.paths.bundle_path is not None else []),
             *team_files,
         ]
         return tuple((str(path), _mtime(path)) for path in watched)
 
-    def _load_state(self, signature: tuple[tuple[str, int], ...]) -> RuntimeState:
-        matches = pd.read_csv(self.paths.matches_path)
-        features = build_pre_match_feature_table(matches, competition_scope="premier_league")
-        features = add_sorting_columns(features)
-        features = add_derived_features(features)
+    def _resolve_artifact_paths(self, *, verify_hashes: bool) -> RuntimeArtifactPaths:
+        if self.paths.bundle_path is None:
+            return RuntimeArtifactPaths(
+                model_path=self.paths.model_path,
+                metrics_path=self.paths.metrics_path,
+                prediction_feature_table_path=self.paths.prediction_feature_table_path,
+                team_keys_path=None,
+                bundle_metadata=None,
+            )
 
-        temperature, model_metadata = load_model_metadata(self.paths.metrics_path)
-        model = load_model(self.paths.model_path)
+        bundle = load_model_bundle(self.paths.bundle_path, verify_hashes=verify_hashes)
+        components = bundle["resolved_components"]
+        return RuntimeArtifactPaths(
+            model_path=components["model"],
+            metrics_path=components["metrics"],
+            prediction_feature_table_path=components["prediction_features"],
+            team_keys_path=components["team_keys"],
+            bundle_metadata={
+                key: value
+                for key, value in bundle.items()
+                if key not in {"components", "resolved_components"}
+            },
+        )
+
+    @staticmethod
+    def _validate_blend_team_keys(
+        features: pd.DataFrame,
+        model: Any,
+        team_keys_path: Path | None,
+    ) -> None:
+        if not hasattr(model, "dixon_coles"):
+            return
+        required = ("home_team_key", "away_team_key")
+        missing = [column for column in required if column not in features.columns]
+        if missing:
+            raise ValueError(
+                "The v3 prediction feature table is missing canonical team keys: "
+                + ", ".join(missing)
+            )
+        values = pd.concat([features[required[0]], features[required[1]]], ignore_index=True)
+        if values.isna().any():
+            raise ValueError("The v3 prediction feature table contains empty canonical team keys.")
+        numeric_keys = sorted({str(value) for value in values if str(value).strip().isdigit()})
+        if numeric_keys:
+            raise ValueError(
+                "The v3 prediction feature table contains numeric FPL IDs instead of canonical team keys: "
+                + ", ".join(numeric_keys[:5])
+            )
+        known = set(model.dixon_coles.teams)
+        unknown = sorted({str(value) for value in values}.difference(known))
+        if unknown:
+            raise ValueError(
+                "The v3 prediction feature table contains teams absent from the Dixon-Coles artifact: "
+                + ", ".join(unknown[:5])
+            )
+        if team_keys_path is None:
+            return
+        snapshot = json.loads(team_keys_path.read_text(encoding="utf-8"))
+        lookup = {
+            (str(entry["season"]), int(entry["team_id"])): str(entry["team_key"])
+            for entry in snapshot.get("entries", [])
+        }
+        mismatches: list[str] = []
+        for side in ("home", "away"):
+            for season, team_id, team_key in zip(
+                features["source_season"],
+                features[f"{side}_team"],
+                features[f"{side}_team_key"],
+                strict=True,
+            ):
+                try:
+                    expected = lookup.get((str(season), int(float(team_id))))
+                except (TypeError, ValueError):
+                    expected = None
+                if expected is not None and expected != str(team_key):
+                    mismatches.append(f"{season}/{team_id}: expected {expected}, received {team_key}")
+        if mismatches:
+            raise ValueError("The v3 team-key snapshot disagrees with prediction features: " + mismatches[0])
+
+    @staticmethod
+    def _validate_bundle_feature_schema(
+        features: pd.DataFrame,
+        model: Any,
+        bundle_metadata: dict[str, Any] | None,
+    ) -> None:
+        if bundle_metadata is None:
+            return
+        bundled_columns = list(bundle_metadata.get("feature_columns", []))
+        if not bundled_columns:
+            raise ValueError("The model bundle does not declare its feature schema.")
+        missing = [column for column in bundled_columns if column not in features.columns]
+        if missing:
+            raise ValueError("Prediction features do not satisfy the model bundle schema: " + ", ".join(missing))
+        model_columns = feature_columns_for_model(model)
+        if model_columns != bundled_columns:
+            raise ValueError("The model feature schema does not match the model bundle manifest.")
+
+    def _load_state(self, signature: tuple[tuple[str, int], ...]) -> RuntimeState:
+        artifacts = self._resolve_artifact_paths(verify_hashes=True)
+        matches = pd.read_csv(self.paths.matches_path)
+        if artifacts.prediction_feature_table_path is not None:
+            features = load_prediction_feature_frame(artifacts.prediction_feature_table_path)
+        else:
+            features = build_pre_match_feature_table(matches, competition_scope="premier_league")
+            features = add_sorting_columns(features)
+            features = add_derived_features(features)
+
+        unresolved_match_ids = set(
+            matches.loc[
+                is_premier_league_frame(matches) & (matches["finished"] != True),
+                "match_id",
+            ].astype(str)
+        )
+        feature_match_ids = set(features["match_id"].astype(str))
+        missing_fixtures = sorted(unresolved_match_ids.difference(feature_match_ids))
+        if missing_fixtures:
+            raise ValueError(
+                "The prediction feature bundle is stale; it is missing unresolved fixtures: "
+                + ", ".join(missing_fixtures[:5])
+            )
+
+        temperature, model_metadata = load_model_metadata(artifacts.metrics_path)
+        model = load_model(artifacts.model_path)
+        self._validate_bundle_feature_schema(features, model, artifacts.bundle_metadata)
+        self._validate_blend_team_keys(features, model, artifacts.team_keys_path)
         team_lookup = load_team_lookup(self.paths.data_dir)
 
         players = pd.read_csv(self.paths.players_path)
@@ -255,6 +396,7 @@ class LiveInferenceService:
             players=players,
             playerstats=playerstats,
             player_matches=player_matches,
+            bundle_metadata=artifacts.bundle_metadata,
         )
 
     def state(self, refresh: bool = False) -> RuntimeState:
@@ -269,6 +411,7 @@ class LiveInferenceService:
 
     def dashboard_payload(self, refresh: bool = False) -> dict[str, Any]:
         state = self.state(refresh=refresh)
+        current_season = infer_current_season(state.features)
         current_gameweek, current_fixtures, upcoming_fixtures, postponed_fixtures = build_prediction_groups_from_frame(
             state.features,
             model=state.model,
@@ -277,9 +420,18 @@ class LiveInferenceService:
         )
         return {
             "generatedAtUtc": datetime.now(UTC).isoformat(),
-            "currentSeason": CURRENT_SEASON,
+            "currentSeason": current_season,
             "model": {
-                "version": self.paths.model_path.stem,
+                "version": (
+                    state.bundle_metadata.get("model_version")
+                    if state.bundle_metadata is not None
+                    else self.paths.model_path.stem
+                ),
+                "bundleSchemaVersion": (
+                    state.bundle_metadata.get("schema_version")
+                    if state.bundle_metadata is not None
+                    else None
+                ),
                 "calibrationTemperature": state.temperature,
                 "metrics": state.model_metadata.get("metrics", {}),
                 "split": state.model_metadata.get("split", {}),

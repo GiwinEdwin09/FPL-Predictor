@@ -8,6 +8,10 @@ on:
 permissions:
   contents: write
 
+concurrency:
+  group: scheduled-model-refresh
+  cancel-in-progress: false
+
 jobs:
   refresh:
     runs-on: ubuntu-latest
@@ -29,16 +33,16 @@ jobs:
       - name: Run refresh pipeline
         env:
           PYTHONPATH: src
-        run: python scripts/run_refresh_pipeline.py
+        run: python scripts/run_refresh_pipeline.py --model-version v3
 
       - name: Commit refreshed artifacts
         run: |
-          if git diff --quiet -- apps/web/public/data/dashboard.json; then
-            echo "No dashboard changes to commit."
+          if git diff --quiet -- apps/web/public/data/dashboard.json data/features/match_pre_match_features_v3.csv data/models/model_v3.json data/models/model_v3_bundle.json data/models/model_v3_metrics.json data/models/model_v3_team_keys.json data/models/model_v3_xgboost.json; then
+            echo "No dashboard or model changes to commit."
             exit 0
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add apps/web/public/data/dashboard.json
-          git commit -m "chore: refresh dashboard payload"
+          git add apps/web/public/data/dashboard.json data/features/match_pre_match_features_v3.csv data/models/model_v3.json data/models/model_v3_bundle.json data/models/model_v3_metrics.json data/models/model_v3_team_keys.json data/models/model_v3_xgboost.json
+          git commit -m "chore: refresh v3 prediction bundle"
           git push

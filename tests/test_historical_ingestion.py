@@ -10,6 +10,9 @@ def test_canonical_team_key_reconciles_common_aliases() -> None:
     assert canonical_team_key("Sheffield Weds") == "sheffield-wednesday"
     assert canonical_team_key("Nott'm Forest") == "nottingham-forest"
     assert canonical_team_key("Spurs") == "tottenham"
+    assert canonical_team_key("Coventry City") == "coventry"
+    assert canonical_team_key("Hull City") == "hull"
+    assert canonical_team_key("Ipswich Town") == "ipswich"
 
 
 def test_read_football_data_csv_keeps_leading_fields_on_ragged_rows(tmp_path: Path) -> None:

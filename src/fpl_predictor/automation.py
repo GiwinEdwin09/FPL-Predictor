@@ -137,14 +137,14 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--matches-path", default="data/matches.csv")
     parser.add_argument(
         "--prediction-feature-table-path",
-        default="data/features/match_pre_match_features.csv",
+        default=None,
     )
     parser.add_argument(
         "--training-feature-table-path",
-        default="data/features/all_match_pre_match_features.csv",
+        default=None,
     )
-    parser.add_argument("--model-path", default="data/models/model_v2.json")
-    parser.add_argument("--metrics-path", default="data/models/model_v2_metrics.json")
+    parser.add_argument("--model-path", default=None)
+    parser.add_argument("--metrics-path", default=None)
     parser.add_argument("--dashboard-path", default="apps/web/public/data/dashboard.json")
     parser.add_argument(
         "--model-version",
@@ -167,13 +167,26 @@ def parse_args() -> argparse.Namespace:
 
 def main() -> None:
     args = parse_args()
+    suffix = "_v3" if args.model_version == "v3" else ""
+    prediction_feature_table_path = Path(
+        args.prediction_feature_table_path
+        or f"data/features/match_pre_match_features{suffix}.csv"
+    )
+    training_feature_table_path = Path(
+        args.training_feature_table_path
+        or f"data/features/all_match_pre_match_features{suffix}.csv"
+    )
+    model_path = Path(args.model_path or f"data/models/model_{args.model_version}.json")
+    metrics_path = Path(
+        args.metrics_path or f"data/models/model_{args.model_version}_metrics.json"
+    )
     summary = run_refresh_pipeline(
         data_dir=Path(args.data_dir),
-        prediction_feature_table_path=Path(args.prediction_feature_table_path),
-        training_feature_table_path=Path(args.training_feature_table_path),
+        prediction_feature_table_path=prediction_feature_table_path,
+        training_feature_table_path=training_feature_table_path,
         matches_path=Path(args.matches_path),
-        model_path=Path(args.model_path),
-        metrics_path=Path(args.metrics_path),
+        model_path=model_path,
+        metrics_path=metrics_path,
         dashboard_path=Path(args.dashboard_path),
         force_sync=args.force_sync,
         model_version=args.model_version,
@@ -186,4 +199,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-

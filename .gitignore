@@ -17,8 +17,14 @@ node_modules/
 dist/
 coverage/
 data/raw/
-data/features/
-data/models/
+data/features/*
+!data/features/match_pre_match_features_v3.csv
+data/models/*
+!data/models/model_v3.json
+!data/models/model_v3_bundle.json
+!data/models/model_v3_metrics.json
+!data/models/model_v3_team_keys.json
+!data/models/model_v3_xgboost.json
 data/reference/
 data/automation/
 data/historical/

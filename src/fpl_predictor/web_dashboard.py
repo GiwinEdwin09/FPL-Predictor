@@ -17,7 +17,13 @@ from fpl_predictor.model_training import (
 )
 from fpl_predictor.predictors import feature_columns_for_model, predict_match_probabilities
 
-CURRENT_SEASON = "2025-2026"
+def season_label_for_timestamp(value: pd.Timestamp) -> str:
+    timestamp = pd.Timestamp(value)
+    start_year = timestamp.year if timestamp.month >= 7 else timestamp.year - 1
+    return f"{start_year}-{start_year + 1}"
+
+
+CURRENT_SEASON = season_label_for_timestamp(pd.Timestamp.now(tz=UTC))
 DEFAULT_BADGE = "club"
 BADGE_ALIASES = {
     "afc bournemouth": "bournemouth",
@@ -60,10 +66,37 @@ BADGE_ALIASES = {
 RECENT_HISTORY_LIMIT: int | None = None
 
 
+def infer_current_season(
+    features: pd.DataFrame,
+    now_utc: pd.Timestamp | None = None,
+) -> str:
+    if now_utc is None:
+        now_utc = pd.Timestamp.now(tz=UTC)
+    if "source_season" not in features.columns or features.empty:
+        return season_label_for_timestamp(now_utc)
+    premier_league = features.loc[is_premier_league_frame(features)].copy()
+    seasons = sorted(str(value) for value in premier_league["source_season"].dropna().unique())
+    if not seasons:
+        return season_label_for_timestamp(now_utc)
+    unfinished = premier_league.loc[premier_league["finished"] != True, "source_season"]
+    unfinished_seasons = sorted(str(value) for value in unfinished.dropna().unique())
+    return unfinished_seasons[-1] if unfinished_seasons else seasons[-1]
+
+
 def normalize_team_name(value: Any) -> str:
     if pd.isna(value):
         return ""
     return str(value).strip().casefold()
+
+
+def first_present_value(*values: Any, fallback: str) -> str:
+    for value in values:
+        if value is None or pd.isna(value):
+            continue
+        text = str(value).strip()
+        if text and text.casefold() != "nan":
+            return text
+    return fallback
 
 
 def coerce_int(value: Any) -> int | None:
@@ -89,17 +122,29 @@ def load_team_lookup(data_dir: Path) -> dict[tuple[str, int], dict[str, Any]]:
             team_code = coerce_int(row.get("code"))
             if team_code is None:
                 continue
-            name = row.get("fotmob_name") or row.get("name") or f"Team {team_code}"
-            short_name = row.get("short_name") or row.get("name") or name
+            name = first_present_value(
+                row.get("fotmob_name"),
+                row.get("name"),
+                fallback=f"Team {team_code}",
+            )
+            short_name = first_present_value(
+                row.get("short_name"),
+                row.get("name"),
+                fallback=name,
+            )
             badge_slug = BADGE_ALIASES.get(normalize_team_name(name))
             if badge_slug is None:
                 badge_slug = BADGE_ALIASES.get(normalize_team_name(short_name), DEFAULT_BADGE)
             lookup[(season_dir.name, team_code)] = {
                 "id": team_code,
-                "name": str(name),
-                "shortName": str(short_name),
+                "name": name,
+                "shortName": short_name,
                 "badgeSlug": badge_slug,
-                "badgePath": f"/teams/{badge_slug}.football-logos.cc.png",
+                "badgePath": (
+                    None
+                    if badge_slug == DEFAULT_BADGE
+                    else f"/teams/{badge_slug}.football-logos.cc.png"
+                ),
             }
     return lookup
 
@@ -273,14 +318,20 @@ def build_prediction_groups_from_frame(
     temperature: float,
     team_lookup: dict[tuple[str, int], dict[str, Any]],
     now_utc: pd.Timestamp | None = None,
-    season: str = CURRENT_SEASON,
+    season: str | None = None,
 ) -> tuple[int | None, list[dict[str, Any]], list[dict[str, Any]], list[dict[str, Any]]]:
     if now_utc is None:
         now_utc = pd.Timestamp.now(tz=UTC)
+    if season is None:
+        season = infer_current_season(features, now_utc)
 
     latest_completed_gw = latest_completed_gameweek(features, season)
     current_gameweek = current_active_gameweek(features, season, now_utc)
-    unresolved = features.loc[is_premier_league_frame(features) & (features["finished"] != True)].copy()
+    unresolved = features.loc[
+        is_premier_league_frame(features)
+        & (features["source_season"] == season)
+        & (features["finished"] != True)
+    ].copy()
     postponed = unresolved.loc[
         unresolved.apply(
             lambda row: is_postponed_match(
@@ -534,10 +585,11 @@ def build_dashboard_payload(
         team_lookup=team_lookup,
     )
     matches = pd.read_csv(matches_path)
+    current_season = infer_current_season(features)
 
     return {
         "generatedAtUtc": datetime.now(UTC).isoformat(),
-        "currentSeason": CURRENT_SEASON,
+        "currentSeason": current_season,
         "model": {
             "version": model_path.stem,
             "calibrationTemperature": temperature,

@@ -16,7 +16,8 @@ import requests
 GITHUB_OWNER = "olbauday"
 GITHUB_REPO = "FPL-Core-Insights"
 GITHUB_BRANCH = "main"
-SEASONS = ("2024-2025", "2025-2026")
+RECENT_SEASON_COUNT = 3
+SEASON_PATH_PATTERN = re.compile(r"^data/(\d{4}-\d{4})/")
 TREE_URL = (
     f"https://api.github.com/repos/{GITHUB_OWNER}/{GITHUB_REPO}"
     f"/git/trees/{GITHUB_BRANCH}?recursive=1"
@@ -98,6 +99,25 @@ def fetch_repository_paths(session: requests.Session | None = None) -> list[str]
     response.raise_for_status()
     payload = response.json()
     return [item["path"] for item in payload.get("tree", []) if item.get("type") == "blob"]
+
+
+def discover_available_seasons(paths: Iterable[str]) -> list[str]:
+    seasons = {
+        match.group(1)
+        for path in paths
+        if (match := SEASON_PATH_PATTERN.match(path)) is not None
+    }
+    return sorted(seasons)
+
+
+def select_recent_seasons(
+    paths: Iterable[str],
+    count: int = RECENT_SEASON_COUNT,
+) -> tuple[str, ...]:
+    seasons = discover_available_seasons(paths)
+    if not seasons:
+        raise FileNotFoundError("No season directories were found in the upstream repository.")
+    return tuple(seasons[-max(1, count) :])
 
 
 def extract_gameweek(path: str, dataset_name: str = "matches") -> int | None:
@@ -276,11 +296,12 @@ def write_sync_state(data_dir: Path, datasets_summary: dict[str, object]) -> Pat
 
 def run_sync(
     data_dir: Path,
-    seasons: Iterable[str] = SEASONS,
+    seasons: Iterable[str] | None = None,
     dataset_names: Sequence[str] = DEFAULT_DATASETS,
     force: bool = False,
 ) -> dict[str, object]:
     repo_paths = fetch_repository_paths()
+    selected_seasons = tuple(seasons) if seasons is not None else select_recent_seasons(repo_paths)
     datasets_summary: dict[str, object] = {}
     any_updated = False
 
@@ -289,7 +310,7 @@ def run_sync(
         results: list[SeasonSyncResult] = []
         season_frames: list[tuple[str, pd.DataFrame]] = []
 
-        for season in seasons:
+        for season in selected_seasons:
             result, frame = sync_season_dataset(
                 season=season,
                 dataset=dataset,
@@ -317,6 +338,7 @@ def run_sync(
         "data_dir": str(data_dir),
         "sync_state_path": str(state_path),
         "any_updated": any_updated,
+        "seasons": list(selected_seasons),
         "datasets": datasets_summary,
     }
 

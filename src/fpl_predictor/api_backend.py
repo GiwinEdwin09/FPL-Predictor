@@ -34,12 +34,27 @@ def dashboard_cache_path() -> Path:
     return env_path("DASHBOARD_CACHE_PATH", "apps/web/public/data/dashboard.json")
 
 
+def configured_model_version() -> str:
+    version = os.getenv("MODEL_VERSION", "v2").strip().casefold()
+    if version not in {"v2", "v3"}:
+        raise ValueError(f"Unsupported MODEL_VERSION {version!r}; expected 'v2' or 'v3'.")
+    return version
+
+
 def prediction_feature_table_path() -> Path:
-    return env_path("PREDICTION_FEATURE_TABLE_PATH", "data/features/match_pre_match_features.csv")
+    suffix = "_v3" if configured_model_version() == "v3" else ""
+    return env_path(
+        "PREDICTION_FEATURE_TABLE_PATH",
+        f"data/features/match_pre_match_features{suffix}.csv",
+    )
 
 
 def training_feature_table_path() -> Path:
-    return env_path("TRAINING_FEATURE_TABLE_PATH", "data/features/all_match_pre_match_features.csv")
+    suffix = "_v3" if configured_model_version() == "v3" else ""
+    return env_path(
+        "TRAINING_FEATURE_TABLE_PATH",
+        f"data/features/all_match_pre_match_features{suffix}.csv",
+    )
 
 
 def bootstrap_runtime_assets_enabled() -> bool:
@@ -59,15 +74,22 @@ def load_cached_dashboard(cache_path: Path) -> dict[str, Any]:
 
 
 def inference_paths() -> InferencePaths:
+    version = configured_model_version()
     data_dir = env_path("DATA_DIR", "data")
+    configured_bundle = os.getenv("MODEL_BUNDLE_PATH")
+    bundle_path = Path(configured_bundle) if configured_bundle else None
+    if version == "v3" and bundle_path is None:
+        bundle_path = Path("data/models/model_v3_bundle.json")
     return InferencePaths(
-        data_dir=env_path("DATA_DIR", "data"),
+        data_dir=data_dir,
         matches_path=env_path("MATCHES_PATH", "data/matches.csv"),
         players_path=env_path("PLAYERS_PATH", "data/players.csv"),
         playerstats_path=env_path("PLAYERSTATS_PATH", "data/playerstats.csv"),
         playermatchstats_path=env_path("PLAYERMATCHSTATS_PATH", "data/playermatchstats.csv"),
-        model_path=env_path("MODEL_PATH", "data/models/model_v2.json"),
-        metrics_path=env_path("METRICS_PATH", "data/models/model_v2_metrics.json"),
+        model_path=env_path("MODEL_PATH", f"data/models/model_{version}.json"),
+        metrics_path=env_path("METRICS_PATH", f"data/models/model_{version}_metrics.json"),
+        prediction_feature_table_path=prediction_feature_table_path(),
+        bundle_path=bundle_path,
     )
 
 
@@ -125,19 +147,26 @@ def create_app() -> FastAPI:
 
     @app.on_event("startup")
     def bootstrap_runtime_assets() -> None:
-        if not bootstrap_runtime_assets_enabled():
-            return
-        ensure_runtime_assets(
-            inference_paths(),
-            prediction_feature_table_path=prediction_feature_table_path(),
-            training_feature_table_path=training_feature_table_path(),
-            dashboard_output_path=dashboard_cache_path(),
-            force_sync=refresh_runtime_assets_on_startup(),
-        )
+        if bootstrap_runtime_assets_enabled():
+            ensure_runtime_assets(
+                inference_paths(),
+                prediction_feature_table_path=prediction_feature_table_path(),
+                training_feature_table_path=training_feature_table_path(),
+                dashboard_output_path=dashboard_cache_path(),
+                force_sync=refresh_runtime_assets_on_startup(),
+                model_version=configured_model_version(),
+            )
+        get_inference_service().state()
 
     @app.get("/health")
     def health() -> dict[str, str]:
-        return {"status": "ok"}
+        state = get_inference_service().state()
+        version = (
+            str(state.bundle_metadata.get("model_version"))
+            if state.bundle_metadata is not None
+            else inference_paths().model_path.stem
+        )
+        return {"status": "ok", "modelVersion": version}
 
     @app.get("/api/dashboard")
     def dashboard(refresh: bool = Query(default=False)) -> dict[str, Any]:
@@ -213,6 +242,7 @@ def create_app() -> FastAPI:
             training_feature_table_path=training_feature_table_path(),
             dashboard_output_path=dashboard_cache_path(),
             force_sync=True,
+            model_version=configured_model_version(),
         )
         reset_inference_service()
         payload = get_cached_or_generated_dashboard()

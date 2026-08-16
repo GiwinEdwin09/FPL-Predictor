@@ -17,5 +17,7 @@ services:
         sync: false
       - key: DASHBOARD_CACHE_PATH
         value: /tmp/dashboard.json
+      - key: MODEL_VERSION
+        value: v3
       - key: REFRESH_RUNTIME_ASSETS_ON_STARTUP
         value: "0"
