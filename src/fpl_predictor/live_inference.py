@@ -13,8 +13,8 @@ from fpl_predictor.model_training import (
     FEATURE_COLUMNS,
     add_derived_features,
     add_sorting_columns,
-    apply_temperature,
 )
+from fpl_predictor.predictors import feature_columns_for_model, predict_match_probabilities
 from fpl_predictor.web_dashboard import (
     CURRENT_SEASON,
     build_historical_matches_from_frames,
@@ -304,8 +304,12 @@ class LiveInferenceService:
         if fixture_frame.empty:
             raise KeyError(f"Unknown match_id: {match_id}")
         fixture_row = fixture_frame.iloc[0]
-        probabilities = state.model.predict_proba(fixture_frame.loc[:, FEATURE_COLUMNS])
-        probabilities = apply_temperature(probabilities, state.temperature)
+        probabilities = predict_match_probabilities(
+            state.model,
+            fixture_frame,
+            feature_columns=feature_columns_for_model(state.model, FEATURE_COLUMNS),
+            temperature=state.temperature,
+        )
         serialized = serialize_prediction_fixture(
             fixture_row.to_dict(),
             probabilities[0],
@@ -867,8 +871,12 @@ class LiveInferenceService:
         )
 
         adjusted_frame = add_derived_features(pd.DataFrame([adjusted]))
-        probabilities = state.model.predict_proba(adjusted_frame.loc[:, FEATURE_COLUMNS])
-        probabilities = apply_temperature(probabilities, state.temperature)
+        probabilities = predict_match_probabilities(
+            state.model,
+            adjusted_frame,
+            feature_columns=feature_columns_for_model(state.model, FEATURE_COLUMNS),
+            temperature=state.temperature,
+        )
         simulated_fixture = serialize_prediction_fixture(
             adjusted.to_dict(),
             probabilities[0],

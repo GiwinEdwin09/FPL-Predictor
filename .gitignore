@@ -21,6 +21,7 @@ data/features/
 data/models/
 data/reference/
 data/automation/
+data/historical/
 data/*.csv
 data/*.json
 !data/.gitkeep

@@ -48,6 +48,7 @@ def run_refresh_pipeline(
     metrics_path: Path,
     dashboard_path: Path,
     force_sync: bool = False,
+    model_version: str = "v2",
 ) -> RefreshSummary:
     sync_summary = run_sync(data_dir=data_dir, force=force_sync)
     updated_datasets = changed_seasons_by_dataset(sync_summary)
@@ -65,23 +66,47 @@ def run_refresh_pipeline(
             updated_datasets={},
         )
 
+    feature_matches_path = matches_path
+    include_historical_rows = True
+    if model_version == "v3":
+        from fpl_predictor.historical_ingestion import sync_football_data_history
+        from fpl_predictor.model_v3 import train_and_save_model_v3
+        from fpl_predictor.training_corpus import build_training_corpus
+
+        sync_football_data_history()
+        corpus = build_training_corpus(data_dir=data_dir)
+        feature_matches_path = Path(corpus.output_path)
+        include_historical_rows = False
+
     build_feature_table(
-        matches_path=matches_path,
+        matches_path=feature_matches_path,
         output_path=prediction_feature_table_path,
         competition_scope="premier_league",
+        include_historical_rows=include_historical_rows,
     )
     build_feature_table(
-        matches_path=matches_path,
+        matches_path=feature_matches_path,
         output_path=training_feature_table_path,
         competition_scope="all",
+        include_historical_rows=True,
     )
-    training_summary = train_and_save_model(
-        prediction_feature_table_path=prediction_feature_table_path,
-        training_feature_table_path=training_feature_table_path,
-        matches_path=matches_path,
-        model_path=model_path,
-        metrics_path=metrics_path,
-    )
+    if model_version == "v3":
+        training_summary = train_and_save_model_v3(
+            prediction_feature_table_path=prediction_feature_table_path,
+            training_feature_table_path=training_feature_table_path,
+            matches_path=feature_matches_path,
+            model_path=model_path,
+            metrics_path=metrics_path,
+            data_dir=data_dir,
+        )
+    else:
+        training_summary = train_and_save_model(
+            prediction_feature_table_path=prediction_feature_table_path,
+            training_feature_table_path=training_feature_table_path,
+            matches_path=matches_path,
+            model_path=model_path,
+            metrics_path=metrics_path,
+        )
     export_dashboard(
         output_path=dashboard_path,
         data_dir=data_dir,
@@ -122,6 +147,12 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--metrics-path", default="data/models/model_v2_metrics.json")
     parser.add_argument("--dashboard-path", default="apps/web/public/data/dashboard.json")
     parser.add_argument(
+        "--model-version",
+        choices=("v2", "v3"),
+        default="v2",
+        help="v2 keeps the current production trainer. v3 rebuilds historical data and trains the blended model.",
+    )
+    parser.add_argument(
         "--summary-path",
         default="data/automation/last_refresh_summary.json",
         help="Path where the pipeline summary JSON should be written.",
@@ -145,6 +176,7 @@ def main() -> None:
         metrics_path=Path(args.metrics_path),
         dashboard_path=Path(args.dashboard_path),
         force_sync=args.force_sync,
+        model_version=args.model_version,
     )
     summary_path = Path(args.summary_path)
     summary_path.parent.mkdir(parents=True, exist_ok=True)

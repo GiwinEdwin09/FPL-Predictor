@@ -7,12 +7,16 @@ from typing import Any, Literal
 
 import pandas as pd
 
+from fpl_predictor.ratings import EloRatings, PiRatings
+
 WINDOW_SIZE = 5
 AVG_METRICS = ("xg", "xga", "shots_on_target", "big_chances", "tackles_won")
 RATE_METRICS = ("clean_sheet",)
 PREMIER_LEAGUE_TOURNAMENTS = frozenset({"prem", "premier league"})
 EUROPEAN_TOURNAMENTS = frozenset({"champions-league", "europa-league", "conference-league"})
 DOMESTIC_CUP_TOURNAMENTS = frozenset({"efl-cup", "fa-cup", "league-cup", "carabao-cup"})
+COVID_SEASONS = frozenset({"2019-2020", "2020-2021"})
+HISTORICAL_SOURCE = "football-data.co.uk"
 BASE_COLUMNS = (
     "match_id",
     "source_season",
@@ -25,6 +29,9 @@ BASE_COLUMNS = (
     "away_team",
     "home_score",
     "away_score",
+    "home_team_key",
+    "away_team_key",
+    "source",
 )
 
 
@@ -65,10 +72,42 @@ def is_european_match(match_row: pd.Series) -> bool:
     return competition_code(match_row) in EUROPEAN_TOURNAMENTS
 
 
-def should_emit_match(match_row: pd.Series, competition_scope: Literal["all", "premier_league"]) -> bool:
+def should_emit_match(
+    match_row: pd.Series,
+    competition_scope: Literal["all", "premier_league"],
+    include_historical_rows: bool = True,
+) -> bool:
+    source = str(match_row.get("source", "")).strip().casefold()
+    if not include_historical_rows and source == HISTORICAL_SOURCE:
+        return False
     if competition_scope == "all":
         return True
     return is_premier_league_match(match_row)
+
+
+def resolve_team_key(
+    match_row: pd.Series,
+    side: str,
+    team_key_lookup: dict[tuple[str, int], str] | None = None,
+) -> Any:
+    explicit = match_row.get(f"{side}_team_key")
+    if explicit is not None and not pd.isna(explicit) and str(explicit).strip():
+        return str(explicit)
+    team_id = match_row.get(f"{side}_team")
+    if team_key_lookup is not None:
+        try:
+            numeric_id = int(float(team_id))
+        except (TypeError, ValueError):
+            numeric_id = None
+        if numeric_id is not None:
+            season = str(match_row.get("source_season", ""))
+            mapped = team_key_lookup.get((season, numeric_id))
+            if mapped:
+                return mapped
+            for (_, mapped_id), mapped_key in team_key_lookup.items():
+                if mapped_id == numeric_id:
+                    return mapped_key
+    return team_id
 
 
 def build_team_observations(match_row: pd.Series) -> list[dict[str, Any]]:
@@ -155,6 +194,7 @@ def compute_team_snapshot(
     for metric in AVG_METRICS:
         metric_values = [float(item[metric]) for item in history if pd.notna(item[metric])]
         snapshot[f"{prefix}_last5_avg_{metric}"] = average_or_na(metric_values)
+        snapshot[f"{prefix}_last5_{metric}_observations"] = len(metric_values)
 
     for metric in RATE_METRICS:
         metric_values = [float(item[metric]) for item in history if pd.notna(item[metric])]
@@ -174,6 +214,8 @@ def build_pre_match_feature_table(
     matches: pd.DataFrame,
     window_size: int = WINDOW_SIZE,
     competition_scope: Literal["all", "premier_league"] = "premier_league",
+    team_key_lookup: dict[tuple[str, int], str] | None = None,
+    include_historical_rows: bool = True,
 ) -> pd.DataFrame:
     working = matches.copy()
     working["kickoff_time"] = pd.to_datetime(working["kickoff_time"], errors="coerce", utc=True, format="mixed")
@@ -190,6 +232,8 @@ def build_pre_match_feature_table(
 
     histories: dict[Any, deque[dict[str, Any]]] = defaultdict(lambda: deque(maxlen=window_size))
     last_kickoffs: dict[Any, pd.Timestamp] = {}
+    elo_ratings = EloRatings()
+    pi_ratings = PiRatings()
     feature_rows: list[dict[str, Any]] = []
 
     working["_batch_key"] = list(
@@ -211,17 +255,24 @@ def build_pre_match_feature_table(
                 if pd.notna(match_row["kickoff_time"])
                 else pd.NaT
             )
+            home_key = resolve_team_key(match_row, "home", team_key_lookup)
+            away_key = resolve_team_key(match_row, "away", team_key_lookup)
+            home_elo, away_elo = elo_ratings.snapshot(home_key, away_key)
+            home_pi_home, home_pi_away, away_pi_home, away_pi_away = pi_ratings.snapshot(home_key, away_key)
             feature_row = {column: match_row[column] for column in BASE_COLUMNS if column in match_row.index}
+            feature_row["home_team_key"] = home_key
+            feature_row["away_team_key"] = away_key
             feature_row["competition_code"] = competition_code(match_row)
             feature_row["is_premier_league_match"] = int(is_premier_league_match(match_row))
             feature_row["is_cup_match"] = int(is_cup_match(match_row))
             feature_row["is_european_match"] = int(is_european_match(match_row))
+            feature_row["is_covid_season"] = int(str(match_row.get("source_season", "")) in COVID_SEASONS)
             feature_row.update(
                 compute_team_snapshot(
                     prefix="home",
-                    team_id=match_row["home_team"],
+                    team_id=home_key,
                     current_kickoff=current_kickoff,
-                    current_elo=match_row.get("home_team_elo"),
+                    current_elo=home_elo,
                     histories=histories,
                     last_kickoffs=last_kickoffs,
                 )
@@ -229,24 +280,43 @@ def build_pre_match_feature_table(
             feature_row.update(
                 compute_team_snapshot(
                     prefix="away",
-                    team_id=match_row["away_team"],
+                    team_id=away_key,
                     current_kickoff=current_kickoff,
-                    current_elo=match_row.get("away_team_elo"),
+                    current_elo=away_elo,
                     histories=histories,
                     last_kickoffs=last_kickoffs,
                 )
             )
+            feature_row["home_pi_rating"] = home_pi_home
+            feature_row["home_pi_home"] = home_pi_home
+            feature_row["home_pi_away"] = home_pi_away
+            feature_row["away_pi_rating"] = away_pi_away
+            feature_row["away_pi_home"] = away_pi_home
+            feature_row["away_pi_away"] = away_pi_away
+            feature_row["has_xg_coverage"] = int(
+                (feature_row.get("home_last5_xg_observations") or 0)
+                + (feature_row.get("away_last5_xg_observations") or 0)
+                > 0
+            )
             batch_features.append(feature_row)
 
         for feature_row, (_, match_row) in zip(batch_features, batch.iterrows(), strict=True):
-            if should_emit_match(match_row, competition_scope):
+            if should_emit_match(match_row, competition_scope, include_historical_rows=include_historical_rows):
                 feature_rows.append(feature_row)
 
         for _, match_row in batch.iterrows():
             if not is_finished_match(match_row):
                 continue
+            home_key = resolve_team_key(match_row, "home", team_key_lookup)
+            away_key = resolve_team_key(match_row, "away", team_key_lookup)
+            home_score = match_row.get("home_score")
+            away_score = match_row.get("away_score")
+            if pd.notna(home_score) and pd.notna(away_score):
+                elo_ratings.update(home_key, away_key, float(home_score), float(away_score))
+                pi_ratings.update(home_key, away_key, float(home_score), float(away_score))
             for observation in build_team_observations(match_row):
-                team_id = observation["team_id"]
+                team_id = resolve_team_key(match_row, "home" if observation["team_id"] == match_row["home_team"] else "away", team_key_lookup)
+                observation["team_id"] = team_id
                 histories[team_id].append(observation)
                 last_kickoffs[team_id] = observation["kickoff_time"]
 
@@ -266,12 +336,16 @@ def build_feature_table(
     output_path: Path,
     window_size: int = WINDOW_SIZE,
     competition_scope: Literal["all", "premier_league"] = "premier_league",
+    team_key_lookup: dict[tuple[str, int], str] | None = None,
+    include_historical_rows: bool = True,
 ) -> Path:
     matches = pd.read_csv(matches_path)
     feature_table = build_pre_match_feature_table(
         matches,
         window_size=window_size,
         competition_scope=competition_scope,
+        team_key_lookup=team_key_lookup,
+        include_historical_rows=include_historical_rows,
     )
     output_path.parent.mkdir(parents=True, exist_ok=True)
     feature_table.to_csv(output_path, index=False)

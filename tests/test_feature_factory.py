@@ -323,3 +323,127 @@ def test_build_pre_match_feature_table_handles_mixed_timezone_kickoff_formats() 
     row = feature_table.loc[feature_table["match_id"] == "new-season"].iloc[0]
     assert row["home_last5_matches"] == 1
     assert row["home_days_rest"] == 97 + 1.5 / 24
+
+
+def test_result_only_history_keeps_clean_sheets_and_marks_missing_xg() -> None:
+    matches = pd.DataFrame(
+        [
+            {
+                "match_id": "old-1",
+                "source_season": "2004-2005",
+                "source_gameweek": 1,
+                "tournament": "prem",
+                "gameweek": 1,
+                "kickoff_time": "2004-08-14 15:00:00",
+                "finished": True,
+                "home_team": "arsenal",
+                "away_team": "everton",
+                "home_score": 2,
+                "away_score": 0,
+                "home_expected_goals_xg": None,
+                "away_expected_goals_xg": None,
+                "home_shots_on_target": None,
+                "away_shots_on_target": None,
+                "home_big_chances": None,
+                "away_big_chances": None,
+                "home_tackles_won": None,
+                "away_tackles_won": None,
+            },
+            {
+                "match_id": "new-1",
+                "source_season": "2004-2005",
+                "source_gameweek": 2,
+                "tournament": "prem",
+                "gameweek": 2,
+                "kickoff_time": "2004-08-21 15:00:00",
+                "finished": False,
+                "home_team": "chelsea",
+                "away_team": "arsenal",
+                "home_score": None,
+                "away_score": None,
+                "home_expected_goals_xg": None,
+                "away_expected_goals_xg": None,
+                "home_shots_on_target": None,
+                "away_shots_on_target": None,
+                "home_big_chances": None,
+                "away_big_chances": None,
+                "home_tackles_won": None,
+                "away_tackles_won": None,
+            },
+        ]
+    )
+
+    feature_table = build_pre_match_feature_table(matches)
+    row = feature_table.loc[feature_table["match_id"] == "new-1"].iloc[0]
+
+    assert row["away_last5_matches"] == 1
+    assert row["away_last5_clean_sheet_rate"] == 1.0
+    assert row["away_last5_xg_observations"] == 0
+    assert math.isnan(row["away_last5_avg_xg"])
+    assert row["has_xg_coverage"] == 0
+    assert row["away_current_elo"] > 1500
+
+
+def test_historical_rows_can_warm_ratings_without_being_emitted() -> None:
+    matches = pd.DataFrame(
+        [
+            {
+                "match_id": "fd-1",
+                "source": "football-data.co.uk",
+                "source_season": "2023-2024",
+                "source_gameweek": 38,
+                "tournament": "prem",
+                "gameweek": 38,
+                "kickoff_time": "2024-05-19 15:00:00",
+                "finished": True,
+                "home_team": "arsenal",
+                "away_team": "everton",
+                "home_team_key": "arsenal",
+                "away_team_key": "everton",
+                "home_score": 2,
+                "away_score": 1,
+                "home_expected_goals_xg": None,
+                "away_expected_goals_xg": None,
+                "home_shots_on_target": None,
+                "away_shots_on_target": None,
+                "home_big_chances": None,
+                "away_big_chances": None,
+                "home_tackles_won": None,
+                "away_tackles_won": None,
+            },
+            {
+                "match_id": "fci-1",
+                "source": "fpl-core-insights",
+                "source_season": "2024-2025",
+                "source_gameweek": 1,
+                "tournament": "prem",
+                "gameweek": 1,
+                "kickoff_time": "2024-08-17 15:00:00",
+                "finished": False,
+                "home_team": 1,
+                "away_team": 2,
+                "home_team_key": "arsenal",
+                "away_team_key": "everton",
+                "home_score": None,
+                "away_score": None,
+                "home_expected_goals_xg": None,
+                "away_expected_goals_xg": None,
+                "home_shots_on_target": None,
+                "away_shots_on_target": None,
+                "home_big_chances": None,
+                "away_big_chances": None,
+                "home_tackles_won": None,
+                "away_tackles_won": None,
+            },
+        ]
+    )
+
+    feature_table = build_pre_match_feature_table(matches, include_historical_rows=False)
+
+    assert feature_table["match_id"].tolist() == ["fci-1"]
+    row = feature_table.iloc[0]
+    assert row["home_team"] == 1
+    assert row["home_last5_matches"] == 1
+    assert row["home_current_elo"] != 1500
+    assert row["home_pi_rating"] != 0
+

@@ -12,10 +12,10 @@ from fpl_predictor.model_training import (
     FEATURE_COLUMNS,
     add_derived_features,
     add_sorting_columns,
-    apply_temperature,
     is_premier_league_frame,
     load_prediction_feature_frame,
 )
+from fpl_predictor.predictors import feature_columns_for_model, predict_match_probabilities
 
 CURRENT_SEASON = "2025-2026"
 DEFAULT_BADGE = "club"
@@ -132,6 +132,11 @@ def load_model_metadata(metrics_path: Path) -> tuple[float, dict[str, Any]]:
 
 
 def load_model(model_path: Path) -> Any:
+    text = model_path.read_text(encoding="utf-8")
+    if '"predictor_type"' in text[:1_000]:
+        from fpl_predictor.predictors import BlendPredictor
+
+        return BlendPredictor.load(model_path)
     try:
         from xgboost import XGBClassifier
     except ModuleNotFoundError as exc:
@@ -342,8 +347,12 @@ def build_prediction_groups_from_frame(
     def serialize_rows(frame: pd.DataFrame, *, postponed_reason: str | None = None) -> list[dict[str, Any]]:
         if frame.empty:
             return []
-        probabilities = model.predict_proba(frame.loc[:, FEATURE_COLUMNS])
-        probabilities = apply_temperature(probabilities, temperature)
+        probabilities = predict_match_probabilities(
+            model,
+            frame,
+            feature_columns=feature_columns_for_model(model, FEATURE_COLUMNS),
+            temperature=temperature,
+        )
         items: list[dict[str, Any]] = []
         for row, probability in zip(frame.to_dict(orient="records"), probabilities, strict=True):
             item = serialize_prediction_fixture(row, probability, team_lookup)
@@ -402,8 +411,12 @@ def build_history_probabilities(
         return {}
 
     batch = pd.DataFrame(batch_rows)
-    probabilities = model.predict_proba(batch.loc[:, FEATURE_COLUMNS])
-    probabilities = apply_temperature(probabilities, temperature)
+    probabilities = predict_match_probabilities(
+        model,
+        batch,
+        feature_columns=feature_columns_for_model(model, FEATURE_COLUMNS),
+        temperature=temperature,
+    )
     return dict(zip(batch_ids, probabilities, strict=True))
 
 

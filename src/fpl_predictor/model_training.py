@@ -46,6 +46,42 @@ FEATURE_COLUMNS = (
     "last5_avg_tackles_won_diff",
     "last5_clean_sheet_rate_diff",
 )
+V3_FEATURE_COLUMNS = (
+    "is_cup_match",
+    "is_european_match",
+    "is_premier_league_match",
+    "is_covid_season",
+    "has_xg_coverage",
+    "home_last5_matches",
+    "home_days_rest",
+    "home_current_elo",
+    "home_pi_rating",
+    "home_last5_avg_xg",
+    "home_last5_avg_xga",
+    "home_last5_avg_shots_on_target",
+    "home_last5_avg_big_chances",
+    "home_last5_clean_sheet_rate",
+    "home_last5_xg_observations",
+    "away_last5_matches",
+    "away_days_rest",
+    "away_current_elo",
+    "away_pi_rating",
+    "away_last5_avg_xg",
+    "away_last5_avg_xga",
+    "away_last5_avg_shots_on_target",
+    "away_last5_avg_big_chances",
+    "away_last5_clean_sheet_rate",
+    "away_last5_xg_observations",
+    "elo_diff",
+    "pi_diff",
+    "days_rest_diff",
+    "last5_matches_diff",
+    "last5_avg_xg_diff",
+    "last5_avg_xga_diff",
+    "last5_avg_shots_on_target_diff",
+    "last5_avg_big_chances_diff",
+    "last5_clean_sheet_rate_diff",
+)
 VALIDATION_WINDOW_DAYS = 28
 CALIBRATION_WINDOW_DAYS = 21
 TEMPERATURE_GRID = np.linspace(1.0, 5.0, 41)
@@ -158,6 +194,16 @@ def add_derived_features(frame: pd.DataFrame) -> pd.DataFrame:
     working["last5_clean_sheet_rate_diff"] = (
         working["home_last5_clean_sheet_rate"] - working["away_last5_clean_sheet_rate"]
     )
+    if "home_pi_rating" in working.columns and "away_pi_rating" in working.columns:
+        working["pi_diff"] = working["home_pi_rating"] - working["away_pi_rating"]
+    if "is_covid_season" not in working.columns:
+        working["is_covid_season"] = 0
+    if "has_xg_coverage" not in working.columns:
+        working["has_xg_coverage"] = 0
+    if "home_last5_xg_observations" not in working.columns:
+        working["home_last5_xg_observations"] = np.nan
+    if "away_last5_xg_observations" not in working.columns:
+        working["away_last5_xg_observations"] = np.nan
     return working
 
 
