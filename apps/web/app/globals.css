@@ -2208,6 +2208,48 @@ button {
   gap: 2.25rem;
 }
 
+.insights-season-context {
+  display: grid;
+  grid-template-columns: minmax(150px, 0.28fr) minmax(0, 1fr);
+  align-items: center;
+  gap: 1.25rem;
+  padding: 1rem 1.2rem;
+  background: var(--paper-deep);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--accent-deep);
+  border-radius: var(--radius-lg);
+}
+
+.insights-season-heading {
+  display: grid;
+  gap: 0.2rem;
+}
+
+.insights-season-heading span {
+  color: var(--muted);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.insights-season-heading strong {
+  color: var(--brand);
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+}
+
+.insights-season-context p {
+  margin: 0;
+  color: var(--muted-strong);
+  font-size: 0.9rem;
+  line-height: 1.55;
+}
+
+.insights-season-context p strong {
+  color: var(--ink);
+}
+
 .insight-section {
   display: grid;
   gap: 0.5rem;
@@ -2796,6 +2838,11 @@ button {
 }
 
 @media (max-width: 520px) {
+  .insights-season-context {
+    grid-template-columns: 1fr;
+    gap: 0.65rem;
+  }
+
   .stat-strip {
     grid-template-columns: 1fr;
   }

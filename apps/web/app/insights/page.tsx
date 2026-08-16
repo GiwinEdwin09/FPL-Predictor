@@ -51,8 +51,9 @@ export default async function InsightsPage() {
         </div>
         <h1 className="page-title">The model&apos;s report card.</h1>
         <p className="page-lede">
-          Every finished match gets graded against what the model predicted before kickoff. Track the hit rate week by
-          week, relive the results it never saw coming, and check whether its confidence is honest.
+          Explore the model&apos;s 2025–2026 results, hit rate, biggest surprises, and calibration. The model launched
+          during the season, so earlier gameweeks are identified as retrospective replays rather than published
+          forecasts.
         </p>
       </header>
 

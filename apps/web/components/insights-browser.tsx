@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 
 import type { QuizMatch } from "@/lib/quiz";
 import { resolveOutcome } from "@/lib/quiz";
@@ -22,6 +22,9 @@ type ModelMeta = {
   trainRows: number | null;
   validationRows: number | null;
 };
+
+const INSIGHTS_SEASON = "2025-2026";
+const INSIGHTS_SEASON_LABEL = "2025–2026";
 
 function formatPercent(value: number, digits = 0) {
   return `${(value * 100).toFixed(digits)}%`;
@@ -74,9 +77,7 @@ function GameweekAccuracyChart({ rows }: { rows: GameweekAccuracy[] }) {
           return (
             <g key={`${row.season}-${row.gameweek}`}>
               <rect x={x} y={y} width={barWidth} height={barHeight} rx={3} className="chart-bar">
-                <title>
-                  GW {row.gameweek}: {formatPercent(row.accuracy)} ({row.correct}/{row.total})
-                </title>
+                <title>{`GW ${row.gameweek}: ${formatPercent(row.accuracy)} (${row.correct}/${row.total})`}</title>
               </rect>
               {rows.length <= 20 || index % 4 === 0 ? (
                 <text x={index * barSlot + barSlot / 2} y={height - 8} className="chart-tick" textAnchor="middle">
@@ -132,10 +133,7 @@ function CalibrationChart({ bins }: { bins: CalibrationBin[] }) {
               r={4 + 10 * Math.sqrt(bin.count / maxCount)}
               className="chart-dot"
             >
-              <title>
-                {bin.label}: predicted {formatPercent(bin.predictedAvg, 1)}, happened {formatPercent(bin.actualRate, 1)}{" "}
-                ({bin.count} forecasts)
-              </title>
+              <title>{`${bin.label}: predicted ${formatPercent(bin.predictedAvg, 1)}, happened ${formatPercent(bin.actualRate, 1)} (${bin.count} forecasts)`}</title>
             </circle>
           ))}
         <text x={toX(0.5)} y={height - 6} className="chart-axis-label" textAnchor="middle">
@@ -160,10 +158,7 @@ function CalibrationChart({ bins }: { bins: CalibrationBin[] }) {
 }
 
 export function InsightsBrowser({ matches, model }: { matches: QuizMatch[]; model: ModelMeta }) {
-  const seasons = useMemo(() => Array.from(new Set(matches.map((match) => match.season))).sort().reverse(), [matches]);
-  const [season, setSeason] = useState(seasons[0] ?? "2025-2026");
-
-  const seasonMatches = useMemo(() => matches.filter((match) => match.season === season), [matches, season]);
+  const seasonMatches = useMemo(() => matches.filter((match) => match.season === INSIGHTS_SEASON), [matches]);
   const summary = useMemo(() => summarizeModel(seasonMatches), [seasonMatches]);
   const gameweekRows = useMemo(() => accuracyByGameweek(seasonMatches), [seasonMatches]);
   const upsets = useMemo(() => biggestUpsets(seasonMatches), [seasonMatches]);
@@ -171,18 +166,16 @@ export function InsightsBrowser({ matches, model }: { matches: QuizMatch[]; mode
 
   return (
     <div className="insights-stack">
-      <div className="history-controls">
-        <label className="toolbar-field toolbar-select">
-          <span>Season</span>
-          <select value={season} onChange={(event) => setSeason(event.target.value)}>
-            {seasons.map((value) => (
-              <option key={value} value={value}>
-                {value}
-              </option>
-            ))}
-          </select>
-        </label>
-      </div>
+      <section className="insights-season-context" aria-label="Insights season coverage">
+        <div className="insights-season-heading">
+          <span>Season coverage</span>
+          <strong>{INSIGHTS_SEASON_LABEL}</strong>
+        </div>
+        <p>
+          <strong>Mid-season launch.</strong> This model was created during the 2025–2026 season, not before
+          Gameweek 1. Earlier gameweeks are retrospective replays and were not predictions published at the time.
+        </p>
+      </section>
 
       <section className="stat-strip" aria-label="Model at a glance">
         <article className="stat-tile">
@@ -215,7 +208,7 @@ export function InsightsBrowser({ matches, model }: { matches: QuizMatch[]; mode
         <div className="section-head">
           <div>
             <h2>Accuracy by gameweek</h2>
-            <p>How the model&apos;s hit rate moved across the {season} season.</p>
+            <p>How the model&apos;s hit rate moved across the {INSIGHTS_SEASON_LABEL} season.</p>
           </div>
         </div>
         <GameweekAccuracyChart rows={gameweekRows} />
