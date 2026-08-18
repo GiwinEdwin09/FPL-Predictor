@@ -117,12 +117,6 @@ export function FixtureCard({
           </strong>
         </div>
         <div>
-          <span className="context-label">Rest Days</span>
-          <strong>
-            {fixture.context.homeDaysRest ?? "NA"} - {fixture.context.awayDaysRest ?? "NA"}
-          </strong>
-        </div>
-        <div>
           <span className="context-label">Form Sample</span>
           <strong>
             {fixture.context.homeLast5Matches ?? 0} - {fixture.context.awayLast5Matches ?? 0}
