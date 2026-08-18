@@ -73,20 +73,20 @@ export function FixturesWeekView({ fixtures }: FixturesWeekViewProps) {
           className="week-arrow"
           onClick={() => setIndex((current) => Math.max(0, current - 1))}
           disabled={index === 0}
-          aria-label="Previous gameweek"
+          aria-label="Previous matchweek"
         >
           ←
         </button>
         <div className="week-heading">
-          <p className="eyebrow">Upcoming Gameweek</p>
-          <h2>Gameweek {gameweek}</h2>
+          <p className="eyebrow">Upcoming Matchweek</p>
+          <h2>Matchweek {gameweek}</h2>
           <p>{formatWeekStart(firstKickoff, fixturesForWeek.length)}</p>
         </div>
         <button
           className="week-arrow"
           onClick={() => setIndex((current) => Math.min(gameweeks.length - 1, current + 1))}
           disabled={index === gameweeks.length - 1}
-          aria-label="Next gameweek"
+          aria-label="Next matchweek"
         >
           →
         </button>

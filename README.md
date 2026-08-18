@@ -1,10 +1,10 @@
-# FPL-Predictor
+# Prem Predict
 
 [![Live Site](https://img.shields.io/badge/Live%20Site-Vercel-000000?logo=vercel&logoColor=white)](https://fpl-predictor-bay.vercel.app/)
 [![Production Model](https://img.shields.io/badge/Production%20Model-v3-2563eb)](./build-progress/README.md#phase-3b5-ratings-dixon-coles-and-model_v3)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE)
 
-FPL-Predictor is a Premier League forecasting product built on top of the
+Prem Predict is a Premier League match-forecasting product built on top of the
 [FPL Core Insights](https://github.com/olbauday/FPL-Core-Insights) data source.
 It combines football data engineering, a production `model_v3` forecasting
 pipeline, a FastAPI backend, and a Next.js frontend to turn raw match updates

@@ -1,6 +1,6 @@
 import { PredictionsBrowser } from "@/components/predictions-browser";
 import { loadDashboardResult } from "@/lib/dashboard";
-import { formatDeadlineLong, summarizeGameweek } from "@/lib/gameweek";
+import { summarizeGameweek } from "@/lib/gameweek";
 
 function formatGenerated(generatedAtUtc: string) {
   return new Intl.DateTimeFormat("en-GB", {
@@ -26,7 +26,7 @@ export default async function PredictionsPage() {
               Predictions
             </span>
           </div>
-          <h1 className="page-title">Upcoming fixtures, one gameweek at a time.</h1>
+          <h1 className="page-title">Upcoming fixtures, one matchweek at a time.</h1>
           <p className="page-lede">
             The predictions view is temporarily unavailable, but the rest of the site is online and we can retry shortly.
           </p>
@@ -42,7 +42,6 @@ export default async function PredictionsPage() {
 
   const dashboard = result.data;
   const summary = summarizeGameweek(dashboard);
-  const deadlineLabel = formatDeadlineLong(summary.deadlineUtc);
   const totalUpcoming = dashboard.upcomingFixtures.length + dashboard.currentGameweekFixtures.length;
 
   return (
@@ -55,16 +54,13 @@ export default async function PredictionsPage() {
           </span>
           {summary.gameweek !== null ? (
             <span className="page-eyebrow page-eyebrow-light">
-              {summary.status === "live" ? `Live · GW ${summary.gameweek}` : `Next up · GW ${summary.gameweek}`}
+              {summary.status === "live" ? `Live · MW ${summary.gameweek}` : `Next up · MW ${summary.gameweek}`}
             </span>
           ) : null}
-          {deadlineLabel ? (
-            <span className="page-meta-pill">Deadline {deadlineLabel}</span>
-          ) : null}
         </div>
-        <h1 className="page-title">Upcoming fixtures, one gameweek at a time.</h1>
+        <h1 className="page-title">Upcoming fixtures, one matchweek at a time.</h1>
         <p className="page-lede">
-          Use the current-gameweek tab once a round has started, browse future rounds gameweek by gameweek, and keep
+          Use the current-matchweek tab once a round has started, browse future rounds matchweek by matchweek, and keep
           postponed fixtures separate so unresolved scheduling changes don&apos;t confuse the forecast view.
         </p>
         <div className="page-meta-row">

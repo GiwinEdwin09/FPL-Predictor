@@ -1,5 +1,5 @@
 {
-  "name": "fpl-predictor-web",
+  "name": "prem-predict-web",
   "private": true,
   "version": "0.1.0",
   "scripts": {
@@ -19,4 +19,3 @@
     "typescript": "^5.7.2"
   }
 }
-

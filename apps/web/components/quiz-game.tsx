@@ -234,7 +234,7 @@ export function QuizGame({ candidates, daily }: { candidates: QuizMatch[]; daily
         <article className="quiz-card">
           <div className="quiz-card-topline">
             <span className="fixture-card-gw">
-              GW {currentMatch.gameweek ?? "TBD"} · {currentMatch.season}
+              MW {currentMatch.gameweek ?? "TBD"} · {currentMatch.season}
             </span>
             <span className="fixture-card-time">
               {mode === "daily" ? `Match ${dailyIndex + 1} of ${daily.length} · ` : ""}

@@ -1,7 +1,7 @@
 import type { UpcomingFixture } from "@/lib/dashboard";
 
 function formatGameweek(gameweek: number | null) {
-  return gameweek === null ? "TBD" : `Gameweek ${gameweek}`;
+  return gameweek === null ? "TBD" : `Matchweek ${gameweek}`;
 }
 
 export function PostponedFixturesView({ fixtures }: { fixtures: UpcomingFixture[] }) {
@@ -47,4 +47,3 @@ export function PostponedFixturesView({ fixtures }: { fixtures: UpcomingFixture[
     </section>
   );
 }
-

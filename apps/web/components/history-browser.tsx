@@ -69,7 +69,7 @@ export function HistoryBrowser({ matches }: { matches: HistoricalMatch[] }) {
           <article key={match.matchId} className="history-card">
             <div className="history-meta">
               <span>{match.season}</span>
-              <span>GW {match.gameweek ?? "TBD"}</span>
+              <span>MW {match.gameweek ?? "TBD"}</span>
               <span>{formatKickoff(match.kickoffTime)}</span>
             </div>
             <div className="history-scoreline">
@@ -128,4 +128,3 @@ export function HistoryBrowser({ matches }: { matches: HistoricalMatch[] }) {
     </section>
   );
 }
-

@@ -23,9 +23,9 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
-  title: "FPL Predictor — Premier League fixture forecasts",
+  title: "Prem Predict — Premier League match forecasts",
   description:
-    "Gameweek-by-gameweek Premier League predictions, finished match stats, and pre-match context for fantasy and football fans.",
+    "Matchweek-by-matchweek Premier League predictions, finished-match statistics, and pre-match context.",
 };
 
 export default async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {

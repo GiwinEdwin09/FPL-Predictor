@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { loadDashboardResult, type UpcomingFixture } from "@/lib/dashboard";
-import { fixturesForGameweek, formatDeadlineLong, summarizeGameweek } from "@/lib/gameweek";
+import { fixturesForGameweek, summarizeGameweek } from "@/lib/gameweek";
 
 const TOTAL_GAMEWEEKS = 38;
 
@@ -53,7 +53,7 @@ function HeroFixturePreview({ fixture }: { fixture: UpcomingFixture }) {
     <div className="hero-aside">
       <div className="hero-aside-label">
         <span>Spotlight fixture</span>
-        <span className="accent-pill">GW {fixture.gameweek ?? "?"}</span>
+        <span className="accent-pill">MW {fixture.gameweek ?? "?"}</span>
       </div>
       <div className="hero-fixture-row">
         <div className="hero-fixture-team">
@@ -144,10 +144,10 @@ export default async function HomePage() {
             <div>
               <span className="hero-eyebrow">
                 <span className="hero-eyebrow-pulse" aria-hidden="true" />
-                Premier League Predictor
+                Premier League Forecasts
               </span>
               <h1>
-                Predict. Analyse. <span className="accent">Win your gameweek.</span>
+                Predict. Analyse. <span className="accent">Read the game.</span>
               </h1>
               <p>
                 Calibrated home, draw and away win probabilities for every Premier League fixture, plus the
@@ -195,13 +195,12 @@ export default async function HomePage() {
 
   const matchesAnalysed = dashboard.historicalMatches.length;
   const accuracyPct = Math.round((dashboard.model.metrics.accuracy ?? 0) * 100);
-  const deadlineLabel = formatDeadlineLong(summary.deadlineUtc);
 
   const heroEyebrow =
     summary.status === "live"
-      ? `Live · GW ${summary.gameweek}`
+      ? `Live · MW ${summary.gameweek}`
       : summary.status === "upcoming"
-        ? `Next up · GW ${summary.gameweek}`
+        ? `Next up · MW ${summary.gameweek}`
         : `Premier League ${dashboard.currentSeason}`;
 
   return (
@@ -214,20 +213,19 @@ export default async function HomePage() {
               {heroEyebrow}
             </span>
             <h1>
-              Predict. Analyse. <span className="accent">Win your gameweek.</span>
+              Predict. Analyse. <span className="accent">Read the game.</span>
             </h1>
             <p>
               Calibrated home, draw and away win probabilities for every Premier League fixture in{" "}
               {dashboard.currentSeason.replace("-", "/")}, paired with the stats that explain finished matches.
-              {deadlineLabel ? ` Deadline ${deadlineLabel}.` : ""}
             </p>
             <div className="hero-cta-row">
               <Link href="/predictions" className="cta-primary">
                 <ArrowRightIcon />
                 {summary.status === "live"
-                  ? `Open GW ${summary.gameweek} predictions`
+                  ? `Open MW ${summary.gameweek} predictions`
                   : summary.gameweek
-                    ? `Preview GW ${summary.gameweek} predictions`
+                    ? `Preview MW ${summary.gameweek} predictions`
                     : "Open predictions"}
               </Link>
               <Link href="/history" className="cta-secondary">
@@ -242,7 +240,7 @@ export default async function HomePage() {
 
       <section className="stat-strip" aria-label="Season at a glance">
         <article className="stat-tile">
-          <div className="stat-tile-label">Gameweek</div>
+          <div className="stat-tile-label">Matchweek</div>
           <div className="stat-tile-value">{summary.gameweek ?? "—"}</div>
           <div className="stat-tile-hint">
             {summary.status === "live"
@@ -256,11 +254,15 @@ export default async function HomePage() {
           <div className="stat-tile-label">Fixtures this week</div>
           <div className="stat-tile-value">{summary.fixtureCount}</div>
           <div className="stat-tile-hint">
-            {deadlineLabel ? `Deadline ${deadlineLabel}` : "Schedule still being confirmed"}
+            {summary.status === "live"
+              ? "Round in progress"
+              : summary.status === "upcoming"
+                ? "Upcoming Premier League fixtures"
+                : "Schedule still being confirmed"}
           </div>
         </article>
         <article className="stat-tile">
-          <div className="stat-tile-label">Gameweeks left</div>
+          <div className="stat-tile-label">Matchweeks left</div>
           <div className="stat-tile-value">{remainingGameweeks}</div>
           <div className="stat-tile-hint">{TOTAL_GAMEWEEKS} total in a Premier League season</div>
         </article>
@@ -276,7 +278,7 @@ export default async function HomePage() {
           <div className="section-head">
             <div>
               <h2>
-                Upcoming · GW {summary.gameweek}
+                Upcoming · MW {summary.gameweek}
               </h2>
               <p>
                 {previewFixtures.length} of {summary.fixtureCount} fixtures shown — open predictions for the full

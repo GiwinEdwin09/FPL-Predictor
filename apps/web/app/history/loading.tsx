@@ -17,7 +17,7 @@ export default function HistoryLoading() {
         <div className="week-panel-header week-panel-header-simple">
           <div className="week-heading">
             <p>Loading</p>
-            <h2>Preparing historical gameweeks</h2>
+            <h2>Preparing historical matchweeks</h2>
             <p>Fetching the latest completed match archive.</p>
           </div>
         </div>

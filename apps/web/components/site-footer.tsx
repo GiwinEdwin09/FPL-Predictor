@@ -40,18 +40,14 @@ export function SiteFooter({ generatedAtUtc }: { generatedAtUtc: string | null }
               <path d="M14.3 12.5L17 16" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" />
             </svg>
           </span>
-          <span>FPL Predictor</span>
+          <span>Prem Predict</span>
         </div>
 
         <div className="site-footer-meta">
           <span>
             Data via{" "}
             <a href="https://github.com/olbauday/FPL-Core-Insights" target="_blank" rel="noreferrer">
-              FPL Core Insights
-            </a>
-            , sourced in part from the official{" "}
-            <a href="https://fantasy.premierleague.com/api/" target="_blank" rel="noreferrer">
-              FPL API
+              upstream match data
             </a>
           </span>
           <span className="site-footer-dot" aria-hidden="true">

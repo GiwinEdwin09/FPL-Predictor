@@ -48,7 +48,7 @@ function ClubBadge({ name, badgePath }: { name: string; badgePath: string | null
 
 function GameweekAccuracyChart({ rows }: { rows: GameweekAccuracy[] }) {
   if (rows.length === 0) {
-    return <p className="empty-state">No finished gameweeks for this season yet.</p>;
+    return <p className="empty-state">No finished matchweeks for this season yet.</p>;
   }
 
   const width = 720;
@@ -62,7 +62,7 @@ function GameweekAccuracyChart({ rows }: { rows: GameweekAccuracy[] }) {
 
   return (
     <div className="chart-frame">
-      <svg viewBox={`0 0 ${width} ${height}`} role="img" aria-label="Model accuracy by gameweek" className="chart-svg">
+      <svg viewBox={`0 0 ${width} ${height}`} role="img" aria-label="Model accuracy by matchweek" className="chart-svg">
         <line
           x1={0}
           x2={width}
@@ -77,7 +77,7 @@ function GameweekAccuracyChart({ rows }: { rows: GameweekAccuracy[] }) {
           return (
             <g key={`${row.season}-${row.gameweek}`}>
               <rect x={x} y={y} width={barWidth} height={barHeight} rx={3} className="chart-bar">
-                <title>{`GW ${row.gameweek}: ${formatPercent(row.accuracy)} (${row.correct}/${row.total})`}</title>
+                <title>{`MW ${row.gameweek}: ${formatPercent(row.accuracy)} (${row.correct}/${row.total})`}</title>
               </rect>
               {rows.length <= 20 || index % 4 === 0 ? (
                 <text x={index * barSlot + barSlot / 2} y={height - 8} className="chart-tick" textAnchor="middle">
@@ -89,7 +89,7 @@ function GameweekAccuracyChart({ rows }: { rows: GameweekAccuracy[] }) {
         })}
       </svg>
       <p className="chart-caption">
-        Bars show the share of matches the model called correctly each gameweek. The line marks the season average of{" "}
+        Bars show the share of matches the model called correctly each matchweek. The line marks the season average of{" "}
         {formatPercent(overall)}.
       </p>
     </div>
@@ -173,7 +173,7 @@ export function InsightsBrowser({ matches, model }: { matches: QuizMatch[]; mode
         </div>
         <p>
           <strong>Mid-season launch.</strong> This model was created during the 2025–2026 season, not before
-          Gameweek 1. Earlier gameweeks are retrospective replays and were not predictions published at the time.
+          Matchweek 1. Earlier matchweeks are retrospective replays and were not predictions published at the time.
         </p>
       </section>
 
@@ -207,7 +207,7 @@ export function InsightsBrowser({ matches, model }: { matches: QuizMatch[]; mode
       <section className="insight-section">
         <div className="section-head">
           <div>
-            <h2>Accuracy by gameweek</h2>
+            <h2>Accuracy by matchweek</h2>
             <p>How the model&apos;s hit rate moved across the {INSIGHTS_SEASON_LABEL} season.</p>
           </div>
         </div>
@@ -247,7 +247,7 @@ export function InsightsBrowser({ matches, model }: { matches: QuizMatch[]; mode
                 </div>
                 <div className="upset-detail">
                   <span>
-                    GW {upset.match.gameweek ?? "—"} · {formatDate(upset.match.kickoffTime)}
+                    MW {upset.match.gameweek ?? "—"} · {formatDate(upset.match.kickoffTime)}
                   </span>
                   <span>
                     Model gave {outcomeText} just <strong>{formatPercent(upset.probability, 1)}</strong>

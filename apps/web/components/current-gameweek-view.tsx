@@ -25,7 +25,7 @@ export function CurrentGameweekView({
   fixtures: UpcomingFixture[];
 }) {
   if (gameweek === null || fixtures.length === 0) {
-    return <p className="empty-state">No active Premier League gameweek is currently in progress.</p>;
+    return <p className="empty-state">No active Premier League matchweek is currently in progress.</p>;
   }
 
   const firstKickoff = fixtures
@@ -37,8 +37,8 @@ export function CurrentGameweekView({
     <section className="week-panel">
       <div className="week-panel-header week-panel-header-simple">
         <div className="week-heading">
-          <p className="eyebrow">Current Gameweek</p>
-          <h2>Gameweek {gameweek}</h2>
+          <p className="eyebrow">Current Matchweek</p>
+          <h2>Matchweek {gameweek}</h2>
           <p>
             This round has already started, so any available scores are shown alongside the pre-match forecast.{" "}
             {formatWeekStart(firstKickoff)}

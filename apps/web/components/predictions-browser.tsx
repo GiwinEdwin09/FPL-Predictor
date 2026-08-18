@@ -31,7 +31,7 @@ export function PredictionsBrowser({
           className={`tab-button ${tab === "current" ? "tab-button-active" : ""}`}
           onClick={() => setTab("current")}
         >
-          Current Gameweek
+          Current Matchweek
           <span className="tab-count">{currentGameweekFixtures.length}</span>
         </button>
         <button

@@ -54,7 +54,7 @@ export default async function HistoryPage() {
         </div>
         <h1 className="page-title">Finished matches with the stats that matter most.</h1>
         <p className="page-lede">
-          Step through completed gameweeks and compare scorelines with xG, shots on target, big chances, possession,
+          Step through completed matchweeks and compare scorelines with xG, shots on target, big chances, possession,
           and pre-match context.
         </p>
         <div className="page-meta-row">

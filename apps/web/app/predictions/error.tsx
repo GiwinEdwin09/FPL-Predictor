@@ -15,7 +15,7 @@ export default function PredictionsError({ error, reset }: PredictionsErrorProps
             Predictions
           </span>
         </div>
-        <h1 className="page-title">Upcoming fixtures, one gameweek at a time.</h1>
+        <h1 className="page-title">Upcoming fixtures, one matchweek at a time.</h1>
         <p className="page-lede">The live prediction page hit an unexpected issue while loading.</p>
       </header>
 

@@ -95,7 +95,7 @@ export function HistoryWeekView({ matches }: HistoryWeekViewProps) {
       </div>
 
       {gameweek === undefined ? (
-        <p className="empty-state">No finished gameweeks are available for this season.</p>
+        <p className="empty-state">No finished matchweeks are available for this season.</p>
       ) : (
         <>
           <div className="week-panel-header">
@@ -103,14 +103,14 @@ export function HistoryWeekView({ matches }: HistoryWeekViewProps) {
               className="week-arrow"
               onClick={() => setIndex((current) => Math.max(0, current - 1))}
               disabled={clampedIndex === 0}
-              aria-label="Previous gameweek"
+              aria-label="Previous matchweek"
             >
               ←
             </button>
             <div className="week-heading">
-              <p className="eyebrow">Historical Gameweek</p>
+              <p className="eyebrow">Historical Matchweek</p>
               <h2>
-                {season} · Gameweek {gameweek}
+                {season} · Matchweek {gameweek}
               </h2>
               <p>{selectedMatches.length} finished matches</p>
             </div>
@@ -118,7 +118,7 @@ export function HistoryWeekView({ matches }: HistoryWeekViewProps) {
               className="week-arrow"
               onClick={() => setIndex((current) => Math.min(gameweeks.length - 1, current + 1))}
               disabled={clampedIndex === gameweeks.length - 1}
-              aria-label="Next gameweek"
+              aria-label="Next matchweek"
             >
               →
             </button>

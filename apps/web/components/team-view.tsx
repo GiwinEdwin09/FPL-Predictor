@@ -255,7 +255,7 @@ export function TeamView({ team, matches }: { team: TeamSummary; matches: QuizMa
             <li key={point.matchId} className="team-result-row">
               <span className={resultClass(point.result)}>{point.result ?? "–"}</span>
               <span className="team-result-meta">
-                GW {point.gameweek ?? "—"} · {formatDate(point.kickoffTime)}
+                MW {point.gameweek ?? "—"} · {formatDate(point.kickoffTime)}
               </span>
               <span className="team-result-fixture">
                 {point.isHome ? "vs" : "at"} {point.opponent.name}

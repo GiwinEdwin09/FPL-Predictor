@@ -9,12 +9,12 @@ export default function PredictionsLoading() {
           </span>
           <span className="page-eyebrow page-eyebrow-light">Loading…</span>
         </div>
-        <h1 className="page-title">Upcoming fixtures, one gameweek at a time.</h1>
+        <h1 className="page-title">Upcoming fixtures, one matchweek at a time.</h1>
         <p className="page-lede">Pulling the latest probabilities and grouping fixtures into rounds.</p>
       </header>
 
       <div className="tab-bar">
-        <span className="tab-button tab-button-disabled">Current Gameweek</span>
+        <span className="tab-button tab-button-disabled">Current Matchweek</span>
         <span className="tab-button tab-button-disabled">Future Predictions</span>
         <span className="tab-button tab-button-disabled">Postponed</span>
       </div>

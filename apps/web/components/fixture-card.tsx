@@ -57,7 +57,7 @@ export function FixtureCard({
   return (
     <article className="fixture-card">
       <div className="fixture-card-topline">
-        <span className="fixture-card-gw">GW {fixture.gameweek ?? "TBD"}</span>
+        <span className="fixture-card-gw">MW {fixture.gameweek ?? "TBD"}</span>
         <span className="fixture-card-time">{formatKickoff(fixture.kickoffTime)}</span>
       </div>
 

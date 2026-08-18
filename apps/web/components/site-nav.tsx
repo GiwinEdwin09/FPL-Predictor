@@ -4,7 +4,6 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 import type { GameweekSummary } from "@/lib/gameweek";
-import { formatDeadlineShort } from "@/lib/gameweek";
 
 const links = [
   { href: "/", label: "Home" },
@@ -47,27 +46,20 @@ function BrandMark() {
 function GameweekChip({ summary }: { summary: GameweekSummary }) {
   if (summary.gameweek === null) {
     return (
-      <span className="gameweek-chip" title="No active or upcoming gameweek">
+      <span className="gameweek-chip" title="No active or upcoming matchweek">
         <span className="gameweek-chip-dot" aria-hidden="true" />
         Season finished
       </span>
     );
   }
 
-  const deadlineLabel = formatDeadlineShort(summary.deadlineUtc);
   const statusLabel = summary.status === "live" ? "Live" : "Next";
 
   return (
-    <span className="gameweek-chip" title={deadlineLabel ? `Deadline ${deadlineLabel} UTC` : undefined}>
+    <span className="gameweek-chip">
       <span className="gameweek-chip-dot" aria-hidden="true" />
       <span className="gameweek-chip-muted">{statusLabel}</span>
-      <strong>GW {summary.gameweek}</strong>
-      {deadlineLabel ? (
-        <>
-          <span className="gameweek-chip-divider">·</span>
-          <span className="gameweek-chip-muted">{deadlineLabel}</span>
-        </>
-      ) : null}
+      <strong>MW {summary.gameweek}</strong>
     </span>
   );
 }
@@ -81,7 +73,7 @@ export function SiteNav({ summary }: { summary: GameweekSummary | null }) {
         <Link href="/" className="site-brand">
           <BrandMark />
           <span>
-            FPL <span className="brand-wordmark-accent">Predictor</span>
+            Prem <span className="brand-wordmark-accent">Predict</span>
           </span>
         </Link>
 

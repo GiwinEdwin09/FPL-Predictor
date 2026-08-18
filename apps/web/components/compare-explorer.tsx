@@ -152,7 +152,7 @@ export function CompareExplorer({ matches, teams }: { matches: QuizMatch[]; team
                 return (
                   <li key={match.matchId} className="team-result-row compare-meeting-row">
                     <span className="team-result-meta">
-                      GW {match.gameweek ?? "—"} · {match.season} · {formatDate(match.kickoffTime)}
+                      MW {match.gameweek ?? "—"} · {match.season} · {formatDate(match.kickoffTime)}
                     </span>
                     <span className="upset-fixture compare-meeting-fixture">
                       <span className="upset-team">

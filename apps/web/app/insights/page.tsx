@@ -52,7 +52,7 @@ export default async function InsightsPage() {
         <h1 className="page-title">The model&apos;s report card.</h1>
         <p className="page-lede">
           Explore the model&apos;s 2025–2026 results, hit rate, biggest surprises, and calibration. The model launched
-          during the season, so earlier gameweeks are identified as retrospective replays rather than published
+          during the season, so earlier matchweeks are identified as retrospective replays rather than published
           forecasts.
         </p>
       </header>
