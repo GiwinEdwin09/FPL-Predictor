@@ -6,6 +6,17 @@ This document tracks the technical build progress for the Premier League Predict
 
 The product-facing overview now lives in the root [README.md](../README.md).
 
+### Current production status
+
+- the Render backend is configured with `MODEL_VERSION=v3`
+- the API loads the committed, hash-validated v3 bundle during its Docker build
+- the final predictor is fitted on 12,809 finished matches spanning 33 seasons
+- the saved evaluation replays all 380 matches from 2025/26 across 38
+  chronological gameweek folds
+- the guarded selection process chose Dixon-Coles in all 38 folds; XGBoost
+  remains packaged as a research candidate rather than being forced into live
+  probabilities
+
 ## Phase 1: Automated Data Ingestion
 
 This repo includes a sync script that:
@@ -119,9 +130,9 @@ If all-competition rows are needed for model training:
 PYTHONPATH=src python3 scripts/build_phase2_features.py --competition-scope all --output-path data/features/all_match_pre_match_features.csv
 ```
 
-## Phase 3: Model Training
+## Phase 3: Model v2 Research Baseline (Superseded)
 
-Train the current XGBoost model:
+Train the legacy XGBoost v2 baseline:
 
 ```bash
 PYTHONPATH=src python3 scripts/train_phase3_model.py
@@ -134,7 +145,7 @@ data/models/model_v2.json
 data/models/model_v2_metrics.json
 ```
 
-Current trainer behavior:
+Legacy trainer behavior:
 
 - uses `XGBoost` for a 3-class target: `0` home win, `1` draw, `2` away win
 - trains on all finished matches before the validation window, with competition-aware sample weights
@@ -149,7 +160,7 @@ The trainer writes the latest single-window metrics to
 are useful as a smoke test, but the walk-forward evaluation below is the
 authoritative model-comparison tool.
 
-Sample weighting currently defaults to:
+V2 sample weighting defaults to:
 
 - Premier League: `1.0`
 - Champions League / Europa League / Conference League: `0.8`
@@ -158,7 +169,7 @@ Sample weighting currently defaults to:
 
 ### Walk-Forward Backtesting
 
-Run the current production model and its baselines as if each 2025/26
+Replay the legacy v2 model and its baselines as if each 2025/26
 gameweek were still in the future:
 
 ```bash
@@ -181,7 +192,7 @@ The harness:
 - writes the complete result to
   `data/models/model_v2_walk_forward_backtest.json`
 
-Current 2025/26 replay results over all 380 league matches:
+Recorded v2 replay results over all 380 matches from 2025/26:
 
 | Model | Accuracy | Log loss | Brier | RPS | ECE |
 | --- | ---: | ---: | ---: | ---: | ---: |
@@ -200,15 +211,13 @@ average `3.57`, and 12 of 38 folds hit the current grid maximum of `5.0`,
 which is strong evidence that the tree model is overconfident at this data
 volume.
 
-The current dataset contains no bookmaker-odds columns, so the market baseline
-is correctly reported as unavailable. Do not tune a replacement model directly
-against these 380 results and then call the same replay a final test; first add
-older seasons, use those for development/tuning, and retain 2025/26 as the
-untouched final comparison season.
+The v2 dataset contained no bookmaker-odds columns, so its market baseline was
+correctly reported as unavailable. These results motivated the historical-data,
+Dixon-Coles, and guarded-selection work that became production v3 below.
 
 ## Phase 2b: Historical Premier League results
 
-Download and normalize football-data.co.uk Premier League CSVs from 1994/95
+Download and normalize football-data.co.uk Premier League CSVs from 1993/94
 onward:
 
 ```bash
@@ -243,9 +252,13 @@ Pre-match features now include:
 - last-5 observation counts and an `has_xg_coverage` flag for result-only eras
 - a COVID-season flag for 2019/20 and 2020/21
 
-`model_v3` is a leakage-safe blend of time-decayed Dixon-Coles and a
-regularized XGBoost model. Blend weight and temperature are chosen on a
-held-out train slice; the trees are not refit on that slice.
+`model_v3` is now the production forecasting pipeline. It evaluates a
+time-decayed Dixon-Coles model and regularized XGBoost candidate without using
+future matches. Within every outer gameweek fold, predictor selection and
+temperature calibration use accumulated chronological season-block
+out-of-fold predictions from the training data. The blend is promoted only
+when its gameweek-block bootstrap interval beats Dixon-Coles; otherwise the
+fold selects Dixon-Coles.
 
 Train it:
 
@@ -261,38 +274,88 @@ PYTHONPATH=src python3 scripts/backtest_model.py --v3 \
   --matches-path data/matches_training.csv
 ```
 
-Authoritative 2025/26 replay after adding 1994–2025 history (380 league
-matches, 38 gameweek folds, ~12.3k training rows available):
+The complete audit output is committed at
+`data/models/model_v3_walk_forward_backtest.json`.
+
+### Authoritative v3 walk-forward result
+
+The corrected 2025/26 replay uses all 380 league matches across 38 gameweek
+folds. Each prediction is generated using only matches available before that
+gameweek's first kickoff. The feature corpus contains 12,809 eligible finished
+matches across 33 seasons, from 1993/94 through 2025/26.
 
 | Model | Accuracy | Log loss | Brier | RPS | ECE |
 | --- | ---: | ---: | ---: | ---: | ---: |
 | Uniform | 42.63% | 1.0986 | 0.6667 | 0.2322 | 0.0930 |
-| Historical prior | 42.63% | 1.0815 | 0.6550 | 0.2279 | 0.0322 |
-| Elo-only logistic | 47.89% | 1.0314 | 0.6205 | 0.2108 | 0.0599 |
-| Time-decayed Dixon-Coles | 47.11% | **1.0297** | **0.6190** | **0.2100** | 0.0434 |
-| Regularized XGBoost v3 | 46.05% | 1.0954 | 0.6569 | 0.2245 | 0.0961 |
-| Multinomial logistic v3 | 47.63% | 1.0632 | 0.6341 | 0.2159 | 0.0457 |
-| Blend v3 (DC + XGB) | **48.42%** | 1.0301 | 0.6200 | 0.2101 | **0.0254** |
+| Historical prior | 42.63% | 1.0813 | 0.6548 | 0.2278 | **0.0306** |
+| Elo-only logistic | **47.89%** | 1.0314 | 0.6205 | 0.2109 | 0.0624 |
+| Time-decayed Dixon-Coles | 46.84% | **1.0299** | **0.6186** | **0.2099** | 0.0476 |
+| Regularized XGBoost v3 | 47.11% | 1.0441 | 0.6284 | 0.2137 | 0.0522 |
+| Multinomial logistic v3 | **47.89%** | 1.0616 | 0.6330 | 0.2156 | 0.0417 |
+| Selected v3 pipeline | 46.84% | 1.0310 | 0.6194 | 0.2101 | 0.0438 |
 | Closing market (de-vigged) | 49.47% | 1.0118 | 0.6077 | 0.2045 | 0.0340 |
 
-The blend is mostly Dixon-Coles (mean weight `0.77`) with a mean temperature of
-`1.44`. It is statistically better than v2 XGBoost and the historical prior,
-statistically indistinguishable from Elo (log-loss difference `-0.0013`, 95%
-CI `-0.024` to `+0.022`), and still behind the closing line. Production
-refresh therefore stays on `model_v2` until a later candidate beats Elo with a
-bootstrap interval that excludes zero.
+All 38 folds selected Dixon-Coles, producing a mean Dixon-Coles weight of
+`1.0`; the mean fitted temperature was `0.997`. The selected v3 pipeline was
+statistically indistinguishable from Elo: v3 minus Elo log-loss difference
+`-0.0004`, with a 95% gameweek-block bootstrap interval from `-0.0173` to
+`+0.0163`. It remained behind the closing market by `+0.0192` log loss, with a
+95% interval from `+0.0044` to `+0.0333`.
 
-To train v3 during a refresh without changing the live default:
+The production decision is therefore deliberately conservative. V3 replaces
+the underperforming v2 tree model, but its promotion gate does not pretend the
+XGBoost candidate adds value when the evidence does not support it. The bundle
+retains the tree component for evaluation while serving the selected
+Dixon-Coles component.
+
+### Validation versus final production fit
+
+`model_v3_metrics.json` contains a separate latest-window smoke test: 12,767
+matches precede a 42-match validation window. That small window currently
+reports 40.48% accuracy, 1.0332 log loss, and 0.6219 Brier score. It should not
+be confused with the authoritative 380-match walk-forward table above.
+
+After that validation is recorded, the production predictor is refitted on all
+12,809 eligible finished matches. This final refit does not invalidate the
+earlier evaluation because its metrics were computed before the validation rows
+were added back. Unfinished 2026/27 fixtures remain prediction-only rows and are
+never used as training targets.
+
+### Production artifacts
+
+The committed v3 release consists of:
+
+- `data/models/model_v3_bundle.json`: manifest and component hashes
+- `data/models/model_v3.json`: selected Dixon-Coles/blend parameters
+- `data/models/model_v3_xgboost.json`: guarded tree candidate
+- `data/models/model_v3_metrics.json`: latest-window smoke-test metrics and
+  final-fit summary
+- `data/models/model_v3_team_keys.json`: canonical team lookup
+- `data/features/match_pre_match_features_v3.csv`: warmed prediction features
+- `data/models/model_v3_walk_forward_backtest.json`: complete out-of-sample
+  predictions, fold details, metrics, and confidence intervals
+
+The scheduled refresh now trains and packages v3 directly:
 
 ```bash
-PYTHONPATH=src python3 scripts/run_refresh_pipeline.py --model-version v3 \
-  --model-path data/models/model_v3.json \
-  --metrics-path data/models/model_v3_metrics.json
+PYTHONPATH=src python3 scripts/run_refresh_pipeline.py --model-version v3
 ```
 
-The dashboard JSON contract is unchanged: `{homeWin, draw, awayWin}`. Historical
-UI probabilities are still a current-model replay unless they are later wired
-to walk-forward out-of-sample predictions.
+Render loads the immutable bundle with:
+
+```text
+MODEL_VERSION=v3
+MODEL_BUNDLE_PATH=data/models/model_v3_bundle.json
+BOOTSTRAP_RUNTIME_ASSETS=0
+REFRESH_RUNTIME_ASSETS_ON_STARTUP=0
+```
+
+The API validates the manifest, file hashes, feature schema, and canonical team
+keys during startup. An incomplete or mismatched v3 bundle fails startup instead
+of silently falling back to average-team parameters. The dashboard JSON contract
+remains `{homeWin, draw, awayWin}`. Historical UI probabilities are still a
+current-model replay unless they are explicitly replaced with saved
+walk-forward out-of-sample predictions.
 
 ## Reference Snapshot
 
@@ -319,7 +382,7 @@ apps/web
 It reads a generated dashboard payload that includes:
 
 - upcoming unfinished Premier League fixtures
-- calibrated home/draw/away probabilities from `model_v2`
+- calibrated home/draw/away probabilities from production `model_v3`
 - historical finished matches with key stats and pre-match context
 
 App structure:
@@ -395,10 +458,10 @@ What it does:
 
 1. sync upstream source data
 2. detect whether anything actually changed
-3. rebuild prediction-facing and all-competition feature tables
-4. retrain `model_v2`
-5. regenerate the frontend dashboard payload
-6. commit refreshed artifacts back to the repository if there was a real change
+3. refresh the historical corpus and rebuild v3 prediction/training features
+4. retrain and package `model_v3`
+5. regenerate the frontend dashboard payload with v3 probabilities
+6. commit refreshed v3 artifacts back to the repository if data changed
 
 Schedule:
 
@@ -419,3 +482,6 @@ Schedule:
 - let Render provide the runtime `PORT` value and keep the app bound to `0.0.0.0`
 - use the public `onrender.com` URL for Vercel's `API_BASE_URL`
 - set `CORS_ALLOW_ORIGINS` to the Vercel production URL without a trailing slash
+- set `MODEL_VERSION=v3` and point `MODEL_BUNDLE_PATH` at the committed bundle
+- keep runtime bootstrapping and startup refresh disabled so each deploy uses the
+  validated immutable artifact built into its Docker image

@@ -1,12 +1,14 @@
 # FPL-Predictor
 
 [![Live Site](https://img.shields.io/badge/Live%20Site-Vercel-000000?logo=vercel&logoColor=white)](https://fpl-predictor-bay.vercel.app/)
+[![Production Model](https://img.shields.io/badge/Production%20Model-v3-2563eb)](./build-progress/README.md#phase-3b5-ratings-dixon-coles-and-model_v3)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE)
 
 FPL-Predictor is a Premier League forecasting product built on top of the
 [FPL Core Insights](https://github.com/olbauday/FPL-Core-Insights) data source.
-It combines football data engineering, Dixon-Coles and XGBoost research models, a FastAPI backend,
-and a Next.js frontend to turn raw match updates into a browsable prediction site.
+It combines football data engineering, a production `model_v3` forecasting
+pipeline, a FastAPI backend, and a Next.js frontend to turn raw match updates
+into a browsable prediction site. The live Render API currently serves v3.
 
 ## System Flow
 
@@ -15,7 +17,7 @@ and a Next.js frontend to turn raw match updates into a browsable prediction sit
 | `FPL-Core-Insights` | Upstream source for teams, players, matches, player stats, and player match stats |
 | `src/fpl_predictor/data_ingestion.py` | Pulls and normalizes season data from GitHub raw URLs |
 | `src/fpl_predictor/feature_factory.py` | Builds leakage-safe rolling pre-match features |
-| `src/fpl_predictor/model_v3.py` | Evaluates, calibrates, and packages the production candidate |
+| `src/fpl_predictor/model_v3.py` | Evaluates, selects, refits, and packages the production model |
 | `apps/api` + `FastAPI` | Serves live predictions, history, and lineup simulation APIs |
 | `apps/web` + `Next.js` | Renders the public site for predictions and historical match browsing |
 
@@ -23,7 +25,7 @@ and a Next.js frontend to turn raw match updates into a browsable prediction sit
 flowchart LR
     A["FPL-Core-Insights"] --> B["Data Ingestion"]
     B --> C["Rolling Feature Factory"]
-    C --> D["Dixon-Coles + Guarded XGBoost Candidate"]
+    C --> D["Production model_v3"]
     D --> E["FastAPI Backend"]
     E --> F["Next.js Frontend"]
 ```
@@ -47,7 +49,7 @@ Behind the site, the project currently includes:
 
 - automated ingestion of `teams`, `players`, `matches`, `playerstats`, and `playermatchstats`
 - kickoff-time-aware rolling features for each club's previous matches
-- a competition-weighted Dixon-Coles production predictor with a guarded XGBoost candidate
+- production `model_v3`, with Dixon-Coles protected by a guarded XGBoost promotion gate
 - probability calibration to improve confidence quality
 - a FastAPI backend for serving dashboard, predictions, and historical match data
 - a Next.js frontend deployed separately from the API
@@ -97,21 +99,37 @@ The frontend can either:
 - read a generated local dashboard payload, or
 - fetch live data from the FastAPI backend using `API_BASE_URL`
 
-### Model versions
+### Production model: v3
 
-Render is configured for `v3`. Training evaluates the Dixon-Coles/XGBoost blend
-on chronological season blocks, but promotes the blend only when its block-
-bootstrap confidence interval beats Dixon-Coles. Otherwise v3 safely serves the
-corrected Dixon-Coles component.
+Render is configured for `v3`, and `/health` reports the loaded v3 bundle.
+Training evaluates the Dixon-Coles/XGBoost blend on chronological season blocks,
+but promotes the blend only when its gameweek-block bootstrap confidence interval
+beats Dixon-Coles. Otherwise v3 safely serves the corrected Dixon-Coles component.
 
-Train and package the candidate locally with:
+Current production snapshot:
+
+| Item | v3 status |
+| --- | --- |
+| Historical coverage | 33 seasons, from 1993/94 through 2025/26 |
+| Finished matches in the final fit | 12,809 |
+| Final evaluation | 380 matches across 38 chronological 2025/26 gameweek folds |
+| Selected predictor | Dixon-Coles in all 38 folds |
+| Walk-forward result | 46.84% accuracy, 1.0310 log loss, 0.2101 RPS |
+
+The closing market remained stronger on the same replay, so the reported v3
+numbers should be read as honest out-of-sample results rather than a claim that
+the model beats bookmaker prices. After evaluation, the production component is
+refitted on every eligible finished match; unfinished 2026/27 fixtures are used
+only to produce predictions.
+
+Train and package the production bundle locally with:
 
 ```bash
-python -m fpl_predictor.model_v3
+PYTHONPATH=src python3 scripts/train_model_v3.py
 ```
 
 The command writes a versioned bundle manifest alongside the model. Production
-bundle files are committed so Render can copy an immutable candidate into its
+bundle files are committed so Render can copy an immutable v3 release into its
 Docker image. The bundle
 pins the model, metrics, warmed prediction feature table, XGBoost booster, and
 canonical team-key snapshot with SHA-256 hashes. Live inference loads that
@@ -125,17 +143,20 @@ Premier League coverage starts with Football-Data's earliest available CSV
 richer rows win any overlaps. Unfinished fixtures are retained for prediction
 features but never used as training targets.
 
-To run the API against an already-built candidate bundle, configure:
+To run the API against the committed production bundle, configure:
 
 ```text
 MODEL_VERSION=v3
 MODEL_BUNDLE_PATH=data/models/model_v3_bundle.json
+BOOTSTRAP_RUNTIME_ASSETS=0
+REFRESH_RUNTIME_ASSETS_ON_STARTUP=0
 ```
 
 The scheduled refresh discovers new upstream seasons automatically, rebuilds the
-v3 bundle, and commits it with the dashboard payload. If the bundle is incomplete, modified, has a mismatched feature schema, or
-contains numeric FPL IDs in place of canonical team keys, API startup fails
-instead of silently falling back to average-team Dixon-Coles parameters.
+v3 bundle, and commits it with the dashboard payload. If the bundle is
+incomplete, modified, has a mismatched feature schema, or contains numeric FPL
+IDs in place of canonical team keys, API startup fails instead of silently
+falling back to average-team Dixon-Coles parameters.
 
 ## Build Progress
 
@@ -149,6 +170,6 @@ The product now has:
 
 - a live frontend structure
 - a deployed backend path
-- trained model artifacts
+- a deployed v3 model bundle and trained artifacts
 - exported prediction and historical datasets for the site
-- Full data automation
+- full v3 data and model refresh automation
