@@ -25,6 +25,7 @@ data/models/*
 !data/models/model_v3_metrics.json
 !data/models/model_v3_team_keys.json
 !data/models/model_v3_xgboost.json
+!data/models/model_v3_walk_forward_backtest.json
 data/reference/
 data/automation/
 data/historical/

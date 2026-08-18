@@ -558,6 +558,7 @@ def run_walk_forward_backtest_v3(
     prediction_rows: list[dict[str, Any]] = []
     temperatures: list[float] = []
     blend_weights: list[float] = []
+    selected_predictors: list[str] = []
 
     for fold in folds:
         train = fold.train
@@ -597,6 +598,7 @@ def run_walk_forward_backtest_v3(
         }
         temperatures.append(float(details["calibration_temperature"]))
         blend_weights.append(float(details["dixon_coles_weight"]))
+        selected_predictors.append(str(details["selected_predictor"]))
         for name, probabilities in fold_predictions.items():
             probability_parts[name].append(probabilities)
         target_parts.append(targets)
@@ -644,6 +646,15 @@ def run_walk_forward_backtest_v3(
                 "dixon_coles_weight": float(details["dixon_coles_weight"]),
                 "calibration_rows": int(details["calibration_rows"]),
                 "calibration_cutoff_utc": details["calibration_cutoff_utc"],
+                "calibration_strategy": details["calibration_strategy"],
+                "calibration_folds": int(details["calibration_folds"]),
+                "selected_predictor": details["selected_predictor"],
+                "tree_n_estimators": int(details["tree_n_estimators"]),
+                "blend_candidate_log_loss": float(details["blend_candidate_log_loss"]),
+                "dixon_coles_oof_log_loss": float(details["dixon_coles_oof_log_loss"]),
+                "blend_vs_dc_log_loss_ci95": [
+                    float(value) for value in details["blend_vs_dc_log_loss_ci95"]
+                ],
                 "metrics": fold_metrics,
             }
         )
@@ -700,7 +711,11 @@ def run_walk_forward_backtest_v3(
             "half_life_days": half_life_days,
             "fold_boundary": "Train before the first kickoff of each Premier League gameweek.",
             "accuracy_tie_break": "Argmax ties resolve to class 0 (home win).",
-            "calibration": "Temperature and blend weight chosen on a held-out train slice; final trees fit without that slice.",
+            "calibration": (
+                "Predictor selection and temperature use accumulated chronological "
+                "season-block out-of-fold predictions inside each training fold. The "
+                "blend is promoted only when its block-bootstrap interval beats Dixon-Coles."
+            ),
         },
         "data": {
             "training_rows_available": int(len(frame)),
@@ -717,6 +732,10 @@ def run_walk_forward_backtest_v3(
             "mean_temperature": float(np.mean(temperatures)),
             "median_temperature": float(np.median(temperatures)),
             "mean_dixon_coles_weight": float(np.mean(blend_weights)),
+            "selected_predictor_counts": {
+                name: selected_predictors.count(name)
+                for name in sorted(set(selected_predictors))
+            },
         },
         "comparisons": comparisons,
         "folds": fold_rows,

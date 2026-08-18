@@ -68,6 +68,7 @@ class ModelV3TrainingSummary(TrainingSummary):
     blend_candidate_log_loss: float
     dixon_coles_oof_log_loss: float
     blend_vs_dc_log_loss_ci95: list[float]
+    final_fit: dict[str, Any]
 
 
 def build_calibration_season_folds(
@@ -364,6 +365,54 @@ def train_blend_predictor(
     return predictor, details
 
 
+def fit_final_blend_predictor(
+    frame: pd.DataFrame,
+    selection_details: dict[str, Any],
+    *,
+    feature_columns: tuple[str, ...] = V3_FEATURE_COLUMNS,
+    half_life_days: float = DEFAULT_HALF_LIFE_DAYS,
+    bake_temperature: bool = False,
+) -> BlendPredictor:
+    """Refit the selected production predictor on every eligible finished match."""
+    tree_model, dixon_coles = _fit_blend_components(
+        frame,
+        feature_columns,
+        half_life_days,
+        int(selection_details["tree_n_estimators"]),
+    )
+    return BlendPredictor(
+        dixon_coles=dixon_coles,
+        tree_model=tree_model,
+        feature_columns=list(feature_columns),
+        dixon_coles_weight=float(selection_details["dixon_coles_weight"]),
+        temperature=(
+            float(selection_details["calibration_temperature"])
+            if bake_temperature
+            else 1.0
+        ),
+    )
+
+
+def summarize_final_fit(frame: pd.DataFrame) -> dict[str, Any]:
+    seasons = sorted(str(value) for value in frame["source_season"].dropna().unique())
+    kickoffs = pd.to_datetime(
+        frame["kickoff_time"],
+        errors="coerce",
+        utc=True,
+        format="mixed",
+    ).dropna()
+    return {
+        "rows": int(len(frame)),
+        "seasons": len(seasons),
+        "first_season": seasons[0] if seasons else None,
+        "latest_season": seasons[-1] if seasons else None,
+        "first_finished_kickoff_utc": kickoffs.min().isoformat() if not kickoffs.empty else None,
+        "latest_finished_kickoff_utc": kickoffs.max().isoformat() if not kickoffs.empty else None,
+        "target_distribution": summarize_targets(frame),
+        "competition_distribution": summarize_competitions(frame),
+    }
+
+
 def train_and_save_model_v3(
     prediction_feature_table_path: Path,
     training_feature_table_path: Path,
@@ -384,7 +433,18 @@ def train_and_save_model_v3(
     )
     frame = load_v3_training_frame(training_feature_table_path)
     train, validation, split_summary = split_train_validation(frame)
-    predictor, details = train_blend_predictor(train, half_life_days=half_life_days)
+    evaluation_predictor, details = train_blend_predictor(
+        train,
+        half_life_days=half_life_days,
+    )
+    probabilities = evaluation_predictor.predict_proba(validation)
+    probabilities = apply_temperature(probabilities, details["calibration_temperature"])
+    predictions = probabilities.argmax(axis=1)
+    predictor = fit_final_blend_predictor(
+        frame,
+        details,
+        half_life_days=half_life_days,
+    )
     prediction_team_keys = pd.concat(
         [prediction_features["home_team_key"], prediction_features["away_team_key"]],
         ignore_index=True,
@@ -393,9 +453,6 @@ def train_and_save_model_v3(
         predictor.dixon_coles,
         prediction_team_keys.dropna(),
     )
-    probabilities = predictor.predict_proba(validation)
-    probabilities = apply_temperature(probabilities, details["calibration_temperature"])
-    predictions = probabilities.argmax(axis=1)
 
     metrics = {
         "accuracy": float((predictions == validation["target"].to_numpy()).mean()),
@@ -439,6 +496,7 @@ def train_and_save_model_v3(
         blend_vs_dc_log_loss_ci95=[
             float(value) for value in details["blend_vs_dc_log_loss_ci95"]
         ],
+        final_fit=summarize_final_fit(frame),
     )
     metrics_path.write_text(json.dumps(asdict(summary), indent=2), encoding="utf-8")
     create_model_bundle(

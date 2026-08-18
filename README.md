@@ -118,6 +118,13 @@ canonical team-key snapshot with SHA-256 hashes. Live inference loads that
 exported feature table directly, so API predictions use the same rating state as
 offline evaluation.
 
+The evaluation split remains chronological, but after its metrics are recorded
+the production artifact is refitted on every eligible finished match. Historical
+Premier League coverage starts with Football-Data's earliest available CSV
+(1993-1994), and the recent FPL-Core-Insights seasons are merged on top so their
+richer rows win any overlaps. Unfinished fixtures are retained for prediction
+features but never used as training targets.
+
 To run the API against an already-built candidate bundle, configure:
 
 ```text

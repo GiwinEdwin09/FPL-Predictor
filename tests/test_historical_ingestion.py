@@ -2,7 +2,18 @@ from pathlib import Path
 
 import pandas as pd
 
-from fpl_predictor.historical_ingestion import canonical_team_key, parse_football_data_kickoff, read_football_data_csv
+from fpl_predictor.historical_ingestion import (
+    DEFAULT_START_YEAR,
+    canonical_team_key,
+    parse_football_data_kickoff,
+    read_football_data_csv,
+    season_code,
+)
+
+
+def test_history_starts_with_earliest_available_premier_league_csv() -> None:
+    assert DEFAULT_START_YEAR == 1993
+    assert season_code(DEFAULT_START_YEAR) == "9394"
 
 
 def test_canonical_team_key_reconciles_common_aliases() -> None:

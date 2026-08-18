@@ -16,7 +16,7 @@ import pandas as pd
 import requests
 
 FOOTBALL_DATA_BASE_URL = "https://www.football-data.co.uk/mmz4281"
-DEFAULT_START_YEAR = 1994
+DEFAULT_START_YEAR = 1993
 DEFAULT_END_YEAR = 2025
 DEFAULT_RAW_DIR = Path("data/historical/football-data/raw")
 DEFAULT_OUTPUT_PATH = Path("data/historical/football_data_premier_league.csv")
