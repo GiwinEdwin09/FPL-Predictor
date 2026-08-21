@@ -1,17 +1,8 @@
 import { PredictionsBrowser } from "@/components/predictions-browser";
+import { ErrorState } from "@/components/ui/states";
 import { loadDashboardResult } from "@/lib/dashboard";
 import { summarizeGameweek } from "@/lib/gameweek";
-
-function formatGenerated(generatedAtUtc: string) {
-  return new Intl.DateTimeFormat("en-GB", {
-    day: "numeric",
-    month: "short",
-    hour: "2-digit",
-    minute: "2-digit",
-    timeZone: "UTC",
-    timeZoneName: "short",
-  }).format(new Date(generatedAtUtc));
-}
+import { formatMatchDate } from "@/lib/format";
 
 export default async function PredictionsPage() {
   const result = await loadDashboardResult();
@@ -32,10 +23,7 @@ export default async function PredictionsPage() {
           </p>
         </header>
 
-        <section className="page-state-card page-state-error" role="alert">
-          <h2>Unable to load predictions</h2>
-          <p>{result.errorMessage}</p>
-        </section>
+        <ErrorState title="Unable to load predictions">{result.errorMessage}</ErrorState>
       </div>
     );
   }
@@ -58,19 +46,20 @@ export default async function PredictionsPage() {
             </span>
           ) : null}
         </div>
-        <h1 className="page-title">Upcoming fixtures, one matchweek at a time.</h1>
+        <h1 className="page-title">Who does the model back this week?</h1>
         <p className="page-lede">
-          Use the current-matchweek tab once a round has started, browse future rounds matchweek by matchweek, and keep
-          postponed fixtures separate so unresolved scheduling changes don&apos;t confuse the forecast view.
+          Calibrated HOME / DRAW / AWAY probabilities for every Premier League fixture, with the model&apos;s pick,
+          a confidence rating, and the factors behind each call. Open any card to see why — or edit the lineups to
+          simulate a different team sheet.
         </p>
         <div className="page-meta-row">
           <span>
-            <strong>{totalUpcoming}</strong> fixtures with active probabilities
+            <strong>{totalUpcoming}</strong> fixtures with active forecasts
           </span>
           <span className="site-footer-dot" aria-hidden="true">
             ·
           </span>
-          <span>Updated {formatGenerated(dashboard.generatedAtUtc)}</span>
+          <span>Updated {formatMatchDate(dashboard.generatedAtUtc)}</span>
         </div>
       </header>
 

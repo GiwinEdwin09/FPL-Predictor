@@ -3,7 +3,12 @@
 import Image from "next/image";
 import { useMemo, useState } from "react";
 
-import type { TeamSummary } from "@/lib/dashboard";
+import { ConfidenceBadge } from "@/components/ui/badges";
+import { TeamCrest } from "@/components/ui/crest";
+import { ProbabilityBar } from "@/components/ui/probability-bar";
+import { describeConfidence } from "@/lib/confidence";
+import type { TeamSummary, UpcomingFixture } from "@/lib/dashboard";
+import { formatKickoff } from "@/lib/format";
 import type { QuizMatch } from "@/lib/quiz";
 import { buildTeamTrend, summarizeTeam, type TeamTrendPoint } from "@/lib/teams";
 
@@ -124,7 +129,15 @@ function resultClass(result: TeamTrendPoint["result"]) {
   return "result-chip result-loss";
 }
 
-export function TeamView({ team, matches }: { team: TeamSummary; matches: QuizMatch[] }) {
+export function TeamView({
+  team,
+  matches,
+  upcomingFixtures,
+}: {
+  team: TeamSummary;
+  matches: QuizMatch[];
+  upcomingFixtures: UpcomingFixture[];
+}) {
   const seasons = useMemo(() => Array.from(new Set(matches.map((match) => match.season))).sort().reverse(), [matches]);
   const availableSeasons = useMemo(
     () =>
@@ -151,6 +164,17 @@ export function TeamView({ team, matches }: { team: TeamSummary; matches: QuizMa
   const xgAgainstValues = trend.map((point) => point.xgAgainst);
   const [xgMin, xgMax] = rangeOf([...xgForValues, ...xgAgainstValues], 0.15);
   const form = trend.filter((point) => point.result !== null).slice(-5).map((point) => point.result);
+  const nextFixtures = useMemo(
+    () =>
+      upcomingFixtures
+        .filter(
+          (fixture) =>
+            fixture.homeTeam.badgeSlug === team.badgeSlug || fixture.awayTeam.badgeSlug === team.badgeSlug,
+        )
+        .sort((left, right) => (left.kickoffTime ?? "9999").localeCompare(right.kickoffTime ?? "9999"))
+        .slice(0, 3),
+    [upcomingFixtures, team.badgeSlug],
+  );
 
   return (
     <div className="insights-stack">
@@ -220,10 +244,57 @@ export function TeamView({ team, matches }: { team: TeamSummary; matches: QuizMa
         </article>
       </section>
 
+      {nextFixtures.length > 0 ? (
+        <section className="insight-section">
+          <div className="section-head">
+            <div>
+              <h2>Next up</h2>
+              <p>The model&apos;s live forecast for this club&apos;s upcoming fixtures.</p>
+            </div>
+          </div>
+          <div className="upcoming-rows">
+            {nextFixtures.map((fixture) => {
+              const confidence = describeConfidence(fixture.probabilities);
+              return (
+                <article key={fixture.matchId} className="upcoming-row" style={{ gridTemplateColumns: "8.5rem minmax(0,1.05fr) minmax(0,1.35fr)" }}>
+                  <div className="upcoming-row-time">{formatKickoff(fixture.kickoffTime)}</div>
+                  <div className="upcoming-row-teams">
+                    <div className="upcoming-row-team">
+                      <TeamCrest name={fixture.homeTeam.name} badgePath={fixture.homeTeam.badgePath} size={26} />
+                      <span>{fixture.homeTeam.shortName}</span>
+                    </div>
+                    <span className="upcoming-row-vs">vs</span>
+                    <div className="upcoming-row-team upcoming-row-team-away">
+                      <span>{fixture.awayTeam.shortName}</span>
+                      <TeamCrest name={fixture.awayTeam.name} badgePath={fixture.awayTeam.badgePath} size={26} />
+                    </div>
+                  </div>
+                  <div className="upcoming-row-bar">
+                    <ProbabilityBar
+                      probabilities={fixture.probabilities}
+                      homeShort={fixture.homeTeam.shortName}
+                      awayShort={fixture.awayTeam.shortName}
+                      size="sm"
+                    />
+                    <span className="upcoming-row-lead">
+                      Model:{" "}
+                      {confidence.pick !== null
+                        ? `${confidence.pick === "home" ? fixture.homeTeam.shortName : confidence.pick === "away" ? fixture.awayTeam.shortName : "Draw"} · ${Math.round((confidence.pick === "home" ? fixture.probabilities.homeWin : confidence.pick === "away" ? fixture.probabilities.awayWin : fixture.probabilities.draw) * 100)}%`
+                        : "Too close to call"}{" "}
+                      <ConfidenceBadge confidence={confidence} />
+                    </span>
+                  </div>
+                </article>
+              );
+            })}
+          </div>
+        </section>
+      ) : null}
+
       <TrendChart
         title="Elo trajectory"
         caption="Pre-match Elo entering each league match, in kickoff order."
-        series={[{ label: "Elo", tone: "var(--brand)", values: eloValues }]}
+        series={[{ label: "Elo", tone: "var(--brand-bright)", values: eloValues }]}
         yMin={eloMin}
         yMax={eloMax}
         formatValue={(value) => `${Math.round(value)}`}
@@ -234,7 +305,7 @@ export function TeamView({ team, matches }: { team: TeamSummary; matches: QuizMa
         caption="xG created and conceded per match."
         series={[
           { label: "xG for", tone: "var(--accent-deep)", values: xgForValues },
-          { label: "xG against", tone: "var(--signal-draw)", values: xgAgainstValues },
+          { label: "xG against", tone: "var(--prob-draw)", values: xgAgainstValues },
         ]}
         yMin={Math.max(0, xgMin)}
         yMax={xgMax}

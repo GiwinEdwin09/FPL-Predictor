@@ -1,50 +1,41 @@
 "use client";
 
-import Image from "next/image";
 import { useMemo, useState } from "react";
 
+import { ResultBadge } from "@/components/ui/badges";
+import { TeamCrest } from "@/components/ui/crest";
+import { ProbabilityBar } from "@/components/ui/probability-bar";
+import { EmptyState } from "@/components/ui/states";
 import type { HistoricalMatch } from "@/lib/dashboard";
+import { formatMatchDate, formatPercent } from "@/lib/format";
 
 type HistoryWeekViewProps = {
   matches: HistoricalMatch[];
 };
 
-function formatKickoff(kickoffTime: string | null) {
-  if (!kickoffTime) {
-    return "Date pending";
+type Verdict = "correct" | "incorrect" | "upset";
+
+/** Upset threshold: realized outcome the model gave ≤ 20% before kickoff. */
+const UPSET_PROBABILITY_THRESHOLD = 0.2;
+
+function verdictFor(match: HistoricalMatch): Verdict | null {
+  if (!match.probabilities || match.score.home === null || match.score.away === null) {
+    return null;
   }
-
-  return new Intl.DateTimeFormat("en-GB", {
-    weekday: "short",
-    day: "numeric",
-    month: "short",
-    year: "numeric",
-  }).format(new Date(kickoffTime));
-}
-
-function ClubLogo({
-  name,
-  badgePath,
-}: {
-  name: string;
-  badgePath: string | null;
-}) {
-  if (!badgePath) {
-    return <div className="history-club-mark history-club-mark-fallback">{name.slice(0, 3).toUpperCase()}</div>;
+  const { homeWin, draw, awayWin } = match.probabilities;
+  const pick = homeWin >= draw && homeWin >= awayWin ? "home" : awayWin >= homeWin && awayWin >= draw ? "away" : "draw";
+  const actual = match.score.home > match.score.away ? "home" : match.score.away > match.score.home ? "away" : "draw";
+  if (pick === actual) {
+    return "correct";
   }
-
-  return <Image src={badgePath} alt={name} width={44} height={44} className="history-club-mark-image" />;
+  const actualProbability =
+    actual === "home" ? homeWin : actual === "away" ? awayWin : draw;
+  return actualProbability <= UPSET_PROBABILITY_THRESHOLD ? "upset" : "incorrect";
 }
-
-type GroupKey = {
-  season: string;
-  gameweek: number;
-  label: string;
-};
 
 export function HistoryWeekView({ matches }: HistoryWeekViewProps) {
   const seasons = useMemo(() => Array.from(new Set(matches.map((match) => match.season))).sort().reverse(), [matches]);
-  const [season, setSeason] = useState(seasons[0] ?? "2025-2026");
+  const [season, setSeason] = useState(seasons[0] ?? "");
 
   const groups = useMemo(() => {
     const relevant = matches.filter((match) => match.season === season && match.gameweek !== null);
@@ -73,6 +64,8 @@ export function HistoryWeekView({ matches }: HistoryWeekViewProps) {
   const gameweek = gameweeks[clampedIndex];
   const selectedMatches = gameweek === undefined ? [] : groups.get(gameweek) ?? [];
 
+  const gradedCount = selectedMatches.filter((match) => verdictFor(match) !== null).length;
+
   return (
     <section className="week-panel">
       <div className="history-controls">
@@ -87,7 +80,7 @@ export function HistoryWeekView({ matches }: HistoryWeekViewProps) {
           >
             {seasons.map((value) => (
               <option key={value} value={value}>
-                {value}
+                {value.replace("-", "/")}
               </option>
             ))}
           </select>
@@ -95,11 +88,14 @@ export function HistoryWeekView({ matches }: HistoryWeekViewProps) {
       </div>
 
       {gameweek === undefined ? (
-        <p className="empty-state">No finished matchweeks are available for this season.</p>
+        <EmptyState title="No finished matchweeks for this season">
+          Choose a different season to browse graded results.
+        </EmptyState>
       ) : (
         <>
           <div className="week-panel-header">
             <button
+              type="button"
               className="week-arrow"
               onClick={() => setIndex((current) => Math.max(0, current - 1))}
               disabled={clampedIndex === 0}
@@ -108,13 +104,16 @@ export function HistoryWeekView({ matches }: HistoryWeekViewProps) {
               ←
             </button>
             <div className="week-heading">
-              <p className="eyebrow">Historical Matchweek</p>
+              <p className="eyebrow">Was the model right?</p>
               <h2>
-                {season} · Matchweek {gameweek}
+                {season.replace("-", "/")} · Matchweek {gameweek}
               </h2>
-              <p>{selectedMatches.length} finished matches</p>
+              <p>
+                {selectedMatches.length} finished matches · {gradedCount} with stored pre-match forecasts
+              </p>
             </div>
             <button
+              type="button"
               className="week-arrow"
               onClick={() => setIndex((current) => Math.min(gameweeks.length - 1, current + 1))}
               disabled={clampedIndex === gameweeks.length - 1}
@@ -125,64 +124,107 @@ export function HistoryWeekView({ matches }: HistoryWeekViewProps) {
           </div>
 
           <div className="history-week-scroll">
-            {selectedMatches.map((match) => (
-              <article key={match.matchId} className="history-card">
-                <div className="history-meta">
-                  <span>{formatKickoff(match.kickoffTime)}</span>
-                  <span>{match.homeTeam.name} vs {match.awayTeam.name}</span>
-                </div>
-                <div className="history-scoreline">
-                  <div className="history-team-line">
-                    <div className="history-team-brand">
-                      <ClubLogo name={match.homeTeam.name} badgePath={match.homeTeam.badgePath} />
-                      <strong>{match.homeTeam.name}</strong>
+            {selectedMatches.map((match) => {
+              const verdict = verdictFor(match);
+              const verdictLabel =
+                verdict === "correct"
+                  ? "Correct prediction"
+                  : verdict === "upset"
+                    ? "Upset — model missed"
+                    : "Incorrect prediction";
+
+              return (
+                <article key={match.matchId} className="history-card">
+                  <div className="history-meta">
+                    <span>MW {match.gameweek ?? "?"}</span>
+                    <span>{formatMatchDate(match.kickoffTime)}</span>
+                    {verdict ? <ResultBadge state={verdict} label={verdictLabel} /> : null}
+                  </div>
+
+                  <div className="history-scoreline">
+                    <div className="history-team-line">
+                      <div className="history-team-brand">
+                        <TeamCrest name={match.homeTeam.name} badgePath={match.homeTeam.badgePath} size={44} />
+                        <strong>{match.homeTeam.name}</strong>
+                      </div>
+                      <span>{match.score.home ?? "-"}</span>
                     </div>
-                    <span>{match.score.home ?? "-"}</span>
-                  </div>
-                  <div className="history-team-line">
-                    <div className="history-team-brand">
-                      <ClubLogo name={match.awayTeam.name} badgePath={match.awayTeam.badgePath} />
-                      <strong>{match.awayTeam.name}</strong>
+                    <div className="history-team-line">
+                      <div className="history-team-brand">
+                        <TeamCrest name={match.awayTeam.name} badgePath={match.awayTeam.badgePath} size={44} />
+                        <strong>{match.awayTeam.name}</strong>
+                      </div>
+                      <span>{match.score.away ?? "-"}</span>
                     </div>
-                    <span>{match.score.away ?? "-"}</span>
                   </div>
-                </div>
-                <div className="history-stats">
-                  <div>
-                    <span>xG</span>
-                    <strong>
-                      {match.stats.xg.home ?? "NA"} - {match.stats.xg.away ?? "NA"}
-                    </strong>
+
+                  {match.probabilities ? (
+                    <div>
+                      <span className="context-label" style={{ display: "block", marginBottom: "0.45rem" }}>
+                        Pre-match model
+                      </span>
+                      <ProbabilityBar
+                        probabilities={match.probabilities}
+                        homeShort={match.homeTeam.shortName}
+                        awayShort={match.awayTeam.shortName}
+                        size="sm"
+                      />
+                    </div>
+                  ) : null}
+
+                  <div className="history-stats">
+                    <div>
+                      <span>xG</span>
+                      <strong>
+                        {match.stats.xg.home ?? "—"} – {match.stats.xg.away ?? "—"}
+                      </strong>
+                    </div>
+                    <div>
+                      <span>Shots on target</span>
+                      <strong>
+                        {match.stats.shotsOnTarget.home ?? "—"} – {match.stats.shotsOnTarget.away ?? "—"}
+                      </strong>
+                    </div>
+                    <div>
+                      <span>Big chances</span>
+                      <strong>
+                        {match.stats.bigChances.home ?? "—"} – {match.stats.bigChances.away ?? "—"}
+                      </strong>
+                    </div>
+                    <div>
+                      <span>Possession</span>
+                      <strong>
+                        {match.stats.possession.home !== null ? `${Math.round(match.stats.possession.home)}%` : "—"} –{" "}
+                        {match.stats.possession.away !== null ? `${Math.round(match.stats.possession.away)}%` : "—"}
+                      </strong>
+                    </div>
                   </div>
-                  <div>
-                    <span>Shots on target</span>
-                    <strong>
-                      {match.stats.shotsOnTarget.home ?? "NA"} - {match.stats.shotsOnTarget.away ?? "NA"}
-                    </strong>
+
+                  <div className="history-prematch">
+                    <span>
+                      Pre-match Elo: {match.preMatch.homeElo !== null ? Math.round(match.preMatch.homeElo) : "—"} /{" "}
+                      {match.preMatch.awayElo !== null ? Math.round(match.preMatch.awayElo) : "—"}
+                    </span>
+                    {match.probabilities ? (
+                      <span>
+                        Model gave the winner{" "}
+                        {formatPercent(
+                          Math.max(
+                            match.probabilities.homeWin,
+                            match.probabilities.draw,
+                            match.probabilities.awayWin,
+                          ),
+                          1,
+                        )}{" "}
+                        before kickoff
+                      </span>
+                    ) : (
+                      <span>No stored forecast for this fixture</span>
+                    )}
                   </div>
-                  <div>
-                    <span>Big chances</span>
-                    <strong>
-                      {match.stats.bigChances.home ?? "NA"} - {match.stats.bigChances.away ?? "NA"}
-                    </strong>
-                  </div>
-                  <div>
-                    <span>Possession</span>
-                    <strong>
-                      {match.stats.possession.home ?? "NA"}% - {match.stats.possession.away ?? "NA"}%
-                    </strong>
-                  </div>
-                </div>
-                <div className="history-prematch">
-                  <span>
-                    Pre-match Elo: {match.preMatch.homeElo ?? "NA"} / {match.preMatch.awayElo ?? "NA"}
-                  </span>
-                  <span>
-                    Pre-match last 5 xG: {match.preMatch.homeLast5Xg ?? "NA"} / {match.preMatch.awayLast5Xg ?? "NA"}
-                  </span>
-                </div>
-              </article>
-            ))}
+                </article>
+              );
+            })}
           </div>
         </>
       )}

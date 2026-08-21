@@ -198,6 +198,17 @@ export function QuizGame({ candidates, daily }: { candidates: QuizMatch[]; daily
           </button>
         </div>
         <div className="quiz-scoreboard" aria-live="polite">
+          {score.played > 0 ? (
+            <span
+              className={`verdict-badge ${score.user > score.model ? "verdict-correct" : score.user < score.model ? "verdict-incorrect" : "conf-wide-open"}`}
+            >
+              {score.user > score.model
+                ? "You beat the model"
+                : score.user < score.model
+                  ? "Model leads"
+                  : "All square"}
+            </span>
+          ) : null}
           <span className="quiz-score-chip quiz-score-you">
             You <strong>{score.user}</strong>
           </span>
@@ -246,13 +257,13 @@ export function QuizGame({ candidates, daily }: { candidates: QuizMatch[]; daily
             <div className="quiz-club">
               <ClubBadge name={currentMatch.homeTeam.name} badgePath={currentMatch.homeTeam.badgePath} />
               <p className="club-name">{currentMatch.homeTeam.name}</p>
-              <p className="club-subline">Elo {currentMatch.preMatch.homeElo ?? "NA"}</p>
+              <p className="club-subline">Elo {currentMatch.preMatch.homeElo !== null ? Math.round(currentMatch.preMatch.homeElo) : "—"}</p>
             </div>
             <div className="fixture-versus">vs</div>
             <div className="quiz-club">
               <ClubBadge name={currentMatch.awayTeam.name} badgePath={currentMatch.awayTeam.badgePath} />
               <p className="club-name">{currentMatch.awayTeam.name}</p>
-              <p className="club-subline">Elo {currentMatch.preMatch.awayElo ?? "NA"}</p>
+              <p className="club-subline">Elo {currentMatch.preMatch.awayElo !== null ? Math.round(currentMatch.preMatch.awayElo) : "—"}</p>
             </div>
           </div>
 
@@ -260,7 +271,7 @@ export function QuizGame({ candidates, daily }: { candidates: QuizMatch[]; daily
             <div>
               <span className="context-label">Last 5 xG</span>
               <strong>
-                {currentMatch.preMatch.homeLast5Xg ?? "NA"} - {currentMatch.preMatch.awayLast5Xg ?? "NA"}
+                {currentMatch.preMatch.homeLast5Xg ?? "—"} – {currentMatch.preMatch.awayLast5Xg ?? "—"}
               </strong>
             </div>
           </div>
@@ -293,9 +304,9 @@ export function QuizGame({ candidates, daily }: { candidates: QuizMatch[]; daily
               <div className="probability-list quiz-model-bars">
                 {(
                   [
-                    { outcome: "home" as QuizOutcome, label: currentMatch.homeTeam.shortName, tone: "var(--signal-home)" },
-                    { outcome: "draw" as QuizOutcome, label: "Draw", tone: "var(--signal-draw)" },
-                    { outcome: "away" as QuizOutcome, label: currentMatch.awayTeam.shortName, tone: "var(--signal-away)" },
+                    { outcome: "home" as QuizOutcome, label: currentMatch.homeTeam.shortName, tone: "var(--prob-home)" },
+                    { outcome: "draw" as QuizOutcome, label: "Draw", tone: "var(--prob-draw)" },
+                    { outcome: "away" as QuizOutcome, label: currentMatch.awayTeam.shortName, tone: "var(--prob-away)" },
                   ]
                 ).map((bar) => (
                   <div

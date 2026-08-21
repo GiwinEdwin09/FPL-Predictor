@@ -57,6 +57,25 @@ export function biggestUpsets(matches: QuizMatch[], count = 8): UpsetEntry[] {
   return entries.sort((left, right) => left.probability - right.probability).slice(0, count);
 }
 
+/**
+ * Matches the model called correctly despite assigning the winning outcome a
+ * low probability — bold calls that landed.
+ */
+export function bestCalls(matches: QuizMatch[], count = 8): UpsetEntry[] {
+  const entries: UpsetEntry[] = [];
+  for (const match of matches) {
+    const outcome = resolveOutcome(match);
+    if (outcome === null || modelPick(match) !== outcome) {
+      continue;
+    }
+    entries.push({ match, outcome, probability: outcomeProbability(match, outcome) });
+  }
+  return entries
+    .sort((left, right) => left.probability - right.probability)
+    .filter((entry) => entry.probability <= 0.5)
+    .slice(0, count);
+}
+
 export type CalibrationBin = {
   label: string;
   lower: number;

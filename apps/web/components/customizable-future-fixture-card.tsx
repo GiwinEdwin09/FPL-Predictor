@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 
-import { FixtureCard } from "@/components/fixture-card";
+import { PredictionCard } from "@/components/prediction-card";
 import type { UpcomingFixture } from "@/lib/dashboard";
 import type { FixtureLineupContext, FixtureSimulation, LineupPlayer, TeamLineupContext } from "@/lib/lineup";
 
@@ -75,22 +75,6 @@ function groupedPlayers(players: LineupPlayer[]) {
   return groups;
 }
 
-function probabilitySummary(simulation: FixtureSimulation | null, fixture: UpcomingFixture) {
-  if (!simulation) {
-    return {
-      title: "Default Forecast",
-      probabilities: fixture.probabilities,
-      note: "These bars reflect the default projected lineup from the current runtime.",
-    };
-  }
-
-  return {
-    title: "Your Lineup Forecast",
-    probabilities: simulation.simulatedMatch.probabilities,
-    note: "These probabilities are recalculated live from the lineup you selected.",
-  };
-}
-
 function fetchWithTimeout(input: RequestInfo | URL, init: RequestInit, timeoutMs: number) {
   const controller = new AbortController();
   let didTimeout = false;
@@ -120,6 +104,20 @@ function timeoutMessage(kind: "lineup" | "simulation", timeoutMs: number) {
     return `Lineup loading timed out after ${seconds}s. The backend is probably reachable, but it is responding too slowly right now.`;
   }
   return `Simulation timed out after ${seconds}s. This is a good signal to check runtime latency rather than guessing whether the UI is broken.`;
+}
+
+function DeltaChip({ from, to }: { from: number; to: number }) {
+  const diffPp = Math.round((to - from) * 100);
+  if (diffPp === 0) {
+    return null;
+  }
+  const up = diffPp > 0;
+  return (
+    <span className={`delta-chip ${up ? "delta-up" : "delta-down"}`}>
+      <span aria-hidden="true">{up ? "↑" : "↓"}</span>
+      {Math.abs(diffPp)}pp
+    </span>
+  );
 }
 
 function PitchMap({
@@ -271,6 +269,7 @@ export function CustomizableFutureFixtureCard({ fixture }: CustomizableFutureFix
       return;
     }
     void ensureContextLoaded();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [context, open]);
 
   useEffect(() => {
@@ -322,9 +321,13 @@ export function CustomizableFutureFixtureCard({ fixture }: CustomizableFutureFix
     }
 
     void runSimulation();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [awaySelectedIds, context, fixture.matchId, homeSelectedIds, open]);
 
-  const summary = useMemo(() => probabilitySummary(simulation, fixture), [fixture, simulation]);
+  const activeProbabilities = useMemo(
+    () => simulation?.simulatedMatch.probabilities ?? fixture.probabilities,
+    [fixture.probabilities, simulation],
+  );
   const homePlayers = useMemo(
     () => (context ? selectedPlayers(context.home, homeSelectedIds) : []),
     [context, homeSelectedIds],
@@ -341,18 +344,22 @@ export function CustomizableFutureFixtureCard({ fixture }: CustomizableFutureFix
       : "Open the lineup tool to fetch the projected XI from the live backend.";
 
   return (
-    <FixtureCard
-      fixture={fixture}
-      probabilitiesOverride={simulation?.simulatedMatch.probabilities}
-    >
+    <PredictionCard fixture={fixture} probabilitiesOverride={activeProbabilities}>
       <div className="fixture-actions">
         <div>
-          <strong>{summary.title}</strong>
-          <p>{open ? summary.note : prefetchedSummary}</p>
+          <strong>Lineup simulator</strong>
+          <p>
+            {open
+              ? simulation
+                ? "Probabilities above are recalculated live from your selected XI."
+                : "Swap players below — the forecast updates automatically."
+              : prefetchedSummary}
+          </p>
         </div>
         <div className="fixture-action-buttons">
           {context ? (
             <button
+              type="button"
               className="lineup-reset-button"
               onClick={() => {
                 setHomeSelectedIds(context.home.lineup.map((player) => player.playerId));
@@ -368,6 +375,7 @@ export function CustomizableFutureFixtureCard({ fixture }: CustomizableFutureFix
             </button>
           ) : null}
           <button
+            type="button"
             className="lineup-toggle-button"
             onMouseEnter={() => {
               if (!hasPrefetched.current) {
@@ -389,53 +397,55 @@ export function CustomizableFutureFixtureCard({ fixture }: CustomizableFutureFix
               }
             }}
           >
-            {open ? "Hide Lineup Tool" : "Customize Lineup"}
+            {open ? "Hide Lineup Tool" : "Edit Lineup"}
           </button>
         </div>
       </div>
 
       {open ? (
         <section className="lineup-builder-shell">
-          {loadingContext ? <p className="lineup-status">Loading projected lineups. Timeout test is {LINEUP_CONTEXT_TIMEOUT_MS / 1000}s.</p> : null}
-          {simulating ? <p className="lineup-status">Updating your forecast...</p> : null}
-          {error ? <p className="lineup-error">{error}</p> : null}
-
           {loadingContext && context === null ? (
-            <div className="lineup-builder-grid">
-              <div className="lineup-column">
-                <section className="lineup-pitch-card lineup-skeleton-card">
-                  <div className="skeleton-line skeleton-line-title" />
-                  <div className="lineup-pitch lineup-pitch-skeleton">
-                    <div className="skeleton-pill-row">
-                      <span className="skeleton-pill" />
-                      <span className="skeleton-pill" />
-                      <span className="skeleton-pill" />
+            <>
+              <p className="lineup-status">Loading projected lineups…</p>
+              <div className="lineup-builder-grid">
+                <div className="lineup-column">
+                  <section className="lineup-pitch-card skeleton-card">
+                    <div className="skeleton-line skeleton-line-title" />
+                    <div className="lineup-pitch lineup-pitch-skeleton">
+                      <div className="skeleton-pill-row">
+                        <span className="skeleton-pill" />
+                        <span className="skeleton-pill" />
+                        <span className="skeleton-pill" />
+                      </div>
+                      <div className="skeleton-pill-row">
+                        <span className="skeleton-pill" />
+                        <span className="skeleton-pill" />
+                        <span className="skeleton-pill" />
+                        <span className="skeleton-pill" />
+                      </div>
+                      <div className="skeleton-pill-row">
+                        <span className="skeleton-pill" />
+                        <span className="skeleton-pill" />
+                        <span className="skeleton-pill" />
+                      </div>
                     </div>
-                    <div className="skeleton-pill-row">
-                      <span className="skeleton-pill" />
-                      <span className="skeleton-pill" />
-                      <span className="skeleton-pill" />
-                      <span className="skeleton-pill" />
-                    </div>
-                    <div className="skeleton-pill-row">
-                      <span className="skeleton-pill" />
-                      <span className="skeleton-pill" />
-                      <span className="skeleton-pill" />
-                    </div>
-                  </div>
-                </section>
+                  </section>
+                </div>
+                <div className="lineup-column">
+                  <section className="lineup-controls-card skeleton-card">
+                    <div className="skeleton-line skeleton-line-title" />
+                    <div className="skeleton-line" />
+                    <div className="skeleton-line" />
+                    <div className="skeleton-line" />
+                    <div className="skeleton-line" />
+                  </section>
+                </div>
               </div>
-              <div className="lineup-column">
-                <section className="lineup-controls-card lineup-skeleton-card">
-                  <div className="skeleton-line skeleton-line-title" />
-                  <div className="skeleton-line" />
-                  <div className="skeleton-line" />
-                  <div className="skeleton-line" />
-                  <div className="skeleton-line" />
-                </section>
-              </div>
-            </div>
+            </>
           ) : null}
+
+          {simulating ? <p className="lineup-status">Updating your forecast…</p> : null}
+          {error ? <p className="lineup-error">{error}</p> : null}
 
           {context ? (
             <>
@@ -448,25 +458,30 @@ export function CustomizableFutureFixtureCard({ fixture }: CustomizableFutureFix
                   </span>
                 </div>
                 <div className="simulation-bars">
-                  <div>
-                    <span>{fixture.homeTeam.shortName}</span>
-                    <strong>{formatPercent(summary.probabilities.homeWin)}</strong>
-                  </div>
-                  <div>
-                    <span>Draw</span>
-                    <strong>{formatPercent(summary.probabilities.draw)}</strong>
-                  </div>
-                  <div>
-                    <span>{fixture.awayTeam.shortName}</span>
-                    <strong>{formatPercent(summary.probabilities.awayWin)}</strong>
-                  </div>
+                  {(
+                    [
+                      ["HOME", fixture.homeTeam.shortName, fixture.probabilities.homeWin, activeProbabilities.homeWin],
+                      ["DRAW", "Draw", fixture.probabilities.draw, activeProbabilities.draw],
+                      ["AWAY", fixture.awayTeam.shortName, fixture.probabilities.awayWin, activeProbabilities.awayWin],
+                    ] as const
+                  ).map(([slot, label, base, next]) => (
+                    <div key={slot}>
+                      <span>
+                        {label} <DeltaChip from={base} to={next} />
+                      </span>
+                      <strong>
+                        {formatPercent(base)}
+                        {base !== next ? <span style={{ color: "var(--muted)" }}> → {formatPercent(next)}</span> : null}
+                      </strong>
+                    </div>
+                  ))}
                 </div>
                 {simulation ? (
                   <p className="simulation-adjustment-note">
-                    Attack shift: home {simulation.adjustments.homeAttackRatio ?? "NA"}x, away{" "}
-                    {simulation.adjustments.awayAttackRatio ?? "NA"}x. Defence shift: home{" "}
-                    {simulation.adjustments.homeDefenceRatio ?? "NA"}x, away{" "}
-                    {simulation.adjustments.awayDefenceRatio ?? "NA"}x.
+                    Attack shift: home {simulation.adjustments.homeAttackRatio ?? "—"}x, away{" "}
+                    {simulation.adjustments.awayAttackRatio ?? "—"}x. Defence shift: home{" "}
+                    {simulation.adjustments.homeDefenceRatio ?? "—"}x, away{" "}
+                    {simulation.adjustments.awayDefenceRatio ?? "—"}x.
                   </p>
                 ) : null}
               </div>
@@ -485,6 +500,6 @@ export function CustomizableFutureFixtureCard({ fixture }: CustomizableFutureFix
           ) : null}
         </section>
       ) : null}
-    </FixtureCard>
+    </PredictionCard>
   );
 }

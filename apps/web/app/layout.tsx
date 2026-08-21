@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter, Space_Grotesk } from "next/font/google";
 
 import { SiteFooter } from "@/components/site-footer";
@@ -25,7 +25,11 @@ const spaceGrotesk = Space_Grotesk({
 export const metadata: Metadata = {
   title: "Prem Predict — Premier League match forecasts",
   description:
-    "Matchweek-by-matchweek Premier League predictions, finished-match statistics, and pre-match context.",
+    "Machine-learned Premier League predictions: calibrated HOME / DRAW / AWAY probabilities for every fixture, model explainability, and full forecast history.",
+};
+
+export const viewport: Viewport = {
+  themeColor: "#09080f",
 };
 
 export default async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {

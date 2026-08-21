@@ -43,7 +43,7 @@ export default async function TeamPage({ params }: { params: Promise<{ slug: str
           ← All teams
         </Link>
       </nav>
-      <TeamView team={team} matches={matches} />
+      <TeamView team={team} matches={matches} upcomingFixtures={result.data.upcomingFixtures} />
     </div>
   );
 }

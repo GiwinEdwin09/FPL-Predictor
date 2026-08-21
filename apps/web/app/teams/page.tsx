@@ -15,7 +15,7 @@ export default async function TeamsPage() {
               Teams
             </span>
           </div>
-          <h1 className="page-title">Every club, under the microscope.</h1>
+          <h1 className="page-title">Pick a club. Read its numbers.</h1>
           <p className="page-lede">
             Team pages are temporarily unavailable, but the rest of the site is online and we can retry shortly.
           </p>
@@ -40,10 +40,11 @@ export default async function TeamsPage() {
             Teams
           </span>
         </div>
-        <h1 className="page-title">Every club, under the microscope.</h1>
+        <h1 className="page-title">Pick a club. Read its numbers.</h1>
         <p className="page-lede">
-          Standings from the matches the model graded, with its hit rate on each club. Pick a team to see its form,
-          Elo trajectory, expected goals, and result-by-result forecast record.
+          Every Premier League club with its season record and how often the model called its matches correctly.
+          Open a club for the full profile: form, Elo trajectory, expected goals, upcoming forecasts, and
+          result-by-result grading. Prefer the classic view? Switch to the table.
         </p>
       </header>
 

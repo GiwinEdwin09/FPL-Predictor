@@ -44,8 +44,9 @@ export default async function ComparePage() {
         </div>
         <h1 className="page-title">Head-to-head, settled by the data.</h1>
         <p className="page-lede">
-          Pick any two clubs to pull up every league meeting in the archive: the win split, goals and expected goals,
-          and how often the model read the fixture correctly.
+          Put any two clubs side by side: Elo, expected goals, defensive load and how often the model calls each
+          team&apos;s matches — then scroll into every league meeting in the archive with the model&apos;s pre-match
+          call marked hit or miss.
         </p>
       </header>
 

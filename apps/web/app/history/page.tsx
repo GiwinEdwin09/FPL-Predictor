@@ -25,7 +25,7 @@ export default async function HistoryPage() {
               History
             </span>
           </div>
-          <h1 className="page-title">Finished matches with the stats that matter most.</h1>
+          <h1 className="page-title">Was the model right?</h1>
           <p className="page-lede">
             The historical results view is temporarily unavailable, but we can try again once the backend responds.
           </p>
@@ -52,10 +52,10 @@ export default async function HistoryPage() {
           </span>
           <span className="page-eyebrow page-eyebrow-light">{seasons.length} season{seasons.length === 1 ? "" : "s"}</span>
         </div>
-        <h1 className="page-title">Finished matches with the stats that matter most.</h1>
+        <h1 className="page-title">Was the model right?</h1>
         <p className="page-lede">
-          Step through completed matchweeks and compare scorelines with xG, shots on target, big chances, possession,
-          and pre-match context.
+          Every finished match graded against its stored pre-match forecast — correct calls, misses, and outright
+          upsets, with the xG, shots and possession behind each result.
         </p>
         <div className="page-meta-row">
           <span>

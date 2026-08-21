@@ -1,8 +1,14 @@
-import { InsightsBrowser } from "@/components/insights-browser";
+import { ModelLabBrowser } from "@/components/model-lab-browser";
+import { ErrorState } from "@/components/ui/states";
 import { loadDashboardResult } from "@/lib/dashboard";
 import { pickQuizCandidates } from "@/lib/quiz";
 
-export default async function InsightsPage() {
+export const metadata = {
+  title: "Model Lab — Prem Predict",
+  description: "How good is the Prem Predict model? Accuracy, calibration, upsets and best calls.",
+};
+
+export default async function ModelLabPage() {
   const result = await loadDashboardResult();
 
   if (!result.ok) {
@@ -12,19 +18,16 @@ export default async function InsightsPage() {
           <div className="page-head-row">
             <span className="page-eyebrow">
               <span className="page-eyebrow-dot" aria-hidden="true" />
-              Insights
+              Model Lab
             </span>
           </div>
-          <h1 className="page-title">The model&apos;s report card.</h1>
+          <h1 className="page-title">How good is the model?</h1>
           <p className="page-lede">
-            Insights are temporarily unavailable, but the rest of the site is online and we can retry shortly.
+            The model evaluation view is temporarily unavailable, but the rest of the site is online.
           </p>
         </header>
 
-        <section className="page-state-card page-state-error" role="alert">
-          <h2>Unable to load insights</h2>
-          <p>{result.errorMessage}</p>
-        </section>
+        <ErrorState title="Unable to load model metrics">{result.errorMessage}</ErrorState>
       </div>
     );
   }
@@ -46,18 +49,18 @@ export default async function InsightsPage() {
         <div className="page-head-row">
           <span className="page-eyebrow">
             <span className="page-eyebrow-dot" aria-hidden="true" />
-            Insights
+            Model Lab
           </span>
+          <span className="page-eyebrow page-eyebrow-light">{dashboard.model.version}</span>
         </div>
-        <h1 className="page-title">The model&apos;s report card.</h1>
+        <h1 className="page-title">How good is the model?</h1>
         <p className="page-lede">
-          Explore the model&apos;s 2025–2026 results, hit rate, biggest surprises, and calibration. The model launched
-          during the season, so earlier matchweeks are identified as retrospective replays rather than published
-          forecasts.
+          Every forecast is graded against what actually happened. See the hit rate, whether the model beats simply
+          picking home wins, how well its confidence tracks reality, and its biggest misses and boldest correct calls.
         </p>
       </header>
 
-      <InsightsBrowser matches={matches} model={model} />
+      <ModelLabBrowser matches={matches} model={model} />
     </div>
   );
 }
