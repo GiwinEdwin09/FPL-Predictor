@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react";
 
 import { CustomizableFutureFixtureCard } from "@/components/customizable-future-fixture-card";
+import { EmptyState } from "@/components/ui/states";
 import type { UpcomingFixture } from "@/lib/dashboard";
 
 type FixturesWeekViewProps = {
@@ -56,7 +57,11 @@ export function FixturesWeekView({ fixtures }: FixturesWeekViewProps) {
   const [index, setIndex] = useState(0);
 
   if (gameweeks.length === 0) {
-    return <p className="empty-state">No upcoming fixtures are available.</p>;
+    return (
+      <EmptyState title="No upcoming fixtures available">
+        The schedule has not been published for future matchweeks yet. Check back once the next round is confirmed.
+      </EmptyState>
+    );
   }
 
   const gameweek = gameweeks[Math.min(index, gameweeks.length - 1)];

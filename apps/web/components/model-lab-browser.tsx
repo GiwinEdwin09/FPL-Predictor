@@ -3,11 +3,14 @@
 import Image from "next/image";
 import { useMemo } from "react";
 
+import { TeamCrest } from "@/components/ui/crest";
+import { MetricTile } from "@/components/ui/metric-tile";
 import type { QuizMatch } from "@/lib/quiz";
-import { resolveOutcome } from "@/lib/quiz";
+import { modelPick, resolveOutcome } from "@/lib/quiz";
 import {
   accuracyByGameweek,
   biggestUpsets,
+  bestCalls,
   calibrationBins,
   summarizeModel,
   type CalibrationBin,
@@ -23,9 +26,6 @@ type ModelMeta = {
   validationRows: number | null;
 };
 
-const INSIGHTS_SEASON = "2025-2026";
-const INSIGHTS_SEASON_LABEL = "2025–2026";
-
 function formatPercent(value: number, digits = 0) {
   return `${(value * 100).toFixed(digits)}%`;
 }
@@ -37,13 +37,6 @@ function formatDate(kickoffTime: string | null) {
   return new Intl.DateTimeFormat("en-GB", { day: "numeric", month: "short", year: "numeric" }).format(
     new Date(kickoffTime),
   );
-}
-
-function ClubBadge({ name, badgePath }: { name: string; badgePath: string | null }) {
-  if (!badgePath) {
-    return <span className="upset-badge upset-badge-fallback">{name.slice(0, 3).toUpperCase()}</span>;
-  }
-  return <Image src={badgePath} alt={name} width={30} height={30} className="upset-badge-image" />;
 }
 
 function GameweekAccuracyChart({ rows }: { rows: GameweekAccuracy[] }) {
@@ -89,8 +82,8 @@ function GameweekAccuracyChart({ rows }: { rows: GameweekAccuracy[] }) {
         })}
       </svg>
       <p className="chart-caption">
-        Bars show the share of matches the model called correctly each matchweek. The line marks the season average of{" "}
-        {formatPercent(overall)}.
+        Each bar is the share of matches called correctly in that matchweek. The dashed line marks the season average
+        of {formatPercent(overall)}.
       </p>
     </div>
   );
@@ -150,65 +143,139 @@ function CalibrationChart({ bins }: { bins: CalibrationBin[] }) {
         </text>
       </svg>
       <p className="chart-caption">
-        Each dot bins forecasts by predicted probability (all three outcomes per match). Dots on the dashed line mean
-        the model&apos;s confidence matches reality; dot size tracks sample count.
+        Every forecast across the season is binned by predicted probability (all three outcomes per match). Dots
+        sitting on the dashed diagonal mean the model&apos;s confidence matches reality; dot size tracks sample count.
       </p>
     </div>
   );
 }
 
-export function InsightsBrowser({ matches, model }: { matches: QuizMatch[]; model: ModelMeta }) {
-  const seasonMatches = useMemo(() => matches.filter((match) => match.season === INSIGHTS_SEASON), [matches]);
+type UpsetLike = {
+  match: QuizMatch;
+  outcome: "home" | "draw" | "away";
+  probability: number;
+};
+
+function OutcomeRow({ entry, hit }: { entry: UpsetLike; hit: boolean }) {
+  const outcomeText =
+    entry.outcome === "draw"
+      ? "a draw"
+      : entry.outcome === "home"
+        ? `${entry.match.homeTeam.shortName} win`
+        : `${entry.match.awayTeam.shortName} win`;
+  return (
+    <li className={`upset-row${hit ? " hit-row" : ""}`}>
+      <span className="upset-rank" aria-hidden="true" />
+      <div className="upset-fixture">
+        <span className="upset-team">
+          <TeamCrest name={entry.match.homeTeam.name} badgePath={entry.match.homeTeam.badgePath} size={30} />
+          {entry.match.homeTeam.shortName}
+        </span>
+        <strong className="upset-score">
+          {entry.match.score.home} – {entry.match.score.away}
+        </strong>
+        <span className="upset-team">
+          <TeamCrest name={entry.match.awayTeam.name} badgePath={entry.match.awayTeam.badgePath} size={30} />
+          {entry.match.awayTeam.shortName}
+        </span>
+      </div>
+      <div className="upset-detail">
+        <span>
+          MW {entry.match.gameweek ?? "—"} · {formatDate(entry.match.kickoffTime)}
+        </span>
+        <span>
+          {hit ? "Called at just " : "Gave "}
+          {outcomeText} <strong>{formatPercent(entry.probability, 1)}</strong> · {hit ? "and it landed" : "it happened"}
+        </span>
+      </div>
+    </li>
+  );
+}
+
+export function ModelLabBrowser({ matches, model }: { matches: QuizMatch[]; model: ModelMeta }) {
+  const seasons = useMemo(
+    () => Array.from(new Set(matches.map((match) => match.season))).sort().reverse(),
+    [matches],
+  );
+  // Evaluate on the most recent fully-graded season available in the data.
+  const season = seasons[0] ?? "";
+  const seasonMatches = useMemo(() => matches.filter((match) => match.season === season), [matches, season]);
+
   const summary = useMemo(() => summarizeModel(seasonMatches), [seasonMatches]);
   const gameweekRows = useMemo(() => accuracyByGameweek(seasonMatches), [seasonMatches]);
-  const upsets = useMemo(() => biggestUpsets(seasonMatches), [seasonMatches]);
+  const upsets = useMemo(() => biggestUpsets(seasonMatches, 6), [seasonMatches]);
+  const calls = useMemo(() => bestCalls(seasonMatches, 6), [seasonMatches]);
   const bins = useMemo(() => calibrationBins(seasonMatches), [seasonMatches]);
+
+  const improvementPp =
+    summary.total > 0 ? (summary.accuracy - summary.homeBaseline) * 100 : null;
+
+  if (summary.total === 0) {
+    return (
+      <p className="empty-state">
+        No finished matches with pre-match forecasts are available yet, so the model cannot be graded.
+      </p>
+    );
+  }
 
   return (
     <div className="insights-stack">
-      <section className="insights-season-context" aria-label="Insights season coverage">
-        <div className="insights-season-heading">
-          <span>Season coverage</span>
-          <strong>{INSIGHTS_SEASON_LABEL}</strong>
+      <section className="lab-season-banner" aria-label="Evaluation coverage">
+        <div className="lab-season-heading">
+          <span>Evaluation window</span>
+          <strong>{season.replace("-", "/")}</strong>
         </div>
         <p>
-          <strong>Mid-season launch.</strong> This model was created during the 2025–2026 season, not before
-          Matchweek 1. Earlier matchweeks are retrospective replays and were not predictions published at the time.
+          Grading covers every finished {season.replace("-", "/")} Premier League match with a stored pre-match
+          forecast ({summary.total} matches).{" "}
+          <strong>Honest out-of-sample numbers</strong> — earlier matchweeks are retrospective replays, not picks
+          published at kickoff time.
         </p>
       </section>
 
-      <section className="stat-strip" aria-label="Model at a glance">
-        <article className="stat-tile">
-          <div className="stat-tile-label">Match accuracy</div>
-          <div className="stat-tile-value">{formatPercent(summary.accuracy, 1)}</div>
-          <div className="stat-tile-hint">
-            {summary.correct} of {summary.total} finished matches
+      <section className="stat-strip" aria-label="Headline metrics">
+        <MetricTile
+          label="Match accuracy"
+          value={<span className="accented">{formatPercent(summary.accuracy, 1)}</span>}
+          hint={`${summary.correct} of ${summary.total} finished matches called correctly`}
+        />
+        <MetricTile
+          label="Home-team baseline"
+          value={formatPercent(summary.homeBaseline, 1)}
+          hint="What picking the home side every week would score"
+        />
+        <MetricTile
+          label="Model improvement"
+          value={`${improvementPp !== null && improvementPp >= 0 ? "+" : ""}${improvementPp?.toFixed(1) ?? "—"} pp`}
+          hint="Accuracy gained over always picking home wins"
+        />
+        <MetricTile
+          label="Log loss"
+          value={model.logLoss?.toFixed(3) ?? "—"}
+          hint={
+            <>
+              Probability quality on held-out validation — lower is better. Brier {model.brier?.toFixed(3) ?? "—"}.{" "}
+              {model.validationRows ?? "—"} matches held out.
+            </>
+          }
+        />
+      </section>
+
+      <section className="insight-section">
+        <div className="section-head">
+          <div>
+            <h2>Can you trust a 70% prediction?</h2>
+            <p>Calibration checks whether the model&apos;s confidence matches what actually happens.</p>
           </div>
-        </article>
-        <article className="stat-tile">
-          <div className="stat-tile-label">Always-home baseline</div>
-          <div className="stat-tile-value">{formatPercent(summary.homeBaseline, 1)}</div>
-          <div className="stat-tile-hint">What picking the home side every time would score</div>
-        </article>
-        <article className="stat-tile">
-          <div className="stat-tile-label">Validation log loss</div>
-          <div className="stat-tile-value">{model.logLoss?.toFixed(3) ?? "—"}</div>
-          <div className="stat-tile-hint">
-            Held-out window · Brier {model.brier?.toFixed(3) ?? "—"} · temp {model.temperature?.toFixed(2) ?? "—"}
-          </div>
-        </article>
-        <article className="stat-tile">
-          <div className="stat-tile-label">Training rows</div>
-          <div className="stat-tile-value">{model.trainRows ?? "—"}</div>
-          <div className="stat-tile-hint">{model.validationRows ?? "—"} held out for validation</div>
-        </article>
+        </div>
+        <CalibrationChart bins={bins} />
       </section>
 
       <section className="insight-section">
         <div className="section-head">
           <div>
             <h2>Accuracy by matchweek</h2>
-            <p>How the model&apos;s hit rate moved across the {INSIGHTS_SEASON_LABEL} season.</p>
+            <p>How the hit rate moved across the {season.replace("-", "/")} season.</p>
           </div>
         </div>
         <GameweekAccuracyChart rows={gameweekRows} />
@@ -222,52 +289,27 @@ export function InsightsBrowser({ matches, model }: { matches: QuizMatch[]; mode
           </div>
         </div>
         <ol className="upset-list">
-          {upsets.map((upset) => {
-            const outcomeText =
-              upset.outcome === "draw"
-                ? "a draw"
-                : upset.outcome === "home"
-                  ? `${upset.match.homeTeam.shortName} win`
-                  : `${upset.match.awayTeam.shortName} win`;
-            return (
-              <li key={upset.match.matchId} className="upset-row">
-                <span className="upset-rank" aria-hidden="true" />
-                <div className="upset-fixture">
-                  <span className="upset-team">
-                    <ClubBadge name={upset.match.homeTeam.name} badgePath={upset.match.homeTeam.badgePath} />
-                    {upset.match.homeTeam.shortName}
-                  </span>
-                  <strong className="upset-score">
-                    {upset.match.score.home} - {upset.match.score.away}
-                  </strong>
-                  <span className="upset-team">
-                    <ClubBadge name={upset.match.awayTeam.name} badgePath={upset.match.awayTeam.badgePath} />
-                    {upset.match.awayTeam.shortName}
-                  </span>
-                </div>
-                <div className="upset-detail">
-                  <span>
-                    MW {upset.match.gameweek ?? "—"} · {formatDate(upset.match.kickoffTime)}
-                  </span>
-                  <span>
-                    Model gave {outcomeText} just <strong>{formatPercent(upset.probability, 1)}</strong>
-                  </span>
-                </div>
-              </li>
-            );
-          })}
+          {upsets.map((upset) => (
+            <OutcomeRow key={`upset-${upset.match.matchId}`} entry={upset} hit={false} />
+          ))}
         </ol>
       </section>
 
-      <section className="insight-section">
-        <div className="section-head">
-          <div>
-            <h2>Calibration</h2>
-            <p>When the model says 70%, does it happen 70% of the time?</p>
+      {calls.length > 0 ? (
+        <section className="insight-section">
+          <div className="section-head">
+            <div>
+              <h2>Best calls</h2>
+              <p>Bold predictions the model got right against the odds.</p>
+            </div>
           </div>
-        </div>
-        <CalibrationChart bins={bins} />
-      </section>
+          <ol className="upset-list">
+            {calls.map((call) => (
+              <OutcomeRow key={`call-${call.match.matchId}`} entry={call} hit={true} />
+            ))}
+          </ol>
+        </section>
+      ) : null}
     </div>
   );
 }

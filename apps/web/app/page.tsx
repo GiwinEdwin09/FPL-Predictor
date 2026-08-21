@@ -1,137 +1,18 @@
-import Image from "next/image";
 import Link from "next/link";
 
-import { loadDashboardResult, type UpcomingFixture } from "@/lib/dashboard";
+import { CompactFixture } from "@/components/compact-fixture";
+import { FeaturedMatch } from "@/components/featured-match";
+import { TeamCrest } from "@/components/ui/crest";
+import { MetricTile } from "@/components/ui/metric-tile";
+import { ErrorState } from "@/components/ui/states";
+import { loadDashboardResult } from "@/lib/dashboard";
+import { formatMatchDate, formatPercent } from "@/lib/format";
+import { biggestUpsets } from "@/lib/insights";
 import { fixturesForGameweek, summarizeGameweek } from "@/lib/gameweek";
+import { pickQuizCandidates } from "@/lib/quiz";
 
 const TOTAL_GAMEWEEKS = 38;
-
-function formatPercent(value: number) {
-  return `${Math.round(value * 100)}%`;
-}
-
-function formatKickoffShort(kickoffTime: string | null) {
-  if (!kickoffTime) {
-    return "TBC";
-  }
-  return new Intl.DateTimeFormat("en-GB", {
-    weekday: "short",
-    day: "numeric",
-    month: "short",
-    hour: "2-digit",
-    minute: "2-digit",
-    timeZone: "UTC",
-  }).format(new Date(kickoffTime));
-}
-
-function TeamBadge({ name, badgePath, size = 28 }: { name: string; badgePath: string | null; size?: number }) {
-  if (!badgePath) {
-    return (
-      <div
-        className="club-mark-fallback"
-        style={{ width: size, height: size, borderRadius: 8, fontSize: 10 }}
-      >
-        {name.slice(0, 3).toUpperCase()}
-      </div>
-    );
-  }
-  return <Image src={badgePath} alt={name} width={size} height={size} className="club-mark-image" style={{ width: size, height: size, filter: "none" }} />;
-}
-
-function HeroFixturePreview({ fixture }: { fixture: UpcomingFixture }) {
-  const total = fixture.probabilities.homeWin + fixture.probabilities.draw + fixture.probabilities.awayWin || 1;
-  const homeFrac = fixture.probabilities.homeWin / total;
-  const drawFrac = fixture.probabilities.draw / total;
-  const awayFrac = fixture.probabilities.awayWin / total;
-  const favored = homeFrac >= awayFrac && homeFrac >= drawFrac
-    ? `${fixture.homeTeam.shortName} favored`
-    : awayFrac >= homeFrac && awayFrac >= drawFrac
-      ? `${fixture.awayTeam.shortName} favored`
-      : "Even matchup";
-
-  return (
-    <div className="hero-aside">
-      <div className="hero-aside-label">
-        <span>Spotlight fixture</span>
-        <span className="accent-pill">MW {fixture.gameweek ?? "?"}</span>
-      </div>
-      <div className="hero-fixture-row">
-        <div className="hero-fixture-team">
-          <TeamBadge name={fixture.homeTeam.name} badgePath={fixture.homeTeam.badgePath} size={36} />
-          <span className="hero-fixture-name">{fixture.homeTeam.shortName}</span>
-        </div>
-        <div className="hero-fixture-vs">VS</div>
-        <div className="hero-fixture-team hero-fixture-team-away">
-          <span className="hero-fixture-name">{fixture.awayTeam.shortName}</span>
-          <TeamBadge name={fixture.awayTeam.name} badgePath={fixture.awayTeam.badgePath} size={36} />
-        </div>
-      </div>
-      <div className="hero-aside-meta">
-        <span>{formatKickoffShort(fixture.kickoffTime)}</span>
-        <span>{favored}</span>
-      </div>
-      <div
-        className="hero-prob-bar"
-        style={{
-          ["--home-frac" as string]: `${homeFrac}fr`,
-          ["--draw-frac" as string]: `${drawFrac}fr`,
-          ["--away-frac" as string]: `${awayFrac}fr`,
-        }}
-      >
-        <span aria-label={`Home win ${formatPercent(homeFrac)}`} />
-        <span aria-label={`Draw ${formatPercent(drawFrac)}`} />
-        <span aria-label={`Away win ${formatPercent(awayFrac)}`} />
-      </div>
-      <div className="hero-prob-legend">
-        <span>{fixture.homeTeam.shortName} {formatPercent(homeFrac)}</span>
-        <span>Draw {formatPercent(drawFrac)}</span>
-        <span>{fixture.awayTeam.shortName} {formatPercent(awayFrac)}</span>
-      </div>
-    </div>
-  );
-}
-
-function UpcomingFixtureRow({ fixture }: { fixture: UpcomingFixture }) {
-  const probs = fixture.probabilities;
-  const total = probs.homeWin + probs.draw + probs.awayWin || 1;
-  const homePct = (probs.homeWin / total) * 100;
-  const drawPct = (probs.draw / total) * 100;
-  const awayPct = (probs.awayWin / total) * 100;
-
-  let leadLabel: string;
-  if (homePct >= drawPct && homePct >= awayPct) {
-    leadLabel = `H favored (${Math.round(homePct)}%)`;
-  } else if (awayPct >= drawPct && awayPct >= homePct) {
-    leadLabel = `A favored (${Math.round(awayPct)}%)`;
-  } else {
-    leadLabel = "Tight";
-  }
-
-  return (
-    <article className="upcoming-row">
-      <div className="upcoming-row-time">{formatKickoffShort(fixture.kickoffTime)}</div>
-      <div className="upcoming-row-teams">
-        <div className="upcoming-row-team">
-          <TeamBadge name={fixture.homeTeam.name} badgePath={fixture.homeTeam.badgePath} size={26} />
-          <span>{fixture.homeTeam.shortName}</span>
-        </div>
-        <span className="upcoming-row-vs">vs</span>
-        <div className="upcoming-row-team upcoming-row-team-away">
-          <span>{fixture.awayTeam.shortName}</span>
-          <TeamBadge name={fixture.awayTeam.name} badgePath={fixture.awayTeam.badgePath} size={26} />
-        </div>
-      </div>
-      <div className="upcoming-row-bar" aria-label={leadLabel}>
-        <div className="upcoming-row-bar-track">
-          <div className="upcoming-row-bar-home" style={{ width: `${homePct}%` }} />
-          <div className="upcoming-row-bar-draw" style={{ width: `${drawPct}%` }} />
-          <div className="upcoming-row-bar-away" style={{ width: `${awayPct}%` }} />
-        </div>
-        <span className="upcoming-row-lead">{leadLabel}</span>
-      </div>
-    </article>
-  );
-}
+const PREVIEW_FIXTURE_COUNT = 5;
 
 export default async function HomePage() {
   const result = await loadDashboardResult();
@@ -147,28 +28,27 @@ export default async function HomePage() {
                 Premier League Forecasts
               </span>
               <h1>
-                Predict. Analyse. <span className="accent">Read the game.</span>
+                Predict the <span className="accent">Weekend.</span>
               </h1>
               <p>
-                Calibrated home, draw and away win probabilities for every Premier League fixture, plus the
-                stats behind every finished match. Live data is unavailable right now — try again shortly.
+                Calibrated HOME / DRAW / AWAY probabilities for every Premier League fixture, built on Elo ratings,
+                expected goals and match context. Live data is unavailable right now — try again shortly.
               </p>
               <div className="hero-cta-row">
                 <Link href="/predictions" className="cta-primary">
-                  Try predictions
+                  View Predictions
                 </Link>
-                <Link href="/history" className="cta-secondary">
-                  Browse history
+                <Link href="/model-lab" className="cta-secondary">
+                  How good is the model?
                 </Link>
               </div>
             </div>
           </div>
         </section>
 
-        <section className="page-state-card page-state-error" role="alert" style={{ marginTop: "1.5rem" }}>
-          <h2>Live data is unavailable</h2>
-          <p>{result.errorMessage}</p>
-        </section>
+        <div style={{ marginTop: "1.5rem" }}>
+          <ErrorState title="Live data is unavailable">{result.errorMessage}</ErrorState>
+        </div>
       </div>
     );
   }
@@ -181,30 +61,39 @@ export default async function HomePage() {
     const right = b.kickoffTime ?? "9999";
     return left.localeCompare(right);
   });
-  const previewFixtures = sortedFocus.slice(0, 3);
-  const spotlightFixture = previewFixtures[0] ?? null;
+  const previewFixtures = sortedFocus.slice(0, PREVIEW_FIXTURE_COUNT);
+  const spotlightFixture = sortedFocus[0] ?? null;
 
-  const allUpcomingGameweeks = new Set<number>();
-  for (const fixture of dashboard.upcomingFixtures) {
-    if (fixture.gameweek !== null) allUpcomingGameweeks.add(fixture.gameweek);
-  }
   const remainingGameweeks =
     summary.gameweek !== null
       ? Math.max(0, TOTAL_GAMEWEEKS - summary.gameweek + (summary.status === "live" ? 0 : 1))
       : 0;
 
   const matchesAnalysed = dashboard.historicalMatches.length;
-  const accuracyPct = Math.round((dashboard.model.metrics.accuracy ?? 0) * 100);
+  const accuracyPct = formatPercent(dashboard.model.metrics.accuracy ?? 0, 1);
+
+  // Historical insight: the single biggest shock from the archive.
+  const gradedMatches = pickQuizCandidates(dashboard.historicalMatches);
+  const latestSeason = gradedMatches.reduce<string | null>(
+    (latest, match) => (latest === null || match.season > latest ? match.season : latest),
+    null,
+  );
+  const seasonUpsets = biggestUpsets(
+    gradedMatches.filter((match) => match.season === latestSeason),
+    1,
+  );
+  const headlineShock = seasonUpsets[0] ?? null;
 
   const heroEyebrow =
     summary.status === "live"
-      ? `Live · MW ${summary.gameweek}`
+      ? `Live · Matchweek ${summary.gameweek}`
       : summary.status === "upcoming"
-        ? `Next up · MW ${summary.gameweek}`
-        : `Premier League ${dashboard.currentSeason}`;
+        ? `Next up · Matchweek ${summary.gameweek}`
+        : `Premier League ${dashboard.currentSeason.replace("-", "/")}`;
 
   return (
     <div className="page-shell">
+      {/* Hero */}
       <section className="hero">
         <div className="hero-inner">
           <div>
@@ -213,114 +102,165 @@ export default async function HomePage() {
               {heroEyebrow}
             </span>
             <h1>
-              Predict. Analyse. <span className="accent">Read the game.</span>
+              Predict the <span className="accent">Weekend.</span>
             </h1>
             <p>
-              Calibrated home, draw and away win probabilities for every Premier League fixture in{" "}
-              {dashboard.currentSeason.replace("-", "/")}, paired with the stats that explain finished matches.
+              Machine-learned forecasts for every Premier League fixture — calibrated HOME / DRAW / AWAY
+              probabilities built from Elo ratings, expected goals, recent form and lineups.
             </p>
             <div className="hero-cta-row">
               <Link href="/predictions" className="cta-primary">
-                <ArrowRightIcon />
-                {summary.status === "live"
-                  ? `Open MW ${summary.gameweek} predictions`
-                  : summary.gameweek
-                    ? `Preview MW ${summary.gameweek} predictions`
-                    : "Open predictions"}
+                View Predictions
+                <svg className="cta-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                  <path d="M5 12H19" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+                  <path d="M13 6L19 12L13 18" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
               </Link>
-              <Link href="/history" className="cta-secondary">
-                <HistoryIcon />
-                Browse match history
+              <Link href="/model-lab" className="cta-secondary">
+                Model Lab
               </Link>
             </div>
           </div>
-          {spotlightFixture ? <HeroFixturePreview fixture={spotlightFixture} /> : null}
+
+          <aside aria-label="Why trust these predictions">
+            <div style={{ display: "grid", gap: "0.7rem", justifyItems: "start" }}>
+              {[
+                ["Elo", "Every club carries a live strength rating updated after each match."],
+                ["xG & xGA", "Rolling five-match attack and defensive quality, kickoff-aware."],
+                ["Calibration", "When the model says 70%, it happens about 70% of the time."],
+                ["Lineups", "Swap players in any fixture and watch the forecast respond."],
+              ].map(([term, description]) => (
+                <div key={term} style={{ display: "flex", gap: "0.75rem", alignItems: "baseline" }}>
+                  <span
+                    style={{
+                      flexShrink: 0,
+                      fontSize: "0.68rem",
+                      fontWeight: 800,
+                      letterSpacing: "0.12em",
+                      textTransform: "uppercase",
+                      color: "var(--accent)",
+                      minWidth: "4.5rem",
+                    }}
+                  >
+                    {term}
+                  </span>
+                  <span style={{ fontSize: "0.86rem", color: "rgba(255,255,255,0.72)", lineHeight: 1.5 }}>
+                    {description}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </aside>
         </div>
       </section>
 
+      {/* Match of the Week */}
+      {spotlightFixture ? <FeaturedMatch fixture={spotlightFixture} /> : null}
+
+      {/* Season at a glance */}
       <section className="stat-strip" aria-label="Season at a glance">
-        <article className="stat-tile">
-          <div className="stat-tile-label">Matchweek</div>
-          <div className="stat-tile-value">{summary.gameweek ?? "—"}</div>
-          <div className="stat-tile-hint">
-            {summary.status === "live"
+        <MetricTile
+          label={summary.status === "live" ? "Live matchweek" : "Current matchweek"}
+          value={summary.gameweek ?? "—"}
+          hint={
+            summary.status === "live"
               ? "Round in progress"
               : summary.status === "upcoming"
                 ? "Up next"
-                : "Season complete"}
-          </div>
-        </article>
-        <article className="stat-tile">
-          <div className="stat-tile-label">Fixtures this week</div>
-          <div className="stat-tile-value">{summary.fixtureCount}</div>
-          <div className="stat-tile-hint">
-            {summary.status === "live"
-              ? "Round in progress"
-              : summary.status === "upcoming"
-                ? "Upcoming Premier League fixtures"
-                : "Schedule still being confirmed"}
-          </div>
-        </article>
-        <article className="stat-tile">
-          <div className="stat-tile-label">Matchweeks left</div>
-          <div className="stat-tile-value">{remainingGameweeks}</div>
-          <div className="stat-tile-hint">{TOTAL_GAMEWEEKS} total in a Premier League season</div>
-        </article>
-        <article className="stat-tile">
-          <div className="stat-tile-label">Matches analysed</div>
-          <div className="stat-tile-value">{matchesAnalysed.toLocaleString("en-GB")}</div>
-          <div className="stat-tile-hint">Model accuracy {accuracyPct}% (calibrated)</div>
-        </article>
+                : "Season complete"
+          }
+        />
+        <MetricTile
+          label="Fixtures this round"
+          value={summary.fixtureCount}
+          hint={`${remainingGameweeks} matchweek${remainingGameweeks === 1 ? "" : "s"} left of ${TOTAL_GAMEWEEKS}`}
+        />
+        <MetricTile
+          label="Match accuracy"
+          value={accuracyPct}
+          hint={`Across ${dashboard.model.split.validation_rows ?? "—"} held-out matches`}
+        />
+        <MetricTile
+          label="Matches analysed"
+          value={matchesAnalysed.toLocaleString("en-GB")}
+          hint="Finished matches with full pre-match context"
+        />
       </section>
 
+      {/* Matchweek preview */}
       {previewFixtures.length > 0 ? (
         <section className="section">
           <div className="section-head">
             <div>
-              <h2>
-                Upcoming · MW {summary.gameweek}
-              </h2>
+              <h2>{summary.status === "live" ? "Live now" : "Coming up"} · MW {summary.gameweek}</h2>
               <p>
-                {previewFixtures.length} of {summary.fixtureCount} fixtures shown — open predictions for the full
-                round and customise lineups.
+                {previewFixtures.length} of {summary.fixtureCount} fixtures shown — every card shows the model&apos;s
+                pick and how confident it is.
               </p>
             </div>
             <Link href="/predictions" className="section-link">
-              View all
-              <ArrowRightIcon />
+              View all predictions
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M5 12H19" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+                <path d="M13 6L19 12L13 18" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
             </Link>
           </div>
           <div className="upcoming-rows">
             {previewFixtures.map((fixture) => (
-              <UpcomingFixtureRow key={fixture.matchId} fixture={fixture} />
+              <CompactFixture key={fixture.matchId} fixture={fixture} />
             ))}
           </div>
         </section>
       ) : null}
+
+      {/* Historical insight teaser */}
+      {headlineShock ? (
+        <section className="section">
+          <div className="section-head">
+            <div>
+              <h2>From the archive · {latestSeason?.replace("-", "/")}</h2>
+              <p>The result the model rated least likely — and how often it gets calls like this right.</p>
+            </div>
+            <Link href="/model-lab" className="section-link">
+              Open Model Lab
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M5 12H19" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+                <path d="M13 6L19 12L13 18" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </Link>
+          </div>
+          <Link
+            href="/model-lab"
+            className="upset-row"
+            style={{ display: "grid", cursor: "pointer" }}
+            aria-label={`Open model lab: ${headlineShock.match.homeTeam.name} ${headlineShock.match.score.home}-${headlineShock.match.score.away} ${headlineShock.match.awayTeam.name}`}
+          >
+            <span className="upset-rank" aria-hidden="true" />
+            <div className="upset-fixture">
+              <span className="upset-team">
+                <TeamCrest name={headlineShock.match.homeTeam.name} badgePath={headlineShock.match.homeTeam.badgePath} size={30} />
+                {headlineShock.match.homeTeam.shortName}
+              </span>
+              <strong className="upset-score">
+                {headlineShock.match.score.home} – {headlineShock.match.score.away}
+              </strong>
+              <span className="upset-team">
+                <TeamCrest name={headlineShock.match.awayTeam.name} badgePath={headlineShock.match.awayTeam.badgePath} size={30} />
+                {headlineShock.match.awayTeam.shortName}
+              </span>
+            </div>
+            <div className="upset-detail">
+              <span>
+                MW {headlineShock.match.gameweek ?? "—"} · {formatMatchDate(headlineShock.match.kickoffTime)}
+              </span>
+              <span>
+                Model gave the winner just <strong>{formatPercent(headlineShock.probability, 1)}</strong>
+              </span>
+            </div>
+          </Link>
+        </section>
+      ) : null}
     </div>
-  );
-}
-
-function ArrowRightIcon() {
-  return (
-    <svg className="cta-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <path d="M5 12H19" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
-      <path d="M13 6L19 12L13 18" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  );
-}
-
-function HistoryIcon() {
-  return (
-    <svg className="cta-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <path
-        d="M3 12C3 7.03 7.03 3 12 3C16.97 3 21 7.03 21 12C21 16.97 16.97 21 12 21"
-        stroke="currentColor"
-        strokeWidth="1.8"
-        strokeLinecap="round"
-      />
-      <path d="M3 12L6 9M3 12L6 15" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-      <path d="M12 7V12L15 14" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
   );
 }

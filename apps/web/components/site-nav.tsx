@@ -2,23 +2,20 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 
 import type { GameweekSummary } from "@/lib/gameweek";
 
 const links = [
-  { href: "/", label: "Home" },
   { href: "/predictions", label: "Predictions" },
-  { href: "/quiz", label: "Quiz" },
-  { href: "/insights", label: "Insights" },
   { href: "/teams", label: "Teams" },
   { href: "/compare", label: "Compare" },
+  { href: "/model-lab", label: "Model Lab" },
   { href: "/history", label: "History" },
+  { href: "/beat-the-model", label: "Beat the Model" },
 ];
 
 function isActive(pathname: string, href: string) {
-  if (href === "/") {
-    return pathname === "/";
-  }
   return pathname === href || pathname.startsWith(`${href}/`);
 }
 
@@ -48,7 +45,8 @@ function GameweekChip({ summary }: { summary: GameweekSummary }) {
     return (
       <span className="gameweek-chip" title="No active or upcoming matchweek">
         <span className="gameweek-chip-dot" aria-hidden="true" />
-        Season finished
+        <span className="gameweek-chip-muted">Season</span>
+        finished
       </span>
     );
   }
@@ -56,7 +54,7 @@ function GameweekChip({ summary }: { summary: GameweekSummary }) {
   const statusLabel = summary.status === "live" ? "Live" : "Next";
 
   return (
-    <span className="gameweek-chip">
+    <span className="gameweek-chip" data-live={summary.status === "live"}>
       <span className="gameweek-chip-dot" aria-hidden="true" />
       <span className="gameweek-chip-muted">{statusLabel}</span>
       <strong>MW {summary.gameweek}</strong>
@@ -66,11 +64,16 @@ function GameweekChip({ summary }: { summary: GameweekSummary }) {
 
 export function SiteNav({ summary }: { summary: GameweekSummary | null }) {
   const pathname = usePathname() ?? "/";
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  useEffect(() => {
+    setMenuOpen(false);
+  }, [pathname]);
 
   return (
     <header className="site-header">
       <div className="site-header-inner">
-        <Link href="/" className="site-brand">
+        <Link href="/" className="site-brand" onClick={() => setMenuOpen(false)}>
           <BrandMark />
           <span>
             Prem <span className="brand-wordmark-accent">Predict</span>
@@ -90,8 +93,61 @@ export function SiteNav({ summary }: { summary: GameweekSummary | null }) {
           ))}
         </nav>
 
-        <div className="header-meta">{summary ? <GameweekChip summary={summary} /> : null}</div>
+        <div className="header-meta">
+          {summary ? <GameweekChip summary={summary} /> : null}
+          <button
+            type="button"
+            className="nav-toggle"
+            aria-expanded={menuOpen}
+            aria-controls="mobile-navigation"
+            aria-label={menuOpen ? "Close navigation menu" : "Open navigation menu"}
+            onClick={() => setMenuOpen((open) => !open)}
+          >
+            <span className="nav-toggle-box" aria-hidden="true">
+              <span />
+              <span />
+              <span />
+            </span>
+          </button>
+        </div>
       </div>
+
+      <nav
+        id="mobile-navigation"
+        className="mobile-nav"
+        data-open={menuOpen}
+        aria-label="Mobile"
+      >
+        <ul className="mobile-nav-list">
+          <li>
+            <Link
+              href="/"
+              className="mobile-nav-link"
+              data-active={pathname === "/" ? true : undefined}
+            >
+              Home
+              <span className="mobile-nav-index">00</span>
+            </Link>
+          </li>
+          {links.map((link, index) => (
+            <li key={link.href}>
+              <Link
+                href={link.href}
+                className="mobile-nav-link"
+                data-active={isActive(pathname, link.href) ? true : undefined}
+              >
+                {link.label}
+                <span className="mobile-nav-index">{String(index + 1).padStart(2, "0")}</span>
+              </Link>
+            </li>
+          ))}
+        </ul>
+        {summary ? (
+          <div className="mobile-nav-meta">
+            <GameweekChip summary={summary} />
+          </div>
+        ) : null}
+      </nav>
     </header>
   );
 }

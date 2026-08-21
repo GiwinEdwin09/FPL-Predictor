@@ -1,21 +1,7 @@
-import { FixtureCard } from "@/components/fixture-card";
+import { PredictionCard } from "@/components/prediction-card";
+import { EmptyState } from "@/components/ui/states";
 import type { UpcomingFixture } from "@/lib/dashboard";
-
-function formatWeekStart(kickoffTime: string | null) {
-  if (!kickoffTime) {
-    return "Kickoff timing is still being confirmed by the source.";
-  }
-
-  return `Round opened ${new Intl.DateTimeFormat("en-GB", {
-    weekday: "short",
-    day: "numeric",
-    month: "short",
-    hour: "2-digit",
-    minute: "2-digit",
-    timeZone: "UTC",
-    timeZoneName: "short",
-  }).format(new Date(kickoffTime))}.`;
-}
+import { formatKickoffWithZone } from "@/lib/format";
 
 export function CurrentGameweekView({
   gameweek,
@@ -25,7 +11,11 @@ export function CurrentGameweekView({
   fixtures: UpcomingFixture[];
 }) {
   if (gameweek === null || fixtures.length === 0) {
-    return <p className="empty-state">No active Premier League matchweek is currently in progress.</p>;
+    return (
+      <EmptyState title="No matchweek in progress">
+        There is no active Premier League round right now. Check the future predictions tab for upcoming fixtures.
+      </EmptyState>
+    );
   }
 
   const firstKickoff = fixtures
@@ -40,15 +30,15 @@ export function CurrentGameweekView({
           <p className="eyebrow">Current Matchweek</p>
           <h2>Matchweek {gameweek}</h2>
           <p>
-            This round has already started, so any available scores are shown alongside the pre-match forecast.{" "}
-            {formatWeekStart(firstKickoff)}
+            This round has already started, so any available scores are shown alongside the pre-match forecast.
+            {firstKickoff ? ` Round opened ${formatKickoffWithZone(firstKickoff)}.` : ""}
           </p>
         </div>
       </div>
 
       <div className="fixtures-week-scroll">
         {fixtures.map((fixture) => (
-          <FixtureCard key={fixture.matchId} fixture={fixture} />
+          <PredictionCard key={fixture.matchId} fixture={fixture} />
         ))}
       </div>
     </section>
