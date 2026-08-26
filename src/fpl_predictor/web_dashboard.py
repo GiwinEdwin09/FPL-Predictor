@@ -16,6 +16,17 @@ from fpl_predictor.model_training import (
     load_prediction_feature_frame,
 )
 from fpl_predictor.predictors import feature_columns_for_model, predict_match_probabilities
+from fpl_predictor.prediction_ledger import (
+    DEFAULT_LEDGER_PATH,
+    PREDICTION_TYPE_PRE_KICKOFF,
+    PREDICTION_TYPE_REPLAY,
+    LedgerEntry,
+    load_ledger,
+    save_ledger,
+    seed_walk_forward_predictions,
+    sync_fixture_predictions,
+    upsert_prediction,
+)
 
 def season_label_for_timestamp(value: pd.Timestamp) -> str:
     timestamp = pd.Timestamp(value)
@@ -68,6 +79,7 @@ BADGE_ALIASES = {
     "wolverhampton wanderers": "wolves",
 }
 RECENT_HISTORY_LIMIT: int | None = None
+DEFAULT_WALK_FORWARD_PATH = Path("data/models/model_v3_walk_forward_backtest.json")
 
 
 def infer_current_season(
@@ -253,6 +265,47 @@ def serialize_probabilities(probability: Any) -> dict[str, float]:
         "draw": round(float(probability[1]), 4),
         "awayWin": round(float(probability[2]), 4),
     }
+
+
+def serialized_probability_mapping(probability: Any) -> dict[str, float]:
+    if isinstance(probability, dict):
+        return {
+            "homeWin": float(probability["homeWin"]),
+            "draw": float(probability["draw"]),
+            "awayWin": float(probability["awayWin"]),
+        }
+    return serialize_probabilities(probability)
+
+
+def ledger_rows_from_fixtures(items: list[dict[str, Any]], *, finished: bool = False) -> list[dict[str, Any]]:
+    rows: list[dict[str, Any]] = []
+    for item in items:
+        probabilities = item.get("probabilities")
+        if probabilities is None:
+            continue
+        rows.append(
+            {
+                "match_id": item["matchId"],
+                "probabilities": serialized_probability_mapping(probabilities),
+                "kickoff_time": item.get("kickoffTime"),
+                "finished": finished or bool(item.get("finished")),
+                "prediction_type": item.get("predictionType", PREDICTION_TYPE_PRE_KICKOFF),
+            }
+        )
+    return rows
+
+
+def apply_ledger_to_fixtures(
+    items: list[dict[str, Any]],
+    entries: dict[str, LedgerEntry],
+) -> list[dict[str, Any]]:
+    for item in items:
+        entry = entries.get(str(item["matchId"]))
+        if entry is None:
+            continue
+        item["probabilities"] = serialize_probabilities(entry.probability_array())
+        item["predictionType"] = entry.prediction_type
+    return items
 
 
 def serialize_prediction_fixture(
@@ -482,8 +535,13 @@ def build_historical_matches_from_frames(
     model: Any | None = None,
     temperature: float = 1.0,
     limit: int | None = RECENT_HISTORY_LIMIT,
+    ledger_entries: dict[str, LedgerEntry] | None = None,
+    model_version: str = "model_v3",
+    now_utc: pd.Timestamp | None = None,
 ) -> list[dict[str, Any]]:
     feature_lookup = features.set_index("match_id", drop=False)
+    feature_lookup.index = feature_lookup.index.astype(str)
+    entries = ledger_entries if ledger_entries is not None else {}
 
     history = matches.loc[is_premier_league_frame(matches) & (matches["finished"] == True)].copy()
     history["kickoff_time"] = pd.to_datetime(history["kickoff_time"], errors="coerce", utc=True, format="mixed")
@@ -493,20 +551,36 @@ def build_historical_matches_from_frames(
         kind="stable",
     )
 
-    probabilities_by_match = (
-        build_history_probabilities(list(history["match_id"]), feature_lookup, model, temperature)
-        if model is not None
-        else {}
-    )
+    missing_ids = [
+        str(match_id)
+        for match_id in dict.fromkeys(history["match_id"].astype(str))
+        if str(match_id) not in entries
+    ]
+    if model is not None and missing_ids:
+        scored = build_history_probabilities(missing_ids, feature_lookup, model, temperature)
+        for match_id, probability in scored.items():
+            history_row = history.loc[history["match_id"].astype(str) == str(match_id)]
+            kickoff = history_row["kickoff_time"].iloc[0] if not history_row.empty else None
+            upsert_prediction(
+                entries,
+                match_id=str(match_id),
+                probabilities=probability,
+                model_version=model_version,
+                kickoff_time=kickoff,
+                finished=True,
+                prediction_type=PREDICTION_TYPE_REPLAY,
+                now_utc=now_utc,
+            )
 
     items: list[dict[str, Any]] = []
     selected_history = history if limit is None else history.head(limit)
     for row in selected_history.to_dict(orient="records"):
-        pre_match = feature_lookup.loc[row["match_id"]] if row["match_id"] in feature_lookup.index else None
+        pre_match = feature_lookup.loc[str(row["match_id"])] if str(row["match_id"]) in feature_lookup.index else None
         if isinstance(pre_match, pd.DataFrame):
             pre_match = pre_match.iloc[0]
 
-        probability = probabilities_by_match.get(row["match_id"])
+        entry = entries.get(str(row["match_id"]))
+        probability = entry.probability_array() if entry is not None else None
 
         items.append(
             {
@@ -545,6 +619,7 @@ def build_historical_matches_from_frames(
                     "awayLast5Xg": coerce_float(pre_match.get("away_last5_avg_xg")) if pre_match is not None else None,
                 },
                 "probabilities": serialize_probabilities(probability) if probability is not None else None,
+                "predictionType": entry.prediction_type if entry is not None else None,
                 "matchUrl": row.get("match_url"),
             }
         )
@@ -577,6 +652,9 @@ def build_dashboard_payload(
     matches_path: Path,
     model_path: Path,
     metrics_path: Path,
+    ledger_path: Path = DEFAULT_LEDGER_PATH,
+    walk_forward_path: Path = DEFAULT_WALK_FORWARD_PATH,
+    now_utc: pd.Timestamp | None = None,
 ) -> dict[str, Any]:
     team_lookup = load_team_lookup(data_dir)
     temperature, model_metadata = load_model_metadata(metrics_path)
@@ -590,12 +668,39 @@ def build_dashboard_payload(
     )
     matches = pd.read_csv(matches_path)
     current_season = infer_current_season(features)
+    model_version = model_path.stem
+    entries = load_ledger(ledger_path)
+    seed_walk_forward_predictions(entries, walk_forward_path, model_version=model_version)
+    sync_fixture_predictions(
+        entries,
+        [
+            *ledger_rows_from_fixtures(current_fixtures),
+            *ledger_rows_from_fixtures(upcoming_fixtures),
+            *ledger_rows_from_fixtures(postponed_fixtures),
+        ],
+        model_version=model_version,
+        now_utc=now_utc,
+    )
+    apply_ledger_to_fixtures(current_fixtures, entries)
+    apply_ledger_to_fixtures(upcoming_fixtures, entries)
+    apply_ledger_to_fixtures(postponed_fixtures, entries)
+    historical_matches = build_historical_matches_from_frames(
+        matches,
+        features,
+        team_lookup=team_lookup,
+        model=model,
+        temperature=temperature,
+        ledger_entries=entries,
+        model_version=model_version,
+        now_utc=now_utc,
+    )
+    save_ledger(ledger_path, entries)
 
     return {
         "generatedAtUtc": datetime.now(UTC).isoformat(),
         "currentSeason": current_season,
         "model": {
-            "version": model_path.stem,
+            "version": model_version,
             "calibrationTemperature": temperature,
             "metrics": model_metadata.get("metrics", {}),
             "split": model_metadata.get("split", {}),
@@ -605,13 +710,7 @@ def build_dashboard_payload(
         "currentGameweekFixtures": current_fixtures,
         "upcomingFixtures": upcoming_fixtures,
         "postponedFixtures": postponed_fixtures,
-        "historicalMatches": build_historical_matches_from_frames(
-            matches,
-            features,
-            team_lookup=team_lookup,
-            model=model,
-            temperature=temperature,
-        ),
+        "historicalMatches": historical_matches,
     }
 
 
@@ -622,6 +721,8 @@ def export_dashboard(
     matches_path: Path,
     model_path: Path,
     metrics_path: Path,
+    ledger_path: Path = DEFAULT_LEDGER_PATH,
+    walk_forward_path: Path = DEFAULT_WALK_FORWARD_PATH,
 ) -> Path:
     dashboard = build_dashboard_payload(
         data_dir=data_dir,
@@ -629,6 +730,8 @@ def export_dashboard(
         matches_path=matches_path,
         model_path=model_path,
         metrics_path=metrics_path,
+        ledger_path=ledger_path,
+        walk_forward_path=walk_forward_path,
     )
 
     output_path.parent.mkdir(parents=True, exist_ok=True)
@@ -670,6 +773,11 @@ def parse_args() -> argparse.Namespace:
         default="data/models/model_v2_metrics.json",
         help="Training summary path that stores the calibration temperature.",
     )
+    parser.add_argument(
+        "--ledger-path",
+        default=str(DEFAULT_LEDGER_PATH),
+        help="Frozen prediction ledger path. Finished and kicked-off matches are never rescored.",
+    )
     return parser.parse_args()
 
 
@@ -682,6 +790,7 @@ def main() -> None:
         matches_path=Path(args.matches_path),
         model_path=Path(args.model_path),
         metrics_path=Path(args.metrics_path),
+        ledger_path=Path(args.ledger_path),
     )
     print(output_path)
 

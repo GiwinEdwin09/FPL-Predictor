@@ -26,6 +26,7 @@ export type UpcomingFixture = {
     draw: number;
     awayWin: number;
   };
+  predictionType?: "pre_kickoff" | "backfill_walk_forward" | "replay" | null;
   context: {
     homeElo: number | null;
     awayElo: number | null;
@@ -70,6 +71,7 @@ export type HistoricalMatch = {
     draw: number;
     awayWin: number;
   } | null;
+  predictionType?: "pre_kickoff" | "backfill_walk_forward" | "replay" | null;
   matchUrl: string | null;
 };
 

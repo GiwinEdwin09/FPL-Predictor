@@ -20,16 +20,26 @@ from fpl_predictor.model_training import (
 from fpl_predictor.model_bundle import load_model_bundle
 from fpl_predictor.predictors import feature_columns_for_model, predict_match_probabilities
 from fpl_predictor.web_dashboard import (
+    DEFAULT_WALK_FORWARD_PATH,
+    apply_ledger_to_fixtures,
     build_historical_matches_from_frames,
     build_prediction_groups_from_frame,
     coerce_float,
     coerce_int,
+    infer_current_season,
+    ledger_rows_from_fixtures,
     load_model,
     load_model_metadata,
     load_team_lookup,
-    infer_current_season,
     serialize_prediction_fixture,
     serialize_team,
+)
+from fpl_predictor.prediction_ledger import (
+    DEFAULT_LEDGER_PATH,
+    load_ledger,
+    save_ledger,
+    seed_walk_forward_predictions,
+    sync_fixture_predictions,
 )
 
 PLAYER_METRIC_COLUMNS = (
@@ -59,6 +69,7 @@ class InferencePaths:
     metrics_path: Path
     prediction_feature_table_path: Path | None = None
     bundle_path: Path | None = None
+    ledger_path: Path | None = None
 
 
 @dataclass(frozen=True)
@@ -205,6 +216,7 @@ class LiveInferenceService:
             ),
             *([artifacts.team_keys_path] if artifacts.team_keys_path is not None else []),
             *([self.paths.bundle_path] if self.paths.bundle_path is not None else []),
+            *([self.paths.ledger_path] if self.paths.ledger_path is not None else []),
             *team_files,
         ]
         return tuple((str(path), _mtime(path)) for path in watched)
@@ -418,6 +430,38 @@ class LiveInferenceService:
             temperature=state.temperature,
             team_lookup=state.team_lookup,
         )
+        model_version = (
+            state.bundle_metadata.get("model_version")
+            if state.bundle_metadata is not None
+            else self.paths.model_path.stem
+        )
+        if model_version == "v3":
+            model_version = "model_v3"
+        ledger_path = self.paths.ledger_path or DEFAULT_LEDGER_PATH
+        entries = load_ledger(ledger_path)
+        seed_walk_forward_predictions(entries, DEFAULT_WALK_FORWARD_PATH, model_version=model_version)
+        sync_fixture_predictions(
+            entries,
+            [
+                *ledger_rows_from_fixtures(current_fixtures),
+                *ledger_rows_from_fixtures(upcoming_fixtures),
+                *ledger_rows_from_fixtures(postponed_fixtures),
+            ],
+            model_version=model_version,
+        )
+        apply_ledger_to_fixtures(current_fixtures, entries)
+        apply_ledger_to_fixtures(upcoming_fixtures, entries)
+        apply_ledger_to_fixtures(postponed_fixtures, entries)
+        historical_matches = build_historical_matches_from_frames(
+            state.matches,
+            state.features,
+            team_lookup=state.team_lookup,
+            model=state.model,
+            temperature=state.temperature,
+            ledger_entries=entries,
+            model_version=model_version,
+        )
+        save_ledger(ledger_path, entries)
         return {
             "generatedAtUtc": datetime.now(UTC).isoformat(),
             "currentSeason": current_season,
@@ -441,13 +485,7 @@ class LiveInferenceService:
             "currentGameweekFixtures": current_fixtures,
             "upcomingFixtures": upcoming_fixtures,
             "postponedFixtures": postponed_fixtures,
-            "historicalMatches": build_historical_matches_from_frames(
-                state.matches,
-                state.features,
-                team_lookup=state.team_lookup,
-                model=state.model,
-                temperature=state.temperature,
-            ),
+            "historicalMatches": historical_matches,
         }
 
     def _baseline_fixture(self, match_id: str, *, refresh: bool = False) -> tuple[RuntimeState, pd.Series, dict[str, Any]]:

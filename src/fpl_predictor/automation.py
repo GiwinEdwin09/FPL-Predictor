@@ -24,6 +24,11 @@ class RefreshSummary:
     metrics_path: str | None
     dashboard_path: str | None
     updated_datasets: dict[str, list[str]]
+    deployed: bool | None = None
+    deploy_reason: str | None = None
+    candidate_log_loss: float | None = None
+    incumbent_log_loss: float | None = None
+    ledger_path: str | None = None
 
 
 def changed_seasons_by_dataset(sync_summary: dict[str, Any]) -> dict[str, list[str]]:
@@ -64,6 +69,11 @@ def run_refresh_pipeline(
             metrics_path=None,
             dashboard_path=None,
             updated_datasets={},
+            deployed=None,
+            deploy_reason=None,
+            candidate_log_loss=None,
+            incumbent_log_loss=None,
+            ledger_path=None,
         )
 
     feature_matches_path = matches_path
@@ -90,15 +100,39 @@ def run_refresh_pipeline(
         competition_scope="all",
         include_historical_rows=True,
     )
+    deploy_result: dict[str, Any] = {
+        "deploy": True,
+        "reason": "v2 trains directly to production",
+        "candidate_log_loss": None,
+        "incumbent_log_loss": None,
+    }
     if model_version == "v3":
+        from fpl_predictor.model_gate import maybe_promote_candidate
+        from fpl_predictor.model_training import split_train_validation
+        from fpl_predictor.model_v3 import load_v3_training_frame
+
+        candidate_model_path = model_path.parent / "candidate" / model_path.name
+        candidate_metrics_path = metrics_path.parent / "candidate" / metrics_path.name
         training_summary = train_and_save_model_v3(
             prediction_feature_table_path=prediction_feature_table_path,
             training_feature_table_path=training_feature_table_path,
             matches_path=feature_matches_path,
-            model_path=model_path,
-            metrics_path=metrics_path,
+            model_path=candidate_model_path,
+            metrics_path=candidate_metrics_path,
             data_dir=data_dir,
         )
+        frame = load_v3_training_frame(training_feature_table_path)
+        _, validation, _ = split_train_validation(frame)
+        deploy_result = maybe_promote_candidate(
+            candidate_model_path=candidate_model_path,
+            candidate_metrics_path=candidate_metrics_path,
+            production_model_path=model_path,
+            production_metrics_path=metrics_path,
+            validation=validation,
+            prediction_features_path=prediction_feature_table_path,
+        )
+        if not deploy_result["deploy"] and not model_path.exists():
+            raise ValueError(f"Candidate model failed promotion and no incumbent exists: {deploy_result['reason']}")
     else:
         training_summary = train_and_save_model(
             prediction_feature_table_path=prediction_feature_table_path,
@@ -107,6 +141,7 @@ def run_refresh_pipeline(
             model_path=model_path,
             metrics_path=metrics_path,
         )
+    ledger_path = Path(data_dir) / "predictions_ledger.json"
     export_dashboard(
         output_path=dashboard_path,
         data_dir=data_dir,
@@ -114,6 +149,7 @@ def run_refresh_pipeline(
         matches_path=matches_path,
         model_path=model_path,
         metrics_path=metrics_path,
+        ledger_path=ledger_path,
     )
 
     return RefreshSummary(
@@ -122,10 +158,15 @@ def run_refresh_pipeline(
         sync_state_path=str(sync_summary["sync_state_path"]),
         prediction_feature_table_path=str(prediction_feature_table_path),
         training_feature_table_path=str(training_feature_table_path),
-        model_path=training_summary.model_path,
-        metrics_path=training_summary.metrics_path,
+        model_path=str(model_path),
+        metrics_path=str(metrics_path),
         dashboard_path=str(dashboard_path),
         updated_datasets=updated_datasets,
+        deployed=bool(deploy_result["deploy"]),
+        deploy_reason=str(deploy_result["reason"]),
+        candidate_log_loss=deploy_result.get("candidate_log_loss"),
+        incumbent_log_loss=deploy_result.get("incumbent_log_loss"),
+        ledger_path=str(ledger_path),
     )
 
 

@@ -90,6 +90,7 @@ def inference_paths() -> InferencePaths:
         metrics_path=env_path("METRICS_PATH", f"data/models/model_{version}_metrics.json"),
         prediction_feature_table_path=prediction_feature_table_path(),
         bundle_path=bundle_path,
+        ledger_path=env_path("PREDICTION_LEDGER_PATH", "data/predictions_ledger.json"),
     )
 
 
