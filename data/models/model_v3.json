@@ -206,5 +206,5 @@
   "home_key_column": "home_team_key",
   "away_key_column": "away_team_key",
   "tree_model_kind": "xgboost",
-  "tree_model_path": "data/models/model_v3_xgboost.json"
+  "tree_model_path": "data/models/candidate/model_v3_xgboost.json"
 }

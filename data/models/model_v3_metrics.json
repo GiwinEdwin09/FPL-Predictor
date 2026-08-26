@@ -1,6 +1,6 @@
 {
-  "model_path": "data/models/model_v3.json",
-  "metrics_path": "data/models/model_v3_metrics.json",
+  "model_path": "data/models/candidate/model_v3.json",
+  "metrics_path": "data/models/candidate/model_v3_metrics.json",
   "prediction_feature_table_path": "data/features/match_pre_match_features_v3.csv",
   "training_feature_table_path": "data/features/all_match_pre_match_features_v3.csv",
   "target_distribution_train": {
@@ -73,8 +73,8 @@
   "dixon_coles_weight": 1.0,
   "half_life_days": 550.0,
   "predictor_type": "blend_v3",
-  "bundle_path": "data/models/model_v3_bundle.json",
-  "team_keys_path": "data/models/model_v3_team_keys.json",
+  "bundle_path": "data/models/candidate/model_v3_bundle.json",
+  "team_keys_path": "data/models/candidate/model_v3_team_keys.json",
   "cold_start_teams": [],
   "calibration_strategy": "season_block_walk_forward_oof",
   "calibration_folds": 12,

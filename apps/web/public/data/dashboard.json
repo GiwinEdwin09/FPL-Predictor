@@ -1,5 +1,5 @@
 {
-  "generatedAtUtc": "2026-08-26T02:10:57.581979+00:00",
+  "generatedAtUtc": "2026-08-26T06:03:10.977474+00:00",
   "currentSeason": "2026-2027",
   "model": {
     "version": "model_v3",
@@ -15939,6 +15939,556 @@
   ],
   "postponedFixtures": [],
   "historicalMatches": [
+    {
+      "matchId": "26-27-prem-fulham-vs-chelsea",
+      "season": "2026-2027",
+      "gameweek": 1,
+      "kickoffTime": "2026-08-24T19:00:00+00:00",
+      "homeTeam": {
+        "id": 54,
+        "name": "Fulham",
+        "shortName": "FUL",
+        "badgeSlug": "fulham",
+        "badgePath": "/teams/fulham.football-logos.cc.png"
+      },
+      "awayTeam": {
+        "id": 8,
+        "name": "Chelsea",
+        "shortName": "CHE",
+        "badgeSlug": "chelsea",
+        "badgePath": "/teams/chelsea.football-logos.cc.png"
+      },
+      "score": {
+        "home": 2,
+        "away": 3
+      },
+      "stats": {
+        "xg": {
+          "home": 1.33,
+          "away": 2.24
+        },
+        "shotsOnTarget": {
+          "home": 6,
+          "away": 6
+        },
+        "bigChances": {
+          "home": 2,
+          "away": 4
+        },
+        "possession": {
+          "home": 62.0,
+          "away": 38.0
+        }
+      },
+      "preMatch": {
+        "homeElo": 1592.0,
+        "awayElo": 1617.0,
+        "homeLast5Xg": 1.26,
+        "awayLast5Xg": 0.91
+      },
+      "probabilities": {
+        "homeWin": 0.3324,
+        "draw": 0.2667,
+        "awayWin": 0.4009
+      },
+      "predictionType": "replay",
+      "matchUrl": "/matches/chelsea-vs-fulham/2s2omg#5795372"
+    },
+    {
+      "matchId": "26-27-prem-newcastle-united-vs-liverpool",
+      "season": "2026-2027",
+      "gameweek": 1,
+      "kickoffTime": "2026-08-23T15:30:00+00:00",
+      "homeTeam": {
+        "id": 4,
+        "name": "Newcastle",
+        "shortName": "NEW",
+        "badgeSlug": "newcastle",
+        "badgePath": "/teams/newcastle.football-logos.cc.png"
+      },
+      "awayTeam": {
+        "id": 14,
+        "name": "Liverpool",
+        "shortName": "LIV",
+        "badgeSlug": "liverpool",
+        "badgePath": "/teams/liverpool.football-logos.cc.png"
+      },
+      "score": {
+        "home": 2,
+        "away": 2
+      },
+      "stats": {
+        "xg": {
+          "home": 1.58,
+          "away": 2.98
+        },
+        "shotsOnTarget": {
+          "home": 4,
+          "away": 7
+        },
+        "bigChances": {
+          "home": 3,
+          "away": 3
+        },
+        "possession": {
+          "home": 39.0,
+          "away": 61.0
+        }
+      },
+      "preMatch": {
+        "homeElo": 1608.0,
+        "awayElo": 1693.0,
+        "homeLast5Xg": 1.54,
+        "awayLast5Xg": 1.41
+      },
+      "probabilities": {
+        "homeWin": 0.3178,
+        "draw": 0.2452,
+        "awayWin": 0.437
+      },
+      "predictionType": "replay",
+      "matchUrl": "/matches/liverpool-vs-newcastle-united/2ygyxm#5795371"
+    },
+    {
+      "matchId": "26-27-prem-manchester-city-vs-afc-bournemouth",
+      "season": "2026-2027",
+      "gameweek": 1,
+      "kickoffTime": "2026-08-23T13:00:00+00:00",
+      "homeTeam": {
+        "id": 43,
+        "name": "Man City",
+        "shortName": "MCI",
+        "badgeSlug": "manchester-city",
+        "badgePath": "/teams/manchester-city.football-logos.cc.png"
+      },
+      "awayTeam": {
+        "id": 91,
+        "name": "Bournemouth",
+        "shortName": "BOU",
+        "badgeSlug": "bournemouth",
+        "badgePath": "/teams/bournemouth.football-logos.cc.png"
+      },
+      "score": {
+        "home": 2,
+        "away": 1
+      },
+      "stats": {
+        "xg": {
+          "home": 2.25,
+          "away": 0.65
+        },
+        "shotsOnTarget": {
+          "home": 6,
+          "away": 4
+        },
+        "bigChances": {
+          "home": 4,
+          "away": 1
+        },
+        "possession": {
+          "home": 66.0,
+          "away": 34.0
+        }
+      },
+      "preMatch": {
+        "homeElo": 1780.0,
+        "awayElo": 1651.0,
+        "homeLast5Xg": 1.8,
+        "awayLast5Xg": 1.55
+      },
+      "probabilities": {
+        "homeWin": 0.7046,
+        "draw": 0.181,
+        "awayWin": 0.1144
+      },
+      "predictionType": "replay",
+      "matchUrl": "/matches/manchester-city-vs-afc-bournemouth/2feiv3#5795370"
+    },
+    {
+      "matchId": "26-27-prem-brighton-hove-albion-vs-aston-villa",
+      "season": "2026-2027",
+      "gameweek": 1,
+      "kickoffTime": "2026-08-23T13:00:00+00:00",
+      "homeTeam": {
+        "id": 36,
+        "name": "Brighton",
+        "shortName": "BHA",
+        "badgeSlug": "brighton",
+        "badgePath": "/teams/brighton.football-logos.cc.png"
+      },
+      "awayTeam": {
+        "id": 7,
+        "name": "Aston Villa",
+        "shortName": "AVL",
+        "badgeSlug": "aston-villa",
+        "badgePath": "/teams/aston-villa.football-logos.cc.png"
+      },
+      "score": {
+        "home": 4,
+        "away": 0
+      },
+      "stats": {
+        "xg": {
+          "home": 3.77,
+          "away": 0.29
+        },
+        "shotsOnTarget": {
+          "home": 6,
+          "away": 0
+        },
+        "bigChances": {
+          "home": 6,
+          "away": 0
+        },
+        "possession": {
+          "home": 73.0,
+          "away": 27.0
+        }
+      },
+      "preMatch": {
+        "homeElo": 1623.0,
+        "awayElo": 1686.0,
+        "homeLast5Xg": 1.83,
+        "awayLast5Xg": 1.26
+      },
+      "probabilities": {
+        "homeWin": 0.4277,
+        "draw": 0.2597,
+        "awayWin": 0.3126
+      },
+      "predictionType": "replay",
+      "matchUrl": "/matches/brighton-hove-albion-vs-aston-villa/3gku1s#5795369"
+    },
+    {
+      "matchId": "26-27-prem-brentford-vs-tottenham-hotspur",
+      "season": "2026-2027",
+      "gameweek": 1,
+      "kickoffTime": "2026-08-22T16:30:00+00:00",
+      "homeTeam": {
+        "id": 94,
+        "name": "Brentford",
+        "shortName": "BRE",
+        "badgeSlug": "brentford",
+        "badgePath": "/teams/brentford.football-logos.cc.png"
+      },
+      "awayTeam": {
+        "id": 6,
+        "name": "Spurs",
+        "shortName": "TOT",
+        "badgeSlug": "tottenham",
+        "badgePath": "/teams/tottenham.football-logos.cc.png"
+      },
+      "score": {
+        "home": 3,
+        "away": 0
+      },
+      "stats": {
+        "xg": {
+          "home": 3.87,
+          "away": 0.57
+        },
+        "shotsOnTarget": {
+          "home": 8,
+          "away": 4
+        },
+        "bigChances": {
+          "home": 6,
+          "away": 2
+        },
+        "possession": {
+          "home": 40.0,
+          "away": 60.0
+        }
+      },
+      "preMatch": {
+        "homeElo": 1616.0,
+        "awayElo": 1543.0,
+        "homeLast5Xg": 1.39,
+        "awayLast5Xg": 1.12
+      },
+      "probabilities": {
+        "homeWin": 0.471,
+        "draw": 0.2401,
+        "awayWin": 0.2888
+      },
+      "predictionType": "replay",
+      "matchUrl": "/matches/tottenham-hotspur-vs-brentford/2u5c8b#5795368"
+    },
+    {
+      "matchId": "26-27-prem-nottingham-forest-vs-leeds-united",
+      "season": "2026-2027",
+      "gameweek": 1,
+      "kickoffTime": "2026-08-22T14:00:00+00:00",
+      "homeTeam": {
+        "id": 17,
+        "name": "Nott'm Forest",
+        "shortName": "NFO",
+        "badgeSlug": "nottingham-forest",
+        "badgePath": "/teams/nottingham-forest.football-logos.cc.png"
+      },
+      "awayTeam": {
+        "id": 2,
+        "name": "Leeds",
+        "shortName": "LEE",
+        "badgeSlug": "leeds-united",
+        "badgePath": "/teams/leeds-united.football-logos.cc.png"
+      },
+      "score": {
+        "home": 0,
+        "away": 1
+      },
+      "stats": {
+        "xg": {
+          "home": 0.66,
+          "away": 0.47
+        },
+        "shotsOnTarget": {
+          "home": 2,
+          "away": 3
+        },
+        "bigChances": {
+          "home": 0,
+          "away": 0
+        },
+        "possession": {
+          "home": 56.0,
+          "away": 44.0
+        }
+      },
+      "preMatch": {
+        "homeElo": 1579.0,
+        "awayElo": 1557.0,
+        "homeLast5Xg": 1.57,
+        "awayLast5Xg": 1.15
+      },
+      "probabilities": {
+        "homeWin": 0.4604,
+        "draw": 0.2639,
+        "awayWin": 0.2756
+      },
+      "predictionType": "replay",
+      "matchUrl": "/matches/leeds-united-vs-nottingham-forest/2vqauu#5795367"
+    },
+    {
+      "matchId": "26-27-prem-ipswich-town-vs-sunderland",
+      "season": "2026-2027",
+      "gameweek": 1,
+      "kickoffTime": "2026-08-22T14:00:00+00:00",
+      "homeTeam": {
+        "id": 40,
+        "name": "Ipswich Town",
+        "shortName": "IPS",
+        "badgeSlug": "ipswich",
+        "badgePath": "/teams/ipswich.football-logos.cc.png"
+      },
+      "awayTeam": {
+        "id": 56,
+        "name": "Sunderland",
+        "shortName": "SUN",
+        "badgeSlug": "sunderland",
+        "badgePath": "/teams/sunderland.football-logos.cc.png"
+      },
+      "score": {
+        "home": 2,
+        "away": 1
+      },
+      "stats": {
+        "xg": {
+          "home": 1.8,
+          "away": 0.66
+        },
+        "shotsOnTarget": {
+          "home": 3,
+          "away": 4
+        },
+        "bigChances": {
+          "home": 2,
+          "away": 2
+        },
+        "possession": {
+          "home": 38.0,
+          "away": 62.0
+        }
+      },
+      "preMatch": {
+        "homeElo": 1416.0,
+        "awayElo": 1553.0,
+        "homeLast5Xg": 0.79,
+        "awayLast5Xg": 1.04
+      },
+      "probabilities": {
+        "homeWin": 0.246,
+        "draw": 0.2733,
+        "awayWin": 0.4807
+      },
+      "predictionType": "replay",
+      "matchUrl": "/matches/sunderland-vs-ipswich-town/2sif4z#5795366"
+    },
+    {
+      "matchId": "26-27-prem-everton-vs-crystal-palace",
+      "season": "2026-2027",
+      "gameweek": 1,
+      "kickoffTime": "2026-08-22T14:00:00+00:00",
+      "homeTeam": {
+        "id": 11,
+        "name": "Everton",
+        "shortName": "EVE",
+        "badgeSlug": "everton",
+        "badgePath": "/teams/everton.football-logos.cc.png"
+      },
+      "awayTeam": {
+        "id": 31,
+        "name": "Crystal Palace",
+        "shortName": "CRY",
+        "badgeSlug": "crystal-palace",
+        "badgePath": "/teams/crystal-palace.football-logos.cc.png"
+      },
+      "score": {
+        "home": 2,
+        "away": 0
+      },
+      "stats": {
+        "xg": {
+          "home": 1.12,
+          "away": 1.96
+        },
+        "shotsOnTarget": {
+          "home": 5,
+          "away": 4
+        },
+        "bigChances": {
+          "home": 1,
+          "away": 4
+        },
+        "possession": {
+          "home": 42.0,
+          "away": 58.0
+        }
+      },
+      "preMatch": {
+        "homeElo": 1580.0,
+        "awayElo": 1583.0,
+        "homeLast5Xg": 1.44,
+        "awayLast5Xg": 1.38
+      },
+      "probabilities": {
+        "homeWin": 0.3973,
+        "draw": 0.3037,
+        "awayWin": 0.2989
+      },
+      "predictionType": "replay",
+      "matchUrl": "/matches/everton-vs-crystal-palace/2tttz7#5795365"
+    },
+    {
+      "matchId": "26-27-prem-hull-city-vs-manchester-united",
+      "season": "2026-2027",
+      "gameweek": 1,
+      "kickoffTime": "2026-08-22T11:30:00+00:00",
+      "homeTeam": {
+        "id": 88,
+        "name": "Hull City",
+        "shortName": "HUL",
+        "badgeSlug": "hull-city",
+        "badgePath": "/teams/hull-city.football-logos.cc.png"
+      },
+      "awayTeam": {
+        "id": 1,
+        "name": "Man Utd",
+        "shortName": "MUN",
+        "badgeSlug": "manchester-united",
+        "badgePath": "/teams/manchester-united.football-logos.cc.png"
+      },
+      "score": {
+        "home": 2,
+        "away": 0
+      },
+      "stats": {
+        "xg": {
+          "home": 1.01,
+          "away": 1.83
+        },
+        "shotsOnTarget": {
+          "home": 4,
+          "away": 5
+        },
+        "bigChances": {
+          "home": 3,
+          "away": 2
+        },
+        "possession": {
+          "home": 28.0,
+          "away": 72.0
+        }
+      },
+      "preMatch": {
+        "homeElo": 1446.0,
+        "awayElo": 1690.0,
+        "homeLast5Xg": null,
+        "awayLast5Xg": 2.11
+      },
+      "probabilities": {
+        "homeWin": 0.5593,
+        "draw": 0.264,
+        "awayWin": 0.1767
+      },
+      "predictionType": "replay",
+      "matchUrl": "/matches/hull-city-vs-manchester-united/2yngir#5795364"
+    },
+    {
+      "matchId": "26-27-prem-arsenal-vs-coventry-city",
+      "season": "2026-2027",
+      "gameweek": 1,
+      "kickoffTime": "2026-08-21T19:00:00+00:00",
+      "homeTeam": {
+        "id": 3,
+        "name": "Arsenal",
+        "shortName": "ARS",
+        "badgeSlug": "arsenal",
+        "badgePath": "/teams/arsenal.football-logos.cc.png"
+      },
+      "awayTeam": {
+        "id": 9,
+        "name": "Coventry City",
+        "shortName": "COV",
+        "badgeSlug": "coventry-city",
+        "badgePath": "/teams/coventry-city.football-logos.cc.png"
+      },
+      "score": {
+        "home": 3,
+        "away": 0
+      },
+      "stats": {
+        "xg": {
+          "home": 1.88,
+          "away": 0.2
+        },
+        "shotsOnTarget": {
+          "home": 6,
+          "away": 1
+        },
+        "bigChances": {
+          "home": 1,
+          "away": 1
+        },
+        "possession": {
+          "home": 64.0,
+          "away": 36.0
+        }
+      },
+      "preMatch": {
+        "homeElo": 1828.0,
+        "awayElo": 1447.0,
+        "homeLast5Xg": 1.74,
+        "awayLast5Xg": null
+      },
+      "probabilities": {
+        "homeWin": 0.9141,
+        "draw": 0.0718,
+        "awayWin": 0.0141
+      },
+      "predictionType": "replay",
+      "matchUrl": "/matches/coventry-city-vs-arsenal/2tttz6#5795363"
+    },
     {
       "matchId": "25-26-prem-west-ham-united-vs-leeds-united",
       "season": "2025-2026",
