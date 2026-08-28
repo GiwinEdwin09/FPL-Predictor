@@ -31,8 +31,8 @@
   "calibration_cutoff_utc": "2023-08-11T19:00:00+00:00",
   "metrics": {
     "accuracy": 0.40476190476190477,
-    "multiclass_log_loss": 1.0335610561005732,
-    "multiclass_brier_score": 0.6221245814766388
+    "multiclass_log_loss": 1.03378443166631,
+    "multiclass_brier_score": 0.622311101632737
   },
   "feature_columns": [
     "is_cup_match",
@@ -85,28 +85,28 @@
   ],
   "tree_n_estimators": 56,
   "selected_predictor": "dixon_coles",
-  "blend_candidate_log_loss": 0.9874250673165373,
-  "dixon_coles_oof_log_loss": 0.9906629635212745,
+  "blend_candidate_log_loss": 0.9874355987172614,
+  "dixon_coles_oof_log_loss": 0.9906752261989504,
   "blend_vs_dc_log_loss_ci95": [
-    -0.008497185594714718,
-    0.002114564819931097
+    -0.008498805681674153,
+    0.002110159088822404
   ],
   "final_fit": {
-    "rows": 12827,
+    "rows": 12829,
     "seasons": 34,
     "first_season": "1993-1994",
     "latest_season": "2026-2027",
     "first_finished_kickoff_utc": "1993-08-14T14:00:00+00:00",
-    "latest_finished_kickoff_utc": "2026-08-26T19:00:00+00:00",
+    "latest_finished_kickoff_utc": "2026-08-27T19:00:00+00:00",
     "target_distribution": {
-      "0": 5840,
+      "0": 5842,
       "1": 3268,
       "2": 3719
     },
     "competition_distribution": {
       "prem": 12714,
       "champions-league": 48,
-      "efl-cup": 45,
+      "efl-cup": 47,
       "europa-league": 14,
       "conference-league": 6
     }
