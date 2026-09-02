@@ -2,7 +2,7 @@
   "schema_version": 1,
   "model_version": "v3",
   "predictor_type": "blend_v3",
-  "created_at_utc": "2026-09-02T09:52:47.163905+00:00",
+  "created_at_utc": "2026-09-02T20:02:38.480939+00:00",
   "feature_columns": [
     "is_cup_match",
     "is_european_match",
@@ -42,13 +42,13 @@
   "components": {
     "metrics": {
       "path": "model_v3_metrics.json",
-      "sha256": "2f7698abfb4ab6c7eec45cdb525235d3057073291f8099b4432b3cd827699c51",
-      "size_bytes": 3214
+      "sha256": "458e6f4b3eddcf7e24abd37f6d60e82fc62e976f01c9417195dacbcd9107d59a",
+      "size_bytes": 3211
     },
     "model": {
       "path": "model_v3.json",
-      "sha256": "c6e1b1b351a63452e5bf813fa52a6a989ded78f9c7397ad99aafd336783e7af7",
-      "size_bytes": 5247
+      "sha256": "8cdf15ce14dd76d4ad6ba5e4ad606144423c21b30ba7cb8d61e849b454bc8200",
+      "size_bytes": 5267
     },
     "prediction_features": {
       "path": "../features/match_pre_match_features_v3.csv",
