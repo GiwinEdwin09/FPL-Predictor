@@ -98,12 +98,6 @@ def ensure_runtime_assets(
         team_key_lookup=team_key_lookup,
         include_historical_rows=include_historical_rows,
     )
-    build_feature_table(
-        matches_path=feature_matches_path,
-        output_path=training_feature_table_path,
-        competition_scope="all",
-        team_key_lookup=team_key_lookup,
-    )
     if model_version == "v3":
         from fpl_predictor.model_v3 import train_and_save_model_v3
 

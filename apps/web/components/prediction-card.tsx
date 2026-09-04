@@ -6,10 +6,9 @@ import { TeamCrest } from "@/components/ui/crest";
 import { ConfidenceBadge } from "@/components/ui/badges";
 import { ProbabilityBar } from "@/components/ui/probability-bar";
 import { describeConfidence, outcomeLabel } from "@/lib/confidence";
-import type { UpcomingFixture } from "@/lib/dashboard";
+import type { FixtureProbabilities, UpcomingFixture } from "@/lib/dashboard";
 import { formatKickoffWithZone } from "@/lib/format";
 import { explainPrediction, fixtureMetricPairs } from "@/lib/explain";
-import type { FixtureProbabilities } from "@/lib/lineup";
 
 function ChevronIcon() {
   return (

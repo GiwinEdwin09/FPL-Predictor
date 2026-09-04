@@ -37,7 +37,7 @@ def time_decay_weights(kickoffs: pd.Series, half_life_days: float = DEFAULT_HALF
     days_ago = np.where(np.isfinite(days_ago), days_ago, 2.0 * half_life_days)
     if half_life_days <= 0:
         return np.ones(len(timestamps), dtype=float)
-    return np.exp(-math_log_two() * days_ago / half_life_days)
+    return np.exp(-np.log(2.0) * days_ago / half_life_days)
 
 
 def dixon_coles_sample_weights(
@@ -51,10 +51,6 @@ def dixon_coles_sample_weights(
         return weights
     competition = pd.to_numeric(frame[sample_weight_column], errors="coerce").fillna(1.0)
     return weights * competition.clip(lower=0.0).to_numpy(dtype=float)
-
-
-def math_log_two() -> float:
-    return float(np.log(2.0))
 
 
 def dixon_coles_tau(

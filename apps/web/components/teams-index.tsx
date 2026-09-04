@@ -1,5 +1,6 @@
 "use client";
 
+import { matchSeasons } from "@/lib/gameweek";
 import Image from "next/image";
 import Link from "next/link";
 import { useMemo, useState } from "react";
@@ -16,7 +17,7 @@ function ClubBadge({ name, badgePath }: { name: string; badgePath: string | null
 }
 
 export function TeamsIndex({ matches }: { matches: QuizMatch[] }) {
-  const seasons = useMemo(() => Array.from(new Set(matches.map((match) => match.season))).sort().reverse(), [matches]);
+  const seasons = useMemo(() => matchSeasons(matches), [matches]);
   const [season, setSeason] = useState(seasons[0] ?? "");
   const [view, setView] = useState<"clubs" | "table">("clubs");
 

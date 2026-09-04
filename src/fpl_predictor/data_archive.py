@@ -1,12 +1,13 @@
 from __future__ import annotations
 
 import argparse
-import hashlib
 import json
 import shutil
 import tarfile
 from datetime import UTC, datetime
 from pathlib import Path
+
+from fpl_predictor.model_bundle import sha256_file
 
 
 ARCHIVE_SOURCES = (
@@ -17,14 +18,6 @@ ARCHIVE_SOURCES = (
     "data/playermatchstats.csv",
     "data/sync_state.json",
 )
-
-
-def file_sha256(path: Path) -> str:
-    digest = hashlib.sha256()
-    with path.open("rb") as handle:
-        for chunk in iter(lambda: handle.read(8192), b""):
-            digest.update(chunk)
-    return digest.hexdigest()
 
 
 def build_archive(snapshot_root: Path) -> dict[str, object]:
@@ -41,7 +34,7 @@ def build_archive(snapshot_root: Path) -> dict[str, object]:
                     copied_files.append(
                         {
                             "path": str(path.relative_to(snapshot_root)),
-                            "sha256": file_sha256(path),
+                            "sha256": sha256_file(path),
                             "size_bytes": path.stat().st_size,
                         }
                     )
@@ -51,7 +44,7 @@ def build_archive(snapshot_root: Path) -> dict[str, object]:
             copied_files.append(
                 {
                     "path": str(destination.relative_to(snapshot_root)),
-                    "sha256": file_sha256(destination),
+                    "sha256": sha256_file(destination),
                     "size_bytes": destination.stat().st_size,
                 }
             )

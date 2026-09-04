@@ -11,9 +11,13 @@ import numpy as np
 import pandas as pd
 from sklearn.metrics import accuracy_score, log_loss
 
-from fpl_predictor.feature_factory import build_pre_match_feature_table
+from fpl_predictor.feature_factory import (
+    PREMIER_LEAGUE_TOURNAMENTS,
+    build_pre_match_feature_table,
+    normalize_tournament,
+)
+from fpl_predictor.predictors import apply_temperature
 
-PREMIER_LEAGUE_TOURNAMENTS = frozenset({"prem", "premier league"})
 FEATURE_COLUMNS = (
     "is_cup_match",
     "is_european_match",
@@ -124,12 +128,6 @@ class TrainingSummary:
     feature_columns: list[str]
 
 
-def normalize_tournament(value: Any) -> str:
-    if pd.isna(value):
-        return ""
-    return str(value).strip().casefold()
-
-
 def is_premier_league_frame(frame: pd.DataFrame) -> pd.Series:
     tournament = frame.get("tournament")
     if tournament is None:
@@ -183,23 +181,19 @@ def add_sorting_columns(frame: pd.DataFrame) -> pd.DataFrame:
 
 def add_derived_features(frame: pd.DataFrame) -> pd.DataFrame:
     working = frame.copy()
-    working["elo_diff"] = working["home_current_elo"] - working["away_current_elo"]
-    working["days_rest_diff"] = working["home_days_rest"] - working["away_days_rest"]
-    working["last5_matches_diff"] = working["home_last5_matches"] - working["away_last5_matches"]
-    working["last5_avg_xg_diff"] = working["home_last5_avg_xg"] - working["away_last5_avg_xg"]
-    working["last5_avg_xga_diff"] = working["home_last5_avg_xga"] - working["away_last5_avg_xga"]
-    working["last5_avg_shots_on_target_diff"] = (
-        working["home_last5_avg_shots_on_target"] - working["away_last5_avg_shots_on_target"]
-    )
-    working["last5_avg_big_chances_diff"] = (
-        working["home_last5_avg_big_chances"] - working["away_last5_avg_big_chances"]
-    )
-    working["last5_avg_tackles_won_diff"] = (
-        working["home_last5_avg_tackles_won"] - working["away_last5_avg_tackles_won"]
-    )
-    working["last5_clean_sheet_rate_diff"] = (
-        working["home_last5_clean_sheet_rate"] - working["away_last5_clean_sheet_rate"]
-    )
+    differences = {
+        "elo_diff": "current_elo",
+        "days_rest_diff": "days_rest",
+        "last5_matches_diff": "last5_matches",
+        "last5_avg_xg_diff": "last5_avg_xg",
+        "last5_avg_xga_diff": "last5_avg_xga",
+        "last5_avg_shots_on_target_diff": "last5_avg_shots_on_target",
+        "last5_avg_big_chances_diff": "last5_avg_big_chances",
+        "last5_avg_tackles_won_diff": "last5_avg_tackles_won",
+        "last5_clean_sheet_rate_diff": "last5_clean_sheet_rate",
+    }
+    for column, metric in differences.items():
+        working[column] = working[f"home_{metric}"] - working[f"away_{metric}"]
     if "home_pi_rating" in working.columns and "away_pi_rating" in working.columns:
         working["pi_diff"] = working["home_pi_rating"] - working["away_pi_rating"]
     if "is_covid_season" not in working.columns:
@@ -215,14 +209,6 @@ def add_derived_features(frame: pd.DataFrame) -> pd.DataFrame:
 
 def competition_sample_weight(frame: pd.DataFrame) -> pd.Series:
     return frame["competition_code"].map(COMPETITION_WEIGHTS).fillna(0.4)
-
-
-def apply_temperature(probabilities: np.ndarray, temperature: float) -> np.ndarray:
-    clipped = np.clip(probabilities, 1e-9, 1.0)
-    logits = np.log(clipped) / temperature
-    logits = logits - logits.max(axis=1, keepdims=True)
-    exponentiated = np.exp(logits)
-    return exponentiated / exponentiated.sum(axis=1, keepdims=True)
 
 
 def load_prediction_feature_frame(feature_table_path: Path) -> pd.DataFrame:
@@ -242,9 +228,7 @@ def build_training_feature_frame(matches_path: Path, training_feature_table_path
 
 
 def load_training_frame(training_feature_table_path: Path) -> pd.DataFrame:
-    features = pd.read_csv(training_feature_table_path)
-    features = add_sorting_columns(features)
-    features = add_derived_features(features)
+    features = load_prediction_feature_frame(training_feature_table_path)
     features["target"] = build_target(features)
     features = features.loc[features["target"] >= 0].copy()
     features["sample_weight"] = competition_sample_weight(features)

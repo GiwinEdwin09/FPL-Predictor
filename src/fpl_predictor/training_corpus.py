@@ -84,10 +84,9 @@ def team_key_for_fci_row(
     key = lookup.get((str(season), numeric_id))
     if key:
         return key
-    for (mapped_season, mapped_id), mapped_key in lookup.items():
+    for (_, mapped_id), mapped_key in lookup.items():
         if mapped_id == numeric_id:
             return mapped_key
-        del mapped_season
     return canonical_team_key(team_id)
 
 
@@ -105,8 +104,7 @@ def overlap_key(home_team_key: Any, away_team_key: Any, kickoff_time: Any) -> tu
 def _empty_market_frame(index: pd.Index) -> pd.DataFrame:
     frame = pd.DataFrame(index=index)
     for column in MARKET_COLUMNS:
-        frame[column] = pd.NA if column == "market_odds_source" else float("nan")
-    frame["market_odds_source"] = ""
+        frame[column] = "" if column == "market_odds_source" else float("nan")
     return frame
 
 

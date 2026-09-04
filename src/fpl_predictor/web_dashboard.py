@@ -10,8 +10,6 @@ import pandas as pd
 
 from fpl_predictor.model_training import (
     FEATURE_COLUMNS,
-    add_derived_features,
-    add_sorting_columns,
     is_premier_league_frame,
     load_prediction_feature_frame,
 )
@@ -34,7 +32,6 @@ def season_label_for_timestamp(value: pd.Timestamp) -> str:
     return f"{start_year}-{start_year + 1}"
 
 
-CURRENT_SEASON = season_label_for_timestamp(pd.Timestamp.now(tz=UTC))
 DEFAULT_BADGE = "club"
 BADGE_ALIASES = {
     "afc bournemouth": "bournemouth",
@@ -481,25 +478,6 @@ def build_prediction_groups_from_frame(
     return current_gameweek, current_fixtures, upcoming_fixtures, postponed_fixtures
 
 
-def build_prediction_groups(
-    feature_table_path: Path,
-    model_path: Path,
-    metrics_path: Path,
-    team_lookup: dict[tuple[str, int], dict[str, Any]],
-) -> tuple[int | None, list[dict[str, Any]], list[dict[str, Any]], list[dict[str, Any]]]:
-    features = pd.read_csv(feature_table_path)
-    features = add_sorting_columns(features)
-    features = add_derived_features(features)
-    temperature, _ = load_model_metadata(metrics_path)
-    model = load_model(model_path)
-    return build_prediction_groups_from_frame(
-        features,
-        model=model,
-        temperature=temperature,
-        team_lookup=team_lookup,
-    )
-
-
 def build_history_probabilities(
     history_match_ids: list[Any],
     feature_lookup: pd.DataFrame,
@@ -626,26 +604,6 @@ def build_historical_matches_from_frames(
     return items
 
 
-def build_historical_matches(
-    matches_path: Path,
-    feature_table_path: Path,
-    team_lookup: dict[tuple[str, int], dict[str, Any]],
-    model: Any | None = None,
-    temperature: float = 1.0,
-    limit: int | None = RECENT_HISTORY_LIMIT,
-) -> list[dict[str, Any]]:
-    matches = pd.read_csv(matches_path)
-    features = load_prediction_feature_frame(feature_table_path)
-    return build_historical_matches_from_frames(
-        matches,
-        features,
-        team_lookup=team_lookup,
-        model=model,
-        temperature=temperature,
-        limit=limit,
-    )
-
-
 def build_dashboard_payload(
     data_dir: Path,
     feature_table_path: Path,
@@ -660,17 +618,43 @@ def build_dashboard_payload(
     temperature, model_metadata = load_model_metadata(metrics_path)
     model = load_model(model_path)
     features = load_prediction_feature_frame(feature_table_path)
+    return build_dashboard_payload_from_frames(
+        pd.read_csv(matches_path),
+        features,
+        model=model,
+        temperature=temperature,
+        model_metadata=model_metadata,
+        team_lookup=team_lookup,
+        model_version=model_path.stem,
+        ledger_path=ledger_path,
+        walk_forward_path=walk_forward_path,
+        now_utc=now_utc,
+    )
+
+
+def build_dashboard_payload_from_frames(
+    matches: pd.DataFrame,
+    features: pd.DataFrame,
+    *,
+    model: Any,
+    temperature: float,
+    model_metadata: dict[str, Any],
+    team_lookup: dict[tuple[str, int], dict[str, Any]],
+    model_version: str,
+    ledger_path: Path = DEFAULT_LEDGER_PATH,
+    walk_forward_path: Path = DEFAULT_WALK_FORWARD_PATH,
+    now_utc: pd.Timestamp | None = None,
+) -> dict[str, Any]:
     current_gameweek, current_fixtures, upcoming_fixtures, postponed_fixtures = build_prediction_groups_from_frame(
         features,
         model=model,
         temperature=temperature,
         team_lookup=team_lookup,
     )
-    matches = pd.read_csv(matches_path)
     current_season = infer_current_season(features)
-    model_version = model_path.stem
+    ledger_model_version = "model_v3" if model_version == "v3" else model_version
     entries = load_ledger(ledger_path)
-    seed_walk_forward_predictions(entries, walk_forward_path, model_version=model_version)
+    seed_walk_forward_predictions(entries, walk_forward_path, model_version=ledger_model_version)
     sync_fixture_predictions(
         entries,
         [
@@ -678,7 +662,7 @@ def build_dashboard_payload(
             *ledger_rows_from_fixtures(upcoming_fixtures),
             *ledger_rows_from_fixtures(postponed_fixtures),
         ],
-        model_version=model_version,
+        model_version=ledger_model_version,
         now_utc=now_utc,
     )
     apply_ledger_to_fixtures(current_fixtures, entries)
@@ -691,7 +675,7 @@ def build_dashboard_payload(
         model=model,
         temperature=temperature,
         ledger_entries=entries,
-        model_version=model_version,
+        model_version=ledger_model_version,
         now_utc=now_utc,
     )
     save_ledger(ledger_path, entries)

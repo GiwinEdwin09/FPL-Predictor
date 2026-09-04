@@ -1,3 +1,4 @@
+from dataclasses import replace
 from pathlib import Path
 from types import SimpleNamespace
 
@@ -7,7 +8,8 @@ import pytest
 
 from fpl_predictor.live_inference import InferencePaths, LiveInferenceService, _is_available, _position_bucket
 from fpl_predictor.predictors import predict_match_probabilities
-from fpl_predictor.web_dashboard import serialize_probabilities
+from fpl_predictor.prediction_ledger import load_ledger, save_ledger, upsert_prediction
+from fpl_predictor.web_dashboard import build_dashboard_payload, serialize_probabilities
 
 
 class _FakeBlendPredictor:
@@ -210,3 +212,79 @@ def test_live_inference_rejects_bundle_missing_an_upcoming_fixture(tmp_path: Pat
 
     with pytest.raises(ValueError, match="bundle is stale"):
         service.state()
+
+
+@pytest.mark.parametrize("bundle_version", [None, "v3"])
+def test_live_and_exported_dashboards_preserve_locked_forecasts(tmp_path: Path, monkeypatch, bundle_version) -> None:
+    paths = replace(_write_runtime_csvs(tmp_path), ledger_path=tmp_path / "ledger.json")
+    model = _FakeBlendPredictor()
+    monkeypatch.setattr("fpl_predictor.live_inference.load_model", lambda _: model)
+    monkeypatch.setattr("fpl_predictor.web_dashboard.load_model", lambda _: model)
+    monkeypatch.setattr("fpl_predictor.web_dashboard.seed_walk_forward_predictions", lambda *_, **__: 0)
+    entries = {}
+    upsert_prediction(
+        entries,
+        match_id="fixture-1",
+        probabilities=np.array([0.42, 0.28, 0.30]),
+        model_version="original-model",
+        finished=True,
+    )
+    save_ledger(paths.ledger_path, entries)
+
+    service = LiveInferenceService(paths)
+    if bundle_version:
+        service.state().bundle_metadata = {"model_version": bundle_version, "schema_version": 1}
+    live = service.dashboard_payload()
+    exported = build_dashboard_payload(
+        paths.data_dir,
+        paths.prediction_feature_table_path,
+        paths.matches_path,
+        paths.model_path,
+        paths.metrics_path,
+        ledger_path=paths.ledger_path,
+    )
+
+    assert live["model"]["version"] == (bundle_version or "model")
+    assert live["model"].pop("bundleSchemaVersion") == (1 if bundle_version else None)
+    live["model"]["version"] = exported["model"]["version"]
+    live.pop("generatedAtUtc")
+    exported.pop("generatedAtUtc")
+    assert live == exported
+    fixture = live["upcomingFixtures"][0]
+    assert fixture["probabilities"] == {"homeWin": 0.42, "draw": 0.28, "awayWin": 0.30}
+    assert load_ledger(paths.ledger_path)["fixture-1"].model_version == "original-model"
+
+
+def test_lineup_simulation_adjusts_only_the_changed_team(tmp_path: Path, monkeypatch) -> None:
+    paths = _write_runtime_csvs(tmp_path)
+    monkeypatch.setattr("fpl_predictor.live_inference.load_model", lambda _: _FakeBlendPredictor())
+    service = LiveInferenceService(paths)
+    original = service.state().features.copy(deep=True)
+    monkeypatch.setattr(
+        service,
+        "projected_lineup",
+        lambda team_id, **_: {"lineup": [{"playerId": team_id}], "roster": []},
+    )
+
+    def lineup_metrics(_state, player_ids, **_):
+        strength = 2.0 if player_ids == [99] else 1.0
+        return dict.fromkeys(
+            ["attack_strength", "finishing_strength", "creation_strength", "touch_strength",
+             "tackle_strength", "defensive_strength"],
+            strength,
+        )
+
+    monkeypatch.setattr(service, "_lineup_metrics", lineup_metrics)
+    result = service.simulate_fixture("fixture-1", home_player_ids=[99])
+
+    assert result["simulatedMatch"]["context"]["homeLast5Xg"] == 2.03
+    assert result["simulatedMatch"]["context"]["homeLast5Xga"] == 0.74
+    assert result["simulatedMatch"]["context"]["awayLast5Xg"] == 1.2
+    assert result["simulatedMatch"]["context"]["awayLast5Xga"] == 1.1
+    assert result["adjustments"] == {
+        "homeAttackRatio": 2.0, "awayAttackRatio": 1.0,
+        "homeDefenceRatio": 2.0, "awayDefenceRatio": 1.0,
+    }
+    assert result["home"]["selectedPlayerIds"] == [99]
+    assert result["away"]["selectedPlayerIds"] == [2]
+    pd.testing.assert_frame_equal(service.state().features, original)

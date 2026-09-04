@@ -1,5 +1,6 @@
 "use client";
 
+import { matchSeasons } from "@/lib/gameweek";
 import Image from "next/image";
 import { useMemo, useState } from "react";
 
@@ -138,7 +139,7 @@ export function TeamView({
   matches: QuizMatch[];
   upcomingFixtures: UpcomingFixture[];
 }) {
-  const seasons = useMemo(() => Array.from(new Set(matches.map((match) => match.season))).sort().reverse(), [matches]);
+  const seasons = useMemo(() => matchSeasons(matches), [matches]);
   const availableSeasons = useMemo(
     () =>
       seasons.filter(

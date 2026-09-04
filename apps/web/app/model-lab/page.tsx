@@ -35,11 +35,8 @@ export default async function ModelLabPage() {
   const dashboard = result.data;
   const matches = pickQuizCandidates(dashboard.historicalMatches);
   const model = {
-    validationAccuracy: dashboard.model.metrics.accuracy ?? null,
     logLoss: dashboard.model.metrics.multiclass_log_loss ?? null,
     brier: dashboard.model.metrics.multiclass_brier_score ?? null,
-    temperature: dashboard.model.calibrationTemperature ?? null,
-    trainRows: dashboard.model.split.train_rows ?? null,
     validationRows: dashboard.model.split.validation_rows ?? null,
   };
 

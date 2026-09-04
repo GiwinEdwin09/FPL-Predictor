@@ -94,12 +94,6 @@ def run_refresh_pipeline(
         competition_scope="premier_league",
         include_historical_rows=include_historical_rows,
     )
-    build_feature_table(
-        matches_path=feature_matches_path,
-        output_path=training_feature_table_path,
-        competition_scope="all",
-        include_historical_rows=True,
-    )
     deploy_result: dict[str, Any] = {
         "deploy": True,
         "reason": "v2 trains directly to production",
@@ -113,7 +107,7 @@ def run_refresh_pipeline(
 
         candidate_model_path = model_path.parent / "candidate" / model_path.name
         candidate_metrics_path = metrics_path.parent / "candidate" / metrics_path.name
-        training_summary = train_and_save_model_v3(
+        train_and_save_model_v3(
             prediction_feature_table_path=prediction_feature_table_path,
             training_feature_table_path=training_feature_table_path,
             matches_path=feature_matches_path,
@@ -134,7 +128,7 @@ def run_refresh_pipeline(
         if not deploy_result["deploy"] and not model_path.exists():
             raise ValueError(f"Candidate model failed promotion and no incumbent exists: {deploy_result['reason']}")
     else:
-        training_summary = train_and_save_model(
+        train_and_save_model(
             prediction_feature_table_path=prediction_feature_table_path,
             training_feature_table_path=training_feature_table_path,
             matches_path=matches_path,

@@ -65,7 +65,7 @@ def probabilities_from_mapping(values: Mapping[str, Any]) -> dict[str, float]:
 
 
 def isoformat_kickoff(value: Any) -> str | None:
-    if value is None or (isinstance(value, float) and pd.isna(value)) or pd.isna(value):
+    if value is None or pd.isna(value):
         return None
     timestamp = pd.Timestamp(value)
     if timestamp.tzinfo is None:
@@ -76,7 +76,7 @@ def isoformat_kickoff(value: Any) -> str | None:
 
 
 def parse_kickoff(value: Any) -> pd.Timestamp | None:
-    if value is None or (isinstance(value, float) and pd.isna(value)) or pd.isna(value):
+    if value is None or pd.isna(value):
         return None
     timestamp = pd.to_datetime(value, utc=True, errors="coerce", format="mixed")
     if pd.isna(timestamp):
@@ -111,14 +111,6 @@ def entry_from_json(payload: Mapping[str, Any]) -> LedgerEntry:
         locked=bool(payload.get("locked", False)),
         prediction_type=str(payload.get("predictionType", PREDICTION_TYPE_PRE_KICKOFF)),
     )
-
-
-def empty_ledger() -> dict[str, Any]:
-    return {
-        "schema_version": LEDGER_SCHEMA_VERSION,
-        "updated_at_utc": datetime.now(UTC).isoformat(),
-        "entries": {},
-    }
 
 
 def load_ledger(path: Path = DEFAULT_LEDGER_PATH) -> dict[str, LedgerEntry]:
@@ -242,12 +234,6 @@ def sync_fixture_predictions(
         if wrote:
             changed += 1
     return changed
-
-
-def ledger_probability_lookup(
-    entries: Mapping[str, LedgerEntry],
-) -> dict[str, np.ndarray]:
-    return {match_id: entry.probability_array() for match_id, entry in entries.items()}
 
 
 def walk_forward_probabilities(backtest_payload: Mapping[str, Any]) -> dict[str, dict[str, float]]:

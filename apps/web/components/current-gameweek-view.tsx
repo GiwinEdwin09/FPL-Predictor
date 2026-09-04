@@ -1,5 +1,6 @@
 import { PredictionCard } from "@/components/prediction-card";
 import { EmptyState } from "@/components/ui/states";
+import { earliestKickoff } from "@/lib/gameweek";
 import type { UpcomingFixture } from "@/lib/dashboard";
 import { formatKickoffWithZone } from "@/lib/format";
 
@@ -18,10 +19,7 @@ export function CurrentGameweekView({
     );
   }
 
-  const firstKickoff = fixtures
-    .map((fixture) => fixture.kickoffTime)
-    .filter((kickoffTime): kickoffTime is string => kickoffTime !== null)
-    .sort()[0] ?? null;
+  const firstKickoff = earliestKickoff(fixtures);
 
   return (
     <section className="week-panel">

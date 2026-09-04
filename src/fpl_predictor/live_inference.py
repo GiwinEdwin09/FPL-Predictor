@@ -20,41 +20,17 @@ from fpl_predictor.model_training import (
 from fpl_predictor.model_bundle import load_model_bundle
 from fpl_predictor.predictors import feature_columns_for_model, predict_match_probabilities
 from fpl_predictor.web_dashboard import (
-    DEFAULT_WALK_FORWARD_PATH,
-    apply_ledger_to_fixtures,
-    build_historical_matches_from_frames,
-    build_prediction_groups_from_frame,
+    build_dashboard_payload_from_frames,
     coerce_float,
     coerce_int,
-    infer_current_season,
-    ledger_rows_from_fixtures,
     load_model,
     load_model_metadata,
     load_team_lookup,
     serialize_prediction_fixture,
     serialize_team,
 )
-from fpl_predictor.prediction_ledger import (
-    DEFAULT_LEDGER_PATH,
-    load_ledger,
-    save_ledger,
-    seed_walk_forward_predictions,
-    sync_fixture_predictions,
-)
+from fpl_predictor.prediction_ledger import DEFAULT_LEDGER_PATH
 
-PLAYER_METRIC_COLUMNS = (
-    "xg",
-    "xa",
-    "shots_on_target",
-    "chances_created",
-    "touches_opposition_box",
-    "tackles_won",
-    "tackles",
-    "interceptions",
-    "recoveries",
-    "clearances",
-    "blocks",
-)
 DEFAULT_SIMULATION_RATIO_LIMITS = (0.65, 1.35)
 
 
@@ -423,70 +399,27 @@ class LiveInferenceService:
 
     def dashboard_payload(self, refresh: bool = False) -> dict[str, Any]:
         state = self.state(refresh=refresh)
-        current_season = infer_current_season(state.features)
-        current_gameweek, current_fixtures, upcoming_fixtures, postponed_fixtures = build_prediction_groups_from_frame(
-            state.features,
-            model=state.model,
-            temperature=state.temperature,
-            team_lookup=state.team_lookup,
-        )
         model_version = (
             state.bundle_metadata.get("model_version")
             if state.bundle_metadata is not None
             else self.paths.model_path.stem
         )
-        if model_version == "v3":
-            model_version = "model_v3"
-        ledger_path = self.paths.ledger_path or DEFAULT_LEDGER_PATH
-        entries = load_ledger(ledger_path)
-        seed_walk_forward_predictions(entries, DEFAULT_WALK_FORWARD_PATH, model_version=model_version)
-        sync_fixture_predictions(
-            entries,
-            [
-                *ledger_rows_from_fixtures(current_fixtures),
-                *ledger_rows_from_fixtures(upcoming_fixtures),
-                *ledger_rows_from_fixtures(postponed_fixtures),
-            ],
-            model_version=model_version,
-        )
-        apply_ledger_to_fixtures(current_fixtures, entries)
-        apply_ledger_to_fixtures(upcoming_fixtures, entries)
-        apply_ledger_to_fixtures(postponed_fixtures, entries)
-        historical_matches = build_historical_matches_from_frames(
+        payload = build_dashboard_payload_from_frames(
             state.matches,
             state.features,
-            team_lookup=state.team_lookup,
             model=state.model,
             temperature=state.temperature,
-            ledger_entries=entries,
+            model_metadata=state.model_metadata,
+            team_lookup=state.team_lookup,
             model_version=model_version,
+            ledger_path=self.paths.ledger_path or DEFAULT_LEDGER_PATH,
         )
-        save_ledger(ledger_path, entries)
-        return {
-            "generatedAtUtc": datetime.now(UTC).isoformat(),
-            "currentSeason": current_season,
-            "model": {
-                "version": (
-                    state.bundle_metadata.get("model_version")
-                    if state.bundle_metadata is not None
-                    else self.paths.model_path.stem
-                ),
-                "bundleSchemaVersion": (
-                    state.bundle_metadata.get("schema_version")
-                    if state.bundle_metadata is not None
-                    else None
-                ),
-                "calibrationTemperature": state.temperature,
-                "metrics": state.model_metadata.get("metrics", {}),
-                "split": state.model_metadata.get("split", {}),
-                "competitionDistributionTrain": state.model_metadata.get("competition_distribution_train", {}),
-            },
-            "currentGameweek": current_gameweek,
-            "currentGameweekFixtures": current_fixtures,
-            "upcomingFixtures": upcoming_fixtures,
-            "postponedFixtures": postponed_fixtures,
-            "historicalMatches": historical_matches,
-        }
+        payload["model"]["bundleSchemaVersion"] = (
+            state.bundle_metadata.get("schema_version")
+            if state.bundle_metadata is not None
+            else None
+        )
+        return payload
 
     def _baseline_fixture(self, match_id: str, *, refresh: bool = False) -> tuple[RuntimeState, pd.Series, dict[str, Any]]:
         state = self.state(refresh=refresh)
@@ -649,14 +582,18 @@ class LiveInferenceService:
             on="player_id",
             how="left",
         )
-        candidates["chance_play_this_round"] = pd.to_numeric(candidates["chance_play_this_round"], errors="coerce").fillna(100.0)
-        candidates["form"] = pd.to_numeric(candidates["form"], errors="coerce").fillna(0.0)
-        candidates["season_minutes"] = pd.to_numeric(candidates["season_minutes"], errors="coerce").fillna(0.0)
-        candidates["season_starts"] = pd.to_numeric(candidates["season_starts"], errors="coerce").fillna(0.0)
-        candidates["recent_matches"] = pd.to_numeric(candidates["recent_matches"], errors="coerce").fillna(0.0)
-        candidates["recent_starts"] = pd.to_numeric(candidates["recent_starts"], errors="coerce").fillna(0.0)
-        candidates["recent_minutes"] = pd.to_numeric(candidates["recent_minutes"], errors="coerce").fillna(0.0)
-        candidates["recent_average_minutes"] = pd.to_numeric(candidates["recent_average_minutes"], errors="coerce").fillna(0.0)
+        numeric_defaults = {
+            "chance_play_this_round": 100.0,
+            "form": 0.0,
+            "season_minutes": 0.0,
+            "season_starts": 0.0,
+            "recent_matches": 0.0,
+            "recent_starts": 0.0,
+            "recent_minutes": 0.0,
+            "recent_average_minutes": 0.0,
+        }
+        for column, default in numeric_defaults.items():
+            candidates[column] = pd.to_numeric(candidates[column], errors="coerce").fillna(default)
         candidates["available"] = candidates.apply(
             lambda row: _is_available(
                 row.get("status"),
@@ -685,7 +622,6 @@ class LiveInferenceService:
         selected: list[int] = []
 
         def take(bucket: str, count: int) -> None:
-            nonlocal selected
             subset = candidates.loc[
                 (candidates["position_bucket"] == bucket)
                 & ~candidates["player_id"].isin(selected)
@@ -941,6 +877,29 @@ class LiveInferenceService:
             ratio = 1.0 / ratio
         return float(base_value) * ratio
 
+    def _adjust_lineup_features(
+        self,
+        adjusted: pd.Series,
+        side: str,
+        baseline: dict[str, float],
+        simulated: dict[str, float],
+    ) -> None:
+        metrics = (
+            ("xg", ("attack_strength",), False),
+            ("shots_on_target", ("finishing_strength",), False),
+            ("big_chances", ("creation_strength", "touch_strength"), False),
+            ("tackles_won", ("tackle_strength",), False),
+            ("xga", ("defensive_strength",), True),
+        )
+        for metric, strengths, inverse in metrics:
+            column = f"{side}_last5_avg_{metric}"
+            adjusted[column] = self._scaled_feature(
+                adjusted.get(column),
+                baseline_strength=sum(baseline[strength] for strength in strengths),
+                simulated_strength=sum(simulated[strength] for strength in strengths),
+                inverse=inverse,
+            )
+
     def simulate_fixture(
         self,
         match_id: str,
@@ -1007,58 +966,11 @@ class LiveInferenceService:
         )
 
         adjusted = fixture_row.copy()
-        adjusted["home_last5_avg_xg"] = self._scaled_feature(
-            fixture_row.get("home_last5_avg_xg"),
-            baseline_strength=baseline_home["attack_strength"],
-            simulated_strength=simulated_home["attack_strength"],
-        )
-        adjusted["away_last5_avg_xg"] = self._scaled_feature(
-            fixture_row.get("away_last5_avg_xg"),
-            baseline_strength=baseline_away["attack_strength"],
-            simulated_strength=simulated_away["attack_strength"],
-        )
-        adjusted["home_last5_avg_shots_on_target"] = self._scaled_feature(
-            fixture_row.get("home_last5_avg_shots_on_target"),
-            baseline_strength=baseline_home["finishing_strength"],
-            simulated_strength=simulated_home["finishing_strength"],
-        )
-        adjusted["away_last5_avg_shots_on_target"] = self._scaled_feature(
-            fixture_row.get("away_last5_avg_shots_on_target"),
-            baseline_strength=baseline_away["finishing_strength"],
-            simulated_strength=simulated_away["finishing_strength"],
-        )
-        adjusted["home_last5_avg_big_chances"] = self._scaled_feature(
-            fixture_row.get("home_last5_avg_big_chances"),
-            baseline_strength=baseline_home["creation_strength"] + baseline_home["touch_strength"],
-            simulated_strength=simulated_home["creation_strength"] + simulated_home["touch_strength"],
-        )
-        adjusted["away_last5_avg_big_chances"] = self._scaled_feature(
-            fixture_row.get("away_last5_avg_big_chances"),
-            baseline_strength=baseline_away["creation_strength"] + baseline_away["touch_strength"],
-            simulated_strength=simulated_away["creation_strength"] + simulated_away["touch_strength"],
-        )
-        adjusted["home_last5_avg_tackles_won"] = self._scaled_feature(
-            fixture_row.get("home_last5_avg_tackles_won"),
-            baseline_strength=baseline_home["tackle_strength"],
-            simulated_strength=simulated_home["tackle_strength"],
-        )
-        adjusted["away_last5_avg_tackles_won"] = self._scaled_feature(
-            fixture_row.get("away_last5_avg_tackles_won"),
-            baseline_strength=baseline_away["tackle_strength"],
-            simulated_strength=simulated_away["tackle_strength"],
-        )
-        adjusted["home_last5_avg_xga"] = self._scaled_feature(
-            fixture_row.get("home_last5_avg_xga"),
-            baseline_strength=baseline_home["defensive_strength"],
-            simulated_strength=simulated_home["defensive_strength"],
-            inverse=True,
-        )
-        adjusted["away_last5_avg_xga"] = self._scaled_feature(
-            fixture_row.get("away_last5_avg_xga"),
-            baseline_strength=baseline_away["defensive_strength"],
-            simulated_strength=simulated_away["defensive_strength"],
-            inverse=True,
-        )
+        for side, baseline, simulated in (
+            ("home", baseline_home, simulated_home),
+            ("away", baseline_away, simulated_away),
+        ):
+            self._adjust_lineup_features(adjusted, side, baseline, simulated)
 
         adjusted_frame = add_derived_features(pd.DataFrame([adjusted]))
         probabilities = predict_match_probabilities(

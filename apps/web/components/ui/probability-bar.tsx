@@ -1,13 +1,8 @@
+import type { FixtureProbabilities } from "@/lib/dashboard";
 import { formatPercent } from "@/lib/format";
 
-type Probabilities = {
-  homeWin: number;
-  draw: number;
-  awayWin: number;
-};
-
 type ProbabilityBarProps = {
-  probabilities: Probabilities;
+  probabilities: FixtureProbabilities;
   homeShort: string;
   awayShort: string;
   size?: "sm" | "md" | "lg";

@@ -24,10 +24,9 @@ from fpl_predictor.model_training import (
     add_derived_features,
     add_sorting_columns,
     apply_temperature,
-    build_target,
-    competition_sample_weight,
     is_premier_league_frame,
     load_prediction_feature_frame,
+    load_training_frame,
     multiclass_brier_score,
     split_train_validation,
     summarize_competitions,
@@ -290,18 +289,8 @@ def build_v3_training_feature_frame(
 
 
 def load_v3_training_frame(training_feature_table_path: Path) -> pd.DataFrame:
-    features = pd.read_csv(training_feature_table_path)
-    features = add_sorting_columns(features)
-    features = add_derived_features(features)
-    features["target"] = build_target(features)
-    features = features.loc[features["target"] >= 0].copy()
-    features = features.loc[features["kickoff_time"].notna()].copy()
-    features["sample_weight"] = competition_sample_weight(features)
-    return features.sort_values(
-        ["kickoff_time", "source_season", "_ordering_gameweek", "match_id"],
-        kind="stable",
-        na_position="last",
-    ).reset_index(drop=True)
+    features = load_training_frame(training_feature_table_path)
+    return features.loc[features["kickoff_time"].notna()].reset_index(drop=True)
 
 
 def train_blend_predictor(

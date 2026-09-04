@@ -1,5 +1,7 @@
 "use client";
 
+import { formatMatchDate } from "@/lib/format";
+
 import Image from "next/image";
 import Link from "next/link";
 import { useMemo, useState } from "react";
@@ -42,15 +44,6 @@ function TeamPicker({
         ))}
       </select>
     </label>
-  );
-}
-
-function formatDate(kickoffTime: string | null) {
-  if (!kickoffTime) {
-    return "Date pending";
-  }
-  return new Intl.DateTimeFormat("en-GB", { day: "numeric", month: "short", year: "numeric" }).format(
-    new Date(kickoffTime),
   );
 }
 
@@ -323,7 +316,7 @@ export function CompareExplorer({ matches, teams }: { matches: QuizMatch[]; team
                 return (
                   <li key={match.matchId} className="team-result-row compare-meeting-row">
                     <span className="team-result-meta">
-                      MW {match.gameweek ?? "—"} · {match.season.replace("-", "/")} · {formatDate(match.kickoffTime)}
+                      MW {match.gameweek ?? "—"} · {match.season.replace("-", "/")} · {formatMatchDate(match.kickoffTime)}
                     </span>
                     <span className="upset-fixture compare-meeting-fixture">
                       <span className="upset-team">

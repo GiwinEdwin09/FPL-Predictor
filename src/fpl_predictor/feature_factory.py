@@ -14,7 +14,6 @@ AVG_METRICS = ("xg", "xga", "shots_on_target", "big_chances", "tackles_won")
 RATE_METRICS = ("clean_sheet",)
 PREMIER_LEAGUE_TOURNAMENTS = frozenset({"prem", "premier league"})
 EUROPEAN_TOURNAMENTS = frozenset({"champions-league", "europa-league", "conference-league"})
-DOMESTIC_CUP_TOURNAMENTS = frozenset({"efl-cup", "fa-cup", "league-cup", "carabao-cup"})
 COVID_SEASONS = frozenset({"2019-2020", "2020-2021"})
 HISTORICAL_SOURCE = "football-data.co.uk"
 BASE_COLUMNS = (

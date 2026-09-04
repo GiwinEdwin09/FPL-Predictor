@@ -1,6 +1,5 @@
 from pathlib import Path
 
-import pandas as pd
 
 from fpl_predictor.historical_ingestion import (
     DEFAULT_START_YEAR,
