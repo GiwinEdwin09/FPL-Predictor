@@ -7,6 +7,8 @@ import { TeamCrest } from "@/components/ui/crest";
 import { ProbabilityBar } from "@/components/ui/probability-bar";
 import { EmptyState } from "@/components/ui/states";
 import type { HistoricalMatch } from "@/lib/dashboard";
+import { modelPick, outcomeProbability, resolveOutcome } from "@/lib/quiz";
+import { groupByGameweek, matchSeasons } from "@/lib/gameweek";
 import { formatMatchDate, formatPercent } from "@/lib/format";
 
 type HistoryWeekViewProps = {
@@ -22,41 +24,24 @@ function verdictFor(match: HistoricalMatch): Verdict | null {
   if (!match.probabilities || match.score.home === null || match.score.away === null) {
     return null;
   }
-  const { homeWin, draw, awayWin } = match.probabilities;
-  const pick = homeWin >= draw && homeWin >= awayWin ? "home" : awayWin >= homeWin && awayWin >= draw ? "away" : "draw";
-  const actual = match.score.home > match.score.away ? "home" : match.score.away > match.score.home ? "away" : "draw";
-  if (pick === actual) {
+  const actual = resolveOutcome(match);
+  if (actual === null) return null;
+  const prediction = { probabilities: match.probabilities };
+  if (modelPick(prediction) === actual) {
     return "correct";
   }
-  const actualProbability =
-    actual === "home" ? homeWin : actual === "away" ? awayWin : draw;
+  const actualProbability = outcomeProbability(prediction, actual);
   return actualProbability <= UPSET_PROBABILITY_THRESHOLD ? "upset" : "incorrect";
 }
 
 export function HistoryWeekView({ matches }: HistoryWeekViewProps) {
-  const seasons = useMemo(() => Array.from(new Set(matches.map((match) => match.season))).sort().reverse(), [matches]);
+  const seasons = useMemo(() => matchSeasons(matches), [matches]);
   const [season, setSeason] = useState(seasons[0] ?? "");
 
-  const groups = useMemo(() => {
-    const relevant = matches.filter((match) => match.season === season && match.gameweek !== null);
-    const map = new Map<number, HistoricalMatch[]>();
-    for (const match of relevant) {
-      const key = match.gameweek as number;
-      const current = map.get(key) ?? [];
-      current.push(match);
-      map.set(key, current);
-    }
-
-    for (const [, items] of map) {
-      items.sort((left, right) => {
-        const leftTime = left.kickoffTime ?? "";
-        const rightTime = right.kickoffTime ?? "";
-        return leftTime.localeCompare(rightTime);
-      });
-    }
-
-    return map;
-  }, [matches, season]);
+  const groups = useMemo(
+    () => groupByGameweek(matches.filter((match) => match.season === season)),
+    [matches, season],
+  );
 
   const gameweeks = useMemo(() => Array.from(groups.keys()).sort((left, right) => left - right), [groups]);
   const [index, setIndex] = useState(0);
@@ -126,19 +111,13 @@ export function HistoryWeekView({ matches }: HistoryWeekViewProps) {
           <div className="history-week-scroll">
             {selectedMatches.map((match) => {
               const verdict = verdictFor(match);
-              const verdictLabel =
-                verdict === "correct"
-                  ? "Correct prediction"
-                  : verdict === "upset"
-                    ? "Upset — model missed"
-                    : "Incorrect prediction";
 
               return (
                 <article key={match.matchId} className="history-card">
                   <div className="history-meta">
                     <span>MW {match.gameweek ?? "?"}</span>
                     <span>{formatMatchDate(match.kickoffTime)}</span>
-                    {verdict ? <ResultBadge state={verdict} label={verdictLabel} /> : null}
+                    {verdict ? <ResultBadge state={verdict} /> : null}
                   </div>
 
                   <div className="history-scoreline">

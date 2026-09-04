@@ -9,6 +9,12 @@ export type TeamSummary = {
   badgePath: string | null;
 };
 
+export type FixtureProbabilities = {
+  homeWin: number;
+  draw: number;
+  awayWin: number;
+};
+
 export type UpcomingFixture = {
   matchId: string;
   season: string;
@@ -21,11 +27,7 @@ export type UpcomingFixture = {
   };
   homeTeam: TeamSummary;
   awayTeam: TeamSummary;
-  probabilities: {
-    homeWin: number;
-    draw: number;
-    awayWin: number;
-  };
+  probabilities: FixtureProbabilities;
   predictionType?: "pre_kickoff" | "backfill_walk_forward" | "replay" | null;
   context: {
     homeElo: number | null;
@@ -66,11 +68,7 @@ export type HistoricalMatch = {
     homeLast5Xg: number | null;
     awayLast5Xg: number | null;
   };
-  probabilities: {
-    homeWin: number;
-    draw: number;
-    awayWin: number;
-  } | null;
+  probabilities: FixtureProbabilities | null;
   predictionType?: "pre_kickoff" | "backfill_walk_forward" | "replay" | null;
   matchUrl: string | null;
 };

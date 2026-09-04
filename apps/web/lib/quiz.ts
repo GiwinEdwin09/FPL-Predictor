@@ -1,4 +1,4 @@
-import type { HistoricalMatch } from "@/lib/dashboard";
+import type { HistoricalMatch, UpcomingFixture } from "@/lib/dashboard";
 
 export type QuizOutcome = "home" | "draw" | "away";
 
@@ -21,7 +21,7 @@ export function resolveOutcome(match: HistoricalMatch): QuizOutcome | null {
   return "draw";
 }
 
-export function modelPick(match: QuizMatch): QuizOutcome {
+export function modelPick(match: Pick<UpcomingFixture, "probabilities">): QuizOutcome {
   const { homeWin, draw, awayWin } = match.probabilities;
   if (homeWin >= draw && homeWin >= awayWin) {
     return "home";
@@ -32,7 +32,7 @@ export function modelPick(match: QuizMatch): QuizOutcome {
   return "draw";
 }
 
-export function outcomeProbability(match: QuizMatch, outcome: QuizOutcome): number {
+export function outcomeProbability(match: Pick<UpcomingFixture, "probabilities">, outcome: QuizOutcome): number {
   if (outcome === "home") {
     return match.probabilities.homeWin;
   }

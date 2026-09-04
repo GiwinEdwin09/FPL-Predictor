@@ -18,25 +18,27 @@ export function formatPercent(value: number | null | undefined, digits = 0): str
   return `${(value * 100).toFixed(digits)}%`;
 }
 
+function formatDateTime(
+  value: string | null | undefined,
+  options: Intl.DateTimeFormatOptions,
+  fallback: string,
+): string {
+  if (!value) return fallback;
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return fallback;
+  return new Intl.DateTimeFormat("en-GB", options).format(date);
+}
+
 export function formatKickoff(kickoffTime: string | null | undefined): string {
-  if (!kickoffTime) return "Kickoff TBC";
-  const date = new Date(kickoffTime);
-  if (Number.isNaN(date.getTime())) return "Kickoff TBC";
-  return new Intl.DateTimeFormat("en-GB", KICKOFF_FORMAT).format(date);
+  return formatDateTime(kickoffTime, KICKOFF_FORMAT, "Kickoff TBC");
 }
 
 export function formatKickoffWithZone(kickoffTime: string | null | undefined): string {
-  if (!kickoffTime) return "Kickoff TBC";
-  const date = new Date(kickoffTime);
-  if (Number.isNaN(date.getTime())) return "Kickoff TBC";
-  return new Intl.DateTimeFormat("en-GB", KICKOFF_FORMAT_TZ).format(date);
+  return formatDateTime(kickoffTime, KICKOFF_FORMAT_TZ, "Kickoff TBC");
 }
 
 export function formatMatchDate(kickoffTime: string | null | undefined): string {
-  if (!kickoffTime) return "Date pending";
-  const date = new Date(kickoffTime);
-  if (Number.isNaN(date.getTime())) return "Date pending";
-  return new Intl.DateTimeFormat("en-GB", DATE_FORMAT).format(date);
+  return formatDateTime(kickoffTime, DATE_FORMAT, "Date pending");
 }
 
 export function formatMetric(value: number | null | undefined, digits = 2): string {

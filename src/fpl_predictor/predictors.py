@@ -3,7 +3,7 @@ from __future__ import annotations
 import json
 from dataclasses import asdict, dataclass
 from pathlib import Path
-from typing import Any, Protocol
+from typing import Any
 
 import numpy as np
 import pandas as pd
@@ -23,11 +23,6 @@ PROBABILITY_EPSILON = 1e-12
 DEFAULT_BLEND_GRID = tuple(round(value, 2) for value in np.linspace(0.0, 1.0, 11))
 DEFAULT_TEMPERATURE_GRID = np.linspace(0.75, 2.5, 15)
 DEFAULT_HALF_LIFE_DAYS = 550.0
-
-
-class OutcomePredictor(Protocol):
-    def predict_proba(self, frame: pd.DataFrame) -> np.ndarray:
-        ...
 
 
 def normalize_probabilities(probabilities: np.ndarray) -> np.ndarray:

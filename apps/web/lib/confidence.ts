@@ -1,3 +1,6 @@
+import type { FixtureProbabilities } from "@/lib/dashboard";
+import { modelPick } from "@/lib/quiz";
+
 export type ConfidenceLevel =
   | "strong-favorite"
   | "favorite"
@@ -14,18 +17,6 @@ export type Confidence = {
   pick: "home" | "draw" | "away" | null;
 };
 
-type Distribution = {
-  homeWin: number;
-  draw: number;
-  awayWin: number;
-};
-
-function pickOutcome({ homeWin, draw, awayWin }: Distribution): "home" | "draw" | "away" {
-  if (homeWin >= draw && homeWin >= awayWin) return "home";
-  if (awayWin >= homeWin && awayWin >= draw) return "away";
-  return "draw";
-}
-
 /**
  * Human-readable confidence for a 1X2 probability distribution.
  *
@@ -34,7 +25,7 @@ function pickOutcome({ homeWin, draw, awayWin }: Distribution): "home" | "draw" 
  * - how tightly packed the three outcomes are (spread)
  * - the draw probability as a balancing force
  */
-export function describeConfidence(probabilities: Distribution): Confidence {
+export function describeConfidence(probabilities: FixtureProbabilities): Confidence {
   const { homeWin, draw, awayWin } = probabilities;
   const values = [homeWin, draw, awayWin];
   const sorted = [...values].sort((left, right) => right - left);
@@ -42,7 +33,7 @@ export function describeConfidence(probabilities: Distribution): Confidence {
   const second = sorted[1];
   const gap = top - second;
   const spread = sorted[0] - sorted[2];
-  const pick = pickOutcome(probabilities);
+  const pick = modelPick({ probabilities });
 
   // Very tight distribution: nothing separates the outcomes.
   if (spread <= 0.12 && gap <= 0.06) {

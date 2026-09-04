@@ -1,5 +1,7 @@
 "use client";
 
+import { formatPercent } from "@/lib/format";
+
 import { useEffect, useMemo, useRef, useState } from "react";
 
 import { PredictionCard } from "@/components/prediction-card";
@@ -32,10 +34,6 @@ function bucketPosition(position: string | null | undefined): PositionBucket {
     return "forward";
   }
   return "unknown";
-}
-
-function formatPercent(value: number) {
-  return `${Math.round(value * 100)}%`;
 }
 
 function initials(name: string) {
@@ -264,6 +262,13 @@ export function CustomizableFutureFixtureCard({ fixture }: CustomizableFutureFix
     }
   }
 
+  function prefetchContext() {
+    if (!hasPrefetched.current) {
+      hasPrefetched.current = true;
+      void ensureContextLoaded();
+    }
+  }
+
   useEffect(() => {
     if (!open || context !== null) {
       return;
@@ -377,18 +382,8 @@ export function CustomizableFutureFixtureCard({ fixture }: CustomizableFutureFix
           <button
             type="button"
             className="lineup-toggle-button"
-            onMouseEnter={() => {
-              if (!hasPrefetched.current) {
-                hasPrefetched.current = true;
-                void ensureContextLoaded();
-              }
-            }}
-            onFocus={() => {
-              if (!hasPrefetched.current) {
-                hasPrefetched.current = true;
-                void ensureContextLoaded();
-              }
-            }}
+            onMouseEnter={prefetchContext}
+            onFocus={prefetchContext}
             onClick={() => {
               hasPrefetched.current = true;
               setOpen((current) => !current);

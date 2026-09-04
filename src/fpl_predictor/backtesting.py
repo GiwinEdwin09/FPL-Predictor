@@ -11,17 +11,15 @@ from sklearn.linear_model import LogisticRegression
 
 from fpl_predictor.model_training import (
     FEATURE_COLUMNS,
-    apply_temperature,
     choose_temperature,
     fit_model,
     is_premier_league_frame,
     load_training_frame,
 )
+from fpl_predictor.predictors import NUM_OUTCOMES, apply_temperature, normalize_probabilities
 
-NUM_OUTCOMES = 3
 MODEL_NAME = "xgboost_v2"
 OUTCOME_LABELS = ("home_win", "draw", "away_win")
-PROBABILITY_EPSILON = 1e-12
 DEFAULT_CALIBRATION_BINS = 10
 
 # Prefer consensus closing prices, then individual closing prices, then
@@ -45,14 +43,6 @@ class WalkForwardFold:
     cutoff_utc: str
     train: pd.DataFrame
     validation: pd.DataFrame
-
-
-def normalize_probabilities(probabilities: np.ndarray) -> np.ndarray:
-    values = np.asarray(probabilities, dtype=float)
-    if values.ndim != 2 or values.shape[1] != NUM_OUTCOMES:
-        raise ValueError("Probabilities must have shape (rows, 3).")
-    values = np.clip(values, PROBABILITY_EPSILON, 1.0)
-    return values / values.sum(axis=1, keepdims=True)
 
 
 def probability_loss_rows(y_true: np.ndarray, probabilities: np.ndarray) -> dict[str, np.ndarray]:
@@ -333,6 +323,99 @@ def _target_distribution(targets: np.ndarray) -> dict[str, int]:
     }
 
 
+def _market_predictions(validation: pd.DataFrame, lookup: dict[str, np.ndarray]) -> np.ndarray:
+    probabilities = np.full((len(validation), NUM_OUTCOMES), np.nan)
+    for row_index, match_id in enumerate(validation["match_id"].astype(str)):
+        if match_id in lookup:
+            probabilities[row_index] = lookup[match_id]
+    return probabilities
+
+
+def _fold_report(
+    fold: WalkForwardFold,
+    fold_predictions: dict[str, np.ndarray],
+) -> tuple[dict[str, dict[str, float | int]], list[dict[str, Any]]]:
+    validation = fold.validation
+    targets = validation["target"].to_numpy(dtype=int)
+    prediction_rows: list[dict[str, Any]] = []
+    fold_metrics: dict[str, dict[str, float | int]] = {}
+    for name, probabilities in fold_predictions.items():
+        valid = np.isfinite(probabilities).all(axis=1)
+        if valid.any():
+            fold_metrics[name] = score_probabilities(targets[valid], probabilities[valid])
+
+    for row_index, (_, match) in enumerate(validation.iterrows()):
+        serialized_models: dict[str, dict[str, float] | None] = {}
+        for name, probabilities in fold_predictions.items():
+            probability = probabilities[row_index]
+            serialized_models[name] = (
+                {
+                    label: float(probability[outcome_index])
+                    for outcome_index, label in enumerate(OUTCOME_LABELS)
+                }
+                if np.isfinite(probability).all()
+                else None
+            )
+        prediction_rows.append(
+            {
+                "fold_id": fold.fold_id,
+                "match_id": str(match["match_id"]),
+                "season": str(match["source_season"]),
+                "gameweek": int(match["_ordering_gameweek"]),
+                "kickoff_time": match["kickoff_time"].isoformat(),
+                "actual_outcome": OUTCOME_LABELS[int(targets[row_index])],
+                "models": serialized_models,
+            }
+        )
+
+    return fold_metrics, prediction_rows
+
+
+def _model_reports(targets: np.ndarray, predictions: dict[str, np.ndarray]) -> dict[str, Any]:
+    model_results: dict[str, Any] = {}
+    for name, probabilities in predictions.items():
+        valid = np.isfinite(probabilities).all(axis=1)
+        if not valid.any():
+            model_results[name] = {"available": False, "rows": 0}
+            continue
+        valid_targets = targets[valid]
+        valid_probabilities = probabilities[valid]
+        model_results[name] = {
+            "available": True,
+            "coverage": float(valid.mean()),
+            **score_probabilities(valid_targets, valid_probabilities),
+            "reliability": reliability_bins(valid_targets, valid_probabilities),
+        }
+
+    return model_results
+
+
+def _compare_predictions(
+    targets: np.ndarray,
+    predictions: dict[str, np.ndarray],
+    blocks: np.ndarray,
+    reference: str,
+    baseline: str,
+    bootstrap_samples: int,
+    seed: int,
+) -> dict[str, Any]:
+    valid = np.isfinite(predictions[reference]).all(axis=1) & np.isfinite(predictions[baseline]).all(axis=1)
+    reference_losses = probability_loss_rows(targets[valid], predictions[reference][valid])
+    baseline_losses = probability_loss_rows(targets[valid], predictions[baseline][valid])
+    comparison: dict[str, Any] = {
+        "interpretation": f"Negative differences favor {reference}.",
+    }
+    for metric in ("log_loss", "brier", "rps"):
+        comparison[metric] = paired_block_bootstrap(
+            reference_losses[metric],
+            baseline_losses[metric],
+            blocks[valid],
+            samples=bootstrap_samples,
+            seed=seed,
+        )
+    return comparison
+
+
 def run_walk_forward_backtest(
     training_feature_table_path: Path,
     matches_path: Path,
@@ -378,10 +461,7 @@ def run_walk_forward_backtest(
         xgboost = normalize_probabilities(xgboost)
         temperatures.append(float(temperature))
 
-        market = np.full((rows, NUM_OUTCOMES), np.nan)
-        for row_index, match_id in enumerate(validation["match_id"].astype(str)):
-            if match_id in market_lookup:
-                market[row_index] = market_lookup[match_id]
+        market = _market_predictions(validation, market_lookup)
 
         fold_predictions = {
             "uniform": uniform,
@@ -395,35 +475,8 @@ def run_walk_forward_backtest(
         target_parts.append(targets)
         block_parts.append(np.full(rows, fold.fold_id, dtype=object))
 
-        fold_metrics: dict[str, dict[str, float | int]] = {}
-        for name, probabilities in fold_predictions.items():
-            valid = np.isfinite(probabilities).all(axis=1)
-            if valid.any():
-                fold_metrics[name] = score_probabilities(targets[valid], probabilities[valid])
-
-        for row_index, (_, match) in enumerate(validation.iterrows()):
-            serialized_models: dict[str, dict[str, float] | None] = {}
-            for name, probabilities in fold_predictions.items():
-                probability = probabilities[row_index]
-                serialized_models[name] = (
-                    {
-                        label: float(probability[outcome_index])
-                        for outcome_index, label in enumerate(OUTCOME_LABELS)
-                    }
-                    if np.isfinite(probability).all()
-                    else None
-                )
-            prediction_rows.append(
-                {
-                    "fold_id": fold.fold_id,
-                    "match_id": str(match["match_id"]),
-                    "season": str(match["source_season"]),
-                    "gameweek": int(match["_ordering_gameweek"]),
-                    "kickoff_time": match["kickoff_time"].isoformat(),
-                    "actual_outcome": OUTCOME_LABELS[int(targets[row_index])],
-                    "models": serialized_models,
-                }
-            )
+        fold_metrics, fold_prediction_rows = _fold_report(fold, fold_predictions)
+        prediction_rows.extend(fold_prediction_rows)
 
         fold_rows.append(
             {
@@ -444,43 +497,16 @@ def run_walk_forward_backtest(
     blocks = np.concatenate(block_parts)
     predictions = {name: np.vstack(parts) for name, parts in probability_parts.items()}
 
-    model_results: dict[str, Any] = {}
-    loss_rows: dict[str, dict[str, np.ndarray]] = {}
-    for name, probabilities in predictions.items():
-        valid = np.isfinite(probabilities).all(axis=1)
-        if not valid.any():
-            model_results[name] = {"available": False, "rows": 0}
-            continue
-        valid_targets = targets[valid]
-        valid_probabilities = probabilities[valid]
-        model_results[name] = {
-            "available": True,
-            "coverage": float(valid.mean()),
-            **score_probabilities(valid_targets, valid_probabilities),
-            "reliability": reliability_bins(valid_targets, valid_probabilities),
-        }
-        loss_rows[name] = probability_loss_rows(valid_targets, valid_probabilities)
+    model_results = _model_reports(targets, predictions)
 
     comparisons: dict[str, Any] = {}
     reference = MODEL_NAME
     for baseline in ("uniform", "historical_prior", "elo_logistic", "market"):
-        if baseline not in loss_rows:
+        if not model_results[baseline]["available"]:
             continue
-        valid = np.isfinite(predictions[reference]).all(axis=1) & np.isfinite(predictions[baseline]).all(axis=1)
-        reference_losses = probability_loss_rows(targets[valid], predictions[reference][valid])
-        baseline_losses = probability_loss_rows(targets[valid], predictions[baseline][valid])
-        comparison: dict[str, Any] = {
-            "interpretation": "Negative differences favor xgboost_v2.",
-        }
-        for metric in ("log_loss", "brier", "rps"):
-            comparison[metric] = paired_block_bootstrap(
-                reference_losses[metric],
-                baseline_losses[metric],
-                blocks[valid],
-                samples=bootstrap_samples,
-                seed=seed,
-            )
-        comparisons[f"{reference}_minus_{baseline}"] = comparison
+        comparisons[f"{reference}_minus_{baseline}"] = _compare_predictions(
+            targets, predictions, blocks, reference, baseline, bootstrap_samples, seed,
+        )
 
     return {
         "generated_at_utc": datetime.now(UTC).isoformat(),
@@ -525,8 +551,8 @@ def run_walk_forward_backtest_v3(
     seed: int = 42,
     half_life_days: float = 550.0,
 ) -> dict[str, Any]:
-    from fpl_predictor.dixon_coles import fit_dixon_coles, predict_dixon_coles
-    from fpl_predictor.model_training import V3_FEATURE_COLUMNS, apply_temperature
+    from fpl_predictor.dixon_coles import predict_dixon_coles
+    from fpl_predictor.model_training import V3_FEATURE_COLUMNS
     from fpl_predictor.model_v3 import load_v3_training_frame, train_blend_predictor
     from fpl_predictor.predictors import (
         fit_multinomial_logistic,
@@ -581,10 +607,7 @@ def run_walk_forward_backtest_v3(
         logistic_model = fit_multinomial_logistic(train, V3_FEATURE_COLUMNS, sample_weight=weights)
         logistic = sklearn_probabilities(logistic_model, validation, V3_FEATURE_COLUMNS)
 
-        market = np.full((rows, NUM_OUTCOMES), np.nan)
-        for row_index, match_id in enumerate(validation["match_id"].astype(str)):
-            if match_id in market_lookup:
-                market[row_index] = market_lookup[match_id]
+        market = _market_predictions(validation, market_lookup)
 
         fold_predictions = {
             "uniform": uniform,
@@ -604,35 +627,8 @@ def run_walk_forward_backtest_v3(
         target_parts.append(targets)
         block_parts.append(np.full(rows, fold.fold_id, dtype=object))
 
-        fold_metrics: dict[str, dict[str, float | int]] = {}
-        for name, probabilities in fold_predictions.items():
-            valid = np.isfinite(probabilities).all(axis=1)
-            if valid.any():
-                fold_metrics[name] = score_probabilities(targets[valid], probabilities[valid])
-
-        for row_index, (_, match) in enumerate(validation.iterrows()):
-            serialized_models: dict[str, dict[str, float] | None] = {}
-            for name, probabilities in fold_predictions.items():
-                probability = probabilities[row_index]
-                serialized_models[name] = (
-                    {
-                        label: float(probability[outcome_index])
-                        for outcome_index, label in enumerate(OUTCOME_LABELS)
-                    }
-                    if np.isfinite(probability).all()
-                    else None
-                )
-            prediction_rows.append(
-                {
-                    "fold_id": fold.fold_id,
-                    "match_id": str(match["match_id"]),
-                    "season": str(match["source_season"]),
-                    "gameweek": int(match["_ordering_gameweek"]),
-                    "kickoff_time": match["kickoff_time"].isoformat(),
-                    "actual_outcome": OUTCOME_LABELS[int(targets[row_index])],
-                    "models": serialized_models,
-                }
-            )
+        fold_metrics, fold_prediction_rows = _fold_report(fold, fold_predictions)
+        prediction_rows.extend(fold_prediction_rows)
 
         fold_rows.append(
             {
@@ -663,43 +659,16 @@ def run_walk_forward_backtest_v3(
     blocks = np.concatenate(block_parts)
     predictions = {name: np.vstack(parts) for name, parts in probability_parts.items()}
 
-    model_results: dict[str, Any] = {}
-    loss_rows: dict[str, dict[str, np.ndarray]] = {}
-    for name, probabilities in predictions.items():
-        valid = np.isfinite(probabilities).all(axis=1)
-        if not valid.any():
-            model_results[name] = {"available": False, "rows": 0}
-            continue
-        valid_targets = targets[valid]
-        valid_probabilities = probabilities[valid]
-        model_results[name] = {
-            "available": True,
-            "coverage": float(valid.mean()),
-            **score_probabilities(valid_targets, valid_probabilities),
-            "reliability": reliability_bins(valid_targets, valid_probabilities),
-        }
-        loss_rows[name] = probability_loss_rows(valid_targets, valid_probabilities)
+    model_results = _model_reports(targets, predictions)
 
     comparisons: dict[str, Any] = {}
     for reference in ("blend_v3", "dixon_coles", "xgboost_v3"):
         for baseline in ("uniform", "historical_prior", "elo_logistic", "dixon_coles", "market", "xgboost_v3"):
-            if reference == baseline or baseline not in loss_rows or reference not in loss_rows:
+            if reference == baseline or not model_results[baseline]["available"] or not model_results[reference]["available"]:
                 continue
-            valid = np.isfinite(predictions[reference]).all(axis=1) & np.isfinite(predictions[baseline]).all(axis=1)
-            reference_losses = probability_loss_rows(targets[valid], predictions[reference][valid])
-            baseline_losses = probability_loss_rows(targets[valid], predictions[baseline][valid])
-            comparison: dict[str, Any] = {
-                "interpretation": f"Negative differences favor {reference}.",
-            }
-            for metric in ("log_loss", "brier", "rps"):
-                comparison[metric] = paired_block_bootstrap(
-                    reference_losses[metric],
-                    baseline_losses[metric],
-                    blocks[valid],
-                    samples=bootstrap_samples,
-                    seed=seed,
-                )
-            comparisons[f"{reference}_minus_{baseline}"] = comparison
+            comparisons[f"{reference}_minus_{baseline}"] = _compare_predictions(
+                targets, predictions, blocks, reference, baseline, bootstrap_samples, seed,
+            )
 
     return {
         "generated_at_utc": datetime.now(UTC).isoformat(),

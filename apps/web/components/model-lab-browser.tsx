@@ -1,12 +1,13 @@
 "use client";
 
-import Image from "next/image";
+import { formatMatchDate, formatPercent } from "@/lib/format";
+
+import { matchSeasons } from "@/lib/gameweek";
 import { useMemo } from "react";
 
 import { TeamCrest } from "@/components/ui/crest";
 import { MetricTile } from "@/components/ui/metric-tile";
 import type { QuizMatch } from "@/lib/quiz";
-import { modelPick, resolveOutcome } from "@/lib/quiz";
 import {
   accuracyByGameweek,
   biggestUpsets,
@@ -15,29 +16,14 @@ import {
   summarizeModel,
   type CalibrationBin,
   type GameweekAccuracy,
+  type UpsetEntry,
 } from "@/lib/insights";
 
 type ModelMeta = {
-  validationAccuracy: number | null;
   logLoss: number | null;
   brier: number | null;
-  temperature: number | null;
-  trainRows: number | null;
   validationRows: number | null;
 };
-
-function formatPercent(value: number, digits = 0) {
-  return `${(value * 100).toFixed(digits)}%`;
-}
-
-function formatDate(kickoffTime: string | null) {
-  if (!kickoffTime) {
-    return "Date pending";
-  }
-  return new Intl.DateTimeFormat("en-GB", { day: "numeric", month: "short", year: "numeric" }).format(
-    new Date(kickoffTime),
-  );
-}
 
 function GameweekAccuracyChart({ rows }: { rows: GameweekAccuracy[] }) {
   if (rows.length === 0) {
@@ -150,13 +136,7 @@ function CalibrationChart({ bins }: { bins: CalibrationBin[] }) {
   );
 }
 
-type UpsetLike = {
-  match: QuizMatch;
-  outcome: "home" | "draw" | "away";
-  probability: number;
-};
-
-function OutcomeRow({ entry, hit }: { entry: UpsetLike; hit: boolean }) {
+function OutcomeRow({ entry, hit }: { entry: UpsetEntry; hit: boolean }) {
   const outcomeText =
     entry.outcome === "draw"
       ? "a draw"
@@ -181,7 +161,7 @@ function OutcomeRow({ entry, hit }: { entry: UpsetLike; hit: boolean }) {
       </div>
       <div className="upset-detail">
         <span>
-          MW {entry.match.gameweek ?? "—"} · {formatDate(entry.match.kickoffTime)}
+          MW {entry.match.gameweek ?? "—"} · {formatMatchDate(entry.match.kickoffTime)}
         </span>
         <span>
           {hit ? "Called at just " : "Gave "}
@@ -194,7 +174,7 @@ function OutcomeRow({ entry, hit }: { entry: UpsetLike; hit: boolean }) {
 
 export function ModelLabBrowser({ matches, model }: { matches: QuizMatch[]; model: ModelMeta }) {
   const seasons = useMemo(
-    () => Array.from(new Set(matches.map((match) => match.season))).sort().reverse(),
+    () => matchSeasons(matches),
     [matches],
   );
   // Evaluate on the most recent fully-graded season available in the data.

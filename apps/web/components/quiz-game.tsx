@@ -1,5 +1,7 @@
 "use client";
 
+import { formatPercent } from "@/lib/format";
+
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
@@ -21,10 +23,6 @@ type DailyRecord = {
 
 const SCORE_STORAGE_KEY = "fpl-predictor-quiz-score-v1";
 const DAILY_STORAGE_KEY = "fpl-predictor-quiz-daily-v1";
-
-function formatPercent(value: number) {
-  return `${Math.round(value * 100)}%`;
-}
 
 function formatKickoff(kickoffTime: string) {
   return new Intl.DateTimeFormat("en-GB", {
