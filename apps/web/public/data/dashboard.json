@@ -1,5 +1,5 @@
 {
-  "generatedAtUtc": "2026-09-04T09:55:20.017050+00:00",
+  "generatedAtUtc": "2026-09-04T19:51:25.662031+00:00",
   "currentSeason": "2026-2027",
   "model": {
     "version": "model_v3",
@@ -23,9 +23,8 @@
       "conference-league": 6
     }
   },
-  "currentGameweek": null,
-  "currentGameweekFixtures": [],
-  "upcomingFixtures": [
+  "currentGameweek": 3,
+  "currentGameweekFixtures": [
     {
       "matchId": "26-27-prem-ipswich-town-vs-liverpool",
       "season": "2026-2027",
@@ -67,6 +66,7 @@
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
       },
+      "status": "current",
       "predictionType": "pre_kickoff"
     },
     {
@@ -110,6 +110,7 @@
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
       },
+      "status": "current",
       "predictionType": "pre_kickoff"
     },
     {
@@ -153,6 +154,7 @@
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
       },
+      "status": "current",
       "predictionType": "pre_kickoff"
     },
     {
@@ -196,6 +198,7 @@
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
       },
+      "status": "current",
       "predictionType": "pre_kickoff"
     },
     {
@@ -239,6 +242,7 @@
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
       },
+      "status": "current",
       "predictionType": "pre_kickoff"
     },
     {
@@ -282,6 +286,7 @@
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
       },
+      "status": "current",
       "predictionType": "pre_kickoff"
     },
     {
@@ -325,6 +330,7 @@
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
       },
+      "status": "current",
       "predictionType": "pre_kickoff"
     },
     {
@@ -368,6 +374,7 @@
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
       },
+      "status": "current",
       "predictionType": "pre_kickoff"
     },
     {
@@ -411,6 +418,7 @@
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
       },
+      "status": "current",
       "predictionType": "pre_kickoff"
     },
     {
@@ -454,8 +462,11 @@
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
       },
+      "status": "current",
       "predictionType": "pre_kickoff"
-    },
+    }
+  ],
+  "upcomingFixtures": [
     {
       "matchId": "26-27-prem-afc-bournemouth-vs-brentford",
       "season": "2026-2027",
