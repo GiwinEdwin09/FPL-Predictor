@@ -18,6 +18,7 @@ node_modules/
 dist/
 coverage/
 data/raw/
+data/cache/
 data/features/*
 !data/features/match_pre_match_features_v3.csv
 data/models/*
