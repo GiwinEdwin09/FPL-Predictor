@@ -30,10 +30,33 @@ jobs:
       - name: Install dependencies
         run: python -m pip install --upgrade pip && python -m pip install -r requirements.txt && python -m pip install --no-deps -e .
 
+      - name: Restore downloaded source data
+        id: source-cache
+        continue-on-error: true
+        uses: actions/cache/restore@v5
+        with:
+          path: |
+            data/historical/football-data/raw
+            data/cache/upstream
+          key: refresh-sources-v1-${{ runner.os }}-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: |
+            refresh-sources-v1-${{ runner.os }}-
+
       - name: Run refresh pipeline
+        id: pipeline
         env:
           PYTHONPATH: src
         run: python scripts/run_refresh_pipeline.py --model-version v3
+
+      - name: Save downloaded source data
+        continue-on-error: true
+        if: ${{ always() && steps.pipeline.outcome != 'skipped' && steps.source-cache.outputs.cache-primary-key != '' }}
+        uses: actions/cache/save@v5
+        with:
+          path: |
+            data/historical/football-data/raw
+            data/cache/upstream
+          key: ${{ steps.source-cache.outputs.cache-primary-key }}
 
       - name: Commit refreshed artifacts
         run: |

@@ -15,6 +15,8 @@ import numpy as np
 import pandas as pd
 import requests
 
+from fpl_predictor.http import get_with_retries
+
 FOOTBALL_DATA_BASE_URL = "https://www.football-data.co.uk/mmz4281"
 DEFAULT_START_YEAR = 1993
 DEFAULT_END_YEAR = 2025
@@ -276,15 +278,20 @@ def download_season(
     raw_dir.mkdir(parents=True, exist_ok=True)
     path = raw_dir / f"E0_{season_code(start_year)}.csv"
     if path.exists() and not force:
-        return path, False
+        # A file downloaded during its season may still be missing later results.
+        # Reuse it permanently only after a download following the season's end.
+        cached_at = datetime.fromtimestamp(path.stat().st_mtime, UTC)
+        if cached_at >= datetime(start_year + 1, 7, 1, tzinfo=UTC):
+            return path, False
 
-    http = session or requests.Session()
-    response = http.get(
+    if session is None:
+        with requests.Session() as http:
+            return download_season(start_year, raw_dir, force=force, session=http)
+    response = get_with_retries(
+        session,
         season_url(start_year),
-        timeout=30,
         headers={"User-Agent": "FPL-Predictor historical model research"},
     )
-    response.raise_for_status()
     if b"HomeTeam" not in response.content[:1_000]:
         raise ValueError(f"Unexpected football-data.co.uk response for {season_label(start_year)}")
     temporary_path = path.with_suffix(".tmp")

@@ -6,12 +6,15 @@ import json
 import re
 from dataclasses import asdict, dataclass
 from datetime import UTC, datetime
+from io import BytesIO
 from pathlib import Path
 from typing import Iterable, Sequence
 from urllib.parse import quote
 
 import pandas as pd
 import requests
+
+from fpl_predictor.http import get_with_retries
 
 GITHUB_OWNER = "olbauday"
 GITHUB_REPO = "FPL-Core-Insights"
@@ -89,16 +92,17 @@ def build_raw_url(path: str) -> str:
     return f"{RAW_BASE_URL}/{quote(path, safe='/')}"
 
 
-def fetch_repository_paths(session: requests.Session | None = None) -> list[str]:
-    http = session or requests.Session()
-    response = http.get(
-        TREE_URL,
-        headers={"Accept": "application/vnd.github+json"},
-        timeout=30,
-    )
-    response.raise_for_status()
+def fetch_repository_files() -> dict[str, str]:
+    with requests.Session() as session:
+        response = get_with_retries(
+            session,
+            TREE_URL,
+            headers={"Accept": "application/vnd.github+json"},
+        )
     payload = response.json()
-    return [item["path"] for item in payload.get("tree", []) if item.get("type") == "blob"]
+    if payload.get("truncated"):
+        raise ValueError("Upstream repository tree is truncated; refusing an incomplete sync.")
+    return {item["path"]: item["sha"] for item in payload.get("tree", []) if item.get("type") == "blob"}
 
 
 def discover_available_seasons(paths: Iterable[str]) -> list[str]:
@@ -191,12 +195,34 @@ def sort_frame(frame: pd.DataFrame, dataset: DatasetConfig) -> pd.DataFrame:
 def load_remote_dataset(
     remote_paths: list[str],
     dataset: DatasetConfig,
+    *,
+    cache_dir: Path | None = None,
+    remote_hashes: dict[str, str] | None = None,
+    force: bool = False,
 ) -> tuple[str, list[str], pd.DataFrame]:
     remote_urls = [build_raw_url(path) for path in remote_paths]
     frames: list[pd.DataFrame] = []
 
     for path, url in zip(remote_paths, remote_urls, strict=True):
-        frame = pd.read_csv(url)
+        sha = remote_hashes.get(path) if remote_hashes is not None else None
+        cache_path = cache_dir / f"{sha}.csv" if cache_dir is not None and sha else None
+        content = cache_path.read_bytes() if cache_path is not None and cache_path.exists() and not force else None
+        # Git's blob hash covers the original bytes, not a pandas reserialization.
+        if content is not None and git_blob_hash(content) != sha:
+            content = None
+        downloaded = content is None
+        if downloaded:
+            with requests.Session() as session:
+                content = get_with_retries(session, url).content
+            if sha is not None and git_blob_hash(content) != sha:
+                raise ValueError(f"Upstream file changed during sync: {path}. Retry the sync.")
+        # Parse before saving so a malformed response never becomes a cache hit.
+        frame = pd.read_csv(BytesIO(content))
+        if downloaded and cache_path is not None:
+            cache_path.parent.mkdir(parents=True, exist_ok=True)
+            temporary_path = cache_path.with_suffix(".tmp")
+            temporary_path.write_bytes(content)
+            temporary_path.replace(cache_path)
         source_gameweek = extract_gameweek(path, dataset.name)
         if source_gameweek is not None and "source_gameweek" not in frame.columns:
             frame["source_gameweek"] = source_gameweek
@@ -214,17 +240,27 @@ def load_remote_dataset(
     return "gameweek_concat", remote_urls, sort_frame(remote_df, dataset)
 
 
+def git_blob_hash(content: bytes) -> str:
+    return hashlib.sha1(f"blob {len(content)}\0".encode() + content).hexdigest()
+
+
 def sync_season_dataset(
     season: str,
     dataset: DatasetConfig,
     repo_paths: Iterable[str],
     data_dir: Path,
     force: bool = False,
+    remote_hashes: dict[str, str] | None = None,
 ) -> tuple[SeasonSyncResult, pd.DataFrame]:
     ensure_data_layout(data_dir)
 
     remote_paths = find_season_dataset_paths(repo_paths, season, dataset)
-    source_mode, remote_urls, remote_df = load_remote_dataset(remote_paths, dataset)
+    source_mode, remote_urls, remote_df = load_remote_dataset(
+        remote_paths, dataset,
+        cache_dir=data_dir / "cache" / "upstream",
+        remote_hashes=remote_hashes,
+        force=force,
+    )
 
     local_path = data_dir / "raw" / season / f"{dataset.name}.csv"
     local_path.parent.mkdir(parents=True, exist_ok=True)
@@ -300,7 +336,8 @@ def run_sync(
     dataset_names: Sequence[str] = DEFAULT_DATASETS,
     force: bool = False,
 ) -> dict[str, object]:
-    repo_paths = fetch_repository_paths()
+    repo_files = fetch_repository_files()
+    repo_paths = list(repo_files)
     selected_seasons = tuple(seasons) if seasons is not None else select_recent_seasons(repo_paths)
     datasets_summary: dict[str, object] = {}
     any_updated = False
@@ -317,6 +354,7 @@ def run_sync(
                 repo_paths=repo_paths,
                 data_dir=data_dir,
                 force=force,
+                remote_hashes=repo_files,
             )
             results.append(result)
             season_frames.append((season, frame))
@@ -329,6 +367,12 @@ def run_sync(
         if master_path is not None:
             dataset_summary["output_path"] = str(master_path)
         datasets_summary[dataset_name] = dataset_summary
+
+    # Retain only current blobs; old revisions would otherwise accumulate forever.
+    active_hashes = set(repo_files.values())
+    for cached_path in (data_dir / "cache" / "upstream").glob("*.csv"):
+        if cached_path.stem not in active_hashes:
+            cached_path.unlink()
 
     state_path = data_dir / "sync_state.json"
     if any_updated or not state_path.exists():

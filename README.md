@@ -158,6 +158,30 @@ incomplete, modified, has a mismatched feature schema, or contains numeric FPL
 IDs in place of canonical team keys, API startup fails instead of silently
 falling back to average-team Dixon-Coles parameters.
 
+Refresh downloads are cached separately from model artifacts. GitHub Actions
+restores and saves `data/historical/football-data/raw` and `data/cache/upstream`
+between runs, including completed downloads from failed runs. A first run or
+an evicted cache still needs to download the source files.
+
+Completed Football-Data seasons are reused locally. Files saved before July 1
+following their season are refreshed so a mid-season snapshot is not frozen
+permanently. Use `python -m fpl_predictor.historical_ingestion --force` to fetch
+historical corrections explicitly. FPL-Core-Insights files are checked against
+the GitHub tree's blob hashes: only new, changed, missing, or damaged CSVs are
+downloaded. Temporary HTTP errors such as 503 are retried up to three times.
+
+Training still uses the full historical corpus plus recent results; caching
+avoids repeated network downloads, not the model fit. To force a model rebuild
+when the upstream data is unchanged while retaining the download cache, run:
+
+```bash
+python scripts/run_refresh_pipeline.py --model-version v3 --force-retrain
+```
+
+`--force-sync` bypasses the FPL-Core-Insights download cache. The scheduled job
+caches only source downloads, so a failed model build or artifact push is retried
+on the next run rather than being treated as a completed refresh.
+
 ## Build Progress
 
 All implementation notes, build steps, model metrics, ingestion details, and deployment instructions now live in:
