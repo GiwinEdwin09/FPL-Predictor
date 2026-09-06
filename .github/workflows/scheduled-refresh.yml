@@ -35,12 +35,10 @@ jobs:
         continue-on-error: true
         uses: actions/cache/restore@v5
         with:
-          path: |
-            data/historical/football-data/raw
-            data/cache/upstream
-          key: refresh-sources-v1-${{ runner.os }}-${{ github.run_id }}-${{ github.run_attempt }}
+          path: data/cache/upstream
+          key: refresh-upstream-v2-${{ runner.os }}-${{ github.run_id }}-${{ github.run_attempt }}
           restore-keys: |
-            refresh-sources-v1-${{ runner.os }}-
+            refresh-upstream-v2-${{ runner.os }}-
 
       - name: Run refresh pipeline
         id: pipeline
@@ -53,9 +51,7 @@ jobs:
         if: ${{ always() && steps.pipeline.outcome != 'skipped' && steps.source-cache.outputs.cache-primary-key != '' }}
         uses: actions/cache/save@v5
         with:
-          path: |
-            data/historical/football-data/raw
-            data/cache/upstream
+          path: data/cache/upstream
           key: ${{ steps.source-cache.outputs.cache-primary-key }}
 
       - name: Commit refreshed artifacts

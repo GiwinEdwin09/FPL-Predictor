@@ -306,19 +306,47 @@ def sync_football_data_history(
     start_years: Iterable[int] = range(DEFAULT_START_YEAR, DEFAULT_END_YEAR + 1),
     *,
     force: bool = False,
+    offline: bool = False,
 ) -> dict[str, Any]:
+    if offline and force:
+        raise ValueError("Offline historical ingestion cannot be combined with force downloads.")
+    start_years = tuple(start_years)
+    if not start_years:
+        raise ValueError("At least one historical season must be requested.")
     summaries: list[HistoricalSeasonSummary] = []
     frames: list[pd.DataFrame] = []
     with requests.Session() as session:
         for start_year in start_years:
-            path, downloaded = download_season(
-                start_year,
-                raw_dir,
-                force=force,
-                session=session,
-            )
-            raw = read_football_data_csv(path)
-            normalized = normalize_football_data_frame(raw, start_year)
+            if offline:
+                path = raw_dir / f"E0_{season_code(start_year)}.csv"
+                downloaded = False
+                if not path.is_file():
+                    raise FileNotFoundError(
+                        f"Missing historical snapshot for {season_label(start_year)}: {path}. "
+                        "Restore the CSV from the repository; offline mode does not download files."
+                    )
+            else:
+                path, downloaded = download_season(
+                    start_year,
+                    raw_dir,
+                    force=force,
+                    session=session,
+                )
+            try:
+                raw = read_football_data_csv(path)
+                normalized = normalize_football_data_frame(raw, start_year)
+                if offline and (
+                    normalized.empty
+                    or len(normalized) != len(raw)
+                    or normalized["kickoff_time"].isna().any()
+                    or normalized[["home_team", "away_team"]].eq("").any().any()
+                    or normalized["match_id"].duplicated().any()
+                ):
+                    raise ValueError("Snapshot must contain unique, finished matches with valid dates and teams.")
+            except (ValueError, TypeError) as error:
+                raise ValueError(
+                    f"Invalid historical CSV for {season_label(start_year)} at {path}: {error}"
+                ) from error
             frames.append(normalized)
             summaries.append(
                 HistoricalSeasonSummary(
@@ -335,9 +363,12 @@ def sync_football_data_history(
     combined = combined.drop_duplicates("match_id", keep="last")
     combined = combined.sort_values(["kickoff_time", "match_id"], kind="stable").reset_index(drop=True)
     output_path.parent.mkdir(parents=True, exist_ok=True)
-    combined.to_csv(output_path, index=False)
+    temporary_path = output_path.with_suffix(".tmp")
+    combined.to_csv(temporary_path, index=False)
+    temporary_path.replace(output_path)
     return {
         "source": "football-data.co.uk",
+        "offline": offline,
         "synced_at_utc": datetime.now(UTC).isoformat(),
         "raw_dir": str(raw_dir),
         "output_path": str(output_path),
@@ -352,7 +383,9 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--output-path", default=str(DEFAULT_OUTPUT_PATH))
     parser.add_argument("--start-year", type=int, default=DEFAULT_START_YEAR)
     parser.add_argument("--end-year", type=int, default=DEFAULT_END_YEAR)
-    parser.add_argument("--force", action="store_true")
+    mode = parser.add_mutually_exclusive_group()
+    mode.add_argument("--force", action="store_true", help="Download historical corrections, replacing local CSVs.")
+    mode.add_argument("--offline", action="store_true", help="Rebuild history using only local season CSVs.")
     return parser.parse_args()
 
 
@@ -365,6 +398,7 @@ def main() -> None:
         output_path=Path(args.output_path),
         start_years=range(args.start_year, args.end_year + 1),
         force=args.force,
+        offline=args.offline,
     )
     print(json.dumps(summary, indent=2))
 

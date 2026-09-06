@@ -89,6 +89,7 @@ def run_refresh_pipeline(
         sync_football_data_history(
             raw_dir=historical_dir / "football-data" / "raw",
             output_path=historical_path,
+            offline=True,
         )
         corpus = build_training_corpus(
             fci_matches_path=matches_path,

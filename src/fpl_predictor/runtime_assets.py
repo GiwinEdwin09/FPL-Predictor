@@ -80,7 +80,7 @@ def ensure_runtime_assets(
         sync_football_data_history(
             raw_dir=historical_dir / "football-data" / "raw",
             output_path=historical_path,
-            force=force_sync,
+            offline=True,
         )
         corpus = build_training_corpus(
             fci_matches_path=paths.matches_path,
