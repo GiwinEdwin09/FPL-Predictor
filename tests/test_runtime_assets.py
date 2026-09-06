@@ -1,4 +1,8 @@
 from pathlib import Path
+from types import SimpleNamespace
+from unittest.mock import Mock
+
+import pytest
 
 from fpl_predictor.live_inference import InferencePaths
 from fpl_predictor.runtime_assets import ensure_runtime_assets
@@ -44,3 +48,42 @@ def test_runtime_assets_can_reuse_verified_v3_bundle(tmp_path: Path, monkeypatch
     assert changed is True
     assert exported["feature_table_path"] == components["prediction_features"]
     assert exported["model_path"] == components["model"]
+
+
+@pytest.mark.parametrize("force_sync", [False, True])
+def test_runtime_training_always_uses_offline_history(tmp_path, monkeypatch, force_sync) -> None:
+    sync = Mock()
+    history = Mock()
+    trainer = Mock()
+    monkeypatch.setattr("fpl_predictor.runtime_assets.run_sync", sync)
+    monkeypatch.setattr("fpl_predictor.historical_ingestion.sync_football_data_history", history)
+    monkeypatch.setattr("fpl_predictor.training_corpus.build_training_corpus", Mock(
+        return_value=SimpleNamespace(output_path=str(tmp_path / "matches_training.csv")),
+    ))
+    monkeypatch.setattr("fpl_predictor.runtime_assets.build_feature_table", Mock())
+    monkeypatch.setattr("fpl_predictor.model_v3.train_and_save_model_v3", trainer)
+    paths = InferencePaths(
+        data_dir=tmp_path,
+        matches_path=tmp_path / "matches.csv",
+        players_path=tmp_path / "players.csv",
+        playerstats_path=tmp_path / "playerstats.csv",
+        playermatchstats_path=tmp_path / "playermatchstats.csv",
+        model_path=tmp_path / "model.json",
+        metrics_path=tmp_path / "metrics.json",
+    )
+
+    assert ensure_runtime_assets(
+        paths,
+        prediction_feature_table_path=tmp_path / "prediction.csv",
+        training_feature_table_path=tmp_path / "training.csv",
+        model_version="v3",
+        force_sync=force_sync,
+    ) is True
+
+    sync.assert_called_once_with(data_dir=tmp_path, force=force_sync)
+    history.assert_called_once_with(
+        raw_dir=tmp_path / "historical" / "football-data" / "raw",
+        output_path=tmp_path / "historical" / "football_data_premier_league.csv",
+        offline=True,
+    )
+    trainer.assert_called_once()

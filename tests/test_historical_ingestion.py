@@ -1,12 +1,23 @@
+import os
+import shutil
+from datetime import UTC, datetime
 from pathlib import Path
+from unittest.mock import Mock
 
+import pytest
+import requests
+import pandas as pd
 
 from fpl_predictor.historical_ingestion import (
     DEFAULT_START_YEAR,
+    DEFAULT_END_YEAR,
     canonical_team_key,
+    download_season,
     parse_football_data_kickoff,
+    parse_args,
     read_football_data_csv,
     season_code,
+    sync_football_data_history,
 )
 
 
@@ -50,3 +61,125 @@ def test_parse_football_data_kickoff_converts_london_local_time_to_utc() -> None
     assert str(kickoff.tz) == "UTC"
     assert kickoff.hour == 11
     assert kickoff.minute == 30
+
+
+def test_rebuilds_historical_corpus_from_cached_seasons_without_network(tmp_path, monkeypatch) -> None:
+    raw_dir = tmp_path / "raw"
+    raw_dir.mkdir()
+    for year in (1993, 1994):
+        (raw_dir / f"E0_{season_code(year)}.csv").write_text(
+            f"Date,HomeTeam,AwayTeam,FTHG,FTAG\n01/09/{year},Arsenal,Chelsea,2,1\n"
+        )
+    get = Mock(side_effect=AssertionError("Cached history should not use the network"))
+    monkeypatch.setattr("fpl_predictor.historical_ingestion.get_with_retries", get)
+
+    summary = sync_football_data_history(raw_dir, tmp_path / "combined.csv", [1993, 1994])
+
+    assert summary["rows"] == 2
+    assert all(not season["downloaded"] for season in summary["seasons"])
+    assert (tmp_path / "combined.csv").exists()
+    get.assert_not_called()
+
+
+@pytest.mark.parametrize("force, mid_season", [(True, False), (False, True), (False, False)])
+def test_downloads_missing_forced_or_incomplete_season(tmp_path, monkeypatch, force, mid_season) -> None:
+    path = tmp_path / "E0_9394.csv"
+    if force or mid_season:
+        path.write_bytes(b"old data")
+    if mid_season:
+        saved_at = datetime(1994, 1, 1, tzinfo=UTC).timestamp()
+        os.utime(path, (saved_at, saved_at))
+    content = b"Date,HomeTeam,AwayTeam,FTHG,FTAG\n01/09/93,Arsenal,Chelsea,2,1\n"
+    get = Mock(return_value=Mock(content=content))
+    monkeypatch.setattr("fpl_predictor.historical_ingestion.get_with_retries", get)
+
+    result, downloaded = download_season(1993, tmp_path, force=force)
+
+    assert downloaded is True
+    assert result.read_bytes() == content
+    assert not path.with_suffix(".tmp").exists()
+    # The completed snapshot is now reusable without another request.
+    assert download_season(1993, tmp_path) == (path, False)
+    get.assert_called_once()
+
+
+def test_failed_download_keeps_previous_snapshot(tmp_path, monkeypatch) -> None:
+    path = tmp_path / "E0_9394.csv"
+    path.write_bytes(b"existing snapshot")
+    monkeypatch.setattr(
+        "fpl_predictor.historical_ingestion.get_with_retries",
+        Mock(side_effect=requests.HTTPError("503")),
+    )
+    with pytest.raises(requests.HTTPError):
+        download_season(1993, tmp_path, force=True)
+    assert path.read_bytes() == b"existing snapshot"
+
+
+def test_repository_snapshot_rebuilds_offline_with_old_timestamps(tmp_path, monkeypatch) -> None:
+    snapshot = Path(__file__).resolve().parents[1] / "data/historical/football-data/raw"
+    raw_dir = tmp_path / "raw"
+    shutil.copytree(snapshot, raw_dir)
+    for path in raw_dir.glob("*.csv"):
+        os.utime(path, (0, 0))
+    request = Mock(side_effect=AssertionError("Offline history must never access the network"))
+    monkeypatch.setattr(requests.Session, "request", request)
+    output = tmp_path / "combined.csv"
+
+    summary = sync_football_data_history(raw_dir, output, offline=True)
+
+    assert summary["offline"] is True
+    assert len(summary["seasons"]) == 33
+    assert summary["rows"] == 12_704
+    assert all(not season["downloaded"] for season in summary["seasons"])
+    for year, season in zip(range(DEFAULT_START_YEAR, DEFAULT_END_YEAR + 1), summary["seasons"], strict=True):
+        assert season["finished_rows"] == season["rows"] == (462 if year < 1995 else 380)
+    combined = pd.read_csv(output)
+    assert combined["match_id"].nunique() == 12_704
+    assert combined["source_season"].nunique() == 33
+    assert pd.to_datetime(combined["kickoff_time"], utc=True).max() == pd.Timestamp("2026-05-24T15:00:00Z")
+    request.assert_not_called()
+
+
+@pytest.mark.parametrize("invalid_csv", [
+    None,
+    "",
+    "Date,HomeTeam,AwayTeam,FTHG,FTAG\n",
+    "unexpected,column\n1,2\n",
+    "Date,HomeTeam,AwayTeam,FTHG,FTAG\ninvalid,Arsenal,Chelsea,2,1\n",
+    "Date,HomeTeam,AwayTeam,FTHG,FTAG\n01/09/94,Arsenal,Chelsea,,1\n",
+    "Date,HomeTeam,AwayTeam,FTHG,FTAG\n01/09/94,,Chelsea,2,1\n",
+    "Date,HomeTeam,AwayTeam,FTHG,FTAG\n01/09/94,Arsenal,Chelsea,2,1\n01/09/94,Arsenal,Chelsea,2,1\n",
+])
+def test_offline_invalid_season_preserves_previous_combined_file(tmp_path, monkeypatch, invalid_csv) -> None:
+    raw_dir = tmp_path / "raw"
+    raw_dir.mkdir()
+    (raw_dir / "E0_9394.csv").write_text("Date,HomeTeam,AwayTeam,FTHG,FTAG\n01/09/93,Arsenal,Chelsea,2,1\n")
+    if invalid_csv is not None:
+        (raw_dir / "E0_9495.csv").write_text(invalid_csv)
+    output = tmp_path / "combined.csv"
+    output.write_bytes(b"previous complete history")
+    request = Mock(side_effect=AssertionError("Unexpected network request"))
+    monkeypatch.setattr(requests.Session, "request", request)
+
+    with pytest.raises((ValueError, FileNotFoundError), match="1994-1995.*E0_9495.csv"):
+        sync_football_data_history(raw_dir, output, [1993, 1994], offline=True)
+
+    assert output.read_bytes() == b"previous complete history"
+    assert not output.with_suffix(".tmp").exists()
+    request.assert_not_called()
+
+
+def test_offline_rejects_force_and_empty_season_selection(tmp_path) -> None:
+    with pytest.raises(ValueError, match="cannot be combined"):
+        sync_football_data_history(tmp_path, tmp_path / "combined.csv", offline=True, force=True)
+    with pytest.raises(ValueError, match="At least one"):
+        sync_football_data_history(tmp_path, tmp_path / "combined.csv", [], offline=True)
+
+
+def test_offline_cli_flag_and_force_are_mutually_exclusive(monkeypatch) -> None:
+    monkeypatch.setattr("sys.argv", ["sync_historical_results.py", "--offline"])
+    assert parse_args().offline is True
+    monkeypatch.setattr("sys.argv", ["sync_historical_results.py", "--offline", "--force"])
+    with pytest.raises(SystemExit) as error:
+        parse_args()
+    assert error.value.code == 2

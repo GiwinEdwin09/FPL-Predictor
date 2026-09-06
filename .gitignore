@@ -18,6 +18,7 @@ node_modules/
 dist/
 coverage/
 data/raw/
+data/cache/
 data/features/*
 !data/features/match_pre_match_features_v3.csv
 data/models/*
@@ -29,7 +30,12 @@ data/models/*
 !data/models/model_v3_walk_forward_backtest.json
 data/reference/
 data/automation/
-data/historical/
+data/historical/*
+!data/historical/football-data/
+data/historical/football-data/*
+!data/historical/football-data/raw/
+data/historical/football-data/raw/*
+!data/historical/football-data/raw/E0_*.csv
 data/*.csv
 data/*.json
 !data/.gitkeep

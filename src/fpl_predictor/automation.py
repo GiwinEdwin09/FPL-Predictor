@@ -54,11 +54,12 @@ def run_refresh_pipeline(
     dashboard_path: Path,
     force_sync: bool = False,
     model_version: str = "v2",
+    force_retrain: bool = False,
 ) -> RefreshSummary:
     sync_summary = run_sync(data_dir=data_dir, force=force_sync)
     updated_datasets = changed_seasons_by_dataset(sync_summary)
 
-    if not sync_summary["any_updated"]:
+    if not sync_summary["any_updated"] and not force_retrain:
         return RefreshSummary(
             refreshed_at_utc=datetime.now(UTC).isoformat(),
             data_changed=False,
@@ -83,8 +84,19 @@ def run_refresh_pipeline(
         from fpl_predictor.model_v3 import train_and_save_model_v3
         from fpl_predictor.training_corpus import build_training_corpus
 
-        sync_football_data_history()
-        corpus = build_training_corpus(data_dir=data_dir)
+        historical_dir = data_dir / "historical"
+        historical_path = historical_dir / "football_data_premier_league.csv"
+        sync_football_data_history(
+            raw_dir=historical_dir / "football-data" / "raw",
+            output_path=historical_path,
+            offline=True,
+        )
+        corpus = build_training_corpus(
+            fci_matches_path=matches_path,
+            historical_path=historical_path,
+            output_path=data_dir / "matches_training.csv",
+            data_dir=data_dir,
+        )
         feature_matches_path = Path(corpus.output_path)
         include_historical_rows = False
 
@@ -148,7 +160,7 @@ def run_refresh_pipeline(
 
     return RefreshSummary(
         refreshed_at_utc=datetime.now(UTC).isoformat(),
-        data_changed=True,
+        data_changed=bool(sync_summary["any_updated"]),
         sync_state_path=str(sync_summary["sync_state_path"]),
         prediction_feature_table_path=str(prediction_feature_table_path),
         training_feature_table_path=str(training_feature_table_path),
@@ -193,6 +205,11 @@ def parse_args() -> argparse.Namespace:
         help="Path where the pipeline summary JSON should be written.",
     )
     parser.add_argument(
+        "--force-retrain",
+        action="store_true",
+        help="Retrain even when upstream data is unchanged, reusing cached downloads.",
+    )
+    parser.add_argument(
         "--force-sync",
         action="store_true",
         help="Force upstream sync even when remote row counts and hashes match.",
@@ -225,6 +242,7 @@ def main() -> None:
         dashboard_path=Path(args.dashboard_path),
         force_sync=args.force_sync,
         model_version=args.model_version,
+        force_retrain=args.force_retrain,
     )
     summary_path = Path(args.summary_path)
     summary_path.parent.mkdir(parents=True, exist_ok=True)

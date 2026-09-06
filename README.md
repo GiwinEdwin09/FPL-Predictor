@@ -158,6 +158,52 @@ incomplete, modified, has a mismatched feature schema, or contains numeric FPL
 IDs in place of canonical team keys, API startup fails instead of silently
 falling back to average-team Dixon-Coles parameters.
 
+The repository includes the original Premier League CSVs from
+[Football-Data](https://www.football-data.co.uk/englandm.php) under
+`data/historical/football-data/raw`: 33 seasons from 1993–94 through 2025–26,
+containing 12,704 finished matches through May 24, 2026. The filenames use the
+source's season codes (for example, `E0_9394.csv`). These source files are tracked;
+the combined historical table and training corpus remain generated outputs.
+
+Scheduled v3 refreshes and runtime training read this snapshot in offline mode,
+regardless of file timestamps. They never contact Football-Data, even on a fresh
+checkout with an empty Actions cache. Missing or invalid historical files stop
+the rebuild with an error instead of silently dropping a season. Recent results
+still come from FPL-Core-Insights on GitHub, so routine refreshes require GitHub
+access.
+
+To rebuild just the historical table without downloading anything, run:
+
+```bash
+python scripts/sync_historical_results.py --offline
+```
+
+When Football-Data is available, historical corrections can be downloaded with
+`python scripts/sync_historical_results.py --force`. Review and commit the changed
+source CSVs deliberately. `--offline` and `--force` cannot be combined. Historical
+coverage remains fixed at 1993–94 through 2025–26; newer seasons come from
+FPL-Core-Insights.
+
+GitHub Actions caches only `data/cache/upstream`, including completed downloads
+from failed runs. FPL-Core-Insights files are checked against the GitHub tree's
+blob hashes: only new, changed, missing, or damaged CSVs are downloaded. A first
+run or an evicted cache needs to download these recent files, but historical
+CSVs are already supplied by checkout. Temporary HTTP errors such as 503 are
+retried up to three times.
+
+Training still uses the full historical corpus plus recent results; caching
+avoids repeated network downloads, not the model fit. To force a model rebuild
+when the upstream data is unchanged while retaining the download cache, run:
+
+```bash
+python scripts/run_refresh_pipeline.py --model-version v3 --force-retrain
+```
+
+`--force-sync` bypasses only the FPL-Core-Insights download cache; historical
+ingestion stays offline. The scheduled job
+caches only source downloads, so a failed model build or artifact push is retried
+on the next run rather than being treated as a completed refresh.
+
 ## Build Progress
 
 All implementation notes, build steps, model metrics, ingestion details, and deployment instructions now live in:
