@@ -92,21 +92,21 @@
     0.002110159088822404
   ],
   "final_fit": {
-    "rows": 12855,
+    "rows": 12858,
     "seasons": 34,
     "first_season": "1993-1994",
     "latest_season": "2026-2027",
     "first_finished_kickoff_utc": "1993-08-14T14:00:00+00:00",
-    "latest_finished_kickoff_utc": "2026-09-08T19:00:00+00:00",
+    "latest_finished_kickoff_utc": "2026-09-09T19:15:00+00:00",
     "target_distribution": {
-      "0": 5850,
+      "0": 5852,
       "1": 3277,
-      "2": 3728
+      "2": 3729
     },
     "competition_distribution": {
       "prem": 12734,
-      "efl-cup": 51,
-      "champions-league": 50,
+      "efl-cup": 52,
+      "champions-league": 52,
       "europa-league": 14,
       "conference-league": 6
     }
