@@ -178,9 +178,10 @@ export function QuizGame({ candidates, daily }: { candidates: QuizMatch[]; daily
   return (
     <section className="quiz-panel">
       <div className="quiz-toolbar">
-        <div className="quiz-mode-toggle" role="tablist" aria-label="Quiz mode">
+        <div className="quiz-mode-toggle" role="group" aria-label="Quiz mode">
           <button
             className={mode === "daily" ? "quiz-mode-button quiz-mode-active" : "quiz-mode-button"}
+            aria-pressed={mode === "daily"}
             onClick={() => {
               setMode("daily");
               setAnsweredPick(null);
@@ -190,6 +191,7 @@ export function QuizGame({ candidates, daily }: { candidates: QuizMatch[]; daily
           </button>
           <button
             className={mode === "practice" ? "quiz-mode-button quiz-mode-active" : "quiz-mode-button"}
+            aria-pressed={mode === "practice"}
             onClick={startPractice}
           >
             Practice

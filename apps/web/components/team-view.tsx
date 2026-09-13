@@ -187,7 +187,7 @@ export function TeamView({
             <span className="team-badge team-badge-fallback team-hero-badge">{team.name.slice(0, 3).toUpperCase()}</span>
           )}
           <div>
-            <h2 className="team-hero-name">{team.name}</h2>
+            <h1 className="team-hero-name">{team.name}</h1>
             <div className="team-form-strip" aria-label="Last five results">
               {form.map((result, index) => (
                 <span key={index} className={resultClass(result)}>
@@ -257,7 +257,7 @@ export function TeamView({
             {nextFixtures.map((fixture) => {
               const confidence = describeConfidence(fixture.probabilities);
               return (
-                <article key={fixture.matchId} className="upcoming-row" style={{ gridTemplateColumns: "8.5rem minmax(0,1.05fr) minmax(0,1.35fr)" }}>
+                <article key={fixture.matchId} className="upcoming-row">
                   <div className="upcoming-row-time">{formatKickoff(fixture.kickoffTime)}</div>
                   <div className="upcoming-row-teams">
                     <div className="upcoming-row-team">
