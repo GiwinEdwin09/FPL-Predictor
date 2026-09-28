@@ -3,6 +3,7 @@
 import Link from "next/link";
 
 import { BrandMark } from "@/components/ui/brand-mark";
+import { AccountNav } from "@/components/account-nav";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -75,6 +76,7 @@ export function SiteNav({ summary }: { summary: GameweekSummary | null }) {
         </nav>
 
         <div className="header-meta">
+          <AccountNav />
           {summary ? <GameweekChip summary={summary} /> : null}
           <button
             type="button"

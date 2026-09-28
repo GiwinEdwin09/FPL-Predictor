@@ -56,6 +56,19 @@ Behind the site, the project currently includes:
 
 ## Product Experience
 
+### Accounts and saved lineups
+
+The frontend supports Supabase email sign-in and private named lineup scenarios.
+After signing in, save an XI from a future fixture and open **My lineups** to rename,
+reopen, archive, or restore it. Reopening uses the current model; the saved selection
+is preserved and changes can be saved separately. Saves are scoped to the verified
+account and protected by Postgres row-level security.
+
+Provisioning, environment variables, email delivery, schema, and verification are
+documented in [supabase/README.md](./supabase/README.md). Until the Supabase project
+and environment are connected, the app shows an account-setup state and public
+forecast browsing remains available.
+
 ### Predictions
 
 The predictions page focuses on future Premier League fixtures.

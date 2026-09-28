@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Inter, Space_Grotesk } from "next/font/google";
 
 import { SiteFooter } from "@/components/site-footer";
+import { AuthProvider } from "@/components/auth-provider";
 import { SiteNav } from "@/components/site-nav";
 import { loadDashboardResult } from "@/lib/dashboard";
 import { summarizeGameweek } from "@/lib/gameweek";
@@ -40,11 +41,13 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
   return (
     <html lang="en" className={`${inter.variable} ${spaceGrotesk.variable}`}>
       <body>
+        <AuthProvider>
         <div className="app-shell">
           <SiteNav summary={summary} />
           <main className="app-main">{children}</main>
           <SiteFooter generatedAtUtc={generatedAtUtc} />
         </div>
+        </AuthProvider>
       </body>
     </html>
   );

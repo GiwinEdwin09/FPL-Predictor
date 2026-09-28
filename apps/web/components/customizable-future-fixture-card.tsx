@@ -5,11 +5,14 @@ import { formatPercent } from "@/lib/format";
 import { useEffect, useMemo, useRef, useState } from "react";
 
 import { PredictionCard } from "@/components/prediction-card";
+import { SaveLineup } from "@/components/save-lineup";
+import { validateScenarioRoster, type SavedScenario } from "@/lib/scenarios";
 import type { UpcomingFixture } from "@/lib/dashboard";
 import type { FixtureLineupContext, FixtureSimulation, LineupPlayer, TeamLineupContext } from "@/lib/lineup";
 
 type CustomizableFutureFixtureCardProps = {
   fixture: UpcomingFixture;
+  initialScenario?: SavedScenario;
 };
 
 type PositionBucket = "goalkeeper" | "defender" | "midfielder" | "forward" | "unknown";
@@ -205,9 +208,10 @@ function LineupControls({
   );
 }
 
-export function CustomizableFutureFixtureCard({ fixture }: CustomizableFutureFixtureCardProps) {
-  const [open, setOpen] = useState(false);
-  const [context, setContext] = useState<FixtureLineupContext | null>(lineupContextCache.get(fixture.matchId) ?? null);
+export function CustomizableFutureFixtureCard({ fixture, initialScenario }: CustomizableFutureFixtureCardProps) {
+  const cacheKey = `${fixture.season}:${fixture.matchId}`;
+  const [open, setOpen] = useState(Boolean(initialScenario));
+  const [context, setContext] = useState<FixtureLineupContext | null>(null);
   const [simulation, setSimulation] = useState<FixtureSimulation | null>(null);
   const [homeSelectedIds, setHomeSelectedIds] = useState<number[]>([]);
   const [awaySelectedIds, setAwaySelectedIds] = useState<number[]>([]);
@@ -216,16 +220,26 @@ export function CustomizableFutureFixtureCard({ fixture }: CustomizableFutureFix
   const [error, setError] = useState<string | null>(null);
   const hasPrefetched = useRef(false);
 
+  function applyContext(payload: FixtureLineupContext) {
+    setContext(payload);
+    let home = payload.home.lineup.map((player) => player.playerId);
+    let away = payload.away.lineup.map((player) => player.playerId);
+    if (initialScenario) {
+      try {
+        validateScenarioRoster({ id: initialScenario.id, name: initialScenario.name, season: initialScenario.season,
+          matchId: initialScenario.match_id, homePlayerIds: initialScenario.home_player_ids, awayPlayerIds: initialScenario.away_player_ids }, payload);
+        home = initialScenario.home_player_ids; away = initialScenario.away_player_ids;
+      } catch {
+        setError("Some saved players are no longer in this fixture’s squad. The simulator shows the current default XI; your original save is unchanged above.");
+      }
+    }
+    setHomeSelectedIds(home); setAwaySelectedIds(away);
+  }
+
   async function ensureContextLoaded() {
-    if (lineupContextCache.has(fixture.matchId)) {
-      const cached = lineupContextCache.get(fixture.matchId)!;
-      setContext(cached);
-      if (homeSelectedIds.length === 0) {
-        setHomeSelectedIds(cached.home.lineup.map((player) => player.playerId));
-      }
-      if (awaySelectedIds.length === 0) {
-        setAwaySelectedIds(cached.away.lineup.map((player) => player.playerId));
-      }
+    if (lineupContextCache.has(cacheKey)) {
+      const cached = lineupContextCache.get(cacheKey)!;
+      applyContext(cached);
       return;
     }
 
@@ -247,10 +261,8 @@ export function CustomizableFutureFixtureCard({ fixture }: CustomizableFutureFix
         throw new Error(`Failed to load lineup context (${response.status}).`);
       }
       const payload = (await response.json()) as FixtureLineupContext;
-      lineupContextCache.set(fixture.matchId, payload);
-      setContext(payload);
-      setHomeSelectedIds(payload.home.lineup.map((player) => player.playerId));
-      setAwaySelectedIds(payload.away.lineup.map((player) => player.playerId));
+      lineupContextCache.set(cacheKey, payload);
+      applyContext(payload);
     } catch (loadError) {
       if (loadError instanceof DOMException && loadError.name === "TimeoutError") {
         setError(timeoutMessage("lineup", LINEUP_CONTEXT_TIMEOUT_MS));
@@ -286,11 +298,14 @@ export function CustomizableFutureFixtureCard({ fixture }: CustomizableFutureFix
     const baselineAway = context.away.lineup.map((player) => player.playerId);
     if (equalIds(homeSelectedIds, baselineHome) && equalIds(awaySelectedIds, baselineAway)) {
       setSimulation(null);
+      setSimulating(false);
       return;
     }
 
+    let active = true;
     async function runSimulation() {
       setSimulating(true);
+      setSimulation(null);
       setError(null);
       try {
         const response = await fetchWithTimeout(
@@ -313,19 +328,21 @@ export function CustomizableFutureFixtureCard({ fixture }: CustomizableFutureFix
           throw new Error(`Failed to simulate lineup (${response.status}).`);
         }
         const payload = (await response.json()) as FixtureSimulation;
-        setSimulation(payload);
+        if (active) setSimulation(payload);
       } catch (simulationError) {
+        if (!active) return;
         if (simulationError instanceof DOMException && simulationError.name === "TimeoutError") {
           setError(timeoutMessage("simulation", SIMULATION_TIMEOUT_MS));
         } else {
           setError(simulationError instanceof Error ? simulationError.message : "Unable to run lineup simulation.");
         }
       } finally {
-        setSimulating(false);
+        if (active) setSimulating(false);
       }
     }
 
     void runSimulation();
+    return () => { active = false; };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [awaySelectedIds, context, fixture.matchId, homeSelectedIds, open]);
 
@@ -444,6 +461,7 @@ export function CustomizableFutureFixtureCard({ fixture }: CustomizableFutureFix
 
           {context ? (
             <>
+              <SaveLineup fixture={fixture} homePlayerIds={homeSelectedIds} awayPlayerIds={awaySelectedIds} />
               <div className="simulation-summary-card">
                 <div className="simulation-summary-topline">
                   <span>Your runtime forecast</span>

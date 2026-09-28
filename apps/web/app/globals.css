@@ -3813,3 +3813,30 @@ img {
     transform: scaleX(1) !important;
   }
 }
+/* Account-owned lineup scenarios */
+.account-nav, .saved-toolbar { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
+.account-link { white-space: nowrap; font-weight: 600; color: var(--ink); }
+.account-signout { background: transparent; border: 0; color: var(--muted); cursor: pointer; font: inherit; font-size: .8rem; }
+.account-loading, .account-note { color: var(--muted); font-size: .85rem; line-height: 1.6; overflow-wrap: anywhere; }
+.account-page { max-width: 850px; }
+.account-card, .save-lineup { padding: clamp(1rem, 3vw, 1.75rem); border: 1px solid var(--border); border-radius: 16px; background: var(--surface); margin-block: 1rem; }
+.account-card h2 { margin: 0 0 .7rem; font-size: 1.2rem; overflow-wrap: anywhere; }
+.account-card p, .save-lineup p { line-height: 1.65; color: var(--muted); margin: .5rem 0 1rem; }
+.account-form { display: flex; flex-direction: column; align-items: stretch; gap: .85rem; }
+.account-form label { display: flex; flex-direction: column; gap: .5rem; font-weight: 500; }
+.account-form input { width: 100%; padding: .85rem 1rem; background: var(--bg); color: var(--ink); border: 1px solid var(--border); border-radius: 8px; font: inherit; min-width: 0; }
+.account-form input:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.account-form .cta-primary { align-self: flex-start; }
+.saved-lineups { display: grid; gap: 1rem; }
+.saved-toolbar { justify-content: space-between; }
+.saved-lineup-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+.saved-lineup-card { margin: 0; }
+.saved-player-list { padding-left: 1.4rem; line-height: 1.9; }
+.save-lineup button:disabled, .account-form button:disabled { opacity: .55; cursor: wait; }
+@media (max-width: 700px) {
+  .saved-lineup-grid { grid-template-columns: 1fr; }
+  .account-nav { gap: .55rem; }
+  .account-link { font-size: .8rem; }
+  .header-meta .gameweek-chip { display: none; }
+  .saved-lineup-card .fixture-action-buttons { flex-wrap: wrap; }
+}

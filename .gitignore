@@ -7,6 +7,9 @@ __pycache__/
 *.tsbuildinfo
 .env
 .env.*
+!.env.example
+!**/.env.example
+supabase/.temp/
 venv/
 .venv/
 *.pkl
