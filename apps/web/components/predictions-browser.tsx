@@ -20,39 +20,39 @@ export function PredictionsBrowser({
   upcomingFixtures,
   postponedFixtures,
 }: PredictionsBrowserProps) {
-  const [tab, setTab] = useState<"current" | "future" | "postponed">(
-    currentGameweekFixtures.length > 0 ? "current" : "future",
-  );
+  const tabs = (
+    [
+      { id: "current", label: "Current Matchweek", count: currentGameweekFixtures.length },
+      { id: "upcoming", label: "Upcoming", count: upcomingFixtures.length },
+      { id: "postponed", label: "Postponed", count: postponedFixtures.length },
+    ] as const
+  ).filter((entry) => entry.count > 0);
+  const [tab, setTab] = useState<"current" | "upcoming" | "postponed">(tabs[0]?.id ?? "upcoming");
 
   return (
     <>
-      <div className="tab-bar">
-        <button
-          className={`tab-button ${tab === "current" ? "tab-button-active" : ""}`}
-          onClick={() => setTab("current")}
-        >
-          Current Matchweek
-          <span className="tab-count">{currentGameweekFixtures.length}</span>
-        </button>
-        <button
-          className={`tab-button ${tab === "future" ? "tab-button-active" : ""}`}
-          onClick={() => setTab("future")}
-        >
-          Future Predictions
-          <span className="tab-count">{upcomingFixtures.length}</span>
-        </button>
-        <button
-          className={`tab-button ${tab === "postponed" ? "tab-button-active" : ""}`}
-          onClick={() => setTab("postponed")}
-        >
-          Postponed
-          <span className="tab-count">{postponedFixtures.length}</span>
-        </button>
-      </div>
+      {/* Empty tabs are hidden, and a single remaining tab needs no switcher. */}
+      {tabs.length > 1 ? (
+        <div className="tab-bar" role="tablist">
+          {tabs.map((entry) => (
+            <button
+              key={entry.id}
+              type="button"
+              role="tab"
+              aria-selected={tab === entry.id}
+              className={`tab-button ${tab === entry.id ? "tab-button-active" : ""}`}
+              onClick={() => setTab(entry.id)}
+            >
+              {entry.label}
+              <span className="tab-count">{entry.count}</span>
+            </button>
+          ))}
+        </div>
+      ) : null}
 
       {tab === "current" ? (
         <CurrentGameweekView gameweek={currentGameweek} fixtures={currentGameweekFixtures} />
-      ) : tab === "future" ? (
+      ) : tab === "upcoming" ? (
         <FixturesWeekView fixtures={upcomingFixtures} />
       ) : (
         <PostponedFixturesView fixtures={postponedFixtures} />

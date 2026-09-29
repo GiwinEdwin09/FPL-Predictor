@@ -778,11 +778,19 @@ img {
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid var(--border);
   margin-bottom: 1.25rem;
-  flex-wrap: wrap;
+  max-width: 100%;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.tab-bar::-webkit-scrollbar {
+  display: none;
 }
 
 .tab-button {
   display: inline-flex;
+  flex-shrink: 0;
+  white-space: nowrap;
   align-items: center;
   gap: 0.5rem;
   padding: 0.52rem 0.95rem;
@@ -2992,6 +3000,29 @@ img {
   color: var(--prob-draw);
 }
 
+.upset-label {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 7.5rem;
+  padding: 0.3rem 0.7rem;
+  border-radius: var(--radius-pill);
+  background: rgba(251, 191, 36, 0.1);
+  border: 1px solid rgba(251, 191, 36, 0.32);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--prob-draw);
+  white-space: nowrap;
+}
+
+.upset-row.hit-row .upset-label {
+  background: rgba(0, 255, 133, 0.1);
+  border-color: rgba(0, 255, 133, 0.32);
+  color: var(--accent);
+}
+
 .upset-row.hit-row .upset-rank::before {
   background: rgba(0, 255, 133, 0.1);
   border-color: rgba(0, 255, 133, 0.32);
@@ -3771,6 +3802,12 @@ img {
 
   .upset-row {
     grid-template-columns: auto 1fr;
+  }
+
+  .upset-label {
+    grid-column: 1 / -1;
+    justify-self: start;
+    min-width: 0;
   }
 
   .upset-detail {

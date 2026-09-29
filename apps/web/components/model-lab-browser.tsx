@@ -1,12 +1,12 @@
 "use client";
 
-import { formatMatchDate, formatPercent } from "@/lib/format";
+import { formatPercent } from "@/lib/format";
 
 import { matchSeasons } from "@/lib/gameweek";
 import { useMemo } from "react";
 
-import { TeamCrest } from "@/components/ui/crest";
 import { MetricTile } from "@/components/ui/metric-tile";
+import { OutcomeRow } from "@/components/outcome-row";
 import type { QuizMatch } from "@/lib/quiz";
 import {
   accuracyByGameweek,
@@ -16,7 +16,6 @@ import {
   summarizeModel,
   type CalibrationBin,
   type GameweekAccuracy,
-  type UpsetEntry,
 } from "@/lib/insights";
 
 type ModelMeta = {
@@ -134,42 +133,6 @@ function CalibrationChart({ bins }: { bins: CalibrationBin[] }) {
         sitting on the dashed diagonal mean the model&apos;s confidence matches reality; dot size tracks sample count.
       </p>
     </div>
-  );
-}
-
-function OutcomeRow({ entry, hit }: { entry: UpsetEntry; hit: boolean }) {
-  const outcomeText =
-    entry.outcome === "draw"
-      ? "a draw"
-      : entry.outcome === "home"
-        ? `${entry.match.homeTeam.shortName} win`
-        : `${entry.match.awayTeam.shortName} win`;
-  return (
-    <li className={`upset-row${hit ? " hit-row" : ""}`}>
-      <span className="upset-rank" aria-hidden="true" />
-      <div className="upset-fixture">
-        <span className="upset-team">
-          <TeamCrest name={entry.match.homeTeam.name} badgePath={entry.match.homeTeam.badgePath} size={30} />
-          {entry.match.homeTeam.shortName}
-        </span>
-        <strong className="upset-score">
-          {entry.match.score.home} – {entry.match.score.away}
-        </strong>
-        <span className="upset-team">
-          <TeamCrest name={entry.match.awayTeam.name} badgePath={entry.match.awayTeam.badgePath} size={30} />
-          {entry.match.awayTeam.shortName}
-        </span>
-      </div>
-      <div className="upset-detail">
-        <span>
-          MW {entry.match.gameweek ?? "—"} · {formatMatchDate(entry.match.kickoffTime)}
-        </span>
-        <span>
-          {hit ? "Called at just " : "Gave "}
-          {outcomeText} <strong>{formatPercent(entry.probability, 1)}</strong> · {hit ? "and it landed" : "it happened"}
-        </span>
-      </div>
-    </li>
   );
 }
 

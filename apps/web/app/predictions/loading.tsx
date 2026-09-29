@@ -13,12 +13,6 @@ export default function PredictionsLoading() {
         <p className="page-lede">Pulling the latest probabilities and grouping fixtures into rounds.</p>
       </header>
 
-      <div className="tab-bar">
-        <span className="tab-button tab-button-disabled">Current Matchweek</span>
-        <span className="tab-button tab-button-disabled">Future Predictions</span>
-        <span className="tab-button tab-button-disabled">Postponed</span>
-      </div>
-
       <section className="week-panel">
         <div className="week-panel-header week-panel-header-simple">
           <div className="week-heading">

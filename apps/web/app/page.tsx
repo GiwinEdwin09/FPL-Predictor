@@ -2,12 +2,12 @@ import Link from "next/link";
 
 import { CompactFixture } from "@/components/compact-fixture";
 import { FeaturedMatch } from "@/components/featured-match";
-import { TeamCrest } from "@/components/ui/crest";
+import { OutcomeRow } from "@/components/outcome-row";
 import { MetricTile } from "@/components/ui/metric-tile";
 import { ErrorState } from "@/components/ui/states";
 import { loadDashboardResult } from "@/lib/dashboard";
-import { formatMatchDate, formatPercent } from "@/lib/format";
-import { biggestUpsets } from "@/lib/insights";
+import { formatPercent } from "@/lib/format";
+import { bestCalls, biggestUpsets } from "@/lib/insights";
 import { fixturesForGameweek, sortByKickoff, summarizeGameweek } from "@/lib/gameweek";
 import { pickQuizCandidates } from "@/lib/quiz";
 
@@ -68,17 +68,15 @@ export default async function HomePage() {
   const matchesAnalysed = dashboard.historicalMatches.length;
   const accuracyPct = formatPercent(dashboard.model.metrics.accuracy ?? 0, 1);
 
-  // Historical insight: the single biggest shock from the archive.
+  // Historical insight: the season's boldest correct call next to its biggest miss.
   const gradedMatches = pickQuizCandidates(dashboard.historicalMatches);
   const latestSeason = gradedMatches.reduce<string | null>(
     (latest, match) => (latest === null || match.season > latest ? match.season : latest),
     null,
   );
-  const seasonUpsets = biggestUpsets(
-    gradedMatches.filter((match) => match.season === latestSeason),
-    1,
-  );
-  const headlineShock = seasonUpsets[0] ?? null;
+  const seasonMatches = gradedMatches.filter((match) => match.season === latestSeason);
+  const bestCall = bestCalls(seasonMatches, 1)[0] ?? null;
+  const biggestMiss = biggestUpsets(seasonMatches, 1)[0] ?? null;
 
   const heroEyebrow =
     summary.status === "live"
@@ -211,12 +209,12 @@ export default async function HomePage() {
       ) : null}
 
       {/* Historical insight teaser */}
-      {headlineShock ? (
+      {bestCall || biggestMiss ? (
         <section className="section">
           <div className="section-head">
             <div>
               <h2>From the archive · {latestSeason?.replace("-", "/")}</h2>
-              <p>The result the model rated least likely — and how often it gets calls like this right.</p>
+              <p>The boldest call that landed this season, and the result the model least expected.</p>
             </div>
             <Link href="/model-lab" className="section-link">
               Open Model Lab
@@ -226,35 +224,10 @@ export default async function HomePage() {
               </svg>
             </Link>
           </div>
-          <Link
-            href="/model-lab"
-            className="upset-row"
-            style={{ display: "grid", cursor: "pointer" }}
-            aria-label={`Open model lab: ${headlineShock.match.homeTeam.name} ${headlineShock.match.score.home}-${headlineShock.match.score.away} ${headlineShock.match.awayTeam.name}`}
-          >
-            <span className="upset-rank" aria-hidden="true" />
-            <div className="upset-fixture">
-              <span className="upset-team">
-                <TeamCrest name={headlineShock.match.homeTeam.name} badgePath={headlineShock.match.homeTeam.badgePath} size={30} />
-                {headlineShock.match.homeTeam.shortName}
-              </span>
-              <strong className="upset-score">
-                {headlineShock.match.score.home} – {headlineShock.match.score.away}
-              </strong>
-              <span className="upset-team">
-                <TeamCrest name={headlineShock.match.awayTeam.name} badgePath={headlineShock.match.awayTeam.badgePath} size={30} />
-                {headlineShock.match.awayTeam.shortName}
-              </span>
-            </div>
-            <div className="upset-detail">
-              <span>
-                MW {headlineShock.match.gameweek ?? "—"} · {formatMatchDate(headlineShock.match.kickoffTime)}
-              </span>
-              <span>
-                Model gave the winner just <strong>{formatPercent(headlineShock.probability, 1)}</strong>
-              </span>
-            </div>
-          </Link>
+          <ul className="upset-list">
+            {bestCall ? <OutcomeRow entry={bestCall} hit label="Best call" /> : null}
+            {biggestMiss ? <OutcomeRow entry={biggestMiss} hit={false} label="Biggest miss" /> : null}
+          </ul>
         </section>
       ) : null}
     </div>
