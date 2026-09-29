@@ -43,3 +43,4 @@ data/*.csv
 data/*.json
 !data/.gitkeep
 !data/predictions_ledger.json
+.gstack/

@@ -24,12 +24,17 @@ only an [unused-index informational notice](https://supabase.com/docs/guides/dat
 the owner/recent index is intentional for listing a user's saves.
 
 The public Auth settings endpoint confirms Email is enabled, sign-ups are allowed,
-email confirmation is required, and anonymous sign-in is disabled. **Public sign-in
-is not yet ready:** configure production/local callback URLs and custom SMTP, add
-the public connection variables to Vercel, redeploy, and test email sign-in. The
-local app also needs the existing Render `API_BASE_URL` for roster validation when
-saving. The connector does not expose Auth-settings updates; dashboard access is
-needed for that remaining setup.
+email confirmation is required, and anonymous sign-in is disabled. The Site URL is
+`https://fpl-predictor-bay.vercel.app`; its `/auth/callback` URL and
+`http://localhost:3000/auth/callback` are configured as allowed redirects.
+Vercel's Production environment now contains both public Supabase connection
+variables and retains the existing `API_BASE_URL`.
+
+**Custom SMTP is still required for public sign-ups.** Until it is configured,
+Supabase's built-in email sender only delivers to organization members. A real
+email callback must complete before considering the full login flow verified.
+The local app also needs the existing Render `API_BASE_URL` for roster validation
+when saving.
 
 ## Provision and connect
 
