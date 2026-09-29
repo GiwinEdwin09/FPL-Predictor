@@ -3,10 +3,19 @@
 import { formatPercent } from "@/lib/format";
 
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 import type { QuizMatch, QuizOutcome } from "@/lib/quiz";
-import { modelPick, outcomeProbability, resolveOutcome, todayKey } from "@/lib/quiz";
+import {
+  dailyQuizMatches,
+  modelPick,
+  outcomeProbability,
+  resolveOutcome,
+  restoreDailyProgress,
+  tallyDailyPicks,
+  todayKey,
+  type DailyProgress,
+} from "@/lib/quiz";
 
 type ScoreState = {
   user: number;
@@ -23,6 +32,7 @@ type DailyRecord = {
 
 const SCORE_STORAGE_KEY = "fpl-predictor-quiz-score-v1";
 const DAILY_STORAGE_KEY = "fpl-predictor-quiz-daily-v1";
+const PROGRESS_STORAGE_KEY = "fpl-predictor-quiz-progress-v1";
 
 function formatKickoff(kickoffTime: string) {
   return new Intl.DateTimeFormat("en-GB", {
@@ -128,12 +138,14 @@ function QuizSidebar({
   );
 }
 
-export function QuizGame({ candidates, daily }: { candidates: QuizMatch[]; daily: QuizMatch[] }) {
+export function QuizGame({ candidates, daily: initialDaily }: { candidates: QuizMatch[]; daily: QuizMatch[] }) {
   const [mode, setMode] = useState<"daily" | "practice">("daily");
+  // The page is prerendered, so its daily five reflects the build date; swap in today's on mount.
+  const [daily, setDaily] = useState(initialDaily);
   const [dailyIndex, setDailyIndex] = useState(0);
   const [dailyRecord, setDailyRecord] = useState<DailyRecord | null>(null);
-  const [dailyTally, setDailyTally] = useState({ user: 0, model: 0 });
-  const [dailyResults, setDailyResults] = useState<boolean[]>([]);
+  // Your call on each daily match answered so far; saved so a reload can't replay scored matches.
+  const [dailyPicks, setDailyPicks] = useState<QuizOutcome[]>([]);
   const [practiceMatch, setPracticeMatch] = useState<QuizMatch | null>(null);
   const [practiceSeen, setPracticeSeen] = useState<string[]>([]);
   const [answeredPick, setAnsweredPick] = useState<QuizOutcome | null>(null);
@@ -148,17 +160,47 @@ export function QuizGame({ candidates, daily }: { candidates: QuizMatch[]; daily
           setScore(parsed);
         }
       }
-      const rawDaily = window.localStorage.getItem(DAILY_STORAGE_KEY);
-      if (rawDaily) {
-        const parsed = JSON.parse(rawDaily) as DailyRecord;
-        if (parsed.date === todayKey()) {
-          setDailyRecord(parsed);
-        }
-      }
     } catch {
       // Ignore corrupted storage and start fresh.
     }
-  }, []);
+
+    const today = todayKey();
+    const todaysFive = dailyQuizMatches(candidates, today);
+    setDaily(todaysFive);
+    try {
+      const rawDaily = window.localStorage.getItem(DAILY_STORAGE_KEY);
+      const record = rawDaily ? (JSON.parse(rawDaily) as DailyRecord) : null;
+      if (record?.date === today) {
+        setDailyRecord(record);
+        return;
+      }
+      const rawProgress = window.localStorage.getItem(PROGRESS_STORAGE_KEY);
+      const progress = rawProgress ? restoreDailyProgress(JSON.parse(rawProgress), today, todaysFive) : null;
+      if (progress) {
+        setDailyPicks(progress.picks);
+        setDailyIndex(progress.index);
+        setAnsweredPick(progress.picks[progress.index] ?? null);
+      }
+    } catch {
+      // Ignore corrupted storage and start today's five fresh.
+    }
+  }, [candidates]);
+
+  const tally = useMemo(() => tallyDailyPicks(daily, dailyPicks), [daily, dailyPicks]);
+
+  function saveProgress(picks: QuizOutcome[], index: number) {
+    const progress: DailyProgress = {
+      date: todayKey(),
+      matchIds: daily.map((match) => match.matchId),
+      picks,
+      index,
+    };
+    try {
+      window.localStorage.setItem(PROGRESS_STORAGE_KEY, JSON.stringify(progress));
+    } catch {
+      // Storage unavailable; progress lasts for this visit only.
+    }
+  }
 
   const currentMatch: QuizMatch | null =
     mode === "daily" ? (dailyRecord ? null : (daily[dailyIndex] ?? null)) : practiceMatch;
@@ -185,6 +227,10 @@ export function QuizGame({ candidates, daily }: { candidates: QuizMatch[]; daily
     if (!currentMatch || answeredPick) {
       return;
     }
+    // A daily match can only be scored once, even after switching modes.
+    if (mode === "daily" && dailyPicks.length > dailyIndex) {
+      return;
+    }
     setAnsweredPick(outcome);
     const actual = resolveOutcome(currentMatch);
     const userCorrect = actual !== null && outcome === actual;
@@ -195,11 +241,9 @@ export function QuizGame({ candidates, daily }: { candidates: QuizMatch[]; daily
       played: score.played + 1,
     });
     if (mode === "daily") {
-      setDailyResults((results) => [...results, userCorrect]);
-      setDailyTally((tally) => ({
-        user: tally.user + (userCorrect ? 1 : 0),
-        model: tally.model + (modelCorrect ? 1 : 0),
-      }));
+      const picks = [...dailyPicks, outcome];
+      setDailyPicks(picks);
+      saveProgress(picks, dailyIndex);
     }
   }
 
@@ -208,16 +252,18 @@ export function QuizGame({ candidates, daily }: { candidates: QuizMatch[]; daily
     if (mode === "daily") {
       if (dailyIndex + 1 < daily.length) {
         setDailyIndex(dailyIndex + 1);
+        saveProgress(dailyPicks, dailyIndex + 1);
         return;
       }
       const record: DailyRecord = {
         date: todayKey(),
-        user: dailyTally.user,
-        model: dailyTally.model,
+        user: tally.user,
+        model: tally.model,
         total: daily.length,
       };
       try {
         window.localStorage.setItem(DAILY_STORAGE_KEY, JSON.stringify(record));
+        window.localStorage.removeItem(PROGRESS_STORAGE_KEY);
       } catch {
         // Storage unavailable; the summary still shows for this session.
       }
@@ -265,7 +311,8 @@ export function QuizGame({ candidates, daily }: { candidates: QuizMatch[]; daily
               aria-pressed={mode === "daily"}
               onClick={() => {
                 setMode("daily");
-                setAnsweredPick(null);
+                // Coming back to an answered daily match shows its reveal again, not fresh picks.
+                setAnsweredPick(dailyPicks[dailyIndex] ?? null);
               }}
             >
               Daily five
@@ -427,8 +474,8 @@ export function QuizGame({ candidates, daily }: { candidates: QuizMatch[]; daily
       <QuizSidebar
         daily={daily}
         dailyIndex={dailyIndex}
-        dailyResults={dailyResults}
-        dailyTally={dailyTally}
+        dailyResults={tally.results}
+        dailyTally={tally}
         dailyRecord={dailyRecord}
       />
     </div>
