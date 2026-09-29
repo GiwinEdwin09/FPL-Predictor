@@ -208,6 +208,32 @@ export default async function HomePage() {
         </section>
       ) : null}
 
+      {/* Beat the Model teaser */}
+      <section className="play-teaser" aria-label="Beat the Model">
+        <div className="play-teaser-copy">
+          <p className="eyebrow">Beat the Model</p>
+          <h2>Think you can out-call the model?</h2>
+          <p>
+            Five real Premier League matches a day, scorelines hidden. Make your calls, then see how the model did on
+            the same games.
+          </p>
+        </div>
+        <div className="play-teaser-actions">
+          <div className="play-teaser-picks" aria-hidden="true">
+            <span>Home</span>
+            <span>Draw</span>
+            <span>Away</span>
+          </div>
+          <Link href="/beat-the-model" className="cta-primary">
+            Play today&apos;s five
+            <svg className="cta-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M5 12H19" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+              <path d="M13 6L19 12L13 18" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </Link>
+        </div>
+      </section>
+
       {/* Historical insight teaser */}
       {bestCall || biggestMiss ? (
         <section className="section">

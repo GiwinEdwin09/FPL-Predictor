@@ -13,6 +13,7 @@ import type { FixtureLineupContext, FixtureSimulation, LineupPlayer, TeamLineupC
 type CustomizableFutureFixtureCardProps = {
   fixture: UpcomingFixture;
   initialScenario?: SavedScenario;
+  highlighted?: boolean;
 };
 
 type PositionBucket = "goalkeeper" | "defender" | "midfielder" | "forward" | "unknown";
@@ -208,7 +209,11 @@ function LineupControls({
   );
 }
 
-export function CustomizableFutureFixtureCard({ fixture, initialScenario }: CustomizableFutureFixtureCardProps) {
+export function CustomizableFutureFixtureCard({
+  fixture,
+  initialScenario,
+  highlighted = false,
+}: CustomizableFutureFixtureCardProps) {
   const cacheKey = `${fixture.season}:${fixture.matchId}`;
   const [open, setOpen] = useState(Boolean(initialScenario));
   const [context, setContext] = useState<FixtureLineupContext | null>(null);
@@ -366,7 +371,7 @@ export function CustomizableFutureFixtureCard({ fixture, initialScenario }: Cust
       : "Open the lineup tool to fetch the projected XI from the live backend.";
 
   return (
-    <PredictionCard fixture={fixture} probabilitiesOverride={activeProbabilities}>
+    <PredictionCard fixture={fixture} probabilitiesOverride={activeProbabilities} highlighted={highlighted}>
       <div className="fixture-actions">
         <div>
           <strong>Lineup simulator</strong>

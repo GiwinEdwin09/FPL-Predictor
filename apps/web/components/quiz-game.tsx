@@ -50,11 +50,90 @@ function ClubBadge({ name, badgePath }: { name: string; badgePath: string | null
   return <Image src={badgePath} alt={name} width={64} height={64} className="quiz-club-mark-image" />;
 }
 
+type DotState = "hit" | "miss" | "current" | "pending";
+
+function QuizSidebar({
+  daily,
+  dailyIndex,
+  dailyResults,
+  dailyTally,
+  dailyRecord,
+}: {
+  daily: QuizMatch[];
+  dailyIndex: number;
+  /** Whether you called each daily match played so far this session. */
+  dailyResults: boolean[];
+  dailyTally: { user: number; model: number };
+  dailyRecord: DailyRecord | null;
+}) {
+  const dots: DotState[] = daily.map((_, index) => {
+    if (index < dailyResults.length) return dailyResults[index] ? "hit" : "miss";
+    return index === dailyIndex ? "current" : "pending";
+  });
+  const dotLabel: Record<DotState, string> = {
+    hit: "called it",
+    miss: "missed",
+    current: "current match",
+    pending: "up next",
+  };
+
+  return (
+    <aside className="quiz-side" aria-label="About Beat the Model">
+      <section className="quiz-side-card">
+        <p className="eyebrow">Today&apos;s five</p>
+        {dailyRecord ? (
+          <p className="quiz-side-copy">
+            Done for today: <strong>You {dailyRecord.user}</strong> – <strong>{dailyRecord.model} Model</strong>. New
+            matches at 00:00 UTC.
+          </p>
+        ) : (
+          <>
+            <ol className="quiz-dots">
+              {dots.map((state, index) => (
+                <li key={daily[index].matchId} className={`quiz-dot quiz-dot-${state}`}>
+                  <span className="sr-only">
+                    Match {index + 1}: {dotLabel[state]}
+                  </span>
+                </li>
+              ))}
+            </ol>
+            <p className="quiz-side-copy">
+              {dailyResults.length === 0
+                ? "Five real matches, the same for everyone today. New set at 00:00 UTC."
+                : `Today so far: You ${dailyTally.user} – ${dailyTally.model} Model.`}
+            </p>
+          </>
+        )}
+      </section>
+
+      <section className="quiz-side-card">
+        <p className="eyebrow">How it works</p>
+        <ol className="quiz-steps">
+          <li>
+            <strong>See what the model saw.</strong> Elo ratings and recent xG, with the score hidden.
+          </li>
+          <li>
+            <strong>Make your call.</strong> Home win, draw or away win.
+          </li>
+          <li>
+            <strong>Reveal.</strong> The real score, plus the odds the model gave each outcome.
+          </li>
+        </ol>
+        <p className="quiz-side-copy">
+          You and the model are scored on the same matches, so it&apos;s a straight head-to-head. Your record stays in
+          this browser.
+        </p>
+      </section>
+    </aside>
+  );
+}
+
 export function QuizGame({ candidates, daily }: { candidates: QuizMatch[]; daily: QuizMatch[] }) {
   const [mode, setMode] = useState<"daily" | "practice">("daily");
   const [dailyIndex, setDailyIndex] = useState(0);
   const [dailyRecord, setDailyRecord] = useState<DailyRecord | null>(null);
   const [dailyTally, setDailyTally] = useState({ user: 0, model: 0 });
+  const [dailyResults, setDailyResults] = useState<boolean[]>([]);
   const [practiceMatch, setPracticeMatch] = useState<QuizMatch | null>(null);
   const [practiceSeen, setPracticeSeen] = useState<string[]>([]);
   const [answeredPick, setAnsweredPick] = useState<QuizOutcome | null>(null);
@@ -116,6 +195,7 @@ export function QuizGame({ candidates, daily }: { candidates: QuizMatch[]; daily
       played: score.played + 1,
     });
     if (mode === "daily") {
+      setDailyResults((results) => [...results, userCorrect]);
       setDailyTally((tally) => ({
         user: tally.user + (userCorrect ? 1 : 0),
         model: tally.model + (modelCorrect ? 1 : 0),
@@ -176,172 +256,181 @@ export function QuizGame({ candidates, daily }: { candidates: QuizMatch[]; daily
   const modelCorrect = currentMatch && actual !== null && modelOutcome === actual;
 
   return (
-    <section className="quiz-panel">
-      <div className="quiz-toolbar">
-        <div className="quiz-mode-toggle" role="group" aria-label="Quiz mode">
-          <button
-            className={mode === "daily" ? "quiz-mode-button quiz-mode-active" : "quiz-mode-button"}
-            aria-pressed={mode === "daily"}
-            onClick={() => {
-              setMode("daily");
-              setAnsweredPick(null);
-            }}
-          >
-            Daily five
-          </button>
-          <button
-            className={mode === "practice" ? "quiz-mode-button quiz-mode-active" : "quiz-mode-button"}
-            aria-pressed={mode === "practice"}
-            onClick={startPractice}
-          >
-            Practice
-          </button>
-        </div>
-        <div className="quiz-scoreboard" aria-live="polite">
-          {score.played > 0 ? (
-            <span
-              className={`verdict-badge ${score.user > score.model ? "verdict-correct" : score.user < score.model ? "verdict-incorrect" : "conf-wide-open"}`}
+    <div className="quiz-layout">
+      <section className="quiz-panel">
+        <div className="quiz-toolbar">
+          <div className="quiz-mode-toggle" role="group" aria-label="Quiz mode">
+            <button
+              className={mode === "daily" ? "quiz-mode-button quiz-mode-active" : "quiz-mode-button"}
+              aria-pressed={mode === "daily"}
+              onClick={() => {
+                setMode("daily");
+                setAnsweredPick(null);
+              }}
             >
-              {score.user > score.model
-                ? "You beat the model"
-                : score.user < score.model
-                  ? "Model leads"
-                  : "All square"}
+              Daily five
+            </button>
+            <button
+              className={mode === "practice" ? "quiz-mode-button quiz-mode-active" : "quiz-mode-button"}
+              aria-pressed={mode === "practice"}
+              onClick={startPractice}
+            >
+              Practice
+            </button>
+          </div>
+          <div className="quiz-scoreboard" aria-live="polite">
+            {score.played > 0 ? (
+              <span
+                className={`verdict-badge ${score.user > score.model ? "verdict-correct" : score.user < score.model ? "verdict-incorrect" : "conf-wide-open"}`}
+              >
+                {score.user > score.model
+                  ? "You beat the model"
+                  : score.user < score.model
+                    ? "Model leads"
+                    : "All square"}
+              </span>
+            ) : null}
+            <span className="quiz-score-chip quiz-score-you">
+              You <strong>{score.user}</strong>
             </span>
-          ) : null}
-          <span className="quiz-score-chip quiz-score-you">
-            You <strong>{score.user}</strong>
-          </span>
-          <span className="quiz-score-chip quiz-score-model">
-            Model <strong>{score.model}</strong>
-          </span>
-          <span className="quiz-score-chip">
-            Played <strong>{score.played}</strong>
-          </span>
-          <button className="quiz-reset" onClick={resetScore} title="Reset your all-time score">
-            Reset
-          </button>
+            <span className="quiz-score-chip quiz-score-model">
+              Model <strong>{score.model}</strong>
+            </span>
+            <span className="quiz-score-chip">
+              Played <strong>{score.played}</strong>
+            </span>
+            <button className="quiz-reset" onClick={resetScore} title="Reset your all-time score">
+              Reset
+            </button>
+          </div>
         </div>
-      </div>
 
-      {mode === "daily" && dailyRecord ? (
-        <article className="quiz-card quiz-summary-card">
-          <p className="eyebrow">Daily five · complete</p>
-          <h2 className="quiz-summary-title">
-            You {dailyRecord.user} - {dailyRecord.model} Model
-          </h2>
-          <p className="quiz-summary-copy">
-            {dailyRecord.user > dailyRecord.model
-              ? "You beat the model today. Come back tomorrow for five new matches."
-              : dailyRecord.user === dailyRecord.model
-                ? "Dead even with the model today. Come back tomorrow for a rematch."
-                : "The model edged you today. Come back tomorrow for a rematch."}
-          </p>
-          <button className="quiz-next-button" onClick={startPractice}>
-            Keep practicing
-          </button>
-        </article>
-      ) : currentMatch ? (
-        <article className="quiz-card">
-          <div className="quiz-card-topline">
-            <span className="fixture-card-gw">
-              MW {currentMatch.gameweek ?? "TBD"} · {currentMatch.season}
-            </span>
-            <span className="fixture-card-time">
-              {mode === "daily" ? `Match ${dailyIndex + 1} of ${daily.length} · ` : ""}
-              {formatKickoff(currentMatch.kickoffTime as string)}
-            </span>
-          </div>
-
-          <div className="quiz-clubs">
-            <div className="quiz-club">
-              <ClubBadge name={currentMatch.homeTeam.name} badgePath={currentMatch.homeTeam.badgePath} />
-              <p className="club-name">{currentMatch.homeTeam.name}</p>
-              <p className="club-subline">Elo {currentMatch.preMatch.homeElo !== null ? Math.round(currentMatch.preMatch.homeElo) : "—"}</p>
+        {mode === "daily" && dailyRecord ? (
+          <article className="quiz-card quiz-summary-card">
+            <p className="eyebrow">Daily five · complete</p>
+            <h2 className="quiz-summary-title">
+              You {dailyRecord.user} - {dailyRecord.model} Model
+            </h2>
+            <p className="quiz-summary-copy">
+              {dailyRecord.user > dailyRecord.model
+                ? "You beat the model today. Come back tomorrow for five new matches."
+                : dailyRecord.user === dailyRecord.model
+                  ? "Dead even with the model today. Come back tomorrow for a rematch."
+                  : "The model edged you today. Come back tomorrow for a rematch."}
+            </p>
+            <button className="quiz-next-button" onClick={startPractice}>
+              Keep practicing
+            </button>
+          </article>
+        ) : currentMatch ? (
+          <article className="quiz-card">
+            <div className="quiz-card-topline">
+              <span className="fixture-card-gw">
+                MW {currentMatch.gameweek ?? "TBD"} · {currentMatch.season}
+              </span>
+              <span className="fixture-card-time">
+                {mode === "daily" ? `Match ${dailyIndex + 1} of ${daily.length} · ` : ""}
+                {formatKickoff(currentMatch.kickoffTime as string)}
+              </span>
             </div>
-            <div className="fixture-versus">vs</div>
-            <div className="quiz-club">
-              <ClubBadge name={currentMatch.awayTeam.name} badgePath={currentMatch.awayTeam.badgePath} />
-              <p className="club-name">{currentMatch.awayTeam.name}</p>
-              <p className="club-subline">Elo {currentMatch.preMatch.awayElo !== null ? Math.round(currentMatch.preMatch.awayElo) : "—"}</p>
-            </div>
-          </div>
 
-          <div className="fixture-context-grid quiz-context">
-            <div>
-              <span className="context-label">Last 5 xG</span>
-              <strong>
-                {currentMatch.preMatch.homeLast5Xg ?? "—"} – {currentMatch.preMatch.awayLast5Xg ?? "—"}
-              </strong>
-            </div>
-          </div>
-
-          {!answeredPick ? (
-            <>
-              <p className="quiz-prompt">How did this one finish?</p>
-              <div className="quiz-picks">
-                {(["home", "draw", "away"] as QuizOutcome[]).map((outcome) => (
-                  <button key={outcome} className="quiz-pick-button" onClick={() => handlePick(outcome)}>
-                    {outcomeLabel(outcome, currentMatch)}
-                  </button>
-                ))}
+            <div className="quiz-clubs">
+              <div className="quiz-club">
+                <ClubBadge name={currentMatch.homeTeam.name} badgePath={currentMatch.homeTeam.badgePath} />
+                <p className="club-name">{currentMatch.homeTeam.name}</p>
+                <p className="club-subline">Elo {currentMatch.preMatch.homeElo !== null ? Math.round(currentMatch.preMatch.homeElo) : "—"}</p>
               </div>
-            </>
-          ) : (
-            <div className="quiz-reveal">
-              <div className="quiz-final-score">
-                <span>{currentMatch.homeTeam.shortName}</span>
+              <div className="fixture-versus">vs</div>
+              <div className="quiz-club">
+                <ClubBadge name={currentMatch.awayTeam.name} badgePath={currentMatch.awayTeam.badgePath} />
+                <p className="club-name">{currentMatch.awayTeam.name}</p>
+                <p className="club-subline">Elo {currentMatch.preMatch.awayElo !== null ? Math.round(currentMatch.preMatch.awayElo) : "—"}</p>
+              </div>
+            </div>
+
+            <div className="fixture-context-grid quiz-context">
+              <div>
+                <span className="context-label">Last 5 xG</span>
                 <strong>
-                  {currentMatch.score.home} - {currentMatch.score.away}
+                  {currentMatch.preMatch.homeLast5Xg ?? "—"} – {currentMatch.preMatch.awayLast5Xg ?? "—"}
                 </strong>
-                <span>{currentMatch.awayTeam.shortName}</span>
               </div>
-              <p className={userCorrect ? "quiz-verdict quiz-verdict-good" : "quiz-verdict quiz-verdict-miss"}>
-                {userCorrect ? "You called it." : "Not this time."}{" "}
-                {modelCorrect ? "The model got it right too." : "The model missed this one as well."}
-              </p>
-
-              <div className="probability-list quiz-model-bars">
-                {(
-                  [
-                    { outcome: "home" as QuizOutcome, label: currentMatch.homeTeam.shortName, tone: "var(--prob-home)" },
-                    { outcome: "draw" as QuizOutcome, label: "Draw", tone: "var(--prob-draw)" },
-                    { outcome: "away" as QuizOutcome, label: currentMatch.awayTeam.shortName, tone: "var(--prob-away)" },
-                  ]
-                ).map((bar) => (
-                  <div
-                    key={bar.outcome}
-                    className={
-                      bar.outcome === modelOutcome ? "probability-row probability-row-model" : "probability-row"
-                    }
-                  >
-                    <div className="probability-label">
-                      <span>
-                        {bar.label}
-                        {bar.outcome === modelOutcome ? <em className="quiz-model-tag">model pick</em> : null}
-                      </span>
-                      <strong>{formatPercent(outcomeProbability(currentMatch, bar.outcome))}</strong>
-                    </div>
-                    <div className="probability-track">
-                      <div
-                        className="probability-fill"
-                        style={{
-                          width: `${Math.max(8, outcomeProbability(currentMatch, bar.outcome) * 100)}%`,
-                          background: bar.tone,
-                        }}
-                      />
-                    </div>
-                  </div>
-                ))}
-              </div>
-
-              <button className="quiz-next-button" onClick={handleNext}>
-                {mode === "daily" && dailyIndex + 1 >= daily.length ? "See today’s result" : "Next match"}
-              </button>
             </div>
-          )}
-        </article>
-      ) : null}
-    </section>
+
+            {!answeredPick ? (
+              <>
+                <p className="quiz-prompt">How did this one finish?</p>
+                <div className="quiz-picks">
+                  {(["home", "draw", "away"] as QuizOutcome[]).map((outcome) => (
+                    <button key={outcome} className="quiz-pick-button" onClick={() => handlePick(outcome)}>
+                      {outcomeLabel(outcome, currentMatch)}
+                    </button>
+                  ))}
+                </div>
+              </>
+            ) : (
+              <div className="quiz-reveal">
+                <div className="quiz-final-score">
+                  <span>{currentMatch.homeTeam.shortName}</span>
+                  <strong>
+                    {currentMatch.score.home} - {currentMatch.score.away}
+                  </strong>
+                  <span>{currentMatch.awayTeam.shortName}</span>
+                </div>
+                <p className={userCorrect ? "quiz-verdict quiz-verdict-good" : "quiz-verdict quiz-verdict-miss"}>
+                  {userCorrect ? "You called it." : "Not this time."}{" "}
+                  {modelCorrect ? "The model got it right too." : "The model missed this one as well."}
+                </p>
+
+                <div className="probability-list quiz-model-bars">
+                  {(
+                    [
+                      { outcome: "home" as QuizOutcome, label: currentMatch.homeTeam.shortName, tone: "var(--prob-home)" },
+                      { outcome: "draw" as QuizOutcome, label: "Draw", tone: "var(--prob-draw)" },
+                      { outcome: "away" as QuizOutcome, label: currentMatch.awayTeam.shortName, tone: "var(--prob-away)" },
+                    ]
+                  ).map((bar) => (
+                    <div
+                      key={bar.outcome}
+                      className={
+                        bar.outcome === modelOutcome ? "probability-row probability-row-model" : "probability-row"
+                      }
+                    >
+                      <div className="probability-label">
+                        <span>
+                          {bar.label}
+                          {bar.outcome === modelOutcome ? <em className="quiz-model-tag">model pick</em> : null}
+                        </span>
+                        <strong>{formatPercent(outcomeProbability(currentMatch, bar.outcome))}</strong>
+                      </div>
+                      <div className="probability-track">
+                        <div
+                          className="probability-fill"
+                          style={{
+                            width: `${Math.max(8, outcomeProbability(currentMatch, bar.outcome) * 100)}%`,
+                            background: bar.tone,
+                          }}
+                        />
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                <button className="quiz-next-button" onClick={handleNext}>
+                  {mode === "daily" && dailyIndex + 1 >= daily.length ? "See today’s result" : "Next match"}
+                </button>
+              </div>
+            )}
+          </article>
+        ) : null}
+      </section>
+      <QuizSidebar
+        daily={daily}
+        dailyIndex={dailyIndex}
+        dailyResults={dailyResults}
+        dailyTally={dailyTally}
+        dailyRecord={dailyRecord}
+      />
+    </div>
   );
 }

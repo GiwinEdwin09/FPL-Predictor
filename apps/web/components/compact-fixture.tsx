@@ -4,6 +4,7 @@ import { TeamCrest } from "@/components/ui/crest";
 import { ProbabilityBar } from "@/components/ui/probability-bar";
 import { describeConfidence } from "@/lib/confidence";
 import type { UpcomingFixture } from "@/lib/dashboard";
+import { fixtureHref } from "@/lib/fixture-link";
 import { formatKickoff, formatPercent } from "@/lib/format";
 
 export function CompactFixture({ fixture }: { fixture: UpcomingFixture }) {
@@ -24,7 +25,7 @@ export function CompactFixture({ fixture }: { fixture: UpcomingFixture }) {
       : null;
 
   return (
-    <Link href="/predictions" className="upcoming-row">
+    <Link href={fixtureHref(fixture.matchId)} className="upcoming-row">
       <div className="upcoming-row-time">{formatKickoff(fixture.kickoffTime)}</div>
 
       <div className="upcoming-row-teams">

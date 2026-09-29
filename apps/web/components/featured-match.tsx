@@ -5,6 +5,7 @@ import { TeamCrest } from "@/components/ui/crest";
 import { ProbabilityBar } from "@/components/ui/probability-bar";
 import { describeConfidence } from "@/lib/confidence";
 import type { UpcomingFixture } from "@/lib/dashboard";
+import { fixtureHref } from "@/lib/fixture-link";
 import { formatKickoff } from "@/lib/format";
 
 export function FeaturedMatch({ fixture }: { fixture: UpcomingFixture }) {
@@ -75,7 +76,7 @@ export function FeaturedMatch({ fixture }: { fixture: UpcomingFixture }) {
         <p className="motw-footer-note">
           Probabilities produced by the production model from Elo, recent xG form and venue.
         </p>
-        <Link href="/predictions" className="cta-primary">
+        <Link href={fixtureHref(fixture.matchId)} className="cta-primary">
           Analyse match
           <svg className="cta-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
             <path d="M5 12H19" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />

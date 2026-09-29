@@ -10,12 +10,15 @@ import type { UpcomingFixture } from "@/lib/dashboard";
 
 type FixturesWeekViewProps = {
   fixtures: UpcomingFixture[];
+  /** Matchweek to open on; defaults to the earliest one. */
+  initialGameweek?: number | null;
+  highlightedMatchId?: string | null;
 };
 
-export function FixturesWeekView({ fixtures }: FixturesWeekViewProps) {
+export function FixturesWeekView({ fixtures, initialGameweek = null, highlightedMatchId = null }: FixturesWeekViewProps) {
   const grouped = useMemo(() => groupByGameweek(fixtures), [fixtures]);
   const gameweeks = useMemo(() => Array.from(grouped.keys()).sort((left, right) => left - right), [grouped]);
-  const [index, setIndex] = useState(0);
+  const [index, setIndex] = useState(() => Math.max(0, initialGameweek === null ? 0 : gameweeks.indexOf(initialGameweek)));
 
   if (gameweeks.length === 0) {
     return (
@@ -57,7 +60,11 @@ export function FixturesWeekView({ fixtures }: FixturesWeekViewProps) {
 
       <div className="fixtures-week-scroll">
         {fixturesForWeek.map((fixture) => (
-          <CustomizableFutureFixtureCard key={fixture.matchId} fixture={fixture} />
+          <CustomizableFutureFixtureCard
+            key={fixture.matchId}
+            fixture={fixture}
+            highlighted={fixture.matchId === highlightedMatchId}
+          />
         ))}
       </div>
     </section>

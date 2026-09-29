@@ -7,9 +7,11 @@ import { formatKickoffWithZone } from "@/lib/format";
 export function CurrentGameweekView({
   gameweek,
   fixtures,
+  highlightedMatchId = null,
 }: {
   gameweek: number | null;
   fixtures: UpcomingFixture[];
+  highlightedMatchId?: string | null;
 }) {
   if (gameweek === null || fixtures.length === 0) {
     return (
@@ -36,7 +38,7 @@ export function CurrentGameweekView({
 
       <div className="fixtures-week-scroll">
         {fixtures.map((fixture) => (
-          <PredictionCard key={fixture.matchId} fixture={fixture} />
+          <PredictionCard key={fixture.matchId} fixture={fixture} highlighted={fixture.matchId === highlightedMatchId} />
         ))}
       </div>
     </section>

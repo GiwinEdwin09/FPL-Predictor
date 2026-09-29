@@ -9,6 +9,7 @@ import { describeConfidence, outcomeLabel } from "@/lib/confidence";
 import type { FixtureProbabilities, UpcomingFixture } from "@/lib/dashboard";
 import { formatKickoffWithZone } from "@/lib/format";
 import { explainPrediction, fixtureMetricPairs } from "@/lib/explain";
+import { fixtureAnchorId } from "@/lib/fixture-link";
 
 function ChevronIcon() {
   return (
@@ -21,9 +22,12 @@ function ChevronIcon() {
 export function PredictionCard({
   fixture,
   probabilitiesOverride,
+  highlighted = false,
   children,
 }: {
   fixture: UpcomingFixture;
+  /** Briefly outlines the card, e.g. after arriving from a fixture link. */
+  highlighted?: boolean;
   /** Simulated probabilities (e.g. from a lineup change). Falls back to the model's default forecast. */
   probabilitiesOverride?: FixtureProbabilities;
   children?: ReactNode;
@@ -42,7 +46,7 @@ export function PredictionCard({
       : null;
 
   return (
-    <article className="fixture-card">
+    <article id={fixtureAnchorId(fixture.matchId)} className={`fixture-card${highlighted ? " fixture-card-focus" : ""}`}>
       <div className="fixture-card-topline">
         <span className="fixture-card-gw">MW {fixture.gameweek ?? "TBD"}</span>
         <span className="fixture-card-time">{formatKickoffWithZone(fixture.kickoffTime)}</span>

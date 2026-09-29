@@ -1220,6 +1220,17 @@ img[src*="tottenham"] {
   transition: border-color var(--speed-fast) ease, box-shadow var(--speed-fast) ease, transform var(--speed-fast) var(--ease-out);
 }
 
+/* Arriving from a fixture link: land below the sticky nav and week header, then outline briefly. */
+.fixture-card {
+  scroll-margin-top: calc(var(--site-header-height, 70px) + 8rem);
+}
+
+.fixture-card.fixture-card-focus {
+  border-color: rgba(0, 255, 133, 0.55);
+  box-shadow: 0 0 0 3px rgba(0, 255, 133, 0.14), var(--shadow-sm);
+  transition: border-color 600ms ease, box-shadow 600ms ease;
+}
+
 .fixture-card:hover {
   border-color: rgba(255, 255, 255, 0.17);
   box-shadow: var(--shadow-md);
@@ -1918,6 +1929,60 @@ img[src*="tottenham"] {
    Match of the Week (featured match)
    ========================================================================== */
 
+/* Home-page invitation to Beat the Model */
+.play-teaser {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  margin-top: 2.5rem;
+  padding: 1.5rem 1.75rem;
+  border-radius: var(--radius-xl);
+  border: 1px solid rgba(0, 255, 133, 0.22);
+  background:
+    radial-gradient(520px 260px at 100% 0%, rgba(0, 255, 133, 0.1), transparent 60%),
+    linear-gradient(180deg, var(--surface-2), var(--surface));
+  box-shadow: var(--shadow-md);
+}
+
+.play-teaser-copy h2 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(1.3rem, 2.4vw, 1.7rem);
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+
+.play-teaser-copy p:last-child {
+  margin: 0.5rem 0 0;
+  max-width: 52ch;
+  font-size: 0.92rem;
+  line-height: 1.55;
+  color: var(--muted-strong);
+}
+
+.play-teaser-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-shrink: 0;
+}
+
+.play-teaser-picks {
+  display: flex;
+  gap: 0.4rem;
+}
+
+.play-teaser-picks span {
+  padding: 0.45rem 0.8rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-strong);
+  background: rgba(255, 255, 255, 0.04);
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--muted-strong);
+}
+
 .motw {
   position: relative;
   overflow: hidden;
@@ -2498,10 +2563,101 @@ img[src*="tottenham"] {
    Quiz → Beat the Model
    ========================================================================== */
 
+.quiz-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 760px) minmax(260px, 1fr);
+  gap: 1.5rem;
+  align-items: start;
+}
+
 .quiz-panel {
   display: grid;
   gap: 1.25rem;
   max-width: 760px;
+}
+
+/* Side panel: sits beside the game on desktop, below it on smaller screens. */
+.quiz-side {
+  display: grid;
+  gap: 1rem;
+  /* Line up with the game card, below the mode/score toolbar. */
+  margin-top: 3.6rem;
+}
+
+.quiz-side-card {
+  padding: 1.15rem 1.2rem;
+  border-radius: var(--radius-lg);
+  background: linear-gradient(180deg, var(--surface-2), var(--surface));
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
+}
+
+.quiz-side-copy {
+  margin: 0.75rem 0 0;
+  font-size: 0.84rem;
+  line-height: 1.55;
+  color: var(--muted-strong);
+}
+
+.quiz-side-copy strong {
+  color: var(--ink);
+}
+
+.quiz-dots {
+  list-style: none;
+  margin: 0.35rem 0 0;
+  padding: 0;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.quiz-dot {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 1px solid var(--border-strong);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.quiz-dot-current {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(0, 255, 133, 0.14);
+}
+
+.quiz-dot-hit {
+  border-color: rgba(0, 255, 133, 0.5);
+  background: rgba(0, 255, 133, 0.75);
+}
+
+.quiz-dot-miss {
+  border-color: rgba(255, 77, 109, 0.5);
+  background: rgba(255, 77, 109, 0.55);
+}
+
+.quiz-steps {
+  margin: 0.35rem 0 0;
+  padding-left: 1.1rem;
+  display: grid;
+  gap: 0.55rem;
+  font-size: 0.86rem;
+  line-height: 1.5;
+  color: var(--muted-strong);
+}
+
+.quiz-steps strong {
+  color: var(--ink);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 .quiz-toolbar {
@@ -3635,6 +3791,23 @@ img[src*="tottenham"] {
     --site-header-height: 65px;
   }
 
+  .quiz-layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .play-teaser {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .play-teaser-actions {
+    justify-content: space-between;
+  }
+
+  .quiz-side {
+    margin-top: 0;
+  }
+
   .hero-inner {
     grid-template-columns: 1fr;
     gap: 1.75rem;
@@ -3842,6 +4015,19 @@ img[src*="tottenham"] {
 @media (max-width: 520px) {
   .stat-strip {
     gap: 0.6rem;
+  }
+
+  .play-teaser {
+    padding: 1.25rem;
+  }
+
+  .play-teaser-picks {
+    display: none;
+  }
+
+  .play-teaser-actions .cta-primary {
+    width: 100%;
+    justify-content: center;
   }
 
   .stat-tile {
