@@ -117,8 +117,9 @@ export function HistoryWeekView({ matches }: HistoryWeekViewProps) {
               return (
                 <article key={match.matchId} className="history-card">
                   <div className="history-meta">
-                    <span>MW {match.gameweek ?? "?"}</span>
-                    <span>{formatMatchDate(match.kickoffTime)}</span>
+                    <span className="history-meta-when">
+                      MW {match.gameweek ?? "?"} · {formatMatchDate(match.kickoffTime)}
+                    </span>
                     {verdict ? <ResultBadge state={verdict} /> : null}
                   </div>
 

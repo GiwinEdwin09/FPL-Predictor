@@ -55,21 +55,21 @@ export function ProbabilityBar({
 
       {showValues ? (
         <div className="probbar-values" aria-hidden="true">
-          <div className={`probbar-cell${size === "sm" ? "" : " probbar-cell-center"}`}>
+          <div className="probbar-cell">
             <span className="probbar-value-num">{formatPercent(probabilities.homeWin)}</span>
             <span className="probbar-value-label">
               <span className="probbar-swatch probbar-swatch-home" />
               {homeShort}
             </span>
           </div>
-          <div className={`probbar-cell probbar-cell-center${size === "sm" ? " probbar-cell-right" : ""}`}>
+          <div className="probbar-cell probbar-cell-center">
             <span className="probbar-value-num">{formatPercent(probabilities.draw)}</span>
             <span className="probbar-value-label">
               <span className="probbar-swatch probbar-swatch-draw" />
               Draw
             </span>
           </div>
-          <div className={`probbar-cell probbar-cell-right${size === "sm" ? " probbar-cell-left" : ""}`}>
+          <div className="probbar-cell probbar-cell-right">
             <span className="probbar-value-num">{formatPercent(probabilities.awayWin)}</span>
             <span className="probbar-value-label">
               <span className="probbar-swatch probbar-swatch-away" />
