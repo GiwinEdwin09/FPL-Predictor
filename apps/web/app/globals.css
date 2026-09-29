@@ -857,6 +857,16 @@ img {
   grid-template-columns: 1fr;
 }
 
+/* Keep week arrows reachable while the page scrolls through a long matchweek. */
+.week-panel-header:not(.week-panel-header-simple) {
+  position: sticky;
+  top: var(--site-header-height, 70px);
+  z-index: 5;
+  padding-top: 0.75rem;
+  margin-top: -0.75rem;
+  background: var(--surface-2);
+}
+
 .week-heading p:first-child {
   margin: 0 0 0.35rem;
   font-size: 0.7rem;
@@ -910,25 +920,6 @@ img {
 .history-week-scroll {
   display: grid;
   gap: 1rem;
-  max-height: 72vh;
-  overflow-y: auto;
-  padding-right: 0.4rem;
-}
-
-.fixtures-week-scroll::-webkit-scrollbar,
-.history-week-scroll::-webkit-scrollbar {
-  width: 8px;
-}
-
-.fixtures-week-scroll::-webkit-scrollbar-thumb,
-.history-week-scroll::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.14);
-  border-radius: var(--radius-pill);
-}
-
-.fixtures-week-scroll::-webkit-scrollbar-track,
-.history-week-scroll::-webkit-scrollbar-track {
-  background: transparent;
 }
 
 /* ==========================================================================
@@ -3575,6 +3566,10 @@ img {
    ========================================================================== */
 
 @media (max-width: 960px) {
+  :root {
+    --site-header-height: 65px;
+  }
+
   .hero-inner {
     grid-template-columns: 1fr;
     gap: 1.75rem;
@@ -3620,6 +3615,10 @@ img {
 }
 
 @media (max-width: 720px) {
+  :root {
+    --site-header-height: 62px;
+  }
+
   .page-shell {
     width: min(1240px, calc(100% - 1.5rem));
   }
@@ -3736,6 +3735,16 @@ img {
     flex-direction: column;
     align-items: flex-start;
     text-align: left;
+  }
+
+  .site-footer-meta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.6rem;
+  }
+
+  .site-footer-dot {
+    display: none;
   }
 
   .metric-duo {

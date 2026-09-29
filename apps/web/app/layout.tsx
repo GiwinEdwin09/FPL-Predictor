@@ -23,10 +23,31 @@ const spaceGrotesk = Space_Grotesk({
   weight: ["500", "600", "700"],
 });
 
+const SITE_TITLE = "Prem Predict — Premier League match forecasts";
+const SITE_DESCRIPTION =
+  "Machine-learned Premier League predictions: calibrated HOME / DRAW / AWAY probabilities for every fixture, model explainability, and full forecast history.";
+
+function siteUrl(): string {
+  if (process.env.NEXT_PUBLIC_SITE_URL) return process.env.NEXT_PUBLIC_SITE_URL;
+  if (process.env.VERCEL_PROJECT_PRODUCTION_URL) return `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`;
+  return "https://fpl-predictor-bay.vercel.app";
+}
+
 export const metadata: Metadata = {
-  title: "Prem Predict — Premier League match forecasts",
-  description:
-    "Machine-learned Premier League predictions: calibrated HOME / DRAW / AWAY probabilities for every fixture, model explainability, and full forecast history.",
+  metadataBase: new URL(siteUrl()),
+  title: SITE_TITLE,
+  description: SITE_DESCRIPTION,
+  openGraph: {
+    type: "website",
+    siteName: "Prem Predict",
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
+  },
 };
 
 export const viewport: Viewport = {

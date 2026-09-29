@@ -34,7 +34,7 @@ export function SiteFooter({ generatedAtUtc }: { generatedAtUtc: string | null }
           <span>
             Data via{" "}
             <a href="https://github.com/olbauday/FPL-Core-Insights" target="_blank" rel="noreferrer">
-              upstream match data
+              FPL Core Insights
             </a>
           </span>
           <span className="site-footer-dot" aria-hidden="true">

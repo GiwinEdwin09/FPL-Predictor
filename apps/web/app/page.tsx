@@ -8,7 +8,7 @@ import { ErrorState } from "@/components/ui/states";
 import { loadDashboardResult } from "@/lib/dashboard";
 import { formatMatchDate, formatPercent } from "@/lib/format";
 import { biggestUpsets } from "@/lib/insights";
-import { fixturesForGameweek, summarizeGameweek } from "@/lib/gameweek";
+import { fixturesForGameweek, sortByKickoff, summarizeGameweek } from "@/lib/gameweek";
 import { pickQuizCandidates } from "@/lib/quiz";
 
 const TOTAL_GAMEWEEKS = 38;
@@ -56,11 +56,7 @@ export default async function HomePage() {
   const dashboard = result.data;
   const summary = summarizeGameweek(dashboard);
   const focusFixtures = fixturesForGameweek(dashboard, summary.gameweek);
-  const sortedFocus = [...focusFixtures].sort((a, b) => {
-    const left = a.kickoffTime ?? "9999";
-    const right = b.kickoffTime ?? "9999";
-    return left.localeCompare(right);
-  });
+  const sortedFocus = sortByKickoff(focusFixtures);
   const previewFixtures = sortedFocus.slice(0, PREVIEW_FIXTURE_COUNT);
   const spotlightFixture = sortedFocus[0] ?? null;
 
@@ -176,9 +172,9 @@ export default async function HomePage() {
           hint={`${remainingGameweeks} matchweek${remainingGameweeks === 1 ? "" : "s"} left of ${TOTAL_GAMEWEEKS}`}
         />
         <MetricTile
-          label="Match accuracy"
+          label="Test accuracy"
           value={accuracyPct}
-          hint={`Across ${dashboard.model.split.validation_rows ?? "—"} held-out matches`}
+          hint={`Across ${dashboard.model.split.validation_rows ?? "—"} held-out test matches`}
         />
         <MetricTile
           label="Matches analysed"

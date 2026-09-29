@@ -44,8 +44,10 @@ export function HistoryWeekView({ matches }: HistoryWeekViewProps) {
   );
 
   const gameweeks = useMemo(() => Array.from(groups.keys()).sort((left, right) => left - right), [groups]);
-  const [index, setIndex] = useState(0);
-  const clampedIndex = Math.min(index, Math.max(0, gameweeks.length - 1));
+  // null = latest finished matchweek, so the page opens on what just happened.
+  const [index, setIndex] = useState<number | null>(null);
+  const lastIndex = Math.max(0, gameweeks.length - 1);
+  const clampedIndex = index === null ? lastIndex : Math.min(index, lastIndex);
   const gameweek = gameweeks[clampedIndex];
   const selectedMatches = gameweek === undefined ? [] : groups.get(gameweek) ?? [];
 
@@ -60,7 +62,7 @@ export function HistoryWeekView({ matches }: HistoryWeekViewProps) {
             value={season}
             onChange={(event) => {
               setSeason(event.target.value);
-              setIndex(0);
+              setIndex(null);
             }}
           >
             {seasons.map((value) => (
@@ -82,7 +84,7 @@ export function HistoryWeekView({ matches }: HistoryWeekViewProps) {
             <button
               type="button"
               className="week-arrow"
-              onClick={() => setIndex((current) => Math.max(0, current - 1))}
+              onClick={() => setIndex(Math.max(0, clampedIndex - 1))}
               disabled={clampedIndex === 0}
               aria-label="Previous matchweek"
             >
@@ -100,8 +102,8 @@ export function HistoryWeekView({ matches }: HistoryWeekViewProps) {
             <button
               type="button"
               className="week-arrow"
-              onClick={() => setIndex((current) => Math.min(gameweeks.length - 1, current + 1))}
-              disabled={clampedIndex === gameweeks.length - 1}
+              onClick={() => setIndex(Math.min(lastIndex, clampedIndex + 1))}
+              disabled={clampedIndex === lastIndex}
               aria-label="Next matchweek"
             >
               →

@@ -20,6 +20,7 @@ import {
 } from "@/lib/insights";
 
 type ModelMeta = {
+  testAccuracy: number | null;
   logLoss: number | null;
   brier: number | null;
   validationRows: number | null;
@@ -215,9 +216,9 @@ export function ModelLabBrowser({ matches, model }: { matches: QuizMatch[]; mode
 
       <section className="stat-strip" aria-label="Headline metrics">
         <MetricTile
-          label="Match accuracy"
+          label="Season accuracy so far"
           value={<span className="accented">{formatPercent(summary.accuracy, 1)}</span>}
-          hint={`${summary.correct} of ${summary.total} finished matches called correctly`}
+          hint={`${summary.correct} of ${summary.total} finished matches called correctly · updates each matchweek`}
         />
         <MetricTile
           label="Home-team baseline"
@@ -230,12 +231,13 @@ export function ModelLabBrowser({ matches, model }: { matches: QuizMatch[]; mode
           hint="Accuracy gained over always picking home wins"
         />
         <MetricTile
-          label="Log loss"
+          label="Test log loss"
           value={model.logLoss?.toFixed(3) ?? "—"}
           hint={
             <>
-              Probability quality on held-out validation — lower is better. Brier {model.brier?.toFixed(3) ?? "—"}.{" "}
-              {model.validationRows ?? "—"} matches held out.
+              From {model.validationRows ?? "—"} held-out test matches:{" "}
+              {model.testAccuracy !== null ? formatPercent(model.testAccuracy, 1) : "—"} accuracy, Brier{" "}
+              {model.brier?.toFixed(3) ?? "—"}. Lower log loss is better.
             </>
           }
         />

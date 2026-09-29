@@ -77,3 +77,7 @@ export function fixturesForGameweek(dashboard: DashboardData, gameweek: number |
   }
   return dashboard.upcomingFixtures.filter((fixture) => fixture.gameweek === gameweek);
 }
+
+export function sortByKickoff<T extends { kickoffTime: string | null }>(fixtures: T[]): T[] {
+  return [...fixtures].sort((a, b) => (a.kickoffTime ?? "9999").localeCompare(b.kickoffTime ?? "9999"));
+}
