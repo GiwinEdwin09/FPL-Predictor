@@ -55,10 +55,24 @@ type MetricRow = {
   valueB: number | null;
   /** When true the larger value leads the metric. */
   higherBetter: boolean;
+  /** Value where the meters start; Elo has no meaningful zero. Defaults to 0. */
+  floor?: number;
   format: (value: number | null) => string;
 };
 
-export function CompareExplorer({ matches, teams }: { matches: QuizMatch[]; teams: TeamSummary[] }) {
+/** Elo meters start here so a 200-point gap reads as a real difference. */
+const ELO_METER_FLOOR = 1300;
+
+export function CompareExplorer({
+  matches,
+  teams,
+  currentElo = {},
+}: {
+  matches: QuizMatch[];
+  teams: TeamSummary[];
+  /** Current rating per club slug, from each club's next fixture. */
+  currentElo?: Record<string, number>;
+}) {
   const [slugA, setSlugA] = useState(teams[0]?.badgeSlug ?? "");
   const [slugB, setSlugB] = useState(teams[1]?.badgeSlug ?? "");
 
@@ -106,17 +120,19 @@ export function CompareExplorer({ matches, teams }: { matches: QuizMatch[]; team
     );
   }
 
-  const eloA = latestElo(slugA);
-  const eloB = latestElo(slugB);
+  const eloA = currentElo[slugA] ?? latestElo(slugA);
+  const eloB = currentElo[slugB] ?? latestElo(slugB);
+  const eloIsCurrent = slugA in currentElo && slugB in currentElo;
 
   const metrics: MetricRow[] = [
     {
       key: "elo",
       label: "Elo",
-      sub: comparisonSeason ? `end of ${comparisonSeason.replace("-", "/")}` : "latest rating",
+      sub: `${eloIsCurrent ? "current rating" : "latest rating"} · bars start at ${ELO_METER_FLOOR}`,
       valueA: eloA,
       valueB: eloB,
       higherBetter: true,
+      floor: ELO_METER_FLOOR,
       format: (value) => (value === null ? "—" : String(Math.round(value))),
     },
     {
@@ -199,6 +215,11 @@ export function CompareExplorer({ matches, teams }: { matches: QuizMatch[]; team
           const comparable =
             metric.valueA !== null && metric.valueB !== null && (metric.valueA !== 0 || metric.valueB !== 0);
           const max = comparable ? Math.max(metric.valueA!, metric.valueB!) : null;
+          const floor = metric.floor ?? 0;
+          const meterWidth = (value: number | null) =>
+            max !== null && value !== null && max > floor
+              ? `${Math.max(0, ((value - floor) / (max - floor)) * 100)}%`
+              : "0%";
           const leader: "a" | "b" | null = comparable
             ? metric.higherBetter
               ? metric.valueA! > metric.valueB!
@@ -219,7 +240,7 @@ export function CompareExplorer({ matches, teams }: { matches: QuizMatch[]; team
               <div className="cmp-meter" aria-hidden="true">
                 <div
                   className={`cmp-meter-fill${leader === "a" ? " is-leader" : ""}`}
-                  style={{ width: max && comparable ? `${(metric.valueA! / max) * 100}%` : "0%" }}
+                  style={{ width: meterWidth(metric.valueA) }}
                 />
               </div>
               <div className="cmp-metric-label">
@@ -229,7 +250,7 @@ export function CompareExplorer({ matches, teams }: { matches: QuizMatch[]; team
               <div className="cmp-meter cmp-meter-right" aria-hidden="true">
                 <div
                   className={`cmp-meter-fill${leader === "b" ? " is-leader" : ""}`}
-                  style={{ width: max && comparable ? `${(metric.valueB! / max) * 100}%` : "0%" }}
+                  style={{ width: meterWidth(metric.valueB) }}
                 />
               </div>
               <strong className={`cmp-metric-value${leader === "b" ? " is-leader" : ""}`}>{metric.format(metric.valueB)}</strong>
@@ -262,7 +283,7 @@ export function CompareExplorer({ matches, teams }: { matches: QuizMatch[]; team
             </div>
           </section>
 
-          <section className="stat-strip" aria-label="Head-to-head summary">
+          <section className="stat-strip stat-strip-3" aria-label="Head-to-head summary">
             <article className="stat-tile">
               <div className="stat-tile-label">Goals</div>
               <div className="stat-tile-value">
@@ -295,6 +316,14 @@ export function CompareExplorer({ matches, teams }: { matches: QuizMatch[]; team
               <div>
                 <h2>Recent meetings</h2>
                 <p>Latest first, with the model&apos;s pre-match favorite and whether it landed.</p>
+                <p className="model-dot-legend">
+                  <span>
+                    <span className="model-dot model-dot-hit" aria-hidden="true" /> Model called it
+                  </span>
+                  <span>
+                    <span className="model-dot model-dot-miss" aria-hidden="true" /> Model missed
+                  </span>
+                </p>
               </div>
               <Link href="/history" className="section-link">
                 Full history

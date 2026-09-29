@@ -1,5 +1,26 @@
-import type { TeamSummary } from "@/lib/dashboard";
+import type { TeamSummary, UpcomingFixture } from "@/lib/dashboard";
+import { sortByKickoff } from "@/lib/gameweek";
 import { modelPick, resolveOutcome, type QuizMatch } from "@/lib/quiz";
+
+/**
+ * Each club's current Elo: the pre-match rating on its next fixture, which already
+ * includes every finished result. Clubs with no upcoming fixture are left out.
+ */
+export function currentEloBySlug(fixtures: UpcomingFixture[]): Record<string, number> {
+  const elo: Record<string, number> = {};
+  for (const fixture of sortByKickoff(fixtures)) {
+    const sides = [
+      [fixture.homeTeam.badgeSlug, fixture.context.homeElo],
+      [fixture.awayTeam.badgeSlug, fixture.context.awayElo],
+    ] as const;
+    for (const [slug, rating] of sides) {
+      if (rating !== null && !(slug in elo)) {
+        elo[slug] = rating;
+      }
+    }
+  }
+  return elo;
+}
 
 export function collectTeams(matches: QuizMatch[]): TeamSummary[] {
   const bySlug = new Map<string, TeamSummary>();

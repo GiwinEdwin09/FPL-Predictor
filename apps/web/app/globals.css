@@ -599,6 +599,10 @@ img {
   margin-top: 1rem;
 }
 
+.stat-strip-3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
 .stat-tile {
   padding: 1.1rem 1.2rem;
   border-radius: var(--radius-lg);
@@ -3056,19 +3060,119 @@ img[src*="tottenham"] {
   height: auto;
 }
 
-.chart-bar {
-  fill: var(--brand-bright);
+/* The calibration SVG scales with its box; cap it so its axis text stays near body size. */
+.chart-svg-calibration {
+  max-width: 540px;
+  margin: 0 auto;
 }
 
-.chart-bar:hover {
-  fill: var(--accent);
+/* Accuracy by matchweek: HTML columns on a 0-100% scale. */
+.acc-chart {
+  display: grid;
+  /* y-axis | plot | gutter for the average line's label */
+  grid-template-columns: 2.6rem minmax(0, 1fr) 3.6rem;
+  grid-template-rows: 180px auto;
+  column-gap: 0.6rem;
+  /* Room for the value label above a 100% column. */
+  margin-top: 1.4rem;
 }
 
-.chart-baseline {
-  stroke: var(--prob-draw);
-  stroke-width: 1.5;
-  stroke-dasharray: 5 4;
-  opacity: 0.7;
+.acc-y {
+  position: relative;
+}
+
+.acc-y span {
+  position: absolute;
+  right: 0;
+  transform: translateY(50%);
+  font-size: 0.7rem;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.acc-plot {
+  position: relative;
+  border-bottom: 1px solid var(--border-strong);
+}
+
+.acc-grid {
+  position: absolute;
+  left: 0;
+  right: 0;
+  border-top: 1px solid var(--border);
+}
+
+.acc-cols {
+  position: absolute;
+  inset: 0;
+  display: flex;
+}
+
+.acc-col {
+  flex: 1;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.acc-bar {
+  position: relative;
+  width: min(24px, 70%);
+  min-height: 2px;
+  border-radius: 4px 4px 0 0;
+  background: var(--brand-bright);
+  transition: background-color var(--speed-fast) ease;
+}
+
+.acc-col:hover .acc-bar {
+  background: var(--accent);
+}
+
+.acc-value {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-bottom: 0.35rem;
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: var(--ink);
+  white-space: nowrap;
+}
+
+/* Season average: a dashed reference line, labelled in the right gutter. */
+.acc-avg {
+  position: absolute;
+  left: 0;
+  right: 0;
+  border-top: 1.5px dashed rgba(251, 191, 36, 0.75);
+  pointer-events: none;
+}
+
+.acc-avg-label {
+  position: absolute;
+  left: 100%;
+  top: 0;
+  transform: translateY(-50%);
+  margin-left: 0.45rem;
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--muted-strong);
+  white-space: nowrap;
+}
+
+.acc-x {
+  grid-column: 2;
+  display: flex;
+}
+
+.acc-x span {
+  flex: 1;
+  padding-top: 0.45rem;
+  text-align: center;
+  font-size: 0.7rem;
+  color: var(--muted);
+  white-space: nowrap;
 }
 
 .chart-grid {
@@ -3085,9 +3189,10 @@ img[src*="tottenham"] {
 
 .chart-dot {
   fill: var(--accent);
-  fill-opacity: 0.8;
-  stroke: var(--accent-ink);
-  stroke-width: 1;
+  fill-opacity: 0.85;
+  /* Surface-colored ring keeps overlapping dots distinct. */
+  stroke: var(--surface-2);
+  stroke-width: 2;
 }
 
 .chart-tick {
@@ -3544,6 +3649,22 @@ img[src*="tottenham"] {
 
 .model-dot-miss {
   background: var(--border-strong);
+}
+
+.model-dot-legend,
+.section-head .model-dot-legend {
+  margin-top: 0.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1rem;
+  font-size: 0.78rem;
+  color: var(--muted);
+}
+
+.model-dot-legend > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
 }
 
 /* ==========================================================================
@@ -4015,6 +4136,12 @@ img[src*="tottenham"] {
 @media (max-width: 520px) {
   .stat-strip {
     gap: 0.6rem;
+  }
+
+  /* The calibration SVG shrinks to ~70% here; enlarge its type in viewBox units to compensate. */
+  .chart-svg-calibration .chart-tick,
+  .chart-svg-calibration .chart-axis-label {
+    font-size: 15px;
   }
 
   .play-teaser {

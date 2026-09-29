@@ -25,51 +25,65 @@ type ModelMeta = {
   validationRows: number | null;
 };
 
+/** Column value labels stay readable up to this many matchweeks; past it, hover and the y-axis carry values. */
+const MAX_LABELED_COLUMNS = 12;
+
+// Plain HTML columns rather than a scaled SVG, so type stays at its real size at any width.
 function GameweekAccuracyChart({ rows }: { rows: GameweekAccuracy[] }) {
   if (rows.length === 0) {
     return <p className="empty-state">No finished matchweeks for this season yet.</p>;
   }
 
-  const width = 720;
-  const height = 180;
-  const padTop = 12;
-  const padBottom = 26;
-  const chartHeight = height - padTop - padBottom;
-  const barSlot = width / rows.length;
-  const barWidth = Math.max(6, barSlot * 0.62);
   const overall = rows.reduce((sum, row) => sum + row.correct, 0) / rows.reduce((sum, row) => sum + row.total, 0);
+  const showValues = rows.length <= MAX_LABELED_COLUMNS;
+  const showTick = (index: number) => rows.length <= 20 || index % 4 === 0;
 
   return (
     <div className="chart-frame">
-      <svg viewBox={`0 0 ${width} ${height}`} role="img" aria-label="Model accuracy by matchweek" className="chart-svg">
-        <line
-          x1={0}
-          x2={width}
-          y1={padTop + chartHeight * (1 - overall)}
-          y2={padTop + chartHeight * (1 - overall)}
-          className="chart-baseline"
-        />
-        {rows.map((row, index) => {
-          const barHeight = Math.max(2, row.accuracy * chartHeight);
-          const x = index * barSlot + (barSlot - barWidth) / 2;
-          const y = padTop + chartHeight - barHeight;
-          return (
-            <g key={`${row.season}-${row.gameweek}`}>
-              <rect x={x} y={y} width={barWidth} height={barHeight} rx={3} className="chart-bar">
-                <title>{`MW ${row.gameweek}: ${formatPercent(row.accuracy)} (${row.correct}/${row.total})`}</title>
-              </rect>
-              {rows.length <= 20 || index % 4 === 0 ? (
-                <text x={index * barSlot + barSlot / 2} y={height - 8} className="chart-tick" textAnchor="middle">
-                  {row.gameweek}
-                </text>
-              ) : null}
-            </g>
-          );
-        })}
-      </svg>
+      <div
+        className="acc-chart"
+        role="img"
+        aria-label={`Model accuracy by matchweek. Season average ${formatPercent(overall)}. ${rows
+          .map((row) => `Matchweek ${row.gameweek}: ${formatPercent(row.accuracy)}`)
+          .join(", ")}.`}
+      >
+        <div className="acc-y" aria-hidden="true">
+          {[0, 0.5, 1].map((tick) => (
+            <span key={tick} style={{ bottom: `${tick * 100}%` }}>
+              {formatPercent(tick)}
+            </span>
+          ))}
+        </div>
+        <div className="acc-plot" aria-hidden="true">
+          {[0.25, 0.5, 0.75, 1].map((tick) => (
+            <span key={tick} className="acc-grid" style={{ bottom: `${tick * 100}%` }} />
+          ))}
+          <div className="acc-cols">
+            {rows.map((row) => (
+              <div
+                key={`${row.season}-${row.gameweek}`}
+                className="acc-col"
+                title={`MW ${row.gameweek}: ${formatPercent(row.accuracy)} (${row.correct}/${row.total})`}
+              >
+                <div className="acc-bar" style={{ height: `${row.accuracy * 100}%` }}>
+                  {showValues ? <span className="acc-value">{formatPercent(row.accuracy)}</span> : null}
+                </div>
+              </div>
+            ))}
+          </div>
+          <span className="acc-avg" style={{ bottom: `${overall * 100}%` }}>
+            <span className="acc-avg-label">Avg {formatPercent(overall)}</span>
+          </span>
+        </div>
+        <div className="acc-x" aria-hidden="true">
+          {rows.map((row, index) => (
+            <span key={`${row.season}-${row.gameweek}`}>{showTick(index) ? `MW ${row.gameweek}` : ""}</span>
+          ))}
+        </div>
+      </div>
       <p className="chart-caption">
-        Each bar is the share of matches called correctly in that matchweek. The dashed line marks the season average
-        of {formatPercent(overall)}.
+        Each column is the share of that matchweek&apos;s matches the model called correctly. The dashed line is the
+        season average.
       </p>
     </div>
   );
@@ -78,7 +92,7 @@ function GameweekAccuracyChart({ rows }: { rows: GameweekAccuracy[] }) {
 function CalibrationChart({ bins }: { bins: CalibrationBin[] }) {
   const width = 420;
   const height = 320;
-  const pad = { top: 16, right: 16, bottom: 40, left: 44 };
+  const pad = { top: 16, right: 26, bottom: 48, left: 60 };
   const innerWidth = width - pad.left - pad.right;
   const innerHeight = height - pad.top - pad.bottom;
   const maxCount = Math.max(1, ...bins.map((bin) => bin.count));
@@ -88,12 +102,17 @@ function CalibrationChart({ bins }: { bins: CalibrationBin[] }) {
 
   return (
     <div className="chart-frame">
-      <svg viewBox={`0 0 ${width} ${height}`} role="img" aria-label="Calibration chart" className="chart-svg">
+      <svg
+        viewBox={`0 0 ${width} ${height}`}
+        role="img"
+        aria-label="Calibration chart"
+        className="chart-svg chart-svg-calibration"
+      >
         {[0, 0.25, 0.5, 0.75, 1].map((tick) => (
           <g key={tick}>
             <line x1={toX(tick)} x2={toX(tick)} y1={toY(0)} y2={toY(1)} className="chart-grid" />
             <line x1={toX(0)} x2={toX(1)} y1={toY(tick)} y2={toY(tick)} className="chart-grid" />
-            <text x={toX(tick)} y={height - 24} className="chart-tick" textAnchor="middle">
+            <text x={toX(tick)} y={height - 27} className="chart-tick" textAnchor="middle">
               {Math.round(tick * 100)}%
             </text>
             <text x={pad.left - 8} y={toY(tick) + 4} className="chart-tick" textAnchor="end">
@@ -119,11 +138,11 @@ function CalibrationChart({ bins }: { bins: CalibrationBin[] }) {
           Predicted probability
         </text>
         <text
-          x={12}
+          x={14}
           y={toY(0.5)}
           className="chart-axis-label"
           textAnchor="middle"
-          transform={`rotate(-90 12 ${toY(0.5)})`}
+          transform={`rotate(-90 14 ${toY(0.5)})`}
         >
           Actual frequency
         </text>

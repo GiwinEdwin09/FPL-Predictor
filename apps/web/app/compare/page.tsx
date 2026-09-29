@@ -1,7 +1,7 @@
 import { CompareExplorer } from "@/components/compare-explorer";
 import { loadDashboardResult } from "@/lib/dashboard";
 import { pickQuizCandidates } from "@/lib/quiz";
-import { collectTeams } from "@/lib/teams";
+import { collectTeams, currentEloBySlug } from "@/lib/teams";
 
 export default async function ComparePage() {
   const result = await loadDashboardResult();
@@ -32,6 +32,10 @@ export default async function ComparePage() {
 
   const matches = pickQuizCandidates(result.data.historicalMatches);
   const teams = collectTeams(matches);
+  const currentElo = currentEloBySlug([
+    ...result.data.currentGameweekFixtures.filter((fixture) => !fixture.finished),
+    ...result.data.upcomingFixtures,
+  ]);
 
   return (
     <div className="page-shell">
@@ -50,7 +54,7 @@ export default async function ComparePage() {
         </p>
       </header>
 
-      <CompareExplorer matches={matches} teams={teams} />
+      <CompareExplorer matches={matches} teams={teams} currentElo={currentElo} />
     </div>
   );
 }
