@@ -13,6 +13,9 @@ The product-facing overview now lives in the root [README.md](../README.md).
 - the final predictor is fitted on 12,809 finished matches spanning 33 seasons
 - the saved evaluation replays all 380 matches from 2025/26 across 38
   chronological gameweek folds
+- Dixon-Coles shrinks team ratings toward the league average and uses a
+  365-day half-life, which lowered walk-forward log loss by 0.0081 over four
+  seasons
 - the guarded selection process chose Dixon-Coles in all 38 folds; XGBoost
   remains packaged as a research candidate rather than being forced into live
   probabilities
@@ -260,6 +263,28 @@ out-of-fold predictions from the training data. The blend is promoted only
 when its gameweek-block bootstrap interval beats Dixon-Coles; otherwise the
 fold selects Dixon-Coles.
 
+The Dixon-Coles fit adds an L2 (ridge) penalty of `2.0` that shrinks attack
+ratings toward zero and defence ratings toward their mean, and uses its own
+365-day time-decay half-life (XGBoost recency weights keep 550 days). Mean
+defence acts as the goal-level intercept, so it is left unpenalized. Without
+shrinkage, teams with little recent data, mostly promoted or returning
+clubs, received extreme ratings. The fit uses an analytic gradient, which
+makes walk-forward replays fast enough to run over several seasons.
+
+Settings were chosen on a 2017/18 to 2020/21 replay, then checked with the
+v3 backtest below over 2022/23 to 2025/26 (1,520 matches):
+
+| Served v3 predictor | Log loss | RPS | Accuracy |
+| --- | ---: | ---: | ---: |
+| Unshrunk, 550-day half-life | 0.9964 | 0.2053 | 51.71% |
+| Ridge `2.0`, 365-day half-life | **0.9883** | **0.2035** | **52.37%** |
+
+The log-loss difference is `-0.0081`, with a 95% gameweek-block bootstrap
+interval of `-0.0182` to `-0.0018`. The RPS difference is `-0.0019`, with an
+interval of `-0.0030` to `-0.0008`. Compare configurations with
+`--dixon-coles-half-life-days` and `--dixon-coles-ridge`; seasons sourced from
+Football-Data have no gameweek numbers and are replayed in weekly blocks.
+
 Train it:
 
 ```bash
@@ -289,18 +314,20 @@ matches across 33 seasons, from 1993/94 through 2025/26.
 | Uniform | 42.63% | 1.0986 | 0.6667 | 0.2322 | 0.0930 |
 | Historical prior | 42.63% | 1.0813 | 0.6548 | 0.2278 | **0.0306** |
 | Elo-only logistic | **47.89%** | 1.0314 | 0.6205 | 0.2109 | 0.0624 |
-| Time-decayed Dixon-Coles | 46.84% | **1.0299** | **0.6186** | **0.2099** | 0.0476 |
+| Shrunk, time-decayed Dixon-Coles | 46.58% | **1.0262** | **0.6158** | **0.2085** | 0.0461 |
 | Regularized XGBoost v3 | 47.11% | 1.0441 | 0.6284 | 0.2137 | 0.0522 |
 | Multinomial logistic v3 | **47.89%** | 1.0616 | 0.6330 | 0.2156 | 0.0417 |
-| Selected v3 pipeline | 46.84% | 1.0310 | 0.6194 | 0.2101 | 0.0438 |
+| Selected v3 pipeline | 46.58% | 1.0277 | 0.6169 | 0.2087 | 0.0459 |
 | Closing market (de-vigged) | 49.47% | 1.0118 | 0.6077 | 0.2045 | 0.0340 |
 
 All 38 folds selected Dixon-Coles, producing a mean Dixon-Coles weight of
-`1.0`; the mean fitted temperature was `0.997`. The selected v3 pipeline was
+`1.0`; the mean fitted temperature was `0.961`. The selected v3 pipeline was
 statistically indistinguishable from Elo: v3 minus Elo log-loss difference
-`-0.0004`, with a 95% gameweek-block bootstrap interval from `-0.0173` to
-`+0.0163`. It remained behind the closing market by `+0.0192` log loss, with a
-95% interval from `+0.0044` to `+0.0333`.
+`-0.0037`, with a 95% gameweek-block bootstrap interval from `-0.0202` to
+`+0.0132`. It remained behind the closing market by `+0.0159` log loss, with a
+95% interval from `+0.0001` to `+0.0314`. Before rating shrinkage, the same
+replay scored 1.0310 log loss for the selected pipeline and 1.0299 for
+Dixon-Coles.
 
 The production decision is therefore deliberately conservative. V3 replaces
 the underperforming v2 tree model, but its promotion gate does not pretend the

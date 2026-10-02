@@ -1,6 +1,7 @@
 import numpy as np
 import pandas as pd
 
+from fpl_predictor.dixon_coles import DIXON_COLES_HALF_LIFE_DAYS, DIXON_COLES_RIDGE
 from fpl_predictor.model_v3 import (
     build_calibration_season_folds,
     fit_final_blend_predictor,
@@ -87,12 +88,13 @@ def test_final_predictor_refits_every_eligible_finished_match(monkeypatch) -> No
     tree_model = object()
     dixon_coles = object()
 
-    def fake_fit_components(train, feature_columns, half_life_days, tree_count):
+    def fake_fit_components(train, feature_columns, half_life_days, tree_count, **dixon_coles_settings):
         captured.update(
             rows=len(train),
             feature_columns=feature_columns,
             half_life_days=half_life_days,
             tree_count=tree_count,
+            **dixon_coles_settings,
         )
         return tree_model, dixon_coles
 
@@ -108,6 +110,8 @@ def test_final_predictor_refits_every_eligible_finished_match(monkeypatch) -> No
 
     assert captured["rows"] == len(frame)
     assert captured["tree_count"] == 53
+    assert captured["dixon_coles_half_life_days"] == DIXON_COLES_HALF_LIFE_DAYS
+    assert captured["dixon_coles_ridge"] == DIXON_COLES_RIDGE
     assert predictor.tree_model is tree_model
     assert predictor.dixon_coles is dixon_coles
     assert predictor.temperature == 1.0

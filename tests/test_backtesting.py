@@ -4,6 +4,7 @@ import numpy as np
 import pandas as pd
 
 from fpl_predictor.backtesting import (
+    _fold_report,
     devig_decimal_odds,
     expected_calibration_error,
     load_market_probability_lookup,
@@ -144,6 +145,10 @@ def test_walk_forward_folds_infer_week_blocks_when_rounds_are_missing() -> None:
 
     assert [fold.fold_id for fold in folds] == ["2023-2024-B1", "2023-2024-B2"]
     assert all(fold.train["kickoff_time"].max() < fold.validation["kickoff_time"].min() for fold in folds)
+
+    _, rows = _fold_report(folds[0], {"uniform": np.full((1, 3), 1 / 3)})
+    assert rows[0]["fold_id"] == "2023-2024-B1"
+    assert rows[0]["gameweek"] is None
 
 
 def test_devig_decimal_odds_normalizes_valid_rows() -> None:

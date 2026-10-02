@@ -40,6 +40,18 @@ def parse_args() -> argparse.Namespace:
         help="Evaluate the blended model_v3 candidates instead of production model_v2.",
     )
     parser.add_argument("--half-life-days", type=float, default=550.0)
+    parser.add_argument(
+        "--dixon-coles-half-life-days",
+        type=float,
+        default=None,
+        help="Dixon-Coles time-decay half-life. Defaults to the production setting.",
+    )
+    parser.add_argument(
+        "--dixon-coles-ridge",
+        type=float,
+        default=None,
+        help="Dixon-Coles rating shrinkage. Defaults to the production setting; 0 disables it.",
+    )
     return parser.parse_args()
 
 
@@ -56,6 +68,8 @@ def main() -> None:
             bootstrap_samples=args.bootstrap_samples,
             seed=args.seed,
             half_life_days=args.half_life_days,
+            dixon_coles_half_life_days=args.dixon_coles_half_life_days,
+            dixon_coles_ridge=args.dixon_coles_ridge,
         )
         if args.output_path == "data/models/model_v2_walk_forward_backtest.json":
             args.output_path = "data/models/model_v3_walk_forward_backtest.json"

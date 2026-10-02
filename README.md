@@ -119,6 +119,13 @@ Training evaluates the Dixon-Coles/XGBoost blend on chronological season blocks,
 but promotes the blend only when its gameweek-block bootstrap confidence interval
 beats Dixon-Coles. Otherwise v3 safely serves the corrected Dixon-Coles component.
 
+The Dixon-Coles fit shrinks team attack and defence ratings toward the league
+average (ridge penalty `2.0`) and uses a 365-day time-decay half-life. Across a
+four-season walk-forward replay (2022/23 through 2025/26, 1,520 matches), this
+lowered the served model's log loss by `0.0081` versus the previous unshrunk
+550-day fit, with a 95% gameweek-block bootstrap interval of `-0.0182` to
+`-0.0018`.
+
 Current production snapshot:
 
 | Item | v3 status |
@@ -127,7 +134,7 @@ Current production snapshot:
 | Finished matches in the final fit | 12,809 |
 | Final evaluation | 380 matches across 38 chronological 2025/26 gameweek folds |
 | Selected predictor | Dixon-Coles in all 38 folds |
-| Walk-forward result | 46.84% accuracy, 1.0310 log loss, 0.2101 RPS |
+| Walk-forward result | 46.58% accuracy, 1.0277 log loss, 0.2087 RPS |
 
 The closing market remained stronger on the same replay, so the reported v3
 numbers should be read as honest out-of-sample results rather than a claim that

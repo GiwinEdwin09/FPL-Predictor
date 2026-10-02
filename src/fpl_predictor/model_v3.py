@@ -12,6 +12,8 @@ from sklearn.metrics import log_loss
 
 from fpl_predictor.dixon_coles import (
     DEFAULT_HALF_LIFE_DAYS,
+    DIXON_COLES_HALF_LIFE_DAYS,
+    DIXON_COLES_RIDGE,
     add_cold_start_teams,
     fit_dixon_coles,
     predict_dixon_coles,
@@ -55,6 +57,8 @@ MIN_PROMOTION_LOG_LOSS = 1e-4
 class ModelV3TrainingSummary(TrainingSummary):
     dixon_coles_weight: float
     half_life_days: float
+    dixon_coles_half_life_days: float
+    dixon_coles_ridge: float
     predictor_type: str
     bundle_path: str
     team_keys_path: str
@@ -110,6 +114,8 @@ def _fit_blend_components(
     feature_columns: tuple[str, ...],
     half_life_days: float,
     tree_count: int,
+    dixon_coles_half_life_days: float = DIXON_COLES_HALF_LIFE_DAYS,
+    dixon_coles_ridge: float = DIXON_COLES_RIDGE,
 ) -> tuple[Any, Any]:
     weights = recency_sample_weights(
         train["kickoff_time"],
@@ -122,7 +128,11 @@ def _fit_blend_components(
         sample_weight=weights,
         n_estimators=tree_count,
     )
-    dixon_coles = fit_dixon_coles(train, half_life_days=half_life_days)
+    dixon_coles = fit_dixon_coles(
+        train,
+        half_life_days=dixon_coles_half_life_days,
+        ridge=dixon_coles_ridge,
+    )
     return tree_model, dixon_coles
 
 
@@ -222,6 +232,8 @@ def choose_oof_blend_and_temperature(
     feature_columns: tuple[str, ...],
     half_life_days: float,
     tree_count: int,
+    dixon_coles_half_life_days: float = DIXON_COLES_HALF_LIFE_DAYS,
+    dixon_coles_ridge: float = DIXON_COLES_RIDGE,
 ) -> tuple[float, float, float, int, list[str], str, dict[str, Any]]:
     folds = build_calibration_season_folds(train)
     dixon_predictions: list[np.ndarray] = []
@@ -234,6 +246,8 @@ def choose_oof_blend_and_temperature(
             feature_columns,
             half_life_days,
             tree_count,
+            dixon_coles_half_life_days=dixon_coles_half_life_days,
+            dixon_coles_ridge=dixon_coles_ridge,
         )
         dixon_predictions.append(
             predict_dixon_coles(
@@ -298,6 +312,8 @@ def train_blend_predictor(
     *,
     feature_columns: tuple[str, ...] = V3_FEATURE_COLUMNS,
     half_life_days: float = DEFAULT_HALF_LIFE_DAYS,
+    dixon_coles_half_life_days: float = DIXON_COLES_HALF_LIFE_DAYS,
+    dixon_coles_ridge: float = DIXON_COLES_RIDGE,
     bake_temperature: bool = False,
 ) -> tuple[BlendPredictor, dict[str, Any]]:
     tree_count = choose_xgboost_tree_count(
@@ -319,6 +335,8 @@ def train_blend_predictor(
             feature_columns=feature_columns,
             half_life_days=half_life_days,
             tree_count=tree_count,
+            dixon_coles_half_life_days=dixon_coles_half_life_days,
+            dixon_coles_ridge=dixon_coles_ridge,
         )
     )
     tree_model, dixon_coles = _fit_blend_components(
@@ -326,6 +344,8 @@ def train_blend_predictor(
         feature_columns,
         half_life_days,
         tree_count,
+        dixon_coles_half_life_days=dixon_coles_half_life_days,
+        dixon_coles_ridge=dixon_coles_ridge,
     )
 
     predictor = BlendPredictor(
@@ -348,6 +368,8 @@ def train_blend_predictor(
         ),
         "fit_train_rows": int(len(train)),
         "half_life_days": half_life_days,
+        "dixon_coles_half_life_days": dixon_coles_half_life_days,
+        "dixon_coles_ridge": dixon_coles_ridge,
         "tree_n_estimators": tree_count,
         **selection_details,
     }
@@ -368,6 +390,10 @@ def fit_final_blend_predictor(
         feature_columns,
         half_life_days,
         int(selection_details["tree_n_estimators"]),
+        dixon_coles_half_life_days=float(
+            selection_details.get("dixon_coles_half_life_days", DIXON_COLES_HALF_LIFE_DAYS)
+        ),
+        dixon_coles_ridge=float(selection_details.get("dixon_coles_ridge", DIXON_COLES_RIDGE)),
     )
     return BlendPredictor(
         dixon_coles=dixon_coles,
@@ -471,6 +497,8 @@ def train_and_save_model_v3(
         feature_columns=list(V3_FEATURE_COLUMNS),
         dixon_coles_weight=float(details["dixon_coles_weight"]),
         half_life_days=float(half_life_days),
+        dixon_coles_half_life_days=float(details["dixon_coles_half_life_days"]),
+        dixon_coles_ridge=float(details["dixon_coles_ridge"]),
         predictor_type="blend_v3",
         bundle_path=str(bundle_path),
         team_keys_path=str(team_keys_path),

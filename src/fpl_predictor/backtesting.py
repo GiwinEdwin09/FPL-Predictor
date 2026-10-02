@@ -361,7 +361,11 @@ def _fold_report(
                 "fold_id": fold.fold_id,
                 "match_id": str(match["match_id"]),
                 "season": str(match["source_season"]),
-                "gameweek": int(match["_ordering_gameweek"]),
+                "gameweek": (
+                    int(match["_ordering_gameweek"])
+                    if pd.notna(match["_ordering_gameweek"])
+                    else None
+                ),
                 "kickoff_time": match["kickoff_time"].isoformat(),
                 "actual_outcome": OUTCOME_LABELS[int(targets[row_index])],
                 "models": serialized_models,
@@ -550,8 +554,14 @@ def run_walk_forward_backtest_v3(
     bootstrap_samples: int = 2_000,
     seed: int = 42,
     half_life_days: float = 550.0,
+    dixon_coles_half_life_days: float | None = None,
+    dixon_coles_ridge: float | None = None,
 ) -> dict[str, Any]:
-    from fpl_predictor.dixon_coles import predict_dixon_coles
+    from fpl_predictor.dixon_coles import (
+        DIXON_COLES_HALF_LIFE_DAYS,
+        DIXON_COLES_RIDGE,
+        predict_dixon_coles,
+    )
     from fpl_predictor.model_training import V3_FEATURE_COLUMNS
     from fpl_predictor.model_v3 import load_v3_training_frame, train_blend_predictor
     from fpl_predictor.predictors import (
@@ -560,6 +570,10 @@ def run_walk_forward_backtest_v3(
         sklearn_probabilities,
     )
 
+    if dixon_coles_half_life_days is None:
+        dixon_coles_half_life_days = DIXON_COLES_HALF_LIFE_DAYS
+    if dixon_coles_ridge is None:
+        dixon_coles_ridge = DIXON_COLES_RIDGE
     frame = load_v3_training_frame(training_feature_table_path)
     seasons = tuple(evaluation_seasons)
     folds = make_walk_forward_folds(frame, seasons, min_train_rows=min_train_rows)
@@ -595,7 +609,12 @@ def run_walk_forward_backtest_v3(
         uniform = np.full((rows, NUM_OUTCOMES), 1.0 / NUM_OUTCOMES)
         prior = historical_prior_probabilities(train, rows)
         elo = elo_logistic_probabilities(train, validation)
-        predictor, details = train_blend_predictor(train, half_life_days=half_life_days)
+        predictor, details = train_blend_predictor(
+            train,
+            half_life_days=half_life_days,
+            dixon_coles_half_life_days=dixon_coles_half_life_days,
+            dixon_coles_ridge=dixon_coles_ridge,
+        )
         dixon = predict_dixon_coles(
             predictor.dixon_coles,
             validation.get("home_team_key", validation["home_team"]),
@@ -678,6 +697,8 @@ def run_walk_forward_backtest_v3(
             "bootstrap_samples": bootstrap_samples,
             "random_seed": seed,
             "half_life_days": half_life_days,
+            "dixon_coles_half_life_days": dixon_coles_half_life_days,
+            "dixon_coles_ridge": dixon_coles_ridge,
             "fold_boundary": "Train before the first kickoff of each Premier League gameweek.",
             "accuracy_tie_break": "Argmax ties resolve to class 0 (home win).",
             "calibration": (

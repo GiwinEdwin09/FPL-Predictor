@@ -10,6 +10,9 @@ from scipy.stats import poisson
 
 NUM_OUTCOMES = 3
 DEFAULT_HALF_LIFE_DAYS = 550.0
+DIXON_COLES_HALF_LIFE_DAYS = 365.0
+# L2 penalty on team ratings, on the scale of the time-decay weights (latest match = 1.0).
+DIXON_COLES_RIDGE = 2.0
 MAX_GOALS = 8
 PROBABILITY_EPSILON = 1e-12
 COLD_START_ATTACK_ADJUSTMENT = -0.15
@@ -25,6 +28,7 @@ class DixonColesParameters:
     rho: float
     half_life_days: float
     log_likelihood: float
+    ridge: float = 0.0
 
     def team_index(self) -> dict[str, int]:
         return {team: index for index, team in enumerate(self.teams)}
@@ -104,17 +108,25 @@ def _lambdas(
     return np.clip(home_lambda, 1e-6, 20.0), np.clip(away_lambda, 1e-6, 20.0)
 
 
-def weighted_log_likelihood(
+def weighted_log_likelihood_and_gradient(
     values: np.ndarray,
     home_index: np.ndarray,
     away_index: np.ndarray,
     home_goals: np.ndarray,
     away_goals: np.ndarray,
     weights: np.ndarray,
-) -> float:
-    team_count = int(max(home_index.max(), away_index.max()) + 1)
+    team_count: int,
+    ridge: float = 0.0,
+) -> tuple[float, np.ndarray]:
+    """Penalized negative log-likelihood and its gradient with respect to the packed parameters.
+
+    The penalty shrinks attack ratings toward zero and defence ratings toward their mean;
+    mean defence is the model's goal-level intercept and is left unpenalized.
+    """
     attack, defence, home_advantage, rho = unpack_parameters(values, team_count)
     rho = float(np.clip(rho, -0.2, 0.2))
+    raw_home = attack[home_index] - defence[away_index] + home_advantage
+    raw_away = attack[away_index] - defence[home_index]
     home_lambda, away_lambda = _lambdas(attack, defence, home_advantage, home_index, away_index)
     tau = dixon_coles_tau(home_goals, away_goals, home_lambda, away_lambda, rho)
     log_prob = (
@@ -122,7 +134,65 @@ def weighted_log_likelihood(
         + poisson.logpmf(home_goals, home_lambda)
         + poisson.logpmf(away_goals, away_lambda)
     )
-    return float(-np.sum(weights * log_prob))
+    objective = float(-np.sum(weights * log_prob))
+
+    mask_00 = (home_goals == 0) & (away_goals == 0)
+    mask_10 = (home_goals == 1) & (away_goals == 0)
+    mask_01 = (home_goals == 0) & (away_goals == 1)
+    mask_11 = (home_goals == 1) & (away_goals == 1)
+    tau_home = np.zeros_like(tau)
+    tau_away = np.zeros_like(tau)
+    tau_rho = np.zeros_like(tau)
+    both = home_lambda * away_lambda
+    tau_home[mask_00] = -both[mask_00] * rho
+    tau_away[mask_00] = -both[mask_00] * rho
+    tau_rho[mask_00] = -both[mask_00]
+    tau_away[mask_10] = away_lambda[mask_10] * rho
+    tau_rho[mask_10] = away_lambda[mask_10]
+    tau_home[mask_01] = home_lambda[mask_01] * rho
+    tau_rho[mask_01] = home_lambda[mask_01]
+    tau_rho[mask_11] = -1.0
+    home_in_range = (raw_home > np.log(1e-6)) & (raw_home < np.log(20.0))
+    away_in_range = (raw_away > np.log(1e-6)) & (raw_away < np.log(20.0))
+    d_home = weights * (tau_home / tau + home_goals - home_lambda) * home_in_range
+    d_away = weights * (tau_away / tau + away_goals - away_lambda) * away_in_range
+    attack_gradient = -(
+        np.bincount(home_index, d_home, team_count) + np.bincount(away_index, d_away, team_count)
+    )
+    defence_gradient = np.bincount(away_index, d_home, team_count) + np.bincount(home_index, d_away, team_count)
+    home_gradient = -float(d_home.sum())
+    rho_gradient = -float(np.sum(weights * tau_rho / tau))
+
+    if ridge > 0:
+        centred_defence = defence - defence.mean()
+        objective += ridge * float(attack @ attack + centred_defence @ centred_defence)
+        attack_gradient = attack_gradient + 2.0 * ridge * attack
+        defence_gradient = defence_gradient + 2.0 * ridge * centred_defence
+
+    gradient = np.concatenate(
+        [
+            attack_gradient[:-1] - attack_gradient[-1],
+            defence_gradient,
+            [home_gradient, rho_gradient],
+        ]
+    )
+    return objective, gradient
+
+
+def weighted_log_likelihood(
+    values: np.ndarray,
+    home_index: np.ndarray,
+    away_index: np.ndarray,
+    home_goals: np.ndarray,
+    away_goals: np.ndarray,
+    weights: np.ndarray,
+    ridge: float = 0.0,
+) -> float:
+    team_count = int(max(home_index.max(), away_index.max()) + 1)
+    objective, _ = weighted_log_likelihood_and_gradient(
+        values, home_index, away_index, home_goals, away_goals, weights, team_count, ridge
+    )
+    return objective
 
 
 def fit_dixon_coles(
@@ -130,7 +200,8 @@ def fit_dixon_coles(
     *,
     home_key_column: str = "home_team_key",
     away_key_column: str = "away_team_key",
-    half_life_days: float = DEFAULT_HALF_LIFE_DAYS,
+    half_life_days: float = DIXON_COLES_HALF_LIFE_DAYS,
+    ridge: float = DIXON_COLES_RIDGE,
     initial: DixonColesParameters | None = None,
 ) -> DixonColesParameters:
     working = frame.copy()
@@ -166,16 +237,20 @@ def fit_dixon_coles(
         start[-2] = 0.25
 
     result = minimize(
-        weighted_log_likelihood,
+        weighted_log_likelihood_and_gradient,
         start,
-        args=(home_index, away_index, home_goals, away_goals, weights),
+        args=(home_index, away_index, home_goals, away_goals, weights, team_count, ridge),
+        jac=True,
         method="L-BFGS-B",
         bounds=[(None, None)] * (parameter_count - 2) + [(-1.0, 1.5), (-0.2, 0.2)],
-        options={"maxiter": 150, "ftol": 1e-6},
+        options={"maxiter": 500, "ftol": 1e-9},
     )
     if not result.success:
         raise RuntimeError(f"Dixon-Coles optimization failed: {result.message}")
     attack, defence, home_advantage, rho = unpack_parameters(result.x, team_count)
+    log_likelihood, _ = weighted_log_likelihood_and_gradient(
+        result.x, home_index, away_index, home_goals, away_goals, weights, team_count
+    )
     return DixonColesParameters(
         teams=teams,
         attack=attack.tolist(),
@@ -183,7 +258,8 @@ def fit_dixon_coles(
         home_advantage=float(home_advantage),
         rho=float(np.clip(rho, -0.2, 0.2)),
         half_life_days=float(half_life_days),
-        log_likelihood=float(-result.fun),
+        log_likelihood=float(-log_likelihood),
+        ridge=float(ridge),
     )
 
 
@@ -208,6 +284,7 @@ def add_cold_start_teams(
         rho=parameters.rho,
         half_life_days=parameters.half_life_days,
         log_likelihood=parameters.log_likelihood,
+        ridge=parameters.ridge,
     )
     return expanded, missing
 
@@ -273,4 +350,5 @@ def parameters_from_dict(payload: dict[str, Any]) -> DixonColesParameters:
         rho=float(payload["rho"]),
         half_life_days=float(payload.get("half_life_days", DEFAULT_HALF_LIFE_DAYS)),
         log_likelihood=float(payload.get("log_likelihood", 0.0)),
+        ridge=float(payload.get("ridge", 0.0)),
     )
