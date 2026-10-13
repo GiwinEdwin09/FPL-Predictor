@@ -3,9 +3,9 @@
 import { useMemo, useState } from "react";
 
 import { CustomizableFutureFixtureCard } from "@/components/customizable-future-fixture-card";
+import { DayGroups, LocalTime } from "@/components/ui/local-time";
 import { EmptyState } from "@/components/ui/states";
 import { earliestKickoff, groupByGameweek } from "@/lib/gameweek";
-import { formatKickoffWithZone } from "@/lib/format";
 import type { UpcomingFixture } from "@/lib/dashboard";
 
 type FixturesWeekViewProps = {
@@ -46,7 +46,15 @@ export function FixturesWeekView({ fixtures, initialGameweek = null, highlighted
         <div className="week-heading">
           <p className="eyebrow">Upcoming Matchweek</p>
           <h2>Matchweek {gameweek}</h2>
-          <p>{firstKickoff ? `Starts ${formatKickoffWithZone(firstKickoff)}` : `${fixturesForWeek.length} fixtures in this round`}</p>
+          <p>
+            {firstKickoff ? (
+              <>
+                Starts <LocalTime value={firstKickoff} withZone /> · times in your time zone
+              </>
+            ) : (
+              `${fixturesForWeek.length} fixtures in this round`
+            )}
+          </p>
         </div>
         <button
           className="week-arrow"
@@ -58,15 +66,11 @@ export function FixturesWeekView({ fixtures, initialGameweek = null, highlighted
         </button>
       </div>
 
-      <div className="fixtures-week-scroll">
-        {fixturesForWeek.map((fixture) => (
-          <CustomizableFutureFixtureCard
-            key={fixture.matchId}
-            fixture={fixture}
-            highlighted={fixture.matchId === highlightedMatchId}
-          />
-        ))}
-      </div>
+      <DayGroups fixtures={fixturesForWeek}>
+        {(fixture) => (
+          <CustomizableFutureFixtureCard fixture={fixture} highlighted={fixture.matchId === highlightedMatchId} />
+        )}
+      </DayGroups>
     </section>
   );
 }

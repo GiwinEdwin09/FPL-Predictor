@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 import { CompareExplorer } from "@/components/compare-explorer";
 import { loadDashboardResult } from "@/lib/dashboard";
 import { pickQuizCandidates } from "@/lib/quiz";
@@ -39,6 +41,11 @@ export default async function ComparePage() {
 
   return (
     <div className="page-shell">
+      <nav className="team-breadcrumb" aria-label="Breadcrumb">
+        <Link href="/teams" className="section-link">
+          ← All teams
+        </Link>
+      </nav>
       <header className="page-head">
         <div className="page-head-row">
           <span className="page-eyebrow">

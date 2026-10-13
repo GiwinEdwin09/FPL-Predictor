@@ -1,57 +1,49 @@
+"use client";
+
 import Link from "next/link";
 
+import { ModelVerdict } from "@/components/ui/badges";
 import { TeamCrest } from "@/components/ui/crest";
+import { DayGroups, LocalTime } from "@/components/ui/local-time";
 import { ProbabilityBar } from "@/components/ui/probability-bar";
-import { describeConfidence } from "@/lib/confidence";
 import type { UpcomingFixture } from "@/lib/dashboard";
 import { fixtureHref } from "@/lib/fixture-link";
-import { formatKickoff, formatPercent } from "@/lib/format";
 
 export function CompactFixture({ fixture }: { fixture: UpcomingFixture }) {
-  const confidence = describeConfidence(fixture.probabilities);
-
-  const lead =
-    confidence.pick !== null && confidence.pick !== "draw"
-      ? `${confidence.pick === "home" ? fixture.homeTeam.shortName : fixture.awayTeam.shortName} favored`
-      : confidence.label;
-
-  const leadValue =
-    confidence.pick !== null && confidence.pick !== "draw"
-      ? formatPercent(
-          confidence.pick === "home"
-            ? fixture.probabilities.homeWin
-            : fixture.probabilities.awayWin,
-        )
-      : null;
+  const { homeTeam, awayTeam } = fixture;
 
   return (
     <Link href={fixtureHref(fixture.matchId)} className="upcoming-row">
-      <div className="upcoming-row-time">{formatKickoff(fixture.kickoffTime)}</div>
+      <div className="upcoming-row-time">
+        <LocalTime value={fixture.kickoffTime} variant="time" />
+      </div>
 
       <div className="upcoming-row-teams">
         <div className="upcoming-row-team">
-          <TeamCrest name={fixture.homeTeam.name} badgePath={fixture.homeTeam.badgePath} size={26} />
-          <span>{fixture.homeTeam.shortName}</span>
+          <TeamCrest name={homeTeam.name} badgePath={homeTeam.badgePath} size={26} />
+          <span>{homeTeam.shortName}</span>
         </div>
         <span className="upcoming-row-vs">vs</span>
         <div className="upcoming-row-team upcoming-row-team-away">
-          <span>{fixture.awayTeam.shortName}</span>
-          <TeamCrest name={fixture.awayTeam.name} badgePath={fixture.awayTeam.badgePath} size={26} />
+          <span>{awayTeam.shortName}</span>
+          <TeamCrest name={awayTeam.name} badgePath={awayTeam.badgePath} size={26} />
         </div>
       </div>
 
       <div className="upcoming-row-bar">
         <ProbabilityBar
           probabilities={fixture.probabilities}
-          homeShort={fixture.homeTeam.shortName}
-          awayShort={fixture.awayTeam.shortName}
+          homeShort={homeTeam.shortName}
+          awayShort={awayTeam.shortName}
           size="sm"
         />
-        <span className="upcoming-row-lead">
-          {lead}
-          {leadValue ? ` · ${leadValue}` : ""}
-        </span>
+        <ModelVerdict probabilities={fixture.probabilities} homeShort={homeTeam.shortName} awayShort={awayTeam.shortName} />
       </div>
     </Link>
   );
+}
+
+/** Compact fixture rows under a heading for each of the viewer's calendar days. */
+export function CompactFixtureList({ fixtures }: { fixtures: UpcomingFixture[] }) {
+  return <DayGroups fixtures={fixtures}>{(fixture) => <CompactFixture fixture={fixture} />}</DayGroups>;
 }

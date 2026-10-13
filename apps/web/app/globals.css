@@ -588,6 +588,10 @@ img {
   gap: 0.75rem;
 }
 
+.page-head .hero-cta-row {
+  margin-top: 1.25rem;
+}
+
 /* ==========================================================================
    Stat tiles / metric cards
    ========================================================================== */
@@ -928,12 +932,6 @@ img {
   cursor: not-allowed;
 }
 
-.fixtures-week-scroll,
-.history-week-scroll {
-  display: grid;
-  gap: 1rem;
-}
-
 /* ==========================================================================
    Probability bar — the signature visual
    ========================================================================== */
@@ -1105,28 +1103,6 @@ img {
   color: var(--ink-soft);
 }
 
-.pick-badge {
-  display: inline-flex;
-  align-items: baseline;
-  gap: 0.55rem;
-}
-
-.pick-badge-label {
-  font-size: 0.68rem;
-  font-weight: 700;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--muted);
-}
-
-.pick-badge-team {
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: clamp(1.15rem, 2.4vw, 1.5rem);
-  letter-spacing: -0.01em;
-  color: var(--ink);
-}
-
 .verdict-badge {
   display: inline-flex;
   align-items: center;
@@ -1209,44 +1185,226 @@ img[src*="tottenham"] {
 }
 
 /* ==========================================================================
-   Match card (prediction card)
+   Fixture rows (predictions, history) and day groups
    ========================================================================== */
 
-.fixture-card {
-  position: relative;
+.day-groups {
   display: grid;
-  gap: 1.1rem;
-  padding: 1.3rem 1.35rem;
+  gap: 2rem;
+}
+
+.day-group-title {
+  margin: 0 0 0.6rem;
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted-strong);
+}
+
+.day-group-rows {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.fixture-row {
   border-radius: var(--radius-lg);
   background: linear-gradient(180deg, var(--surface-2), var(--surface));
   border: 1px solid var(--border);
   box-shadow: var(--shadow-sm);
-  transition: border-color var(--speed-fast) ease, box-shadow var(--speed-fast) ease, transform var(--speed-fast) var(--ease-out);
-}
-
-/* Arriving from a fixture link: land below the sticky nav and week header, then outline briefly. */
-.fixture-card {
+  transition: border-color var(--speed-fast) ease, box-shadow var(--speed-fast) ease;
+  /* Arriving from a fixture link: land below the sticky nav and week header. */
   scroll-margin-top: calc(var(--site-header-height, 70px) + 8rem);
 }
 
-.fixture-card.fixture-card-focus {
+.fixture-row:hover,
+.fixture-row[data-open="true"] {
+  border-color: rgba(255, 255, 255, 0.17);
+}
+
+.fixture-row.fixture-row-focus {
   border-color: rgba(0, 255, 133, 0.55);
   box-shadow: 0 0 0 3px rgba(0, 255, 133, 0.14), var(--shadow-sm);
   transition: border-color 600ms ease, box-shadow 600ms ease;
 }
 
-.fixture-card:hover {
-  border-color: rgba(255, 255, 255, 0.17);
-  box-shadow: var(--shadow-md);
-  transform: translateY(-1px);
+.fixture-row.skeleton-card {
+  display: grid;
+  gap: 0.6rem;
+  padding: 1rem 1.1rem;
 }
 
-.fixture-card-topline {
-  display: flex;
-  justify-content: space-between;
+.fixture-row-summary {
+  position: relative;
+  display: grid;
+  grid-template-columns: 4.25rem minmax(0, 1.15fr) minmax(0, 1.35fr) 2rem;
   align-items: center;
-  gap: 0.75rem;
+  gap: 1rem;
+  padding: 0.8rem 1rem 0.8rem 1.1rem;
+  cursor: pointer;
 }
+
+.history-row .fixture-row-summary {
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1.35fr) 2rem;
+}
+
+.fixture-row-time {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--muted-strong);
+  font-variant-numeric: tabular-nums;
+}
+
+.fixture-row-teams {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.fixture-row-team {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  min-width: 0;
+}
+
+.fixture-row-team-away {
+  justify-content: flex-end;
+  text-align: right;
+}
+
+.fixture-row-name {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--ink);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.fixture-row-vs {
+  font-size: 0.64rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.fixture-row-forecast {
+  display: grid;
+  gap: 0.45rem;
+  min-width: 0;
+}
+
+.fixture-row-forecast > .verdict-badge {
+  justify-self: start;
+}
+
+/* The toggle's hit area stretches over the whole summary row. */
+.fixture-row-toggle {
+  display: grid;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--muted-strong);
+  cursor: pointer;
+}
+
+.fixture-row-toggle::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius-lg);
+}
+
+.fixture-row-toggle:focus-visible {
+  outline: none;
+}
+
+.fixture-row-toggle:focus-visible::after {
+  outline: 2px solid var(--accent);
+  outline-offset: -2px;
+}
+
+.fixture-row-summary:hover .fixture-row-toggle {
+  border-color: var(--border-strong);
+  color: var(--ink);
+}
+
+.row-chevron {
+  width: 14px;
+  height: 14px;
+  transition: transform var(--speed-med) var(--ease-out);
+}
+
+.fixture-row[data-open="true"] .row-chevron {
+  transform: rotate(180deg);
+}
+
+.fixture-row-body {
+  display: grid;
+  gap: 1rem;
+  padding: 1rem 1.1rem 1.1rem;
+  border-top: 1px dashed var(--border-strong);
+  animation: rise-in 240ms var(--ease-out);
+}
+
+.why-panel {
+  display: grid;
+  gap: 1rem;
+}
+
+.model-verdict {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.model-verdict-pick {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--ink);
+}
+
+.history-row-score {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.2rem 0.6rem;
+  border-radius: var(--radius-sm);
+  background: rgba(255, 255, 255, 0.06);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+}
+
+.history-row-score span {
+  color: var(--muted);
+}
+
+.history-row-short {
+  display: none;
+}
+
+.history-row-noforecast,
+.history-row-note {
+  margin: 0;
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+/* Match-card pieces still used by Beat the Model */
 
 .fixture-card-gw {
   display: inline-flex;
@@ -1270,25 +1428,6 @@ img[src*="tottenham"] {
   font-variant-numeric: tabular-nums;
   text-transform: uppercase;
   letter-spacing: 0.04em;
-}
-
-.fixture-clubs {
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
-  align-items: center;
-  gap: 0.75rem;
-}
-
-.club-stack {
-  display: flex;
-  align-items: center;
-  gap: 0.85rem;
-  min-width: 0;
-}
-
-.club-stack-away {
-  justify-content: flex-end;
-  text-align: right;
 }
 
 .club-name {
@@ -1327,18 +1466,6 @@ img[src*="tottenham"] {
   text-transform: uppercase;
 }
 
-.pred-callout {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.75rem;
-  padding: 0.8rem 1rem;
-  border-radius: var(--radius-md);
-  background: linear-gradient(120deg, rgba(55, 0, 60, 0.5), rgba(23, 8, 34, 0.65));
-  border: 1px solid rgba(177, 138, 255, 0.22);
-}
-
 .fixture-context-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -1371,57 +1498,6 @@ img[src*="tottenham"] {
   font-size: 0.94rem;
   color: var(--ink);
   font-variant-numeric: tabular-nums;
-}
-
-/* Disclosure ("why this prediction") */
-
-.why-toggle {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.45rem;
-  padding: 0.55rem 1rem;
-  border-radius: var(--radius-pill);
-  border: 1px solid var(--border-strong);
-  background: rgba(255, 255, 255, 0.04);
-  color: var(--ink);
-  font-size: 0.84rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background-color var(--speed-fast) ease, border-color var(--speed-fast) ease, color var(--speed-fast) ease;
-}
-
-.why-toggle:hover {
-  background: rgba(255, 255, 255, 0.09);
-  border-color: var(--accent);
-  color: var(--accent);
-}
-
-.why-toggle[aria-expanded="true"] {
-  background: rgba(0, 255, 133, 0.1);
-  border-color: rgba(0, 255, 133, 0.35);
-  color: var(--accent);
-}
-
-.why-chevron {
-  width: 12px;
-  height: 12px;
-  transition: transform var(--speed-med) var(--ease-out);
-}
-
-.why-toggle[aria-expanded="true"] .why-chevron {
-  transform: rotate(180deg);
-}
-
-.disclosure-panel {
-  overflow: hidden;
-}
-
-.disclosure-inner {
-  display: grid;
-  gap: 1rem;
-  padding-top: 1rem;
-  border-top: 1px dashed var(--border-strong);
-  animation: rise-in 240ms var(--ease-out);
 }
 
 @keyframes rise-in {
@@ -1921,14 +1997,6 @@ img[src*="tottenham"] {
   gap: 0.4rem;
 }
 
-.upcoming-row-lead {
-  font-size: 0.74rem;
-  font-weight: 700;
-  color: var(--muted-strong);
-  letter-spacing: 0.03em;
-  text-transform: uppercase;
-}
-
 /* ==========================================================================
    Match of the Week (featured match)
    ========================================================================== */
@@ -1970,21 +2038,6 @@ img[src*="tottenham"] {
   align-items: center;
   gap: 1rem;
   flex-shrink: 0;
-}
-
-.play-teaser-picks {
-  display: flex;
-  gap: 0.4rem;
-}
-
-.play-teaser-picks span {
-  padding: 0.45rem 0.8rem;
-  border-radius: var(--radius-md);
-  border: 1px solid var(--border-strong);
-  background: rgba(255, 255, 255, 0.04);
-  font-size: 0.78rem;
-  font-weight: 700;
-  color: var(--muted-strong);
 }
 
 .motw {
@@ -2225,71 +2278,6 @@ img[src*="tottenham"] {
    History cards
    ========================================================================== */
 
-.history-card {
-  position: relative;
-  padding: 1.15rem 1.25rem;
-  border-radius: var(--radius-lg);
-  background: linear-gradient(180deg, var(--surface-2), var(--surface));
-  border: 1px solid var(--border);
-  box-shadow: var(--shadow-sm);
-  display: grid;
-  gap: 0.9rem;
-}
-
-.history-meta {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.5rem 0.75rem;
-  font-size: 0.74rem;
-  font-weight: 600;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  color: var(--muted);
-}
-
-.history-meta-when {
-  white-space: nowrap;
-}
-
-.history-scoreline {
-  display: grid;
-  gap: 0.6rem;
-}
-
-.history-team-line {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 1rem;
-}
-
-.history-team-brand {
-  display: flex;
-  align-items: center;
-  gap: 0.7rem;
-  min-width: 0;
-}
-
-.history-team-brand strong {
-  font-family: var(--font-display);
-  font-weight: 600;
-  font-size: 0.98rem;
-  color: var(--ink);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.history-team-line > span {
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: 1.45rem;
-  color: var(--ink);
-  font-variant-numeric: tabular-nums;
-}
-
 .history-stats {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -2462,20 +2450,9 @@ img[src*="tottenham"] {
   height: 1.05rem;
 }
 
-.skeleton-bars,
-.skeleton-grid {
-  display: grid;
-  gap: 0.6rem;
-  margin-top: 0.85rem;
-}
-
 .skeleton-bar {
   height: 2.2rem;
   border-radius: var(--radius-md);
-}
-
-.skeleton-grid {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
 .skeleton-pill-row {
@@ -3387,56 +3364,6 @@ img[src*="tottenham"] {
    Teams
    ========================================================================== */
 
-.club-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(168px, 1fr));
-  gap: 0.75rem;
-}
-
-.club-tile {
-  display: grid;
-  justify-items: center;
-  gap: 0.5rem;
-  padding: 1.15rem 0.85rem 1rem;
-  border-radius: var(--radius-lg);
-  background: linear-gradient(180deg, var(--surface-2), var(--surface));
-  border: 1px solid var(--border);
-  box-shadow: var(--shadow-sm);
-  transition: border-color var(--speed-fast) ease, transform var(--speed-fast) var(--ease-out), box-shadow var(--speed-fast) ease;
-  text-align: center;
-}
-
-.club-tile:hover {
-  border-color: var(--accent);
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-md);
-}
-
-.club-tile-name {
-  font-family: var(--font-display);
-  font-weight: 600;
-  font-size: 0.9rem;
-  color: var(--ink);
-  line-height: 1.2;
-}
-
-.club-tile-stats {
-  display: flex;
-  gap: 0.9rem;
-  font-size: 0.68rem;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--muted);
-}
-
-.club-tile-stats strong {
-  display: block;
-  font-size: 0.92rem;
-  color: var(--ink-soft);
-  font-variant-numeric: tabular-nums;
-}
-
 .standings-table-wrap {
   background: linear-gradient(180deg, var(--surface-2), var(--surface));
   border: 1px solid var(--border);
@@ -3461,6 +3388,10 @@ img[src*="tottenham"] {
   color: var(--muted);
   padding: 0.85rem 0.6rem;
   border-bottom: 1px solid var(--border-strong);
+}
+
+.standings-table th.standings-num {
+  text-align: right;
 }
 
 .standings-table td {
@@ -3819,7 +3750,8 @@ img[src*="tottenham"] {
 .cmp-meter-fill {
   height: 100%;
   border-radius: var(--radius-pill);
-  background: var(--brand-bright);
+  /* Neutral for the trailing club: violet already means "away" elsewhere on the site. */
+  background: rgba(255, 255, 255, 0.32);
   transition: width 600ms var(--ease-out);
 }
 
@@ -3979,6 +3911,45 @@ img[src*="tottenham"] {
 }
 
 @media (max-width: 720px) {
+  .fixture-row-summary {
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas:
+      "time toggle"
+      "teams teams"
+      "forecast forecast";
+    gap: 0.6rem;
+    padding: 0.85rem 0.9rem;
+  }
+
+  .history-row .fixture-row-summary {
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas:
+      "teams toggle"
+      "forecast forecast";
+  }
+
+  .fixture-row-time { grid-area: time; }
+  .fixture-row-teams { grid-area: teams; }
+  .fixture-row-forecast { grid-area: forecast; }
+  .fixture-row-toggle { grid-area: toggle; }
+
+  .fixture-row-body {
+    padding: 0.9rem;
+  }
+
+  /* Full names don't fit beside the score on a phone; use club codes. */
+  .history-row-full {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+  }
+
+  .history-row-short {
+    display: inline;
+  }
+
   :root {
     --site-header-height: 62px;
   }
@@ -4049,22 +4020,6 @@ img[src*="tottenham"] {
     height: 40px;
   }
 
-  .fixture-card {
-    padding: 1.1rem 1rem;
-  }
-
-  .fixture-clubs {
-    grid-template-columns: 1fr;
-    gap: 0.5rem;
-  }
-
-  /* Mirror the home row when stacked: crest first, then name. */
-  .club-stack-away {
-    flex-direction: row-reverse;
-    justify-content: flex-end;
-    text-align: left;
-  }
-
   .fixture-versus {
     display: none;
   }
@@ -4107,11 +4062,6 @@ img[src*="tottenham"] {
     order: -1;
   }
 
-  .pred-callout {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
   .site-footer-inner {
     flex-direction: column;
     align-items: flex-start;
@@ -4146,10 +4096,6 @@ img[src*="tottenham"] {
 
   .play-teaser {
     padding: 1.25rem;
-  }
-
-  .play-teaser-picks {
-    display: none;
   }
 
   .play-teaser-actions .cta-primary {

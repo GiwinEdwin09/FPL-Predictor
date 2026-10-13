@@ -103,9 +103,9 @@ function fetchWithTimeout(input: RequestInfo | URL, init: RequestInit, timeoutMs
 function timeoutMessage(kind: "lineup" | "simulation", timeoutMs: number) {
   const seconds = Math.round(timeoutMs / 1000);
   if (kind === "lineup") {
-    return `Lineup loading timed out after ${seconds}s. The backend is probably reachable, but it is responding too slowly right now.`;
+    return `Lineups took longer than ${seconds}s to load. The lineup service is slow right now, so try again in a moment.`;
   }
-  return `Simulation timed out after ${seconds}s. This is a good signal to check runtime latency rather than guessing whether the UI is broken.`;
+  return `The updated forecast took longer than ${seconds}s. Try changing the lineup again in a moment.`;
 }
 
 function DeltaChip({ from, to }: { from: number; to: number }) {
@@ -364,23 +364,22 @@ export function CustomizableFutureFixtureCard({
     [awaySelectedIds, context],
   );
 
-  const prefetchedSummary = loadingContext
-    ? "Fetching projected XI from the live backend..."
-    : context
-      ? "Projected XI is cached for this fixture."
-      : "Open the lineup tool to fetch the projected XI from the live backend.";
-
   return (
-    <PredictionCard fixture={fixture} probabilitiesOverride={activeProbabilities} highlighted={highlighted}>
+    <PredictionCard
+      fixture={fixture}
+      probabilitiesOverride={activeProbabilities}
+      highlighted={highlighted}
+      defaultOpen={Boolean(initialScenario)}
+    >
       <div className="fixture-actions">
         <div>
           <strong>Lineup simulator</strong>
           <p>
             {open
               ? simulation
-                ? "Probabilities above are recalculated live from your selected XI."
-                : "Swap players below — the forecast updates automatically."
-              : prefetchedSummary}
+                ? "The probabilities above now reflect your XI."
+                : "Swap players below and the forecast updates automatically."
+              : "Change either starting XI and see how the forecast moves."}
           </p>
         </div>
         <div className="fixture-action-buttons">
@@ -414,7 +413,7 @@ export function CustomizableFutureFixtureCard({
               }
             }}
           >
-            {open ? "Hide Lineup Tool" : "Edit Lineup"}
+            {open ? "Close lineups" : "Edit lineups"}
           </button>
         </div>
       </div>
@@ -469,10 +468,10 @@ export function CustomizableFutureFixtureCard({
               <SaveLineup fixture={fixture} homePlayerIds={homeSelectedIds} awayPlayerIds={awaySelectedIds} />
               <div className="simulation-summary-card">
                 <div className="simulation-summary-topline">
-                  <span>Your runtime forecast</span>
+                  <span>Your forecast</span>
                   <span>
-                    {simulation?.simulationMode ?? "projected-default-lineup"}
-                    {simulating ? " · refreshing" : ""}
+                    {simulation ? "Your XI" : "Projected XI"}
+                    {simulating ? " · updating" : ""}
                   </span>
                 </div>
                 <div className="simulation-bars">

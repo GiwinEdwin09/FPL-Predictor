@@ -9,7 +9,7 @@ export default function PredictionsLoading() {
           </span>
           <span className="page-eyebrow page-eyebrow-light">Loading…</span>
         </div>
-        <h1 className="page-title">Upcoming fixtures, one matchweek at a time.</h1>
+        <h1 className="page-title">Who does the model back this week?</h1>
         <p className="page-lede">Pulling the latest probabilities and grouping fixtures into rounds.</p>
       </header>
 
@@ -22,17 +22,11 @@ export default function PredictionsLoading() {
           </div>
         </div>
 
-        <div className="fixtures-week-scroll">
-          {Array.from({ length: 3 }).map((_, index) => (
-            <article key={index} className="fixture-card skeleton-card">
-              <div className="skeleton-line skeleton-line-short" />
+        <div className="day-group-rows">
+          {Array.from({ length: 5 }).map((_, index) => (
+            <article key={index} className="fixture-row skeleton-card">
               <div className="skeleton-line skeleton-line-title" />
-              <div className="skeleton-line skeleton-line-title" />
-              <div className="skeleton-bars">
-                <div className="skeleton-bar" />
-                <div className="skeleton-bar" />
-                <div className="skeleton-bar" />
-              </div>
+              <div className="skeleton-line" />
             </article>
           ))}
         </div>

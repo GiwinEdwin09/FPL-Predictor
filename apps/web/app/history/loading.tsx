@@ -9,7 +9,7 @@ export default function HistoryLoading() {
           </span>
           <span className="page-eyebrow page-eyebrow-light">Loading…</span>
         </div>
-        <h1 className="page-title">Finished matches with the stats that matter most.</h1>
+        <h1 className="page-title">Was the model right?</h1>
         <p className="page-lede">Loading completed fixtures and their key match summaries.</p>
       </header>
 
@@ -22,18 +22,11 @@ export default function HistoryLoading() {
           </div>
         </div>
 
-        <div className="history-week-scroll">
-          {Array.from({ length: 3 }).map((_, index) => (
-            <article key={index} className="history-card skeleton-card">
-              <div className="skeleton-line skeleton-line-short" />
+        <div className="day-group-rows">
+          {Array.from({ length: 5 }).map((_, index) => (
+            <article key={index} className="fixture-row skeleton-card">
               <div className="skeleton-line skeleton-line-title" />
-              <div className="skeleton-line skeleton-line-title" />
-              <div className="skeleton-grid">
-                <div className="skeleton-bar" />
-                <div className="skeleton-bar" />
-                <div className="skeleton-bar" />
-                <div className="skeleton-bar" />
-              </div>
+              <div className="skeleton-line" />
             </article>
           ))}
         </div>

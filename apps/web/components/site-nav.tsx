@@ -11,15 +11,18 @@ import type { GameweekSummary } from "@/lib/gameweek";
 
 const links = [
   { href: "/predictions", label: "Predictions" },
-  { href: "/teams", label: "Teams" },
-  { href: "/compare", label: "Compare" },
-  { href: "/model-lab", label: "Model Lab" },
   { href: "/history", label: "History" },
+  { href: "/teams", label: "Teams", alsoActiveOn: ["/compare"] },
+  { href: "/model-lab", label: "Model Lab" },
   { href: "/beat-the-model", label: "Beat the Model" },
 ];
 
-function isActive(pathname: string, href: string) {
+function matchesPath(pathname: string, href: string) {
   return pathname === href || pathname.startsWith(`${href}/`);
+}
+
+function isActive(pathname: string, link: (typeof links)[number]) {
+  return [link.href, ...(link.alsoActiveOn ?? [])].some((href) => matchesPath(pathname, href));
 }
 
 function GameweekChip({ summary }: { summary: GameweekSummary }) {
@@ -68,7 +71,7 @@ export function SiteNav({ summary }: { summary: GameweekSummary | null }) {
               key={link.href}
               href={link.href}
               className="site-nav-link"
-              data-active={isActive(pathname, link.href)}
+              data-active={isActive(pathname, link)}
             >
               {link.label}
             </Link>
@@ -117,7 +120,7 @@ export function SiteNav({ summary }: { summary: GameweekSummary | null }) {
               <Link
                 href={link.href}
                 className="mobile-nav-link"
-                data-active={isActive(pathname, link.href) ? true : undefined}
+                data-active={isActive(pathname, link) ? true : undefined}
               >
                 {link.label}
                 <span className="mobile-nav-index">{String(index + 1).padStart(2, "0")}</span>

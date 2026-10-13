@@ -1,15 +1,17 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useId, useMemo, useState } from "react";
 
+import { ChevronIcon } from "@/components/prediction-card";
 import { ResultBadge } from "@/components/ui/badges";
+import { DayGroups } from "@/components/ui/local-time";
 import { TeamCrest } from "@/components/ui/crest";
 import { ProbabilityBar } from "@/components/ui/probability-bar";
 import { EmptyState } from "@/components/ui/states";
 import type { HistoricalMatch } from "@/lib/dashboard";
 import { modelPick, outcomeProbability, resolveOutcome } from "@/lib/quiz";
 import { groupByGameweek, matchSeasons } from "@/lib/gameweek";
-import { formatMatchDate, formatPercent } from "@/lib/format";
+import { formatPercent } from "@/lib/format";
 
 type HistoryWeekViewProps = {
   matches: HistoricalMatch[];
@@ -91,7 +93,6 @@ export function HistoryWeekView({ matches }: HistoryWeekViewProps) {
               ←
             </button>
             <div className="week-heading">
-              <p className="eyebrow">Was the model right?</p>
               <h2>
                 {season.replace("-", "/")} · Matchweek {gameweek}
               </h2>
@@ -110,106 +111,123 @@ export function HistoryWeekView({ matches }: HistoryWeekViewProps) {
             </button>
           </div>
 
-          <div className="history-week-scroll">
-            {selectedMatches.map((match) => {
-              const verdict = verdictFor(match);
-
-              return (
-                <article key={match.matchId} className="history-card">
-                  <div className="history-meta">
-                    <span className="history-meta-when">
-                      MW {match.gameweek ?? "?"} · {formatMatchDate(match.kickoffTime)}
-                    </span>
-                    {verdict ? <ResultBadge state={verdict} /> : null}
-                  </div>
-
-                  <div className="history-scoreline">
-                    <div className="history-team-line">
-                      <div className="history-team-brand">
-                        <TeamCrest name={match.homeTeam.name} badgePath={match.homeTeam.badgePath} size={44} />
-                        <strong>{match.homeTeam.name}</strong>
-                      </div>
-                      <span>{match.score.home ?? "-"}</span>
-                    </div>
-                    <div className="history-team-line">
-                      <div className="history-team-brand">
-                        <TeamCrest name={match.awayTeam.name} badgePath={match.awayTeam.badgePath} size={44} />
-                        <strong>{match.awayTeam.name}</strong>
-                      </div>
-                      <span>{match.score.away ?? "-"}</span>
-                    </div>
-                  </div>
-
-                  {match.probabilities ? (
-                    <div>
-                      <span className="context-label" style={{ display: "block", marginBottom: "0.45rem" }}>
-                        Pre-match model
-                      </span>
-                      <ProbabilityBar
-                        probabilities={match.probabilities}
-                        homeShort={match.homeTeam.shortName}
-                        awayShort={match.awayTeam.shortName}
-                        size="sm"
-                      />
-                    </div>
-                  ) : null}
-
-                  <div className="history-stats">
-                    <div>
-                      <span>xG</span>
-                      <strong>
-                        {match.stats.xg.home ?? "—"} – {match.stats.xg.away ?? "—"}
-                      </strong>
-                    </div>
-                    <div>
-                      <span>Shots on target</span>
-                      <strong>
-                        {match.stats.shotsOnTarget.home ?? "—"} – {match.stats.shotsOnTarget.away ?? "—"}
-                      </strong>
-                    </div>
-                    <div>
-                      <span>Big chances</span>
-                      <strong>
-                        {match.stats.bigChances.home ?? "—"} – {match.stats.bigChances.away ?? "—"}
-                      </strong>
-                    </div>
-                    <div>
-                      <span>Possession</span>
-                      <strong>
-                        {match.stats.possession.home !== null ? `${Math.round(match.stats.possession.home)}%` : "—"} –{" "}
-                        {match.stats.possession.away !== null ? `${Math.round(match.stats.possession.away)}%` : "—"}
-                      </strong>
-                    </div>
-                  </div>
-
-                  <div className="history-prematch">
-                    <span>
-                      Pre-match Elo: {match.preMatch.homeElo !== null ? Math.round(match.preMatch.homeElo) : "—"} /{" "}
-                      {match.preMatch.awayElo !== null ? Math.round(match.preMatch.awayElo) : "—"}
-                    </span>
-                    {match.probabilities ? (
-                      <span>
-                        Model gave the winner{" "}
-                        {formatPercent(
-                          Math.max(
-                            match.probabilities.homeWin,
-                            match.probabilities.draw,
-                            match.probabilities.awayWin,
-                          ),
-                          1,
-                        )}{" "}
-                        before kickoff
-                      </span>
-                    ) : (
-                      <span>No stored forecast for this fixture</span>
-                    )}
-                  </div>
-                </article>
-              );
-            })}
-          </div>
+          <DayGroups fixtures={selectedMatches}>{(match) => <HistoryRow match={match} />}</DayGroups>
         </>
       )}
     </section>
+  );
+}
+
+function pair(home: number | null, away: number | null, format: (value: number) => string = String) {
+  return `${home !== null ? format(home) : "—"} – ${away !== null ? format(away) : "—"}`;
+}
+
+function HistoryRow({ match }: { match: HistoricalMatch }) {
+  const [open, setOpen] = useState(false);
+  const panelId = useId();
+  const verdict = verdictFor(match);
+  const { homeTeam, awayTeam, stats } = match;
+
+  const statRows = [
+    { label: "xG", home: stats.xg.home, away: stats.xg.away, format: String },
+    { label: "Shots on target", home: stats.shotsOnTarget.home, away: stats.shotsOnTarget.away, format: String },
+    { label: "Big chances", home: stats.bigChances.home, away: stats.bigChances.away, format: String },
+    {
+      label: "Possession",
+      home: stats.possession.home,
+      away: stats.possession.away,
+      format: (value: number) => `${Math.round(value)}%`,
+    },
+  ].filter((row) => row.home !== null || row.away !== null);
+
+  return (
+    <article className="fixture-row history-row" data-open={open}>
+      <div className="fixture-row-summary">
+        <span className="fixture-row-teams">
+          <span className="fixture-row-team">
+            <TeamCrest name={homeTeam.name} badgePath={homeTeam.badgePath} size={28} />
+            <span className="fixture-row-name">
+              <span className="history-row-full">{homeTeam.name}</span>
+              <span className="history-row-short" aria-hidden="true">
+                {homeTeam.shortName}
+              </span>
+            </span>
+          </span>
+          <span className="history-row-score">
+            {match.score.home ?? "–"}
+            <span aria-hidden="true">–</span>
+            {match.score.away ?? "–"}
+          </span>
+          <span className="fixture-row-team fixture-row-team-away">
+            <span className="fixture-row-name">
+              <span className="history-row-full">{awayTeam.name}</span>
+              <span className="history-row-short" aria-hidden="true">
+                {awayTeam.shortName}
+              </span>
+            </span>
+            <TeamCrest name={awayTeam.name} badgePath={awayTeam.badgePath} size={28} />
+          </span>
+        </span>
+
+        <span className="fixture-row-forecast">
+          {match.probabilities ? (
+            <ProbabilityBar
+              probabilities={match.probabilities}
+              homeShort={homeTeam.shortName}
+              awayShort={awayTeam.shortName}
+              size="sm"
+            />
+          ) : (
+            <span className="history-row-noforecast">No stored pre-match forecast</span>
+          )}
+          {verdict ? <ResultBadge state={verdict} /> : null}
+        </span>
+
+        <button
+          type="button"
+          className="fixture-row-toggle"
+          aria-expanded={open}
+          aria-controls={panelId}
+          onClick={() => setOpen((current) => !current)}
+        >
+          <span className="sr-only">
+            {open ? "Hide" : "Show"} match stats for {homeTeam.name} {match.score.home ?? ""}–{match.score.away ?? ""}{" "}
+            {awayTeam.name}
+          </span>
+          <ChevronIcon />
+        </button>
+      </div>
+
+      {open ? (
+        <div id={panelId} className="fixture-row-body">
+          {statRows.length > 0 ? (
+            <div className="history-stats">
+              {statRows.map((row) => (
+                <div key={row.label}>
+                  <span>{row.label}</span>
+                  <strong>{pair(row.home, row.away, row.format)}</strong>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <p className="history-row-note">Match stats aren&apos;t available for this fixture yet.</p>
+          )}
+
+          <div className="history-prematch">
+            <span>Pre-match Elo: {pair(match.preMatch.homeElo, match.preMatch.awayElo, (value) => String(Math.round(value)))}</span>
+            {match.probabilities ? (
+              <span>
+                The model&apos;s pick had{" "}
+                {formatPercent(
+                  Math.max(match.probabilities.homeWin, match.probabilities.draw, match.probabilities.awayWin),
+                  1,
+                )}{" "}
+                before kickoff
+              </span>
+            ) : null}
+          </div>
+        </div>
+      ) : null}
+    </article>
   );
 }

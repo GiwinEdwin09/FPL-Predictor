@@ -4,12 +4,11 @@ import { matchSeasons } from "@/lib/gameweek";
 import Image from "next/image";
 import { useMemo, useState } from "react";
 
-import { ConfidenceBadge } from "@/components/ui/badges";
+import { ModelVerdict } from "@/components/ui/badges";
 import { TeamCrest } from "@/components/ui/crest";
+import { LocalTime } from "@/components/ui/local-time";
 import { ProbabilityBar } from "@/components/ui/probability-bar";
-import { describeConfidence } from "@/lib/confidence";
 import type { TeamSummary, UpcomingFixture } from "@/lib/dashboard";
-import { formatKickoff } from "@/lib/format";
 import type { QuizMatch } from "@/lib/quiz";
 import { buildTeamTrend, summarizeTeam, type TeamTrendPoint } from "@/lib/teams";
 
@@ -254,40 +253,37 @@ export function TeamView({
             </div>
           </div>
           <div className="upcoming-rows">
-            {nextFixtures.map((fixture) => {
-              const confidence = describeConfidence(fixture.probabilities);
-              return (
-                <article key={fixture.matchId} className="upcoming-row">
-                  <div className="upcoming-row-time">{formatKickoff(fixture.kickoffTime)}</div>
-                  <div className="upcoming-row-teams">
-                    <div className="upcoming-row-team">
-                      <TeamCrest name={fixture.homeTeam.name} badgePath={fixture.homeTeam.badgePath} size={26} />
-                      <span>{fixture.homeTeam.shortName}</span>
-                    </div>
-                    <span className="upcoming-row-vs">vs</span>
-                    <div className="upcoming-row-team upcoming-row-team-away">
-                      <span>{fixture.awayTeam.shortName}</span>
-                      <TeamCrest name={fixture.awayTeam.name} badgePath={fixture.awayTeam.badgePath} size={26} />
-                    </div>
+            {nextFixtures.map((fixture) => (
+              <article key={fixture.matchId} className="upcoming-row">
+                <div className="upcoming-row-time">
+                  <LocalTime value={fixture.kickoffTime} />
+                </div>
+                <div className="upcoming-row-teams">
+                  <div className="upcoming-row-team">
+                    <TeamCrest name={fixture.homeTeam.name} badgePath={fixture.homeTeam.badgePath} size={26} />
+                    <span>{fixture.homeTeam.shortName}</span>
                   </div>
-                  <div className="upcoming-row-bar">
-                    <ProbabilityBar
-                      probabilities={fixture.probabilities}
-                      homeShort={fixture.homeTeam.shortName}
-                      awayShort={fixture.awayTeam.shortName}
-                      size="sm"
-                    />
-                    <span className="upcoming-row-lead">
-                      Model:{" "}
-                      {confidence.pick !== null
-                        ? `${confidence.pick === "home" ? fixture.homeTeam.shortName : confidence.pick === "away" ? fixture.awayTeam.shortName : "Draw"} · ${Math.round((confidence.pick === "home" ? fixture.probabilities.homeWin : confidence.pick === "away" ? fixture.probabilities.awayWin : fixture.probabilities.draw) * 100)}%`
-                        : "Too close to call"}{" "}
-                      <ConfidenceBadge confidence={confidence} />
-                    </span>
+                  <span className="upcoming-row-vs">vs</span>
+                  <div className="upcoming-row-team upcoming-row-team-away">
+                    <span>{fixture.awayTeam.shortName}</span>
+                    <TeamCrest name={fixture.awayTeam.name} badgePath={fixture.awayTeam.badgePath} size={26} />
                   </div>
-                </article>
-              );
-            })}
+                </div>
+                <div className="upcoming-row-bar">
+                  <ProbabilityBar
+                    probabilities={fixture.probabilities}
+                    homeShort={fixture.homeTeam.shortName}
+                    awayShort={fixture.awayTeam.shortName}
+                    size="sm"
+                  />
+                  <ModelVerdict
+                    probabilities={fixture.probabilities}
+                    homeShort={fixture.homeTeam.shortName}
+                    awayShort={fixture.awayTeam.shortName}
+                  />
+                </div>
+              </article>
+            ))}
           </div>
         </section>
       ) : null}
