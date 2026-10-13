@@ -1,17 +1,41 @@
-import type { Confidence } from "@/lib/confidence";
+import { describeConfidence, outcomeLabel, type Confidence } from "@/lib/confidence";
+import type { FixtureProbabilities } from "@/lib/dashboard";
 
 const CONFIDENCE_CLASS: Record<Confidence["level"], string> = {
   "strong-favorite": "conf-strong-favorite",
   favorite: "conf-favorite",
   "slight-edge": "conf-slight-edge",
   "too-close": "conf-too-close",
-  "wide-open": "conf-wide-open",
 };
 
 export function ConfidenceBadge({ confidence }: { confidence: Confidence }) {
   return (
     <span className={`conf-badge ${CONFIDENCE_CLASS[confidence.level]}`}>
       {confidence.label}
+    </span>
+  );
+}
+
+/**
+ * The model's call for a fixture, stated once: the pick plus how strongly it
+ * leans ("ARS win · Slight edge"), or just "Too close to call".
+ */
+export function ModelVerdict({
+  probabilities,
+  homeShort,
+  awayShort,
+}: {
+  probabilities: FixtureProbabilities;
+  homeShort: string;
+  awayShort: string;
+}) {
+  const confidence = describeConfidence(probabilities);
+  return (
+    <span className="model-verdict">
+      {confidence.pick !== null ? (
+        <span className="model-verdict-pick">{outcomeLabel(confidence.pick, homeShort, awayShort)}</span>
+      ) : null}
+      <ConfidenceBadge confidence={confidence} />
     </span>
   );
 }

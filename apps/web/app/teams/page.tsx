@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 import { TeamsIndex } from "@/components/teams-index";
 import { loadDashboardResult } from "@/lib/dashboard";
 import { pickQuizCandidates } from "@/lib/quiz";
@@ -42,10 +44,14 @@ export default async function TeamsPage() {
         </div>
         <h1 className="page-title">Pick a club. Read its numbers.</h1>
         <p className="page-lede">
-          Every Premier League club with its season record and how often the model called its matches correctly.
-          Open a club for the full profile: form, Elo trajectory, expected goals, upcoming forecasts, and
-          result-by-result grading. Prefer the classic view? Switch to the table.
+          The league table with how often the model called each club&apos;s matches correctly. Open a club for its
+          form, Elo trajectory, expected goals, upcoming forecasts and result-by-result grading.
         </p>
+        <div className="hero-cta-row">
+          <Link href="/compare" className="cta-secondary">
+            Compare two clubs
+          </Link>
+        </div>
       </header>
 
       <TeamsIndex matches={matches} />

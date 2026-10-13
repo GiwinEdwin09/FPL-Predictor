@@ -6,7 +6,7 @@ import { ProbabilityBar } from "@/components/ui/probability-bar";
 import { describeConfidence } from "@/lib/confidence";
 import type { UpcomingFixture } from "@/lib/dashboard";
 import { fixtureHref } from "@/lib/fixture-link";
-import { formatKickoff } from "@/lib/format";
+import { LocalTime } from "@/components/ui/local-time";
 
 export function FeaturedMatch({ fixture }: { fixture: UpcomingFixture }) {
   const confidence = describeConfidence(fixture.probabilities);
@@ -23,7 +23,7 @@ export function FeaturedMatch({ fixture }: { fixture: UpcomingFixture }) {
       <div className="motw-head">
         <span className="motw-title">Match of the Week</span>
         <span className="motw-meta">
-          Premier League · MW {fixture.gameweek ?? "?"} · {formatKickoff(fixture.kickoffTime)}
+          <LocalTime value={fixture.kickoffTime} withZone />
         </span>
       </div>
 
@@ -52,16 +52,18 @@ export function FeaturedMatch({ fixture }: { fixture: UpcomingFixture }) {
       <div className="motw-verdict">
         {favoredName ? (
           <>
-            <span className="motw-callout">{favoredName} favored</span>
+            <span className="motw-callout">{favoredName} favoured</span>
+            <ConfidenceBadge confidence={confidence} />
+          </>
+        ) : confidence.pick === "draw" ? (
+          <>
+            <span className="motw-callout">Draw favoured</span>
             <ConfidenceBadge confidence={confidence} />
           </>
         ) : (
-          <>
-            <span className="motw-callout" style={{ color: "var(--prob-draw)" }}>
-              {confidence.label}
-            </span>
-            <ConfidenceBadge confidence={confidence} />
-          </>
+          <span className="motw-callout" style={{ color: "var(--prob-draw)" }}>
+            {confidence.label}
+          </span>
         )}
       </div>
 

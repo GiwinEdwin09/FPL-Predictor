@@ -1,8 +1,10 @@
+"use client";
+
 import { PredictionCard } from "@/components/prediction-card";
+import { DayGroups, LocalTime } from "@/components/ui/local-time";
 import { EmptyState } from "@/components/ui/states";
 import { earliestKickoff } from "@/lib/gameweek";
 import type { UpcomingFixture } from "@/lib/dashboard";
-import { formatKickoffWithZone } from "@/lib/format";
 
 export function CurrentGameweekView({
   gameweek,
@@ -31,16 +33,19 @@ export function CurrentGameweekView({
           <h2>Matchweek {gameweek}</h2>
           <p>
             This round has already started, so any available scores are shown alongside the pre-match forecast.
-            {firstKickoff ? ` Round opened ${formatKickoffWithZone(firstKickoff)}.` : ""}
+            {firstKickoff ? (
+              <>
+                {" "}
+                Round opened <LocalTime value={firstKickoff} withZone />.
+              </>
+            ) : null}
           </p>
         </div>
       </div>
 
-      <div className="fixtures-week-scroll">
-        {fixtures.map((fixture) => (
-          <PredictionCard key={fixture.matchId} fixture={fixture} highlighted={fixture.matchId === highlightedMatchId} />
-        ))}
-      </div>
+      <DayGroups fixtures={fixtures}>
+        {(fixture) => <PredictionCard fixture={fixture} highlighted={fixture.matchId === highlightedMatchId} />}
+      </DayGroups>
     </section>
   );
 }

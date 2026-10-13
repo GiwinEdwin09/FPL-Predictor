@@ -1,18 +1,11 @@
 import type { FixtureProbabilities } from "@/lib/dashboard";
 import { modelPick } from "@/lib/quiz";
 
-export type ConfidenceLevel =
-  | "strong-favorite"
-  | "favorite"
-  | "slight-edge"
-  | "too-close"
-  | "wide-open";
+export type ConfidenceLevel = "strong-favorite" | "favorite" | "slight-edge" | "too-close";
 
 export type Confidence = {
   level: ConfidenceLevel;
   label: string;
-  /** Short label used in compact badges. */
-  shortLabel: string;
   /** Outcome the model leans towards, or null when effectively even. */
   pick: "home" | "draw" | "away" | null;
 };
@@ -20,10 +13,8 @@ export type Confidence = {
 /**
  * Human-readable confidence for a 1X2 probability distribution.
  *
- * Uses the full distribution, not just the largest probability:
- * - the gap between the top two outcomes
- * - how tightly packed the three outcomes are (spread)
- * - the draw probability as a balancing force
+ * A pick needs a clear gap over the second outcome; its strength then
+ * comes from the leading probability.
  */
 export function describeConfidence(probabilities: FixtureProbabilities): Confidence {
   const { homeWin, draw, awayWin } = probabilities;
@@ -32,33 +23,22 @@ export function describeConfidence(probabilities: FixtureProbabilities): Confide
   const top = sorted[0];
   const second = sorted[1];
   const gap = top - second;
-  const spread = sorted[0] - sorted[2];
   const pick = modelPick({ probabilities });
 
-  // Very tight distribution: nothing separates the outcomes.
-  if (spread <= 0.12 && gap <= 0.06) {
-    return { level: "wide-open", label: "Wide Open", shortLabel: "Wide Open", pick: null };
-  }
-
-  // Close distribution with a modest leader.
+  // No outcome clearly ahead of the next one.
   if (gap <= 0.09) {
-    return {
-      level: "too-close",
-      label: "Too Close to Call",
-      shortLabel: "Too Close",
-      pick: null,
-    };
+    return { level: "too-close", label: "Too close to call", pick: null };
   }
 
   if (top >= 0.7) {
-    return { level: "strong-favorite", label: "Strong Favorite", shortLabel: "Strong Fav", pick };
+    return { level: "strong-favorite", label: "Strong favourite", pick };
   }
 
   if (top >= 0.55) {
-    return { level: "favorite", label: "Favorite", shortLabel: "Favorite", pick };
+    return { level: "favorite", label: "Favourite", pick };
   }
 
-  return { level: "slight-edge", label: "Slight Edge", shortLabel: "Slight Edge", pick };
+  return { level: "slight-edge", label: "Slight edge", pick };
 }
 
 export function outcomeLabel(
@@ -66,7 +46,7 @@ export function outcomeLabel(
   homeShort: string,
   awayShort: string,
 ): string {
-  if (outcome === "home") return `${homeShort} WIN`;
-  if (outcome === "away") return `${awayShort} WIN`;
-  return "DRAW";
+  if (outcome === "home") return `${homeShort} win`;
+  if (outcome === "away") return `${awayShort} win`;
+  return "Draw";
 }

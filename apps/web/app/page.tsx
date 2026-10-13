@@ -1,17 +1,16 @@
 import Link from "next/link";
 
-import { CompactFixture } from "@/components/compact-fixture";
+import { CompactFixtureList } from "@/components/compact-fixture";
 import { FeaturedMatch } from "@/components/featured-match";
 import { OutcomeRow } from "@/components/outcome-row";
 import { MetricTile } from "@/components/ui/metric-tile";
 import { ErrorState } from "@/components/ui/states";
 import { loadDashboardResult } from "@/lib/dashboard";
 import { formatPercent } from "@/lib/format";
-import { bestCalls, biggestUpsets } from "@/lib/insights";
+import { bestCalls, biggestUpsets, summarizeModel } from "@/lib/insights";
 import { fixturesForGameweek, sortByKickoff, summarizeGameweek } from "@/lib/gameweek";
 import { pickQuizCandidates } from "@/lib/quiz";
 
-const TOTAL_GAMEWEEKS = 38;
 const PREVIEW_FIXTURE_COUNT = 5;
 
 export default async function HomePage() {
@@ -60,13 +59,7 @@ export default async function HomePage() {
   const previewFixtures = sortedFocus.slice(0, PREVIEW_FIXTURE_COUNT);
   const spotlightFixture = sortedFocus[0] ?? null;
 
-  const remainingGameweeks =
-    summary.gameweek !== null
-      ? Math.max(0, TOTAL_GAMEWEEKS - summary.gameweek + (summary.status === "live" ? 0 : 1))
-      : 0;
-
   const matchesAnalysed = dashboard.historicalMatches.length;
-  const accuracyPct = formatPercent(dashboard.model.metrics.accuracy ?? 0, 1);
 
   // Historical insight: the season's boldest correct call next to its biggest miss.
   const gradedMatches = pickQuizCandidates(dashboard.historicalMatches);
@@ -75,15 +68,14 @@ export default async function HomePage() {
     null,
   );
   const seasonMatches = gradedMatches.filter((match) => match.season === latestSeason);
+  // Same season grading as the Model Lab, so both pages quote one accuracy figure.
+  const seasonSummary = summarizeModel(seasonMatches);
+  const seasonLabel = latestSeason?.replace("-", "/") ?? "";
+  const edgePp = (seasonSummary.accuracy - seasonSummary.homeBaseline) * 100;
   const bestCall = bestCalls(seasonMatches, 1)[0] ?? null;
   const biggestMiss = biggestUpsets(seasonMatches, 1)[0] ?? null;
 
-  const heroEyebrow =
-    summary.status === "live"
-      ? `Live · Matchweek ${summary.gameweek}`
-      : summary.status === "upcoming"
-        ? `Next up · Matchweek ${summary.gameweek}`
-        : `Premier League ${dashboard.currentSeason.replace("-", "/")}`;
+  const heroEyebrow = `Premier League ${dashboard.currentSeason.replace("-", "/")}`;
 
   return (
     <div className="page-shell">
@@ -152,34 +144,25 @@ export default async function HomePage() {
       {spotlightFixture ? <FeaturedMatch fixture={spotlightFixture} /> : null}
 
       {/* Season at a glance */}
-      <section className="stat-strip" aria-label="Season at a glance">
-        <MetricTile
-          label={summary.status === "live" ? "Live matchweek" : "Current matchweek"}
-          value={summary.gameweek ?? "—"}
-          hint={
-            summary.status === "live"
-              ? "Round in progress"
-              : summary.status === "upcoming"
-                ? "Up next"
-                : "Season complete"
-          }
-        />
-        <MetricTile
-          label="Fixtures this round"
-          value={summary.fixtureCount}
-          hint={`${remainingGameweeks} matchweek${remainingGameweeks === 1 ? "" : "s"} left of ${TOTAL_GAMEWEEKS}`}
-        />
-        <MetricTile
-          label="Test accuracy"
-          value={accuracyPct}
-          hint={`Across ${dashboard.model.split.validation_rows ?? "—"} held-out test matches`}
-        />
-        <MetricTile
-          label="Matches analysed"
-          value={matchesAnalysed.toLocaleString("en-GB")}
-          hint="Finished matches with full pre-match context"
-        />
-      </section>
+      {seasonSummary.total > 0 ? (
+        <section className="stat-strip stat-strip-3" aria-label="Season at a glance">
+          <MetricTile
+            label={`${seasonLabel} accuracy`}
+            value={formatPercent(seasonSummary.accuracy, 1)}
+            hint={`${seasonSummary.correct} of ${seasonSummary.total} finished matches called correctly`}
+          />
+          <MetricTile
+            label="Vs always picking home"
+            value={`${edgePp >= 0 ? "+" : ""}${edgePp.toFixed(1)} pp`}
+            hint={`Backing the home side every time would score ${formatPercent(seasonSummary.homeBaseline, 1)}`}
+          />
+          <MetricTile
+            label="Matches analysed"
+            value={matchesAnalysed.toLocaleString("en-GB")}
+            hint="Finished matches with full pre-match context"
+          />
+        </section>
+      ) : null}
 
       {/* Matchweek preview */}
       {previewFixtures.length > 0 ? (
@@ -188,8 +171,8 @@ export default async function HomePage() {
             <div>
               <h2>{summary.status === "live" ? "Live now" : "Coming up"} · MW {summary.gameweek}</h2>
               <p>
-                {previewFixtures.length} of {summary.fixtureCount} fixtures shown — every card shows the model&apos;s
-                pick and how confident it is.
+                {previewFixtures.length} of {summary.fixtureCount} fixtures, with the model&apos;s pick and how strongly
+                it leans.
               </p>
             </div>
             <Link href="/predictions" className="section-link">
@@ -200,11 +183,7 @@ export default async function HomePage() {
               </svg>
             </Link>
           </div>
-          <div className="upcoming-rows">
-            {previewFixtures.map((fixture) => (
-              <CompactFixture key={fixture.matchId} fixture={fixture} />
-            ))}
-          </div>
+          <CompactFixtureList fixtures={previewFixtures} />
         </section>
       ) : null}
 
@@ -219,11 +198,6 @@ export default async function HomePage() {
           </p>
         </div>
         <div className="play-teaser-actions">
-          <div className="play-teaser-picks" aria-hidden="true">
-            <span>Home</span>
-            <span>Draw</span>
-            <span>Away</span>
-          </div>
           <Link href="/beat-the-model" className="cta-primary">
             Play today&apos;s five
             <svg className="cta-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -239,7 +213,7 @@ export default async function HomePage() {
         <section className="section">
           <div className="section-head">
             <div>
-              <h2>From the archive · {latestSeason?.replace("-", "/")}</h2>
+              <h2>From the archive · {seasonLabel}</h2>
               <p>The boldest call that landed this season, and the result the model least expected.</p>
             </div>
             <Link href="/model-lab" className="section-link">

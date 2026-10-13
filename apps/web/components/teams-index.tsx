@@ -19,7 +19,6 @@ function ClubBadge({ name, badgePath }: { name: string; badgePath: string | null
 export function TeamsIndex({ matches }: { matches: QuizMatch[] }) {
   const seasons = useMemo(() => matchSeasons(matches), [matches]);
   const [season, setSeason] = useState(seasons[0] ?? "");
-  const [view, setView] = useState<"clubs" | "table">("clubs");
 
   const standings = useMemo(
     () => buildStandings(matches.filter((match) => match.season === season)),
@@ -39,47 +38,12 @@ export function TeamsIndex({ matches }: { matches: QuizMatch[] }) {
             ))}
           </select>
         </label>
-
-        <div className="quiz-mode-toggle" role="group" aria-label="Teams view">
-          <button
-            type="button"
-            className={`quiz-mode-button${view === "clubs" ? " quiz-mode-active" : ""}`}
-            onClick={() => setView("clubs")}
-          >
-            Clubs
-          </button>
-          <button
-            type="button"
-            className={`quiz-mode-button${view === "table" ? " quiz-mode-active" : ""}`}
-            onClick={() => setView("table")}
-          >
-            Table
-          </button>
-        </div>
       </div>
 
       {standings.length === 0 ? (
         <EmptyState title="No graded matches for this season">
           Pick another season to explore club profiles.
         </EmptyState>
-      ) : view === "clubs" ? (
-        <section className="club-grid" aria-label="Club selector">
-          {standings.map((row) => (
-            <Link key={row.team.badgeSlug} href={`/teams/${row.team.badgeSlug}`} className="club-tile">
-              <ClubBadge name={row.team.name} badgePath={row.team.badgePath} />
-              <span className="club-tile-name">{row.team.name}</span>
-              <span className="club-tile-stats">
-                <span>
-                  <strong>{row.points}</strong> Pts
-                </span>
-                <span>
-                  <strong>{row.modelAccuracy === null ? "—" : `${Math.round(row.modelAccuracy * 100)}%`}</strong>{" "}
-                  Model
-                </span>
-              </span>
-            </Link>
-          ))}
-        </section>
       ) : (
         <section className="standings-table-wrap">
           <table className="standings-table">

@@ -48,9 +48,8 @@ export default async function PredictionsPage() {
         </div>
         <h1 className="page-title">Who does the model back this week?</h1>
         <p className="page-lede">
-          Calibrated HOME / DRAW / AWAY probabilities for every Premier League fixture, with the model&apos;s pick,
-          a confidence rating, and the factors behind each call. Open any card to see why — or edit the lineups to
-          simulate a different team sheet.
+          Home, draw and away probabilities for every Premier League fixture, with the model&apos;s pick and how
+          strongly it leans. Open any match to see why, or edit the lineups to try a different team sheet.
         </p>
         <div className="page-meta-row">
           <span>
