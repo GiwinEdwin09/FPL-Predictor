@@ -2,7 +2,7 @@
   "schema_version": 1,
   "model_version": "v3",
   "predictor_type": "blend_v3",
-  "created_at_utc": "2026-10-16T10:02:57.947722+00:00",
+  "created_at_utc": "2026-10-16T20:02:07.571613+00:00",
   "feature_columns": [
     "is_cup_match",
     "is_european_match",
@@ -42,7 +42,7 @@
   "components": {
     "metrics": {
       "path": "model_v3_metrics.json",
-      "sha256": "4b99e313e3025227c182ceb538678f3b3a5228b26ced821ca2f7e506d9c9daec",
+      "sha256": "a8ee1f143dc3562530ff2e514ce69d20a06262e32ccd8928b6af34e6dca0d024",
       "size_bytes": 3281
     },
     "model": {
@@ -52,8 +52,8 @@
     },
     "prediction_features": {
       "path": "../features/match_pre_match_features_v3.csv",
-      "sha256": "5198bffedead37861e8bbf4abb8fd0d3f73bccbc1540e0fdbbe7c0f823a1d9f0",
-      "size_bytes": 515080
+      "sha256": "054c8227c3c4d3946804c152427af55553b8569e21fb8407c91a934a4500b579",
+      "size_bytes": 514882
     },
     "team_keys": {
       "path": "model_v3_team_keys.json",
@@ -62,8 +62,8 @@
     },
     "tree_model": {
       "path": "model_v3_xgboost.json",
-      "sha256": "1120c00e1a407cc11e7febbcc315fadc23ff4bc6bfd958412f51d475194df58d",
-      "size_bytes": 189119
+      "sha256": "175ee39ae001cff9458284692a92d5ff6a0fc4642e9195c0213df3981a40545d",
+      "size_bytes": 189566
     }
   }
 }
