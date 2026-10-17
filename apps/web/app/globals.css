@@ -402,14 +402,7 @@ img {
   margin-top: 0.9rem;
   padding: 0 1rem;
   display: flex;
-  flex-wrap: wrap;
-  align-items: center;
   justify-content: center;
-  gap: 0.6rem;
-}
-
-.mobile-nav-meta:empty {
-  display: none;
 }
 
 @media (max-width: 1080px) {
@@ -4200,27 +4193,54 @@ img[src*="tottenham"] {
 }
 /* Account-owned lineup scenarios */
 .account-nav, .saved-toolbar { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
-.account-nav { gap: .5rem; flex-wrap: nowrap; }
+.account-nav { position: relative; flex-wrap: nowrap; }
 .account-link {
   display: inline-flex; align-items: center; gap: .45rem; min-height: 34px; padding: .42rem .9rem;
   border-radius: var(--radius-pill); border: 1px solid var(--border-strong); background: rgba(255, 255, 255, .05);
-  color: var(--ink); font-size: .8rem; font-weight: 600; letter-spacing: .01em; white-space: nowrap;
+  color: var(--ink); font: inherit; font-size: .8rem; font-weight: 600; letter-spacing: .01em; white-space: nowrap; cursor: pointer;
   transition: background-color var(--speed-fast) ease, border-color var(--speed-fast) ease;
 }
-.account-link:hover { background: rgba(255, 255, 255, .1); border-color: rgba(255, 255, 255, .28); }
-.account-link:focus-visible, .account-signout:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
-.account-link-icon { width: 15px; height: 15px; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; color: var(--accent); }
-.account-link-pending { opacity: .5; }
+.account-link:hover, .account-link[aria-expanded="true"] { background: rgba(255, 255, 255, .1); border-color: rgba(255, 255, 255, .28); }
+.account-link:focus-visible, .account-signout:focus-visible, .account-menu-item:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.account-link-icon { width: 15px; height: 15px; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; color: var(--accent); flex: none; }
+.account-link-label { max-width: 12ch; overflow: hidden; text-overflow: ellipsis; }
+.account-link-chevron { width: 12px; height: 12px; fill: none; stroke: var(--muted); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; transition: transform var(--speed-fast) ease; }
+.account-link[aria-expanded="true"] .account-link-chevron { transform: rotate(180deg); }
+.account-link-pending { opacity: .5; cursor: default; }
 .account-link-pending > * { visibility: hidden; }
-.account-signout {
-  min-height: 34px; padding: .42rem .7rem; border-radius: var(--radius-pill); border: 1px solid transparent;
-  background: transparent; color: var(--muted-strong); cursor: pointer; font: inherit; font-size: .78rem; font-weight: 600; white-space: nowrap;
-  transition: color var(--speed-fast) ease, border-color var(--speed-fast) ease;
+.account-menu {
+  position: absolute; top: calc(100% + .5rem); right: 0; z-index: 60; width: min(260px, calc(100vw - 2rem));
+  display: flex; flex-direction: column; padding: .4rem; border-radius: var(--radius-md);
+  border: 1px solid var(--border-strong); background: var(--surface-2); box-shadow: 0 18px 40px -12px rgba(0, 0, 0, .7);
 }
-.account-signout:hover:not(:disabled) { color: var(--ink); border-color: var(--border-strong); }
-.account-signout:disabled { opacity: .6; cursor: wait; }
+.account-menu-head { display: flex; flex-direction: column; gap: .15rem; padding: .6rem .7rem .7rem; min-width: 0; }
+.account-menu-head strong { font-size: .9rem; color: var(--ink); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.account-menu-head span { font-size: .78rem; color: var(--muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.account-menu-item {
+  display: block; width: 100%; padding: .6rem .7rem; border: 0; border-radius: 8px; background: transparent; text-align: left;
+  color: var(--ink-soft); font: inherit; font-size: .85rem; font-weight: 500; cursor: pointer;
+}
+.account-menu-item:hover:not(:disabled) { background: rgba(255, 255, 255, .06); color: var(--ink); }
+.account-menu-signout { color: var(--danger); }
+.account-menu-signout:hover:not(:disabled) { color: var(--danger); background: var(--danger-soft); }
+.account-menu-divider { height: 1px; margin: .3rem .4rem; background: var(--border); }
+.account-menu .account-note { padding: 0 .7rem .4rem; font-size: .78rem; }
+.account-signout {
+  min-height: 38px; padding: .5rem 1rem; border-radius: var(--radius-pill); border: 1px solid var(--border-strong);
+  background: transparent; color: var(--ink); cursor: pointer; font: inherit; font-size: .85rem; font-weight: 600; white-space: nowrap;
+  transition: background-color var(--speed-fast) ease, border-color var(--speed-fast) ease;
+}
+.account-signout:hover:not(:disabled) { background: rgba(255, 255, 255, .06); border-color: rgba(255, 255, 255, .28); }
+.account-signout:disabled, .account-menu-item:disabled { opacity: .6; cursor: wait; }
 .account-loading, .account-note { color: var(--muted); font-size: .85rem; line-height: 1.6; overflow-wrap: anywhere; }
 .account-page { max-width: 850px; }
+.account-settings { display: grid; }
+.account-details { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .9rem 1.5rem; margin: 0 0 1.4rem; }
+.account-details div { min-width: 0; }
+.account-details dt { color: var(--muted); font-size: .72rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; }
+.account-details dd { margin: .25rem 0 0; color: var(--ink); overflow-wrap: anywhere; }
+.account-actions { display: flex; flex-wrap: wrap; align-items: center; gap: .6rem; }
+.account-card .account-form + .account-note { margin-top: 1rem; }
 .account-card, .save-lineup { padding: clamp(1rem, 3vw, 1.75rem); border: 1px solid var(--border); border-radius: 16px; background: var(--surface); margin-block: 1rem; }
 .account-card h2 { margin: 0 0 .7rem; font-size: 1.2rem; overflow-wrap: anywhere; }
 .account-card p, .save-lineup p { line-height: 1.65; color: var(--muted); margin: .5rem 0 1rem; }
@@ -4237,10 +4257,8 @@ img[src*="tottenham"] {
 .save-lineup button:disabled, .account-form button:disabled { opacity: .55; cursor: wait; }
 @media (max-width: 700px) {
   .saved-lineup-grid { grid-template-columns: 1fr; }
+  .account-details { grid-template-columns: 1fr; }
   .account-link { padding-inline: .75rem; }
-  /* Header only has room for the account pill; sign-out lives in the mobile menu. */
-  .account-nav .account-signout, .account-nav [role="alert"] { display: none; }
-  .mobile-nav-signout { border-color: var(--border-strong); }
   .header-meta .gameweek-chip { display: none; }
   .saved-lineup-card .fixture-action-buttons { flex-wrap: wrap; }
 }

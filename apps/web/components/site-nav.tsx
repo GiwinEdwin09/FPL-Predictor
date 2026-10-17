@@ -3,7 +3,7 @@
 import Link from "next/link";
 
 import { BrandMark } from "@/components/ui/brand-mark";
-import { AccountNav, SignOutButton } from "@/components/account-nav";
+import { AccountNav } from "@/components/account-nav";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -128,10 +128,11 @@ export function SiteNav({ summary }: { summary: GameweekSummary | null }) {
             </li>
           ))}
         </ul>
-        <div className="mobile-nav-meta">
-          {summary ? <GameweekChip summary={summary} /> : null}
-          <SignOutButton className="account-signout mobile-nav-signout" />
-        </div>
+        {summary ? (
+          <div className="mobile-nav-meta">
+            <GameweekChip summary={summary} />
+          </div>
+        ) : null}
       </nav>
     </header>
   );
