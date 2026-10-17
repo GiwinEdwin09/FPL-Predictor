@@ -4,14 +4,16 @@ import Link from "next/link";
 import { useState, type FormEvent } from "react";
 import type { User } from "@supabase/supabase-js";
 import { useAuth } from "@/components/auth-provider";
+import { AccountUnavailable } from "@/components/account-unavailable";
 import { SignOutButton, displayName } from "@/components/account-nav";
 import { browserSupabase } from "@/lib/supabase/client";
 
 const dateFormat: Intl.DateTimeFormatOptions = { day: "numeric", month: "short", year: "numeric" };
 
 export function AccountSettings() {
-  const { user, loading, configured } = useAuth();
+  const { user, loading, configured, unavailable } = useAuth();
   if (loading) return <p role="status">Checking your account…</p>;
+  if (unavailable) return <AccountUnavailable />;
   if (!configured || !user) return <div className="account-card"><h2>{configured ? "You’re not signed in" : "Account saving is being set up"}</h2><p>Sign in to see your account details and saved lineups.</p><Link className="cta-primary" href="/sign-in">Sign in →</Link></div>;
   return <div className="account-settings" key={user.id}>
     <ProfileCard user={user} />

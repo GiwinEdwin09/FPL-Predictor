@@ -3,13 +3,15 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useAuth } from "@/components/auth-provider";
+import { AccountUnavailable } from "@/components/account-unavailable";
 import { CustomizableFutureFixtureCard } from "@/components/customizable-future-fixture-card";
 import type { SavedScenario } from "@/lib/scenarios";
 import type { UpcomingFixture } from "@/lib/dashboard";
 
 export function SavedLineupDetail({ id }: { id: string }) {
-  const { user, loading, configured } = useAuth();
+  const { user, loading, configured, unavailable } = useAuth();
   if (loading) return <p role="status">Checking your account…</p>;
+  if (unavailable) return <AccountUnavailable />;
   if (!configured || !user) return <div className="account-card"><h1>Sign in to open your lineup</h1><p>Only the account that saved this lineup can open it.</p><Link href="/sign-in">Sign in →</Link></div>;
   return <Detail key={`${user.id}:${id}`} id={id} />;
 }

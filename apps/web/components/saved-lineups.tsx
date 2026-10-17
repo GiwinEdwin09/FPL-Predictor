@@ -3,11 +3,13 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useAuth } from "@/components/auth-provider";
+import { AccountUnavailable } from "@/components/account-unavailable";
 import type { SavedScenario } from "@/lib/scenarios";
 
 export function SavedLineups() {
-  const { user, loading, configured } = useAuth();
+  const { user, loading, configured, unavailable } = useAuth();
   if (loading) return <p role="status">Checking your account…</p>;
+  if (unavailable) return <AccountUnavailable />;
   if (!configured || !user) return <div className="account-card"><h2>{configured ? "A place for your own lineups" : "Account saving is being set up"}</h2><p>Sign in to see your saved scenarios. They stay in your account when you sign out.</p><Link className="cta-primary" href="/sign-in">Sign in →</Link></div>;
   return <LineupList key={user.id} email={user.email ?? "your account"} />;
 }
