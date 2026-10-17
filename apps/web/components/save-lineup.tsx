@@ -3,14 +3,16 @@
 import Link from "next/link";
 import { useRef, useState, type FormEvent } from "react";
 import { useAuth } from "@/components/auth-provider";
+import { AccountUnavailable } from "@/components/account-unavailable";
 import type { UpcomingFixture } from "@/lib/dashboard";
 import type { SavedScenario } from "@/lib/scenarios";
 
 type Props = { fixture: UpcomingFixture; homePlayerIds: number[]; awayPlayerIds: number[] };
 
 export function SaveLineup(props: Props) {
-  const { user, loading, configured } = useAuth();
+  const { user, loading, configured, unavailable } = useAuth();
   if (loading) return <p className="account-note">Checking your account…</p>;
+  if (unavailable) return <AccountUnavailable compact />;
   if (!configured) return <p className="account-note">Account saving is being set up. Your current selections are temporary.</p>;
   if (!user) return <div className="save-lineup"><strong>Keep this idea for later.</strong><p>Sign in before building a lineup you want to save across devices.</p><Link href="/sign-in">Sign in to save lineups →</Link></div>;
   return <SaveLineupForm key={user.id} {...props} />;

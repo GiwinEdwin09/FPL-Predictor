@@ -42,9 +42,10 @@ const icon = <svg className="account-link-icon" viewBox="0 0 16 16" aria-hidden=
 </svg>;
 
 export function AccountNav() {
-  const { user, loading } = useAuth();
+  const { user, loading, unavailable } = useAuth();
   // Hidden "Sign in" pill keeps the header from flashing text or shifting while auth resolves.
   if (loading) return <span className="account-link account-link-pending" aria-hidden="true">{icon}<span>Sign in</span></span>;
+  if (unavailable) return <Link className="account-link" href="/account" title="Accounts are temporarily unavailable">{icon}Account</Link>;
   if (!user) return <Link className="account-link" href="/sign-in">{icon}Sign in</Link>;
   return <AccountMenu user={user} />;
 }

@@ -4,9 +4,10 @@ import Link from "next/link";
 import { useEffect, useState, type FormEvent } from "react";
 import { browserSupabase } from "@/lib/supabase/client";
 import { useAuth } from "@/components/auth-provider";
+import { AccountUnavailable } from "@/components/account-unavailable";
 
 export function SignInForm() {
-  const { user, loading, configured } = useAuth();
+  const { user, loading, configured, unavailable } = useAuth();
   const [email, setEmail] = useState("");
   const [sent, setSent] = useState(false);
   const [busy, setBusy] = useState(false);
@@ -31,6 +32,7 @@ export function SignInForm() {
   }
   if (!configured) return <div className="account-card"><h2>Account saving is being set up</h2><p>Sign-in will be available when the account service is connected. You can still explore forecasts and try lineups.</p><Link href="/predictions">Explore predictions →</Link></div>;
   if (loading) return <p role="status">Checking your account…</p>;
+  if (unavailable) return <AccountUnavailable />;
   if (user) return <div className="account-card"><h2>You’re signed in</h2><p>{user.email}</p><div className="account-actions"><Link className="cta-primary" href="/my-lineups">Open my lineups →</Link><Link className="account-signout" href="/account">Account settings</Link></div></div>;
   return <form className="account-card account-form" onSubmit={submit}>
     <h2>{sent ? "Check your inbox" : "Sign in with your email"}</h2>
