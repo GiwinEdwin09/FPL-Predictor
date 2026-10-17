@@ -31,7 +31,7 @@ export function SignInForm() {
   }
   if (!configured) return <div className="account-card"><h2>Account saving is being set up</h2><p>Sign-in will be available when the account service is connected. You can still explore forecasts and try lineups.</p><Link href="/predictions">Explore predictions →</Link></div>;
   if (loading) return <p role="status">Checking your account…</p>;
-  if (user) return <div className="account-card"><h2>You’re signed in</h2><p>{user.email}</p><Link className="cta-primary" href="/my-lineups">Open my lineups →</Link></div>;
+  if (user) return <div className="account-card"><h2>You’re signed in</h2><p>{user.email}</p><div className="account-actions"><Link className="cta-primary" href="/my-lineups">Open my lineups →</Link><Link className="account-signout" href="/account">Account settings</Link></div></div>;
   return <form className="account-card account-form" onSubmit={submit}>
     <h2>{sent ? "Check your inbox" : "Sign in with your email"}</h2>
     <p>{sent ? "Open the link in your email in this browser to finish signing in. Your first sign-in creates your account." : "We’ll email you a secure sign-in link. No password to remember. New here? Your first sign-in creates your account."}</p>
