@@ -402,7 +402,14 @@ img {
   margin-top: 0.9rem;
   padding: 0 1rem;
   display: flex;
+  flex-wrap: wrap;
+  align-items: center;
   justify-content: center;
+  gap: 0.6rem;
+}
+
+.mobile-nav-meta:empty {
+  display: none;
 }
 
 @media (max-width: 1080px) {
@@ -4193,8 +4200,25 @@ img[src*="tottenham"] {
 }
 /* Account-owned lineup scenarios */
 .account-nav, .saved-toolbar { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
-.account-link { white-space: nowrap; font-weight: 600; color: var(--ink); }
-.account-signout { background: transparent; border: 0; color: var(--muted); cursor: pointer; font: inherit; font-size: .8rem; }
+.account-nav { gap: .5rem; flex-wrap: nowrap; }
+.account-link {
+  display: inline-flex; align-items: center; gap: .45rem; min-height: 34px; padding: .42rem .9rem;
+  border-radius: var(--radius-pill); border: 1px solid var(--border-strong); background: rgba(255, 255, 255, .05);
+  color: var(--ink); font-size: .8rem; font-weight: 600; letter-spacing: .01em; white-space: nowrap;
+  transition: background-color var(--speed-fast) ease, border-color var(--speed-fast) ease;
+}
+.account-link:hover { background: rgba(255, 255, 255, .1); border-color: rgba(255, 255, 255, .28); }
+.account-link:focus-visible, .account-signout:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.account-link-icon { width: 15px; height: 15px; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; color: var(--accent); }
+.account-link-pending { opacity: .5; }
+.account-link-pending > * { visibility: hidden; }
+.account-signout {
+  min-height: 34px; padding: .42rem .7rem; border-radius: var(--radius-pill); border: 1px solid transparent;
+  background: transparent; color: var(--muted-strong); cursor: pointer; font: inherit; font-size: .78rem; font-weight: 600; white-space: nowrap;
+  transition: color var(--speed-fast) ease, border-color var(--speed-fast) ease;
+}
+.account-signout:hover:not(:disabled) { color: var(--ink); border-color: var(--border-strong); }
+.account-signout:disabled { opacity: .6; cursor: wait; }
 .account-loading, .account-note { color: var(--muted); font-size: .85rem; line-height: 1.6; overflow-wrap: anywhere; }
 .account-page { max-width: 850px; }
 .account-card, .save-lineup { padding: clamp(1rem, 3vw, 1.75rem); border: 1px solid var(--border); border-radius: 16px; background: var(--surface); margin-block: 1rem; }
@@ -4213,8 +4237,10 @@ img[src*="tottenham"] {
 .save-lineup button:disabled, .account-form button:disabled { opacity: .55; cursor: wait; }
 @media (max-width: 700px) {
   .saved-lineup-grid { grid-template-columns: 1fr; }
-  .account-nav { gap: .55rem; }
-  .account-link { font-size: .8rem; }
+  .account-link { padding-inline: .75rem; }
+  /* Header only has room for the account pill; sign-out lives in the mobile menu. */
+  .account-nav .account-signout, .account-nav [role="alert"] { display: none; }
+  .mobile-nav-signout { border-color: var(--border-strong); }
   .header-meta .gameweek-chip { display: none; }
   .saved-lineup-card .fixture-action-buttons { flex-wrap: wrap; }
 }
