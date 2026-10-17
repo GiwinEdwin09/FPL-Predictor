@@ -1,0 +1,58 @@
+name: Keep Supabase Active
+
+# Supabase pauses Free Plan projects that show too little user database activity
+# over a 7-day window. Its docs say a few requests to the database each day is
+# typically enough to prevent that, so this runs a small Data API (PostgREST) read
+# twice a day. A paused project stops resolving, which hangs sign-in and saved
+# lineups until it is restored by hand from the dashboard.
+#
+# The request uses the publishable key, so it runs as the anon role. Anon has no
+# grants on lineup_scenarios, so Postgres answers "permission denied" (42501). That
+# error comes from the database itself, so the query still counts as activity. Any
+# other response fails the run, which emails the repository owner. A 540 means the
+# project is already paused.
+
+on:
+  schedule:
+    - cron: "17 7,19 * * *"
+  workflow_dispatch:
+
+permissions: {}
+
+concurrency:
+  group: keep-supabase-active
+  cancel-in-progress: true
+
+jobs:
+  query:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Query the Data API
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_PUBLISHABLE_KEY: ${{ secrets.SUPABASE_PUBLISHABLE_KEY }}
+        run: |
+          set -euo pipefail
+          if [ -z "$SUPABASE_URL" ] || [ -z "$SUPABASE_PUBLISHABLE_KEY" ]; then
+            echo "::error::Add the SUPABASE_URL and SUPABASE_PUBLISHABLE_KEY repository secrets."
+            exit 1
+          fi
+
+          status=$(curl --silent --show-error --output body.json \
+            --max-time 60 --retry 2 --retry-delay 10 --retry-all-errors \
+            --write-out "%{http_code}" \
+            --header "apikey: $SUPABASE_PUBLISHABLE_KEY" \
+            "${SUPABASE_URL%/}/rest/v1/lineup_scenarios?select=id&limit=1")
+          code=$(jq -r '.code? // empty' body.json 2>/dev/null || true)
+          echo "status=$status code=${code:-none}"
+
+          case "$status" in
+            2??) exit 0 ;;
+            401 | 403) [ "$code" = "42501" ] && exit 0 ;;
+            540) echo "::error::The Supabase project is paused. Restore it from the dashboard." ;;
+          esac
+          echo "::error::Unexpected Data API response (HTTP $status)."
+          cat body.json
+          exit 1
