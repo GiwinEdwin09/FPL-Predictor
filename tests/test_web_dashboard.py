@@ -79,6 +79,38 @@ def test_team_lookup_resolves_promoted_team_badges(tmp_path: Path) -> None:
     assert lookup[("2026-2027", 88)]["badgePath"] == "/teams/hull-city.football-logos.cc.png"
 
 
+def test_team_lookup_uses_one_name_per_club_across_seasons(tmp_path: Path) -> None:
+    seasons = {
+        "2024-2025": [
+            {"code": 40, "name": "Ipswich", "short_name": "IPS", "fotmob_name": np.nan},
+            {"code": 43, "name": "Man City", "short_name": "MCI", "fotmob_name": np.nan},
+        ],
+        "2025-2026": [
+            {"code": 21, "name": "West Ham", "short_name": "WHU", "fotmob_name": "West Ham United"},
+            {"code": 43, "name": "Man City", "short_name": "MCI", "fotmob_name": "Manchester City"},
+        ],
+        "2026-2027": [
+            {"code": 40, "name": "Ipswich Town", "short_name": "IPS", "fotmob_name": np.nan},
+            {"code": 43, "name": "Man City", "short_name": "MCI", "fotmob_name": np.nan},
+        ],
+    }
+    for season, rows in seasons.items():
+        season_dir = tmp_path / "raw" / season
+        season_dir.mkdir(parents=True)
+        pd.DataFrame(rows).to_csv(season_dir / "teams.csv", index=False)
+
+    lookup = load_team_lookup(tmp_path)
+
+    for season in seasons:
+        assert lookup[(season, 43)]["name"] == "Man City"
+        assert lookup[(season, 43)]["shortName"] == "MCI"
+    assert lookup[("2024-2025", 40)]["name"] == "Ipswich Town"
+    assert lookup[("2026-2027", 40)]["name"] == "Ipswich Town"
+    assert lookup[("2024-2025", 40)]["badgeSlug"] == "ipswich"
+    assert lookup[("2025-2026", 21)]["name"] == "West Ham"
+    assert lookup[("2025-2026", 21)]["badgeSlug"] == "west-ham"
+
+
 def test_historical_uses_locked_ledger_instead_of_rescoring() -> None:
     matches = pd.DataFrame(
         [
