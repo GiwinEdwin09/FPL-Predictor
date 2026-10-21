@@ -18,7 +18,7 @@ export function CurrentGameweekView({
   if (gameweek === null || fixtures.length === 0) {
     return (
       <EmptyState title="No matchweek in progress">
-        There is no active Premier League round right now. Check the future predictions tab for upcoming fixtures.
+        There is no active Premier League round right now. Check the Upcoming tab for future fixtures.
       </EmptyState>
     );
   }

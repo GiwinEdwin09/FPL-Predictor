@@ -33,8 +33,19 @@ function formatDateTime(
   return new Intl.DateTimeFormat("en-GB", options).format(date);
 }
 
+/** e.g. "Fri 23 Oct, 20:00". */
 export function formatKickoff(kickoffTime: string | null | undefined, timeZone = DEFAULT_TIME_ZONE): string {
-  return formatDateTime(kickoffTime, { ...KICKOFF_FORMAT, timeZone }, "Kickoff TBC");
+  if (!kickoffTime) return "Kickoff TBC";
+  const date = new Date(kickoffTime);
+  if (Number.isNaN(date.getTime())) return "Kickoff TBC";
+  // Assembled from parts: Node and browsers ship different CLDR patterns for this combination
+  // ("Fri 23 Oct, 20:00" vs "Fri, 23 Oct, 20:00"), and any difference breaks hydration.
+  const parts = Object.fromEntries(
+    new Intl.DateTimeFormat("en-GB", { ...KICKOFF_FORMAT, timeZone })
+      .formatToParts(date)
+      .map((part) => [part.type, part.value]),
+  );
+  return `${parts.weekday} ${parts.day} ${parts.month}, ${parts.hour}:${parts.minute}`;
 }
 
 export function formatKickoffTime(kickoffTime: string | null | undefined, timeZone = DEFAULT_TIME_ZONE): string {
@@ -64,8 +75,9 @@ export function timeZoneLabel(kickoffTime: string | null | undefined, timeZone =
   return part?.value ?? "";
 }
 
-export function formatMatchDate(kickoffTime: string | null | undefined): string {
-  return formatDateTime(kickoffTime, DATE_FORMAT, "Date pending");
+/** Match day in UK time, so server and browser agree whatever the viewer's zone. */
+export function formatMatchDate(kickoffTime: string | null | undefined, options: Intl.DateTimeFormatOptions = DATE_FORMAT): string {
+  return formatDateTime(kickoffTime, { ...options, timeZone: DEFAULT_TIME_ZONE }, "Date pending");
 }
 
 export function formatMetric(value: number | null | undefined, digits = 2): string {
