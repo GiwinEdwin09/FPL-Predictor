@@ -172,7 +172,7 @@ function LineupControls({
       <div className="lineup-controls-header">
         <div>
           <p className="eyebrow">{team.team.name}</p>
-          <h3>Customize XI</h3>
+          <h3>Customise XI</h3>
         </div>
         <span className="lineup-controls-note">Swap in any player from the current roster snapshot.</span>
       </div>

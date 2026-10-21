@@ -47,6 +47,9 @@ export function PredictionCard({
 
   const probabilities = probabilitiesOverride ?? fixture.probabilities;
   const { homeTeam, awayTeam } = fixture;
+  // Finished matches in the current matchweek show their result beside the pre-match forecast.
+  const { home: homeGoals, away: awayGoals } = fixture.score;
+  const hasResult = fixture.finished && homeGoals !== null && awayGoals !== null;
 
   return (
     <article
@@ -56,7 +59,7 @@ export function PredictionCard({
     >
       <div className="fixture-row-summary">
         <span className="fixture-row-time">
-          <LocalTime value={fixture.kickoffTime} variant="time" />
+          {hasResult ? "FT" : <LocalTime value={fixture.kickoffTime} variant="time" />}
         </span>
 
         <span className="fixture-row-teams">
@@ -64,9 +67,17 @@ export function PredictionCard({
             <TeamCrest name={homeTeam.name} badgePath={homeTeam.badgePath} size={28} />
             <span className="fixture-row-name">{homeTeam.name}</span>
           </span>
-          <span className="fixture-row-vs" aria-hidden="true">
-            vs
-          </span>
+          {hasResult ? (
+            <span className="history-row-score">
+              {homeGoals}
+              <span aria-hidden="true">–</span>
+              {awayGoals}
+            </span>
+          ) : (
+            <span className="fixture-row-vs" aria-hidden="true">
+              vs
+            </span>
+          )}
           <span className="fixture-row-team fixture-row-team-away">
             <span className="fixture-row-name">{awayTeam.name}</span>
             <TeamCrest name={awayTeam.name} badgePath={awayTeam.badgePath} size={28} />

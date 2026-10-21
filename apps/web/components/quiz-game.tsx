@@ -1,6 +1,6 @@
 "use client";
 
-import { formatPercent } from "@/lib/format";
+import { formatMatchDate, formatPercent } from "@/lib/format";
 
 import Image from "next/image";
 import { useEffect, useMemo, useState } from "react";
@@ -35,12 +35,7 @@ const DAILY_STORAGE_KEY = "fpl-predictor-quiz-daily-v1";
 const PROGRESS_STORAGE_KEY = "fpl-predictor-quiz-progress-v1";
 
 function formatKickoff(kickoffTime: string) {
-  return new Intl.DateTimeFormat("en-GB", {
-    weekday: "short",
-    day: "numeric",
-    month: "short",
-    year: "numeric",
-  }).format(new Date(kickoffTime));
+  return formatMatchDate(kickoffTime, { weekday: "short", day: "numeric", month: "short", year: "numeric" });
 }
 
 function outcomeLabel(outcome: QuizOutcome, match: QuizMatch) {
@@ -366,14 +361,14 @@ export function QuizGame({ candidates, daily: initialDaily }: { candidates: Quiz
                   : "The model edged you today. Come back tomorrow for a rematch."}
             </p>
             <button className="quiz-next-button" onClick={startPractice}>
-              Keep practicing
+              Keep practising
             </button>
           </article>
         ) : currentMatch ? (
           <article className="quiz-card">
             <div className="quiz-card-topline">
               <span className="fixture-card-gw">
-                MW {currentMatch.gameweek ?? "TBD"} · {currentMatch.season}
+                MW {currentMatch.gameweek ?? "TBD"} · {currentMatch.season.replace("-", "/")}
               </span>
               <span className="fixture-card-time">
                 {mode === "daily" ? `Match ${dailyIndex + 1} of ${daily.length} · ` : ""}
@@ -426,7 +421,13 @@ export function QuizGame({ candidates, daily: initialDaily }: { candidates: Quiz
                 </div>
                 <p className={userCorrect ? "quiz-verdict quiz-verdict-good" : "quiz-verdict quiz-verdict-miss"}>
                   {userCorrect ? "You called it." : "Not this time."}{" "}
-                  {modelCorrect ? "The model got it right too." : "The model missed this one as well."}
+                  {modelCorrect
+                    ? userCorrect
+                      ? "The model got it right too."
+                      : "The model got it right."
+                    : userCorrect
+                      ? "The model missed it."
+                      : "The model missed this one as well."}
                 </p>
 
                 <div className="probability-list quiz-model-bars">

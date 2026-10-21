@@ -315,7 +315,7 @@ export function CompareExplorer({
             <div className="section-head">
               <div>
                 <h2>Recent meetings</h2>
-                <p>Latest first, with the model&apos;s pre-match favorite and whether it landed.</p>
+                <p>Latest first, with the model&apos;s pre-match favourite and whether it landed.</p>
                 <p className="model-dot-legend">
                   <span>
                     <span className="model-dot model-dot-hit" aria-hidden="true" /> Model called it

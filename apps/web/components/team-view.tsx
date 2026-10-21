@@ -9,14 +9,12 @@ import { TeamCrest } from "@/components/ui/crest";
 import { LocalTime } from "@/components/ui/local-time";
 import { ProbabilityBar } from "@/components/ui/probability-bar";
 import type { TeamSummary, UpcomingFixture } from "@/lib/dashboard";
+import { formatMatchDate } from "@/lib/format";
 import type { QuizMatch } from "@/lib/quiz";
 import { buildTeamTrend, summarizeTeam, type TeamTrendPoint } from "@/lib/teams";
 
 function formatDate(kickoffTime: string | null) {
-  if (!kickoffTime) {
-    return "Date pending";
-  }
-  return new Intl.DateTimeFormat("en-GB", { day: "numeric", month: "short" }).format(new Date(kickoffTime));
+  return formatMatchDate(kickoffTime, { day: "numeric", month: "short" });
 }
 
 type LinePoint = { x: number; y: number; value: number };
@@ -90,9 +88,7 @@ function TrendChart({
               ) : null}
               {points.map((point, index) => (
                 <circle key={index} cx={point.x} cy={point.y} r={2.6} fill={entry.tone}>
-                  <title>
-                    {entry.label}: {formatValue(point.value)}
-                  </title>
+                  <title>{`${entry.label}: ${formatValue(point.value)}`}</title>
                 </circle>
               ))}
             </g>
@@ -202,7 +198,7 @@ export function TeamView({
           <select value={season} onChange={(event) => setSeason(event.target.value)}>
             {availableSeasons.map((value) => (
               <option key={value} value={value}>
-                {value}
+                {value.replace("-", "/")}
               </option>
             ))}
           </select>
@@ -314,7 +310,7 @@ export function TeamView({
           <div>
             <h2>Results</h2>
             <p>
-              Every league match in {season}, latest first. The dot marks whether the model called the result.
+              Every league match in {season.replace("-", "/")}, latest first. The dot marks whether the model called the result.
             </p>
           </div>
         </div>
