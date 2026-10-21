@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useMemo, useState } from "react";
 
+import { ReplayNote } from "@/components/ui/replay-note";
 import { EmptyState } from "@/components/ui/states";
 import type { QuizMatch } from "@/lib/quiz";
 import { buildStandings } from "@/lib/teams";
@@ -16,14 +17,12 @@ function ClubBadge({ name, badgePath }: { name: string; badgePath: string | null
   return <Image src={badgePath} alt="" width={34} height={34} className="team-badge-image" aria-hidden="true" />;
 }
 
-export function TeamsIndex({ matches }: { matches: QuizMatch[] }) {
+export function TeamsIndex({ matches, trainingCutoffUtc }: { matches: QuizMatch[]; trainingCutoffUtc: string }) {
   const seasons = useMemo(() => matchSeasons(matches), [matches]);
   const [season, setSeason] = useState(seasons[0] ?? "");
 
-  const standings = useMemo(
-    () => buildStandings(matches.filter((match) => match.season === season)),
-    [matches, season],
-  );
+  const seasonMatches = useMemo(() => matches.filter((match) => match.season === season), [matches, season]);
+  const standings = useMemo(() => buildStandings(seasonMatches), [seasonMatches]);
 
   return (
     <div className="insights-stack">
@@ -38,6 +37,7 @@ export function TeamsIndex({ matches }: { matches: QuizMatch[] }) {
             ))}
           </select>
         </label>
+        <ReplayNote season={season} matches={seasonMatches} trainingCutoffUtc={trainingCutoffUtc} />
       </div>
 
       {standings.length === 0 ? (

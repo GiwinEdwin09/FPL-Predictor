@@ -54,7 +54,7 @@ export default async function TeamsPage() {
         </div>
       </header>
 
-      <TeamsIndex matches={matches} />
+      <TeamsIndex matches={matches} trainingCutoffUtc={result.data.model.split.validation_cutoff_utc} />
     </div>
   );
 }

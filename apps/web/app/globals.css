@@ -3023,6 +3023,16 @@ img[src*="tottenham"] {
   color: var(--ink);
 }
 
+.history-controls .replay-note {
+  flex: 1 1 100%;
+}
+
+.replay-note a {
+  color: var(--ink);
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+
 .chart-frame {
   background: linear-gradient(180deg, var(--surface-2), var(--surface));
   border: 1px solid var(--border);

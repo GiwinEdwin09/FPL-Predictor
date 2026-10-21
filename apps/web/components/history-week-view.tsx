@@ -7,6 +7,7 @@ import { ResultBadge } from "@/components/ui/badges";
 import { DayGroups } from "@/components/ui/local-time";
 import { TeamCrest } from "@/components/ui/crest";
 import { ProbabilityBar } from "@/components/ui/probability-bar";
+import { ReplayNote } from "@/components/ui/replay-note";
 import { EmptyState } from "@/components/ui/states";
 import type { HistoricalMatch } from "@/lib/dashboard";
 import { modelPick, outcomeProbability, resolveOutcome } from "@/lib/quiz";
@@ -15,6 +16,7 @@ import { formatPercent } from "@/lib/format";
 
 type HistoryWeekViewProps = {
   matches: HistoricalMatch[];
+  trainingCutoffUtc: string;
 };
 
 type Verdict = "correct" | "incorrect" | "upset";
@@ -36,14 +38,12 @@ function verdictFor(match: HistoricalMatch): Verdict | null {
   return actualProbability <= UPSET_PROBABILITY_THRESHOLD ? "upset" : "incorrect";
 }
 
-export function HistoryWeekView({ matches }: HistoryWeekViewProps) {
+export function HistoryWeekView({ matches, trainingCutoffUtc }: HistoryWeekViewProps) {
   const seasons = useMemo(() => matchSeasons(matches), [matches]);
   const [season, setSeason] = useState(seasons[0] ?? "");
 
-  const groups = useMemo(
-    () => groupByGameweek(matches.filter((match) => match.season === season)),
-    [matches, season],
-  );
+  const seasonMatches = useMemo(() => matches.filter((match) => match.season === season), [matches, season]);
+  const groups = useMemo(() => groupByGameweek(seasonMatches), [seasonMatches]);
 
   const gameweeks = useMemo(() => Array.from(groups.keys()).sort((left, right) => left - right), [groups]);
   // null = latest finished matchweek, so the page opens on what just happened.
@@ -74,6 +74,7 @@ export function HistoryWeekView({ matches }: HistoryWeekViewProps) {
             ))}
           </select>
         </label>
+        <ReplayNote season={season} matches={seasonMatches} trainingCutoffUtc={trainingCutoffUtc} />
       </div>
 
       {gameweek === undefined ? (

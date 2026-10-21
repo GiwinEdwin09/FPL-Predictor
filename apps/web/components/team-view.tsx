@@ -8,6 +8,7 @@ import { ModelVerdict } from "@/components/ui/badges";
 import { TeamCrest } from "@/components/ui/crest";
 import { LocalTime } from "@/components/ui/local-time";
 import { ProbabilityBar } from "@/components/ui/probability-bar";
+import { ReplayNote } from "@/components/ui/replay-note";
 import type { TeamSummary, UpcomingFixture } from "@/lib/dashboard";
 import { formatMatchDate } from "@/lib/format";
 import type { QuizMatch } from "@/lib/quiz";
@@ -129,10 +130,12 @@ export function TeamView({
   team,
   matches,
   upcomingFixtures,
+  trainingCutoffUtc,
 }: {
   team: TeamSummary;
   matches: QuizMatch[];
   upcomingFixtures: UpcomingFixture[];
+  trainingCutoffUtc: string;
 }) {
   const seasons = useMemo(() => matchSeasons(matches), [matches]);
   const availableSeasons = useMemo(
@@ -204,6 +207,8 @@ export function TeamView({
           </select>
         </label>
       </div>
+
+      <ReplayNote season={season} matches={seasonMatches} trainingCutoffUtc={trainingCutoffUtc} />
 
       <section className="stat-strip" aria-label="Season summary">
         <article className="stat-tile">

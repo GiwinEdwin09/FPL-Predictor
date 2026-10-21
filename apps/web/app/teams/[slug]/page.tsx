@@ -43,7 +43,12 @@ export default async function TeamPage({ params }: { params: Promise<{ slug: str
           ← All teams
         </Link>
       </nav>
-      <TeamView team={team} matches={matches} upcomingFixtures={result.data.upcomingFixtures} />
+      <TeamView
+        team={team}
+        matches={matches}
+        upcomingFixtures={result.data.upcomingFixtures}
+        trainingCutoffUtc={result.data.model.split.validation_cutoff_utc}
+      />
     </div>
   );
 }
