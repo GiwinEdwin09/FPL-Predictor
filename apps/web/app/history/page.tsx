@@ -55,7 +55,8 @@ export default async function HistoryPage() {
         <h1 className="page-title">Was the model right?</h1>
         <p className="page-lede">
           Every finished match graded against its stored pre-match forecast — correct calls, misses, and outright
-          upsets, with the xG, shots and possession behind each result.
+          upsets, with the xG, shots and possession behind each result. Seasons the model was trained on are flagged
+          as retrospective replays.
         </p>
         <div className="page-meta-row">
           <span>
@@ -68,7 +69,10 @@ export default async function HistoryPage() {
         </div>
       </header>
 
-      <HistoryWeekView matches={dashboard.historicalMatches} />
+      <HistoryWeekView
+        matches={dashboard.historicalMatches}
+        trainingCutoffUtc={dashboard.model.split.validation_cutoff_utc}
+      />
     </div>
   );
 }
