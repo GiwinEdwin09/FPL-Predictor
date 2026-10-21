@@ -37,7 +37,7 @@ export function TeamsIndex({ matches, trainingCutoffUtc }: { matches: QuizMatch[
             ))}
           </select>
         </label>
-        <ReplayNote season={season} matches={seasonMatches} trainingCutoffUtc={trainingCutoffUtc} />
+        <ReplayNote matches={seasonMatches} trainingCutoffUtc={trainingCutoffUtc} />
       </div>
 
       {standings.length === 0 ? (

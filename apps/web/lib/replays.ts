@@ -1,6 +1,6 @@
 import type { HistoricalMatch } from "@/lib/dashboard";
 
-type ForecastedMatch = Pick<HistoricalMatch, "kickoffTime" | "predictionType" | "probabilities">;
+type ForecastedMatch = Pick<HistoricalMatch, "season" | "kickoffTime" | "predictionType" | "probabilities">;
 
 /**
  * True when a forecast is a replay of a match the model trained on. Replays are scored after the
@@ -16,11 +16,16 @@ export function isInSampleReplay(match: ForecastedMatch, trainingCutoffUtc: stri
   return kickoff < cutoff;
 }
 
-/** How many of the matches carry a forecast, and how many of those are in-sample replays. */
+/**
+ * The seasons holding in-sample replays, how many of the matches in those seasons carry a forecast,
+ * and how many of those forecasts are in-sample replays.
+ */
 export function replayCoverage(matches: ForecastedMatch[], trainingCutoffUtc: string) {
-  const graded = matches.filter((match) => match.probabilities !== null);
+  const inSample = matches.filter((match) => isInSampleReplay(match, trainingCutoffUtc));
+  const seasons = Array.from(new Set(inSample.map((match) => match.season))).sort();
   return {
-    graded: graded.length,
-    inSample: graded.filter((match) => isInSampleReplay(match, trainingCutoffUtc)).length,
+    seasons,
+    graded: matches.filter((match) => match.probabilities !== null && seasons.includes(match.season)).length,
+    inSample: inSample.length,
   };
 }

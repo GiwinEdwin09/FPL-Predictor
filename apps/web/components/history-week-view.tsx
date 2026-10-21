@@ -74,7 +74,7 @@ export function HistoryWeekView({ matches, trainingCutoffUtc }: HistoryWeekViewP
             ))}
           </select>
         </label>
-        <ReplayNote season={season} matches={seasonMatches} trainingCutoffUtc={trainingCutoffUtc} />
+        <ReplayNote matches={seasonMatches} trainingCutoffUtc={trainingCutoffUtc} />
       </div>
 
       {gameweek === undefined ? (

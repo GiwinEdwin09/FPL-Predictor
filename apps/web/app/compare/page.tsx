@@ -61,7 +61,12 @@ export default async function ComparePage() {
         </p>
       </header>
 
-      <CompareExplorer matches={matches} teams={teams} currentElo={currentElo} />
+      <CompareExplorer
+        matches={matches}
+        teams={teams}
+        currentElo={currentElo}
+        trainingCutoffUtc={result.data.model.split.validation_cutoff_utc}
+      />
     </div>
   );
 }

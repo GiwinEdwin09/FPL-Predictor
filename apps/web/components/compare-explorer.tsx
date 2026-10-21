@@ -7,6 +7,7 @@ import Link from "next/link";
 import { useMemo, useState } from "react";
 
 import { TeamCrest } from "@/components/ui/crest";
+import { ReplayNote } from "@/components/ui/replay-note";
 import { EmptyState } from "@/components/ui/states";
 import type { TeamSummary } from "@/lib/dashboard";
 import { modelPick, resolveOutcome, type QuizMatch } from "@/lib/quiz";
@@ -67,11 +68,13 @@ export function CompareExplorer({
   matches,
   teams,
   currentElo = {},
+  trainingCutoffUtc,
 }: {
   matches: QuizMatch[];
   teams: TeamSummary[];
   /** Current rating per club slug, from each club's next fixture. */
   currentElo?: Record<string, number>;
+  trainingCutoffUtc: string;
 }) {
   const [slugA, setSlugA] = useState(teams[0]?.badgeSlug ?? "");
   const [slugB, setSlugB] = useState(teams[1]?.badgeSlug ?? "");
@@ -101,6 +104,20 @@ export function CompareExplorer({
     () => (comparisonSeason && seasonMatches.length > 0 ? summarizeTeam(seasonMatches, slugB) : null),
     [comparisonSeason, seasonMatches, slugB],
   );
+
+  // Every forecast the page grades: each club's matches behind its hit rate, plus the meetings.
+  const gradedMatches = useMemo(() => {
+    const byId = new Map<string, QuizMatch>();
+    for (const match of seasonMatches) {
+      if ([slugA, slugB].includes(match.homeTeam.badgeSlug) || [slugA, slugB].includes(match.awayTeam.badgeSlug)) {
+        byId.set(match.matchId, match);
+      }
+    }
+    for (const { match } of summary.meetings) {
+      byId.set(match.matchId, match);
+    }
+    return Array.from(byId.values());
+  }, [seasonMatches, summary.meetings, slugA, slugB]);
 
   const latestElo = (slug: string): number | null => {
     const trend = buildTeamTrend(seasonMatches.length > 0 ? seasonMatches : matches, slug);
@@ -156,7 +173,9 @@ export function CompareExplorer({
     {
       key: "hit",
       label: "Model hit rate",
-      sub: "share of their matches called correctly",
+      sub: comparisonSeason
+        ? `share of their ${comparisonSeason.replace("-", "/")} matches called correctly`
+        : "share of their matches called correctly",
       valueA: statsA?.modelAccuracy ?? null,
       valueB: statsB?.modelAccuracy ?? null,
       higherBetter: true,
@@ -180,6 +199,8 @@ export function CompareExplorer({
         </button>
         <TeamPicker label="Club B" teams={teams} value={slugB} exclude={slugA} onChange={setSlugB} />
       </div>
+
+      <ReplayNote matches={gradedMatches} trainingCutoffUtc={trainingCutoffUtc} />
 
       {/* Arena header */}
       <section className="cmp-hero" aria-label="Head-to-head arena">

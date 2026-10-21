@@ -208,7 +208,7 @@ export function TeamView({
         </label>
       </div>
 
-      <ReplayNote season={season} matches={seasonMatches} trainingCutoffUtc={trainingCutoffUtc} />
+      <ReplayNote matches={seasonMatches} trainingCutoffUtc={trainingCutoffUtc} />
 
       <section className="stat-strip" aria-label="Season summary">
         <article className="stat-tile">
