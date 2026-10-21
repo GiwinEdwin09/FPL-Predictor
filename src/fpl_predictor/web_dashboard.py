@@ -124,8 +124,17 @@ def coerce_float(value: Any, digits: int = 2) -> float | None:
     return round(float(value), digits)
 
 
+def resolve_badge_slug(*names: Any) -> str:
+    for name in names:
+        badge_slug = BADGE_ALIASES.get(normalize_team_name(name))
+        if badge_slug is not None:
+            return badge_slug
+    return DEFAULT_BADGE
+
+
 def load_team_lookup(data_dir: Path) -> dict[tuple[str, int], dict[str, Any]]:
     lookup: dict[tuple[str, int], dict[str, Any]] = {}
+    canonical_names: dict[str, str] = {}
     for season_dir in sorted((data_dir / "raw").iterdir()):
         teams_path = season_dir / "teams.csv"
         if not teams_path.exists():
@@ -136,8 +145,8 @@ def load_team_lookup(data_dir: Path) -> dict[tuple[str, int], dict[str, Any]]:
             if team_code is None:
                 continue
             name = first_present_value(
-                row.get("fotmob_name"),
                 row.get("name"),
+                row.get("fotmob_name"),
                 fallback=f"Team {team_code}",
             )
             short_name = first_present_value(
@@ -145,9 +154,9 @@ def load_team_lookup(data_dir: Path) -> dict[tuple[str, int], dict[str, Any]]:
                 row.get("name"),
                 fallback=name,
             )
-            badge_slug = BADGE_ALIASES.get(normalize_team_name(name))
-            if badge_slug is None:
-                badge_slug = BADGE_ALIASES.get(normalize_team_name(short_name), DEFAULT_BADGE)
+            badge_slug = resolve_badge_slug(name, row.get("fotmob_name"), short_name)
+            if badge_slug != DEFAULT_BADGE:
+                canonical_names[badge_slug] = name
             lookup[(season_dir.name, team_code)] = {
                 "id": team_code,
                 "name": name,
@@ -159,6 +168,10 @@ def load_team_lookup(data_dir: Path) -> dict[tuple[str, int], dict[str, Any]]:
                     else f"/teams/{badge_slug}.football-logos.cc.png"
                 ),
             }
+    # Upstream spells clubs differently by season, so show every season under the
+    # club's FPL name from the latest season it appears in.
+    for team in lookup.values():
+        team["name"] = canonical_names.get(team["badgeSlug"], team["name"])
     return lookup
 
 
