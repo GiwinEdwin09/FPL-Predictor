@@ -1,13 +1,13 @@
 {
-  "generatedAtUtc": "2026-10-21T20:48:31.136495+00:00",
+  "generatedAtUtc": "2026-10-22T10:27:06.742662+00:00",
   "currentSeason": "2026-2027",
   "model": {
     "version": "model_v3",
     "calibrationTemperature": 1.0,
     "metrics": {
       "accuracy": 0.40476190476190477,
-      "multiclass_log_loss": 1.0273627208143754,
-      "multiclass_brier_score": 0.6170921636562768
+      "multiclass_log_loss": 1.0273627208132647,
+      "multiclass_brier_score": 0.6170921636554118
     },
     "split": {
       "train_rows": 12767,
@@ -400,13 +400,13 @@
         "awayWin": 0.2698
       },
       "context": {
-        "homeElo": 1643.0,
+        "homeElo": 1631.0,
         "awayElo": 1645.0,
-        "homeDaysRest": 7.04,
+        "homeDaysRest": 3.89,
         "awayDaysRest": 7.04,
-        "homeLast5Xg": 1.15,
+        "homeLast5Xg": 1.29,
         "awayLast5Xg": 2.0,
-        "homeLast5Xga": 1.43,
+        "homeLast5Xga": 1.4,
         "awayLast5Xga": 0.91,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
@@ -487,13 +487,13 @@
       },
       "context": {
         "homeElo": 1650.0,
-        "awayElo": 1643.0,
+        "awayElo": 1631.0,
         "homeDaysRest": 14.04,
-        "awayDaysRest": 12.98,
+        "awayDaysRest": 9.82,
         "homeLast5Xg": 1.34,
-        "awayLast5Xg": 1.15,
+        "awayLast5Xg": 1.29,
         "homeLast5Xga": 1.65,
-        "awayLast5Xga": 1.43,
+        "awayLast5Xga": 1.4,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
       },
@@ -1303,13 +1303,13 @@
         "awayWin": 0.2961
       },
       "context": {
-        "homeElo": 1643.0,
+        "homeElo": 1631.0,
         "awayElo": 1684.0,
-        "homeDaysRest": 21.15,
+        "homeDaysRest": 17.99,
         "awayDaysRest": 22.0,
-        "homeLast5Xg": 1.15,
+        "homeLast5Xg": 1.29,
         "awayLast5Xg": 2.16,
-        "homeLast5Xga": 1.43,
+        "homeLast5Xga": 1.4,
         "awayLast5Xga": 1.2,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
@@ -1691,13 +1691,13 @@
       },
       "context": {
         "homeElo": 1717.0,
-        "awayElo": 1643.0,
+        "awayElo": 1631.0,
         "homeDaysRest": 32.9,
-        "awayDaysRest": 35.15,
+        "awayDaysRest": 31.99,
         "homeLast5Xg": 2.05,
-        "awayLast5Xg": 1.15,
+        "awayLast5Xg": 1.29,
         "homeLast5Xga": 1.83,
-        "awayLast5Xga": 1.43,
+        "awayLast5Xga": 1.4,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
       },
@@ -1862,13 +1862,13 @@
         "awayWin": 0.3033
       },
       "context": {
-        "homeElo": 1643.0,
+        "homeElo": 1631.0,
         "awayElo": 1638.0,
-        "homeDaysRest": 41.08,
+        "homeDaysRest": 37.93,
         "awayDaysRest": 42.04,
-        "homeLast5Xg": 1.15,
+        "homeLast5Xg": 1.29,
         "awayLast5Xg": 1.84,
-        "homeLast5Xga": 1.43,
+        "homeLast5Xga": 1.4,
         "awayLast5Xga": 1.87,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
@@ -2551,13 +2551,13 @@
       },
       "context": {
         "homeElo": 1603.0,
-        "awayElo": 1643.0,
+        "awayElo": 1631.0,
         "homeDaysRest": 46.16,
-        "awayDaysRest": 45.3,
+        "awayDaysRest": 42.15,
         "homeLast5Xg": 1.38,
-        "awayLast5Xg": 1.15,
+        "awayLast5Xg": 1.29,
         "homeLast5Xga": 1.43,
-        "awayLast5Xga": 1.43,
+        "awayLast5Xga": 1.4,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
       },
@@ -2808,13 +2808,13 @@
         "awayWin": 0.1565
       },
       "context": {
-        "homeElo": 1643.0,
+        "homeElo": 1631.0,
         "awayElo": 1454.0,
-        "homeDaysRest": 48.08,
+        "homeDaysRest": 44.93,
         "awayDaysRest": 46.83,
-        "homeLast5Xg": 1.15,
+        "homeLast5Xg": 1.29,
         "awayLast5Xg": 0.97,
-        "homeLast5Xga": 1.43,
+        "homeLast5Xga": 1.4,
         "awayLast5Xga": 1.86,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
@@ -3411,13 +3411,13 @@
       },
       "context": {
         "homeElo": 1571.0,
-        "awayElo": 1643.0,
+        "awayElo": 1631.0,
         "homeDaysRest": 56.25,
-        "awayDaysRest": 56.25,
+        "awayDaysRest": 53.09,
         "homeLast5Xg": 1.51,
-        "awayLast5Xg": 1.15,
+        "awayLast5Xg": 1.29,
         "homeLast5Xga": 1.99,
-        "awayLast5Xga": 1.43,
+        "awayLast5Xga": 1.4,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
       },
@@ -3841,13 +3841,13 @@
       },
       "context": {
         "homeElo": 1847.0,
-        "awayElo": 1643.0,
+        "awayElo": 1631.0,
         "homeDaysRest": 63.04,
-        "awayDaysRest": 63.15,
+        "awayDaysRest": 59.99,
         "homeLast5Xg": 1.59,
-        "awayLast5Xg": 1.15,
+        "awayLast5Xg": 1.29,
         "homeLast5Xga": 0.75,
-        "awayLast5Xga": 1.43,
+        "awayLast5Xga": 1.4,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
       },
@@ -4270,13 +4270,13 @@
         "awayWin": 0.247
       },
       "context": {
-        "homeElo": 1643.0,
+        "homeElo": 1631.0,
         "awayElo": 1545.0,
-        "homeDaysRest": 70.15,
+        "homeDaysRest": 66.99,
         "awayDaysRest": 70.04,
-        "homeLast5Xg": 1.15,
+        "homeLast5Xg": 1.29,
         "awayLast5Xg": 1.68,
-        "homeLast5Xga": 1.43,
+        "homeLast5Xga": 1.4,
         "awayLast5Xga": 1.21,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
@@ -4614,13 +4614,13 @@
         "awayWin": 0.2111
       },
       "context": {
-        "homeElo": 1643.0,
+        "homeElo": 1631.0,
         "awayElo": 1555.0,
-        "homeDaysRest": 73.27,
+        "homeDaysRest": 70.11,
         "awayDaysRest": 73.27,
-        "homeLast5Xg": 1.15,
+        "homeLast5Xg": 1.29,
         "awayLast5Xg": 1.24,
-        "homeLast5Xga": 1.43,
+        "homeLast5Xga": 1.4,
         "awayLast5Xga": 2.06,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
@@ -4830,13 +4830,13 @@
       },
       "context": {
         "homeElo": 1674.0,
-        "awayElo": 1643.0,
+        "awayElo": 1631.0,
         "homeDaysRest": 75.98,
-        "awayDaysRest": 75.98,
+        "awayDaysRest": 72.82,
         "homeLast5Xg": 2.18,
-        "awayLast5Xg": 1.15,
+        "awayLast5Xg": 1.29,
         "homeLast5Xga": 0.84,
-        "awayLast5Xga": 1.43,
+        "awayLast5Xga": 1.4,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
       },
@@ -5603,13 +5603,13 @@
         "awayWin": 0.288
       },
       "context": {
-        "homeElo": 1643.0,
+        "homeElo": 1631.0,
         "awayElo": 1603.0,
-        "homeDaysRest": 81.29,
+        "homeDaysRest": 78.14,
         "awayDaysRest": 82.15,
-        "homeLast5Xg": 1.15,
+        "homeLast5Xg": 1.29,
         "awayLast5Xg": 1.38,
-        "homeLast5Xga": 1.43,
+        "homeLast5Xga": 1.4,
         "awayLast5Xga": 1.43,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
@@ -5690,13 +5690,13 @@
       },
       "context": {
         "homeElo": 1684.0,
-        "awayElo": 1643.0,
+        "awayElo": 1631.0,
         "homeDaysRest": 90.94,
-        "awayDaysRest": 90.08,
+        "awayDaysRest": 86.93,
         "homeLast5Xg": 2.16,
-        "awayLast5Xg": 1.15,
+        "awayLast5Xg": 1.29,
         "homeLast5Xga": 1.2,
-        "awayLast5Xga": 1.43,
+        "awayLast5Xga": 1.4,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
       },
@@ -6377,13 +6377,13 @@
         "awayWin": 0.3911
       },
       "context": {
-        "homeElo": 1643.0,
+        "homeElo": 1631.0,
         "awayElo": 1717.0,
-        "homeDaysRest": 97.08,
+        "homeDaysRest": 93.93,
         "awayDaysRest": 94.83,
-        "homeLast5Xg": 1.15,
+        "homeLast5Xg": 1.29,
         "awayLast5Xg": 2.05,
-        "homeLast5Xga": 1.43,
+        "homeLast5Xga": 1.4,
         "awayLast5Xga": 1.83,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
@@ -6593,13 +6593,13 @@
       },
       "context": {
         "homeElo": 1638.0,
-        "awayElo": 1643.0,
+        "awayElo": 1631.0,
         "homeDaysRest": 105.04,
-        "awayDaysRest": 104.08,
+        "awayDaysRest": 100.93,
         "homeLast5Xg": 1.84,
-        "awayLast5Xg": 1.15,
+        "awayLast5Xg": 1.29,
         "homeLast5Xga": 1.87,
-        "awayLast5Xga": 1.43,
+        "awayLast5Xga": 1.4,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
       },
@@ -7237,13 +7237,13 @@
         "awayWin": 0.3312
       },
       "context": {
-        "homeElo": 1643.0,
+        "homeElo": 1631.0,
         "awayElo": 1650.0,
-        "homeDaysRest": 111.08,
+        "homeDaysRest": 107.93,
         "awayDaysRest": 112.15,
-        "homeLast5Xg": 1.15,
+        "homeLast5Xg": 1.29,
         "awayLast5Xg": 1.34,
-        "homeLast5Xga": 1.43,
+        "homeLast5Xga": 1.4,
         "awayLast5Xga": 1.65,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
@@ -7667,13 +7667,13 @@
         "awayWin": 0.3504
       },
       "context": {
-        "homeElo": 1643.0,
+        "homeElo": 1631.0,
         "awayElo": 1674.0,
-        "homeDaysRest": 115.29,
+        "homeDaysRest": 112.14,
         "awayDaysRest": 115.29,
-        "homeLast5Xg": 1.15,
+        "homeLast5Xg": 1.29,
         "awayLast5Xg": 2.18,
-        "homeLast5Xga": 1.43,
+        "homeLast5Xga": 1.4,
         "awayLast5Xga": 0.84,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
@@ -8141,13 +8141,13 @@
       },
       "context": {
         "homeElo": 1545.0,
-        "awayElo": 1643.0,
+        "awayElo": 1631.0,
         "homeDaysRest": 124.98,
-        "awayDaysRest": 125.08,
+        "awayDaysRest": 121.93,
         "homeLast5Xg": 1.68,
-        "awayLast5Xg": 1.15,
+        "awayLast5Xg": 1.29,
         "homeLast5Xga": 1.21,
-        "awayLast5Xga": 1.43,
+        "awayLast5Xga": 1.4,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
       },
@@ -8527,13 +8527,13 @@
         "awayWin": 0.4876
       },
       "context": {
-        "homeElo": 1643.0,
+        "homeElo": 1631.0,
         "awayElo": 1847.0,
-        "homeDaysRest": 132.08,
+        "homeDaysRest": 128.93,
         "awayDaysRest": 131.98,
-        "homeLast5Xg": 1.15,
+        "homeLast5Xg": 1.29,
         "awayLast5Xg": 1.59,
-        "homeLast5Xga": 1.43,
+        "homeLast5Xga": 1.4,
         "awayLast5Xga": 0.75,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
@@ -9044,13 +9044,13 @@
       },
       "context": {
         "homeElo": 1555.0,
-        "awayElo": 1643.0,
+        "awayElo": 1631.0,
         "homeDaysRest": 136.29,
-        "awayDaysRest": 136.29,
+        "awayDaysRest": 133.14,
         "homeLast5Xg": 1.24,
-        "awayLast5Xg": 1.15,
+        "awayLast5Xg": 1.29,
         "homeLast5Xga": 2.06,
-        "awayLast5Xga": 1.43,
+        "awayLast5Xga": 1.4,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
       },
@@ -9387,13 +9387,13 @@
         "awayWin": 0.2399
       },
       "context": {
-        "homeElo": 1643.0,
+        "homeElo": 1631.0,
         "awayElo": 1598.0,
-        "homeDaysRest": 146.08,
+        "homeDaysRest": 142.93,
         "awayDaysRest": 147.15,
-        "homeLast5Xg": 1.15,
+        "homeLast5Xg": 1.29,
         "awayLast5Xg": 1.43,
-        "homeLast5Xga": 1.43,
+        "homeLast5Xga": 1.4,
         "awayLast5Xga": 1.04,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
@@ -9818,13 +9818,13 @@
       },
       "context": {
         "homeElo": 1806.0,
-        "awayElo": 1643.0,
+        "awayElo": 1631.0,
         "homeDaysRest": 150.83,
-        "awayDaysRest": 153.08,
+        "awayDaysRest": 149.93,
         "homeLast5Xg": 2.6,
-        "awayLast5Xg": 1.15,
+        "awayLast5Xg": 1.29,
         "homeLast5Xga": 1.82,
-        "awayLast5Xga": 1.43,
+        "awayLast5Xga": 1.4,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
       },
@@ -10247,13 +10247,13 @@
         "awayWin": 0.2592
       },
       "context": {
-        "homeElo": 1643.0,
+        "homeElo": 1631.0,
         "awayElo": 1472.0,
-        "homeDaysRest": 174.04,
+        "homeDaysRest": 170.89,
         "awayDaysRest": 175.0,
-        "homeLast5Xg": 1.15,
+        "homeLast5Xg": 1.29,
         "awayLast5Xg": 1.09,
-        "homeLast5Xga": 1.43,
+        "homeLast5Xga": 1.4,
         "awayLast5Xga": 1.3,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
@@ -10635,13 +10635,13 @@
       },
       "context": {
         "homeElo": 1449.0,
-        "awayElo": 1643.0,
+        "awayElo": 1631.0,
         "homeDaysRest": 182.0,
-        "awayDaysRest": 181.04,
+        "awayDaysRest": 177.89,
         "homeLast5Xg": 1.33,
-        "awayLast5Xg": 1.15,
+        "awayLast5Xg": 1.29,
         "homeLast5Xga": 1.83,
-        "awayLast5Xga": 1.43,
+        "awayLast5Xga": 1.4,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
       },
@@ -11064,13 +11064,13 @@
         "awayWin": 0.2222
       },
       "context": {
-        "homeElo": 1643.0,
+        "homeElo": 1631.0,
         "awayElo": 1571.0,
-        "homeDaysRest": 188.04,
+        "homeDaysRest": 184.89,
         "awayDaysRest": 188.04,
-        "homeLast5Xg": 1.15,
+        "homeLast5Xg": 1.29,
         "awayLast5Xg": 1.51,
-        "homeLast5Xga": 1.43,
+        "homeLast5Xga": 1.4,
         "awayLast5Xga": 1.99,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
@@ -11323,13 +11323,13 @@
       },
       "context": {
         "homeElo": 1454.0,
-        "awayElo": 1643.0,
+        "awayElo": 1631.0,
         "homeDaysRest": 193.79,
-        "awayDaysRest": 195.04,
+        "awayDaysRest": 191.89,
         "homeLast5Xg": 0.97,
-        "awayLast5Xg": 1.15,
+        "awayLast5Xg": 1.29,
         "homeLast5Xga": 1.86,
-        "awayLast5Xga": 1.43,
+        "awayLast5Xga": 1.4,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
       },
@@ -11667,13 +11667,13 @@
       },
       "context": {
         "homeElo": 1645.0,
-        "awayElo": 1643.0,
+        "awayElo": 1631.0,
         "homeDaysRest": 202.04,
-        "awayDaysRest": 202.04,
+        "awayDaysRest": 198.89,
         "homeLast5Xg": 2.0,
-        "awayLast5Xg": 1.15,
+        "awayLast5Xg": 1.29,
         "homeLast5Xga": 0.91,
-        "awayLast5Xga": 1.43,
+        "awayLast5Xga": 1.4,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
       },
@@ -12440,13 +12440,13 @@
         "awayWin": 0.2558
       },
       "context": {
-        "homeElo": 1643.0,
+        "homeElo": 1631.0,
         "awayElo": 1581.0,
-        "homeDaysRest": 209.04,
+        "homeDaysRest": 205.89,
         "awayDaysRest": 209.04,
-        "homeLast5Xg": 1.15,
+        "homeLast5Xg": 1.29,
         "awayLast5Xg": 1.58,
-        "homeLast5Xga": 1.43,
+        "homeLast5Xga": 1.4,
         "awayLast5Xga": 1.57,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
@@ -12914,13 +12914,13 @@
       },
       "context": {
         "homeElo": 1535.0,
-        "awayElo": 1643.0,
+        "awayElo": 1631.0,
         "homeDaysRest": 215.79,
-        "awayDaysRest": 217.04,
+        "awayDaysRest": 213.89,
         "homeLast5Xg": 1.41,
-        "awayLast5Xg": 1.15,
+        "awayLast5Xg": 1.29,
         "homeLast5Xga": 1.07,
-        "awayLast5Xga": 1.43,
+        "awayLast5Xga": 1.4,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
       },
@@ -13300,13 +13300,13 @@
         "awayWin": 0.2403
       },
       "context": {
-        "homeElo": 1643.0,
+        "homeElo": 1631.0,
         "awayElo": 1574.0,
-        "homeDaysRest": 224.08,
+        "homeDaysRest": 220.93,
         "awayDaysRest": 225.04,
-        "homeLast5Xg": 1.15,
+        "homeLast5Xg": 1.29,
         "awayLast5Xg": 1.8,
-        "homeLast5Xga": 1.43,
+        "homeLast5Xga": 1.4,
         "awayLast5Xga": 1.4,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
@@ -17216,14 +17216,14 @@
       "kickoffTime": "2026-05-24T15:00:00+00:00",
       "homeTeam": {
         "id": 21,
-        "name": "West Ham United",
+        "name": "West Ham",
         "shortName": "WHU",
         "badgeSlug": "west-ham",
         "badgePath": "/teams/west-ham.football-logos.cc.png"
       },
       "awayTeam": {
         "id": 2,
-        "name": "Leeds United",
+        "name": "Leeds",
         "shortName": "LEE",
         "badgeSlug": "leeds-united",
         "badgePath": "/teams/leeds-united.football-logos.cc.png"
@@ -17271,7 +17271,7 @@
       "kickoffTime": "2026-05-24T15:00:00+00:00",
       "homeTeam": {
         "id": 6,
-        "name": "Tottenham Hotspur",
+        "name": "Spurs",
         "shortName": "TOT",
         "badgeSlug": "tottenham",
         "badgePath": "/teams/tottenham.football-logos.cc.png"
@@ -17381,14 +17381,14 @@
       "kickoffTime": "2026-05-24T15:00:00+00:00",
       "homeTeam": {
         "id": 17,
-        "name": "Nottingham Forest",
+        "name": "Nott'm Forest",
         "shortName": "NFO",
         "badgeSlug": "nottingham-forest",
         "badgePath": "/teams/nottingham-forest.football-logos.cc.png"
       },
       "awayTeam": {
         "id": 91,
-        "name": "AFC Bournemouth",
+        "name": "Bournemouth",
         "shortName": "BOU",
         "badgeSlug": "bournemouth",
         "badgePath": "/teams/bournemouth.football-logos.cc.png"
@@ -17436,7 +17436,7 @@
       "kickoffTime": "2026-05-24T15:00:00+00:00",
       "homeTeam": {
         "id": 43,
-        "name": "Manchester City",
+        "name": "Man City",
         "shortName": "MCI",
         "badgeSlug": "manchester-city",
         "badgePath": "/teams/manchester-city.football-logos.cc.png"
@@ -17553,7 +17553,7 @@
       },
       "awayTeam": {
         "id": 4,
-        "name": "Newcastle United",
+        "name": "Newcastle",
         "shortName": "NEW",
         "badgeSlug": "newcastle",
         "badgePath": "/teams/newcastle.football-logos.cc.png"
@@ -17663,7 +17663,7 @@
       },
       "awayTeam": {
         "id": 39,
-        "name": "Wolverhampton Wanderers",
+        "name": "Wolves",
         "shortName": "WOL",
         "badgeSlug": "wolves",
         "badgePath": "/teams/wolves.football-logos.cc.png"
@@ -17711,14 +17711,14 @@
       "kickoffTime": "2026-05-24T15:00:00+00:00",
       "homeTeam": {
         "id": 36,
-        "name": "Brighton & Hove Albion",
+        "name": "Brighton",
         "shortName": "BHA",
         "badgeSlug": "brighton",
         "badgePath": "/teams/brighton.football-logos.cc.png"
       },
       "awayTeam": {
         "id": 1,
-        "name": "Manchester United",
+        "name": "Man Utd",
         "shortName": "MUN",
         "badgeSlug": "manchester-united",
         "badgePath": "/teams/manchester-united.football-logos.cc.png"
@@ -17773,7 +17773,7 @@
       },
       "awayTeam": {
         "id": 6,
-        "name": "Tottenham Hotspur",
+        "name": "Spurs",
         "shortName": "TOT",
         "badgeSlug": "tottenham",
         "badgePath": "/teams/tottenham.football-logos.cc.png"
@@ -17821,14 +17821,14 @@
       "kickoffTime": "2026-05-19T18:30:00+00:00",
       "homeTeam": {
         "id": 91,
-        "name": "AFC Bournemouth",
+        "name": "Bournemouth",
         "shortName": "BOU",
         "badgeSlug": "bournemouth",
         "badgePath": "/teams/bournemouth.football-logos.cc.png"
       },
       "awayTeam": {
         "id": 43,
-        "name": "Manchester City",
+        "name": "Man City",
         "shortName": "MCI",
         "badgeSlug": "manchester-city",
         "badgePath": "/teams/manchester-city.football-logos.cc.png"
@@ -17931,14 +17931,14 @@
       "kickoffTime": "2026-05-17T16:30:00+00:00",
       "homeTeam": {
         "id": 4,
-        "name": "Newcastle United",
+        "name": "Newcastle",
         "shortName": "NEW",
         "badgeSlug": "newcastle",
         "badgePath": "/teams/newcastle.football-logos.cc.png"
       },
       "awayTeam": {
         "id": 21,
-        "name": "West Ham United",
+        "name": "West Ham",
         "shortName": "WHU",
         "badgeSlug": "west-ham",
         "badgePath": "/teams/west-ham.football-logos.cc.png"
@@ -17986,7 +17986,7 @@
       "kickoffTime": "2026-05-17T14:00:00+00:00",
       "homeTeam": {
         "id": 39,
-        "name": "Wolverhampton Wanderers",
+        "name": "Wolves",
         "shortName": "WOL",
         "badgeSlug": "wolves",
         "badgePath": "/teams/wolves.football-logos.cc.png"
@@ -18041,14 +18041,14 @@
       "kickoffTime": "2026-05-17T14:00:00+00:00",
       "homeTeam": {
         "id": 2,
-        "name": "Leeds United",
+        "name": "Leeds",
         "shortName": "LEE",
         "badgeSlug": "leeds-united",
         "badgePath": "/teams/leeds-united.football-logos.cc.png"
       },
       "awayTeam": {
         "id": 36,
-        "name": "Brighton & Hove Albion",
+        "name": "Brighton",
         "shortName": "BHA",
         "badgeSlug": "brighton",
         "badgePath": "/teams/brighton.football-logos.cc.png"
@@ -18206,14 +18206,14 @@
       "kickoffTime": "2026-05-17T11:30:00+00:00",
       "homeTeam": {
         "id": 1,
-        "name": "Manchester United",
+        "name": "Man Utd",
         "shortName": "MUN",
         "badgeSlug": "manchester-united",
         "badgePath": "/teams/manchester-united.football-logos.cc.png"
       },
       "awayTeam": {
         "id": 17,
-        "name": "Nottingham Forest",
+        "name": "Nott'm Forest",
         "shortName": "NFO",
         "badgeSlug": "nottingham-forest",
         "badgePath": "/teams/nottingham-forest.football-logos.cc.png"
@@ -18316,7 +18316,7 @@
       "kickoffTime": "2026-05-13T19:00:00+00:00",
       "homeTeam": {
         "id": 43,
-        "name": "Manchester City",
+        "name": "Man City",
         "shortName": "MCI",
         "badgeSlug": "manchester-city",
         "badgePath": "/teams/manchester-city.football-logos.cc.png"
@@ -18371,14 +18371,14 @@
       "kickoffTime": "2026-05-11T19:00:00+00:00",
       "homeTeam": {
         "id": 6,
-        "name": "Tottenham Hotspur",
+        "name": "Spurs",
         "shortName": "TOT",
         "badgeSlug": "tottenham",
         "badgePath": "/teams/tottenham.football-logos.cc.png"
       },
       "awayTeam": {
         "id": 2,
-        "name": "Leeds United",
+        "name": "Leeds",
         "shortName": "LEE",
         "badgeSlug": "leeds-united",
         "badgePath": "/teams/leeds-united.football-logos.cc.png"
@@ -18426,7 +18426,7 @@
       "kickoffTime": "2026-05-10T15:30:00+00:00",
       "homeTeam": {
         "id": 21,
-        "name": "West Ham United",
+        "name": "West Ham",
         "shortName": "WHU",
         "badgeSlug": "west-ham",
         "badgePath": "/teams/west-ham.football-logos.cc.png"
@@ -18481,14 +18481,14 @@
       "kickoffTime": "2026-05-10T13:00:00+00:00",
       "homeTeam": {
         "id": 17,
-        "name": "Nottingham Forest",
+        "name": "Nott'm Forest",
         "shortName": "NFO",
         "badgeSlug": "nottingham-forest",
         "badgePath": "/teams/nottingham-forest.football-logos.cc.png"
       },
       "awayTeam": {
         "id": 4,
-        "name": "Newcastle United",
+        "name": "Newcastle",
         "shortName": "NEW",
         "badgeSlug": "newcastle",
         "badgePath": "/teams/newcastle.football-logos.cc.png"
@@ -18646,7 +18646,7 @@
       "kickoffTime": "2026-05-09T16:30:00+00:00",
       "homeTeam": {
         "id": 43,
-        "name": "Manchester City",
+        "name": "Man City",
         "shortName": "MCI",
         "badgeSlug": "manchester-city",
         "badgePath": "/teams/manchester-city.football-logos.cc.png"
@@ -18708,7 +18708,7 @@
       },
       "awayTeam": {
         "id": 1,
-        "name": "Manchester United",
+        "name": "Man Utd",
         "shortName": "MUN",
         "badgeSlug": "manchester-united",
         "badgePath": "/teams/manchester-united.football-logos.cc.png"
@@ -18763,7 +18763,7 @@
       },
       "awayTeam": {
         "id": 91,
-        "name": "AFC Bournemouth",
+        "name": "Bournemouth",
         "shortName": "BOU",
         "badgeSlug": "bournemouth",
         "badgePath": "/teams/bournemouth.football-logos.cc.png"
@@ -18811,14 +18811,14 @@
       "kickoffTime": "2026-05-09T14:00:00+00:00",
       "homeTeam": {
         "id": 36,
-        "name": "Brighton & Hove Albion",
+        "name": "Brighton",
         "shortName": "BHA",
         "badgeSlug": "brighton",
         "badgePath": "/teams/brighton.football-logos.cc.png"
       },
       "awayTeam": {
         "id": 39,
-        "name": "Wolverhampton Wanderers",
+        "name": "Wolves",
         "shortName": "WOL",
         "badgeSlug": "wolves",
         "badgePath": "/teams/wolves.football-logos.cc.png"
@@ -18928,7 +18928,7 @@
       },
       "awayTeam": {
         "id": 43,
-        "name": "Manchester City",
+        "name": "Man City",
         "shortName": "MCI",
         "badgeSlug": "manchester-city",
         "badgePath": "/teams/manchester-city.football-logos.cc.png"
@@ -18983,7 +18983,7 @@
       },
       "awayTeam": {
         "id": 17,
-        "name": "Nottingham Forest",
+        "name": "Nott'm Forest",
         "shortName": "NFO",
         "badgeSlug": "nottingham-forest",
         "badgePath": "/teams/nottingham-forest.football-logos.cc.png"
@@ -19038,7 +19038,7 @@
       },
       "awayTeam": {
         "id": 6,
-        "name": "Tottenham Hotspur",
+        "name": "Spurs",
         "shortName": "TOT",
         "badgeSlug": "tottenham",
         "badgePath": "/teams/tottenham.football-logos.cc.png"
@@ -19086,7 +19086,7 @@
       "kickoffTime": "2026-05-03T14:30:00+00:00",
       "homeTeam": {
         "id": 1,
-        "name": "Manchester United",
+        "name": "Man Utd",
         "shortName": "MUN",
         "badgeSlug": "manchester-united",
         "badgePath": "/teams/manchester-united.football-logos.cc.png"
@@ -19141,7 +19141,7 @@
       "kickoffTime": "2026-05-03T13:00:00+00:00",
       "homeTeam": {
         "id": 91,
-        "name": "AFC Bournemouth",
+        "name": "Bournemouth",
         "shortName": "BOU",
         "badgeSlug": "bournemouth",
         "badgePath": "/teams/bournemouth.football-logos.cc.png"
@@ -19251,7 +19251,7 @@
       "kickoffTime": "2026-05-02T14:00:00+00:00",
       "homeTeam": {
         "id": 39,
-        "name": "Wolverhampton Wanderers",
+        "name": "Wolves",
         "shortName": "WOL",
         "badgeSlug": "wolves",
         "badgePath": "/teams/wolves.football-logos.cc.png"
@@ -19306,14 +19306,14 @@
       "kickoffTime": "2026-05-02T14:00:00+00:00",
       "homeTeam": {
         "id": 4,
-        "name": "Newcastle United",
+        "name": "Newcastle",
         "shortName": "NEW",
         "badgeSlug": "newcastle",
         "badgePath": "/teams/newcastle.football-logos.cc.png"
       },
       "awayTeam": {
         "id": 36,
-        "name": "Brighton & Hove Albion",
+        "name": "Brighton",
         "shortName": "BHA",
         "badgeSlug": "brighton",
         "badgePath": "/teams/brighton.football-logos.cc.png"
@@ -19368,7 +19368,7 @@
       },
       "awayTeam": {
         "id": 21,
-        "name": "West Ham United",
+        "name": "West Ham",
         "shortName": "WHU",
         "badgeSlug": "west-ham",
         "badgePath": "/teams/west-ham.football-logos.cc.png"
@@ -19416,7 +19416,7 @@
       "kickoffTime": "2026-05-01T19:00:00+00:00",
       "homeTeam": {
         "id": 2,
-        "name": "Leeds United",
+        "name": "Leeds",
         "shortName": "LEE",
         "badgeSlug": "leeds-united",
         "badgePath": "/teams/leeds-united.football-logos.cc.png"
@@ -19471,7 +19471,7 @@
       "kickoffTime": "2026-04-27T19:00:00+00:00",
       "homeTeam": {
         "id": 1,
-        "name": "Manchester United",
+        "name": "Man Utd",
         "shortName": "MUN",
         "badgeSlug": "manchester-united",
         "badgePath": "/teams/manchester-united.football-logos.cc.png"
@@ -19533,7 +19533,7 @@
       },
       "awayTeam": {
         "id": 4,
-        "name": "Newcastle United",
+        "name": "Newcastle",
         "shortName": "NEW",
         "badgeSlug": "newcastle",
         "badgePath": "/teams/newcastle.football-logos.cc.png"
@@ -19581,14 +19581,14 @@
       "kickoffTime": "2026-04-25T14:00:00+00:00",
       "homeTeam": {
         "id": 39,
-        "name": "Wolverhampton Wanderers",
+        "name": "Wolves",
         "shortName": "WOL",
         "badgeSlug": "wolves",
         "badgePath": "/teams/wolves.football-logos.cc.png"
       },
       "awayTeam": {
         "id": 6,
-        "name": "Tottenham Hotspur",
+        "name": "Spurs",
         "shortName": "TOT",
         "badgeSlug": "tottenham",
         "badgePath": "/teams/tottenham.football-logos.cc.png"
@@ -19636,7 +19636,7 @@
       "kickoffTime": "2026-04-25T14:00:00+00:00",
       "homeTeam": {
         "id": 21,
-        "name": "West Ham United",
+        "name": "West Ham",
         "shortName": "WHU",
         "badgeSlug": "west-ham",
         "badgePath": "/teams/west-ham.football-logos.cc.png"
@@ -19808,7 +19808,7 @@
       },
       "awayTeam": {
         "id": 17,
-        "name": "Nottingham Forest",
+        "name": "Nott'm Forest",
         "shortName": "NFO",
         "badgeSlug": "nottingham-forest",
         "badgePath": "/teams/nottingham-forest.football-logos.cc.png"
@@ -19863,7 +19863,7 @@
       },
       "awayTeam": {
         "id": 43,
-        "name": "Manchester City",
+        "name": "Man City",
         "shortName": "MCI",
         "badgeSlug": "manchester-city",
         "badgePath": "/teams/manchester-city.football-logos.cc.png"
@@ -19911,14 +19911,14 @@
       "kickoffTime": "2026-04-22T19:00:00+00:00",
       "homeTeam": {
         "id": 91,
-        "name": "AFC Bournemouth",
+        "name": "Bournemouth",
         "shortName": "BOU",
         "badgeSlug": "bournemouth",
         "badgePath": "/teams/bournemouth.football-logos.cc.png"
       },
       "awayTeam": {
         "id": 2,
-        "name": "Leeds United",
+        "name": "Leeds",
         "shortName": "LEE",
         "badgeSlug": "leeds-united",
         "badgePath": "/teams/leeds-united.football-logos.cc.png"
@@ -19966,7 +19966,7 @@
       "kickoffTime": "2026-04-21T19:00:00+00:00",
       "homeTeam": {
         "id": 36,
-        "name": "Brighton & Hove Albion",
+        "name": "Brighton",
         "shortName": "BHA",
         "badgeSlug": "brighton",
         "badgePath": "/teams/brighton.football-logos.cc.png"
@@ -20028,7 +20028,7 @@
       },
       "awayTeam": {
         "id": 21,
-        "name": "West Ham United",
+        "name": "West Ham",
         "shortName": "WHU",
         "badgeSlug": "west-ham",
         "badgePath": "/teams/west-ham.football-logos.cc.png"
@@ -20076,7 +20076,7 @@
       "kickoffTime": "2026-04-19T15:30:00+00:00",
       "homeTeam": {
         "id": 43,
-        "name": "Manchester City",
+        "name": "Man City",
         "shortName": "MCI",
         "badgeSlug": "manchester-city",
         "badgePath": "/teams/manchester-city.football-logos.cc.png"
@@ -20131,7 +20131,7 @@
       "kickoffTime": "2026-04-19T13:00:00+00:00",
       "homeTeam": {
         "id": 17,
-        "name": "Nottingham Forest",
+        "name": "Nott'm Forest",
         "shortName": "NFO",
         "badgeSlug": "nottingham-forest",
         "badgePath": "/teams/nottingham-forest.football-logos.cc.png"
@@ -20303,7 +20303,7 @@
       },
       "awayTeam": {
         "id": 1,
-        "name": "Manchester United",
+        "name": "Man Utd",
         "shortName": "MUN",
         "badgeSlug": "manchester-united",
         "badgePath": "/teams/manchester-united.football-logos.cc.png"
@@ -20351,14 +20351,14 @@
       "kickoffTime": "2026-04-18T16:30:00+00:00",
       "homeTeam": {
         "id": 6,
-        "name": "Tottenham Hotspur",
+        "name": "Spurs",
         "shortName": "TOT",
         "badgeSlug": "tottenham",
         "badgePath": "/teams/tottenham.football-logos.cc.png"
       },
       "awayTeam": {
         "id": 36,
-        "name": "Brighton & Hove Albion",
+        "name": "Brighton",
         "shortName": "BHA",
         "badgeSlug": "brighton",
         "badgePath": "/teams/brighton.football-logos.cc.png"
@@ -20406,14 +20406,14 @@
       "kickoffTime": "2026-04-18T14:00:00+00:00",
       "homeTeam": {
         "id": 4,
-        "name": "Newcastle United",
+        "name": "Newcastle",
         "shortName": "NEW",
         "badgeSlug": "newcastle",
         "badgePath": "/teams/newcastle.football-logos.cc.png"
       },
       "awayTeam": {
         "id": 91,
-        "name": "AFC Bournemouth",
+        "name": "Bournemouth",
         "shortName": "BOU",
         "badgeSlug": "bournemouth",
         "badgePath": "/teams/bournemouth.football-logos.cc.png"
@@ -20461,14 +20461,14 @@
       "kickoffTime": "2026-04-18T14:00:00+00:00",
       "homeTeam": {
         "id": 2,
-        "name": "Leeds United",
+        "name": "Leeds",
         "shortName": "LEE",
         "badgeSlug": "leeds-united",
         "badgePath": "/teams/leeds-united.football-logos.cc.png"
       },
       "awayTeam": {
         "id": 39,
-        "name": "Wolverhampton Wanderers",
+        "name": "Wolves",
         "shortName": "WOL",
         "badgeSlug": "wolves",
         "badgePath": "/teams/wolves.football-logos.cc.png"
@@ -20571,14 +20571,14 @@
       "kickoffTime": "2026-04-13T19:00:00+00:00",
       "homeTeam": {
         "id": 1,
-        "name": "Manchester United",
+        "name": "Man Utd",
         "shortName": "MUN",
         "badgeSlug": "manchester-united",
         "badgePath": "/teams/manchester-united.football-logos.cc.png"
       },
       "awayTeam": {
         "id": 2,
-        "name": "Leeds United",
+        "name": "Leeds",
         "shortName": "LEE",
         "badgeSlug": "leeds-united",
         "badgePath": "/teams/leeds-united.football-logos.cc.png"
@@ -20633,7 +20633,7 @@
       },
       "awayTeam": {
         "id": 43,
-        "name": "Manchester City",
+        "name": "Man City",
         "shortName": "MCI",
         "badgeSlug": "manchester-city",
         "badgePath": "/teams/manchester-city.football-logos.cc.png"
@@ -20688,7 +20688,7 @@
       },
       "awayTeam": {
         "id": 6,
-        "name": "Tottenham Hotspur",
+        "name": "Spurs",
         "shortName": "TOT",
         "badgeSlug": "tottenham",
         "badgePath": "/teams/tottenham.football-logos.cc.png"
@@ -20736,7 +20736,7 @@
       "kickoffTime": "2026-04-12T13:00:00+00:00",
       "homeTeam": {
         "id": 17,
-        "name": "Nottingham Forest",
+        "name": "Nott'm Forest",
         "shortName": "NFO",
         "badgeSlug": "nottingham-forest",
         "badgePath": "/teams/nottingham-forest.football-logos.cc.png"
@@ -20798,7 +20798,7 @@
       },
       "awayTeam": {
         "id": 4,
-        "name": "Newcastle United",
+        "name": "Newcastle",
         "shortName": "NEW",
         "badgeSlug": "newcastle",
         "badgePath": "/teams/newcastle.football-logos.cc.png"
@@ -20908,7 +20908,7 @@
       },
       "awayTeam": {
         "id": 36,
-        "name": "Brighton & Hove Albion",
+        "name": "Brighton",
         "shortName": "BHA",
         "badgeSlug": "brighton",
         "badgePath": "/teams/brighton.football-logos.cc.png"
@@ -21018,7 +21018,7 @@
       },
       "awayTeam": {
         "id": 91,
-        "name": "AFC Bournemouth",
+        "name": "Bournemouth",
         "shortName": "BOU",
         "badgeSlug": "bournemouth",
         "badgePath": "/teams/bournemouth.football-logos.cc.png"
@@ -21066,14 +21066,14 @@
       "kickoffTime": "2026-04-10T19:00:00+00:00",
       "homeTeam": {
         "id": 21,
-        "name": "West Ham United",
+        "name": "West Ham",
         "shortName": "WHU",
         "badgeSlug": "west-ham",
         "badgePath": "/teams/west-ham.football-logos.cc.png"
       },
       "awayTeam": {
         "id": 39,
-        "name": "Wolverhampton Wanderers",
+        "name": "Wolves",
         "shortName": "WOL",
         "badgeSlug": "wolves",
         "badgePath": "/teams/wolves.football-logos.cc.png"
@@ -21121,14 +21121,14 @@
       "kickoffTime": "2026-03-22T14:15:00+00:00",
       "homeTeam": {
         "id": 6,
-        "name": "Tottenham Hotspur",
+        "name": "Spurs",
         "shortName": "TOT",
         "badgeSlug": "tottenham",
         "badgePath": "/teams/tottenham.football-logos.cc.png"
       },
       "awayTeam": {
         "id": 17,
-        "name": "Nottingham Forest",
+        "name": "Nott'm Forest",
         "shortName": "NFO",
         "badgeSlug": "nottingham-forest",
         "badgePath": "/teams/nottingham-forest.football-logos.cc.png"
@@ -21183,7 +21183,7 @@
       },
       "awayTeam": {
         "id": 21,
-        "name": "West Ham United",
+        "name": "West Ham",
         "shortName": "WHU",
         "badgeSlug": "west-ham",
         "badgePath": "/teams/west-ham.football-logos.cc.png"
@@ -21231,7 +21231,7 @@
       "kickoffTime": "2026-03-22T12:00:00+00:00",
       "homeTeam": {
         "id": 4,
-        "name": "Newcastle United",
+        "name": "Newcastle",
         "shortName": "NEW",
         "badgeSlug": "newcastle",
         "badgePath": "/teams/newcastle.football-logos.cc.png"
@@ -21286,7 +21286,7 @@
       "kickoffTime": "2026-03-21T20:00:00+00:00",
       "homeTeam": {
         "id": 2,
-        "name": "Leeds United",
+        "name": "Leeds",
         "shortName": "LEE",
         "badgeSlug": "leeds-united",
         "badgePath": "/teams/leeds-united.football-logos.cc.png"
@@ -21451,7 +21451,7 @@
       "kickoffTime": "2026-03-21T12:45:00+00:00",
       "homeTeam": {
         "id": 36,
-        "name": "Brighton & Hove Albion",
+        "name": "Brighton",
         "shortName": "BHA",
         "badgeSlug": "brighton",
         "badgePath": "/teams/brighton.football-logos.cc.png"
@@ -21506,14 +21506,14 @@
       "kickoffTime": "2026-03-20T20:00:00+00:00",
       "homeTeam": {
         "id": 91,
-        "name": "AFC Bournemouth",
+        "name": "Bournemouth",
         "shortName": "BOU",
         "badgeSlug": "bournemouth",
         "badgePath": "/teams/bournemouth.football-logos.cc.png"
       },
       "awayTeam": {
         "id": 1,
-        "name": "Manchester United",
+        "name": "Man Utd",
         "shortName": "MUN",
         "badgeSlug": "manchester-united",
         "badgePath": "/teams/manchester-united.football-logos.cc.png"
@@ -21568,7 +21568,7 @@
       },
       "awayTeam": {
         "id": 39,
-        "name": "Wolverhampton Wanderers",
+        "name": "Wolves",
         "shortName": "WOL",
         "badgeSlug": "wolves",
         "badgePath": "/teams/wolves.football-logos.cc.png"
@@ -21623,7 +21623,7 @@
       },
       "awayTeam": {
         "id": 6,
-        "name": "Tottenham Hotspur",
+        "name": "Spurs",
         "shortName": "TOT",
         "badgeSlug": "tottenham",
         "badgePath": "/teams/tottenham.football-logos.cc.png"
@@ -21671,7 +21671,7 @@
       "kickoffTime": "2026-03-15T14:00:00+00:00",
       "homeTeam": {
         "id": 17,
-        "name": "Nottingham Forest",
+        "name": "Nott'm Forest",
         "shortName": "NFO",
         "badgeSlug": "nottingham-forest",
         "badgePath": "/teams/nottingham-forest.football-logos.cc.png"
@@ -21726,7 +21726,7 @@
       "kickoffTime": "2026-03-15T14:00:00+00:00",
       "homeTeam": {
         "id": 1,
-        "name": "Manchester United",
+        "name": "Man Utd",
         "shortName": "MUN",
         "badgeSlug": "manchester-united",
         "badgePath": "/teams/manchester-united.football-logos.cc.png"
@@ -21788,7 +21788,7 @@
       },
       "awayTeam": {
         "id": 2,
-        "name": "Leeds United",
+        "name": "Leeds",
         "shortName": "LEE",
         "badgeSlug": "leeds-united",
         "badgePath": "/teams/leeds-united.football-logos.cc.png"
@@ -21836,14 +21836,14 @@
       "kickoffTime": "2026-03-14T20:00:00+00:00",
       "homeTeam": {
         "id": 21,
-        "name": "West Ham United",
+        "name": "West Ham",
         "shortName": "WHU",
         "badgeSlug": "west-ham",
         "badgePath": "/teams/west-ham.football-logos.cc.png"
       },
       "awayTeam": {
         "id": 43,
-        "name": "Manchester City",
+        "name": "Man City",
         "shortName": "MCI",
         "badgeSlug": "manchester-city",
         "badgePath": "/teams/manchester-city.football-logos.cc.png"
@@ -21898,7 +21898,7 @@
       },
       "awayTeam": {
         "id": 4,
-        "name": "Newcastle United",
+        "name": "Newcastle",
         "shortName": "NEW",
         "badgeSlug": "newcastle",
         "badgePath": "/teams/newcastle.football-logos.cc.png"
@@ -22008,7 +22008,7 @@
       },
       "awayTeam": {
         "id": 36,
-        "name": "Brighton & Hove Albion",
+        "name": "Brighton",
         "shortName": "BHA",
         "badgeSlug": "brighton",
         "badgePath": "/teams/brighton.football-logos.cc.png"
@@ -22063,7 +22063,7 @@
       },
       "awayTeam": {
         "id": 91,
-        "name": "AFC Bournemouth",
+        "name": "Bournemouth",
         "shortName": "BOU",
         "badgeSlug": "bournemouth",
         "badgePath": "/teams/bournemouth.football-logos.cc.png"
@@ -22111,7 +22111,7 @@
       "kickoffTime": "2026-03-05T20:00:00+00:00",
       "homeTeam": {
         "id": 6,
-        "name": "Tottenham Hotspur",
+        "name": "Spurs",
         "shortName": "TOT",
         "badgeSlug": "tottenham",
         "badgePath": "/teams/tottenham.football-logos.cc.png"
@@ -22166,14 +22166,14 @@
       "kickoffTime": "2026-03-04T20:15:00+00:00",
       "homeTeam": {
         "id": 4,
-        "name": "Newcastle United",
+        "name": "Newcastle",
         "shortName": "NEW",
         "badgeSlug": "newcastle",
         "badgePath": "/teams/newcastle.football-logos.cc.png"
       },
       "awayTeam": {
         "id": 1,
-        "name": "Manchester United",
+        "name": "Man Utd",
         "shortName": "MUN",
         "badgeSlug": "manchester-united",
         "badgePath": "/teams/manchester-united.football-logos.cc.png"
@@ -22221,14 +22221,14 @@
       "kickoffTime": "2026-03-04T19:30:00+00:00",
       "homeTeam": {
         "id": 43,
-        "name": "Manchester City",
+        "name": "Man City",
         "shortName": "MCI",
         "badgeSlug": "manchester-city",
         "badgePath": "/teams/manchester-city.football-logos.cc.png"
       },
       "awayTeam": {
         "id": 17,
-        "name": "Nottingham Forest",
+        "name": "Nott'm Forest",
         "shortName": "NFO",
         "badgeSlug": "nottingham-forest",
         "badgePath": "/teams/nottingham-forest.football-logos.cc.png"
@@ -22283,7 +22283,7 @@
       },
       "awayTeam": {
         "id": 21,
-        "name": "West Ham United",
+        "name": "West Ham",
         "shortName": "WHU",
         "badgeSlug": "west-ham",
         "badgePath": "/teams/west-ham.football-logos.cc.png"
@@ -22331,7 +22331,7 @@
       "kickoffTime": "2026-03-04T19:30:00+00:00",
       "homeTeam": {
         "id": 36,
-        "name": "Brighton & Hove Albion",
+        "name": "Brighton",
         "shortName": "BHA",
         "badgeSlug": "brighton",
         "badgePath": "/teams/brighton.football-logos.cc.png"
@@ -22441,7 +22441,7 @@
       "kickoffTime": "2026-03-03T20:15:00+00:00",
       "homeTeam": {
         "id": 39,
-        "name": "Wolverhampton Wanderers",
+        "name": "Wolves",
         "shortName": "WOL",
         "badgeSlug": "wolves",
         "badgePath": "/teams/wolves.football-logos.cc.png"
@@ -22496,7 +22496,7 @@
       "kickoffTime": "2026-03-03T19:30:00+00:00",
       "homeTeam": {
         "id": 2,
-        "name": "Leeds United",
+        "name": "Leeds",
         "shortName": "LEE",
         "badgeSlug": "leeds-united",
         "badgePath": "/teams/leeds-united.football-logos.cc.png"
@@ -22606,7 +22606,7 @@
       "kickoffTime": "2026-03-03T19:30:00+00:00",
       "homeTeam": {
         "id": 91,
-        "name": "AFC Bournemouth",
+        "name": "Bournemouth",
         "shortName": "BOU",
         "badgeSlug": "bournemouth",
         "badgePath": "/teams/bournemouth.football-logos.cc.png"
@@ -22716,7 +22716,7 @@
       "kickoffTime": "2026-03-01T14:00:00+00:00",
       "homeTeam": {
         "id": 1,
-        "name": "Manchester United",
+        "name": "Man Utd",
         "shortName": "MUN",
         "badgeSlug": "manchester-united",
         "badgePath": "/teams/manchester-united.football-logos.cc.png"
@@ -22778,7 +22778,7 @@
       },
       "awayTeam": {
         "id": 6,
-        "name": "Tottenham Hotspur",
+        "name": "Spurs",
         "shortName": "TOT",
         "badgeSlug": "tottenham",
         "badgePath": "/teams/tottenham.football-logos.cc.png"
@@ -22826,14 +22826,14 @@
       "kickoffTime": "2026-03-01T14:00:00+00:00",
       "homeTeam": {
         "id": 36,
-        "name": "Brighton & Hove Albion",
+        "name": "Brighton",
         "shortName": "BHA",
         "badgeSlug": "brighton",
         "badgePath": "/teams/brighton.football-logos.cc.png"
       },
       "awayTeam": {
         "id": 17,
-        "name": "Nottingham Forest",
+        "name": "Nott'm Forest",
         "shortName": "NFO",
         "badgeSlug": "nottingham-forest",
         "badgePath": "/teams/nottingham-forest.football-logos.cc.png"
@@ -22881,14 +22881,14 @@
       "kickoffTime": "2026-02-28T17:30:00+00:00",
       "homeTeam": {
         "id": 2,
-        "name": "Leeds United",
+        "name": "Leeds",
         "shortName": "LEE",
         "badgeSlug": "leeds-united",
         "badgePath": "/teams/leeds-united.football-logos.cc.png"
       },
       "awayTeam": {
         "id": 43,
-        "name": "Manchester City",
+        "name": "Man City",
         "shortName": "MCI",
         "badgeSlug": "manchester-city",
         "badgePath": "/teams/manchester-city.football-logos.cc.png"
@@ -22936,7 +22936,7 @@
       "kickoffTime": "2026-02-28T15:00:00+00:00",
       "homeTeam": {
         "id": 4,
-        "name": "Newcastle United",
+        "name": "Newcastle",
         "shortName": "NEW",
         "badgeSlug": "newcastle",
         "badgePath": "/teams/newcastle.football-logos.cc.png"
@@ -22998,7 +22998,7 @@
       },
       "awayTeam": {
         "id": 21,
-        "name": "West Ham United",
+        "name": "West Ham",
         "shortName": "WHU",
         "badgeSlug": "west-ham",
         "badgePath": "/teams/west-ham.football-logos.cc.png"
@@ -23101,7 +23101,7 @@
       "kickoffTime": "2026-02-28T12:30:00+00:00",
       "homeTeam": {
         "id": 91,
-        "name": "AFC Bournemouth",
+        "name": "Bournemouth",
         "shortName": "BOU",
         "badgeSlug": "bournemouth",
         "badgePath": "/teams/bournemouth.football-logos.cc.png"
@@ -23156,7 +23156,7 @@
       "kickoffTime": "2026-02-27T20:00:00+00:00",
       "homeTeam": {
         "id": 39,
-        "name": "Wolverhampton Wanderers",
+        "name": "Wolves",
         "shortName": "WOL",
         "badgeSlug": "wolves",
         "badgePath": "/teams/wolves.football-logos.cc.png"
@@ -23218,7 +23218,7 @@
       },
       "awayTeam": {
         "id": 1,
-        "name": "Manchester United",
+        "name": "Man Utd",
         "shortName": "MUN",
         "badgeSlug": "manchester-united",
         "badgePath": "/teams/manchester-united.football-logos.cc.png"
@@ -23266,7 +23266,7 @@
       "kickoffTime": "2026-02-22T16:30:00+00:00",
       "homeTeam": {
         "id": 6,
-        "name": "Tottenham Hotspur",
+        "name": "Spurs",
         "shortName": "TOT",
         "badgeSlug": "tottenham",
         "badgePath": "/teams/tottenham.football-logos.cc.png"
@@ -23376,7 +23376,7 @@
       "kickoffTime": "2026-02-22T14:00:00+00:00",
       "homeTeam": {
         "id": 17,
-        "name": "Nottingham Forest",
+        "name": "Nott'm Forest",
         "shortName": "NFO",
         "badgeSlug": "nottingham-forest",
         "badgePath": "/teams/nottingham-forest.football-logos.cc.png"
@@ -23438,7 +23438,7 @@
       },
       "awayTeam": {
         "id": 39,
-        "name": "Wolverhampton Wanderers",
+        "name": "Wolves",
         "shortName": "WOL",
         "badgeSlug": "wolves",
         "badgePath": "/teams/wolves.football-logos.cc.png"
@@ -23486,14 +23486,14 @@
       "kickoffTime": "2026-02-21T20:00:00+00:00",
       "homeTeam": {
         "id": 43,
-        "name": "Manchester City",
+        "name": "Man City",
         "shortName": "MCI",
         "badgeSlug": "manchester-city",
         "badgePath": "/teams/manchester-city.football-logos.cc.png"
       },
       "awayTeam": {
         "id": 4,
-        "name": "Newcastle United",
+        "name": "Newcastle",
         "shortName": "NEW",
         "badgeSlug": "newcastle",
         "badgePath": "/teams/newcastle.football-logos.cc.png"
@@ -23541,14 +23541,14 @@
       "kickoffTime": "2026-02-21T17:30:00+00:00",
       "homeTeam": {
         "id": 21,
-        "name": "West Ham United",
+        "name": "West Ham",
         "shortName": "WHU",
         "badgeSlug": "west-ham",
         "badgePath": "/teams/west-ham.football-logos.cc.png"
       },
       "awayTeam": {
         "id": 91,
-        "name": "AFC Bournemouth",
+        "name": "Bournemouth",
         "shortName": "BOU",
         "badgeSlug": "bournemouth",
         "badgePath": "/teams/bournemouth.football-logos.cc.png"
@@ -23658,7 +23658,7 @@
       },
       "awayTeam": {
         "id": 36,
-        "name": "Brighton & Hove Albion",
+        "name": "Brighton",
         "shortName": "BHA",
         "badgeSlug": "brighton",
         "badgePath": "/teams/brighton.football-logos.cc.png"
@@ -23713,7 +23713,7 @@
       },
       "awayTeam": {
         "id": 2,
-        "name": "Leeds United",
+        "name": "Leeds",
         "shortName": "LEE",
         "badgeSlug": "leeds-united",
         "badgePath": "/teams/leeds-united.football-logos.cc.png"
@@ -23761,7 +23761,7 @@
       "kickoffTime": "2026-02-18T20:00:00+00:00",
       "homeTeam": {
         "id": 39,
-        "name": "Wolverhampton Wanderers",
+        "name": "Wolves",
         "shortName": "WOL",
         "badgeSlug": "wolves",
         "badgePath": "/teams/wolves.football-logos.cc.png"
@@ -23981,14 +23981,14 @@
       "kickoffTime": "2026-02-11T19:30:00+00:00",
       "homeTeam": {
         "id": 17,
-        "name": "Nottingham Forest",
+        "name": "Nott'm Forest",
         "shortName": "NFO",
         "badgeSlug": "nottingham-forest",
         "badgePath": "/teams/nottingham-forest.football-logos.cc.png"
       },
       "awayTeam": {
         "id": 39,
-        "name": "Wolverhampton Wanderers",
+        "name": "Wolves",
         "shortName": "WOL",
         "badgeSlug": "wolves",
         "badgePath": "/teams/wolves.football-logos.cc.png"
@@ -24036,7 +24036,7 @@
       "kickoffTime": "2026-02-11T19:30:00+00:00",
       "homeTeam": {
         "id": 43,
-        "name": "Manchester City",
+        "name": "Man City",
         "shortName": "MCI",
         "badgeSlug": "manchester-city",
         "badgePath": "/teams/manchester-city.football-logos.cc.png"
@@ -24098,7 +24098,7 @@
       },
       "awayTeam": {
         "id": 36,
-        "name": "Brighton & Hove Albion",
+        "name": "Brighton",
         "shortName": "BHA",
         "badgeSlug": "brighton",
         "badgePath": "/teams/brighton.football-logos.cc.png"
@@ -24146,14 +24146,14 @@
       "kickoffTime": "2026-02-10T20:15:00+00:00",
       "homeTeam": {
         "id": 21,
-        "name": "West Ham United",
+        "name": "West Ham",
         "shortName": "WHU",
         "badgeSlug": "west-ham",
         "badgePath": "/teams/west-ham.football-logos.cc.png"
       },
       "awayTeam": {
         "id": 1,
-        "name": "Manchester United",
+        "name": "Man Utd",
         "shortName": "MUN",
         "badgeSlug": "manchester-united",
         "badgePath": "/teams/manchester-united.football-logos.cc.png"
@@ -24201,14 +24201,14 @@
       "kickoffTime": "2026-02-10T19:30:00+00:00",
       "homeTeam": {
         "id": 6,
-        "name": "Tottenham Hotspur",
+        "name": "Spurs",
         "shortName": "TOT",
         "badgeSlug": "tottenham",
         "badgePath": "/teams/tottenham.football-logos.cc.png"
       },
       "awayTeam": {
         "id": 4,
-        "name": "Newcastle United",
+        "name": "Newcastle",
         "shortName": "NEW",
         "badgeSlug": "newcastle",
         "badgePath": "/teams/newcastle.football-logos.cc.png"
@@ -24263,7 +24263,7 @@
       },
       "awayTeam": {
         "id": 91,
-        "name": "AFC Bournemouth",
+        "name": "Bournemouth",
         "shortName": "BOU",
         "badgeSlug": "bournemouth",
         "badgePath": "/teams/bournemouth.football-logos.cc.png"
@@ -24318,7 +24318,7 @@
       },
       "awayTeam": {
         "id": 2,
-        "name": "Leeds United",
+        "name": "Leeds",
         "shortName": "LEE",
         "badgeSlug": "leeds-united",
         "badgePath": "/teams/leeds-united.football-logos.cc.png"
@@ -24373,7 +24373,7 @@
       },
       "awayTeam": {
         "id": 43,
-        "name": "Manchester City",
+        "name": "Man City",
         "shortName": "MCI",
         "badgeSlug": "manchester-city",
         "badgePath": "/teams/manchester-city.football-logos.cc.png"
@@ -24421,7 +24421,7 @@
       "kickoffTime": "2026-02-08T14:00:00+00:00",
       "homeTeam": {
         "id": 36,
-        "name": "Brighton & Hove Albion",
+        "name": "Brighton",
         "shortName": "BHA",
         "badgeSlug": "brighton",
         "badgePath": "/teams/brighton.football-logos.cc.png"
@@ -24476,7 +24476,7 @@
       "kickoffTime": "2026-02-07T17:30:00+00:00",
       "homeTeam": {
         "id": 4,
-        "name": "Newcastle United",
+        "name": "Newcastle",
         "shortName": "NEW",
         "badgeSlug": "newcastle",
         "badgePath": "/teams/newcastle.football-logos.cc.png"
@@ -24531,7 +24531,7 @@
       "kickoffTime": "2026-02-07T15:00:00+00:00",
       "homeTeam": {
         "id": 39,
-        "name": "Wolverhampton Wanderers",
+        "name": "Wolves",
         "shortName": "WOL",
         "badgeSlug": "wolves",
         "badgePath": "/teams/wolves.football-logos.cc.png"
@@ -24648,7 +24648,7 @@
       },
       "awayTeam": {
         "id": 21,
-        "name": "West Ham United",
+        "name": "West Ham",
         "shortName": "WHU",
         "badgeSlug": "west-ham",
         "badgePath": "/teams/west-ham.football-logos.cc.png"
@@ -24751,7 +24751,7 @@
       "kickoffTime": "2026-02-07T15:00:00+00:00",
       "homeTeam": {
         "id": 91,
-        "name": "AFC Bournemouth",
+        "name": "Bournemouth",
         "shortName": "BOU",
         "badgeSlug": "bournemouth",
         "badgePath": "/teams/bournemouth.football-logos.cc.png"
@@ -24806,14 +24806,14 @@
       "kickoffTime": "2026-02-07T12:30:00+00:00",
       "homeTeam": {
         "id": 1,
-        "name": "Manchester United",
+        "name": "Man Utd",
         "shortName": "MUN",
         "badgeSlug": "manchester-united",
         "badgePath": "/teams/manchester-united.football-logos.cc.png"
       },
       "awayTeam": {
         "id": 6,
-        "name": "Tottenham Hotspur",
+        "name": "Spurs",
         "shortName": "TOT",
         "badgeSlug": "tottenham",
         "badgePath": "/teams/tottenham.football-logos.cc.png"
@@ -24861,14 +24861,14 @@
       "kickoffTime": "2026-02-06T20:00:00+00:00",
       "homeTeam": {
         "id": 2,
-        "name": "Leeds United",
+        "name": "Leeds",
         "shortName": "LEE",
         "badgeSlug": "leeds-united",
         "badgePath": "/teams/leeds-united.football-logos.cc.png"
       },
       "awayTeam": {
         "id": 17,
-        "name": "Nottingham Forest",
+        "name": "Nott'm Forest",
         "shortName": "NFO",
         "badgeSlug": "nottingham-forest",
         "badgePath": "/teams/nottingham-forest.football-logos.cc.png"
@@ -24971,14 +24971,14 @@
       "kickoffTime": "2026-02-01T16:30:00+00:00",
       "homeTeam": {
         "id": 6,
-        "name": "Tottenham Hotspur",
+        "name": "Spurs",
         "shortName": "TOT",
         "badgeSlug": "tottenham",
         "badgePath": "/teams/tottenham.football-logos.cc.png"
       },
       "awayTeam": {
         "id": 43,
-        "name": "Manchester City",
+        "name": "Man City",
         "shortName": "MCI",
         "badgeSlug": "manchester-city",
         "badgePath": "/teams/manchester-city.football-logos.cc.png"
@@ -25026,7 +25026,7 @@
       "kickoffTime": "2026-02-01T14:00:00+00:00",
       "homeTeam": {
         "id": 17,
-        "name": "Nottingham Forest",
+        "name": "Nott'm Forest",
         "shortName": "NFO",
         "badgeSlug": "nottingham-forest",
         "badgePath": "/teams/nottingham-forest.football-logos.cc.png"
@@ -25081,7 +25081,7 @@
       "kickoffTime": "2026-02-01T14:00:00+00:00",
       "homeTeam": {
         "id": 1,
-        "name": "Manchester United",
+        "name": "Man Utd",
         "shortName": "MUN",
         "badgeSlug": "manchester-united",
         "badgePath": "/teams/manchester-united.football-logos.cc.png"
@@ -25198,7 +25198,7 @@
       },
       "awayTeam": {
         "id": 4,
-        "name": "Newcastle United",
+        "name": "Newcastle",
         "shortName": "NEW",
         "badgeSlug": "newcastle",
         "badgePath": "/teams/newcastle.football-logos.cc.png"
@@ -25253,7 +25253,7 @@
       },
       "awayTeam": {
         "id": 21,
-        "name": "West Ham United",
+        "name": "West Ham",
         "shortName": "WHU",
         "badgeSlug": "west-ham",
         "badgePath": "/teams/west-ham.football-logos.cc.png"
@@ -25301,14 +25301,14 @@
       "kickoffTime": "2026-01-31T15:00:00+00:00",
       "homeTeam": {
         "id": 39,
-        "name": "Wolverhampton Wanderers",
+        "name": "Wolves",
         "shortName": "WOL",
         "badgeSlug": "wolves",
         "badgePath": "/teams/wolves.football-logos.cc.png"
       },
       "awayTeam": {
         "id": 91,
-        "name": "AFC Bournemouth",
+        "name": "Bournemouth",
         "shortName": "BOU",
         "badgeSlug": "bournemouth",
         "badgePath": "/teams/bournemouth.football-logos.cc.png"
@@ -25356,7 +25356,7 @@
       "kickoffTime": "2026-01-31T15:00:00+00:00",
       "homeTeam": {
         "id": 2,
-        "name": "Leeds United",
+        "name": "Leeds",
         "shortName": "LEE",
         "badgeSlug": "leeds-united",
         "badgePath": "/teams/leeds-united.football-logos.cc.png"
@@ -25411,7 +25411,7 @@
       "kickoffTime": "2026-01-31T15:00:00+00:00",
       "homeTeam": {
         "id": 36,
-        "name": "Brighton & Hove Albion",
+        "name": "Brighton",
         "shortName": "BHA",
         "badgeSlug": "brighton",
         "badgePath": "/teams/brighton.football-logos.cc.png"
@@ -25473,7 +25473,7 @@
       },
       "awayTeam": {
         "id": 2,
-        "name": "Leeds United",
+        "name": "Leeds",
         "shortName": "LEE",
         "badgeSlug": "leeds-united",
         "badgePath": "/teams/leeds-united.football-logos.cc.png"
@@ -25528,7 +25528,7 @@
       },
       "awayTeam": {
         "id": 1,
-        "name": "Manchester United",
+        "name": "Man Utd",
         "shortName": "MUN",
         "badgeSlug": "manchester-united",
         "badgePath": "/teams/manchester-united.football-logos.cc.png"
@@ -25576,7 +25576,7 @@
       "kickoffTime": "2026-01-25T14:00:00+00:00",
       "homeTeam": {
         "id": 4,
-        "name": "Newcastle United",
+        "name": "Newcastle",
         "shortName": "NEW",
         "badgeSlug": "newcastle",
         "badgePath": "/teams/newcastle.football-logos.cc.png"
@@ -25693,7 +25693,7 @@
       },
       "awayTeam": {
         "id": 17,
-        "name": "Nottingham Forest",
+        "name": "Nott'm Forest",
         "shortName": "NFO",
         "badgeSlug": "nottingham-forest",
         "badgePath": "/teams/nottingham-forest.football-logos.cc.png"
@@ -25741,7 +25741,7 @@
       "kickoffTime": "2026-01-24T17:30:00+00:00",
       "homeTeam": {
         "id": 91,
-        "name": "AFC Bournemouth",
+        "name": "Bournemouth",
         "shortName": "BOU",
         "badgeSlug": "bournemouth",
         "badgePath": "/teams/bournemouth.football-logos.cc.png"
@@ -25796,14 +25796,14 @@
       "kickoffTime": "2026-01-24T15:00:00+00:00",
       "homeTeam": {
         "id": 43,
-        "name": "Manchester City",
+        "name": "Man City",
         "shortName": "MCI",
         "badgeSlug": "manchester-city",
         "badgePath": "/teams/manchester-city.football-logos.cc.png"
       },
       "awayTeam": {
         "id": 39,
-        "name": "Wolverhampton Wanderers",
+        "name": "Wolves",
         "shortName": "WOL",
         "badgeSlug": "wolves",
         "badgePath": "/teams/wolves.football-logos.cc.png"
@@ -25858,7 +25858,7 @@
       },
       "awayTeam": {
         "id": 36,
-        "name": "Brighton & Hove Albion",
+        "name": "Brighton",
         "shortName": "BHA",
         "badgeSlug": "brighton",
         "badgePath": "/teams/brighton.football-logos.cc.png"
@@ -25913,7 +25913,7 @@
       },
       "awayTeam": {
         "id": 6,
-        "name": "Tottenham Hotspur",
+        "name": "Spurs",
         "shortName": "TOT",
         "badgeSlug": "tottenham",
         "badgePath": "/teams/tottenham.football-logos.cc.png"
@@ -25961,7 +25961,7 @@
       "kickoffTime": "2026-01-24T12:30:00+00:00",
       "homeTeam": {
         "id": 21,
-        "name": "West Ham United",
+        "name": "West Ham",
         "shortName": "WHU",
         "badgeSlug": "west-ham",
         "badgePath": "/teams/west-ham.football-logos.cc.png"
@@ -26016,14 +26016,14 @@
       "kickoffTime": "2026-01-19T20:00:00+00:00",
       "homeTeam": {
         "id": 36,
-        "name": "Brighton & Hove Albion",
+        "name": "Brighton",
         "shortName": "BHA",
         "badgeSlug": "brighton",
         "badgePath": "/teams/brighton.football-logos.cc.png"
       },
       "awayTeam": {
         "id": 91,
-        "name": "AFC Bournemouth",
+        "name": "Bournemouth",
         "shortName": "BOU",
         "badgeSlug": "bournemouth",
         "badgePath": "/teams/bournemouth.football-logos.cc.png"
@@ -26126,14 +26126,14 @@
       "kickoffTime": "2026-01-18T14:00:00+00:00",
       "homeTeam": {
         "id": 39,
-        "name": "Wolverhampton Wanderers",
+        "name": "Wolves",
         "shortName": "WOL",
         "badgeSlug": "wolves",
         "badgePath": "/teams/wolves.football-logos.cc.png"
       },
       "awayTeam": {
         "id": 4,
-        "name": "Newcastle United",
+        "name": "Newcastle",
         "shortName": "NEW",
         "badgeSlug": "newcastle",
         "badgePath": "/teams/newcastle.football-logos.cc.png"
@@ -26181,7 +26181,7 @@
       "kickoffTime": "2026-01-17T17:30:00+00:00",
       "homeTeam": {
         "id": 17,
-        "name": "Nottingham Forest",
+        "name": "Nott'm Forest",
         "shortName": "NFO",
         "badgeSlug": "nottingham-forest",
         "badgePath": "/teams/nottingham-forest.football-logos.cc.png"
@@ -26236,14 +26236,14 @@
       "kickoffTime": "2026-01-17T15:00:00+00:00",
       "homeTeam": {
         "id": 6,
-        "name": "Tottenham Hotspur",
+        "name": "Spurs",
         "shortName": "TOT",
         "badgeSlug": "tottenham",
         "badgePath": "/teams/tottenham.football-logos.cc.png"
       },
       "awayTeam": {
         "id": 21,
-        "name": "West Ham United",
+        "name": "West Ham",
         "shortName": "WHU",
         "badgeSlug": "west-ham",
         "badgePath": "/teams/west-ham.football-logos.cc.png"
@@ -26401,7 +26401,7 @@
       "kickoffTime": "2026-01-17T15:00:00+00:00",
       "homeTeam": {
         "id": 2,
-        "name": "Leeds United",
+        "name": "Leeds",
         "shortName": "LEE",
         "badgeSlug": "leeds-united",
         "badgePath": "/teams/leeds-united.football-logos.cc.png"
@@ -26511,14 +26511,14 @@
       "kickoffTime": "2026-01-17T12:30:00+00:00",
       "homeTeam": {
         "id": 1,
-        "name": "Manchester United",
+        "name": "Man Utd",
         "shortName": "MUN",
         "badgeSlug": "manchester-united",
         "badgePath": "/teams/manchester-united.football-logos.cc.png"
       },
       "awayTeam": {
         "id": 43,
-        "name": "Manchester City",
+        "name": "Man City",
         "shortName": "MCI",
         "badgeSlug": "manchester-city",
         "badgePath": "/teams/manchester-city.football-logos.cc.png"
@@ -26621,14 +26621,14 @@
       "kickoffTime": "2026-01-07T20:15:00+00:00",
       "homeTeam": {
         "id": 4,
-        "name": "Newcastle United",
+        "name": "Newcastle",
         "shortName": "NEW",
         "badgeSlug": "newcastle",
         "badgePath": "/teams/newcastle.football-logos.cc.png"
       },
       "awayTeam": {
         "id": 2,
-        "name": "Leeds United",
+        "name": "Leeds",
         "shortName": "LEE",
         "badgeSlug": "leeds-united",
         "badgePath": "/teams/leeds-united.football-logos.cc.png"
@@ -26683,7 +26683,7 @@
       },
       "awayTeam": {
         "id": 1,
-        "name": "Manchester United",
+        "name": "Man Utd",
         "shortName": "MUN",
         "badgeSlug": "manchester-united",
         "badgePath": "/teams/manchester-united.football-logos.cc.png"
@@ -26731,14 +26731,14 @@
       "kickoffTime": "2026-01-07T19:30:00+00:00",
       "homeTeam": {
         "id": 43,
-        "name": "Manchester City",
+        "name": "Man City",
         "shortName": "MCI",
         "badgeSlug": "manchester-city",
         "badgePath": "/teams/manchester-city.football-logos.cc.png"
       },
       "awayTeam": {
         "id": 36,
-        "name": "Brighton & Hove Albion",
+        "name": "Brighton",
         "shortName": "BHA",
         "badgeSlug": "brighton",
         "badgePath": "/teams/brighton.football-logos.cc.png"
@@ -26848,7 +26848,7 @@
       },
       "awayTeam": {
         "id": 39,
-        "name": "Wolverhampton Wanderers",
+        "name": "Wolves",
         "shortName": "WOL",
         "badgeSlug": "wolves",
         "badgePath": "/teams/wolves.football-logos.cc.png"
@@ -27006,14 +27006,14 @@
       "kickoffTime": "2026-01-07T19:30:00+00:00",
       "homeTeam": {
         "id": 91,
-        "name": "AFC Bournemouth",
+        "name": "Bournemouth",
         "shortName": "BOU",
         "badgeSlug": "bournemouth",
         "badgePath": "/teams/bournemouth.football-logos.cc.png"
       },
       "awayTeam": {
         "id": 6,
-        "name": "Tottenham Hotspur",
+        "name": "Spurs",
         "shortName": "TOT",
         "badgeSlug": "tottenham",
         "badgePath": "/teams/tottenham.football-logos.cc.png"
@@ -27061,14 +27061,14 @@
       "kickoffTime": "2026-01-06T20:00:00+00:00",
       "homeTeam": {
         "id": 21,
-        "name": "West Ham United",
+        "name": "West Ham",
         "shortName": "WHU",
         "badgeSlug": "west-ham",
         "badgePath": "/teams/west-ham.football-logos.cc.png"
       },
       "awayTeam": {
         "id": 17,
-        "name": "Nottingham Forest",
+        "name": "Nott'm Forest",
         "shortName": "NFO",
         "badgeSlug": "nottingham-forest",
         "badgePath": "/teams/nottingham-forest.football-logos.cc.png"
@@ -27116,7 +27116,7 @@
       "kickoffTime": "2026-01-04T17:30:00+00:00",
       "homeTeam": {
         "id": 43,
-        "name": "Manchester City",
+        "name": "Man City",
         "shortName": "MCI",
         "badgeSlug": "manchester-city",
         "badgePath": "/teams/manchester-city.football-logos.cc.png"
@@ -27226,7 +27226,7 @@
       "kickoffTime": "2026-01-04T15:00:00+00:00",
       "homeTeam": {
         "id": 6,
-        "name": "Tottenham Hotspur",
+        "name": "Spurs",
         "shortName": "TOT",
         "badgeSlug": "tottenham",
         "badgePath": "/teams/tottenham.football-logos.cc.png"
@@ -27281,7 +27281,7 @@
       "kickoffTime": "2026-01-04T15:00:00+00:00",
       "homeTeam": {
         "id": 4,
-        "name": "Newcastle United",
+        "name": "Newcastle",
         "shortName": "NEW",
         "badgeSlug": "newcastle",
         "badgePath": "/teams/newcastle.football-logos.cc.png"
@@ -27391,14 +27391,14 @@
       "kickoffTime": "2026-01-04T12:30:00+00:00",
       "homeTeam": {
         "id": 2,
-        "name": "Leeds United",
+        "name": "Leeds",
         "shortName": "LEE",
         "badgeSlug": "leeds-united",
         "badgePath": "/teams/leeds-united.football-logos.cc.png"
       },
       "awayTeam": {
         "id": 1,
-        "name": "Manchester United",
+        "name": "Man Utd",
         "shortName": "MUN",
         "badgeSlug": "manchester-united",
         "badgePath": "/teams/manchester-united.football-logos.cc.png"
@@ -27446,7 +27446,7 @@
       "kickoffTime": "2026-01-03T17:30:00+00:00",
       "homeTeam": {
         "id": 91,
-        "name": "AFC Bournemouth",
+        "name": "Bournemouth",
         "shortName": "BOU",
         "badgeSlug": "bournemouth",
         "badgePath": "/teams/bournemouth.football-logos.cc.png"
@@ -27501,14 +27501,14 @@
       "kickoffTime": "2026-01-03T15:00:00+00:00",
       "homeTeam": {
         "id": 39,
-        "name": "Wolverhampton Wanderers",
+        "name": "Wolves",
         "shortName": "WOL",
         "badgeSlug": "wolves",
         "badgePath": "/teams/wolves.football-logos.cc.png"
       },
       "awayTeam": {
         "id": 21,
-        "name": "West Ham United",
+        "name": "West Ham",
         "shortName": "WHU",
         "badgeSlug": "west-ham",
         "badgePath": "/teams/west-ham.football-logos.cc.png"
@@ -27556,7 +27556,7 @@
       "kickoffTime": "2026-01-03T15:00:00+00:00",
       "homeTeam": {
         "id": 36,
-        "name": "Brighton & Hove Albion",
+        "name": "Brighton",
         "shortName": "BHA",
         "badgeSlug": "brighton",
         "badgePath": "/teams/brighton.football-logos.cc.png"
@@ -27618,7 +27618,7 @@
       },
       "awayTeam": {
         "id": 17,
-        "name": "Nottingham Forest",
+        "name": "Nott'm Forest",
         "shortName": "NFO",
         "badgeSlug": "nottingham-forest",
         "badgePath": "/teams/nottingham-forest.football-logos.cc.png"
@@ -27673,7 +27673,7 @@
       },
       "awayTeam": {
         "id": 43,
-        "name": "Manchester City",
+        "name": "Man City",
         "shortName": "MCI",
         "badgeSlug": "manchester-city",
         "badgePath": "/teams/manchester-city.football-logos.cc.png"
@@ -27728,7 +27728,7 @@
       },
       "awayTeam": {
         "id": 6,
-        "name": "Tottenham Hotspur",
+        "name": "Spurs",
         "shortName": "TOT",
         "badgeSlug": "tottenham",
         "badgePath": "/teams/tottenham.football-logos.cc.png"
@@ -27783,7 +27783,7 @@
       },
       "awayTeam": {
         "id": 2,
-        "name": "Leeds United",
+        "name": "Leeds",
         "shortName": "LEE",
         "badgeSlug": "leeds-united",
         "badgePath": "/teams/leeds-united.football-logos.cc.png"
@@ -27886,14 +27886,14 @@
       "kickoffTime": "2025-12-30T20:15:00+00:00",
       "homeTeam": {
         "id": 1,
-        "name": "Manchester United",
+        "name": "Man Utd",
         "shortName": "MUN",
         "badgeSlug": "manchester-united",
         "badgePath": "/teams/manchester-united.football-logos.cc.png"
       },
       "awayTeam": {
         "id": 39,
-        "name": "Wolverhampton Wanderers",
+        "name": "Wolves",
         "shortName": "WOL",
         "badgeSlug": "wolves",
         "badgePath": "/teams/wolves.football-logos.cc.png"
@@ -27996,14 +27996,14 @@
       "kickoffTime": "2025-12-30T19:30:00+00:00",
       "homeTeam": {
         "id": 21,
-        "name": "West Ham United",
+        "name": "West Ham",
         "shortName": "WHU",
         "badgeSlug": "west-ham",
         "badgePath": "/teams/west-ham.football-logos.cc.png"
       },
       "awayTeam": {
         "id": 36,
-        "name": "Brighton & Hove Albion",
+        "name": "Brighton",
         "shortName": "BHA",
         "badgeSlug": "brighton",
         "badgePath": "/teams/brighton.football-logos.cc.png"
@@ -28051,7 +28051,7 @@
       "kickoffTime": "2025-12-30T19:30:00+00:00",
       "homeTeam": {
         "id": 17,
-        "name": "Nottingham Forest",
+        "name": "Nott'm Forest",
         "shortName": "NFO",
         "badgeSlug": "nottingham-forest",
         "badgePath": "/teams/nottingham-forest.football-logos.cc.png"
@@ -28113,7 +28113,7 @@
       },
       "awayTeam": {
         "id": 91,
-        "name": "AFC Bournemouth",
+        "name": "Bournemouth",
         "shortName": "BOU",
         "badgeSlug": "bournemouth",
         "badgePath": "/teams/bournemouth.football-logos.cc.png"
@@ -28168,7 +28168,7 @@
       },
       "awayTeam": {
         "id": 4,
-        "name": "Newcastle United",
+        "name": "Newcastle",
         "shortName": "NEW",
         "badgeSlug": "newcastle",
         "badgePath": "/teams/newcastle.football-logos.cc.png"
@@ -28223,7 +28223,7 @@
       },
       "awayTeam": {
         "id": 6,
-        "name": "Tottenham Hotspur",
+        "name": "Spurs",
         "shortName": "TOT",
         "badgeSlug": "tottenham",
         "badgePath": "/teams/tottenham.football-logos.cc.png"
@@ -28278,7 +28278,7 @@
       },
       "awayTeam": {
         "id": 2,
-        "name": "Leeds United",
+        "name": "Leeds",
         "shortName": "LEE",
         "badgeSlug": "leeds-united",
         "badgePath": "/teams/leeds-united.football-logos.cc.png"
@@ -28381,7 +28381,7 @@
       "kickoffTime": "2025-12-27T15:00:00+00:00",
       "homeTeam": {
         "id": 21,
-        "name": "West Ham United",
+        "name": "West Ham",
         "shortName": "WHU",
         "badgeSlug": "west-ham",
         "badgePath": "/teams/west-ham.football-logos.cc.png"
@@ -28443,7 +28443,7 @@
       },
       "awayTeam": {
         "id": 39,
-        "name": "Wolverhampton Wanderers",
+        "name": "Wolves",
         "shortName": "WOL",
         "badgeSlug": "wolves",
         "badgePath": "/teams/wolves.football-logos.cc.png"
@@ -28553,7 +28553,7 @@
       },
       "awayTeam": {
         "id": 91,
-        "name": "AFC Bournemouth",
+        "name": "Bournemouth",
         "shortName": "BOU",
         "badgeSlug": "bournemouth",
         "badgePath": "/teams/bournemouth.football-logos.cc.png"
@@ -28608,7 +28608,7 @@
       },
       "awayTeam": {
         "id": 36,
-        "name": "Brighton & Hove Albion",
+        "name": "Brighton",
         "shortName": "BHA",
         "badgeSlug": "brighton",
         "badgePath": "/teams/brighton.football-logos.cc.png"
@@ -28656,14 +28656,14 @@
       "kickoffTime": "2025-12-27T12:30:00+00:00",
       "homeTeam": {
         "id": 17,
-        "name": "Nottingham Forest",
+        "name": "Nott'm Forest",
         "shortName": "NFO",
         "badgeSlug": "nottingham-forest",
         "badgePath": "/teams/nottingham-forest.football-logos.cc.png"
       },
       "awayTeam": {
         "id": 43,
-        "name": "Manchester City",
+        "name": "Man City",
         "shortName": "MCI",
         "badgeSlug": "manchester-city",
         "badgePath": "/teams/manchester-city.football-logos.cc.png"
@@ -28711,14 +28711,14 @@
       "kickoffTime": "2025-12-26T20:00:00+00:00",
       "homeTeam": {
         "id": 1,
-        "name": "Manchester United",
+        "name": "Man Utd",
         "shortName": "MUN",
         "badgeSlug": "manchester-united",
         "badgePath": "/teams/manchester-united.football-logos.cc.png"
       },
       "awayTeam": {
         "id": 4,
-        "name": "Newcastle United",
+        "name": "Newcastle",
         "shortName": "NEW",
         "badgeSlug": "newcastle",
         "badgePath": "/teams/newcastle.football-logos.cc.png"
@@ -28773,7 +28773,7 @@
       },
       "awayTeam": {
         "id": 17,
-        "name": "Nottingham Forest",
+        "name": "Nott'm Forest",
         "shortName": "NFO",
         "badgeSlug": "nottingham-forest",
         "badgePath": "/teams/nottingham-forest.football-logos.cc.png"
@@ -28828,7 +28828,7 @@
       },
       "awayTeam": {
         "id": 1,
-        "name": "Manchester United",
+        "name": "Man Utd",
         "shortName": "MUN",
         "badgeSlug": "manchester-united",
         "badgePath": "/teams/manchester-united.football-logos.cc.png"
@@ -28876,7 +28876,7 @@
       "kickoffTime": "2025-12-20T20:00:00+00:00",
       "homeTeam": {
         "id": 2,
-        "name": "Leeds United",
+        "name": "Leeds",
         "shortName": "LEE",
         "badgeSlug": "leeds-united",
         "badgePath": "/teams/leeds-united.football-logos.cc.png"
@@ -28986,7 +28986,7 @@
       "kickoffTime": "2025-12-20T17:30:00+00:00",
       "homeTeam": {
         "id": 6,
-        "name": "Tottenham Hotspur",
+        "name": "Spurs",
         "shortName": "TOT",
         "badgeSlug": "tottenham",
         "badgePath": "/teams/tottenham.football-logos.cc.png"
@@ -29041,7 +29041,7 @@
       "kickoffTime": "2025-12-20T15:00:00+00:00",
       "homeTeam": {
         "id": 39,
-        "name": "Wolverhampton Wanderers",
+        "name": "Wolves",
         "shortName": "WOL",
         "badgeSlug": "wolves",
         "badgePath": "/teams/wolves.football-logos.cc.png"
@@ -29096,14 +29096,14 @@
       "kickoffTime": "2025-12-20T15:00:00+00:00",
       "homeTeam": {
         "id": 43,
-        "name": "Manchester City",
+        "name": "Man City",
         "shortName": "MCI",
         "badgeSlug": "manchester-city",
         "badgePath": "/teams/manchester-city.football-logos.cc.png"
       },
       "awayTeam": {
         "id": 21,
-        "name": "West Ham United",
+        "name": "West Ham",
         "shortName": "WHU",
         "badgeSlug": "west-ham",
         "badgePath": "/teams/west-ham.football-logos.cc.png"
@@ -29151,7 +29151,7 @@
       "kickoffTime": "2025-12-20T15:00:00+00:00",
       "homeTeam": {
         "id": 36,
-        "name": "Brighton & Hove Albion",
+        "name": "Brighton",
         "shortName": "BHA",
         "badgeSlug": "brighton",
         "badgePath": "/teams/brighton.football-logos.cc.png"
@@ -29206,7 +29206,7 @@
       "kickoffTime": "2025-12-20T15:00:00+00:00",
       "homeTeam": {
         "id": 91,
-        "name": "AFC Bournemouth",
+        "name": "Bournemouth",
         "shortName": "BOU",
         "badgeSlug": "bournemouth",
         "badgePath": "/teams/bournemouth.football-logos.cc.png"
@@ -29261,7 +29261,7 @@
       "kickoffTime": "2025-12-20T12:30:00+00:00",
       "homeTeam": {
         "id": 4,
-        "name": "Newcastle United",
+        "name": "Newcastle",
         "shortName": "NEW",
         "badgeSlug": "newcastle",
         "badgePath": "/teams/newcastle.football-logos.cc.png"
@@ -29316,14 +29316,14 @@
       "kickoffTime": "2025-12-15T20:00:00+00:00",
       "homeTeam": {
         "id": 1,
-        "name": "Manchester United",
+        "name": "Man Utd",
         "shortName": "MUN",
         "badgeSlug": "manchester-united",
         "badgePath": "/teams/manchester-united.football-logos.cc.png"
       },
       "awayTeam": {
         "id": 91,
-        "name": "AFC Bournemouth",
+        "name": "Bournemouth",
         "shortName": "BOU",
         "badgeSlug": "bournemouth",
         "badgePath": "/teams/bournemouth.football-logos.cc.png"
@@ -29378,7 +29378,7 @@
       },
       "awayTeam": {
         "id": 2,
-        "name": "Leeds United",
+        "name": "Leeds",
         "shortName": "LEE",
         "badgeSlug": "leeds-united",
         "badgePath": "/teams/leeds-united.football-logos.cc.png"
@@ -29426,7 +29426,7 @@
       "kickoffTime": "2025-12-14T14:00:00+00:00",
       "homeTeam": {
         "id": 21,
-        "name": "West Ham United",
+        "name": "West Ham",
         "shortName": "WHU",
         "badgeSlug": "west-ham",
         "badgePath": "/teams/west-ham.football-logos.cc.png"
@@ -29488,7 +29488,7 @@
       },
       "awayTeam": {
         "id": 4,
-        "name": "Newcastle United",
+        "name": "Newcastle",
         "shortName": "NEW",
         "badgeSlug": "newcastle",
         "badgePath": "/teams/newcastle.football-logos.cc.png"
@@ -29536,14 +29536,14 @@
       "kickoffTime": "2025-12-14T14:00:00+00:00",
       "homeTeam": {
         "id": 17,
-        "name": "Nottingham Forest",
+        "name": "Nott'm Forest",
         "shortName": "NFO",
         "badgeSlug": "nottingham-forest",
         "badgePath": "/teams/nottingham-forest.football-logos.cc.png"
       },
       "awayTeam": {
         "id": 6,
-        "name": "Tottenham Hotspur",
+        "name": "Spurs",
         "shortName": "TOT",
         "badgeSlug": "tottenham",
         "badgePath": "/teams/tottenham.football-logos.cc.png"
@@ -29598,7 +29598,7 @@
       },
       "awayTeam": {
         "id": 43,
-        "name": "Manchester City",
+        "name": "Man City",
         "shortName": "MCI",
         "badgeSlug": "manchester-city",
         "badgePath": "/teams/manchester-city.football-logos.cc.png"
@@ -29653,7 +29653,7 @@
       },
       "awayTeam": {
         "id": 39,
-        "name": "Wolverhampton Wanderers",
+        "name": "Wolves",
         "shortName": "WOL",
         "badgeSlug": "wolves",
         "badgePath": "/teams/wolves.football-logos.cc.png"
@@ -29763,7 +29763,7 @@
       },
       "awayTeam": {
         "id": 36,
-        "name": "Brighton & Hove Albion",
+        "name": "Brighton",
         "shortName": "BHA",
         "badgeSlug": "brighton",
         "badgePath": "/teams/brighton.football-logos.cc.png"
@@ -29866,14 +29866,14 @@
       "kickoffTime": "2025-12-08T20:00:00+00:00",
       "homeTeam": {
         "id": 39,
-        "name": "Wolverhampton Wanderers",
+        "name": "Wolves",
         "shortName": "WOL",
         "badgeSlug": "wolves",
         "badgePath": "/teams/wolves.football-logos.cc.png"
       },
       "awayTeam": {
         "id": 1,
-        "name": "Manchester United",
+        "name": "Man Utd",
         "shortName": "MUN",
         "badgeSlug": "manchester-united",
         "badgePath": "/teams/manchester-united.football-logos.cc.png"
@@ -29976,14 +29976,14 @@
       "kickoffTime": "2025-12-07T14:00:00+00:00",
       "homeTeam": {
         "id": 36,
-        "name": "Brighton & Hove Albion",
+        "name": "Brighton",
         "shortName": "BHA",
         "badgeSlug": "brighton",
         "badgePath": "/teams/brighton.football-logos.cc.png"
       },
       "awayTeam": {
         "id": 21,
-        "name": "West Ham United",
+        "name": "West Ham",
         "shortName": "WHU",
         "badgeSlug": "west-ham",
         "badgePath": "/teams/west-ham.football-logos.cc.png"
@@ -30031,7 +30031,7 @@
       "kickoffTime": "2025-12-06T17:30:00+00:00",
       "homeTeam": {
         "id": 2,
-        "name": "Leeds United",
+        "name": "Leeds",
         "shortName": "LEE",
         "badgeSlug": "leeds-united",
         "badgePath": "/teams/leeds-united.football-logos.cc.png"
@@ -30086,7 +30086,7 @@
       "kickoffTime": "2025-12-06T15:00:00+00:00",
       "homeTeam": {
         "id": 6,
-        "name": "Tottenham Hotspur",
+        "name": "Spurs",
         "shortName": "TOT",
         "badgeSlug": "tottenham",
         "badgePath": "/teams/tottenham.football-logos.cc.png"
@@ -30141,7 +30141,7 @@
       "kickoffTime": "2025-12-06T15:00:00+00:00",
       "homeTeam": {
         "id": 4,
-        "name": "Newcastle United",
+        "name": "Newcastle",
         "shortName": "NEW",
         "badgeSlug": "newcastle",
         "badgePath": "/teams/newcastle.football-logos.cc.png"
@@ -30196,7 +30196,7 @@
       "kickoffTime": "2025-12-06T15:00:00+00:00",
       "homeTeam": {
         "id": 43,
-        "name": "Manchester City",
+        "name": "Man City",
         "shortName": "MCI",
         "badgeSlug": "manchester-city",
         "badgePath": "/teams/manchester-city.football-logos.cc.png"
@@ -30258,7 +30258,7 @@
       },
       "awayTeam": {
         "id": 17,
-        "name": "Nottingham Forest",
+        "name": "Nott'm Forest",
         "shortName": "NFO",
         "badgeSlug": "nottingham-forest",
         "badgePath": "/teams/nottingham-forest.football-logos.cc.png"
@@ -30306,7 +30306,7 @@
       "kickoffTime": "2025-12-06T15:00:00+00:00",
       "homeTeam": {
         "id": 91,
-        "name": "AFC Bournemouth",
+        "name": "Bournemouth",
         "shortName": "BOU",
         "badgeSlug": "bournemouth",
         "badgePath": "/teams/bournemouth.football-logos.cc.png"
@@ -30416,14 +30416,14 @@
       "kickoffTime": "2025-12-04T20:00:00+00:00",
       "homeTeam": {
         "id": 1,
-        "name": "Manchester United",
+        "name": "Man Utd",
         "shortName": "MUN",
         "badgeSlug": "manchester-united",
         "badgePath": "/teams/manchester-united.football-logos.cc.png"
       },
       "awayTeam": {
         "id": 21,
-        "name": "West Ham United",
+        "name": "West Ham",
         "shortName": "WHU",
         "badgeSlug": "west-ham",
         "badgePath": "/teams/west-ham.football-logos.cc.png"
@@ -30526,7 +30526,7 @@
       "kickoffTime": "2025-12-03T20:15:00+00:00",
       "homeTeam": {
         "id": 2,
-        "name": "Leeds United",
+        "name": "Leeds",
         "shortName": "LEE",
         "badgeSlug": "leeds-united",
         "badgePath": "/teams/leeds-united.football-logos.cc.png"
@@ -30581,14 +30581,14 @@
       "kickoffTime": "2025-12-03T19:30:00+00:00",
       "homeTeam": {
         "id": 39,
-        "name": "Wolverhampton Wanderers",
+        "name": "Wolves",
         "shortName": "WOL",
         "badgeSlug": "wolves",
         "badgePath": "/teams/wolves.football-logos.cc.png"
       },
       "awayTeam": {
         "id": 17,
-        "name": "Nottingham Forest",
+        "name": "Nott'm Forest",
         "shortName": "NFO",
         "badgeSlug": "nottingham-forest",
         "badgePath": "/teams/nottingham-forest.football-logos.cc.png"
@@ -30691,7 +30691,7 @@
       "kickoffTime": "2025-12-03T19:30:00+00:00",
       "homeTeam": {
         "id": 36,
-        "name": "Brighton & Hove Albion",
+        "name": "Brighton",
         "shortName": "BHA",
         "badgeSlug": "brighton",
         "badgePath": "/teams/brighton.football-logos.cc.png"
@@ -30801,14 +30801,14 @@
       "kickoffTime": "2025-12-02T20:15:00+00:00",
       "homeTeam": {
         "id": 4,
-        "name": "Newcastle United",
+        "name": "Newcastle",
         "shortName": "NEW",
         "badgeSlug": "newcastle",
         "badgePath": "/teams/newcastle.football-logos.cc.png"
       },
       "awayTeam": {
         "id": 6,
-        "name": "Tottenham Hotspur",
+        "name": "Spurs",
         "shortName": "TOT",
         "badgeSlug": "tottenham",
         "badgePath": "/teams/tottenham.football-logos.cc.png"
@@ -30863,7 +30863,7 @@
       },
       "awayTeam": {
         "id": 43,
-        "name": "Manchester City",
+        "name": "Man City",
         "shortName": "MCI",
         "badgeSlug": "manchester-city",
         "badgePath": "/teams/manchester-city.football-logos.cc.png"
@@ -30911,7 +30911,7 @@
       "kickoffTime": "2025-12-02T19:30:00+00:00",
       "homeTeam": {
         "id": 91,
-        "name": "AFC Bournemouth",
+        "name": "Bournemouth",
         "shortName": "BOU",
         "badgeSlug": "bournemouth",
         "badgePath": "/teams/bournemouth.football-logos.cc.png"
@@ -31021,7 +31021,7 @@
       "kickoffTime": "2025-11-30T14:05:00+00:00",
       "homeTeam": {
         "id": 21,
-        "name": "West Ham United",
+        "name": "West Ham",
         "shortName": "WHU",
         "badgeSlug": "west-ham",
         "badgePath": "/teams/west-ham.football-logos.cc.png"
@@ -31076,14 +31076,14 @@
       "kickoffTime": "2025-11-30T14:05:00+00:00",
       "homeTeam": {
         "id": 17,
-        "name": "Nottingham Forest",
+        "name": "Nott'm Forest",
         "shortName": "NFO",
         "badgeSlug": "nottingham-forest",
         "badgePath": "/teams/nottingham-forest.football-logos.cc.png"
       },
       "awayTeam": {
         "id": 36,
-        "name": "Brighton & Hove Albion",
+        "name": "Brighton",
         "shortName": "BHA",
         "badgeSlug": "brighton",
         "badgePath": "/teams/brighton.football-logos.cc.png"
@@ -31138,7 +31138,7 @@
       },
       "awayTeam": {
         "id": 39,
-        "name": "Wolverhampton Wanderers",
+        "name": "Wolves",
         "shortName": "WOL",
         "badgeSlug": "wolves",
         "badgePath": "/teams/wolves.football-logos.cc.png"
@@ -31193,7 +31193,7 @@
       },
       "awayTeam": {
         "id": 1,
-        "name": "Manchester United",
+        "name": "Man Utd",
         "shortName": "MUN",
         "badgeSlug": "manchester-united",
         "badgePath": "/teams/manchester-united.football-logos.cc.png"
@@ -31241,7 +31241,7 @@
       "kickoffTime": "2025-11-29T20:00:00+00:00",
       "homeTeam": {
         "id": 6,
-        "name": "Tottenham Hotspur",
+        "name": "Spurs",
         "shortName": "TOT",
         "badgeSlug": "tottenham",
         "badgePath": "/teams/tottenham.football-logos.cc.png"
@@ -31303,7 +31303,7 @@
       },
       "awayTeam": {
         "id": 4,
-        "name": "Newcastle United",
+        "name": "Newcastle",
         "shortName": "NEW",
         "badgeSlug": "newcastle",
         "badgePath": "/teams/newcastle.football-logos.cc.png"
@@ -31358,7 +31358,7 @@
       },
       "awayTeam": {
         "id": 91,
-        "name": "AFC Bournemouth",
+        "name": "Bournemouth",
         "shortName": "BOU",
         "badgeSlug": "bournemouth",
         "badgePath": "/teams/bournemouth.football-logos.cc.png"
@@ -31406,14 +31406,14 @@
       "kickoffTime": "2025-11-29T15:00:00+00:00",
       "homeTeam": {
         "id": 43,
-        "name": "Manchester City",
+        "name": "Man City",
         "shortName": "MCI",
         "badgeSlug": "manchester-city",
         "badgePath": "/teams/manchester-city.football-logos.cc.png"
       },
       "awayTeam": {
         "id": 2,
-        "name": "Leeds United",
+        "name": "Leeds",
         "shortName": "LEE",
         "badgeSlug": "leeds-united",
         "badgePath": "/teams/leeds-united.football-logos.cc.png"
@@ -31516,7 +31516,7 @@
       "kickoffTime": "2025-11-24T20:00:00+00:00",
       "homeTeam": {
         "id": 1,
-        "name": "Manchester United",
+        "name": "Man Utd",
         "shortName": "MUN",
         "badgeSlug": "manchester-united",
         "badgePath": "/teams/manchester-united.football-logos.cc.png"
@@ -31578,7 +31578,7 @@
       },
       "awayTeam": {
         "id": 6,
-        "name": "Tottenham Hotspur",
+        "name": "Spurs",
         "shortName": "TOT",
         "badgeSlug": "tottenham",
         "badgePath": "/teams/tottenham.football-logos.cc.png"
@@ -31626,7 +31626,7 @@
       "kickoffTime": "2025-11-23T14:00:00+00:00",
       "homeTeam": {
         "id": 2,
-        "name": "Leeds United",
+        "name": "Leeds",
         "shortName": "LEE",
         "badgeSlug": "leeds-united",
         "badgePath": "/teams/leeds-united.football-logos.cc.png"
@@ -31681,14 +31681,14 @@
       "kickoffTime": "2025-11-22T17:30:00+00:00",
       "homeTeam": {
         "id": 4,
-        "name": "Newcastle United",
+        "name": "Newcastle",
         "shortName": "NEW",
         "badgeSlug": "newcastle",
         "badgePath": "/teams/newcastle.football-logos.cc.png"
       },
       "awayTeam": {
         "id": 43,
-        "name": "Manchester City",
+        "name": "Man City",
         "shortName": "MCI",
         "badgeSlug": "manchester-city",
         "badgePath": "/teams/manchester-city.football-logos.cc.png"
@@ -31736,7 +31736,7 @@
       "kickoffTime": "2025-11-22T15:00:00+00:00",
       "homeTeam": {
         "id": 39,
-        "name": "Wolverhampton Wanderers",
+        "name": "Wolves",
         "shortName": "WOL",
         "badgeSlug": "wolves",
         "badgePath": "/teams/wolves.football-logos.cc.png"
@@ -31798,7 +31798,7 @@
       },
       "awayTeam": {
         "id": 17,
-        "name": "Nottingham Forest",
+        "name": "Nott'm Forest",
         "shortName": "NFO",
         "badgeSlug": "nottingham-forest",
         "badgePath": "/teams/nottingham-forest.football-logos.cc.png"
@@ -31901,7 +31901,7 @@
       "kickoffTime": "2025-11-22T15:00:00+00:00",
       "homeTeam": {
         "id": 36,
-        "name": "Brighton & Hove Albion",
+        "name": "Brighton",
         "shortName": "BHA",
         "badgeSlug": "brighton",
         "badgePath": "/teams/brighton.football-logos.cc.png"
@@ -31956,14 +31956,14 @@
       "kickoffTime": "2025-11-22T15:00:00+00:00",
       "homeTeam": {
         "id": 91,
-        "name": "AFC Bournemouth",
+        "name": "Bournemouth",
         "shortName": "BOU",
         "badgeSlug": "bournemouth",
         "badgePath": "/teams/bournemouth.football-logos.cc.png"
       },
       "awayTeam": {
         "id": 21,
-        "name": "West Ham United",
+        "name": "West Ham",
         "shortName": "WHU",
         "badgeSlug": "west-ham",
         "badgePath": "/teams/west-ham.football-logos.cc.png"
@@ -32066,7 +32066,7 @@
       "kickoffTime": "2025-11-09T16:30:00+00:00",
       "homeTeam": {
         "id": 43,
-        "name": "Manchester City",
+        "name": "Man City",
         "shortName": "MCI",
         "badgeSlug": "manchester-city",
         "badgePath": "/teams/manchester-city.football-logos.cc.png"
@@ -32121,14 +32121,14 @@
       "kickoffTime": "2025-11-09T14:00:00+00:00",
       "homeTeam": {
         "id": 17,
-        "name": "Nottingham Forest",
+        "name": "Nott'm Forest",
         "shortName": "NFO",
         "badgeSlug": "nottingham-forest",
         "badgePath": "/teams/nottingham-forest.football-logos.cc.png"
       },
       "awayTeam": {
         "id": 2,
-        "name": "Leeds United",
+        "name": "Leeds",
         "shortName": "LEE",
         "badgeSlug": "leeds-united",
         "badgePath": "/teams/leeds-united.football-logos.cc.png"
@@ -32183,7 +32183,7 @@
       },
       "awayTeam": {
         "id": 36,
-        "name": "Brighton & Hove Albion",
+        "name": "Brighton",
         "shortName": "BHA",
         "badgeSlug": "brighton",
         "badgePath": "/teams/brighton.football-logos.cc.png"
@@ -32238,7 +32238,7 @@
       },
       "awayTeam": {
         "id": 4,
-        "name": "Newcastle United",
+        "name": "Newcastle",
         "shortName": "NEW",
         "badgeSlug": "newcastle",
         "badgePath": "/teams/newcastle.football-logos.cc.png"
@@ -32293,7 +32293,7 @@
       },
       "awayTeam": {
         "id": 91,
-        "name": "AFC Bournemouth",
+        "name": "Bournemouth",
         "shortName": "BOU",
         "badgeSlug": "bournemouth",
         "badgePath": "/teams/bournemouth.football-logos.cc.png"
@@ -32348,7 +32348,7 @@
       },
       "awayTeam": {
         "id": 39,
-        "name": "Wolverhampton Wanderers",
+        "name": "Wolves",
         "shortName": "WOL",
         "badgeSlug": "wolves",
         "badgePath": "/teams/wolves.football-logos.cc.png"
@@ -32451,7 +32451,7 @@
       "kickoffTime": "2025-11-08T15:00:00+00:00",
       "homeTeam": {
         "id": 21,
-        "name": "West Ham United",
+        "name": "West Ham",
         "shortName": "WHU",
         "badgeSlug": "west-ham",
         "badgePath": "/teams/west-ham.football-logos.cc.png"
@@ -32561,14 +32561,14 @@
       "kickoffTime": "2025-11-08T12:30:00+00:00",
       "homeTeam": {
         "id": 6,
-        "name": "Tottenham Hotspur",
+        "name": "Spurs",
         "shortName": "TOT",
         "badgeSlug": "tottenham",
         "badgePath": "/teams/tottenham.football-logos.cc.png"
       },
       "awayTeam": {
         "id": 1,
-        "name": "Manchester United",
+        "name": "Man Utd",
         "shortName": "MUN",
         "badgeSlug": "manchester-united",
         "badgePath": "/teams/manchester-united.football-logos.cc.png"
@@ -32671,14 +32671,14 @@
       "kickoffTime": "2025-11-02T16:30:00+00:00",
       "homeTeam": {
         "id": 43,
-        "name": "Manchester City",
+        "name": "Man City",
         "shortName": "MCI",
         "badgeSlug": "manchester-city",
         "badgePath": "/teams/manchester-city.football-logos.cc.png"
       },
       "awayTeam": {
         "id": 91,
-        "name": "AFC Bournemouth",
+        "name": "Bournemouth",
         "shortName": "BOU",
         "badgeSlug": "bournemouth",
         "badgePath": "/teams/bournemouth.football-logos.cc.png"
@@ -32726,14 +32726,14 @@
       "kickoffTime": "2025-11-02T14:00:00+00:00",
       "homeTeam": {
         "id": 21,
-        "name": "West Ham United",
+        "name": "West Ham",
         "shortName": "WHU",
         "badgeSlug": "west-ham",
         "badgePath": "/teams/west-ham.football-logos.cc.png"
       },
       "awayTeam": {
         "id": 4,
-        "name": "Newcastle United",
+        "name": "Newcastle",
         "shortName": "NEW",
         "badgeSlug": "newcastle",
         "badgePath": "/teams/newcastle.football-logos.cc.png"
@@ -32836,7 +32836,7 @@
       "kickoffTime": "2025-11-01T17:30:00+00:00",
       "homeTeam": {
         "id": 6,
-        "name": "Tottenham Hotspur",
+        "name": "Spurs",
         "shortName": "TOT",
         "badgeSlug": "tottenham",
         "badgePath": "/teams/tottenham.football-logos.cc.png"
@@ -32891,14 +32891,14 @@
       "kickoffTime": "2025-11-01T15:00:00+00:00",
       "homeTeam": {
         "id": 17,
-        "name": "Nottingham Forest",
+        "name": "Nott'm Forest",
         "shortName": "NFO",
         "badgeSlug": "nottingham-forest",
         "badgePath": "/teams/nottingham-forest.football-logos.cc.png"
       },
       "awayTeam": {
         "id": 1,
-        "name": "Manchester United",
+        "name": "Man Utd",
         "shortName": "MUN",
         "badgeSlug": "manchester-united",
         "badgePath": "/teams/manchester-united.football-logos.cc.png"
@@ -32953,7 +32953,7 @@
       },
       "awayTeam": {
         "id": 39,
-        "name": "Wolverhampton Wanderers",
+        "name": "Wolves",
         "shortName": "WOL",
         "badgeSlug": "wolves",
         "badgePath": "/teams/wolves.football-logos.cc.png"
@@ -33111,14 +33111,14 @@
       "kickoffTime": "2025-11-01T15:00:00+00:00",
       "homeTeam": {
         "id": 36,
-        "name": "Brighton & Hove Albion",
+        "name": "Brighton",
         "shortName": "BHA",
         "badgeSlug": "brighton",
         "badgePath": "/teams/brighton.football-logos.cc.png"
       },
       "awayTeam": {
         "id": 2,
-        "name": "Leeds United",
+        "name": "Leeds",
         "shortName": "LEE",
         "badgeSlug": "leeds-united",
         "badgePath": "/teams/leeds-united.football-logos.cc.png"
@@ -33173,7 +33173,7 @@
       },
       "awayTeam": {
         "id": 6,
-        "name": "Tottenham Hotspur",
+        "name": "Spurs",
         "shortName": "TOT",
         "badgeSlug": "tottenham",
         "badgePath": "/teams/tottenham.football-logos.cc.png"
@@ -33221,7 +33221,7 @@
       "kickoffTime": "2025-10-26T14:00:00+00:00",
       "homeTeam": {
         "id": 39,
-        "name": "Wolverhampton Wanderers",
+        "name": "Wolves",
         "shortName": "WOL",
         "badgeSlug": "wolves",
         "badgePath": "/teams/wolves.football-logos.cc.png"
@@ -33283,7 +33283,7 @@
       },
       "awayTeam": {
         "id": 43,
-        "name": "Manchester City",
+        "name": "Man City",
         "shortName": "MCI",
         "badgeSlug": "manchester-city",
         "badgePath": "/teams/manchester-city.football-logos.cc.png"
@@ -33386,14 +33386,14 @@
       "kickoffTime": "2025-10-26T14:00:00+00:00",
       "homeTeam": {
         "id": 91,
-        "name": "AFC Bournemouth",
+        "name": "Bournemouth",
         "shortName": "BOU",
         "badgeSlug": "bournemouth",
         "badgePath": "/teams/bournemouth.football-logos.cc.png"
       },
       "awayTeam": {
         "id": 17,
-        "name": "Nottingham Forest",
+        "name": "Nott'm Forest",
         "shortName": "NFO",
         "badgeSlug": "nottingham-forest",
         "badgePath": "/teams/nottingham-forest.football-logos.cc.png"
@@ -33496,14 +33496,14 @@
       "kickoffTime": "2025-10-25T16:30:00+00:00",
       "homeTeam": {
         "id": 1,
-        "name": "Manchester United",
+        "name": "Man Utd",
         "shortName": "MUN",
         "badgeSlug": "manchester-united",
         "badgePath": "/teams/manchester-united.football-logos.cc.png"
       },
       "awayTeam": {
         "id": 36,
-        "name": "Brighton & Hove Albion",
+        "name": "Brighton",
         "shortName": "BHA",
         "badgeSlug": "brighton",
         "badgePath": "/teams/brighton.football-logos.cc.png"
@@ -33551,7 +33551,7 @@
       "kickoffTime": "2025-10-25T14:00:00+00:00",
       "homeTeam": {
         "id": 4,
-        "name": "Newcastle United",
+        "name": "Newcastle",
         "shortName": "NEW",
         "badgeSlug": "newcastle",
         "badgePath": "/teams/newcastle.football-logos.cc.png"
@@ -33661,14 +33661,14 @@
       "kickoffTime": "2025-10-24T19:00:00+00:00",
       "homeTeam": {
         "id": 2,
-        "name": "Leeds United",
+        "name": "Leeds",
         "shortName": "LEE",
         "badgeSlug": "leeds-united",
         "badgePath": "/teams/leeds-united.football-logos.cc.png"
       },
       "awayTeam": {
         "id": 21,
-        "name": "West Ham United",
+        "name": "West Ham",
         "shortName": "WHU",
         "badgeSlug": "west-ham",
         "badgePath": "/teams/west-ham.football-logos.cc.png"
@@ -33716,7 +33716,7 @@
       "kickoffTime": "2025-10-20T19:00:00+00:00",
       "homeTeam": {
         "id": 21,
-        "name": "West Ham United",
+        "name": "West Ham",
         "shortName": "WHU",
         "badgeSlug": "west-ham",
         "badgePath": "/teams/west-ham.football-logos.cc.png"
@@ -33778,7 +33778,7 @@
       },
       "awayTeam": {
         "id": 1,
-        "name": "Manchester United",
+        "name": "Man Utd",
         "shortName": "MUN",
         "badgeSlug": "manchester-united",
         "badgePath": "/teams/manchester-united.football-logos.cc.png"
@@ -33826,7 +33826,7 @@
       "kickoffTime": "2025-10-19T13:00:00+00:00",
       "homeTeam": {
         "id": 6,
-        "name": "Tottenham Hotspur",
+        "name": "Spurs",
         "shortName": "TOT",
         "badgeSlug": "tottenham",
         "badgePath": "/teams/tottenham.football-logos.cc.png"
@@ -33943,7 +33943,7 @@
       },
       "awayTeam": {
         "id": 39,
-        "name": "Wolverhampton Wanderers",
+        "name": "Wolves",
         "shortName": "WOL",
         "badgeSlug": "wolves",
         "badgePath": "/teams/wolves.football-logos.cc.png"
@@ -33991,7 +33991,7 @@
       "kickoffTime": "2025-10-18T14:00:00+00:00",
       "homeTeam": {
         "id": 43,
-        "name": "Manchester City",
+        "name": "Man City",
         "shortName": "MCI",
         "badgeSlug": "manchester-city",
         "badgePath": "/teams/manchester-city.football-logos.cc.png"
@@ -34053,7 +34053,7 @@
       },
       "awayTeam": {
         "id": 91,
-        "name": "AFC Bournemouth",
+        "name": "Bournemouth",
         "shortName": "BOU",
         "badgeSlug": "bournemouth",
         "badgePath": "/teams/bournemouth.football-logos.cc.png"
@@ -34108,7 +34108,7 @@
       },
       "awayTeam": {
         "id": 2,
-        "name": "Leeds United",
+        "name": "Leeds",
         "shortName": "LEE",
         "badgeSlug": "leeds-united",
         "badgePath": "/teams/leeds-united.football-logos.cc.png"
@@ -34156,14 +34156,14 @@
       "kickoffTime": "2025-10-18T14:00:00+00:00",
       "homeTeam": {
         "id": 36,
-        "name": "Brighton & Hove Albion",
+        "name": "Brighton",
         "shortName": "BHA",
         "badgeSlug": "brighton",
         "badgePath": "/teams/brighton.football-logos.cc.png"
       },
       "awayTeam": {
         "id": 4,
-        "name": "Newcastle United",
+        "name": "Newcastle",
         "shortName": "NEW",
         "badgeSlug": "newcastle",
         "badgePath": "/teams/newcastle.football-logos.cc.png"
@@ -34211,7 +34211,7 @@
       "kickoffTime": "2025-10-18T11:30:00+00:00",
       "homeTeam": {
         "id": 17,
-        "name": "Nottingham Forest",
+        "name": "Nott'm Forest",
         "shortName": "NFO",
         "badgeSlug": "nottingham-forest",
         "badgePath": "/teams/nottingham-forest.football-logos.cc.png"
@@ -34273,7 +34273,7 @@
       },
       "awayTeam": {
         "id": 43,
-        "name": "Manchester City",
+        "name": "Man City",
         "shortName": "MCI",
         "badgeSlug": "manchester-city",
         "badgePath": "/teams/manchester-city.football-logos.cc.png"
@@ -34321,14 +34321,14 @@
       "kickoffTime": "2025-10-05T13:00:00+00:00",
       "homeTeam": {
         "id": 39,
-        "name": "Wolverhampton Wanderers",
+        "name": "Wolves",
         "shortName": "WOL",
         "badgeSlug": "wolves",
         "badgePath": "/teams/wolves.football-logos.cc.png"
       },
       "awayTeam": {
         "id": 36,
-        "name": "Brighton & Hove Albion",
+        "name": "Brighton",
         "shortName": "BHA",
         "badgeSlug": "brighton",
         "badgePath": "/teams/brighton.football-logos.cc.png"
@@ -34376,14 +34376,14 @@
       "kickoffTime": "2025-10-05T13:00:00+00:00",
       "homeTeam": {
         "id": 4,
-        "name": "Newcastle United",
+        "name": "Newcastle",
         "shortName": "NEW",
         "badgeSlug": "newcastle",
         "badgePath": "/teams/newcastle.football-logos.cc.png"
       },
       "awayTeam": {
         "id": 17,
-        "name": "Nottingham Forest",
+        "name": "Nott'm Forest",
         "shortName": "NFO",
         "badgeSlug": "nottingham-forest",
         "badgePath": "/teams/nottingham-forest.football-logos.cc.png"
@@ -34596,7 +34596,7 @@
       "kickoffTime": "2025-10-04T14:00:00+00:00",
       "homeTeam": {
         "id": 1,
-        "name": "Manchester United",
+        "name": "Man Utd",
         "shortName": "MUN",
         "badgeSlug": "manchester-united",
         "badgePath": "/teams/manchester-united.football-logos.cc.png"
@@ -34658,7 +34658,7 @@
       },
       "awayTeam": {
         "id": 21,
-        "name": "West Ham United",
+        "name": "West Ham",
         "shortName": "WHU",
         "badgeSlug": "west-ham",
         "badgePath": "/teams/west-ham.football-logos.cc.png"
@@ -34706,14 +34706,14 @@
       "kickoffTime": "2025-10-04T11:30:00+00:00",
       "homeTeam": {
         "id": 2,
-        "name": "Leeds United",
+        "name": "Leeds",
         "shortName": "LEE",
         "badgeSlug": "leeds-united",
         "badgePath": "/teams/leeds-united.football-logos.cc.png"
       },
       "awayTeam": {
         "id": 6,
-        "name": "Tottenham Hotspur",
+        "name": "Spurs",
         "shortName": "TOT",
         "badgeSlug": "tottenham",
         "badgePath": "/teams/tottenham.football-logos.cc.png"
@@ -34761,7 +34761,7 @@
       "kickoffTime": "2025-10-03T19:00:00+00:00",
       "homeTeam": {
         "id": 91,
-        "name": "AFC Bournemouth",
+        "name": "Bournemouth",
         "shortName": "BOU",
         "badgeSlug": "bournemouth",
         "badgePath": "/teams/bournemouth.football-logos.cc.png"
@@ -34823,7 +34823,7 @@
       },
       "awayTeam": {
         "id": 21,
-        "name": "West Ham United",
+        "name": "West Ham",
         "shortName": "WHU",
         "badgeSlug": "west-ham",
         "badgePath": "/teams/west-ham.football-logos.cc.png"
@@ -34871,7 +34871,7 @@
       "kickoffTime": "2025-09-28T15:30:00+00:00",
       "homeTeam": {
         "id": 4,
-        "name": "Newcastle United",
+        "name": "Newcastle",
         "shortName": "NEW",
         "badgeSlug": "newcastle",
         "badgePath": "/teams/newcastle.football-logos.cc.png"
@@ -34981,14 +34981,14 @@
       "kickoffTime": "2025-09-27T19:00:00+00:00",
       "homeTeam": {
         "id": 6,
-        "name": "Tottenham Hotspur",
+        "name": "Spurs",
         "shortName": "TOT",
         "badgeSlug": "tottenham",
         "badgePath": "/teams/tottenham.football-logos.cc.png"
       },
       "awayTeam": {
         "id": 39,
-        "name": "Wolverhampton Wanderers",
+        "name": "Wolves",
         "shortName": "WOL",
         "badgeSlug": "wolves",
         "badgePath": "/teams/wolves.football-logos.cc.png"
@@ -35036,7 +35036,7 @@
       "kickoffTime": "2025-09-27T16:30:00+00:00",
       "homeTeam": {
         "id": 17,
-        "name": "Nottingham Forest",
+        "name": "Nott'm Forest",
         "shortName": "NFO",
         "badgeSlug": "nottingham-forest",
         "badgePath": "/teams/nottingham-forest.football-logos.cc.png"
@@ -35091,7 +35091,7 @@
       "kickoffTime": "2025-09-27T14:00:00+00:00",
       "homeTeam": {
         "id": 43,
-        "name": "Manchester City",
+        "name": "Man City",
         "shortName": "MCI",
         "badgeSlug": "manchester-city",
         "badgePath": "/teams/manchester-city.football-logos.cc.png"
@@ -35146,14 +35146,14 @@
       "kickoffTime": "2025-09-27T14:00:00+00:00",
       "homeTeam": {
         "id": 2,
-        "name": "Leeds United",
+        "name": "Leeds",
         "shortName": "LEE",
         "badgeSlug": "leeds-united",
         "badgePath": "/teams/leeds-united.football-logos.cc.png"
       },
       "awayTeam": {
         "id": 91,
-        "name": "AFC Bournemouth",
+        "name": "Bournemouth",
         "shortName": "BOU",
         "badgeSlug": "bournemouth",
         "badgePath": "/teams/bournemouth.football-logos.cc.png"
@@ -35263,7 +35263,7 @@
       },
       "awayTeam": {
         "id": 36,
-        "name": "Brighton & Hove Albion",
+        "name": "Brighton",
         "shortName": "BHA",
         "badgeSlug": "brighton",
         "badgePath": "/teams/brighton.football-logos.cc.png"
@@ -35318,7 +35318,7 @@
       },
       "awayTeam": {
         "id": 1,
-        "name": "Manchester United",
+        "name": "Man Utd",
         "shortName": "MUN",
         "badgeSlug": "manchester-united",
         "badgePath": "/teams/manchester-united.football-logos.cc.png"
@@ -35373,7 +35373,7 @@
       },
       "awayTeam": {
         "id": 43,
-        "name": "Manchester City",
+        "name": "Man City",
         "shortName": "MCI",
         "badgeSlug": "manchester-city",
         "badgePath": "/teams/manchester-city.football-logos.cc.png"
@@ -35476,14 +35476,14 @@
       "kickoffTime": "2025-09-21T13:00:00+00:00",
       "homeTeam": {
         "id": 91,
-        "name": "AFC Bournemouth",
+        "name": "Bournemouth",
         "shortName": "BOU",
         "badgeSlug": "bournemouth",
         "badgePath": "/teams/bournemouth.football-logos.cc.png"
       },
       "awayTeam": {
         "id": 4,
-        "name": "Newcastle United",
+        "name": "Newcastle",
         "shortName": "NEW",
         "badgeSlug": "newcastle",
         "badgePath": "/teams/newcastle.football-logos.cc.png"
@@ -35586,7 +35586,7 @@
       "kickoffTime": "2025-09-20T16:30:00+00:00",
       "homeTeam": {
         "id": 1,
-        "name": "Manchester United",
+        "name": "Man Utd",
         "shortName": "MUN",
         "badgeSlug": "manchester-united",
         "badgePath": "/teams/manchester-united.football-logos.cc.png"
@@ -35641,14 +35641,14 @@
       "kickoffTime": "2025-09-20T14:00:00+00:00",
       "homeTeam": {
         "id": 39,
-        "name": "Wolverhampton Wanderers",
+        "name": "Wolves",
         "shortName": "WOL",
         "badgeSlug": "wolves",
         "badgePath": "/teams/wolves.football-logos.cc.png"
       },
       "awayTeam": {
         "id": 2,
-        "name": "Leeds United",
+        "name": "Leeds",
         "shortName": "LEE",
         "badgeSlug": "leeds-united",
         "badgePath": "/teams/leeds-united.football-logos.cc.png"
@@ -35696,7 +35696,7 @@
       "kickoffTime": "2025-09-20T14:00:00+00:00",
       "homeTeam": {
         "id": 21,
-        "name": "West Ham United",
+        "name": "West Ham",
         "shortName": "WHU",
         "badgeSlug": "west-ham",
         "badgePath": "/teams/west-ham.football-logos.cc.png"
@@ -35758,7 +35758,7 @@
       },
       "awayTeam": {
         "id": 17,
-        "name": "Nottingham Forest",
+        "name": "Nott'm Forest",
         "shortName": "NFO",
         "badgeSlug": "nottingham-forest",
         "badgePath": "/teams/nottingham-forest.football-logos.cc.png"
@@ -35806,14 +35806,14 @@
       "kickoffTime": "2025-09-20T14:00:00+00:00",
       "homeTeam": {
         "id": 36,
-        "name": "Brighton & Hove Albion",
+        "name": "Brighton",
         "shortName": "BHA",
         "badgeSlug": "brighton",
         "badgePath": "/teams/brighton.football-logos.cc.png"
       },
       "awayTeam": {
         "id": 6,
-        "name": "Tottenham Hotspur",
+        "name": "Spurs",
         "shortName": "TOT",
         "badgeSlug": "tottenham",
         "badgePath": "/teams/tottenham.football-logos.cc.png"
@@ -35916,14 +35916,14 @@
       "kickoffTime": "2025-09-14T15:30:00+00:00",
       "homeTeam": {
         "id": 43,
-        "name": "Manchester City",
+        "name": "Man City",
         "shortName": "MCI",
         "badgeSlug": "manchester-city",
         "badgePath": "/teams/manchester-city.football-logos.cc.png"
       },
       "awayTeam": {
         "id": 1,
-        "name": "Manchester United",
+        "name": "Man Utd",
         "shortName": "MUN",
         "badgeSlug": "manchester-united",
         "badgePath": "/teams/manchester-united.football-logos.cc.png"
@@ -36081,14 +36081,14 @@
       "kickoffTime": "2025-09-13T16:30:00+00:00",
       "homeTeam": {
         "id": 21,
-        "name": "West Ham United",
+        "name": "West Ham",
         "shortName": "WHU",
         "badgeSlug": "west-ham",
         "badgePath": "/teams/west-ham.football-logos.cc.png"
       },
       "awayTeam": {
         "id": 6,
-        "name": "Tottenham Hotspur",
+        "name": "Spurs",
         "shortName": "TOT",
         "badgeSlug": "tottenham",
         "badgePath": "/teams/tottenham.football-logos.cc.png"
@@ -36136,14 +36136,14 @@
       "kickoffTime": "2025-09-13T14:00:00+00:00",
       "homeTeam": {
         "id": 4,
-        "name": "Newcastle United",
+        "name": "Newcastle",
         "shortName": "NEW",
         "badgeSlug": "newcastle",
         "badgePath": "/teams/newcastle.football-logos.cc.png"
       },
       "awayTeam": {
         "id": 39,
-        "name": "Wolverhampton Wanderers",
+        "name": "Wolves",
         "shortName": "WOL",
         "badgeSlug": "wolves",
         "badgePath": "/teams/wolves.football-logos.cc.png"
@@ -36198,7 +36198,7 @@
       },
       "awayTeam": {
         "id": 2,
-        "name": "Leeds United",
+        "name": "Leeds",
         "shortName": "LEE",
         "badgeSlug": "leeds-united",
         "badgePath": "/teams/leeds-united.football-logos.cc.png"
@@ -36356,14 +36356,14 @@
       "kickoffTime": "2025-09-13T14:00:00+00:00",
       "homeTeam": {
         "id": 91,
-        "name": "AFC Bournemouth",
+        "name": "Bournemouth",
         "shortName": "BOU",
         "badgeSlug": "bournemouth",
         "badgePath": "/teams/bournemouth.football-logos.cc.png"
       },
       "awayTeam": {
         "id": 36,
-        "name": "Brighton & Hove Albion",
+        "name": "Brighton",
         "shortName": "BHA",
         "badgeSlug": "brighton",
         "badgePath": "/teams/brighton.football-logos.cc.png"
@@ -36418,7 +36418,7 @@
       },
       "awayTeam": {
         "id": 17,
-        "name": "Nottingham Forest",
+        "name": "Nott'm Forest",
         "shortName": "NFO",
         "badgeSlug": "nottingham-forest",
         "badgePath": "/teams/nottingham-forest.football-logos.cc.png"
@@ -36576,14 +36576,14 @@
       "kickoffTime": "2025-08-31T13:00:00+00:00",
       "homeTeam": {
         "id": 17,
-        "name": "Nottingham Forest",
+        "name": "Nott'm Forest",
         "shortName": "NFO",
         "badgeSlug": "nottingham-forest",
         "badgePath": "/teams/nottingham-forest.football-logos.cc.png"
       },
       "awayTeam": {
         "id": 21,
-        "name": "West Ham United",
+        "name": "West Ham",
         "shortName": "WHU",
         "badgeSlug": "west-ham",
         "badgePath": "/teams/west-ham.football-logos.cc.png"
@@ -36631,14 +36631,14 @@
       "kickoffTime": "2025-08-31T13:00:00+00:00",
       "homeTeam": {
         "id": 36,
-        "name": "Brighton & Hove Albion",
+        "name": "Brighton",
         "shortName": "BHA",
         "badgeSlug": "brighton",
         "badgePath": "/teams/brighton.football-logos.cc.png"
       },
       "awayTeam": {
         "id": 43,
-        "name": "Manchester City",
+        "name": "Man City",
         "shortName": "MCI",
         "badgeSlug": "manchester-city",
         "badgePath": "/teams/manchester-city.football-logos.cc.png"
@@ -36686,14 +36686,14 @@
       "kickoffTime": "2025-08-30T16:30:00+00:00",
       "homeTeam": {
         "id": 2,
-        "name": "Leeds United",
+        "name": "Leeds",
         "shortName": "LEE",
         "badgeSlug": "leeds-united",
         "badgePath": "/teams/leeds-united.football-logos.cc.png"
       },
       "awayTeam": {
         "id": 4,
-        "name": "Newcastle United",
+        "name": "Newcastle",
         "shortName": "NEW",
         "badgeSlug": "newcastle",
         "badgePath": "/teams/newcastle.football-logos.cc.png"
@@ -36741,7 +36741,7 @@
       "kickoffTime": "2025-08-30T14:00:00+00:00",
       "homeTeam": {
         "id": 39,
-        "name": "Wolverhampton Wanderers",
+        "name": "Wolves",
         "shortName": "WOL",
         "badgeSlug": "wolves",
         "badgePath": "/teams/wolves.football-logos.cc.png"
@@ -36796,14 +36796,14 @@
       "kickoffTime": "2025-08-30T14:00:00+00:00",
       "homeTeam": {
         "id": 6,
-        "name": "Tottenham Hotspur",
+        "name": "Spurs",
         "shortName": "TOT",
         "badgeSlug": "tottenham",
         "badgePath": "/teams/tottenham.football-logos.cc.png"
       },
       "awayTeam": {
         "id": 91,
-        "name": "AFC Bournemouth",
+        "name": "Bournemouth",
         "shortName": "BOU",
         "badgeSlug": "bournemouth",
         "badgePath": "/teams/bournemouth.football-logos.cc.png"
@@ -36906,7 +36906,7 @@
       "kickoffTime": "2025-08-30T14:00:00+00:00",
       "homeTeam": {
         "id": 1,
-        "name": "Manchester United",
+        "name": "Man Utd",
         "shortName": "MUN",
         "badgeSlug": "manchester-united",
         "badgePath": "/teams/manchester-united.football-logos.cc.png"
@@ -37016,7 +37016,7 @@
       "kickoffTime": "2025-08-25T19:00:00+00:00",
       "homeTeam": {
         "id": 4,
-        "name": "Newcastle United",
+        "name": "Newcastle",
         "shortName": "NEW",
         "badgeSlug": "newcastle",
         "badgePath": "/teams/newcastle.football-logos.cc.png"
@@ -37078,7 +37078,7 @@
       },
       "awayTeam": {
         "id": 1,
-        "name": "Manchester United",
+        "name": "Man Utd",
         "shortName": "MUN",
         "badgeSlug": "manchester-united",
         "badgePath": "/teams/manchester-united.football-logos.cc.png"
@@ -37133,7 +37133,7 @@
       },
       "awayTeam": {
         "id": 36,
-        "name": "Brighton & Hove Albion",
+        "name": "Brighton",
         "shortName": "BHA",
         "badgeSlug": "brighton",
         "badgePath": "/teams/brighton.football-logos.cc.png"
@@ -37188,7 +37188,7 @@
       },
       "awayTeam": {
         "id": 17,
-        "name": "Nottingham Forest",
+        "name": "Nott'm Forest",
         "shortName": "NFO",
         "badgeSlug": "nottingham-forest",
         "badgePath": "/teams/nottingham-forest.football-logos.cc.png"
@@ -37243,7 +37243,7 @@
       },
       "awayTeam": {
         "id": 2,
-        "name": "Leeds United",
+        "name": "Leeds",
         "shortName": "LEE",
         "badgeSlug": "leeds-united",
         "badgePath": "/teams/leeds-united.football-logos.cc.png"
@@ -37401,14 +37401,14 @@
       "kickoffTime": "2025-08-23T14:00:00+00:00",
       "homeTeam": {
         "id": 91,
-        "name": "AFC Bournemouth",
+        "name": "Bournemouth",
         "shortName": "BOU",
         "badgeSlug": "bournemouth",
         "badgePath": "/teams/bournemouth.football-logos.cc.png"
       },
       "awayTeam": {
         "id": 39,
-        "name": "Wolverhampton Wanderers",
+        "name": "Wolves",
         "shortName": "WOL",
         "badgeSlug": "wolves",
         "badgePath": "/teams/wolves.football-logos.cc.png"
@@ -37456,14 +37456,14 @@
       "kickoffTime": "2025-08-23T11:30:00+00:00",
       "homeTeam": {
         "id": 43,
-        "name": "Manchester City",
+        "name": "Man City",
         "shortName": "MCI",
         "badgeSlug": "manchester-city",
         "badgePath": "/teams/manchester-city.football-logos.cc.png"
       },
       "awayTeam": {
         "id": 6,
-        "name": "Tottenham Hotspur",
+        "name": "Spurs",
         "shortName": "TOT",
         "badgeSlug": "tottenham",
         "badgePath": "/teams/tottenham.football-logos.cc.png"
@@ -37511,7 +37511,7 @@
       "kickoffTime": "2025-08-22T19:00:00+00:00",
       "homeTeam": {
         "id": 21,
-        "name": "West Ham United",
+        "name": "West Ham",
         "shortName": "WHU",
         "badgeSlug": "west-ham",
         "badgePath": "/teams/west-ham.football-logos.cc.png"
@@ -37566,7 +37566,7 @@
       "kickoffTime": "2025-08-18T19:00:00+00:00",
       "homeTeam": {
         "id": 2,
-        "name": "Leeds United",
+        "name": "Leeds",
         "shortName": "LEE",
         "badgeSlug": "leeds-united",
         "badgePath": "/teams/leeds-united.football-logos.cc.png"
@@ -37621,7 +37621,7 @@
       "kickoffTime": "2025-08-17T15:30:00+00:00",
       "homeTeam": {
         "id": 1,
-        "name": "Manchester United",
+        "name": "Man Utd",
         "shortName": "MUN",
         "badgeSlug": "manchester-united",
         "badgePath": "/teams/manchester-united.football-logos.cc.png"
@@ -37676,7 +37676,7 @@
       "kickoffTime": "2025-08-17T13:00:00+00:00",
       "homeTeam": {
         "id": 17,
-        "name": "Nottingham Forest",
+        "name": "Nott'm Forest",
         "shortName": "NFO",
         "badgeSlug": "nottingham-forest",
         "badgePath": "/teams/nottingham-forest.football-logos.cc.png"
@@ -37786,14 +37786,14 @@
       "kickoffTime": "2025-08-16T16:30:00+00:00",
       "homeTeam": {
         "id": 39,
-        "name": "Wolverhampton Wanderers",
+        "name": "Wolves",
         "shortName": "WOL",
         "badgeSlug": "wolves",
         "badgePath": "/teams/wolves.football-logos.cc.png"
       },
       "awayTeam": {
         "id": 43,
-        "name": "Manchester City",
+        "name": "Man City",
         "shortName": "MCI",
         "badgeSlug": "manchester-city",
         "badgePath": "/teams/manchester-city.football-logos.cc.png"
@@ -37841,7 +37841,7 @@
       "kickoffTime": "2025-08-16T14:00:00+00:00",
       "homeTeam": {
         "id": 6,
-        "name": "Tottenham Hotspur",
+        "name": "Spurs",
         "shortName": "TOT",
         "badgeSlug": "tottenham",
         "badgePath": "/teams/tottenham.football-logos.cc.png"
@@ -37903,7 +37903,7 @@
       },
       "awayTeam": {
         "id": 21,
-        "name": "West Ham United",
+        "name": "West Ham",
         "shortName": "WHU",
         "badgeSlug": "west-ham",
         "badgePath": "/teams/west-ham.football-logos.cc.png"
@@ -37951,7 +37951,7 @@
       "kickoffTime": "2025-08-16T14:00:00+00:00",
       "homeTeam": {
         "id": 36,
-        "name": "Brighton & Hove Albion",
+        "name": "Brighton",
         "shortName": "BHA",
         "badgeSlug": "brighton",
         "badgePath": "/teams/brighton.football-logos.cc.png"
@@ -38013,7 +38013,7 @@
       },
       "awayTeam": {
         "id": 4,
-        "name": "Newcastle United",
+        "name": "Newcastle",
         "shortName": "NEW",
         "badgeSlug": "newcastle",
         "badgePath": "/teams/newcastle.football-logos.cc.png"
@@ -38068,7 +38068,7 @@
       },
       "awayTeam": {
         "id": 91,
-        "name": "AFC Bournemouth",
+        "name": "Bournemouth",
         "shortName": "BOU",
         "badgeSlug": "bournemouth",
         "badgePath": "/teams/bournemouth.football-logos.cc.png"
@@ -38501,7 +38501,7 @@
       "kickoffTime": "2025-05-25T15:00:00+00:00",
       "homeTeam": {
         "id": 40,
-        "name": "Ipswich",
+        "name": "Ipswich Town",
         "shortName": "IPS",
         "badgeSlug": "ipswich",
         "badgePath": "/teams/ipswich.football-logos.cc.png"
@@ -38893,7 +38893,7 @@
       },
       "awayTeam": {
         "id": 40,
-        "name": "Ipswich",
+        "name": "Ipswich Town",
         "shortName": "IPS",
         "badgeSlug": "ipswich",
         "badgePath": "/teams/ipswich.football-logos.cc.png"
@@ -39656,7 +39656,7 @@
       "kickoffTime": "2025-05-10T14:00:00+00:00",
       "homeTeam": {
         "id": 40,
-        "name": "Ipswich",
+        "name": "Ipswich Town",
         "shortName": "IPS",
         "badgeSlug": "ipswich",
         "badgePath": "/teams/ipswich.football-logos.cc.png"
@@ -40158,7 +40158,7 @@
       },
       "awayTeam": {
         "id": 40,
-        "name": "Ipswich",
+        "name": "Ipswich Town",
         "shortName": "IPS",
         "badgeSlug": "ipswich",
         "badgePath": "/teams/ipswich.football-logos.cc.png"
@@ -40598,7 +40598,7 @@
       },
       "awayTeam": {
         "id": 40,
-        "name": "Ipswich",
+        "name": "Ipswich Town",
         "shortName": "IPS",
         "badgeSlug": "ipswich",
         "badgePath": "/teams/ipswich.football-logos.cc.png"
@@ -41031,7 +41031,7 @@
       "kickoffTime": "2025-04-20T13:00:00+00:00",
       "homeTeam": {
         "id": 40,
-        "name": "Ipswich",
+        "name": "Ipswich Town",
         "shortName": "IPS",
         "badgeSlug": "ipswich",
         "badgePath": "/teams/ipswich.football-logos.cc.png"
@@ -41698,7 +41698,7 @@
       },
       "awayTeam": {
         "id": 40,
-        "name": "Ipswich",
+        "name": "Ipswich Town",
         "shortName": "IPS",
         "badgeSlug": "ipswich",
         "badgePath": "/teams/ipswich.football-logos.cc.png"
@@ -42406,7 +42406,7 @@
       "kickoffTime": "2025-04-05T14:00:00+00:00",
       "homeTeam": {
         "id": 40,
-        "name": "Ipswich",
+        "name": "Ipswich Town",
         "shortName": "IPS",
         "badgeSlug": "ipswich",
         "badgePath": "/teams/ipswich.football-logos.cc.png"
@@ -42908,7 +42908,7 @@
       },
       "awayTeam": {
         "id": 40,
-        "name": "Ipswich",
+        "name": "Ipswich Town",
         "shortName": "IPS",
         "badgeSlug": "ipswich",
         "badgePath": "/teams/ipswich.football-logos.cc.png"
@@ -43451,7 +43451,7 @@
       "kickoffTime": "2025-03-15T15:00:00+00:00",
       "homeTeam": {
         "id": 40,
-        "name": "Ipswich",
+        "name": "Ipswich Town",
         "shortName": "IPS",
         "badgeSlug": "ipswich",
         "badgePath": "/teams/ipswich.football-logos.cc.png"
@@ -43953,7 +43953,7 @@
       },
       "awayTeam": {
         "id": 40,
-        "name": "Ipswich",
+        "name": "Ipswich Town",
         "shortName": "IPS",
         "badgeSlug": "ipswich",
         "badgePath": "/teams/ipswich.football-logos.cc.png"
@@ -44338,7 +44338,7 @@
       },
       "awayTeam": {
         "id": 40,
-        "name": "Ipswich",
+        "name": "Ipswich Town",
         "shortName": "IPS",
         "badgeSlug": "ipswich",
         "badgePath": "/teams/ipswich.football-logos.cc.png"
@@ -44881,7 +44881,7 @@
       "kickoffTime": "2025-02-22T15:00:00+00:00",
       "homeTeam": {
         "id": 40,
-        "name": "Ipswich",
+        "name": "Ipswich Town",
         "shortName": "IPS",
         "badgeSlug": "ipswich",
         "badgePath": "/teams/ipswich.football-logos.cc.png"
@@ -45658,7 +45658,7 @@
       },
       "awayTeam": {
         "id": 40,
-        "name": "Ipswich",
+        "name": "Ipswich Town",
         "shortName": "IPS",
         "badgeSlug": "ipswich",
         "badgePath": "/teams/ipswich.football-logos.cc.png"
@@ -46201,7 +46201,7 @@
       "kickoffTime": "2025-02-01T15:00:00+00:00",
       "homeTeam": {
         "id": 40,
-        "name": "Ipswich",
+        "name": "Ipswich Town",
         "shortName": "IPS",
         "badgeSlug": "ipswich",
         "badgePath": "/teams/ipswich.football-logos.cc.png"
@@ -46813,7 +46813,7 @@
       },
       "awayTeam": {
         "id": 40,
-        "name": "Ipswich",
+        "name": "Ipswich Town",
         "shortName": "IPS",
         "badgeSlug": "ipswich",
         "badgePath": "/teams/ipswich.football-logos.cc.png"
@@ -47026,7 +47026,7 @@
       "kickoffTime": "2025-01-19T16:30:00+00:00",
       "homeTeam": {
         "id": 40,
-        "name": "Ipswich",
+        "name": "Ipswich Town",
         "shortName": "IPS",
         "badgeSlug": "ipswich",
         "badgePath": "/teams/ipswich.football-logos.cc.png"
@@ -47576,7 +47576,7 @@
       "kickoffTime": "2025-01-16T19:30:00+00:00",
       "homeTeam": {
         "id": 40,
-        "name": "Ipswich",
+        "name": "Ipswich Town",
         "shortName": "IPS",
         "badgeSlug": "ipswich",
         "badgePath": "/teams/ipswich.football-logos.cc.png"
@@ -48188,7 +48188,7 @@
       },
       "awayTeam": {
         "id": 40,
-        "name": "Ipswich",
+        "name": "Ipswich Town",
         "shortName": "IPS",
         "badgeSlug": "ipswich",
         "badgePath": "/teams/ipswich.football-logos.cc.png"
@@ -48731,7 +48731,7 @@
       "kickoffTime": "2024-12-30T19:45:00+00:00",
       "homeTeam": {
         "id": 40,
-        "name": "Ipswich",
+        "name": "Ipswich Town",
         "shortName": "IPS",
         "badgeSlug": "ipswich",
         "badgePath": "/teams/ipswich.football-logos.cc.png"
@@ -49178,7 +49178,7 @@
       },
       "awayTeam": {
         "id": 40,
-        "name": "Ipswich",
+        "name": "Ipswich Town",
         "shortName": "IPS",
         "badgeSlug": "ipswich",
         "badgePath": "/teams/ipswich.football-logos.cc.png"
@@ -50106,7 +50106,7 @@
       "kickoffTime": "2024-12-21T15:00:00+00:00",
       "homeTeam": {
         "id": 40,
-        "name": "Ipswich",
+        "name": "Ipswich Town",
         "shortName": "IPS",
         "badgeSlug": "ipswich",
         "badgePath": "/teams/ipswich.football-logos.cc.png"
@@ -50608,7 +50608,7 @@
       },
       "awayTeam": {
         "id": 40,
-        "name": "Ipswich",
+        "name": "Ipswich Town",
         "shortName": "IPS",
         "badgeSlug": "ipswich",
         "badgePath": "/teams/ipswich.football-logos.cc.png"
@@ -50986,7 +50986,7 @@
       "kickoffTime": "2024-12-08T14:00:00+00:00",
       "homeTeam": {
         "id": 40,
-        "name": "Ipswich",
+        "name": "Ipswich Town",
         "shortName": "IPS",
         "badgeSlug": "ipswich",
         "badgePath": "/teams/ipswich.football-logos.cc.png"
@@ -51811,7 +51811,7 @@
       "kickoffTime": "2024-12-03T19:30:00+00:00",
       "homeTeam": {
         "id": 40,
-        "name": "Ipswich",
+        "name": "Ipswich Town",
         "shortName": "IPS",
         "badgeSlug": "ipswich",
         "badgePath": "/teams/ipswich.football-logos.cc.png"
@@ -52203,7 +52203,7 @@
       },
       "awayTeam": {
         "id": 40,
-        "name": "Ipswich",
+        "name": "Ipswich Town",
         "shortName": "IPS",
         "badgeSlug": "ipswich",
         "badgePath": "/teams/ipswich.football-logos.cc.png"
@@ -52471,7 +52471,7 @@
       "kickoffTime": "2024-11-24T16:30:00+00:00",
       "homeTeam": {
         "id": 40,
-        "name": "Ipswich",
+        "name": "Ipswich Town",
         "shortName": "IPS",
         "badgeSlug": "ipswich",
         "badgePath": "/teams/ipswich.football-logos.cc.png"
@@ -53028,7 +53028,7 @@
       },
       "awayTeam": {
         "id": 40,
-        "name": "Ipswich",
+        "name": "Ipswich Town",
         "shortName": "IPS",
         "badgeSlug": "ipswich",
         "badgePath": "/teams/ipswich.football-logos.cc.png"
@@ -53901,7 +53901,7 @@
       "kickoffTime": "2024-11-02T15:00:00+00:00",
       "homeTeam": {
         "id": 40,
-        "name": "Ipswich",
+        "name": "Ipswich Town",
         "shortName": "IPS",
         "badgeSlug": "ipswich",
         "badgePath": "/teams/ipswich.football-logos.cc.png"
@@ -54458,7 +54458,7 @@
       },
       "awayTeam": {
         "id": 40,
-        "name": "Ipswich",
+        "name": "Ipswich Town",
         "shortName": "IPS",
         "badgeSlug": "ipswich",
         "badgePath": "/teams/ipswich.football-logos.cc.png"
@@ -54836,7 +54836,7 @@
       "kickoffTime": "2024-10-19T14:15:00+00:00",
       "homeTeam": {
         "id": 40,
-        "name": "Ipswich",
+        "name": "Ipswich Town",
         "shortName": "IPS",
         "badgeSlug": "ipswich",
         "badgePath": "/teams/ipswich.football-logos.cc.png"
@@ -55393,7 +55393,7 @@
       },
       "awayTeam": {
         "id": 40,
-        "name": "Ipswich",
+        "name": "Ipswich Town",
         "shortName": "IPS",
         "badgeSlug": "ipswich",
         "badgePath": "/teams/ipswich.football-logos.cc.png"
@@ -55826,7 +55826,7 @@
       "kickoffTime": "2024-09-29T13:00:00+00:00",
       "homeTeam": {
         "id": 40,
-        "name": "Ipswich",
+        "name": "Ipswich Town",
         "shortName": "IPS",
         "badgeSlug": "ipswich",
         "badgePath": "/teams/ipswich.football-logos.cc.png"
@@ -56493,7 +56493,7 @@
       },
       "awayTeam": {
         "id": 40,
-        "name": "Ipswich",
+        "name": "Ipswich Town",
         "shortName": "IPS",
         "badgeSlug": "ipswich",
         "badgePath": "/teams/ipswich.football-logos.cc.png"
@@ -57263,7 +57263,7 @@
       },
       "awayTeam": {
         "id": 40,
-        "name": "Ipswich",
+        "name": "Ipswich Town",
         "shortName": "IPS",
         "badgeSlug": "ipswich",
         "badgePath": "/teams/ipswich.football-logos.cc.png"
@@ -57696,7 +57696,7 @@
       "kickoffTime": "2024-08-31T14:00:00+00:00",
       "homeTeam": {
         "id": 40,
-        "name": "Ipswich",
+        "name": "Ipswich Town",
         "shortName": "IPS",
         "badgeSlug": "ipswich",
         "badgePath": "/teams/ipswich.football-logos.cc.png"
@@ -58253,7 +58253,7 @@
       },
       "awayTeam": {
         "id": 40,
-        "name": "Ipswich",
+        "name": "Ipswich Town",
         "shortName": "IPS",
         "badgeSlug": "ipswich",
         "badgePath": "/teams/ipswich.football-logos.cc.png"
@@ -58906,7 +58906,7 @@
       "kickoffTime": "2024-08-17T11:30:00+00:00",
       "homeTeam": {
         "id": 40,
-        "name": "Ipswich",
+        "name": "Ipswich Town",
         "shortName": "IPS",
         "badgeSlug": "ipswich",
         "badgePath": "/teams/ipswich.football-logos.cc.png"
