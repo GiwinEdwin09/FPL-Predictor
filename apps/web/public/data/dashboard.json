@@ -1,5 +1,5 @@
 {
-  "generatedAtUtc": "2026-10-23T10:24:41.851567+00:00",
+  "generatedAtUtc": "2026-10-23T20:35:34.561193+00:00",
   "currentSeason": "2026-2027",
   "model": {
     "version": "model_v3",
@@ -23,9 +23,8 @@
       "conference-league": 6
     }
   },
-  "currentGameweek": null,
-  "currentGameweekFixtures": [],
-  "upcomingFixtures": [
+  "currentGameweek": 8,
+  "currentGameweekFixtures": [
     {
       "matchId": "26-27-prem-ipswich-town-vs-nottingham-forest",
       "season": "2026-2027",
@@ -67,6 +66,7 @@
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
       },
+      "status": "current",
       "predictionType": "pre_kickoff"
     },
     {
@@ -110,6 +110,7 @@
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
       },
+      "status": "current",
       "predictionType": "pre_kickoff"
     },
     {
@@ -153,6 +154,7 @@
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
       },
+      "status": "current",
       "predictionType": "pre_kickoff"
     },
     {
@@ -196,6 +198,7 @@
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
       },
+      "status": "current",
       "predictionType": "pre_kickoff"
     },
     {
@@ -239,6 +242,7 @@
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
       },
+      "status": "current",
       "predictionType": "pre_kickoff"
     },
     {
@@ -273,15 +277,16 @@
       "context": {
         "homeElo": 1571.0,
         "awayElo": 1603.0,
-        "homeDaysRest": 7.04,
+        "homeDaysRest": 2.79,
         "awayDaysRest": 7.9,
-        "homeLast5Xg": 1.51,
+        "homeLast5Xg": 1.04,
         "awayLast5Xg": 1.38,
-        "homeLast5Xga": 1.99,
+        "homeLast5Xga": 1.28,
         "awayLast5Xga": 1.43,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
       },
+      "status": "current",
       "predictionType": "pre_kickoff"
     },
     {
@@ -325,6 +330,7 @@
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
       },
+      "status": "current",
       "predictionType": "pre_kickoff"
     },
     {
@@ -368,6 +374,7 @@
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
       },
+      "status": "current",
       "predictionType": "pre_kickoff"
     },
     {
@@ -401,16 +408,17 @@
       },
       "context": {
         "homeElo": 1631.0,
-        "awayElo": 1645.0,
+        "awayElo": 1649.0,
         "homeDaysRest": 3.89,
-        "awayDaysRest": 7.04,
+        "awayDaysRest": 2.79,
         "homeLast5Xg": 1.29,
-        "awayLast5Xg": 2.0,
+        "awayLast5Xg": 2.48,
         "homeLast5Xga": 1.4,
-        "awayLast5Xga": 0.91,
+        "awayLast5Xga": 0.66,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
       },
+      "status": "current",
       "predictionType": "pre_kickoff"
     },
     {
@@ -454,8 +462,11 @@
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
       },
+      "status": "current",
       "predictionType": "pre_kickoff"
-    },
+    }
+  ],
+  "upcomingFixtures": [
     {
       "matchId": "26-27-prem-chelsea-vs-manchester-united",
       "season": "2026-2027",
@@ -529,13 +540,13 @@
         "awayWin": 0.2969
       },
       "context": {
-        "homeElo": 1645.0,
+        "homeElo": 1649.0,
         "awayElo": 1581.0,
-        "homeDaysRest": 13.08,
+        "homeDaysRest": 8.83,
         "awayDaysRest": 13.08,
-        "homeLast5Xg": 2.0,
+        "homeLast5Xg": 2.48,
         "awayLast5Xg": 1.58,
-        "homeLast5Xga": 0.91,
+        "homeLast5Xga": 0.66,
         "awayLast5Xga": 1.57,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
@@ -747,11 +758,11 @@
         "homeElo": 1535.0,
         "awayElo": 1571.0,
         "homeDaysRest": 11.94,
-        "awayDaysRest": 13.19,
+        "awayDaysRest": 8.94,
         "homeLast5Xg": 1.41,
-        "awayLast5Xg": 1.51,
+        "awayLast5Xg": 1.04,
         "homeLast5Xga": 1.07,
-        "awayLast5Xga": 1.99,
+        "awayLast5Xga": 1.28,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
       },
@@ -1176,11 +1187,11 @@
       "context": {
         "homeElo": 1571.0,
         "awayElo": 1717.0,
-        "homeDaysRest": 21.04,
+        "homeDaysRest": 16.79,
         "awayDaysRest": 18.79,
-        "homeLast5Xg": 1.51,
+        "homeLast5Xg": 1.04,
         "awayLast5Xg": 2.05,
-        "homeLast5Xga": 1.99,
+        "homeLast5Xga": 1.28,
         "awayLast5Xga": 1.83,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
@@ -1218,13 +1229,13 @@
       },
       "context": {
         "homeElo": 1449.0,
-        "awayElo": 1645.0,
+        "awayElo": 1649.0,
         "homeDaysRest": 22.0,
-        "awayDaysRest": 21.04,
+        "awayDaysRest": 16.79,
         "homeLast5Xg": 1.33,
-        "awayLast5Xg": 2.0,
+        "awayLast5Xg": 2.48,
         "homeLast5Xga": 1.83,
-        "awayLast5Xga": 0.91,
+        "awayLast5Xga": 0.66,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
       },
@@ -1389,13 +1400,13 @@
         "awayWin": 0.2863
       },
       "context": {
-        "homeElo": 1645.0,
+        "homeElo": 1649.0,
         "awayElo": 1545.0,
-        "homeDaysRest": 34.08,
+        "homeDaysRest": 29.83,
         "awayDaysRest": 33.98,
-        "homeLast5Xg": 2.0,
+        "homeLast5Xg": 2.48,
         "awayLast5Xg": 1.68,
-        "homeLast5Xga": 0.91,
+        "homeLast5Xga": 0.66,
         "awayLast5Xga": 1.21,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
@@ -1521,11 +1532,11 @@
         "homeElo": 1454.0,
         "awayElo": 1571.0,
         "homeDaysRest": 32.83,
-        "awayDaysRest": 34.08,
+        "awayDaysRest": 29.83,
         "homeLast5Xg": 0.97,
-        "awayLast5Xg": 1.51,
+        "awayLast5Xg": 1.04,
         "homeLast5Xga": 1.86,
-        "awayLast5Xga": 1.99,
+        "awayLast5Xga": 1.28,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
       },
@@ -2036,11 +2047,11 @@
       "context": {
         "homeElo": 1571.0,
         "awayElo": 1472.0,
-        "homeDaysRest": 42.05,
+        "homeDaysRest": 37.8,
         "awayDaysRest": 43.0,
-        "homeLast5Xg": 1.51,
+        "homeLast5Xg": 1.04,
         "awayLast5Xg": 1.09,
-        "homeLast5Xga": 1.99,
+        "homeLast5Xga": 1.28,
         "awayLast5Xga": 1.3,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
@@ -2078,13 +2089,13 @@
       },
       "context": {
         "homeElo": 1574.0,
-        "awayElo": 1645.0,
+        "awayElo": 1649.0,
         "homeDaysRest": 43.0,
-        "awayDaysRest": 42.05,
+        "awayDaysRest": 37.8,
         "homeLast5Xg": 1.8,
-        "awayLast5Xg": 2.0,
+        "awayLast5Xg": 2.48,
         "homeLast5Xga": 1.4,
-        "awayLast5Xga": 0.91,
+        "awayLast5Xga": 0.66,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
       },
@@ -2252,11 +2263,11 @@
         "homeElo": 1650.0,
         "awayElo": 1571.0,
         "homeDaysRest": 46.33,
-        "awayDaysRest": 45.27,
+        "awayDaysRest": 41.02,
         "homeLast5Xg": 1.34,
-        "awayLast5Xg": 1.51,
+        "awayLast5Xg": 1.04,
         "homeLast5Xga": 1.65,
-        "awayLast5Xga": 1.99,
+        "awayLast5Xga": 1.28,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
       },
@@ -2421,13 +2432,13 @@
         "awayWin": 0.3988
       },
       "context": {
-        "homeElo": 1645.0,
+        "homeElo": 1649.0,
         "awayElo": 1672.0,
-        "homeDaysRest": 45.3,
+        "homeDaysRest": 41.05,
         "awayDaysRest": 41.15,
-        "homeLast5Xg": 2.0,
+        "homeLast5Xg": 2.48,
         "awayLast5Xg": 1.92,
-        "homeLast5Xga": 0.91,
+        "homeLast5Xga": 0.66,
         "awayLast5Xga": 0.74,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
@@ -2679,13 +2690,13 @@
         "awayWin": 0.2973
       },
       "context": {
-        "homeElo": 1645.0,
+        "homeElo": 1649.0,
         "awayElo": 1472.0,
-        "homeDaysRest": 48.08,
+        "homeDaysRest": 43.83,
         "awayDaysRest": 49.04,
-        "homeLast5Xg": 2.0,
+        "homeLast5Xg": 2.48,
         "awayLast5Xg": 1.09,
-        "homeLast5Xga": 0.91,
+        "homeLast5Xga": 0.66,
         "awayLast5Xga": 1.3,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
@@ -2725,11 +2736,11 @@
         "homeElo": 1688.0,
         "awayElo": 1571.0,
         "homeDaysRest": 44.83,
-        "awayDaysRest": 48.08,
+        "awayDaysRest": 43.83,
         "homeLast5Xg": 2.16,
-        "awayLast5Xg": 1.51,
+        "awayLast5Xg": 1.04,
         "homeLast5Xga": 1.22,
-        "awayLast5Xga": 1.99,
+        "awayLast5Xga": 1.28,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
       },
@@ -3239,13 +3250,13 @@
       },
       "context": {
         "homeElo": 1840.0,
-        "awayElo": 1645.0,
+        "awayElo": 1649.0,
         "homeDaysRest": 52.79,
-        "awayDaysRest": 56.04,
+        "awayDaysRest": 51.79,
         "homeLast5Xg": 1.9,
-        "awayLast5Xg": 2.0,
+        "awayLast5Xg": 2.48,
         "homeLast5Xga": 1.18,
-        "awayLast5Xga": 0.91,
+        "awayLast5Xga": 0.66,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
       },
@@ -3412,11 +3423,11 @@
       "context": {
         "homeElo": 1571.0,
         "awayElo": 1631.0,
-        "homeDaysRest": 56.25,
+        "homeDaysRest": 52.0,
         "awayDaysRest": 53.09,
-        "homeLast5Xg": 1.51,
+        "homeLast5Xg": 1.04,
         "awayLast5Xg": 1.29,
-        "homeLast5Xga": 1.99,
+        "homeLast5Xga": 1.28,
         "awayLast5Xga": 1.4,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
@@ -3539,13 +3550,13 @@
         "awayWin": 0.1879
       },
       "context": {
-        "homeElo": 1645.0,
+        "homeElo": 1649.0,
         "awayElo": 1454.0,
-        "homeDaysRest": 62.08,
+        "homeDaysRest": 57.83,
         "awayDaysRest": 60.83,
-        "homeLast5Xg": 2.0,
+        "homeLast5Xg": 2.48,
         "awayLast5Xg": 0.97,
-        "homeLast5Xga": 0.91,
+        "homeLast5Xga": 0.66,
         "awayLast5Xga": 1.86,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
@@ -3800,11 +3811,11 @@
         "homeElo": 1556.0,
         "awayElo": 1571.0,
         "homeDaysRest": 58.89,
-        "awayDaysRest": 63.04,
+        "awayDaysRest": 58.79,
         "homeLast5Xg": 1.5,
-        "awayLast5Xg": 1.51,
+        "awayLast5Xg": 1.04,
         "homeLast5Xga": 2.33,
-        "awayLast5Xga": 1.99,
+        "awayLast5Xga": 1.28,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
       },
@@ -4099,13 +4110,13 @@
       },
       "context": {
         "homeElo": 1535.0,
-        "awayElo": 1645.0,
+        "awayElo": 1649.0,
         "homeDaysRest": 67.83,
-        "awayDaysRest": 69.08,
+        "awayDaysRest": 64.83,
         "homeLast5Xg": 1.41,
-        "awayLast5Xg": 2.0,
+        "awayLast5Xg": 2.48,
         "homeLast5Xga": 1.07,
-        "awayLast5Xga": 0.91,
+        "awayLast5Xga": 0.66,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
       },
@@ -4315,11 +4326,11 @@
       "context": {
         "homeElo": 1571.0,
         "awayElo": 1840.0,
-        "homeDaysRest": 70.25,
+        "homeDaysRest": 66.0,
         "awayDaysRest": 67.0,
-        "homeLast5Xg": 1.51,
+        "homeLast5Xg": 1.04,
         "awayLast5Xg": 1.9,
-        "homeLast5Xga": 1.99,
+        "homeLast5Xga": 1.28,
         "awayLast5Xga": 1.18,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
@@ -4529,13 +4540,13 @@
       },
       "context": {
         "homeElo": 1571.0,
-        "awayElo": 1645.0,
-        "homeDaysRest": 73.27,
-        "awayDaysRest": 73.27,
-        "homeLast5Xg": 1.51,
-        "awayLast5Xg": 2.0,
-        "homeLast5Xga": 1.99,
-        "awayLast5Xga": 0.91,
+        "awayElo": 1649.0,
+        "homeDaysRest": 69.02,
+        "awayDaysRest": 69.02,
+        "homeLast5Xg": 1.04,
+        "awayLast5Xg": 2.48,
+        "homeLast5Xga": 1.28,
+        "awayLast5Xga": 0.66,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
       },
@@ -4918,11 +4929,11 @@
         "homeElo": 1638.0,
         "awayElo": 1571.0,
         "homeDaysRest": 77.04,
-        "awayDaysRest": 76.08,
+        "awayDaysRest": 71.83,
         "homeLast5Xg": 1.84,
-        "awayLast5Xg": 1.51,
+        "awayLast5Xg": 1.04,
         "homeLast5Xga": 1.87,
-        "awayLast5Xga": 1.99,
+        "awayLast5Xga": 1.28,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
       },
@@ -5087,13 +5098,13 @@
         "awayWin": 0.3406
       },
       "context": {
-        "homeElo": 1645.0,
+        "homeElo": 1649.0,
         "awayElo": 1688.0,
-        "homeDaysRest": 76.19,
+        "homeDaysRest": 71.94,
         "awayDaysRest": 72.94,
-        "homeLast5Xg": 2.0,
+        "homeLast5Xg": 2.48,
         "awayLast5Xg": 2.16,
-        "homeLast5Xga": 0.91,
+        "homeLast5Xga": 0.66,
         "awayLast5Xga": 1.22,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
@@ -5260,13 +5271,13 @@
       },
       "context": {
         "homeElo": 1672.0,
-        "awayElo": 1645.0,
+        "awayElo": 1649.0,
         "homeDaysRest": 75.11,
-        "awayDaysRest": 79.27,
+        "awayDaysRest": 75.02,
         "homeLast5Xg": 1.92,
-        "awayLast5Xg": 2.0,
+        "awayLast5Xg": 2.48,
         "homeLast5Xga": 0.74,
-        "awayLast5Xga": 0.91,
+        "awayLast5Xga": 0.66,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
       },
@@ -5433,11 +5444,11 @@
       "context": {
         "homeElo": 1571.0,
         "awayElo": 1650.0,
-        "homeDaysRest": 80.27,
+        "homeDaysRest": 76.02,
         "awayDaysRest": 81.33,
-        "homeLast5Xg": 1.51,
+        "homeLast5Xg": 1.04,
         "awayLast5Xg": 1.34,
-        "homeLast5Xga": 1.99,
+        "homeLast5Xga": 1.28,
         "awayLast5Xga": 1.65,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
@@ -5646,13 +5657,13 @@
         "awayWin": 0.1728
       },
       "context": {
-        "homeElo": 1645.0,
+        "homeElo": 1649.0,
         "awayElo": 1449.0,
-        "homeDaysRest": 90.08,
+        "homeDaysRest": 85.83,
         "awayDaysRest": 91.04,
-        "homeLast5Xg": 2.0,
+        "homeLast5Xg": 2.48,
         "awayLast5Xg": 1.33,
-        "homeLast5Xga": 0.91,
+        "homeLast5Xga": 0.66,
         "awayLast5Xga": 1.83,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
@@ -5907,11 +5918,11 @@
         "homeElo": 1717.0,
         "awayElo": 1571.0,
         "homeDaysRest": 87.83,
-        "awayDaysRest": 90.08,
+        "awayDaysRest": 85.83,
         "homeLast5Xg": 2.05,
-        "awayLast5Xg": 1.51,
+        "awayLast5Xg": 1.04,
         "homeLast5Xga": 1.83,
-        "awayLast5Xga": 1.99,
+        "awayLast5Xga": 1.28,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
       },
@@ -6164,11 +6175,11 @@
       "context": {
         "homeElo": 1571.0,
         "awayElo": 1535.0,
-        "homeDaysRest": 97.08,
+        "homeDaysRest": 92.83,
         "awayDaysRest": 95.83,
-        "homeLast5Xg": 1.51,
+        "homeLast5Xg": 1.04,
         "awayLast5Xg": 1.41,
-        "homeLast5Xga": 1.99,
+        "homeLast5Xga": 1.28,
         "awayLast5Xga": 1.07,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
@@ -6421,13 +6432,13 @@
       },
       "context": {
         "homeElo": 1545.0,
-        "awayElo": 1645.0,
+        "awayElo": 1649.0,
         "homeDaysRest": 96.98,
-        "awayDaysRest": 97.08,
+        "awayDaysRest": 92.83,
         "homeLast5Xg": 1.68,
-        "awayLast5Xg": 2.0,
+        "awayLast5Xg": 2.48,
         "homeLast5Xga": 1.21,
-        "awayLast5Xga": 0.91,
+        "awayLast5Xga": 0.66,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
       },
@@ -6506,13 +6517,13 @@
         "awayWin": 0.2792
       },
       "context": {
-        "homeElo": 1645.0,
+        "homeElo": 1649.0,
         "awayElo": 1574.0,
-        "homeDaysRest": 104.08,
+        "homeDaysRest": 99.83,
         "awayDaysRest": 105.04,
-        "homeLast5Xg": 2.0,
+        "homeLast5Xg": 2.48,
         "awayLast5Xg": 1.8,
-        "homeLast5Xga": 0.91,
+        "homeLast5Xga": 0.66,
         "awayLast5Xga": 1.4,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
@@ -6724,11 +6735,11 @@
         "homeElo": 1472.0,
         "awayElo": 1571.0,
         "homeDaysRest": 105.04,
-        "awayDaysRest": 104.08,
+        "awayDaysRest": 99.83,
         "homeLast5Xg": 1.09,
-        "awayLast5Xg": 1.51,
+        "awayLast5Xg": 1.04,
         "homeLast5Xga": 1.3,
-        "awayLast5Xga": 1.99,
+        "awayLast5Xga": 1.28,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
       },
@@ -7024,11 +7035,11 @@
       "context": {
         "homeElo": 1571.0,
         "awayElo": 1454.0,
-        "homeDaysRest": 111.08,
+        "homeDaysRest": 106.83,
         "awayDaysRest": 109.83,
-        "homeLast5Xg": 1.51,
+        "homeLast5Xg": 1.04,
         "awayLast5Xg": 0.97,
-        "homeLast5Xga": 1.99,
+        "homeLast5Xga": 1.28,
         "awayLast5Xga": 1.86,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
@@ -7195,13 +7206,13 @@
       },
       "context": {
         "homeElo": 1581.0,
-        "awayElo": 1645.0,
+        "awayElo": 1649.0,
         "homeDaysRest": 111.08,
-        "awayDaysRest": 111.08,
+        "awayDaysRest": 106.83,
         "homeLast5Xg": 1.58,
-        "awayLast5Xg": 2.0,
+        "awayLast5Xg": 2.48,
         "homeLast5Xga": 1.57,
-        "awayLast5Xga": 0.91,
+        "awayLast5Xga": 0.66,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
       },
@@ -7367,13 +7378,13 @@
       },
       "context": {
         "homeElo": 1688.0,
-        "awayElo": 1645.0,
+        "awayElo": 1649.0,
         "homeDaysRest": 112.04,
-        "awayDaysRest": 115.29,
+        "awayDaysRest": 111.04,
         "homeLast5Xg": 2.16,
-        "awayLast5Xg": 2.0,
+        "awayLast5Xg": 2.48,
         "homeLast5Xga": 1.22,
-        "awayLast5Xga": 0.91,
+        "awayLast5Xga": 0.66,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
       },
@@ -7454,11 +7465,11 @@
       "context": {
         "homeElo": 1571.0,
         "awayElo": 1638.0,
-        "homeDaysRest": 115.29,
+        "homeDaysRest": 111.04,
         "awayDaysRest": 116.25,
-        "homeLast5Xg": 1.51,
+        "homeLast5Xg": 1.04,
         "awayLast5Xg": 1.84,
-        "homeLast5Xga": 1.99,
+        "homeLast5Xga": 1.28,
         "awayLast5Xga": 1.87,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
@@ -7796,14 +7807,14 @@
         "awayWin": 0.2603
       },
       "context": {
-        "homeElo": 1645.0,
+        "homeElo": 1649.0,
         "awayElo": 1571.0,
-        "homeDaysRest": 125.08,
-        "awayDaysRest": 125.08,
-        "homeLast5Xg": 2.0,
-        "awayLast5Xg": 1.51,
-        "homeLast5Xga": 0.91,
-        "awayLast5Xga": 1.99,
+        "homeDaysRest": 120.83,
+        "awayDaysRest": 120.83,
+        "homeLast5Xg": 2.48,
+        "awayLast5Xg": 1.04,
+        "homeLast5Xga": 0.66,
+        "awayLast5Xga": 1.28,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
       },
@@ -8270,13 +8281,13 @@
       },
       "context": {
         "homeElo": 1454.0,
-        "awayElo": 1645.0,
+        "awayElo": 1649.0,
         "homeDaysRest": 130.83,
-        "awayDaysRest": 132.08,
+        "awayDaysRest": 127.83,
         "homeLast5Xg": 0.97,
-        "awayLast5Xg": 2.0,
+        "awayLast5Xg": 2.48,
         "homeLast5Xga": 1.86,
-        "awayLast5Xga": 0.91,
+        "awayLast5Xga": 0.66,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
       },
@@ -8314,11 +8325,11 @@
       "context": {
         "homeElo": 1571.0,
         "awayElo": 1556.0,
-        "homeDaysRest": 132.08,
+        "homeDaysRest": 127.83,
         "awayDaysRest": 127.93,
-        "homeLast5Xg": 1.51,
+        "homeLast5Xg": 1.04,
         "awayLast5Xg": 1.5,
-        "homeLast5Xga": 1.99,
+        "homeLast5Xga": 1.28,
         "awayLast5Xga": 2.33,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
@@ -8656,13 +8667,13 @@
         "awayWin": 0.2793
       },
       "context": {
-        "homeElo": 1645.0,
+        "homeElo": 1649.0,
         "awayElo": 1535.0,
-        "homeDaysRest": 136.29,
+        "homeDaysRest": 132.04,
         "awayDaysRest": 135.04,
-        "homeLast5Xg": 2.0,
+        "homeLast5Xg": 2.48,
         "awayLast5Xg": 1.41,
-        "homeLast5Xga": 0.91,
+        "homeLast5Xga": 0.66,
         "awayLast5Xga": 1.07,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
@@ -8702,11 +8713,11 @@
         "homeElo": 1840.0,
         "awayElo": 1571.0,
         "homeDaysRest": 133.04,
-        "awayDaysRest": 136.29,
+        "awayDaysRest": 132.04,
         "homeLast5Xg": 1.9,
-        "awayLast5Xg": 1.51,
+        "awayLast5Xg": 1.04,
         "homeLast5Xga": 1.18,
-        "awayLast5Xga": 1.99,
+        "awayLast5Xga": 1.28,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
       },
@@ -9086,13 +9097,13 @@
         "awayWin": 0.3334
       },
       "context": {
-        "homeElo": 1645.0,
+        "homeElo": 1649.0,
         "awayElo": 1603.0,
-        "homeDaysRest": 146.08,
+        "homeDaysRest": 141.83,
         "awayDaysRest": 146.94,
-        "homeLast5Xg": 2.0,
+        "homeLast5Xg": 2.48,
         "awayLast5Xg": 1.38,
-        "homeLast5Xga": 0.91,
+        "homeLast5Xga": 0.66,
         "awayLast5Xga": 1.43,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
@@ -9260,11 +9271,11 @@
       "context": {
         "homeElo": 1571.0,
         "awayElo": 1574.0,
-        "homeDaysRest": 146.08,
+        "homeDaysRest": 141.83,
         "awayDaysRest": 147.04,
-        "homeLast5Xg": 1.51,
+        "homeLast5Xg": 1.04,
         "awayLast5Xg": 1.8,
-        "homeLast5Xga": 1.99,
+        "homeLast5Xga": 1.28,
         "awayLast5Xga": 1.4,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
@@ -9560,13 +9571,13 @@
       },
       "context": {
         "homeElo": 1638.0,
-        "awayElo": 1645.0,
+        "awayElo": 1649.0,
         "homeDaysRest": 154.04,
-        "awayDaysRest": 153.08,
+        "awayDaysRest": 148.83,
         "homeLast5Xg": 1.84,
-        "awayLast5Xg": 2.0,
+        "awayLast5Xg": 2.48,
         "homeLast5Xga": 1.87,
-        "awayLast5Xga": 0.91,
+        "awayLast5Xga": 0.66,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
       },
@@ -9777,11 +9788,11 @@
         "homeElo": 1449.0,
         "awayElo": 1571.0,
         "homeDaysRest": 154.04,
-        "awayDaysRest": 153.08,
+        "awayDaysRest": 148.83,
         "homeLast5Xg": 1.33,
-        "awayLast5Xg": 1.51,
+        "awayLast5Xg": 1.04,
         "homeLast5Xga": 1.83,
-        "awayLast5Xga": 1.99,
+        "awayLast5Xga": 1.28,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
       },
@@ -9946,13 +9957,13 @@
         "awayWin": 0.5625
       },
       "context": {
-        "homeElo": 1645.0,
+        "homeElo": 1649.0,
         "awayElo": 1806.0,
-        "homeDaysRest": 174.04,
+        "homeDaysRest": 169.79,
         "awayDaysRest": 171.79,
-        "homeLast5Xg": 2.0,
+        "homeLast5Xg": 2.48,
         "awayLast5Xg": 2.6,
-        "homeLast5Xga": 0.91,
+        "homeLast5Xga": 0.66,
         "awayLast5Xga": 1.82,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
@@ -10120,11 +10131,11 @@
       "context": {
         "homeElo": 1571.0,
         "awayElo": 1598.0,
-        "homeDaysRest": 174.04,
+        "homeDaysRest": 169.79,
         "awayDaysRest": 175.1,
-        "homeLast5Xg": 1.51,
+        "homeLast5Xg": 1.04,
         "awayLast5Xg": 1.43,
-        "homeLast5Xga": 1.99,
+        "homeLast5Xga": 1.28,
         "awayLast5Xga": 1.04,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
@@ -10506,13 +10517,13 @@
       },
       "context": {
         "homeElo": 1598.0,
-        "awayElo": 1645.0,
+        "awayElo": 1649.0,
         "homeDaysRest": 182.1,
-        "awayDaysRest": 181.04,
+        "awayDaysRest": 176.79,
         "homeLast5Xg": 1.43,
-        "awayLast5Xg": 2.0,
+        "awayLast5Xg": 2.48,
         "homeLast5Xga": 1.04,
-        "awayLast5Xga": 0.91,
+        "awayLast5Xga": 0.66,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
       },
@@ -10680,11 +10691,11 @@
         "homeElo": 1806.0,
         "awayElo": 1571.0,
         "homeDaysRest": 178.79,
-        "awayDaysRest": 181.04,
+        "awayDaysRest": 176.79,
         "homeLast5Xg": 2.6,
-        "awayLast5Xg": 1.51,
+        "awayLast5Xg": 1.04,
         "homeLast5Xga": 1.82,
-        "awayLast5Xga": 1.99,
+        "awayLast5Xga": 1.28,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
       },
@@ -10806,13 +10817,13 @@
         "awayWin": 0.5355
       },
       "context": {
-        "homeElo": 1645.0,
+        "homeElo": 1649.0,
         "awayElo": 1840.0,
-        "homeDaysRest": 188.04,
+        "homeDaysRest": 183.79,
         "awayDaysRest": 184.79,
-        "homeLast5Xg": 2.0,
+        "homeLast5Xg": 2.48,
         "awayLast5Xg": 1.9,
-        "homeLast5Xga": 0.91,
+        "homeLast5Xga": 0.66,
         "awayLast5Xga": 1.18,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
@@ -11067,11 +11078,11 @@
         "homeElo": 1631.0,
         "awayElo": 1571.0,
         "homeDaysRest": 184.89,
-        "awayDaysRest": 188.04,
+        "awayDaysRest": 183.79,
         "homeLast5Xg": 1.29,
-        "awayLast5Xg": 1.51,
+        "awayLast5Xg": 1.04,
         "homeLast5Xga": 1.4,
-        "awayLast5Xga": 1.99,
+        "awayLast5Xga": 1.28,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
       },
@@ -11367,11 +11378,11 @@
       "context": {
         "homeElo": 1571.0,
         "awayElo": 1688.0,
-        "homeDaysRest": 195.04,
+        "homeDaysRest": 190.79,
         "awayDaysRest": 191.79,
-        "homeLast5Xg": 1.51,
+        "homeLast5Xg": 1.04,
         "awayLast5Xg": 2.16,
-        "homeLast5Xga": 1.99,
+        "homeLast5Xga": 1.28,
         "awayLast5Xga": 1.22,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
@@ -11452,13 +11463,13 @@
       },
       "context": {
         "homeElo": 1472.0,
-        "awayElo": 1645.0,
+        "awayElo": 1649.0,
         "homeDaysRest": 196.0,
-        "awayDaysRest": 195.04,
+        "awayDaysRest": 190.79,
         "homeLast5Xg": 1.09,
-        "awayLast5Xg": 2.0,
+        "awayLast5Xg": 2.48,
         "homeLast5Xga": 1.3,
-        "awayLast5Xga": 0.91,
+        "awayLast5Xga": 0.66,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
       },
@@ -11666,13 +11677,13 @@
         "awayWin": 0.3578
       },
       "context": {
-        "homeElo": 1645.0,
+        "homeElo": 1649.0,
         "awayElo": 1631.0,
-        "homeDaysRest": 202.04,
+        "homeDaysRest": 197.79,
         "awayDaysRest": 198.89,
-        "homeLast5Xg": 2.0,
+        "homeLast5Xg": 2.48,
         "awayLast5Xg": 1.29,
-        "homeLast5Xga": 0.91,
+        "homeLast5Xga": 0.66,
         "awayLast5Xga": 1.4,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
@@ -12013,11 +12024,11 @@
         "homeElo": 1545.0,
         "awayElo": 1571.0,
         "homeDaysRest": 201.94,
-        "awayDaysRest": 202.04,
+        "awayDaysRest": 197.79,
         "homeLast5Xg": 1.68,
-        "awayLast5Xg": 1.51,
+        "awayLast5Xg": 1.04,
         "homeLast5Xga": 1.21,
-        "awayLast5Xga": 1.99,
+        "awayLast5Xga": 1.28,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
       },
@@ -12270,11 +12281,11 @@
       "context": {
         "homeElo": 1571.0,
         "awayElo": 1672.0,
-        "homeDaysRest": 209.04,
+        "homeDaysRest": 204.79,
         "awayDaysRest": 204.89,
-        "homeLast5Xg": 1.51,
+        "homeLast5Xg": 1.04,
         "awayLast5Xg": 1.92,
-        "homeLast5Xga": 1.99,
+        "homeLast5Xga": 1.28,
         "awayLast5Xga": 0.74,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
@@ -12484,13 +12495,13 @@
       },
       "context": {
         "homeElo": 1556.0,
-        "awayElo": 1645.0,
+        "awayElo": 1649.0,
         "homeDaysRest": 204.89,
-        "awayDaysRest": 209.04,
+        "awayDaysRest": 204.79,
         "homeLast5Xg": 1.5,
-        "awayLast5Xg": 2.0,
+        "awayLast5Xg": 2.48,
         "homeLast5Xga": 2.33,
-        "awayLast5Xga": 0.91,
+        "awayLast5Xga": 0.66,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
       },
@@ -12526,13 +12537,13 @@
         "awayWin": 0.3798
       },
       "context": {
-        "homeElo": 1645.0,
+        "homeElo": 1649.0,
         "awayElo": 1650.0,
-        "homeDaysRest": 217.04,
+        "homeDaysRest": 212.79,
         "awayDaysRest": 218.1,
-        "homeLast5Xg": 2.0,
+        "homeLast5Xg": 2.48,
         "awayLast5Xg": 1.34,
-        "homeLast5Xga": 0.91,
+        "homeLast5Xga": 0.66,
         "awayLast5Xga": 1.65,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
@@ -12830,11 +12841,11 @@
         "homeElo": 1603.0,
         "awayElo": 1571.0,
         "homeDaysRest": 217.9,
-        "awayDaysRest": 217.04,
+        "awayDaysRest": 212.79,
         "homeLast5Xg": 1.38,
-        "awayLast5Xg": 1.51,
+        "awayLast5Xg": 1.04,
         "homeLast5Xga": 1.43,
-        "awayLast5Xga": 1.99,
+        "awayLast5Xga": 1.28,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
       },
@@ -13130,11 +13141,11 @@
       "context": {
         "homeElo": 1571.0,
         "awayElo": 1581.0,
-        "homeDaysRest": 224.08,
+        "homeDaysRest": 219.83,
         "awayDaysRest": 224.08,
-        "homeLast5Xg": 1.51,
+        "homeLast5Xg": 1.04,
         "awayLast5Xg": 1.58,
-        "homeLast5Xga": 1.99,
+        "homeLast5Xga": 1.28,
         "awayLast5Xga": 1.57,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
@@ -13258,13 +13269,13 @@
       },
       "context": {
         "homeElo": 1717.0,
-        "awayElo": 1645.0,
+        "awayElo": 1649.0,
         "homeDaysRest": 221.83,
-        "awayDaysRest": 224.08,
+        "awayDaysRest": 219.83,
         "homeLast5Xg": 2.05,
-        "awayLast5Xg": 2.0,
+        "awayLast5Xg": 2.48,
         "homeLast5Xga": 1.83,
-        "awayLast5Xga": 0.91,
+        "awayLast5Xga": 0.66,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
       },

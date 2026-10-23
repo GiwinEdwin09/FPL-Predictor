@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at_utc": "2026-10-20T10:18:24.616580+00:00",
+  "updated_at_utc": "2026-10-23T20:35:34.547531+00:00",
   "entries": {
     "24-25-prem-afc-bournemouth-vs-arsenal": {
       "matchId": "24-25-prem-afc-bournemouth-vs-arsenal",
@@ -12817,7 +12817,7 @@
       "modelVersion": "model_v3",
       "generatedAtUtc": "2026-10-20T10:18:24.507983+00:00",
       "kickoffTimeUtc": "2026-10-23T19:00:00+00:00",
-      "locked": false,
+      "locked": true,
       "predictionType": "pre_kickoff"
     },
     "26-27-prem-ipswich-town-vs-sunderland": {
