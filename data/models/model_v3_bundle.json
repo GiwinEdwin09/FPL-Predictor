@@ -2,7 +2,7 @@
   "schema_version": 1,
   "model_version": "v3",
   "predictor_type": "blend_v3",
-  "created_at_utc": "2026-11-02T23:59:19.005068+00:00",
+  "created_at_utc": "2026-11-03T12:57:12.253795+00:00",
   "feature_columns": [
     "is_cup_match",
     "is_european_match",
@@ -52,8 +52,8 @@
     },
     "prediction_features": {
       "path": "../features/match_pre_match_features_v3.csv",
-      "sha256": "b5e0ccb65865bf50e190026fb56c356a408255e640b975a7e5cbb4e48a19265d",
-      "size_bytes": 511596
+      "sha256": "b64d8083a80a077d7399dc354f9a28951fb88618693d70e02f936a5d1edd750a",
+      "size_bytes": 512263
     },
     "team_keys": {
       "path": "model_v3_team_keys.json",
