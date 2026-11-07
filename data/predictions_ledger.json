@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at_utc": "2026-11-06T22:16:28.568256+00:00",
+  "updated_at_utc": "2026-11-07T11:52:55.921119+00:00",
   "entries": {
     "24-25-prem-afc-bournemouth-vs-arsenal": {
       "matchId": "24-25-prem-afc-bournemouth-vs-arsenal",
@@ -9885,12 +9885,12 @@
     "26-27-prem-afc-bournemouth-vs-arsenal": {
       "matchId": "26-27-prem-afc-bournemouth-vs-arsenal",
       "probabilities": {
-        "homeWin": 0.2148,
-        "draw": 0.2642,
-        "awayWin": 0.5209
+        "homeWin": 0.2166,
+        "draw": 0.2637,
+        "awayWin": 0.5196
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.392227+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.735568+00:00",
       "kickoffTimeUtc": "2027-04-24T14:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -9898,12 +9898,12 @@
     "26-27-prem-afc-bournemouth-vs-aston-villa": {
       "matchId": "26-27-prem-afc-bournemouth-vs-aston-villa",
       "probabilities": {
-        "homeWin": 0.4199,
-        "draw": 0.2617,
-        "awayWin": 0.3184
+        "homeWin": 0.4217,
+        "draw": 0.2604,
+        "awayWin": 0.3179
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.377406+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.721126+00:00",
       "kickoffTimeUtc": "2027-01-02T17:30:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -9924,12 +9924,12 @@
     "26-27-prem-afc-bournemouth-vs-brighton-hove-albion": {
       "matchId": "26-27-prem-afc-bournemouth-vs-brighton-hove-albion",
       "probabilities": {
-        "homeWin": 0.3617,
-        "draw": 0.2601,
-        "awayWin": 0.3782
+        "homeWin": 0.3635,
+        "draw": 0.2592,
+        "awayWin": 0.3773
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.370382+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.714412+00:00",
       "kickoffTimeUtc": "2026-12-02T20:15:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -9937,12 +9937,12 @@
     "26-27-prem-afc-bournemouth-vs-chelsea": {
       "matchId": "26-27-prem-afc-bournemouth-vs-chelsea",
       "probabilities": {
-        "homeWin": 0.3957,
-        "draw": 0.2521,
-        "awayWin": 0.3522
+        "homeWin": 0.397,
+        "draw": 0.2509,
+        "awayWin": 0.3521
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.396586+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.739834+00:00",
       "kickoffTimeUtc": "2027-05-23T14:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -9950,12 +9950,12 @@
     "26-27-prem-afc-bournemouth-vs-coventry-city": {
       "matchId": "26-27-prem-afc-bournemouth-vs-coventry-city",
       "probabilities": {
-        "homeWin": 0.566,
-        "draw": 0.2428,
-        "awayWin": 0.1912
+        "homeWin": 0.6117,
+        "draw": 0.2156,
+        "awayWin": 0.1727
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.373328+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.717223+00:00",
       "kickoffTimeUtc": "2026-12-19T15:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -9963,12 +9963,12 @@
     "26-27-prem-afc-bournemouth-vs-crystal-palace": {
       "matchId": "26-27-prem-afc-bournemouth-vs-crystal-palace",
       "probabilities": {
-        "homeWin": 0.5172,
-        "draw": 0.2527,
+        "homeWin": 0.5184,
+        "draw": 0.2515,
         "awayWin": 0.2301
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.384358+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.727983+00:00",
       "kickoffTimeUtc": "2027-02-20T15:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -9989,12 +9989,12 @@
     "26-27-prem-afc-bournemouth-vs-fulham": {
       "matchId": "26-27-prem-afc-bournemouth-vs-fulham",
       "probabilities": {
-        "homeWin": 0.4708,
-        "draw": 0.2682,
-        "awayWin": 0.2609
+        "homeWin": 0.4725,
+        "draw": 0.267,
+        "awayWin": 0.2605
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.381092+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.724721+00:00",
       "kickoffTimeUtc": "2027-01-30T15:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -10002,12 +10002,12 @@
     "26-27-prem-afc-bournemouth-vs-hull-city": {
       "matchId": "26-27-prem-afc-bournemouth-vs-hull-city",
       "probabilities": {
-        "homeWin": 0.4558,
-        "draw": 0.2808,
-        "awayWin": 0.2634
+        "homeWin": 0.4577,
+        "draw": 0.2805,
+        "awayWin": 0.2618
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.371122+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.715054+00:00",
       "kickoffTimeUtc": "2026-12-05T15:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -10015,12 +10015,12 @@
     "26-27-prem-afc-bournemouth-vs-ipswich-town": {
       "matchId": "26-27-prem-afc-bournemouth-vs-ipswich-town",
       "probabilities": {
-        "homeWin": 0.6421,
-        "draw": 0.1949,
-        "awayWin": 0.163
+        "homeWin": 0.6428,
+        "draw": 0.194,
+        "awayWin": 0.1632
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.378890+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.722556+00:00",
       "kickoffTimeUtc": "2027-01-16T15:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -10054,12 +10054,12 @@
     "26-27-prem-afc-bournemouth-vs-manchester-city": {
       "matchId": "26-27-prem-afc-bournemouth-vs-manchester-city",
       "probabilities": {
-        "homeWin": 0.2348,
-        "draw": 0.243,
-        "awayWin": 0.5222
+        "homeWin": 0.2366,
+        "draw": 0.2426,
+        "awayWin": 0.5208
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.389998+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.733417+00:00",
       "kickoffTimeUtc": "2027-04-10T14:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -10067,12 +10067,12 @@
     "26-27-prem-afc-bournemouth-vs-manchester-united": {
       "matchId": "26-27-prem-afc-bournemouth-vs-manchester-united",
       "probabilities": {
-        "homeWin": 0.4237,
-        "draw": 0.2603,
+        "homeWin": 0.4249,
+        "draw": 0.2591,
         "awayWin": 0.316
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.394408+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.737698+00:00",
       "kickoffTimeUtc": "2027-05-08T14:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -10080,12 +10080,12 @@
     "26-27-prem-afc-bournemouth-vs-newcastle-united": {
       "matchId": "26-27-prem-afc-bournemouth-vs-newcastle-united",
       "probabilities": {
-        "homeWin": 0.4394,
-        "draw": 0.2517,
-        "awayWin": 0.3089
+        "homeWin": 0.4408,
+        "draw": 0.2508,
+        "awayWin": 0.3084
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.387780+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.731241+00:00",
       "kickoffTimeUtc": "2027-03-13T15:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -10093,12 +10093,12 @@
     "26-27-prem-afc-bournemouth-vs-nottingham-forest": {
       "matchId": "26-27-prem-afc-bournemouth-vs-nottingham-forest",
       "probabilities": {
-        "homeWin": 0.4726,
-        "draw": 0.2678,
-        "awayWin": 0.2596
+        "homeWin": 0.4744,
+        "draw": 0.2666,
+        "awayWin": 0.259
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.367647+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.711728+00:00",
       "kickoffTimeUtc": "2026-11-21T15:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -10119,12 +10119,12 @@
     "26-27-prem-afc-bournemouth-vs-tottenham-hotspur": {
       "matchId": "26-27-prem-afc-bournemouth-vs-tottenham-hotspur",
       "probabilities": {
-        "homeWin": 0.4773,
-        "draw": 0.2501,
-        "awayWin": 0.2725
+        "homeWin": 0.479,
+        "draw": 0.2491,
+        "awayWin": 0.2719
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.386574+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.730151+00:00",
       "kickoffTimeUtc": "2027-03-03T20:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -10132,12 +10132,12 @@
     "26-27-prem-arsenal-vs-afc-bournemouth": {
       "matchId": "26-27-prem-arsenal-vs-afc-bournemouth",
       "probabilities": {
-        "homeWin": 0.633,
-        "draw": 0.2256,
-        "awayWin": 0.1413
+        "homeWin": 0.6329,
+        "draw": 0.225,
+        "awayWin": 0.1421
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.372552+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.716482+00:00",
       "kickoffTimeUtc": "2026-12-13T14:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -10145,12 +10145,12 @@
     "26-27-prem-arsenal-vs-aston-villa": {
       "matchId": "26-27-prem-arsenal-vs-aston-villa",
       "probabilities": {
-        "homeWin": 0.624,
-        "draw": 0.2308,
-        "awayWin": 0.1452
+        "homeWin": 0.6244,
+        "draw": 0.2299,
+        "awayWin": 0.1456
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.391147+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.734493+00:00",
       "kickoffTimeUtc": "2027-04-17T14:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -10158,12 +10158,12 @@
     "26-27-prem-arsenal-vs-brentford": {
       "matchId": "26-27-prem-arsenal-vs-brentford",
       "probabilities": {
-        "homeWin": 0.6199,
-        "draw": 0.2296,
-        "awayWin": 0.1505
+        "homeWin": 0.62,
+        "draw": 0.2289,
+        "awayWin": 0.1512
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.377775+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.721473+00:00",
       "kickoffTimeUtc": "2027-01-05T19:30:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -10171,12 +10171,12 @@
     "26-27-prem-arsenal-vs-brighton-hove-albion": {
       "matchId": "26-27-prem-arsenal-vs-brighton-hove-albion",
       "probabilities": {
-        "homeWin": 0.5715,
-        "draw": 0.2476,
-        "awayWin": 0.1809
+        "homeWin": 0.5718,
+        "draw": 0.2468,
+        "awayWin": 0.1813
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.397698+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.740901+00:00",
       "kickoffTimeUtc": "2027-05-30T15:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -10210,12 +10210,12 @@
     "26-27-prem-arsenal-vs-crystal-palace": {
       "matchId": "26-27-prem-arsenal-vs-crystal-palace",
       "probabilities": {
-        "homeWin": 0.7037,
-        "draw": 0.199,
-        "awayWin": 0.0973
+        "homeWin": 0.7035,
+        "draw": 0.1985,
+        "awayWin": 0.098
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.386680+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.730257+00:00",
       "kickoffTimeUtc": "2027-03-03T20:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -10236,12 +10236,12 @@
     "26-27-prem-arsenal-vs-fulham": {
       "matchId": "26-27-prem-arsenal-vs-fulham",
       "probabilities": {
-        "homeWin": 0.6597,
-        "draw": 0.2241,
-        "awayWin": 0.1162
+        "homeWin": 0.6598,
+        "draw": 0.2235,
+        "awayWin": 0.1167
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.384464+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.728088+00:00",
       "kickoffTimeUtc": "2027-02-20T15:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -10249,12 +10249,12 @@
     "26-27-prem-arsenal-vs-hull-city": {
       "matchId": "26-27-prem-arsenal-vs-hull-city",
       "probabilities": {
-        "homeWin": 0.6392,
-        "draw": 0.2402,
-        "awayWin": 0.1206
+        "homeWin": 0.639,
+        "draw": 0.2404,
+        "awayWin": 0.1207
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.366559+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.710659+00:00",
       "kickoffTimeUtc": "2026-11-07T15:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -10262,12 +10262,12 @@
     "26-27-prem-arsenal-vs-ipswich-town": {
       "matchId": "26-27-prem-arsenal-vs-ipswich-town",
       "probabilities": {
-        "homeWin": 0.8157,
-        "draw": 0.1268,
-        "awayWin": 0.0575
+        "homeWin": 0.8152,
+        "draw": 0.1267,
+        "awayWin": 0.0581
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.376851+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.720598+00:00",
       "kickoffTimeUtc": "2027-01-02T15:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -10288,12 +10288,12 @@
     "26-27-prem-arsenal-vs-liverpool": {
       "matchId": "26-27-prem-arsenal-vs-liverpool",
       "probabilities": {
-        "homeWin": 0.5307,
-        "draw": 0.261,
-        "awayWin": 0.2082
+        "homeWin": 0.531,
+        "draw": 0.26,
+        "awayWin": 0.2089
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.382184+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.725790+00:00",
       "kickoffTimeUtc": "2027-02-06T15:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -10301,12 +10301,12 @@
     "26-27-prem-arsenal-vs-manchester-city": {
       "matchId": "26-27-prem-arsenal-vs-manchester-city",
       "probabilities": {
-        "homeWin": 0.4335,
-        "draw": 0.2826,
+        "homeWin": 0.4343,
+        "draw": 0.2817,
         "awayWin": 0.284
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.369669+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.713743+00:00",
       "kickoffTimeUtc": "2026-11-29T16:30:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -10314,12 +10314,12 @@
     "26-27-prem-arsenal-vs-manchester-united": {
       "matchId": "26-27-prem-arsenal-vs-manchester-united",
       "probabilities": {
-        "homeWin": 0.6283,
-        "draw": 0.2284,
-        "awayWin": 0.1433
+        "homeWin": 0.6282,
+        "draw": 0.2277,
+        "awayWin": 0.1441
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.374136+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.717982+00:00",
       "kickoffTimeUtc": "2026-12-20T16:30:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -10327,12 +10327,12 @@
     "26-27-prem-arsenal-vs-newcastle-united": {
       "matchId": "26-27-prem-arsenal-vs-newcastle-united",
       "probabilities": {
-        "homeWin": 0.6479,
-        "draw": 0.2155,
-        "awayWin": 0.1365
+        "homeWin": 0.6477,
+        "draw": 0.2152,
+        "awayWin": 0.1371
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.379998+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.723642+00:00",
       "kickoffTimeUtc": "2027-01-23T15:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -10340,12 +10340,12 @@
     "26-27-prem-arsenal-vs-nottingham-forest": {
       "matchId": "26-27-prem-arsenal-vs-nottingham-forest",
       "probabilities": {
-        "homeWin": 0.6614,
-        "draw": 0.2232,
-        "awayWin": 0.1154
+        "homeWin": 0.6615,
+        "draw": 0.2227,
+        "awayWin": 0.1158
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.395483+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.738762+00:00",
       "kickoffTimeUtc": "2027-05-15T14:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -10353,12 +10353,12 @@
     "26-27-prem-arsenal-vs-sunderland": {
       "matchId": "26-27-prem-arsenal-vs-sunderland",
       "probabilities": {
-        "homeWin": 0.6956,
-        "draw": 0.2092,
-        "awayWin": 0.0953
+        "homeWin": 0.6957,
+        "draw": 0.2087,
+        "awayWin": 0.0956
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.388897+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.732324+00:00",
       "kickoffTimeUtc": "2027-03-20T15:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -10367,11 +10367,11 @@
       "matchId": "26-27-prem-arsenal-vs-tottenham-hotspur",
       "probabilities": {
         "homeWin": 0.6783,
-        "draw": 0.2046,
-        "awayWin": 0.1171
+        "draw": 0.2042,
+        "awayWin": 0.1175
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.393326+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.736631+00:00",
       "kickoffTimeUtc": "2027-05-01T14:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -10379,12 +10379,12 @@
     "26-27-prem-aston-villa-vs-afc-bournemouth": {
       "matchId": "26-27-prem-aston-villa-vs-afc-bournemouth",
       "probabilities": {
-        "homeWin": 0.4327,
-        "draw": 0.2604,
-        "awayWin": 0.3068
+        "homeWin": 0.4335,
+        "draw": 0.2592,
+        "awayWin": 0.3072
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.383273+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.726901+00:00",
       "kickoffTimeUtc": "2027-02-10T20:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -10418,12 +10418,12 @@
     "26-27-prem-aston-villa-vs-brighton-hove-albion": {
       "matchId": "26-27-prem-aston-villa-vs-brighton-hove-albion",
       "probabilities": {
-        "homeWin": 0.3668,
-        "draw": 0.2625,
-        "awayWin": 0.3708
+        "homeWin": 0.3681,
+        "draw": 0.2615,
+        "awayWin": 0.3704
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.390103+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.733526+00:00",
       "kickoffTimeUtc": "2027-04-10T14:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -10431,12 +10431,12 @@
     "26-27-prem-aston-villa-vs-chelsea": {
       "matchId": "26-27-prem-aston-villa-vs-chelsea",
       "probabilities": {
-        "homeWin": 0.4009,
-        "draw": 0.254,
-        "awayWin": 0.3451
+        "homeWin": 0.4017,
+        "draw": 0.2529,
+        "awayWin": 0.3455
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.385439+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.729068+00:00",
       "kickoffTimeUtc": "2027-02-27T15:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -10444,12 +10444,12 @@
     "26-27-prem-aston-villa-vs-coventry-city": {
       "matchId": "26-27-prem-aston-villa-vs-coventry-city",
       "probabilities": {
-        "homeWin": 0.5695,
-        "draw": 0.2434,
-        "awayWin": 0.1871
+        "homeWin": 0.6149,
+        "draw": 0.216,
+        "awayWin": 0.1691
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.392332+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.735671+00:00",
       "kickoffTimeUtc": "2027-04-24T14:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -10457,12 +10457,12 @@
     "26-27-prem-aston-villa-vs-crystal-palace": {
       "matchId": "26-27-prem-aston-villa-vs-crystal-palace",
       "probabilities": {
-        "homeWin": 0.5212,
-        "draw": 0.2536,
-        "awayWin": 0.2252
+        "homeWin": 0.522,
+        "draw": 0.2524,
+        "awayWin": 0.2256
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.371240+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.715160+00:00",
       "kickoffTimeUtc": "2026-12-05T15:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -10470,12 +10470,12 @@
     "26-27-prem-aston-villa-vs-everton": {
       "matchId": "26-27-prem-aston-villa-vs-everton",
       "probabilities": {
-        "homeWin": 0.4589,
-        "draw": 0.2861,
-        "awayWin": 0.255
+        "homeWin": 0.4552,
+        "draw": 0.2814,
+        "awayWin": 0.2633
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.370490+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.714522+00:00",
       "kickoffTimeUtc": "2026-12-02T20:15:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -10496,12 +10496,12 @@
     "26-27-prem-aston-villa-vs-hull-city": {
       "matchId": "26-27-prem-aston-villa-vs-hull-city",
       "probabilities": {
-        "homeWin": 0.4597,
-        "draw": 0.2823,
-        "awayWin": 0.258
+        "homeWin": 0.4612,
+        "draw": 0.2819,
+        "awayWin": 0.2569
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.387899+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.731347+00:00",
       "kickoffTimeUtc": "2027-03-13T15:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -10509,12 +10509,12 @@
     "26-27-prem-aston-villa-vs-ipswich-town": {
       "matchId": "26-27-prem-aston-villa-vs-ipswich-town",
       "probabilities": {
-        "homeWin": 0.6458,
-        "draw": 0.195,
-        "awayWin": 0.1591
+        "homeWin": 0.6461,
+        "draw": 0.1942,
+        "awayWin": 0.1597
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.381199+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.724825+00:00",
       "kickoffTimeUtc": "2027-01-30T15:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -10522,12 +10522,12 @@
     "26-27-prem-aston-villa-vs-leeds-united": {
       "matchId": "26-27-prem-aston-villa-vs-leeds-united",
       "probabilities": {
-        "homeWin": 0.4761,
-        "draw": 0.2644,
-        "awayWin": 0.2595
+        "homeWin": 0.4771,
+        "draw": 0.263,
+        "awayWin": 0.2598
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.374348+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.718192+00:00",
       "kickoffTimeUtc": "2026-12-26T12:30:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -10535,12 +10535,12 @@
     "26-27-prem-aston-villa-vs-liverpool": {
       "matchId": "26-27-prem-aston-villa-vs-liverpool",
       "probabilities": {
-        "homeWin": 0.3273,
-        "draw": 0.2619,
-        "awayWin": 0.4108
+        "homeWin": 0.3283,
+        "draw": 0.2606,
+        "awayWin": 0.411
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.376380+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.720138+00:00",
       "kickoffTimeUtc": "2026-12-30T20:15:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -10561,12 +10561,12 @@
     "26-27-prem-aston-villa-vs-manchester-united": {
       "matchId": "26-27-prem-aston-villa-vs-manchester-united",
       "probabilities": {
-        "homeWin": 0.4285,
-        "draw": 0.262,
-        "awayWin": 0.3095
+        "homeWin": 0.4293,
+        "draw": 0.2607,
+        "awayWin": 0.31
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.378998+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.722662+00:00",
       "kickoffTimeUtc": "2027-01-16T15:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -10574,12 +10574,12 @@
     "26-27-prem-aston-villa-vs-newcastle-united": {
       "matchId": "26-27-prem-aston-villa-vs-newcastle-united",
       "probabilities": {
-        "homeWin": 0.4443,
-        "draw": 0.2533,
+        "homeWin": 0.4453,
+        "draw": 0.2524,
         "awayWin": 0.3024
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.395589+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.738865+00:00",
       "kickoffTimeUtc": "2027-05-15T14:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -10600,12 +10600,12 @@
     "26-27-prem-aston-villa-vs-sunderland": {
       "matchId": "26-27-prem-aston-villa-vs-sunderland",
       "probabilities": {
-        "homeWin": 0.5201,
-        "draw": 0.2638,
-        "awayWin": 0.2161
+        "homeWin": 0.5216,
+        "draw": 0.2626,
+        "awayWin": 0.2158
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.367782+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.711849+00:00",
       "kickoffTimeUtc": "2026-11-21T15:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -10613,12 +10613,12 @@
     "26-27-prem-aston-villa-vs-tottenham-hotspur": {
       "matchId": "26-27-prem-aston-villa-vs-tottenham-hotspur",
       "probabilities": {
-        "homeWin": 0.4819,
-        "draw": 0.2513,
-        "awayWin": 0.2668
+        "homeWin": 0.4832,
+        "draw": 0.2503,
+        "awayWin": 0.2665
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.397821+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.741004+00:00",
       "kickoffTimeUtc": "2027-05-30T15:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -10626,12 +10626,12 @@
     "26-27-prem-brentford-vs-afc-bournemouth": {
       "matchId": "26-27-prem-brentford-vs-afc-bournemouth",
       "probabilities": {
-        "homeWin": 0.4469,
-        "draw": 0.2548,
-        "awayWin": 0.2983
+        "homeWin": 0.4481,
+        "draw": 0.2535,
+        "awayWin": 0.2984
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.389006+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.732455+00:00",
       "kickoffTimeUtc": "2027-03-20T15:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -10639,12 +10639,12 @@
     "26-27-prem-brentford-vs-arsenal": {
       "matchId": "26-27-prem-brentford-vs-arsenal",
       "probabilities": {
-        "homeWin": 0.2271,
-        "draw": 0.2662,
-        "awayWin": 0.5067
+        "homeWin": 0.2289,
+        "draw": 0.2656,
+        "awayWin": 0.5056
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.370598+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.714628+00:00",
       "kickoffTimeUtc": "2026-12-02T20:15:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -10652,12 +10652,12 @@
     "26-27-prem-brentford-vs-aston-villa": {
       "matchId": "26-27-prem-brentford-vs-aston-villa",
       "probabilities": {
-        "homeWin": 0.4387,
-        "draw": 0.2579,
-        "awayWin": 0.3035
+        "homeWin": 0.4403,
+        "draw": 0.2565,
+        "awayWin": 0.3031
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.394514+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.737802+00:00",
       "kickoffTimeUtc": "2027-05-08T14:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -10665,12 +10665,12 @@
     "26-27-prem-brentford-vs-brighton-hove-albion": {
       "matchId": "26-27-prem-brentford-vs-brighton-hove-albion",
       "probabilities": {
-        "homeWin": 0.3795,
-        "draw": 0.2581,
-        "awayWin": 0.3624
+        "homeWin": 0.3812,
+        "draw": 0.2571,
+        "awayWin": 0.3617
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.379104+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.722767+00:00",
       "kickoffTimeUtc": "2027-01-16T15:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -10691,12 +10691,12 @@
     "26-27-prem-brentford-vs-coventry-city": {
       "matchId": "26-27-prem-brentford-vs-coventry-city",
       "probabilities": {
-        "homeWin": 0.5852,
-        "draw": 0.2351,
-        "awayWin": 0.1797
+        "homeWin": 0.6314,
+        "draw": 0.2074,
+        "awayWin": 0.1612
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.384570+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.728193+00:00",
       "kickoffTimeUtc": "2027-02-20T15:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -10704,12 +10704,12 @@
     "26-27-prem-brentford-vs-crystal-palace": {
       "matchId": "26-27-prem-brentford-vs-crystal-palace",
       "probabilities": {
-        "homeWin": 0.5366,
-        "draw": 0.2462,
-        "awayWin": 0.2173
+        "homeWin": 0.5377,
+        "draw": 0.2449,
+        "awayWin": 0.2174
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.376966+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.720705+00:00",
       "kickoffTimeUtc": "2027-01-02T15:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -10717,12 +10717,12 @@
     "26-27-prem-brentford-vs-everton": {
       "matchId": "26-27-prem-brentford-vs-everton",
       "probabilities": {
-        "homeWin": 0.473,
-        "draw": 0.2792,
-        "awayWin": 0.2478
+        "homeWin": 0.4697,
+        "draw": 0.2746,
+        "awayWin": 0.2557
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.368553+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.712638+00:00",
       "kickoffTimeUtc": "2026-11-23T20:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -10730,12 +10730,12 @@
     "26-27-prem-brentford-vs-fulham": {
       "matchId": "26-27-prem-brentford-vs-fulham",
       "probabilities": {
-        "homeWin": 0.4896,
-        "draw": 0.2627,
-        "awayWin": 0.2477
+        "homeWin": 0.4911,
+        "draw": 0.2614,
+        "awayWin": 0.2475
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.392438+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.735776+00:00",
       "kickoffTimeUtc": "2027-04-24T14:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -10743,12 +10743,12 @@
     "26-27-prem-brentford-vs-hull-city": {
       "matchId": "26-27-prem-brentford-vs-hull-city",
       "probabilities": {
-        "homeWin": 0.4739,
-        "draw": 0.2754,
-        "awayWin": 0.2507
+        "homeWin": 0.4758,
+        "draw": 0.275,
+        "awayWin": 0.2493
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.396709+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.739938+00:00",
       "kickoffTimeUtc": "2027-05-23T14:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -10756,12 +10756,12 @@
     "26-27-prem-brentford-vs-ipswich-town": {
       "matchId": "26-27-prem-brentford-vs-ipswich-town",
       "probabilities": {
-        "homeWin": 0.6623,
-        "draw": 0.1866,
-        "awayWin": 0.1511
+        "homeWin": 0.6629,
+        "draw": 0.1857,
+        "awayWin": 0.1514
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.386828+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.730381+00:00",
       "kickoffTimeUtc": "2027-03-03T20:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -10769,12 +10769,12 @@
     "26-27-prem-brentford-vs-leeds-united": {
       "matchId": "26-27-prem-brentford-vs-leeds-united",
       "probabilities": {
-        "homeWin": 0.4908,
-        "draw": 0.2577,
+        "homeWin": 0.4922,
+        "draw": 0.2563,
         "awayWin": 0.2515
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.391253+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.734598+00:00",
       "kickoffTimeUtc": "2027-04-17T14:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -10795,12 +10795,12 @@
     "26-27-prem-brentford-vs-manchester-city": {
       "matchId": "26-27-prem-brentford-vs-manchester-city",
       "probabilities": {
-        "homeWin": 0.2487,
-        "draw": 0.2448,
-        "awayWin": 0.5064
+        "homeWin": 0.2505,
+        "draw": 0.2443,
+        "awayWin": 0.5052
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.371670+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.715612+00:00",
       "kickoffTimeUtc": "2026-12-05T20:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -10808,12 +10808,12 @@
     "26-27-prem-brentford-vs-manchester-united": {
       "matchId": "26-27-prem-brentford-vs-manchester-united",
       "probabilities": {
-        "homeWin": 0.4425,
-        "draw": 0.2564,
-        "awayWin": 0.3011
+        "homeWin": 0.4437,
+        "draw": 0.2551,
+        "awayWin": 0.3012
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.381306+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.724930+00:00",
       "kickoffTimeUtc": "2027-01-30T15:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -10821,12 +10821,12 @@
     "26-27-prem-brentford-vs-newcastle-united": {
       "matchId": "26-27-prem-brentford-vs-newcastle-united",
       "probabilities": {
-        "homeWin": 0.4588,
-        "draw": 0.2475,
-        "awayWin": 0.2937
+        "homeWin": 0.4601,
+        "draw": 0.2466,
+        "awayWin": 0.2933
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.373222+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.717115+00:00",
       "kickoffTimeUtc": "2026-12-19T12:30:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -10873,12 +10873,12 @@
     "26-27-prem-brighton-hove-albion-vs-afc-bournemouth": {
       "matchId": "26-27-prem-brighton-hove-albion-vs-afc-bournemouth",
       "probabilities": {
-        "homeWin": 0.4988,
-        "draw": 0.2467,
-        "awayWin": 0.2545
+        "homeWin": 0.4992,
+        "draw": 0.2458,
+        "awayWin": 0.255
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.377895+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.721580+00:00",
       "kickoffTimeUtc": "2027-01-05T19:30:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -10912,12 +10912,12 @@
     "26-27-prem-brighton-hove-albion-vs-brentford": {
       "matchId": "26-27-prem-brighton-hove-albion-vs-brentford",
       "probabilities": {
-        "homeWin": 0.4828,
-        "draw": 0.248,
-        "awayWin": 0.2692
+        "homeWin": 0.4834,
+        "draw": 0.247,
+        "awayWin": 0.2696
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.366963+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.711014+00:00",
       "kickoffTimeUtc": "2026-11-08T14:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -10925,12 +10925,12 @@
     "26-27-prem-brighton-hove-albion-vs-chelsea": {
       "matchId": "26-27-prem-brighton-hove-albion-vs-chelsea",
       "probabilities": {
-        "homeWin": 0.4675,
-        "draw": 0.244,
-        "awayWin": 0.2885
+        "homeWin": 0.4679,
+        "draw": 0.2431,
+        "awayWin": 0.289
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.391358+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.734704+00:00",
       "kickoffTimeUtc": "2027-04-17T14:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -10938,12 +10938,12 @@
     "26-27-prem-brighton-hove-albion-vs-coventry-city": {
       "matchId": "26-27-prem-brighton-hove-albion-vs-coventry-city",
       "probabilities": {
-        "homeWin": 0.6336,
-        "draw": 0.2179,
-        "awayWin": 0.1485
+        "homeWin": 0.6795,
+        "draw": 0.1893,
+        "awayWin": 0.1312
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.389112+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.732561+00:00",
       "kickoffTimeUtc": "2027-03-20T15:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -10964,12 +10964,12 @@
     "26-27-prem-brighton-hove-albion-vs-everton": {
       "matchId": "26-27-prem-brighton-hove-albion-vs-everton",
       "probabilities": {
-        "homeWin": 0.5203,
-        "draw": 0.268,
-        "awayWin": 0.2116
+        "homeWin": 0.5168,
+        "draw": 0.2644,
+        "awayWin": 0.2188
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.372660+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.716589+00:00",
       "kickoffTimeUtc": "2026-12-13T14:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -10977,12 +10977,12 @@
     "26-27-prem-brighton-hove-albion-vs-fulham": {
       "matchId": "26-27-prem-brighton-hove-albion-vs-fulham",
       "probabilities": {
-        "homeWin": 0.5391,
-        "draw": 0.2509,
-        "awayWin": 0.21
+        "homeWin": 0.5397,
+        "draw": 0.25,
+        "awayWin": 0.2102
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.386936+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.730495+00:00",
       "kickoffTimeUtc": "2027-03-03T20:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -10990,12 +10990,12 @@
     "26-27-prem-brighton-hove-albion-vs-hull-city": {
       "matchId": "26-27-prem-brighton-hove-albion-vs-hull-city",
       "probabilities": {
-        "homeWin": 0.5218,
-        "draw": 0.2643,
-        "awayWin": 0.2139
+        "homeWin": 0.5227,
+        "draw": 0.2642,
+        "awayWin": 0.2131
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.382291+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.725896+00:00",
       "kickoffTimeUtc": "2027-02-06T15:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -11003,12 +11003,12 @@
     "26-27-prem-brighton-hove-albion-vs-ipswich-town": {
       "matchId": "26-27-prem-brighton-hove-albion-vs-ipswich-town",
       "probabilities": {
-        "homeWin": 0.7119,
-        "draw": 0.1675,
-        "awayWin": 0.1206
+        "homeWin": 0.7117,
+        "draw": 0.1671,
+        "awayWin": 0.1212
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.373814+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.717667+00:00",
       "kickoffTimeUtc": "2026-12-20T14:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -11029,12 +11029,12 @@
     "26-27-prem-brighton-hove-albion-vs-liverpool": {
       "matchId": "26-27-prem-brighton-hove-albion-vs-liverpool",
       "probabilities": {
-        "homeWin": 0.3879,
-        "draw": 0.2593,
-        "awayWin": 0.3527
+        "homeWin": 0.3886,
+        "draw": 0.2583,
+        "awayWin": 0.3531
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.396822+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.740042+00:00",
       "kickoffTimeUtc": "2027-05-23T14:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -11042,12 +11042,12 @@
     "26-27-prem-brighton-hove-albion-vs-manchester-city": {
       "matchId": "26-27-prem-brighton-hove-albion-vs-manchester-city",
       "probabilities": {
-        "homeWin": 0.292,
-        "draw": 0.2544,
-        "awayWin": 0.4537
+        "homeWin": 0.2933,
+        "draw": 0.2538,
+        "awayWin": 0.4529
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.380106+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.723747+00:00",
       "kickoffTimeUtc": "2027-01-23T15:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -11055,12 +11055,12 @@
     "26-27-prem-brighton-hove-albion-vs-manchester-united": {
       "matchId": "26-27-prem-brighton-hove-albion-vs-manchester-united",
       "probabilities": {
-        "homeWin": 0.4942,
-        "draw": 0.2486,
-        "awayWin": 0.2572
+        "homeWin": 0.4946,
+        "draw": 0.2477,
+        "awayWin": 0.2578
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.376740+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.720493+00:00",
       "kickoffTimeUtc": "2027-01-02T12:30:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -11068,12 +11068,12 @@
     "26-27-prem-brighton-hove-albion-vs-newcastle-united": {
       "matchId": "26-27-prem-brighton-hove-albion-vs-newcastle-united",
       "probabilities": {
-        "homeWin": 0.5118,
-        "draw": 0.2388,
-        "awayWin": 0.2494
+        "homeWin": 0.5123,
+        "draw": 0.2382,
+        "awayWin": 0.2495
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.369234+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.713286+00:00",
       "kickoffTimeUtc": "2026-11-29T14:05:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -11081,12 +11081,12 @@
     "26-27-prem-brighton-hove-albion-vs-nottingham-forest": {
       "matchId": "26-27-prem-brighton-hove-albion-vs-nottingham-forest",
       "probabilities": {
-        "homeWin": 0.5408,
-        "draw": 0.2503,
-        "awayWin": 0.2088
+        "homeWin": 0.5417,
+        "draw": 0.2494,
+        "awayWin": 0.2089
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.393433+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.736735+00:00",
       "kickoffTimeUtc": "2027-05-01T14:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -11094,12 +11094,12 @@
     "26-27-prem-brighton-hove-albion-vs-sunderland": {
       "matchId": "26-27-prem-brighton-hove-albion-vs-sunderland",
       "probabilities": {
-        "homeWin": 0.5836,
-        "draw": 0.2412,
-        "awayWin": 0.1752
+        "homeWin": 0.5846,
+        "draw": 0.2404,
+        "awayWin": 0.1751
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.394619+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.737905+00:00",
       "kickoffTimeUtc": "2027-05-08T14:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -11107,12 +11107,12 @@
     "26-27-prem-brighton-hove-albion-vs-tottenham-hotspur": {
       "matchId": "26-27-prem-brighton-hove-albion-vs-tottenham-hotspur",
       "probabilities": {
-        "homeWin": 0.5494,
-        "draw": 0.2332,
-        "awayWin": 0.2174
+        "homeWin": 0.5501,
+        "draw": 0.2325,
+        "awayWin": 0.2173
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.384674+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.728300+00:00",
       "kickoffTimeUtc": "2027-02-20T15:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -11133,12 +11133,12 @@
     "26-27-prem-chelsea-vs-arsenal": {
       "matchId": "26-27-prem-chelsea-vs-arsenal",
       "probabilities": {
-        "homeWin": 0.243,
-        "draw": 0.2627,
-        "awayWin": 0.4942
+        "homeWin": 0.2449,
+        "draw": 0.2621,
+        "awayWin": 0.4929
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.388005+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.731489+00:00",
       "kickoffTimeUtc": "2027-03-13T15:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -11146,12 +11146,12 @@
     "26-27-prem-chelsea-vs-aston-villa": {
       "matchId": "26-27-prem-chelsea-vs-aston-villa",
       "probabilities": {
-        "homeWin": 0.4655,
-        "draw": 0.2477,
-        "awayWin": 0.2868
+        "homeWin": 0.4673,
+        "draw": 0.2464,
+        "awayWin": 0.2863
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.374242+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.718088+00:00",
       "kickoffTimeUtc": "2026-12-21T20:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -11159,12 +11159,12 @@
     "26-27-prem-chelsea-vs-brentford": {
       "matchId": "26-27-prem-chelsea-vs-brentford",
       "probabilities": {
-        "homeWin": 0.4576,
-        "draw": 0.245,
-        "awayWin": 0.2974
+        "homeWin": 0.459,
+        "draw": 0.2438,
+        "awayWin": 0.2972
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.397927+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.741107+00:00",
       "kickoffTimeUtc": "2027-05-30T15:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -11185,12 +11185,12 @@
     "26-27-prem-chelsea-vs-coventry-city": {
       "matchId": "26-27-prem-chelsea-vs-coventry-city",
       "probabilities": {
-        "homeWin": 0.6145,
-        "draw": 0.2199,
-        "awayWin": 0.1655
+        "homeWin": 0.6614,
+        "draw": 0.192,
+        "awayWin": 0.1467
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.387050+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.730602+00:00",
       "kickoffTimeUtc": "2027-03-03T20:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -11198,12 +11198,12 @@
     "26-27-prem-chelsea-vs-crystal-palace": {
       "matchId": "26-27-prem-chelsea-vs-crystal-palace",
       "probabilities": {
-        "homeWin": 0.5655,
-        "draw": 0.2325,
+        "homeWin": 0.5667,
+        "draw": 0.2312,
         "awayWin": 0.202
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.369948+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.713958+00:00",
       "kickoffTimeUtc": "2026-12-02T19:30:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -11211,12 +11211,12 @@
     "26-27-prem-chelsea-vs-everton": {
       "matchId": "26-27-prem-chelsea-vs-everton",
       "probabilities": {
-        "homeWin": 0.4999,
-        "draw": 0.2666,
-        "awayWin": 0.2335
+        "homeWin": 0.4966,
+        "draw": 0.2624,
+        "awayWin": 0.2409
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.395710+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.738969+00:00",
       "kickoffTimeUtc": "2027-05-15T14:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -11224,12 +11224,12 @@
     "26-27-prem-chelsea-vs-fulham": {
       "matchId": "26-27-prem-chelsea-vs-fulham",
       "probabilities": {
-        "homeWin": 0.5173,
-        "draw": 0.2502,
-        "awayWin": 0.2325
+        "homeWin": 0.519,
+        "draw": 0.2489,
+        "awayWin": 0.2321
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.390208+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.733631+00:00",
       "kickoffTimeUtc": "2027-04-10T14:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -11250,12 +11250,12 @@
     "26-27-prem-chelsea-vs-ipswich-town": {
       "matchId": "26-27-prem-chelsea-vs-ipswich-town",
       "probabilities": {
-        "homeWin": 0.6925,
-        "draw": 0.1713,
-        "awayWin": 0.1362
+        "homeWin": 0.6932,
+        "draw": 0.1705,
+        "awayWin": 0.1364
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.384803+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.728431+00:00",
       "kickoffTimeUtc": "2027-02-20T15:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -11263,12 +11263,12 @@
     "26-27-prem-chelsea-vs-leeds-united": {
       "matchId": "26-27-prem-chelsea-vs-leeds-united",
       "probabilities": {
-        "homeWin": 0.5188,
-        "draw": 0.2454,
-        "awayWin": 0.2358
+        "homeWin": 0.5203,
+        "draw": 0.244,
+        "awayWin": 0.2357
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.367893+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.711958+00:00",
       "kickoffTimeUtc": "2026-11-21T15:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -11276,12 +11276,12 @@
     "26-27-prem-chelsea-vs-liverpool": {
       "matchId": "26-27-prem-chelsea-vs-liverpool",
       "probabilities": {
-        "homeWin": 0.3619,
-        "draw": 0.2518,
-        "awayWin": 0.3863
+        "homeWin": 0.3634,
+        "draw": 0.2506,
+        "awayWin": 0.386
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.370994+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.714948+00:00",
       "kickoffTimeUtc": "2026-12-05T12:30:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -11289,12 +11289,12 @@
     "26-27-prem-chelsea-vs-manchester-city": {
       "matchId": "26-27-prem-chelsea-vs-manchester-city",
       "probabilities": {
-        "homeWin": 0.2668,
-        "draw": 0.2415,
-        "awayWin": 0.4917
+        "homeWin": 0.2687,
+        "draw": 0.241,
+        "awayWin": 0.4903
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.392544+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.735880+00:00",
       "kickoffTimeUtc": "2027-04-24T14:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -11315,12 +11315,12 @@
     "26-27-prem-chelsea-vs-newcastle-united": {
       "matchId": "26-27-prem-chelsea-vs-newcastle-united",
       "probabilities": {
-        "homeWin": 0.4866,
-        "draw": 0.237,
-        "awayWin": 0.2764
+        "homeWin": 0.488,
+        "draw": 0.2361,
+        "awayWin": 0.2758
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.377514+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.721231+00:00",
       "kickoffTimeUtc": "2027-01-03T14:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -11328,12 +11328,12 @@
     "26-27-prem-chelsea-vs-nottingham-forest": {
       "matchId": "26-27-prem-chelsea-vs-nottingham-forest",
       "probabilities": {
-        "homeWin": 0.5191,
-        "draw": 0.2496,
-        "awayWin": 0.2312
+        "homeWin": 0.5209,
+        "draw": 0.2484,
+        "awayWin": 0.2307
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.381413+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.725035+00:00",
       "kickoffTimeUtc": "2027-01-30T15:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -11341,12 +11341,12 @@
     "26-27-prem-chelsea-vs-sunderland": {
       "matchId": "26-27-prem-chelsea-vs-sunderland",
       "probabilities": {
-        "homeWin": 0.5638,
-        "draw": 0.2419,
-        "awayWin": 0.1944
+        "homeWin": 0.5657,
+        "draw": 0.2406,
+        "awayWin": 0.1937
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.379210+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.722881+00:00",
       "kickoffTimeUtc": "2027-01-16T15:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -11367,12 +11367,12 @@
     "26-27-prem-coventry-city-vs-afc-bournemouth": {
       "matchId": "26-27-prem-coventry-city-vs-afc-bournemouth",
       "probabilities": {
-        "homeWin": 0.2804,
-        "draw": 0.2703,
-        "awayWin": 0.4493
+        "homeWin": 0.2635,
+        "draw": 0.2481,
+        "awayWin": 0.4884
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.385545+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.729173+00:00",
       "kickoffTimeUtc": "2027-02-27T15:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -11380,12 +11380,12 @@
     "26-27-prem-coventry-city-vs-arsenal": {
       "matchId": "26-27-prem-coventry-city-vs-arsenal",
       "probabilities": {
-        "homeWin": 0.1269,
-        "draw": 0.2314,
-        "awayWin": 0.6417
+        "homeWin": 0.1131,
+        "draw": 0.2011,
+        "awayWin": 0.6858
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.390322+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.733736+00:00",
       "kickoffTimeUtc": "2027-04-10T14:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -11393,12 +11393,12 @@
     "26-27-prem-coventry-city-vs-aston-villa": {
       "matchId": "26-27-prem-coventry-city-vs-aston-villa",
       "probabilities": {
-        "homeWin": 0.2747,
-        "draw": 0.2718,
-        "awayWin": 0.4535
+        "homeWin": 0.2583,
+        "draw": 0.2492,
+        "awayWin": 0.4924
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.372900+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.716798+00:00",
       "kickoffTimeUtc": "2026-12-13T16:30:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -11406,12 +11406,12 @@
     "26-27-prem-coventry-city-vs-brentford": {
       "matchId": "26-27-prem-coventry-city-vs-brentford",
       "probabilities": {
-        "homeWin": 0.2668,
-        "draw": 0.2654,
-        "awayWin": 0.4678
+        "homeWin": 0.2495,
+        "draw": 0.2425,
+        "awayWin": 0.508
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.375849+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.719614+00:00",
       "kickoffTimeUtc": "2026-12-30T19:30:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -11432,12 +11432,12 @@
     "26-27-prem-coventry-city-vs-chelsea": {
       "matchId": "26-27-prem-coventry-city-vs-chelsea",
       "probabilities": {
-        "homeWin": 0.2513,
-        "draw": 0.2537,
-        "awayWin": 0.4951
+        "homeWin": 0.2328,
+        "draw": 0.2303,
+        "awayWin": 0.5369
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.375167+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.718957+00:00",
       "kickoffTimeUtc": "2026-12-27T14:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -11445,12 +11445,12 @@
     "26-27-prem-coventry-city-vs-crystal-palace": {
       "matchId": "26-27-prem-coventry-city-vs-crystal-palace",
       "probabilities": {
-        "homeWin": 0.3602,
-        "draw": 0.2883,
-        "awayWin": 0.3515
+        "homeWin": 0.3469,
+        "draw": 0.2697,
+        "awayWin": 0.3834
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.368004+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.712065+00:00",
       "kickoffTimeUtc": "2026-11-21T15:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -11458,12 +11458,12 @@
     "26-27-prem-coventry-city-vs-everton": {
       "matchId": "26-27-prem-coventry-city-vs-everton",
       "probabilities": {
-        "homeWin": 0.3134,
-        "draw": 0.3105,
-        "awayWin": 0.3761
+        "homeWin": 0.2951,
+        "draw": 0.2832,
+        "awayWin": 0.4218
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.379325+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.722986+00:00",
       "kickoffTimeUtc": "2027-01-16T15:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -11497,12 +11497,12 @@
     "26-27-prem-coventry-city-vs-ipswich-town": {
       "matchId": "26-27-prem-coventry-city-vs-ipswich-town",
       "probabilities": {
-        "homeWin": 0.4663,
-        "draw": 0.2508,
-        "awayWin": 0.2829
+        "homeWin": 0.453,
+        "draw": 0.2373,
+        "awayWin": 0.3096
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.369835+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.713851+00:00",
       "kickoffTimeUtc": "2026-12-01T20:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -11510,12 +11510,12 @@
     "26-27-prem-coventry-city-vs-leeds-united": {
       "matchId": "26-27-prem-coventry-city-vs-leeds-united",
       "probabilities": {
-        "homeWin": 0.3211,
-        "draw": 0.2881,
-        "awayWin": 0.3908
+        "homeWin": 0.3067,
+        "draw": 0.2675,
+        "awayWin": 0.4257
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.381519+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.725138+00:00",
       "kickoffTimeUtc": "2027-01-30T15:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -11523,12 +11523,12 @@
     "26-27-prem-coventry-city-vs-liverpool": {
       "matchId": "26-27-prem-coventry-city-vs-liverpool",
       "probabilities": {
-        "homeWin": 0.1977,
-        "draw": 0.2451,
-        "awayWin": 0.5572
+        "homeWin": 0.1801,
+        "draw": 0.2186,
+        "awayWin": 0.6013
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.383380+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.727005+00:00",
       "kickoffTimeUtc": "2027-02-10T20:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -11536,12 +11536,12 @@
     "26-27-prem-coventry-city-vs-manchester-city": {
       "matchId": "26-27-prem-coventry-city-vs-manchester-city",
       "probabilities": {
-        "homeWin": 0.1353,
-        "draw": 0.2106,
-        "awayWin": 0.6541
+        "homeWin": 0.1194,
+        "draw": 0.1822,
+        "awayWin": 0.6983
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.388110+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.731594+00:00",
       "kickoffTimeUtc": "2027-03-13T15:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -11549,12 +11549,12 @@
     "26-27-prem-coventry-city-vs-manchester-united": {
       "matchId": "26-27-prem-coventry-city-vs-manchester-united",
       "probabilities": {
-        "homeWin": 0.2774,
-        "draw": 0.271,
-        "awayWin": 0.4516
+        "homeWin": 0.2605,
+        "draw": 0.2486,
+        "awayWin": 0.4909
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.393538+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.736839+00:00",
       "kickoffTimeUtc": "2027-05-01T14:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -11575,12 +11575,12 @@
     "26-27-prem-coventry-city-vs-nottingham-forest": {
       "matchId": "26-27-prem-coventry-city-vs-nottingham-forest",
       "probabilities": {
-        "homeWin": 0.3235,
-        "draw": 0.2942,
-        "awayWin": 0.3822
+        "homeWin": 0.3104,
+        "draw": 0.274,
+        "awayWin": 0.4156
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.398032+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.741210+00:00",
       "kickoffTimeUtc": "2027-05-30T15:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -11601,12 +11601,12 @@
     "26-27-prem-coventry-city-vs-tottenham-hotspur": {
       "matchId": "26-27-prem-coventry-city-vs-tottenham-hotspur",
       "probabilities": {
-        "homeWin": 0.3209,
-        "draw": 0.2731,
-        "awayWin": 0.4059
+        "homeWin": 0.3053,
+        "draw": 0.2535,
+        "awayWin": 0.4413
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.395823+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.739073+00:00",
       "kickoffTimeUtc": "2027-05-15T14:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -11614,12 +11614,12 @@
     "26-27-prem-crystal-palace-vs-afc-bournemouth": {
       "matchId": "26-27-prem-crystal-palace-vs-afc-bournemouth",
       "probabilities": {
-        "homeWin": 0.3288,
-        "draw": 0.2712,
-        "awayWin": 0.4
+        "homeWin": 0.33,
+        "draw": 0.27,
+        "awayWin": 0.3999
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.375955+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.719719+00:00",
       "kickoffTimeUtc": "2026-12-30T19:30:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -11627,12 +11627,12 @@
     "26-27-prem-crystal-palace-vs-arsenal": {
       "matchId": "26-27-prem-crystal-palace-vs-arsenal",
       "probabilities": {
-        "homeWin": 0.1544,
-        "draw": 0.2461,
-        "awayWin": 0.5995
+        "homeWin": 0.1559,
+        "draw": 0.2459,
+        "awayWin": 0.5981
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.375381+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.719167+00:00",
       "kickoffTimeUtc": "2026-12-27T19:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -11640,12 +11640,12 @@
     "26-27-prem-crystal-palace-vs-aston-villa": {
       "matchId": "26-27-prem-crystal-palace-vs-aston-villa",
       "probabilities": {
-        "homeWin": 0.3222,
-        "draw": 0.2731,
-        "awayWin": 0.4046
+        "homeWin": 0.3239,
+        "draw": 0.272,
+        "awayWin": 0.4042
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.393644+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.736943+00:00",
       "kickoffTimeUtc": "2027-05-01T14:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -11653,12 +11653,12 @@
     "26-27-prem-crystal-palace-vs-brentford": {
       "matchId": "26-27-prem-crystal-palace-vs-brentford",
       "probabilities": {
-        "homeWin": 0.3142,
-        "draw": 0.2678,
-        "awayWin": 0.418
+        "homeWin": 0.3155,
+        "draw": 0.2666,
+        "awayWin": 0.4179
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.383487+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.727108+00:00",
       "kickoffTimeUtc": "2027-02-10T20:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -11666,12 +11666,12 @@
     "26-27-prem-crystal-palace-vs-brighton-hove-albion": {
       "matchId": "26-27-prem-crystal-palace-vs-brighton-hove-albion",
       "probabilities": {
-        "homeWin": 0.2706,
-        "draw": 0.2616,
-        "awayWin": 0.4678
+        "homeWin": 0.2723,
+        "draw": 0.2609,
+        "awayWin": 0.4669
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.395930+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.739176+00:00",
       "kickoffTimeUtc": "2027-05-15T14:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -11679,12 +11679,12 @@
     "26-27-prem-crystal-palace-vs-chelsea": {
       "matchId": "26-27-prem-crystal-palace-vs-chelsea",
       "probabilities": {
-        "homeWin": 0.2982,
-        "draw": 0.258,
-        "awayWin": 0.4438
+        "homeWin": 0.2993,
+        "draw": 0.2569,
+        "awayWin": 0.4437
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.378322+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.722001+00:00",
       "kickoffTimeUtc": "2027-01-06T19:30:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -11692,12 +11692,12 @@
     "26-27-prem-crystal-palace-vs-coventry-city": {
       "matchId": "26-27-prem-crystal-palace-vs-coventry-city",
       "probabilities": {
-        "homeWin": 0.4605,
-        "draw": 0.2782,
-        "awayWin": 0.2613
+        "homeWin": 0.5015,
+        "draw": 0.2544,
+        "awayWin": 0.2441
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.382397+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.726000+00:00",
       "kickoffTimeUtc": "2027-02-06T15:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -11705,12 +11705,12 @@
     "26-27-prem-crystal-palace-vs-everton": {
       "matchId": "26-27-prem-crystal-palace-vs-everton",
       "probabilities": {
-        "homeWin": 0.3603,
-        "draw": 0.3061,
-        "awayWin": 0.3336
+        "homeWin": 0.3563,
+        "draw": 0.2999,
+        "awayWin": 0.3437
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.390465+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.733840+00:00",
       "kickoffTimeUtc": "2027-04-10T14:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -11718,12 +11718,12 @@
     "26-27-prem-crystal-palace-vs-fulham": {
       "matchId": "26-27-prem-crystal-palace-vs-fulham",
       "probabilities": {
-        "homeWin": 0.3715,
-        "draw": 0.2899,
-        "awayWin": 0.3386
+        "homeWin": 0.3731,
+        "draw": 0.2888,
+        "awayWin": 0.3381
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.388224+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.731699+00:00",
       "kickoffTimeUtc": "2027-03-13T15:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -11731,12 +11731,12 @@
     "26-27-prem-crystal-palace-vs-hull-city": {
       "matchId": "26-27-prem-crystal-palace-vs-hull-city",
       "probabilities": {
-        "homeWin": 0.3601,
-        "draw": 0.3018,
-        "awayWin": 0.3381
+        "homeWin": 0.3622,
+        "draw": 0.3017,
+        "awayWin": 0.3361
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.369344+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.713416+00:00",
       "kickoffTimeUtc": "2026-11-29T14:05:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -11757,12 +11757,12 @@
     "26-27-prem-crystal-palace-vs-leeds-united": {
       "matchId": "26-27-prem-crystal-palace-vs-leeds-united",
       "probabilities": {
-        "homeWin": 0.3711,
-        "draw": 0.2842,
-        "awayWin": 0.3447
+        "homeWin": 0.3725,
+        "draw": 0.2828,
+        "awayWin": 0.3446
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.398138+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.741314+00:00",
       "kickoffTimeUtc": "2027-05-30T15:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -11770,12 +11770,12 @@
     "26-27-prem-crystal-palace-vs-liverpool": {
       "matchId": "26-27-prem-crystal-palace-vs-liverpool",
       "probabilities": {
-        "homeWin": 0.2374,
-        "draw": 0.2544,
-        "awayWin": 0.5082
+        "homeWin": 0.2387,
+        "draw": 0.2534,
+        "awayWin": 0.508
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.367085+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.711128+00:00",
       "kickoffTimeUtc": "2026-11-08T14:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -11796,12 +11796,12 @@
     "26-27-prem-crystal-palace-vs-manchester-united": {
       "matchId": "26-27-prem-crystal-palace-vs-manchester-united",
       "probabilities": {
-        "homeWin": 0.3253,
-        "draw": 0.2722,
+        "homeWin": 0.3265,
+        "draw": 0.271,
         "awayWin": 0.4025
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.373008+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.716904+00:00",
       "kickoffTimeUtc": "2026-12-13T19:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -11835,12 +11835,12 @@
     "26-27-prem-crystal-palace-vs-sunderland": {
       "matchId": "26-27-prem-crystal-palace-vs-sunderland",
       "probabilities": {
-        "homeWin": 0.415,
-        "draw": 0.2923,
-        "awayWin": 0.2928
+        "homeWin": 0.4169,
+        "draw": 0.2912,
+        "awayWin": 0.2918
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.385651+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.729279+00:00",
       "kickoffTimeUtc": "2027-02-27T15:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -11848,12 +11848,12 @@
     "26-27-prem-crystal-palace-vs-tottenham-hotspur": {
       "matchId": "26-27-prem-crystal-palace-vs-tottenham-hotspur",
       "probabilities": {
-        "homeWin": 0.3729,
-        "draw": 0.27,
-        "awayWin": 0.3571
+        "homeWin": 0.3746,
+        "draw": 0.2691,
+        "awayWin": 0.3563
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.380213+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.723853+00:00",
       "kickoffTimeUtc": "2027-01-23T15:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -11861,12 +11861,12 @@
     "26-27-prem-everton-vs-afc-bournemouth": {
       "matchId": "26-27-prem-everton-vs-afc-bournemouth",
       "probabilities": {
-        "homeWin": 0.3572,
-        "draw": 0.2946,
-        "awayWin": 0.3482
+        "homeWin": 0.3691,
+        "draw": 0.2883,
+        "awayWin": 0.3426
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.391464+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.734808+00:00",
       "kickoffTimeUtc": "2027-04-17T14:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -11874,12 +11874,12 @@
     "26-27-prem-everton-vs-arsenal": {
       "matchId": "26-27-prem-everton-vs-arsenal",
       "probabilities": {
-        "homeWin": 0.1798,
-        "draw": 0.2866,
-        "awayWin": 0.5336
+        "homeWin": 0.1869,
+        "draw": 0.2834,
+        "awayWin": 0.5298
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.396927+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.740146+00:00",
       "kickoffTimeUtc": "2027-05-23T14:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -11887,12 +11887,12 @@
     "26-27-prem-everton-vs-aston-villa": {
       "matchId": "26-27-prem-everton-vs-aston-villa",
       "probabilities": {
-        "homeWin": 0.3504,
-        "draw": 0.2971,
-        "awayWin": 0.3525
+        "homeWin": 0.3626,
+        "draw": 0.2908,
+        "awayWin": 0.3466
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.378001+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.721687+00:00",
       "kickoffTimeUtc": "2027-01-05T19:30:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -11900,12 +11900,12 @@
     "26-27-prem-everton-vs-brentford": {
       "matchId": "26-27-prem-everton-vs-brentford",
       "probabilities": {
-        "homeWin": 0.3434,
-        "draw": 0.2922,
-        "awayWin": 0.3643
+        "homeWin": 0.3551,
+        "draw": 0.2862,
+        "awayWin": 0.3586
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.380320+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.723959+00:00",
       "kickoffTimeUtc": "2027-01-23T15:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -11913,12 +11913,12 @@
     "26-27-prem-everton-vs-brighton-hove-albion": {
       "matchId": "26-27-prem-everton-vs-brighton-hove-albion",
       "probabilities": {
-        "homeWin": 0.3007,
-        "draw": 0.2898,
-        "awayWin": 0.4095
+        "homeWin": 0.3116,
+        "draw": 0.2848,
+        "awayWin": 0.4035
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.392650+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.735983+00:00",
       "kickoffTimeUtc": "2027-04-24T14:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -11965,12 +11965,12 @@
     "26-27-prem-everton-vs-fulham": {
       "matchId": "26-27-prem-everton-vs-fulham",
       "probabilities": {
-        "homeWin": 0.395,
-        "draw": 0.3107,
-        "awayWin": 0.2943
+        "homeWin": 0.408,
+        "draw": 0.3034,
+        "awayWin": 0.2886
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.371801+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.715716+00:00",
       "kickoffTimeUtc": "2026-12-06T14:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -11978,12 +11978,12 @@
     "26-27-prem-everton-vs-hull-city": {
       "matchId": "26-27-prem-everton-vs-hull-city",
       "probabilities": {
-        "homeWin": 0.3821,
-        "draw": 0.3237,
-        "awayWin": 0.2942
+        "homeWin": 0.395,
+        "draw": 0.3175,
+        "awayWin": 0.2875
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.394746+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.738008+00:00",
       "kickoffTimeUtc": "2027-05-08T14:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -12004,12 +12004,12 @@
     "26-27-prem-everton-vs-leeds-united": {
       "matchId": "26-27-prem-everton-vs-leeds-united",
       "probabilities": {
-        "homeWin": 0.3957,
-        "draw": 0.3048,
-        "awayWin": 0.2995
+        "homeWin": 0.4086,
+        "draw": 0.2974,
+        "awayWin": 0.294
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.383593+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.727213+00:00",
       "kickoffTimeUtc": "2027-02-10T20:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -12017,12 +12017,12 @@
     "26-27-prem-everton-vs-liverpool": {
       "matchId": "26-27-prem-everton-vs-liverpool",
       "probabilities": {
-        "homeWin": 0.2677,
-        "draw": 0.2856,
-        "awayWin": 0.4467
+        "homeWin": 0.2773,
+        "draw": 0.2809,
+        "awayWin": 0.4418
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.369126+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.713178+00:00",
       "kickoffTimeUtc": "2026-11-29T12:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -12030,12 +12030,12 @@
     "26-27-prem-everton-vs-manchester-city": {
       "matchId": "26-27-prem-everton-vs-manchester-city",
       "probabilities": {
-        "homeWin": 0.1956,
-        "draw": 0.2633,
-        "awayWin": 0.5412
+        "homeWin": 0.2033,
+        "draw": 0.2603,
+        "awayWin": 0.5364
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.375730+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.719509+00:00",
       "kickoffTimeUtc": "2026-12-29T20:15:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -12056,12 +12056,12 @@
     "26-27-prem-everton-vs-newcastle-united": {
       "matchId": "26-27-prem-everton-vs-newcastle-united",
       "probabilities": {
-        "homeWin": 0.3668,
-        "draw": 0.2876,
-        "awayWin": 0.3456
+        "homeWin": 0.3791,
+        "draw": 0.2816,
+        "awayWin": 0.3392
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.382504+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.726105+00:00",
       "kickoffTimeUtc": "2027-02-06T15:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -12069,12 +12069,12 @@
     "26-27-prem-everton-vs-nottingham-forest": {
       "matchId": "26-27-prem-everton-vs-nottingham-forest",
       "probabilities": {
-        "homeWin": 0.3965,
-        "draw": 0.3104,
-        "awayWin": 0.2931
+        "homeWin": 0.4097,
+        "draw": 0.3031,
+        "awayWin": 0.2872
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.385820+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.729405+00:00",
       "kickoffTimeUtc": "2027-02-27T15:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -12082,12 +12082,12 @@
     "26-27-prem-everton-vs-sunderland": {
       "matchId": "26-27-prem-everton-vs-sunderland",
       "probabilities": {
-        "homeWin": 0.4354,
-        "draw": 0.3104,
-        "awayWin": 0.2542
+        "homeWin": 0.4495,
+        "draw": 0.3024,
+        "awayWin": 0.2481
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.374463+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.718298+00:00",
       "kickoffTimeUtc": "2026-12-26T15:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -12095,12 +12095,12 @@
     "26-27-prem-everton-vs-tottenham-hotspur": {
       "matchId": "26-27-prem-everton-vs-tottenham-hotspur",
       "probabilities": {
-        "homeWin": 0.4,
-        "draw": 0.2901,
-        "awayWin": 0.3099
+        "homeWin": 0.4133,
+        "draw": 0.2833,
+        "awayWin": 0.3033
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.389218+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.732666+00:00",
       "kickoffTimeUtc": "2027-03-20T15:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -12108,12 +12108,12 @@
     "26-27-prem-fulham-vs-afc-bournemouth": {
       "matchId": "26-27-prem-fulham-vs-afc-bournemouth",
       "probabilities": {
-        "homeWin": 0.3627,
-        "draw": 0.279,
-        "awayWin": 0.3582
+        "homeWin": 0.3634,
+        "draw": 0.278,
+        "awayWin": 0.3587
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.369452+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.713528+00:00",
       "kickoffTimeUtc": "2026-11-29T14:05:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -12121,12 +12121,12 @@
     "26-27-prem-fulham-vs-arsenal": {
       "matchId": "26-27-prem-fulham-vs-arsenal",
       "probabilities": {
-        "homeWin": 0.1782,
-        "draw": 0.2677,
-        "awayWin": 0.5542
+        "homeWin": 0.1795,
+        "draw": 0.2673,
+        "awayWin": 0.5532
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.376061+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.719825+00:00",
       "kickoffTimeUtc": "2026-12-30T19:30:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -12134,12 +12134,12 @@
     "26-27-prem-fulham-vs-aston-villa": {
       "matchId": "26-27-prem-fulham-vs-aston-villa",
       "probabilities": {
-        "homeWin": 0.3557,
-        "draw": 0.2814,
-        "awayWin": 0.3628
+        "homeWin": 0.3568,
+        "draw": 0.2803,
+        "awayWin": 0.3629
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.380427+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.724062+00:00",
       "kickoffTimeUtc": "2027-01-23T15:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -12147,12 +12147,12 @@
     "26-27-prem-fulham-vs-brentford": {
       "matchId": "26-27-prem-fulham-vs-brentford",
       "probabilities": {
-        "homeWin": 0.3481,
-        "draw": 0.2767,
-        "awayWin": 0.3751
+        "homeWin": 0.3489,
+        "draw": 0.2756,
+        "awayWin": 0.3755
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.372125+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.716033+00:00",
       "kickoffTimeUtc": "2026-12-12T15:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -12160,12 +12160,12 @@
     "26-27-prem-fulham-vs-brighton-hove-albion": {
       "matchId": "26-27-prem-fulham-vs-brighton-hove-albion",
       "probabilities": {
-        "homeWin": 0.3033,
-        "draw": 0.2739,
-        "awayWin": 0.4228
+        "homeWin": 0.3045,
+        "draw": 0.2731,
+        "awayWin": 0.4224
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.374568+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.718427+00:00",
       "kickoffTimeUtc": "2026-12-26T15:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -12186,12 +12186,12 @@
     "26-27-prem-fulham-vs-coventry-city": {
       "matchId": "26-27-prem-fulham-vs-coventry-city",
       "probabilities": {
-        "homeWin": 0.4926,
-        "draw": 0.2772,
-        "awayWin": 0.2302
+        "homeWin": 0.5346,
+        "draw": 0.2517,
+        "awayWin": 0.2138
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.397039+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.740252+00:00",
       "kickoffTimeUtc": "2027-05-23T14:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -12212,12 +12212,12 @@
     "26-27-prem-fulham-vs-everton": {
       "matchId": "26-27-prem-fulham-vs-everton",
       "probabilities": {
-        "homeWin": 0.3904,
-        "draw": 0.3112,
-        "awayWin": 0.2984
+        "homeWin": 0.3864,
+        "draw": 0.3057,
+        "awayWin": 0.3079
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.393772+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.737047+00:00",
       "kickoffTimeUtc": "2027-05-01T14:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -12239,11 +12239,11 @@
       "matchId": "26-27-prem-fulham-vs-ipswich-town",
       "probabilities": {
         "homeWin": 0.5632,
-        "draw": 0.2311,
-        "awayWin": 0.2057
+        "draw": 0.2303,
+        "awayWin": 0.2065
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.394855+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.738112+00:00",
       "kickoffTimeUtc": "2027-05-08T14:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -12251,12 +12251,12 @@
     "26-27-prem-fulham-vs-leeds-united": {
       "matchId": "26-27-prem-fulham-vs-leeds-united",
       "probabilities": {
-        "homeWin": 0.4039,
-        "draw": 0.2888,
-        "awayWin": 0.3072
+        "homeWin": 0.4048,
+        "draw": 0.2876,
+        "awayWin": 0.3076
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.385935+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.729516+00:00",
       "kickoffTimeUtc": "2027-02-27T15:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -12264,12 +12264,12 @@
     "26-27-prem-fulham-vs-liverpool": {
       "matchId": "26-27-prem-fulham-vs-liverpool",
       "probabilities": {
-        "homeWin": 0.2687,
-        "draw": 0.2693,
-        "awayWin": 0.462
+        "homeWin": 0.2695,
+        "draw": 0.2682,
+        "awayWin": 0.4622
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.389324+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.732770+00:00",
       "kickoffTimeUtc": "2027-03-20T15:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -12277,12 +12277,12 @@
     "26-27-prem-fulham-vs-manchester-city": {
       "matchId": "26-27-prem-fulham-vs-manchester-city",
       "probabilities": {
-        "homeWin": 0.1934,
-        "draw": 0.2458,
-        "awayWin": 0.5608
+        "homeWin": 0.1947,
+        "draw": 0.2455,
+        "awayWin": 0.5599
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.382611+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.726210+00:00",
       "kickoffTimeUtc": "2027-02-06T15:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -12303,12 +12303,12 @@
     "26-27-prem-fulham-vs-newcastle-united": {
       "matchId": "26-27-prem-fulham-vs-newcastle-united",
       "probabilities": {
-        "homeWin": 0.3724,
-        "draw": 0.2724,
-        "awayWin": 0.3552
+        "homeWin": 0.3732,
+        "draw": 0.2716,
+        "awayWin": 0.3551
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.366682+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.710783+00:00",
       "kickoffTimeUtc": "2026-11-07T15:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -12316,12 +12316,12 @@
     "26-27-prem-fulham-vs-nottingham-forest": {
       "matchId": "26-27-prem-fulham-vs-nottingham-forest",
       "probabilities": {
-        "homeWin": 0.4052,
-        "draw": 0.2942,
-        "awayWin": 0.3007
+        "homeWin": 0.4063,
+        "draw": 0.2932,
+        "awayWin": 0.3004
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.383716+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.727318+00:00",
       "kickoffTimeUtc": "2027-02-10T20:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -12329,12 +12329,12 @@
     "26-27-prem-fulham-vs-sunderland": {
       "matchId": "26-27-prem-fulham-vs-sunderland",
       "probabilities": {
-        "homeWin": 0.4464,
-        "draw": 0.2939,
-        "awayWin": 0.2598
+        "homeWin": 0.4477,
+        "draw": 0.293,
+        "awayWin": 0.2593
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.391571+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.734913+00:00",
       "kickoffTimeUtc": "2027-04-17T14:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -12342,12 +12342,12 @@
     "26-27-prem-fulham-vs-tottenham-hotspur": {
       "matchId": "26-27-prem-fulham-vs-tottenham-hotspur",
       "probabilities": {
-        "homeWin": 0.4076,
-        "draw": 0.2747,
-        "awayWin": 0.3177
+        "homeWin": 0.4087,
+        "draw": 0.274,
+        "awayWin": 0.3174
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.378438+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.722107+00:00",
       "kickoffTimeUtc": "2027-01-06T19:30:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -12355,12 +12355,12 @@
     "26-27-prem-hull-city-vs-afc-bournemouth": {
       "matchId": "26-27-prem-hull-city-vs-afc-bournemouth",
       "probabilities": {
-        "homeWin": 0.362,
+        "homeWin": 0.3609,
         "draw": 0.2903,
-        "awayWin": 0.3477
+        "awayWin": 0.3488
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.393880+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.737151+00:00",
       "kickoffTimeUtc": "2027-05-01T14:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -12368,12 +12368,12 @@
     "26-27-prem-hull-city-vs-arsenal": {
       "matchId": "26-27-prem-hull-city-vs-arsenal",
       "probabilities": {
-        "homeWin": 0.1816,
-        "draw": 0.2826,
-        "awayWin": 0.5358
+        "homeWin": 0.1821,
+        "draw": 0.2831,
+        "awayWin": 0.5348
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.379440+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.723091+00:00",
       "kickoffTimeUtc": "2027-01-16T15:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -12407,12 +12407,12 @@
     "26-27-prem-hull-city-vs-brighton-hove-albion": {
       "matchId": "26-27-prem-hull-city-vs-brighton-hove-albion",
       "probabilities": {
-        "homeWin": 0.3046,
-        "draw": 0.2858,
-        "awayWin": 0.4096
+        "homeWin": 0.3043,
+        "draw": 0.286,
+        "awayWin": 0.4097
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.368334+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.712414+00:00",
       "kickoffTimeUtc": "2026-11-22T14:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -12420,12 +12420,12 @@
     "26-27-prem-hull-city-vs-chelsea": {
       "matchId": "26-27-prem-hull-city-vs-chelsea",
       "probabilities": {
-        "homeWin": 0.3335,
-        "draw": 0.2796,
-        "awayWin": 0.387
+        "homeWin": 0.3325,
+        "draw": 0.2795,
+        "awayWin": 0.388
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.389438+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.732874+00:00",
       "kickoffTimeUtc": "2027-03-20T15:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -12433,12 +12433,12 @@
     "26-27-prem-hull-city-vs-coventry-city": {
       "matchId": "26-27-prem-hull-city-vs-coventry-city",
       "probabilities": {
-        "homeWin": 0.4868,
-        "draw": 0.2882,
-        "awayWin": 0.225
+        "homeWin": 0.526,
+        "draw": 0.2635,
+        "awayWin": 0.2105
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.391676+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.735019+00:00",
       "kickoffTimeUtc": "2027-04-17T14:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -12446,12 +12446,12 @@
     "26-27-prem-hull-city-vs-crystal-palace": {
       "matchId": "26-27-prem-hull-city-vs-crystal-palace",
       "probabilities": {
-        "homeWin": 0.4419,
-        "draw": 0.2934,
-        "awayWin": 0.2646
+        "homeWin": 0.4405,
+        "draw": 0.2937,
+        "awayWin": 0.2659
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.381625+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.725241+00:00",
       "kickoffTimeUtc": "2027-01-30T15:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -12472,12 +12472,12 @@
     "26-27-prem-hull-city-vs-fulham": {
       "matchId": "26-27-prem-hull-city-vs-fulham",
       "probabilities": {
-        "homeWin": 0.4006,
-        "draw": 0.3059,
-        "awayWin": 0.2935
+        "homeWin": 0.3996,
+        "draw": 0.3062,
+        "awayWin": 0.2942
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.396036+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.739279+00:00",
       "kickoffTimeUtc": "2027-05-15T14:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -12498,12 +12498,12 @@
     "26-27-prem-hull-city-vs-leeds-united": {
       "matchId": "26-27-prem-hull-city-vs-leeds-united",
       "probabilities": {
-        "homeWin": 0.4013,
+        "homeWin": 0.4002,
         "draw": 0.3001,
-        "awayWin": 0.2986
+        "awayWin": 0.2997
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.375487+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.719273+00:00",
       "kickoffTimeUtc": "2026-12-29T19:30:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -12511,12 +12511,12 @@
     "26-27-prem-hull-city-vs-liverpool": {
       "matchId": "26-27-prem-hull-city-vs-liverpool",
       "probabilities": {
-        "homeWin": 0.2709,
-        "draw": 0.2818,
-        "awayWin": 0.4473
+        "homeWin": 0.2705,
+        "draw": 0.2815,
+        "awayWin": 0.4479
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.374952+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.718747+00:00",
       "kickoffTimeUtc": "2026-12-26T17:30:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -12524,12 +12524,12 @@
     "26-27-prem-hull-city-vs-manchester-city": {
       "matchId": "26-27-prem-hull-city-vs-manchester-city",
       "probabilities": {
-        "homeWin": 0.1975,
-        "draw": 0.2596,
-        "awayWin": 0.5429
+        "homeWin": 0.1979,
+        "draw": 0.2599,
+        "awayWin": 0.5421
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.386044+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.729622+00:00",
       "kickoffTimeUtc": "2027-02-27T15:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -12550,12 +12550,12 @@
     "26-27-prem-hull-city-vs-newcastle-united": {
       "matchId": "26-27-prem-hull-city-vs-newcastle-united",
       "probabilities": {
-        "homeWin": 0.3717,
-        "draw": 0.2834,
-        "awayWin": 0.3449
+        "homeWin": 0.3708,
+        "draw": 0.2837,
+        "awayWin": 0.3456
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.398253+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.741445+00:00",
       "kickoffTimeUtc": "2027-05-30T15:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -12563,12 +12563,12 @@
     "26-27-prem-hull-city-vs-nottingham-forest": {
       "matchId": "26-27-prem-hull-city-vs-nottingham-forest",
       "probabilities": {
-        "homeWin": 0.4021,
-        "draw": 0.3056,
-        "awayWin": 0.2923
+        "homeWin": 0.4013,
+        "draw": 0.3059,
+        "awayWin": 0.2927
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.370057+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.714065+00:00",
       "kickoffTimeUtc": "2026-12-02T19:30:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -12576,12 +12576,12 @@
     "26-27-prem-hull-city-vs-sunderland": {
       "matchId": "26-27-prem-hull-city-vs-sunderland",
       "probabilities": {
-        "homeWin": 0.4416,
-        "draw": 0.3053,
-        "awayWin": 0.2531
+        "homeWin": 0.4408,
+        "draw": 0.3058,
+        "awayWin": 0.2534
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.383827+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.727457+00:00",
       "kickoffTimeUtc": "2027-02-10T20:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -12589,12 +12589,12 @@
     "26-27-prem-hull-city-vs-tottenham-hotspur": {
       "matchId": "26-27-prem-hull-city-vs-tottenham-hotspur",
       "probabilities": {
-        "homeWin": 0.4055,
-        "draw": 0.2856,
-        "awayWin": 0.3089
+        "homeWin": 0.4046,
+        "draw": 0.2859,
+        "awayWin": 0.3094
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.373115+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.717010+00:00",
       "kickoffTimeUtc": "2026-12-14T20:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -12602,12 +12602,12 @@
     "26-27-prem-ipswich-town-vs-afc-bournemouth": {
       "matchId": "26-27-prem-ipswich-town-vs-afc-bournemouth",
       "probabilities": {
-        "homeWin": 0.2555,
-        "draw": 0.2297,
-        "awayWin": 0.5149
+        "homeWin": 0.257,
+        "draw": 0.2289,
+        "awayWin": 0.5141
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.367199+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.711251+00:00",
       "kickoffTimeUtc": "2026-11-08T14:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -12615,12 +12615,12 @@
     "26-27-prem-ipswich-town-vs-arsenal": {
       "matchId": "26-27-prem-ipswich-town-vs-arsenal",
       "probabilities": {
-        "homeWin": 0.1028,
-        "draw": 0.1766,
-        "awayWin": 0.7206
+        "homeWin": 0.1043,
+        "draw": 0.1768,
+        "awayWin": 0.7189
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.383933+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.727563+00:00",
       "kickoffTimeUtc": "2027-02-10T20:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -12628,12 +12628,12 @@
     "26-27-prem-ipswich-town-vs-aston-villa": {
       "matchId": "26-27-prem-ipswich-town-vs-aston-villa",
       "probabilities": {
-        "homeWin": 0.2498,
-        "draw": 0.2305,
-        "awayWin": 0.5197
+        "homeWin": 0.2517,
+        "draw": 0.2298,
+        "awayWin": 0.5185
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.369016+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.713071+00:00",
       "kickoffTimeUtc": "2026-11-28T17:30:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -12641,12 +12641,12 @@
     "26-27-prem-ipswich-town-vs-brentford": {
       "matchId": "26-27-prem-ipswich-town-vs-brentford",
       "probabilities": {
-        "homeWin": 0.2407,
-        "draw": 0.2238,
-        "awayWin": 0.5356
+        "homeWin": 0.2422,
+        "draw": 0.223,
+        "awayWin": 0.5347
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.374674+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.718536+00:00",
       "kickoffTimeUtc": "2026-12-26T15:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -12654,12 +12654,12 @@
     "26-27-prem-ipswich-town-vs-brighton-hove-albion": {
       "matchId": "26-27-prem-ipswich-town-vs-brighton-hove-albion",
       "probabilities": {
-        "homeWin": 0.1995,
-        "draw": 0.2103,
-        "awayWin": 0.5902
+        "homeWin": 0.2014,
+        "draw": 0.2101,
+        "awayWin": 0.5885
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.386151+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.729728+00:00",
       "kickoffTimeUtc": "2027-02-27T15:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -12667,12 +12667,12 @@
     "26-27-prem-ipswich-town-vs-chelsea": {
       "matchId": "26-27-prem-ipswich-town-vs-chelsea",
       "probabilities": {
-        "homeWin": 0.2231,
-        "draw": 0.2113,
-        "awayWin": 0.5656
+        "homeWin": 0.2244,
+        "draw": 0.2107,
+        "awayWin": 0.5649
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.376497+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.720243+00:00",
       "kickoffTimeUtc": "2026-12-30T20:15:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -12680,12 +12680,12 @@
     "26-27-prem-ipswich-town-vs-coventry-city": {
       "matchId": "26-27-prem-ipswich-town-vs-coventry-city",
       "probabilities": {
-        "homeWin": 0.3951,
-        "draw": 0.2578,
-        "awayWin": 0.3471
+        "homeWin": 0.4329,
+        "draw": 0.2393,
+        "awayWin": 0.3278
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.378545+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.722213+00:00",
       "kickoffTimeUtc": "2027-01-06T19:30:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -12693,12 +12693,12 @@
     "26-27-prem-ipswich-town-vs-crystal-palace": {
       "matchId": "26-27-prem-ipswich-town-vs-crystal-palace",
       "probabilities": {
-        "homeWin": 0.3437,
-        "draw": 0.253,
-        "awayWin": 0.4033
+        "homeWin": 0.3454,
+        "draw": 0.2519,
+        "awayWin": 0.4027
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.389553+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.732977+00:00",
       "kickoffTimeUtc": "2027-03-20T15:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -12706,12 +12706,12 @@
     "26-27-prem-ipswich-town-vs-everton": {
       "matchId": "26-27-prem-ipswich-town-vs-everton",
       "probabilities": {
-        "homeWin": 0.2972,
-        "draw": 0.2704,
-        "awayWin": 0.4323
+        "homeWin": 0.2921,
+        "draw": 0.2635,
+        "awayWin": 0.4443
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.398359+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.741551+00:00",
       "kickoffTimeUtc": "2027-05-30T15:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -12732,12 +12732,12 @@
     "26-27-prem-ipswich-town-vs-hull-city": {
       "matchId": "26-27-prem-ipswich-town-vs-hull-city",
       "probabilities": {
-        "homeWin": 0.2957,
-        "draw": 0.266,
-        "awayWin": 0.4383
+        "homeWin": 0.2986,
+        "draw": 0.2663,
+        "awayWin": 0.435
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.380533+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.724166+00:00",
       "kickoffTimeUtc": "2027-01-23T15:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -12745,12 +12745,12 @@
     "26-27-prem-ipswich-town-vs-leeds-united": {
       "matchId": "26-27-prem-ipswich-town-vs-leeds-united",
       "probabilities": {
-        "homeWin": 0.3013,
-        "draw": 0.2499,
-        "awayWin": 0.4487
+        "homeWin": 0.3031,
+        "draw": 0.2489,
+        "awayWin": 0.448
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.393986+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.737254+00:00",
       "kickoffTimeUtc": "2027-05-01T14:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -12771,12 +12771,12 @@
     "26-27-prem-ipswich-town-vs-manchester-city": {
       "matchId": "26-27-prem-ipswich-town-vs-manchester-city",
       "probabilities": {
-        "homeWin": 0.1081,
-        "draw": 0.1594,
-        "awayWin": 0.7325
+        "homeWin": 0.1096,
+        "draw": 0.1598,
+        "awayWin": 0.7307
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.396142+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.739404+00:00",
       "kickoffTimeUtc": "2027-05-15T14:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -12784,12 +12784,12 @@
     "26-27-prem-ipswich-town-vs-manchester-united": {
       "matchId": "26-27-prem-ipswich-town-vs-manchester-united",
       "probabilities": {
-        "homeWin": 0.2524,
-        "draw": 0.2301,
-        "awayWin": 0.5175
+        "homeWin": 0.2539,
+        "draw": 0.2293,
+        "awayWin": 0.5168
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.391805+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.735123+00:00",
       "kickoffTimeUtc": "2027-04-17T14:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -12797,12 +12797,12 @@
     "26-27-prem-ipswich-town-vs-newcastle-united": {
       "matchId": "26-27-prem-ipswich-town-vs-newcastle-united",
       "probabilities": {
-        "homeWin": 0.2618,
-        "draw": 0.225,
-        "awayWin": 0.5132
+        "homeWin": 0.2637,
+        "draw": 0.2246,
+        "awayWin": 0.5117
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.372231+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.716138+00:00",
       "kickoffTimeUtc": "2026-12-12T15:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -12836,12 +12836,12 @@
     "26-27-prem-ipswich-town-vs-tottenham-hotspur": {
       "matchId": "26-27-prem-ipswich-town-vs-tottenham-hotspur",
       "probabilities": {
-        "homeWin": 0.2983,
-        "draw": 0.2358,
-        "awayWin": 0.4659
+        "homeWin": 0.3005,
+        "draw": 0.2354,
+        "awayWin": 0.4642
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.382738+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.726315+00:00",
       "kickoffTimeUtc": "2027-02-06T15:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -12849,12 +12849,12 @@
     "26-27-prem-leeds-united-vs-afc-bournemouth": {
       "matchId": "26-27-prem-leeds-united-vs-afc-bournemouth",
       "probabilities": {
-        "homeWin": 0.3693,
-        "draw": 0.2733,
-        "awayWin": 0.3573
+        "homeWin": 0.3705,
+        "draw": 0.272,
+        "awayWin": 0.3575
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.382848+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.726460+00:00",
       "kickoffTimeUtc": "2027-02-06T15:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -12862,12 +12862,12 @@
     "26-27-prem-leeds-united-vs-arsenal": {
       "matchId": "26-27-prem-leeds-united-vs-arsenal",
       "probabilities": {
-        "homeWin": 0.1804,
-        "draw": 0.2623,
-        "awayWin": 0.5573
+        "homeWin": 0.1819,
+        "draw": 0.2618,
+        "awayWin": 0.5563
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.394960+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.738216+00:00",
       "kickoffTimeUtc": "2027-05-08T14:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -12875,12 +12875,12 @@
     "26-27-prem-leeds-united-vs-aston-villa": {
       "matchId": "26-27-prem-leeds-united-vs-aston-villa",
       "probabilities": {
-        "homeWin": 0.3622,
-        "draw": 0.2757,
-        "awayWin": 0.3621
+        "homeWin": 0.3638,
+        "draw": 0.2744,
+        "awayWin": 0.3619
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.384908+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.728538+00:00",
       "kickoffTimeUtc": "2027-02-20T15:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -12901,12 +12901,12 @@
     "26-27-prem-leeds-united-vs-brighton-hove-albion": {
       "matchId": "26-27-prem-leeds-united-vs-brighton-hove-albion",
       "probabilities": {
-        "homeWin": 0.3084,
-        "draw": 0.2686,
-        "awayWin": 0.4229
+        "homeWin": 0.3101,
+        "draw": 0.2676,
+        "awayWin": 0.4223
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.388328+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.731805+00:00",
       "kickoffTimeUtc": "2027-03-13T15:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -12914,12 +12914,12 @@
     "26-27-prem-leeds-united-vs-chelsea": {
       "matchId": "26-27-prem-leeds-united-vs-chelsea",
       "probabilities": {
-        "homeWin": 0.3385,
-        "draw": 0.2629,
-        "awayWin": 0.3985
+        "homeWin": 0.3396,
+        "draw": 0.2617,
+        "awayWin": 0.3987
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.380640+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.724271+00:00",
       "kickoffTimeUtc": "2027-01-23T15:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -12927,12 +12927,12 @@
     "26-27-prem-leeds-united-vs-coventry-city": {
       "matchId": "26-27-prem-leeds-united-vs-coventry-city",
       "probabilities": {
-        "homeWin": 0.502,
-        "draw": 0.2701,
-        "awayWin": 0.2279
+        "homeWin": 0.5451,
+        "draw": 0.2443,
+        "awayWin": 0.2106
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.368795+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.712854+00:00",
       "kickoffTimeUtc": "2026-11-28T15:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -12953,12 +12953,12 @@
     "26-27-prem-leeds-united-vs-everton": {
       "matchId": "26-27-prem-leeds-united-vs-everton",
       "probabilities": {
-        "homeWin": 0.3979,
-        "draw": 0.3046,
-        "awayWin": 0.2975
+        "homeWin": 0.3943,
+        "draw": 0.2989,
+        "awayWin": 0.3068
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.376614+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.720347+00:00",
       "kickoffTimeUtc": "2027-01-01T20:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -12966,12 +12966,12 @@
     "26-27-prem-leeds-united-vs-fulham": {
       "matchId": "26-27-prem-leeds-united-vs-fulham",
       "probabilities": {
-        "homeWin": 0.4112,
-        "draw": 0.2881,
-        "awayWin": 0.3007
+        "homeWin": 0.4128,
+        "draw": 0.2868,
+        "awayWin": 0.3004
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.373436+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.717329+00:00",
       "kickoffTimeUtc": "2026-12-19T15:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -12979,12 +12979,12 @@
     "26-27-prem-leeds-united-vs-hull-city": {
       "matchId": "26-27-prem-leeds-united-vs-hull-city",
       "probabilities": {
-        "homeWin": 0.3982,
-        "draw": 0.3004,
-        "awayWin": 0.3014
+        "homeWin": 0.4001,
+        "draw": 0.3001,
+        "awayWin": 0.2997
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.387168+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.730706+00:00",
       "kickoffTimeUtc": "2027-03-03T20:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -12992,12 +12992,12 @@
     "26-27-prem-leeds-united-vs-ipswich-town": {
       "matchId": "26-27-prem-leeds-united-vs-ipswich-town",
       "probabilities": {
-        "homeWin": 0.5734,
-        "draw": 0.2242,
-        "awayWin": 0.2024
+        "homeWin": 0.5741,
+        "draw": 0.2231,
+        "awayWin": 0.2028
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.371348+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.715266+00:00",
       "kickoffTimeUtc": "2026-12-05T15:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -13005,12 +13005,12 @@
     "26-27-prem-leeds-united-vs-liverpool": {
       "matchId": "26-27-prem-leeds-united-vs-liverpool",
       "probabilities": {
-        "homeWin": 0.273,
-        "draw": 0.2642,
-        "awayWin": 0.4628
+        "homeWin": 0.2742,
+        "draw": 0.2629,
+        "awayWin": 0.4629
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.392781+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.736086+00:00",
       "kickoffTimeUtc": "2027-04-24T14:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -13018,12 +13018,12 @@
     "26-27-prem-leeds-united-vs-manchester-city": {
       "matchId": "26-27-prem-leeds-united-vs-manchester-city",
       "probabilities": {
-        "homeWin": 0.1958,
-        "draw": 0.2409,
-        "awayWin": 0.5633
+        "homeWin": 0.1973,
+        "draw": 0.2404,
+        "awayWin": 0.5622
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.378651+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.722318+00:00",
       "kickoffTimeUtc": "2027-01-06T20:15:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -13057,12 +13057,12 @@
     "26-27-prem-leeds-united-vs-nottingham-forest": {
       "matchId": "26-27-prem-leeds-united-vs-nottingham-forest",
       "probabilities": {
-        "homeWin": 0.4129,
-        "draw": 0.2878,
-        "awayWin": 0.2994
+        "homeWin": 0.4146,
+        "draw": 0.2865,
+        "awayWin": 0.2989
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.390573+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.733945+00:00",
       "kickoffTimeUtc": "2027-04-10T14:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -13070,12 +13070,12 @@
     "26-27-prem-leeds-united-vs-sunderland": {
       "matchId": "26-27-prem-leeds-united-vs-sunderland",
       "probabilities": {
-        "homeWin": 0.455,
-        "draw": 0.287,
-        "awayWin": 0.258
+        "homeWin": 0.4569,
+        "draw": 0.2857,
+        "awayWin": 0.2574
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.397146+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.740373+00:00",
       "kickoffTimeUtc": "2027-05-23T14:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -13083,12 +13083,12 @@
     "26-27-prem-leeds-united-vs-tottenham-hotspur": {
       "matchId": "26-27-prem-leeds-united-vs-tottenham-hotspur",
       "probabilities": {
-        "homeWin": 0.4152,
-        "draw": 0.2687,
-        "awayWin": 0.3161
+        "homeWin": 0.4168,
+        "draw": 0.2677,
+        "awayWin": 0.3155
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.366429+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.710524+00:00",
       "kickoffTimeUtc": "2026-11-07T12:30:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -13096,12 +13096,12 @@
     "26-27-prem-liverpool-vs-afc-bournemouth": {
       "matchId": "26-27-prem-liverpool-vs-afc-bournemouth",
       "probabilities": {
-        "homeWin": 0.5405,
-        "draw": 0.238,
-        "awayWin": 0.2214
+        "homeWin": 0.5417,
+        "draw": 0.2368,
+        "awayWin": 0.2216
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.398476+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.741656+00:00",
       "kickoffTimeUtc": "2027-05-30T15:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -13122,12 +13122,12 @@
     "26-27-prem-liverpool-vs-aston-villa": {
       "matchId": "26-27-prem-liverpool-vs-aston-villa",
       "probabilities": {
-        "homeWin": 0.5316,
-        "draw": 0.2421,
-        "awayWin": 0.2263
+        "homeWin": 0.5332,
+        "draw": 0.2407,
+        "awayWin": 0.2261
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.387276+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.730822+00:00",
       "kickoffTimeUtc": "2027-03-03T20:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -13135,12 +13135,12 @@
     "26-27-prem-liverpool-vs-brentford": {
       "matchId": "26-27-prem-liverpool-vs-brentford",
       "probabilities": {
-        "homeWin": 0.5249,
-        "draw": 0.2402,
+        "homeWin": 0.5262,
+        "draw": 0.2389,
         "awayWin": 0.2349
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.396246+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.739521+00:00",
       "kickoffTimeUtc": "2027-05-15T14:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -13161,12 +13161,12 @@
     "26-27-prem-liverpool-vs-chelsea": {
       "matchId": "26-27-prem-liverpool-vs-chelsea",
       "probabilities": {
-        "homeWin": 0.5105,
-        "draw": 0.2374,
-        "awayWin": 0.2521
+        "homeWin": 0.5117,
+        "draw": 0.2362,
+        "awayWin": 0.2522
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.394092+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.737375+00:00",
       "kickoffTimeUtc": "2027-05-01T14:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -13174,12 +13174,12 @@
     "26-27-prem-liverpool-vs-coventry-city": {
       "matchId": "26-27-prem-liverpool-vs-coventry-city",
       "probabilities": {
-        "homeWin": 0.6708,
-        "draw": 0.2031,
-        "awayWin": 0.126
+        "homeWin": 0.7173,
+        "draw": 0.1734,
+        "awayWin": 0.1093
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.377091+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.720810+00:00",
       "kickoffTimeUtc": "2027-01-02T15:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -13187,12 +13187,12 @@
     "26-27-prem-liverpool-vs-crystal-palace": {
       "matchId": "26-27-prem-liverpool-vs-crystal-palace",
       "probabilities": {
-        "homeWin": 0.6258,
-        "draw": 0.2186,
-        "awayWin": 0.1556
+        "homeWin": 0.6269,
+        "draw": 0.2173,
+        "awayWin": 0.1558
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.379545+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.723197+00:00",
       "kickoffTimeUtc": "2027-01-16T15:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -13200,12 +13200,12 @@
     "26-27-prem-liverpool-vs-everton": {
       "matchId": "26-27-prem-liverpool-vs-everton",
       "probabilities": {
-        "homeWin": 0.5581,
-        "draw": 0.2573,
-        "awayWin": 0.1846
+        "homeWin": 0.5559,
+        "draw": 0.2536,
+        "awayWin": 0.1906
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.381752+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.725345+00:00",
       "kickoffTimeUtc": "2027-01-30T15:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -13226,12 +13226,12 @@
     "26-27-prem-liverpool-vs-hull-city": {
       "matchId": "26-27-prem-liverpool-vs-hull-city",
       "probabilities": {
-        "homeWin": 0.56,
-        "draw": 0.2537,
-        "awayWin": 0.1863
+        "homeWin": 0.5615,
+        "draw": 0.2531,
+        "awayWin": 0.1854
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.385014+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.728644+00:00",
       "kickoffTimeUtc": "2027-02-20T15:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -13239,12 +13239,12 @@
     "26-27-prem-liverpool-vs-ipswich-town": {
       "matchId": "26-27-prem-liverpool-vs-ipswich-town",
       "probabilities": {
-        "homeWin": 0.749,
-        "draw": 0.1517,
-        "awayWin": 0.0993
+        "homeWin": 0.7495,
+        "draw": 0.151,
+        "awayWin": 0.0995
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.388434+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.731909+00:00",
       "kickoffTimeUtc": "2027-03-13T15:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -13252,12 +13252,12 @@
     "26-27-prem-liverpool-vs-leeds-united": {
       "matchId": "26-27-prem-liverpool-vs-leeds-united",
       "probabilities": {
-        "homeWin": 0.581,
-        "draw": 0.2349,
-        "awayWin": 0.1841
+        "homeWin": 0.5824,
+        "draw": 0.2334,
+        "awayWin": 0.1842
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.372338+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.716245+00:00",
       "kickoffTimeUtc": "2026-12-12T15:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -13278,12 +13278,12 @@
     "26-27-prem-liverpool-vs-manchester-united": {
       "matchId": "26-27-prem-liverpool-vs-manchester-united",
       "probabilities": {
-        "homeWin": 0.5358,
-        "draw": 0.2402,
-        "awayWin": 0.224
+        "homeWin": 0.5369,
+        "draw": 0.2388,
+        "awayWin": 0.2242
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.368444+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.712528+00:00",
       "kickoffTimeUtc": "2026-11-22T16:30:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -13291,12 +13291,12 @@
     "26-27-prem-liverpool-vs-newcastle-united": {
       "matchId": "26-27-prem-liverpool-vs-newcastle-united",
       "probabilities": {
-        "homeWin": 0.5543,
-        "draw": 0.2296,
-        "awayWin": 0.2161
+        "homeWin": 0.5555,
+        "draw": 0.2286,
+        "awayWin": 0.2159
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.390679+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.734048+00:00",
       "kickoffTimeUtc": "2027-04-10T14:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -13317,12 +13317,12 @@
     "26-27-prem-liverpool-vs-sunderland": {
       "matchId": "26-27-prem-liverpool-vs-sunderland",
       "probabilities": {
-        "homeWin": 0.6215,
-        "draw": 0.2279,
-        "awayWin": 0.1506
+        "homeWin": 0.6232,
+        "draw": 0.2266,
+        "awayWin": 0.1502
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.370165+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.714174+00:00",
       "kickoffTimeUtc": "2026-12-02T19:30:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -13330,12 +13330,12 @@
     "26-27-prem-liverpool-vs-tottenham-hotspur": {
       "matchId": "26-27-prem-liverpool-vs-tottenham-hotspur",
       "probabilities": {
-        "homeWin": 0.5909,
-        "draw": 0.222,
-        "awayWin": 0.187
+        "homeWin": 0.5923,
+        "draw": 0.2209,
+        "awayWin": 0.1867
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.373679+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.717562+00:00",
       "kickoffTimeUtc": "2026-12-19T17:30:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -13356,12 +13356,12 @@
     "26-27-prem-manchester-city-vs-arsenal": {
       "matchId": "26-27-prem-manchester-city-vs-arsenal",
       "probabilities": {
-        "homeWin": 0.3861,
-        "draw": 0.2873,
-        "awayWin": 0.3265
+        "homeWin": 0.3872,
+        "draw": 0.2865,
+        "awayWin": 0.3264
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.381863+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.725476+00:00",
       "kickoffTimeUtc": "2027-01-30T15:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -13369,12 +13369,12 @@
     "26-27-prem-manchester-city-vs-aston-villa": {
       "matchId": "26-27-prem-manchester-city-vs-aston-villa",
       "probabilities": {
-        "homeWin": 0.6333,
-        "draw": 0.211,
-        "awayWin": 0.1558
+        "homeWin": 0.6337,
+        "draw": 0.2102,
+        "awayWin": 0.1561
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.397251+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.740487+00:00",
       "kickoffTimeUtc": "2027-05-23T14:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -13383,11 +13383,11 @@
       "matchId": "26-27-prem-manchester-city-vs-brentford",
       "probabilities": {
         "homeWin": 0.6282,
-        "draw": 0.2101,
-        "awayWin": 0.1617
+        "draw": 0.2094,
+        "awayWin": 0.1623
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.394197+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.737488+00:00",
       "kickoffTimeUtc": "2027-05-01T14:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -13408,12 +13408,12 @@
     "26-27-prem-manchester-city-vs-chelsea": {
       "matchId": "26-27-prem-manchester-city-vs-chelsea",
       "probabilities": {
-        "homeWin": 0.6166,
-        "draw": 0.2094,
-        "awayWin": 0.1741
+        "homeWin": 0.6165,
+        "draw": 0.2087,
+        "awayWin": 0.1747
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.372445+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.716350+00:00",
       "kickoffTimeUtc": "2026-12-12T17:30:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -13434,12 +13434,12 @@
     "26-27-prem-manchester-city-vs-crystal-palace": {
       "matchId": "26-27-prem-manchester-city-vs-crystal-palace",
       "probabilities": {
-        "homeWin": 0.7188,
-        "draw": 0.1792,
-        "awayWin": 0.1021
+        "homeWin": 0.7186,
+        "draw": 0.1787,
+        "awayWin": 0.1026
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.391910+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.735227+00:00",
       "kickoffTimeUtc": "2027-04-17T14:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -13447,12 +13447,12 @@
     "26-27-prem-manchester-city-vs-everton": {
       "matchId": "26-27-prem-manchester-city-vs-everton",
       "probabilities": {
-        "homeWin": 0.6506,
-        "draw": 0.2218,
-        "awayWin": 0.1276
+        "homeWin": 0.6485,
+        "draw": 0.2194,
+        "awayWin": 0.1321
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.387393+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.730927+00:00",
       "kickoffTimeUtc": "2027-03-03T20:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -13460,12 +13460,12 @@
     "26-27-prem-manchester-city-vs-fulham": {
       "matchId": "26-27-prem-manchester-city-vs-fulham",
       "probabilities": {
-        "homeWin": 0.6735,
-        "draw": 0.2033,
-        "awayWin": 0.1232
+        "homeWin": 0.6736,
+        "draw": 0.2028,
+        "awayWin": 0.1236
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.367533+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.711617+00:00",
       "kickoffTimeUtc": "2026-11-21T12:30:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -13499,12 +13499,12 @@
     "26-27-prem-manchester-city-vs-leeds-united": {
       "matchId": "26-27-prem-manchester-city-vs-leeds-united",
       "probabilities": {
-        "homeWin": 0.6774,
-        "draw": 0.1986,
-        "awayWin": 0.124
+        "homeWin": 0.6776,
+        "draw": 0.1979,
+        "awayWin": 0.1246
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.370274+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.714282+00:00",
       "kickoffTimeUtc": "2026-12-02T19:30:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -13512,12 +13512,12 @@
     "26-27-prem-manchester-city-vs-liverpool": {
       "matchId": "26-27-prem-manchester-city-vs-liverpool",
       "probabilities": {
-        "homeWin": 0.5326,
-        "draw": 0.2401,
-        "awayWin": 0.2273
+        "homeWin": 0.533,
+        "draw": 0.2392,
+        "awayWin": 0.2279
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.395064+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.738319+00:00",
       "kickoffTimeUtc": "2027-05-08T14:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -13526,11 +13526,11 @@
       "matchId": "26-27-prem-manchester-city-vs-manchester-united",
       "probabilities": {
         "homeWin": 0.6376,
-        "draw": 0.2087,
-        "awayWin": 0.1537
+        "draw": 0.208,
+        "awayWin": 0.1544
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.389657+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.733082+00:00",
       "kickoffTimeUtc": "2027-03-20T15:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -13538,12 +13538,12 @@
     "26-27-prem-manchester-city-vs-newcastle-united": {
       "matchId": "26-27-prem-manchester-city-vs-newcastle-united",
       "probabilities": {
-        "homeWin": 0.6574,
-        "draw": 0.1967,
-        "awayWin": 0.1459
+        "homeWin": 0.6572,
+        "draw": 0.1963,
+        "awayWin": 0.1464
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.385119+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.728750+00:00",
       "kickoffTimeUtc": "2027-02-20T15:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -13551,12 +13551,12 @@
     "26-27-prem-manchester-city-vs-nottingham-forest": {
       "matchId": "26-27-prem-manchester-city-vs-nottingham-forest",
       "probabilities": {
-        "homeWin": 0.6752,
-        "draw": 0.2025,
-        "awayWin": 0.1223
+        "homeWin": 0.6754,
+        "draw": 0.2019,
+        "awayWin": 0.1227
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.379651+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.723303+00:00",
       "kickoffTimeUtc": "2027-01-16T15:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -13577,12 +13577,12 @@
     "26-27-prem-manchester-city-vs-tottenham-hotspur": {
       "matchId": "26-27-prem-manchester-city-vs-tottenham-hotspur",
       "probabilities": {
-        "homeWin": 0.6902,
-        "draw": 0.1857,
-        "awayWin": 0.1241
+        "homeWin": 0.6903,
+        "draw": 0.1853,
+        "awayWin": 0.1244
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.377621+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.721337+00:00",
       "kickoffTimeUtc": "2027-01-03T16:30:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -13603,12 +13603,12 @@
     "26-27-prem-manchester-united-vs-arsenal": {
       "matchId": "26-27-prem-manchester-united-vs-arsenal",
       "probabilities": {
-        "homeWin": 0.2172,
-        "draw": 0.2665,
-        "awayWin": 0.5164
+        "homeWin": 0.219,
+        "draw": 0.2659,
+        "awayWin": 0.5151
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.386257+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.729833+00:00",
       "kickoffTimeUtc": "2027-02-27T15:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -13616,12 +13616,12 @@
     "26-27-prem-manchester-united-vs-aston-villa": {
       "matchId": "26-27-prem-manchester-united-vs-aston-villa",
       "probabilities": {
-        "homeWin": 0.4225,
-        "draw": 0.2626,
-        "awayWin": 0.3149
+        "homeWin": 0.4243,
+        "draw": 0.2612,
+        "awayWin": 0.3145
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.367421+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.711505+00:00",
       "kickoffTimeUtc": "2026-11-08T16:30:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -13629,12 +13629,12 @@
     "26-27-prem-manchester-united-vs-brentford": {
       "matchId": "26-27-prem-manchester-united-vs-brentford",
       "probabilities": {
-        "homeWin": 0.4147,
-        "draw": 0.2591,
-        "awayWin": 0.3262
+        "homeWin": 0.4161,
+        "draw": 0.2578,
+        "awayWin": 0.326
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.368906+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.712963+00:00",
       "kickoffTimeUtc": "2026-11-28T15:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -13642,12 +13642,12 @@
     "26-27-prem-manchester-united-vs-brighton-hove-albion": {
       "matchId": "26-27-prem-manchester-united-vs-brighton-hove-albion",
       "probabilities": {
-        "homeWin": 0.3644,
-        "draw": 0.2613,
-        "awayWin": 0.3742
+        "homeWin": 0.3663,
+        "draw": 0.2603,
+        "awayWin": 0.3734
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.384037+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.727668+00:00",
       "kickoffTimeUtc": "2027-02-10T20:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -13655,12 +13655,12 @@
     "26-27-prem-manchester-united-vs-chelsea": {
       "matchId": "26-27-prem-manchester-united-vs-chelsea",
       "probabilities": {
-        "homeWin": 0.3985,
-        "draw": 0.2531,
-        "awayWin": 0.3484
+        "homeWin": 0.3998,
+        "draw": 0.2519,
+        "awayWin": 0.3483
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.382954+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.726578+00:00",
       "kickoffTimeUtc": "2027-02-06T15:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -13668,12 +13668,12 @@
     "26-27-prem-manchester-united-vs-coventry-city": {
       "matchId": "26-27-prem-manchester-united-vs-coventry-city",
       "probabilities": {
-        "homeWin": 0.5679,
-        "draw": 0.2431,
-        "awayWin": 0.189
+        "homeWin": 0.6138,
+        "draw": 0.2156,
+        "awayWin": 0.1706
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.371455+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.715394+00:00",
       "kickoffTimeUtc": "2026-12-05T15:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -13681,12 +13681,12 @@
     "26-27-prem-manchester-united-vs-crystal-palace": {
       "matchId": "26-27-prem-manchester-united-vs-crystal-palace",
       "probabilities": {
-        "homeWin": 0.5194,
-        "draw": 0.2532,
-        "awayWin": 0.2274
+        "homeWin": 0.5207,
+        "draw": 0.2518,
+        "awayWin": 0.2275
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.392890+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.736190+00:00",
       "kickoffTimeUtc": "2027-04-24T14:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -13694,12 +13694,12 @@
     "26-27-prem-manchester-united-vs-everton": {
       "matchId": "26-27-prem-manchester-united-vs-everton",
       "probabilities": {
-        "homeWin": 0.4572,
-        "draw": 0.2854,
-        "awayWin": 0.2574
+        "homeWin": 0.4539,
+        "draw": 0.2806,
+        "awayWin": 0.2655
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.388552+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.732012+00:00",
       "kickoffTimeUtc": "2027-03-13T15:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -13707,12 +13707,12 @@
     "26-27-prem-manchester-united-vs-fulham": {
       "matchId": "26-27-prem-manchester-united-vs-fulham",
       "probabilities": {
-        "homeWin": 0.4731,
-        "draw": 0.2689,
-        "awayWin": 0.258
+        "homeWin": 0.4748,
+        "draw": 0.2676,
+        "awayWin": 0.2576
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.398581+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.741759+00:00",
       "kickoffTimeUtc": "2027-05-30T15:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -13720,12 +13720,12 @@
     "26-27-prem-manchester-united-vs-hull-city": {
       "matchId": "26-27-prem-manchester-united-vs-hull-city",
       "probabilities": {
-        "homeWin": 0.4579,
-        "draw": 0.2816,
-        "awayWin": 0.2605
+        "homeWin": 0.4599,
+        "draw": 0.2811,
+        "awayWin": 0.259
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.390826+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.734152+00:00",
       "kickoffTimeUtc": "2027-04-10T14:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -13746,12 +13746,12 @@
     "26-27-prem-manchester-united-vs-leeds-united": {
       "matchId": "26-27-prem-manchester-united-vs-leeds-united",
       "probabilities": {
-        "homeWin": 0.4741,
-        "draw": 0.2638,
-        "awayWin": 0.2621
+        "homeWin": 0.4757,
+        "draw": 0.2623,
+        "awayWin": 0.262
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.396352+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.739626+00:00",
       "kickoffTimeUtc": "2027-05-15T14:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -13759,12 +13759,12 @@
     "26-27-prem-manchester-united-vs-liverpool": {
       "matchId": "26-27-prem-manchester-united-vs-liverpool",
       "probabilities": {
-        "homeWin": 0.325,
-        "draw": 0.2606,
-        "awayWin": 0.4145
+        "homeWin": 0.3264,
+        "draw": 0.2593,
+        "awayWin": 0.4142
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.380773+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.724395+00:00",
       "kickoffTimeUtc": "2027-01-23T15:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -13785,12 +13785,12 @@
     "26-27-prem-manchester-united-vs-newcastle-united": {
       "matchId": "26-27-prem-manchester-united-vs-newcastle-united",
       "probabilities": {
-        "homeWin": 0.442,
-        "draw": 0.2525,
-        "awayWin": 0.3054
+        "homeWin": 0.4435,
+        "draw": 0.2516,
+        "awayWin": 0.3049
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.378782+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.722449+00:00",
       "kickoffTimeUtc": "2027-01-07T20:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -13798,12 +13798,12 @@
     "26-27-prem-manchester-united-vs-nottingham-forest": {
       "matchId": "26-27-prem-manchester-united-vs-nottingham-forest",
       "probabilities": {
-        "homeWin": 0.4748,
-        "draw": 0.2684,
-        "awayWin": 0.2567
+        "homeWin": 0.4767,
+        "draw": 0.2671,
+        "awayWin": 0.2562
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.375274+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.719063+00:00",
       "kickoffTimeUtc": "2026-12-27T16:30:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -13811,12 +13811,12 @@
     "26-27-prem-manchester-united-vs-sunderland": {
       "matchId": "26-27-prem-manchester-united-vs-sunderland",
       "probabilities": {
-        "homeWin": 0.5184,
-        "draw": 0.2633,
-        "awayWin": 0.2183
+        "homeWin": 0.5205,
+        "draw": 0.262,
+        "awayWin": 0.2176
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.376167+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.719930+00:00",
       "kickoffTimeUtc": "2026-12-30T19:30:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -13850,12 +13850,12 @@
     "26-27-prem-newcastle-united-vs-arsenal": {
       "matchId": "26-27-prem-newcastle-united-vs-arsenal",
       "probabilities": {
-        "homeWin": 0.2103,
-        "draw": 0.2553,
-        "awayWin": 0.5344
+        "homeWin": 0.2118,
+        "draw": 0.2551,
+        "awayWin": 0.5332
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.368224+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.712283+00:00",
       "kickoffTimeUtc": "2026-11-21T17:30:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -13876,12 +13876,12 @@
     "26-27-prem-newcastle-united-vs-brentford": {
       "matchId": "26-27-prem-newcastle-united-vs-brentford",
       "probabilities": {
-        "homeWin": 0.4092,
-        "draw": 0.2524,
-        "awayWin": 0.3384
+        "homeWin": 0.4099,
+        "draw": 0.2516,
+        "awayWin": 0.3385
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.386364+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.729939+00:00",
       "kickoffTimeUtc": "2027-02-27T15:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -13889,12 +13889,12 @@
     "26-27-prem-newcastle-united-vs-brighton-hove-albion": {
       "matchId": "26-27-prem-newcastle-united-vs-brighton-hove-albion",
       "probabilities": {
-        "homeWin": 0.358,
-        "draw": 0.2537,
-        "awayWin": 0.3883
+        "homeWin": 0.3593,
+        "draw": 0.2531,
+        "awayWin": 0.3876
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.381971+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.725582+00:00",
       "kickoffTimeUtc": "2027-01-30T15:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -13902,12 +13902,12 @@
     "26-27-prem-newcastle-united-vs-chelsea": {
       "matchId": "26-27-prem-newcastle-united-vs-chelsea",
       "probabilities": {
-        "homeWin": 0.3923,
-        "draw": 0.2462,
-        "awayWin": 0.3616
+        "homeWin": 0.3929,
+        "draw": 0.2454,
+        "awayWin": 0.3617
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.384144+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.727773+00:00",
       "kickoffTimeUtc": "2027-02-10T20:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -13915,12 +13915,12 @@
     "26-27-prem-newcastle-united-vs-coventry-city": {
       "matchId": "26-27-prem-newcastle-united-vs-coventry-city",
       "probabilities": {
-        "homeWin": 0.5667,
-        "draw": 0.2379,
-        "awayWin": 0.1954
+        "homeWin": 0.6118,
+        "draw": 0.2116,
+        "awayWin": 0.1766
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.395169+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.738446+00:00",
       "kickoffTimeUtc": "2027-05-08T14:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -13928,12 +13928,12 @@
     "26-27-prem-newcastle-united-vs-crystal-palace": {
       "matchId": "26-27-prem-newcastle-united-vs-crystal-palace",
       "probabilities": {
-        "homeWin": 0.5168,
-        "draw": 0.2476,
-        "awayWin": 0.2356
+        "homeWin": 0.5174,
+        "draw": 0.2468,
+        "awayWin": 0.2359
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.397357+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.740591+00:00",
       "kickoffTimeUtc": "2027-05-23T14:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -13954,12 +13954,12 @@
     "26-27-prem-newcastle-united-vs-fulham": {
       "matchId": "26-27-prem-newcastle-united-vs-fulham",
       "probabilities": {
-        "homeWin": 0.4699,
-        "draw": 0.2627,
-        "awayWin": 0.2674
+        "homeWin": 0.4708,
+        "draw": 0.2619,
+        "awayWin": 0.2673
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.379781+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.723430+00:00",
       "kickoffTimeUtc": "2027-01-16T15:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -13980,12 +13980,12 @@
     "26-27-prem-newcastle-united-vs-ipswich-town": {
       "matchId": "26-27-prem-newcastle-united-vs-ipswich-town",
       "probabilities": {
-        "homeWin": 0.6428,
-        "draw": 0.1909,
-        "awayWin": 0.1663
+        "homeWin": 0.6427,
+        "draw": 0.1905,
+        "awayWin": 0.1668
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.392997+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.736295+00:00",
       "kickoffTimeUtc": "2027-04-24T14:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -13993,12 +13993,12 @@
     "26-27-prem-newcastle-united-vs-leeds-united": {
       "matchId": "26-27-prem-newcastle-united-vs-leeds-united",
       "probabilities": {
-        "homeWin": 0.4706,
-        "draw": 0.2577,
-        "awayWin": 0.2717
+        "homeWin": 0.4715,
+        "draw": 0.2567,
+        "awayWin": 0.2718
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.389786+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.733187+00:00",
       "kickoffTimeUtc": "2027-03-20T15:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -14019,12 +14019,12 @@
     "26-27-prem-newcastle-united-vs-manchester-city": {
       "matchId": "26-27-prem-newcastle-united-vs-manchester-city",
       "probabilities": {
-        "homeWin": 0.2296,
-        "draw": 0.2348,
-        "awayWin": 0.5356
+        "homeWin": 0.231,
+        "draw": 0.2346,
+        "awayWin": 0.5343
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.375060+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.718853+00:00",
       "kickoffTimeUtc": "2026-12-26T20:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -14032,12 +14032,12 @@
     "26-27-prem-newcastle-united-vs-manchester-united": {
       "matchId": "26-27-prem-newcastle-united-vs-manchester-united",
       "probabilities": {
-        "homeWin": 0.4212,
-        "draw": 0.2546,
-        "awayWin": 0.3243
+        "homeWin": 0.4218,
+        "draw": 0.2537,
+        "awayWin": 0.3245
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.370737+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.714735+00:00",
       "kickoffTimeUtc": "2026-12-02T20:15:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -14045,12 +14045,12 @@
     "26-27-prem-newcastle-united-vs-nottingham-forest": {
       "matchId": "26-27-prem-newcastle-united-vs-nottingham-forest",
       "probabilities": {
-        "homeWin": 0.4716,
-        "draw": 0.2623,
-        "awayWin": 0.2661
+        "homeWin": 0.4728,
+        "draw": 0.2615,
+        "awayWin": 0.2657
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.376274+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.720035+00:00",
       "kickoffTimeUtc": "2026-12-30T19:30:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -14058,12 +14058,12 @@
     "26-27-prem-newcastle-united-vs-sunderland": {
       "matchId": "26-27-prem-newcastle-united-vs-sunderland",
       "probabilities": {
-        "homeWin": 0.5166,
-        "draw": 0.2575,
-        "awayWin": 0.226
+        "homeWin": 0.5178,
+        "draw": 0.2567,
+        "awayWin": 0.2255
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.371910+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.715822+00:00",
       "kickoffTimeUtc": "2026-12-06T14:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -14071,12 +14071,12 @@
     "26-27-prem-newcastle-united-vs-tottenham-hotspur": {
       "matchId": "26-27-prem-newcastle-united-vs-tottenham-hotspur",
       "probabilities": {
-        "homeWin": 0.4757,
-        "draw": 0.2449,
-        "awayWin": 0.2794
+        "homeWin": 0.4767,
+        "draw": 0.2443,
+        "awayWin": 0.279
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.392016+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.735331+00:00",
       "kickoffTimeUtc": "2027-04-17T14:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -14084,12 +14084,12 @@
     "26-27-prem-nottingham-forest-vs-afc-bournemouth": {
       "matchId": "26-27-prem-nottingham-forest-vs-afc-bournemouth",
       "probabilities": {
-        "homeWin": 0.3613,
-        "draw": 0.2789,
-        "awayWin": 0.3598
+        "homeWin": 0.3617,
+        "draw": 0.2779,
+        "awayWin": 0.3604
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.380881+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.724508+00:00",
       "kickoffTimeUtc": "2027-01-23T15:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -14110,12 +14110,12 @@
     "26-27-prem-nottingham-forest-vs-aston-villa": {
       "matchId": "26-27-prem-nottingham-forest-vs-aston-villa",
       "probabilities": {
-        "homeWin": 0.3543,
-        "draw": 0.2813,
-        "awayWin": 0.3644
+        "homeWin": 0.3552,
+        "draw": 0.2802,
+        "awayWin": 0.3646
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.389892+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.733290+00:00",
       "kickoffTimeUtc": "2027-03-20T15:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -14123,12 +14123,12 @@
     "26-27-prem-nottingham-forest-vs-brentford": {
       "matchId": "26-27-prem-nottingham-forest-vs-brentford",
       "probabilities": {
-        "homeWin": 0.3467,
-        "draw": 0.2765,
-        "awayWin": 0.3768
+        "homeWin": 0.3473,
+        "draw": 0.2755,
+        "awayWin": 0.3773
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.383060+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.726693+00:00",
       "kickoffTimeUtc": "2027-02-06T15:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -14136,12 +14136,12 @@
     "26-27-prem-nottingham-forest-vs-brighton-hove-albion": {
       "matchId": "26-27-prem-nottingham-forest-vs-brighton-hove-albion",
       "probabilities": {
-        "homeWin": 0.3019,
-        "draw": 0.2736,
-        "awayWin": 0.4245
+        "homeWin": 0.3029,
+        "draw": 0.2729,
+        "awayWin": 0.4243
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.371562+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.715506+00:00",
       "kickoffTimeUtc": "2026-12-05T17:30:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -14149,12 +14149,12 @@
     "26-27-prem-nottingham-forest-vs-chelsea": {
       "matchId": "26-27-prem-nottingham-forest-vs-chelsea",
       "probabilities": {
-        "homeWin": 0.3313,
-        "draw": 0.268,
-        "awayWin": 0.4007
+        "homeWin": 0.3317,
+        "draw": 0.267,
+        "awayWin": 0.4013
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.368662+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.712747+00:00",
       "kickoffTimeUtc": "2026-11-27T20:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -14175,12 +14175,12 @@
     "26-27-prem-nottingham-forest-vs-crystal-palace": {
       "matchId": "26-27-prem-nottingham-forest-vs-crystal-palace",
       "probabilities": {
-        "homeWin": 0.4446,
-        "draw": 0.2825,
-        "awayWin": 0.2729
+        "homeWin": 0.4449,
+        "draw": 0.2815,
+        "awayWin": 0.2736
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.395273+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.738553+00:00",
       "kickoffTimeUtc": "2027-05-08T14:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -14188,12 +14188,12 @@
     "26-27-prem-nottingham-forest-vs-everton": {
       "matchId": "26-27-prem-nottingham-forest-vs-everton",
       "probabilities": {
-        "homeWin": 0.3891,
-        "draw": 0.3112,
-        "awayWin": 0.2998
+        "homeWin": 0.3848,
+        "draw": 0.3057,
+        "awayWin": 0.3095
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.373923+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.717771+00:00",
       "kickoffTimeUtc": "2026-12-20T14:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -14201,12 +14201,12 @@
     "26-27-prem-nottingham-forest-vs-fulham": {
       "matchId": "26-27-prem-nottingham-forest-vs-fulham",
       "probabilities": {
-        "homeWin": 0.4022,
-        "draw": 0.2945,
-        "awayWin": 0.3033
+        "homeWin": 0.4029,
+        "draw": 0.2936,
+        "awayWin": 0.3035
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.377198+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.720916+00:00",
       "kickoffTimeUtc": "2027-01-02T15:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -14214,12 +14214,12 @@
     "26-27-prem-nottingham-forest-vs-hull-city": {
       "matchId": "26-27-prem-nottingham-forest-vs-hull-city",
       "probabilities": {
-        "homeWin": 0.3894,
-        "draw": 0.3069,
-        "awayWin": 0.3037
+        "homeWin": 0.3905,
+        "draw": 0.3071,
+        "awayWin": 0.3024
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.378108+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.721792+00:00",
       "kickoffTimeUtc": "2027-01-05T19:30:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -14227,12 +14227,12 @@
     "26-27-prem-nottingham-forest-vs-ipswich-town": {
       "matchId": "26-27-prem-nottingham-forest-vs-ipswich-town",
       "probabilities": {
-        "homeWin": 0.5617,
-        "draw": 0.2314,
-        "awayWin": 0.2069
+        "homeWin": 0.5614,
+        "draw": 0.2308,
+        "awayWin": 0.2079
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.397474+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.740695+00:00",
       "kickoffTimeUtc": "2027-05-23T14:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -14253,12 +14253,12 @@
     "26-27-prem-nottingham-forest-vs-liverpool": {
       "matchId": "26-27-prem-nottingham-forest-vs-liverpool",
       "probabilities": {
-        "homeWin": 0.2674,
-        "draw": 0.2689,
-        "awayWin": 0.4638
+        "homeWin": 0.268,
+        "draw": 0.2678,
+        "awayWin": 0.4641
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.392121+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.735462+00:00",
       "kickoffTimeUtc": "2027-04-17T14:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -14266,12 +14266,12 @@
     "26-27-prem-nottingham-forest-vs-manchester-city": {
       "matchId": "26-27-prem-nottingham-forest-vs-manchester-city",
       "probabilities": {
-        "homeWin": 0.1922,
-        "draw": 0.2451,
-        "awayWin": 0.5626
+        "homeWin": 0.1934,
+        "draw": 0.2448,
+        "awayWin": 0.5618
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.366845+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.710899+00:00",
       "kickoffTimeUtc": "2026-11-07T17:30:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -14279,12 +14279,12 @@
     "26-27-prem-nottingham-forest-vs-manchester-united": {
       "matchId": "26-27-prem-nottingham-forest-vs-manchester-united",
       "probabilities": {
-        "homeWin": 0.3576,
-        "draw": 0.2801,
-        "awayWin": 0.3623
+        "homeWin": 0.358,
+        "draw": 0.2791,
+        "awayWin": 0.363
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.385225+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.728855+00:00",
       "kickoffTimeUtc": "2027-02-20T15:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -14292,12 +14292,12 @@
     "26-27-prem-nottingham-forest-vs-newcastle-united": {
       "matchId": "26-27-prem-nottingham-forest-vs-newcastle-united",
       "probabilities": {
-        "homeWin": 0.3709,
-        "draw": 0.2722,
-        "awayWin": 0.3568
+        "homeWin": 0.3715,
+        "draw": 0.2716,
+        "awayWin": 0.3569
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.387510+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.731032+00:00",
       "kickoffTimeUtc": "2027-03-03T20:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -14305,12 +14305,12 @@
     "26-27-prem-nottingham-forest-vs-sunderland": {
       "matchId": "26-27-prem-nottingham-forest-vs-sunderland",
       "probabilities": {
-        "homeWin": 0.445,
-        "draw": 0.294,
-        "awayWin": 0.261
+        "homeWin": 0.446,
+        "draw": 0.2932,
+        "awayWin": 0.2607
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.393103+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.736421+00:00",
       "kickoffTimeUtc": "2027-04-24T14:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -14331,12 +14331,12 @@
     "26-27-prem-sunderland-vs-afc-bournemouth": {
       "matchId": "26-27-prem-sunderland-vs-afc-bournemouth",
       "probabilities": {
-        "homeWin": 0.3139,
-        "draw": 0.2828,
-        "awayWin": 0.4032
+        "homeWin": 0.314,
+        "draw": 0.2819,
+        "awayWin": 0.4041
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.396458+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.739730+00:00",
       "kickoffTimeUtc": "2027-05-15T14:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -14357,12 +14357,12 @@
     "26-27-prem-sunderland-vs-aston-villa": {
       "matchId": "26-27-prem-sunderland-vs-aston-villa",
       "probabilities": {
-        "homeWin": 0.3077,
-        "draw": 0.2848,
-        "awayWin": 0.4075
+        "homeWin": 0.3082,
+        "draw": 0.2839,
+        "awayWin": 0.408
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.383166+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.726797+00:00",
       "kickoffTimeUtc": "2027-02-06T15:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -14370,12 +14370,12 @@
     "26-27-prem-sunderland-vs-brentford": {
       "matchId": "26-27-prem-sunderland-vs-brentford",
       "probabilities": {
-        "homeWin": 0.3002,
-        "draw": 0.279,
-        "awayWin": 0.4208
+        "homeWin": 0.3004,
+        "draw": 0.2781,
+        "awayWin": 0.4215
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.388657+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.732115+00:00",
       "kickoffTimeUtc": "2027-03-13T15:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -14396,12 +14396,12 @@
     "26-27-prem-sunderland-vs-chelsea": {
       "matchId": "26-27-prem-sunderland-vs-chelsea",
       "probabilities": {
-        "homeWin": 0.285,
-        "draw": 0.2687,
-        "awayWin": 0.4463
+        "homeWin": 0.2851,
+        "draw": 0.2678,
+        "awayWin": 0.4471
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.367311+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.711384+00:00",
       "kickoffTimeUtc": "2026-11-08T14:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -14409,12 +14409,12 @@
     "26-27-prem-sunderland-vs-coventry-city": {
       "matchId": "26-27-prem-sunderland-vs-coventry-city",
       "probabilities": {
-        "homeWin": 0.4389,
-        "draw": 0.2935,
-        "awayWin": 0.2676
+        "homeWin": 0.477,
+        "draw": 0.2702,
+        "awayWin": 0.2528
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.380987+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.724615+00:00",
       "kickoffTimeUtc": "2027-01-23T15:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -14422,12 +14422,12 @@
     "26-27-prem-sunderland-vs-crystal-palace": {
       "matchId": "26-27-prem-sunderland-vs-crystal-palace",
       "probabilities": {
-        "homeWin": 0.3936,
-        "draw": 0.2944,
-        "awayWin": 0.312
+        "homeWin": 0.3935,
+        "draw": 0.2936,
+        "awayWin": 0.3128
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.374030+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.717877+00:00",
       "kickoffTimeUtc": "2026-12-20T14:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -14435,12 +14435,12 @@
     "26-27-prem-sunderland-vs-everton": {
       "matchId": "26-27-prem-sunderland-vs-everton",
       "probabilities": {
-        "homeWin": 0.3433,
-        "draw": 0.32,
-        "awayWin": 0.3367
+        "homeWin": 0.3386,
+        "draw": 0.3139,
+        "awayWin": 0.3476
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.385332+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.728961+00:00",
       "kickoffTimeUtc": "2027-02-20T15:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -14461,12 +14461,12 @@
     "26-27-prem-sunderland-vs-hull-city": {
       "matchId": "26-27-prem-sunderland-vs-hull-city",
       "probabilities": {
-        "homeWin": 0.3432,
-        "draw": 0.3154,
-        "awayWin": 0.3414
+        "homeWin": 0.3441,
+        "draw": 0.3159,
+        "awayWin": 0.34
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-02T23:59:19.104208+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.721020+00:00",
       "kickoffTimeUtc": "2027-01-02T15:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -14474,12 +14474,12 @@
     "26-27-prem-sunderland-vs-ipswich-town": {
       "matchId": "26-27-prem-sunderland-vs-ipswich-town",
       "probabilities": {
-        "homeWin": 0.5036,
-        "draw": 0.2502,
-        "awayWin": 0.2462
+        "homeWin": 0.5029,
+        "draw": 0.2497,
+        "awayWin": 0.2475
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.390935+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.734257+00:00",
       "kickoffTimeUtc": "2027-04-10T14:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -14500,12 +14500,12 @@
     "26-27-prem-sunderland-vs-liverpool": {
       "matchId": "26-27-prem-sunderland-vs-liverpool",
       "probabilities": {
-        "homeWin": 0.2277,
-        "draw": 0.2645,
-        "awayWin": 0.5078
+        "homeWin": 0.2281,
+        "draw": 0.2636,
+        "awayWin": 0.5083
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.378215+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.721897+00:00",
       "kickoffTimeUtc": "2027-01-05T20:15:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -14513,12 +14513,12 @@
     "26-27-prem-sunderland-vs-manchester-city": {
       "matchId": "26-27-prem-sunderland-vs-manchester-city",
       "probabilities": {
-        "homeWin": 0.1607,
-        "draw": 0.2349,
-        "awayWin": 0.6045
+        "homeWin": 0.1615,
+        "draw": 0.2346,
+        "awayWin": 0.6038
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.398702+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.741862+00:00",
       "kickoffTimeUtc": "2027-05-30T15:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -14526,12 +14526,12 @@
     "26-27-prem-sunderland-vs-manchester-united": {
       "matchId": "26-27-prem-sunderland-vs-manchester-united",
       "probabilities": {
-        "homeWin": 0.3106,
-        "draw": 0.2838,
-        "awayWin": 0.4056
+        "homeWin": 0.3107,
+        "draw": 0.2829,
+        "awayWin": 0.4065
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.387639+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.731136+00:00",
       "kickoffTimeUtc": "2027-03-03T20:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -14539,12 +14539,12 @@
     "26-27-prem-sunderland-vs-newcastle-united": {
       "matchId": "26-27-prem-sunderland-vs-newcastle-united",
       "probabilities": {
-        "homeWin": 0.3221,
-        "draw": 0.2766,
-        "awayWin": 0.4012
+        "homeWin": 0.3224,
+        "draw": 0.2761,
+        "awayWin": 0.4015
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.394304+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.737594+00:00",
       "kickoffTimeUtc": "2027-05-01T14:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -14552,12 +14552,12 @@
     "26-27-prem-sunderland-vs-nottingham-forest": {
       "matchId": "26-27-prem-sunderland-vs-nottingham-forest",
       "probabilities": {
-        "homeWin": 0.3556,
-        "draw": 0.3031,
-        "awayWin": 0.3413
+        "homeWin": 0.3562,
+        "draw": 0.3024,
+        "awayWin": 0.3414
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.372790+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.716693+00:00",
       "kickoffTimeUtc": "2026-12-13T14:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -14565,12 +14565,12 @@
     "26-27-prem-sunderland-vs-tottenham-hotspur": {
       "matchId": "26-27-prem-sunderland-vs-tottenham-hotspur",
       "probabilities": {
-        "homeWin": 0.3556,
-        "draw": 0.2824,
-        "awayWin": 0.3619
+        "homeWin": 0.3561,
+        "draw": 0.2819,
+        "awayWin": 0.362
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.369560+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.713635+00:00",
       "kickoffTimeUtc": "2026-11-29T14:05:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -14578,12 +14578,12 @@
     "26-27-prem-tottenham-hotspur-vs-afc-bournemouth": {
       "matchId": "26-27-prem-tottenham-hotspur-vs-afc-bournemouth",
       "probabilities": {
-        "homeWin": 0.3828,
-        "draw": 0.2594,
-        "awayWin": 0.3578
+        "homeWin": 0.3832,
+        "draw": 0.2586,
+        "awayWin": 0.3582
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.374840+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.718642+00:00",
       "kickoffTimeUtc": "2026-12-26T15:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -14591,12 +14591,12 @@
     "26-27-prem-tottenham-hotspur-vs-arsenal": {
       "matchId": "26-27-prem-tottenham-hotspur-vs-arsenal",
       "probabilities": {
-        "homeWin": 0.1837,
-        "draw": 0.2482,
-        "awayWin": 0.5681
+        "homeWin": 0.1849,
+        "draw": 0.248,
+        "awayWin": 0.567
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.372018+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.715927+00:00",
       "kickoffTimeUtc": "2026-12-06T16:30:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -14617,12 +14617,12 @@
     "26-27-prem-tottenham-hotspur-vs-brentford": {
       "matchId": "26-27-prem-tottenham-hotspur-vs-brentford",
       "probabilities": {
-        "homeWin": 0.367,
-        "draw": 0.2575,
-        "awayWin": 0.3755
+        "homeWin": 0.3675,
+        "draw": 0.2566,
+        "awayWin": 0.3758
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.391041+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.734379+00:00",
       "kickoffTimeUtc": "2027-04-10T14:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -14630,12 +14630,12 @@
     "26-27-prem-tottenham-hotspur-vs-brighton-hove-albion": {
       "matchId": "26-27-prem-tottenham-hotspur-vs-brighton-hove-albion",
       "probabilities": {
-        "homeWin": 0.3185,
-        "draw": 0.2554,
-        "awayWin": 0.4262
+        "homeWin": 0.3195,
+        "draw": 0.2548,
+        "awayWin": 0.4257
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.375593+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.719398+00:00",
       "kickoffTimeUtc": "2026-12-29T19:30:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -14643,12 +14643,12 @@
     "26-27-prem-tottenham-hotspur-vs-chelsea": {
       "matchId": "26-27-prem-tottenham-hotspur-vs-chelsea",
       "probabilities": {
-        "homeWin": 0.3501,
-        "draw": 0.2498,
-        "awayWin": 0.4002
+        "homeWin": 0.3505,
+        "draw": 0.249,
+        "awayWin": 0.4006
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.395378+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.738657+00:00",
       "kickoffTimeUtc": "2027-05-08T14:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -14695,12 +14695,12 @@
     "26-27-prem-tottenham-hotspur-vs-fulham": {
       "matchId": "26-27-prem-tottenham-hotspur-vs-fulham",
       "probabilities": {
-        "homeWin": 0.4275,
-        "draw": 0.2727,
+        "homeWin": 0.4282,
+        "draw": 0.272,
         "awayWin": 0.2998
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.370875+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.714842+00:00",
       "kickoffTimeUtc": "2026-12-03T20:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -14708,12 +14708,12 @@
     "26-27-prem-tottenham-hotspur-vs-hull-city": {
       "matchId": "26-27-prem-tottenham-hotspur-vs-hull-city",
       "probabilities": {
-        "homeWin": 0.4141,
-        "draw": 0.2847,
-        "awayWin": 0.3012
+        "homeWin": 0.4154,
+        "draw": 0.2848,
+        "awayWin": 0.2998
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.393219+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.736527+00:00",
       "kickoffTimeUtc": "2027-04-24T14:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -14721,12 +14721,12 @@
     "26-27-prem-tottenham-hotspur-vs-ipswich-town": {
       "matchId": "26-27-prem-tottenham-hotspur-vs-ipswich-town",
       "probabilities": {
-        "homeWin": 0.5956,
-        "draw": 0.2083,
-        "awayWin": 0.1961
+        "homeWin": 0.5952,
+        "draw": 0.2078,
+        "awayWin": 0.1969
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.368114+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.712175+00:00",
       "kickoffTimeUtc": "2026-11-21T15:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -14734,12 +14734,12 @@
     "26-27-prem-tottenham-hotspur-vs-leeds-united": {
       "matchId": "26-27-prem-tottenham-hotspur-vs-leeds-united",
       "probabilities": {
-        "homeWin": 0.4277,
-        "draw": 0.2675,
-        "awayWin": 0.3048
+        "homeWin": 0.4282,
+        "draw": 0.2665,
+        "awayWin": 0.3052
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.379890+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.723537+00:00",
       "kickoffTimeUtc": "2027-01-16T15:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -14747,12 +14747,12 @@
     "26-27-prem-tottenham-hotspur-vs-liverpool": {
       "matchId": "26-27-prem-tottenham-hotspur-vs-liverpool",
       "probabilities": {
-        "homeWin": 0.281,
-        "draw": 0.2511,
-        "awayWin": 0.4679
+        "homeWin": 0.2816,
+        "draw": 0.2503,
+        "awayWin": 0.4681
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.386469+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.730045+00:00",
       "kickoffTimeUtc": "2027-02-27T15:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -14760,12 +14760,12 @@
     "26-27-prem-tottenham-hotspur-vs-manchester-city": {
       "matchId": "26-27-prem-tottenham-hotspur-vs-manchester-city",
       "probabilities": {
-        "homeWin": 0.1994,
-        "draw": 0.2281,
-        "awayWin": 0.5726
+        "homeWin": 0.2006,
+        "draw": 0.2279,
+        "awayWin": 0.5715
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.384251+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.727878+00:00",
       "kickoffTimeUtc": "2027-02-10T20:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -14773,12 +14773,12 @@
     "26-27-prem-tottenham-hotspur-vs-manchester-united": {
       "matchId": "26-27-prem-tottenham-hotspur-vs-manchester-united",
       "probabilities": {
-        "homeWin": 0.3788,
-        "draw": 0.2606,
-        "awayWin": 0.3605
+        "homeWin": 0.3792,
+        "draw": 0.2597,
+        "awayWin": 0.361
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.397579+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.740798+00:00",
       "kickoffTimeUtc": "2027-05-23T14:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -14799,12 +14799,12 @@
     "26-27-prem-tottenham-hotspur-vs-nottingham-forest": {
       "matchId": "26-27-prem-tottenham-hotspur-vs-nottingham-forest",
       "probabilities": {
-        "homeWin": 0.4292,
-        "draw": 0.2724,
-        "awayWin": 0.2984
+        "homeWin": 0.4301,
+        "draw": 0.2717,
+        "awayWin": 0.2982
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.388789+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.732219+00:00",
       "kickoffTimeUtc": "2027-03-13T15:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
@@ -14812,12 +14812,12 @@
     "26-27-prem-tottenham-hotspur-vs-sunderland": {
       "matchId": "26-27-prem-tottenham-hotspur-vs-sunderland",
       "probabilities": {
-        "homeWin": 0.4737,
-        "draw": 0.2706,
-        "awayWin": 0.2557
+        "homeWin": 0.4747,
+        "draw": 0.27,
+        "awayWin": 0.2553
       },
       "modelVersion": "model_v3",
-      "generatedAtUtc": "2026-11-06T22:16:28.382078+00:00",
+      "generatedAtUtc": "2026-11-07T11:52:55.725686+00:00",
       "kickoffTimeUtc": "2027-01-30T15:00:00+00:00",
       "locked": false,
       "predictionType": "pre_kickoff"
