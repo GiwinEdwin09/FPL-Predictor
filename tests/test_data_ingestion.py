@@ -1,5 +1,6 @@
 import json
 import shutil
+import subprocess
 from unittest.mock import Mock
 
 import pandas as pd
@@ -14,7 +15,9 @@ from fpl_predictor.data_ingestion import (
     find_season_dataset_paths,
     find_season_matches_paths,
     fetch_repository_files,
+    fetch_repository_files_with_git,
     git_blob_hash,
+    parse_git_ls_tree,
     run_sync,
     select_recent_seasons,
 )
@@ -216,3 +219,85 @@ def test_failed_sync_reuses_completed_downloads_on_retry(tmp_path, monkeypatch) 
     assert summary["any_updated"] is True
     assert get.call_count == 3
     assert pd.read_csv(tmp_path / "playerstats.csv")["total_points"].tolist() == [3, 4]
+
+
+def _http_error(status: int, message: str, remaining: str | None = None) -> requests.HTTPError:
+    response = requests.Response()
+    response.status_code = status
+    if remaining is not None:
+        response.headers["x-ratelimit-remaining"] = remaining
+    return requests.HTTPError(f"{status} Client Error: {message}", response=response)
+
+
+def test_tree_request_sends_a_token_when_one_is_configured(monkeypatch) -> None:
+    response = Mock()
+    response.json.return_value = {"tree": []}
+    get = Mock(return_value=response)
+    monkeypatch.setattr("fpl_predictor.data_ingestion.get_with_retries", get)
+
+    monkeypatch.delenv("GITHUB_TOKEN", raising=False)
+    fetch_repository_files()
+    assert "Authorization" not in get.call_args.kwargs["headers"]
+
+    monkeypatch.setenv("GITHUB_TOKEN", "test-token")
+    fetch_repository_files()
+    assert get.call_args.kwargs["headers"]["Authorization"] == "Bearer test-token"
+
+
+@pytest.mark.parametrize(
+    "error",
+    [
+        _http_error(403, "rate limit exceeded for url: https://api.github.com/..."),
+        _http_error(403, "Forbidden", remaining="0"),
+        _http_error(429, "Too Many Requests", remaining="0"),
+    ],
+)
+def test_rate_limited_tree_request_falls_back_to_git(monkeypatch, error) -> None:
+    monkeypatch.setattr("fpl_predictor.data_ingestion.get_with_retries", Mock(side_effect=error))
+    git_listing = Mock(return_value={"data/file.csv": "a"})
+    monkeypatch.setattr("fpl_predictor.data_ingestion.fetch_repository_files_with_git", git_listing)
+
+    assert fetch_repository_files() == {"data/file.csv": "a"}
+    git_listing.assert_called_once()
+
+
+@pytest.mark.parametrize("error", [_http_error(403, "Forbidden", remaining="12"), _http_error(404, "Not Found")])
+def test_other_tree_request_failures_are_not_hidden(monkeypatch, error) -> None:
+    monkeypatch.setattr("fpl_predictor.data_ingestion.get_with_retries", Mock(side_effect=error))
+    git_listing = Mock()
+    monkeypatch.setattr("fpl_predictor.data_ingestion.fetch_repository_files_with_git", git_listing)
+
+    with pytest.raises(requests.HTTPError):
+        fetch_repository_files()
+    git_listing.assert_not_called()
+
+
+def test_parse_git_ls_tree_keeps_blobs_and_paths_with_spaces() -> None:
+    output = (
+        "100644 blob aaa\tdata/2026-2027/By Gameweek/GW1/matches.csv\0"
+        "040000 tree bbb\tdata/2026-2027\0"
+        "100644 blob ccc\tREADME.md\0"
+    )
+    assert parse_git_ls_tree(output) == {
+        "data/2026-2027/By Gameweek/GW1/matches.csv": "aaa",
+        "README.md": "ccc",
+    }
+
+
+@pytest.mark.skipif(shutil.which("git") is None, reason="git is not installed")
+def test_git_listing_matches_the_blob_hashes_downloads_are_checked_against(tmp_path) -> None:
+    source = tmp_path / "upstream"
+    (source / "data" / "2026-2027" / "By Gameweek" / "GW1").mkdir(parents=True)
+    content = b"match_id,home_team\n1,2\n"
+    (source / "data" / "2026-2027" / "By Gameweek" / "GW1" / "matches.csv").write_bytes(content)
+
+    def git(*args: str) -> None:
+        subprocess.run(["git", "-C", str(source), *args], check=True, capture_output=True)
+
+    git("init", "--quiet", "--initial-branch", "main")
+    git("add", ".")
+    git("-c", "user.name=Test", "-c", "user.email=test@example.com", "commit", "--quiet", "-m", "data")
+
+    files = fetch_repository_files_with_git(source.as_uri())
+
+    assert files == {"data/2026-2027/By Gameweek/GW1/matches.csv": git_blob_hash(content)}
