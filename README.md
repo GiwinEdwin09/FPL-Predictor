@@ -112,6 +112,21 @@ The frontend can either:
 - read a generated local dashboard payload, or
 - fetch live data from the FastAPI backend using `API_BASE_URL`
 
+### What runs where
+
+The public pages are built on Vercel from the committed `apps/web/public/data/dashboard.json`
+and served from the CDN; loading them never calls Render. `DASHBOARD_SOURCE=api` would change
+that, so leave it unset.
+
+Only the lineup tools call the Render API: `GET /api/v1/fixtures/{id}/lineup-context` (opening
+the lineup builder on `/predictions`, reopening or saving a scenario) and
+`POST /api/v1/predict/simulate`. Render's free tier spins the
+service down after 15 minutes without traffic and needs about a minute to wake it, so
+[`keep-api-warm.yml`](./.github/workflows/keep-api-warm.yml) requests `/health` every ten minutes
+outside 02:00–05:59 UTC. That keeps usage near 620 of the 750 free instance hours per month, and a
+failed run emails the repository owner. Each refresh commit still redeploys Render on purpose: the
+Docker build downloads the latest player data, which is what keeps lineups current.
+
 ### Production model: v3
 
 Render is configured for `v3`, and `/health` reports the loaded v3 bundle.
