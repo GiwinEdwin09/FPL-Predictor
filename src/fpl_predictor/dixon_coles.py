@@ -321,7 +321,15 @@ def predict_dixon_coles(
     parameters: DixonColesParameters,
     home_keys: Iterable[Any],
     away_keys: Iterable[Any],
+    *,
+    home_goal_multiplier: float = 1.0,
+    away_goal_multiplier: float = 1.0,
 ) -> np.ndarray:
+    """Outcome probabilities per fixture.
+
+    The multipliers scale each side's expected goals, for what-if forecasts such as a
+    changed starting XI; the default of 1.0 is the model's own forecast.
+    """
     index = parameters.team_index()
     attack = np.asarray(parameters.attack, dtype=float)
     defence = np.asarray(parameters.defence, dtype=float)
@@ -335,8 +343,8 @@ def predict_dixon_coles(
         away_attack = attack[away_idx] if away_idx is not None else average_attack
         home_defence = defence[home_idx] if home_idx is not None else average_defence
         away_defence = defence[away_idx] if away_idx is not None else average_defence
-        home_lambda = float(np.exp(home_attack - away_defence + parameters.home_advantage))
-        away_lambda = float(np.exp(away_attack - home_defence))
+        home_lambda = float(np.exp(home_attack - away_defence + parameters.home_advantage)) * home_goal_multiplier
+        away_lambda = float(np.exp(away_attack - home_defence)) * away_goal_multiplier
         rows.append(outcome_probabilities(home_lambda, away_lambda, parameters.rho))
     return np.vstack(rows) if rows else np.zeros((0, NUM_OUTCOMES), dtype=float)
 

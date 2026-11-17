@@ -7,7 +7,8 @@ import pandas as pd
 import pytest
 
 from fpl_predictor.live_inference import InferencePaths, LiveInferenceService, _is_available, _position_bucket
-from fpl_predictor.predictors import predict_match_probabilities
+from fpl_predictor.dixon_coles import DixonColesParameters
+from fpl_predictor.predictors import BlendPredictor, predict_match_probabilities
 from fpl_predictor.prediction_ledger import load_ledger, save_ledger, upsert_prediction
 from fpl_predictor.web_dashboard import build_dashboard_payload, serialize_probabilities
 
@@ -18,7 +19,7 @@ class _FakeBlendPredictor:
     tree_model = object()
     dixon_coles = SimpleNamespace(teams=["arsenal", "chelsea"])
 
-    def predict_proba(self, frame: pd.DataFrame) -> np.ndarray:
+    def predict_proba(self, frame: pd.DataFrame, **_) -> np.ndarray:
         home_probability = frame["home_current_elo"].to_numpy(dtype=float) / 3_000.0
         draw_probability = np.full(len(frame), 0.25)
         away_probability = 1.0 - home_probability - draw_probability
@@ -126,6 +127,9 @@ def test_is_available_uses_status_and_playing_chance() -> None:
     assert _is_available("a", 100) is True
     assert _is_available("i", 100) is False
     assert _is_available("a", 0) is False
+    # Players without a stats snapshot have no status at all.
+    assert _is_available(float("nan"), 100) is True
+    assert _is_available(None, None) is True
 
 
 def test_select_lineup_prefers_balanced_xi() -> None:
@@ -284,7 +288,94 @@ def test_lineup_simulation_adjusts_only_the_changed_team(tmp_path: Path, monkeyp
     assert result["adjustments"] == {
         "homeAttackRatio": 2.0, "awayAttackRatio": 1.0,
         "homeDefenceRatio": 2.0, "awayDefenceRatio": 1.0,
+        # Applied effects are capped at 1.35: more home goals, fewer conceded.
+        "homeGoalMultiplier": 1.35, "awayGoalMultiplier": 0.741,
     }
     assert result["home"]["selectedPlayerIds"] == [99]
     assert result["away"]["selectedPlayerIds"] == [2]
     pd.testing.assert_frame_equal(service.state().features, original)
+
+
+def _stub_lineups(service: LiveInferenceService, monkeypatch, strengths: dict[int, float]) -> None:
+    """Give each projected XI strength 1.0 and each listed replacement player its own strength."""
+    monkeypatch.setattr(
+        service,
+        "projected_lineup",
+        lambda team_id, **_: {"lineup": [{"playerId": team_id}], "roster": []},
+    )
+
+    def lineup_metrics(_state, player_ids, **_):
+        strength = strengths.get(player_ids[0], 1.0)
+        return dict.fromkeys(
+            ["attack_strength", "finishing_strength", "creation_strength", "touch_strength",
+             "tackle_strength", "defensive_strength"],
+            strength,
+        )
+
+    monkeypatch.setattr(service, "_lineup_metrics", lineup_metrics)
+
+
+def test_lineup_changes_move_a_dixon_coles_only_forecast(tmp_path: Path, monkeypatch) -> None:
+    # Production serves Dixon-Coles alone, which ignores the adjusted feature columns.
+    model = BlendPredictor(
+        dixon_coles=DixonColesParameters(
+            teams=["arsenal", "chelsea"],
+            attack=[0.1, -0.1],
+            defence=[0.05, -0.05],
+            home_advantage=0.25,
+            rho=-0.05,
+            half_life_days=365.0,
+            log_likelihood=0.0,
+        ),
+        tree_model=object(),
+        feature_columns=["home_current_elo"],
+        dixon_coles_weight=1.0,
+    )
+    paths = _write_runtime_csvs(tmp_path)
+    monkeypatch.setattr("fpl_predictor.live_inference.load_model", lambda _: model)
+    service = LiveInferenceService(paths)
+    _stub_lineups(service, monkeypatch, {98: 0.5, 99: 2.0})
+
+    unchanged = service.simulate_fixture("fixture-1")
+    stronger_home = service.simulate_fixture("fixture-1", home_player_ids=[99])
+    weaker_home = service.simulate_fixture("fixture-1", home_player_ids=[98])
+
+    baseline = unchanged["match"]["probabilities"]
+    assert unchanged["simulatedMatch"]["probabilities"] == baseline
+    assert unchanged["adjustments"]["homeGoalMultiplier"] == 1.0
+    assert stronger_home["match"]["probabilities"] == baseline
+    assert stronger_home["simulatedMatch"]["probabilities"]["homeWin"] > baseline["homeWin"]
+    assert weaker_home["simulatedMatch"]["probabilities"]["homeWin"] < baseline["homeWin"]
+    assert weaker_home["simulatedMatch"]["probabilities"]["awayWin"] > baseline["awayWin"]
+    # A halved lineup is capped at the 0.65 floor on its own goals and concedes 1 / 0.65 more.
+    assert weaker_home["adjustments"]["homeGoalMultiplier"] == 0.65
+    assert weaker_home["adjustments"]["awayGoalMultiplier"] == 1.538
+
+
+def test_per_90_rates_do_not_extrapolate_short_cameos(tmp_path: Path) -> None:
+    def appearance(player_id: int, match: int, minutes: float, xg: float) -> dict:
+        return {
+            "source_season": "2025-2026", "team_code": 1, "player_id": player_id,
+            "match_id": f"m{match}", "kickoff_time": pd.Timestamp(f"2025-08-{match:02d}T15:00:00Z"),
+            "match_source_gameweek": match, "source_gameweek": match, "gameweek": match,
+            "minutes_played": minutes, "xg": xg, "shots_on_target": 0, "chances_created": 0,
+            "touches_opposition_box": 0, "tackles_won": 0, "tackles": 0, "interceptions": 0,
+            "recoveries": 0, "clearances": 0, "blocks": 0,
+        }
+
+    state = SimpleNamespace(
+        signature=("test",),
+        player_matches=pd.DataFrame(
+            [appearance(10, match, 90.0, 0.3) for match in range(1, 6)]  # regular starter
+            + [appearance(11, 5, 10.0, 0.3)]  # one ten-minute cameo
+        ),
+    )
+    service = LiveInferenceService(_write_runtime_csvs(tmp_path))
+    cutoff = {"season": "2025-2026", "team_id": 1, "cutoff_kickoff": pd.Timestamp("2025-09-01T15:00:00Z"), "cutoff_gameweek": 6}
+
+    starter = service._player_form_metrics(state, player_id=10, **cutoff)
+    cameo = service._player_form_metrics(state, player_id=11, **cutoff)
+
+    assert starter["xg_p90"] == pytest.approx(0.3)
+    # 0.3 xG in ten minutes is not 2.7 xG per match; it is spread over three matches.
+    assert cameo["xg_p90"] == pytest.approx(0.1)

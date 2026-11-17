@@ -3,8 +3,9 @@ from __future__ import annotations
 import argparse
 from collections import defaultdict, deque
 from pathlib import Path
-from typing import Any, Literal
+from typing import Any, Literal, Mapping
 
+import numpy as np
 import pandas as pd
 
 from fpl_predictor.ratings import EloRatings, PiRatings
@@ -16,6 +17,7 @@ PREMIER_LEAGUE_TOURNAMENTS = frozenset({"prem", "premier league"})
 EUROPEAN_TOURNAMENTS = frozenset({"champions-league", "europa-league", "conference-league"})
 COVID_SEASONS = frozenset({"2019-2020", "2020-2021"})
 HISTORICAL_SOURCE = "football-data.co.uk"
+UNKNOWN_TEAM = "__unknown_team__"
 BASE_COLUMNS = (
     "match_id",
     "source_season",
@@ -34,10 +36,19 @@ BASE_COLUMNS = (
 )
 
 
+# A match is read as a plain mapping of column name to value; a pandas row works too.
+MatchRow = Mapping[str, Any]
+BATCH_KEY_COLUMNS = ("_kickoff_missing", "source_season", "kickoff_time", "_ordering_gameweek")
+
+
 def average_or_na(values: list[float]) -> float:
     if not values:
         return float("nan")
-    return pd.Series(values, dtype="float64").mean(skipna=True)
+    return float(np.mean(values))
+
+
+def float_or_nan(value: Any) -> float:
+    return float(value) if pd.notna(value) else float("nan")
 
 
 def normalize_tournament(value: Any) -> str:
@@ -46,14 +57,14 @@ def normalize_tournament(value: Any) -> str:
     return str(value).strip().casefold()
 
 
-def is_premier_league_match(match_row: pd.Series) -> bool:
+def is_premier_league_match(match_row: MatchRow) -> bool:
     if normalize_tournament(match_row.get("tournament")) in PREMIER_LEAGUE_TOURNAMENTS:
         return True
     match_id = str(match_row.get("match_id", "")).casefold()
     return "-prem-" in match_id
 
 
-def competition_code(match_row: pd.Series) -> str:
+def competition_code(match_row: MatchRow) -> str:
     tournament = normalize_tournament(match_row.get("tournament"))
     if tournament:
         return tournament
@@ -62,17 +73,17 @@ def competition_code(match_row: pd.Series) -> str:
     return "unknown"
 
 
-def is_cup_match(match_row: pd.Series) -> bool:
+def is_cup_match(match_row: MatchRow) -> bool:
     competition = competition_code(match_row)
     return competition != "prem"
 
 
-def is_european_match(match_row: pd.Series) -> bool:
+def is_european_match(match_row: MatchRow) -> bool:
     return competition_code(match_row) in EUROPEAN_TOURNAMENTS
 
 
 def should_emit_match(
-    match_row: pd.Series,
+    match_row: MatchRow,
     competition_scope: Literal["all", "premier_league"],
     include_historical_rows: bool = True,
 ) -> bool:
@@ -85,7 +96,7 @@ def should_emit_match(
 
 
 def resolve_team_key(
-    match_row: pd.Series,
+    match_row: MatchRow,
     side: str,
     team_key_lookup: dict[tuple[str, int], str] | None = None,
 ) -> Any:
@@ -109,63 +120,45 @@ def resolve_team_key(
     return team_id
 
 
-def build_team_observations(match_row: pd.Series) -> list[dict[str, Any]]:
-    observations: list[dict[str, Any]] = []
+def rating_state_key(team_key: Any, match_row: MatchRow, side: str) -> Any:
+    """Key under which a side's ratings and rolling history are stored.
+
+    Cup opponents from outside the tracked leagues arrive without a team id. Each is
+    treated as a one-off, default-rated side, so unrelated clubs never share a rating
+    or a form window.
+    """
+    if pd.notna(team_key):
+        return team_key
+    return (UNKNOWN_TEAM, match_row.get("match_id"), side)
+
+
+def is_unknown_team(state_key: Any) -> bool:
+    return isinstance(state_key, tuple) and state_key[:1] == (UNKNOWN_TEAM,)
+
+
+def build_team_observations(match_row: MatchRow) -> list[dict[str, Any]]:
+    """Return the home and away sides' view of one match, in that order."""
     kickoff_time = pd.Timestamp(match_row["kickoff_time"])
-
-    team_sides = (
-        (
-            match_row["home_team"],
-            match_row["away_team"],
-            match_row["home_expected_goals_xg"],
-            match_row["away_expected_goals_xg"],
-            match_row["home_shots_on_target"],
-            match_row["home_big_chances"],
-            match_row["home_tackles_won"],
-            match_row["home_score"],
-            match_row["away_score"],
-        ),
-        (
-            match_row["away_team"],
-            match_row["home_team"],
-            match_row["away_expected_goals_xg"],
-            match_row["home_expected_goals_xg"],
-            match_row["away_shots_on_target"],
-            match_row["away_big_chances"],
-            match_row["away_tackles_won"],
-            match_row["away_score"],
-            match_row["home_score"],
-        ),
-    )
-
-    for (
-        team_id,
-        opponent_id,
-        xg,
-        xga,
-        shots_on_target,
-        big_chances,
-        tackles_won,
-        goals_for,
-        goals_against,
-    ) in team_sides:
+    observations: list[dict[str, Any]] = []
+    for side, opponent in (("home", "away"), ("away", "home")):
+        goals_against = match_row[f"{opponent}_score"]
         observations.append(
             {
-                "team_id": team_id,
-                "opponent_id": opponent_id,
+                "team_id": match_row[f"{side}_team"],
+                "opponent_id": match_row[f"{opponent}_team"],
                 "match_id": match_row["match_id"],
                 "kickoff_time": kickoff_time,
-                "xg": xg,
-                "xga": xga,
-                "shots_on_target": shots_on_target,
-                "big_chances": big_chances,
-                "tackles_won": tackles_won,
+                # Stored as floats so a rolling window never re-checks for missing values.
+                "xg": float_or_nan(match_row[f"{side}_expected_goals_xg"]),
+                "xga": float_or_nan(match_row[f"{opponent}_expected_goals_xg"]),
+                "shots_on_target": float_or_nan(match_row[f"{side}_shots_on_target"]),
+                "big_chances": float_or_nan(match_row[f"{side}_big_chances"]),
+                "tackles_won": float_or_nan(match_row[f"{side}_tackles_won"]),
                 "clean_sheet": 1.0 if pd.notna(goals_against) and goals_against == 0 else 0.0,
-                "goals_for": goals_for,
+                "goals_for": match_row[f"{side}_score"],
                 "goals_against": goals_against,
             }
         )
-
     return observations
 
 
@@ -177,7 +170,7 @@ def compute_team_snapshot(
     histories: dict[Any, deque[dict[str, Any]]],
     last_kickoffs: dict[Any, pd.Timestamp],
 ) -> dict[str, Any]:
-    history = list(histories.get(team_id, deque()))
+    history = histories.get(team_id, ())
     previous_kickoff = last_kickoffs.get(team_id)
 
     snapshot: dict[str, Any] = {
@@ -191,18 +184,19 @@ def compute_team_snapshot(
         snapshot[f"{prefix}_days_rest"] = rest_delta.total_seconds() / 86_400
 
     for metric in AVG_METRICS:
-        metric_values = [float(item[metric]) for item in history if pd.notna(item[metric])]
+        # NaN is the only value that differs from itself.
+        metric_values = [item[metric] for item in history if item[metric] == item[metric]]
         snapshot[f"{prefix}_last5_avg_{metric}"] = average_or_na(metric_values)
         snapshot[f"{prefix}_last5_{metric}_observations"] = len(metric_values)
 
     for metric in RATE_METRICS:
-        metric_values = [float(item[metric]) for item in history if pd.notna(item[metric])]
+        metric_values = [item[metric] for item in history if item[metric] == item[metric]]
         snapshot[f"{prefix}_last5_{metric}_rate"] = average_or_na(metric_values)
 
     return snapshot
 
 
-def is_finished_match(match_row: pd.Series) -> bool:
+def is_finished_match(match_row: MatchRow) -> bool:
     finished = match_row.get("finished")
     if pd.isna(finished):
         return False
@@ -235,20 +229,20 @@ def build_pre_match_feature_table(
     pi_ratings = PiRatings()
     feature_rows: list[dict[str, Any]] = []
 
-    working["_batch_key"] = list(
-        zip(
-            working["_kickoff_missing"],
-            working["source_season"],
-            working["kickoff_time"],
-            working["_ordering_gameweek"],
-            strict=False,
+    # Matches sharing a kickoff are snapshotted together before any of their results
+    # update the ratings, so simultaneous fixtures never see each other's outcomes.
+    batches: dict[tuple[Any, ...], list[dict[str, Any]]] = {}
+    for match_row in working.to_dict("records"):
+        batch_key = tuple(
+            None if pd.isna(match_row[column]) else match_row[column]
+            for column in BATCH_KEY_COLUMNS
         )
-    )
+        batches.setdefault(batch_key, []).append(match_row)
 
-    for _, batch in working.groupby("_batch_key", sort=False, dropna=False):
-        batch_features: list[dict[str, Any]] = []
+    for batch in batches.values():
+        state_keys: list[tuple[Any, Any]] = []
 
-        for _, match_row in batch.iterrows():
+        for match_row in batch:
             current_kickoff = (
                 pd.Timestamp(match_row["kickoff_time"])
                 if pd.notna(match_row["kickoff_time"])
@@ -256,9 +250,12 @@ def build_pre_match_feature_table(
             )
             home_key = resolve_team_key(match_row, "home", team_key_lookup)
             away_key = resolve_team_key(match_row, "away", team_key_lookup)
-            home_elo, away_elo = elo_ratings.snapshot(home_key, away_key)
-            home_pi_home, home_pi_away, away_pi_home, away_pi_away = pi_ratings.snapshot(home_key, away_key)
-            feature_row = {column: match_row[column] for column in BASE_COLUMNS if column in match_row.index}
+            home_state = rating_state_key(home_key, match_row, "home")
+            away_state = rating_state_key(away_key, match_row, "away")
+            state_keys.append((home_state, away_state))
+            home_elo, away_elo = elo_ratings.snapshot(home_state, away_state)
+            home_pi_home, home_pi_away, away_pi_home, away_pi_away = pi_ratings.snapshot(home_state, away_state)
+            feature_row = {column: match_row[column] for column in BASE_COLUMNS if column in match_row}
             feature_row["home_team_key"] = home_key
             feature_row["away_team_key"] = away_key
             feature_row["competition_code"] = competition_code(match_row)
@@ -266,26 +263,17 @@ def build_pre_match_feature_table(
             feature_row["is_cup_match"] = int(is_cup_match(match_row))
             feature_row["is_european_match"] = int(is_european_match(match_row))
             feature_row["is_covid_season"] = int(str(match_row.get("source_season", "")) in COVID_SEASONS)
-            feature_row.update(
-                compute_team_snapshot(
-                    prefix="home",
-                    team_id=home_key,
-                    current_kickoff=current_kickoff,
-                    current_elo=home_elo,
-                    histories=histories,
-                    last_kickoffs=last_kickoffs,
+            for prefix, state_key, current_elo in (("home", home_state, home_elo), ("away", away_state, away_elo)):
+                feature_row.update(
+                    compute_team_snapshot(
+                        prefix=prefix,
+                        team_id=state_key,
+                        current_kickoff=current_kickoff,
+                        current_elo=current_elo,
+                        histories=histories,
+                        last_kickoffs=last_kickoffs,
+                    )
                 )
-            )
-            feature_row.update(
-                compute_team_snapshot(
-                    prefix="away",
-                    team_id=away_key,
-                    current_kickoff=current_kickoff,
-                    current_elo=away_elo,
-                    histories=histories,
-                    last_kickoffs=last_kickoffs,
-                )
-            )
             feature_row["home_pi_rating"] = home_pi_home
             feature_row["home_pi_home"] = home_pi_home
             feature_row["home_pi_away"] = home_pi_away
@@ -297,27 +285,26 @@ def build_pre_match_feature_table(
                 + (feature_row.get("away_last5_xg_observations") or 0)
                 > 0
             )
-            batch_features.append(feature_row)
-
-        for feature_row, (_, match_row) in zip(batch_features, batch.iterrows(), strict=True):
             if should_emit_match(match_row, competition_scope, include_historical_rows=include_historical_rows):
                 feature_rows.append(feature_row)
 
-        for _, match_row in batch.iterrows():
+        for match_row, sides in zip(batch, state_keys, strict=True):
             if not is_finished_match(match_row):
                 continue
-            home_key = resolve_team_key(match_row, "home", team_key_lookup)
-            away_key = resolve_team_key(match_row, "away", team_key_lookup)
+            home_state, away_state = sides
             home_score = match_row.get("home_score")
             away_score = match_row.get("away_score")
             if pd.notna(home_score) and pd.notna(away_score):
-                elo_ratings.update(home_key, away_key, float(home_score), float(away_score))
-                pi_ratings.update(home_key, away_key, float(home_score), float(away_score))
-            for observation in build_team_observations(match_row):
-                team_id = resolve_team_key(match_row, "home" if observation["team_id"] == match_row["home_team"] else "away", team_key_lookup)
-                observation["team_id"] = team_id
-                histories[team_id].append(observation)
-                last_kickoffs[team_id] = observation["kickoff_time"]
+                elo_ratings.update(home_state, away_state, float(home_score), float(away_score))
+                pi_ratings.update(home_state, away_state, float(home_score), float(away_score))
+            for observation, state_key in zip(build_team_observations(match_row), sides, strict=True):
+                if is_unknown_team(state_key):
+                    elo_ratings.ratings.pop(state_key, None)
+                    pi_ratings.ratings.pop(state_key, None)
+                    continue
+                observation["team_id"] = state_key
+                histories[state_key].append(observation)
+                last_kickoffs[state_key] = observation["kickoff_time"]
 
     feature_table = pd.DataFrame(feature_rows)
     if feature_table.empty:

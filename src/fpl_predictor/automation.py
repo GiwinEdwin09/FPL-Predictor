@@ -9,6 +9,7 @@ from typing import Any
 
 from fpl_predictor.data_ingestion import run_sync
 from fpl_predictor.feature_factory import build_feature_table
+from fpl_predictor.model_bundle import default_artifact_paths
 from fpl_predictor.model_training import train_and_save_model
 from fpl_predictor.web_dashboard import export_dashboard
 
@@ -80,24 +81,10 @@ def run_refresh_pipeline(
     feature_matches_path = matches_path
     include_historical_rows = True
     if model_version == "v3":
-        from fpl_predictor.historical_ingestion import sync_football_data_history
         from fpl_predictor.model_v3 import train_and_save_model_v3
-        from fpl_predictor.training_corpus import build_training_corpus
+        from fpl_predictor.training_corpus import build_v3_training_corpus
 
-        historical_dir = data_dir / "historical"
-        historical_path = historical_dir / "football_data_premier_league.csv"
-        sync_football_data_history(
-            raw_dir=historical_dir / "football-data" / "raw",
-            output_path=historical_path,
-            offline=True,
-        )
-        corpus = build_training_corpus(
-            fci_matches_path=matches_path,
-            historical_path=historical_path,
-            output_path=data_dir / "matches_training.csv",
-            data_dir=data_dir,
-        )
-        feature_matches_path = Path(corpus.output_path)
+        feature_matches_path = build_v3_training_corpus(data_dir, matches_path)
         include_historical_rows = False
 
     build_feature_table(
@@ -219,19 +206,11 @@ def parse_args() -> argparse.Namespace:
 
 def main() -> None:
     args = parse_args()
-    suffix = "_v3" if args.model_version == "v3" else ""
-    prediction_feature_table_path = Path(
-        args.prediction_feature_table_path
-        or f"data/features/match_pre_match_features{suffix}.csv"
-    )
-    training_feature_table_path = Path(
-        args.training_feature_table_path
-        or f"data/features/all_match_pre_match_features{suffix}.csv"
-    )
-    model_path = Path(args.model_path or f"data/models/model_{args.model_version}.json")
-    metrics_path = Path(
-        args.metrics_path or f"data/models/model_{args.model_version}_metrics.json"
-    )
+    defaults = default_artifact_paths(args.model_version)
+    prediction_feature_table_path = Path(args.prediction_feature_table_path or defaults.prediction_features)
+    training_feature_table_path = Path(args.training_feature_table_path or defaults.training_features)
+    model_path = Path(args.model_path or defaults.model)
+    metrics_path = Path(args.metrics_path or defaults.metrics)
     summary = run_refresh_pipeline(
         data_dir=Path(args.data_dir),
         prediction_feature_table_path=prediction_feature_table_path,

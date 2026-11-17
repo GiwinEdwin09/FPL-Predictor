@@ -9,20 +9,22 @@ import numpy as np
 import pandas as pd
 from sklearn.impute import SimpleImputer
 from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import log_loss
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler
 
 from fpl_predictor.dixon_coles import (
+    DEFAULT_HALF_LIFE_DAYS,
+    NUM_OUTCOMES,
+    PROBABILITY_EPSILON,
     DixonColesParameters,
     parameters_from_dict,
     predict_dixon_coles,
+    time_decay_weights,
 )
 
-NUM_OUTCOMES = 3
-PROBABILITY_EPSILON = 1e-12
 DEFAULT_BLEND_GRID = tuple(round(value, 2) for value in np.linspace(0.0, 1.0, 11))
 DEFAULT_TEMPERATURE_GRID = np.linspace(0.75, 2.5, 15)
-DEFAULT_HALF_LIFE_DAYS = 550.0
 
 
 def normalize_probabilities(probabilities: np.ndarray) -> np.ndarray:
@@ -46,11 +48,7 @@ def recency_sample_weights(
     base_weights: pd.Series | np.ndarray | None = None,
     half_life_days: float = DEFAULT_HALF_LIFE_DAYS,
 ) -> np.ndarray:
-    timestamps = pd.to_datetime(kickoffs, errors="coerce", utc=True, format="mixed")
-    latest = timestamps.max()
-    days_ago = (latest - timestamps).dt.total_seconds().to_numpy() / 86_400
-    days_ago = np.where(np.isfinite(days_ago), days_ago, 2.0 * half_life_days)
-    recency = np.exp(-np.log(2.0) * days_ago / max(half_life_days, 1e-6))
+    recency = time_decay_weights(kickoffs, half_life_days=max(half_life_days, 1e-6))
     if base_weights is None:
         return recency
     return recency * np.asarray(base_weights, dtype=float)
@@ -163,8 +161,6 @@ def choose_blend_and_temperature(
     blend_grid: tuple[float, ...] = DEFAULT_BLEND_GRID,
     temperature_grid: np.ndarray | None = None,
 ) -> tuple[float, float, float]:
-    from sklearn.metrics import log_loss
-
     if temperature_grid is None:
         temperature_grid = DEFAULT_TEMPERATURE_GRID
     best = (0.5, 1.0, float("inf"))
@@ -188,10 +184,22 @@ class BlendPredictor:
     home_key_column: str = "home_team_key"
     away_key_column: str = "away_team_key"
 
-    def predict_proba(self, frame: pd.DataFrame) -> np.ndarray:
+    def predict_proba(
+        self,
+        frame: pd.DataFrame,
+        *,
+        home_goal_multiplier: float = 1.0,
+        away_goal_multiplier: float = 1.0,
+    ) -> np.ndarray:
         home_keys = frame[self.home_key_column] if self.home_key_column in frame.columns else frame["home_team"]
         away_keys = frame[self.away_key_column] if self.away_key_column in frame.columns else frame["away_team"]
-        dixon = predict_dixon_coles(self.dixon_coles, home_keys, away_keys)
+        dixon = predict_dixon_coles(
+            self.dixon_coles,
+            home_keys,
+            away_keys,
+            home_goal_multiplier=home_goal_multiplier,
+            away_goal_multiplier=away_goal_multiplier,
+        )
         if self.dixon_coles_weight >= 1.0:
             blended = dixon
         else:
@@ -265,12 +273,24 @@ def predict_match_probabilities(
     *,
     feature_columns: list[str] | tuple[str, ...] | None = None,
     temperature: float = 1.0,
+    home_goal_multiplier: float = 1.0,
+    away_goal_multiplier: float = 1.0,
 ) -> np.ndarray:
+    """Calibrated outcome probabilities for each row of ``frame``.
+
+    The goal multipliers apply to the Dixon-Coles part of a blended model, which rates
+    clubs rather than reading the feature columns. Feature-only models ignore them and
+    respond to the adjusted features in ``frame`` instead.
+    """
     columns = list(feature_columns or getattr(model, "feature_columns", ()))
     if not columns:
         raise ValueError("feature_columns are required for this predictor.")
     if hasattr(model, "dixon_coles") and hasattr(model, "tree_model"):
-        probabilities = model.predict_proba(frame)
+        probabilities = model.predict_proba(
+            frame,
+            home_goal_multiplier=home_goal_multiplier,
+            away_goal_multiplier=away_goal_multiplier,
+        )
         if getattr(model, "temperature", 1.0) != 1.0:
             return probabilities
         return apply_temperature(probabilities, temperature)

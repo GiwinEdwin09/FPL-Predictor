@@ -1,6 +1,7 @@
 from dataclasses import asdict
 
 import numpy as np
+import pytest
 import pandas as pd
 from scipy.optimize import check_grad
 
@@ -179,3 +180,27 @@ def test_parameters_without_ridge_field_still_load() -> None:
 
     assert parameters.ridge == 0.0
     assert parameters.half_life_days == 550.0
+
+
+def test_goal_multipliers_shift_the_forecast_towards_the_stronger_lineup() -> None:
+    parameters = DixonColesParameters(
+        teams=["arsenal", "chelsea"],
+        attack=[0.1, -0.1],
+        defence=[0.05, -0.05],
+        home_advantage=0.25,
+        rho=-0.05,
+        half_life_days=365.0,
+        log_likelihood=0.0,
+    )
+    baseline = predict_dixon_coles(parameters, ["arsenal"], ["chelsea"])[0]
+    unchanged = predict_dixon_coles(
+        parameters, ["arsenal"], ["chelsea"], home_goal_multiplier=1.0, away_goal_multiplier=1.0
+    )[0]
+    weakened_home = predict_dixon_coles(parameters, ["arsenal"], ["chelsea"], home_goal_multiplier=0.65)[0]
+    weakened_away = predict_dixon_coles(parameters, ["arsenal"], ["chelsea"], away_goal_multiplier=0.65)[0]
+
+    np.testing.assert_array_equal(unchanged, baseline)
+    assert weakened_home[0] < baseline[0] and weakened_home[2] > baseline[2]
+    assert weakened_away[0] > baseline[0] and weakened_away[2] < baseline[2]
+    for probabilities in (weakened_home, weakened_away):
+        assert probabilities.sum() == pytest.approx(1.0)

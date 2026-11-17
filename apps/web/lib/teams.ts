@@ -40,6 +40,17 @@ export function teamMatches(matches: QuizMatch[], badgeSlug: string): QuizMatch[
     .sort((left, right) => (left.kickoffTime ?? "").localeCompare(right.kickoffTime ?? ""));
 }
 
+/** A match's goals and xG from one club's side. */
+export function teamView(match: QuizMatch, isHome: boolean) {
+  const [own, opponent] = isHome ? (["home", "away"] as const) : (["away", "home"] as const);
+  return {
+    scored: match.score[own],
+    conceded: match.score[opponent],
+    xgFor: match.stats.xg[own],
+    xgAgainst: match.stats.xg[opponent],
+  };
+}
+
 export type TeamSummaryStats = {
   played: number;
   wins: number;
@@ -67,9 +78,8 @@ export function summarizeTeam(matches: QuizMatch[], badgeSlug: string): TeamSumm
   let modelCorrect = 0;
 
   for (const match of teamMatches(matches, badgeSlug)) {
-    const isHome = match.homeTeam.badgeSlug === badgeSlug;
-    const scored = isHome ? match.score.home : match.score.away;
-    const conceded = isHome ? match.score.away : match.score.home;
+    const view = teamView(match, match.homeTeam.badgeSlug === badgeSlug);
+    const { scored, conceded } = view;
     if (scored === null || conceded === null) {
       continue;
     }
@@ -85,11 +95,9 @@ export function summarizeTeam(matches: QuizMatch[], badgeSlug: string): TeamSumm
       losses += 1;
     }
 
-    const xgForValue = isHome ? match.stats.xg.home : match.stats.xg.away;
-    const xgAgainstValue = isHome ? match.stats.xg.away : match.stats.xg.home;
-    if (xgForValue !== null && xgAgainstValue !== null) {
-      xgFor += xgForValue;
-      xgAgainst += xgAgainstValue;
+    if (view.xgFor !== null && view.xgAgainst !== null) {
+      xgFor += view.xgFor;
+      xgAgainst += view.xgAgainst;
       xgSamples += 1;
     }
 
@@ -156,8 +164,7 @@ export type TeamTrendPoint = {
 export function buildTeamTrend(matches: QuizMatch[], badgeSlug: string): TeamTrendPoint[] {
   return teamMatches(matches, badgeSlug).map((match) => {
     const isHome = match.homeTeam.badgeSlug === badgeSlug;
-    const scored = isHome ? match.score.home : match.score.away;
-    const conceded = isHome ? match.score.away : match.score.home;
+    const view = teamView(match, isHome);
     const outcome = resolveOutcome(match);
     const result =
       outcome === null ? null : outcome === "draw" ? "D" : (outcome === "home") === isHome ? "W" : "L";
@@ -167,11 +174,8 @@ export function buildTeamTrend(matches: QuizMatch[], badgeSlug: string): TeamTre
       kickoffTime: match.kickoffTime,
       isHome,
       opponent: isHome ? match.awayTeam : match.homeTeam,
-      scored,
-      conceded,
+      ...view,
       elo: isHome ? match.preMatch.homeElo : match.preMatch.awayElo,
-      xgFor: isHome ? match.stats.xg.home : match.stats.xg.away,
-      xgAgainst: isHome ? match.stats.xg.away : match.stats.xg.home,
       result,
       modelCorrect: outcome === null ? null : modelPick(match) === outcome,
     };

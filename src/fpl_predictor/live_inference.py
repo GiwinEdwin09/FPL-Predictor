@@ -26,12 +26,34 @@ from fpl_predictor.web_dashboard import (
     load_model,
     load_model_metadata,
     load_team_lookup,
+    row_gameweek,
     serialize_prediction_fixture,
     serialize_team,
+    utc_kickoff,
 )
 from fpl_predictor.prediction_ledger import DEFAULT_LEDGER_PATH
 
 DEFAULT_SIMULATION_RATIO_LIMITS = (0.65, 1.35)
+# A player's per-90 rates are spread over at least this many minutes (three full matches),
+# so a short cameo cannot be extrapolated into a full match of output.
+MIN_PER_90_MINUTES = 270.0
+PER_90_METRIC_COLUMNS = {
+    "xg_p90": "xg",
+    "shots_on_target_p90": "shots_on_target",
+    "chances_created_p90": "chances_created",
+    "touches_box_p90": "touches_opposition_box",
+    "tackles_won_p90": "tackles_won",
+}
+DEFENSIVE_ACTION_COLUMNS = ("tackles", "interceptions", "recoveries", "clearances", "blocks")
+# Lineup strength totals, and the per-90 player metric each one sums.
+LINEUP_STRENGTH_METRICS = {
+    "attack_strength": "xg_p90",
+    "finishing_strength": "shots_on_target_p90",
+    "creation_strength": "chances_created_p90",
+    "touch_strength": "touches_box_p90",
+    "tackle_strength": "tackles_won_p90",
+    "defensive_strength": "defensive_actions_p90",
+}
 
 
 @dataclass(frozen=True)
@@ -85,8 +107,9 @@ def _safe_numeric(value: Any, fallback: float = 0.0) -> float:
     return float(value)
 
 
-def _is_available(status: str | None, chance: float | None) -> bool:
-    normalized = (status or "").strip().casefold()
+def _is_available(status: Any, chance: float | None) -> bool:
+    # A player with no stats row yet has a missing status, which counts as available.
+    normalized = "" if status is None or pd.isna(status) else str(status).strip().casefold()
     if normalized in {"i", "u", "s"}:
         return False
     if chance is not None and chance <= 0:
@@ -110,14 +133,7 @@ def _position_bucket(value: Any) -> str:
 def _fixture_cutoff(
     fixture_row: pd.Series,
 ) -> tuple[pd.Timestamp | None, int | None]:
-    kickoff_time = fixture_row.get("kickoff_time")
-    kickoff = None
-    if pd.notna(kickoff_time):
-        kickoff = pd.Timestamp(kickoff_time)
-        if kickoff.tzinfo is None:
-            kickoff = kickoff.tz_localize("UTC")
-    gameweek = coerce_int(fixture_row.get("source_gameweek")) or coerce_int(fixture_row.get("gameweek"))
-    return kickoff, gameweek
+    return utc_kickoff(fixture_row.get("kickoff_time")), row_gameweek(fixture_row)
 
 
 def _row_before_fixture(
@@ -130,25 +146,58 @@ def _row_before_fixture(
     if str(row.get("source_season")) != season:
         return False
 
-    kickoff_time = row.get("kickoff_time")
-    if cutoff_kickoff is not None and pd.notna(kickoff_time):
-        kickoff = pd.Timestamp(kickoff_time)
-        if kickoff.tzinfo is None:
-            kickoff = kickoff.tz_localize("UTC")
+    kickoff = utc_kickoff(row.get("kickoff_time"))
+    if cutoff_kickoff is not None and kickoff is not None:
         return kickoff < cutoff_kickoff
 
     if cutoff_gameweek is None:
         return False
 
-    row_gameweek = coerce_int(row.get("source_gameweek")) or coerce_int(row.get("gameweek"))
-    if row_gameweek is None:
+    gameweek = row_gameweek(row)
+    if gameweek is None:
         return False
-    return row_gameweek < cutoff_gameweek
+    return gameweek < cutoff_gameweek
+
+
+def _rows_before_fixture(
+    frame: pd.DataFrame,
+    *,
+    season: str,
+    cutoff_kickoff: pd.Timestamp | None,
+    cutoff_gameweek: int | None,
+) -> pd.DataFrame:
+    if frame.empty:
+        return frame
+    return frame.loc[
+        frame.apply(
+            lambda row: _row_before_fixture(
+                row,
+                season=season,
+                cutoff_kickoff=cutoff_kickoff,
+                cutoff_gameweek=cutoff_gameweek,
+            ),
+            axis=1,
+        )
+    ].copy()
 
 
 def _clip_ratio(value: float) -> float:
     lower, upper = DEFAULT_SIMULATION_RATIO_LIMITS
     return max(lower, min(upper, value))
+
+
+def _applied_ratio(simulated: dict[str, float], baseline: dict[str, float], strength: str) -> float:
+    """Change in one lineup strength as it is applied to the forecast: clipped, and 1.0 when unknown."""
+    if baseline[strength] <= 0 or simulated[strength] <= 0:
+        return 1.0
+    return _clip_ratio(simulated[strength] / baseline[strength])
+
+
+def _strength_ratio(simulated: dict[str, float], baseline: dict[str, float], strength: str) -> float | None:
+    """Unclipped change in one lineup strength, or None without a baseline to compare with."""
+    if baseline[strength] <= 0:
+        return None
+    return coerce_float(simulated[strength] / baseline[strength], 3)
 
 
 class LiveInferenceService:
@@ -478,20 +527,12 @@ class LiveInferenceService:
             (state.player_matches["source_season"] == season)
             & (state.player_matches["team_code"] == team_id)
         ].copy()
-        if frame.empty:
-            return frame
-
-        frame = frame.loc[
-            frame.apply(
-                lambda row: _row_before_fixture(
-                    row,
-                    season=season,
-                    cutoff_kickoff=cutoff_kickoff,
-                    cutoff_gameweek=cutoff_gameweek,
-                ),
-                axis=1,
-            )
-        ].copy()
+        frame = _rows_before_fixture(
+            frame,
+            season=season,
+            cutoff_kickoff=cutoff_kickoff,
+            cutoff_gameweek=cutoff_gameweek,
+        )
         if frame.empty:
             return frame
 
@@ -761,22 +802,12 @@ class LiveInferenceService:
             & (state.player_matches["team_code"] == team_id)
             & (state.player_matches["player_id"] == player_id)
         ].copy()
-        if rows.empty:
-            payload = {"matches": 0.0}
-            self._player_form_metrics_cache[metrics_key] = payload
-            return payload.copy()
-
-        rows = rows.loc[
-            rows.apply(
-                lambda row: _row_before_fixture(
-                    row,
-                    season=season,
-                    cutoff_kickoff=cutoff_kickoff,
-                    cutoff_gameweek=cutoff_gameweek,
-                ),
-                axis=1,
-            )
-        ].copy()
+        rows = _rows_before_fixture(
+            rows,
+            season=season,
+            cutoff_kickoff=cutoff_kickoff,
+            cutoff_gameweek=cutoff_gameweek,
+        )
         if rows.empty:
             payload = {"matches": 0.0}
             self._player_form_metrics_cache[metrics_key] = payload
@@ -789,24 +820,12 @@ class LiveInferenceService:
             na_position="last",
         ).head(5)
 
-        total_minutes = float(rows["minutes_played"].fillna(0).sum())
-        total_minutes = max(total_minutes, 1.0)
-        defensive_total = (
-            rows["tackles"].fillna(0)
-            + rows["interceptions"].fillna(0)
-            + rows["recoveries"].fillna(0)
-            + rows["clearances"].fillna(0)
-            + rows["blocks"].fillna(0)
-        ).sum()
-        payload = {
-            "matches": float(len(rows)),
-            "xg_p90": float(rows["xg"].fillna(0).sum()) * 90.0 / total_minutes,
-            "shots_on_target_p90": float(rows["shots_on_target"].fillna(0).sum()) * 90.0 / total_minutes,
-            "chances_created_p90": float(rows["chances_created"].fillna(0).sum()) * 90.0 / total_minutes,
-            "touches_box_p90": float(rows["touches_opposition_box"].fillna(0).sum()) * 90.0 / total_minutes,
-            "tackles_won_p90": float(rows["tackles_won"].fillna(0).sum()) * 90.0 / total_minutes,
-            "defensive_actions_p90": float(defensive_total) * 90.0 / total_minutes,
-        }
+        total_minutes = max(float(rows["minutes_played"].fillna(0).sum()), MIN_PER_90_MINUTES)
+        defensive_total = sum(rows[column].fillna(0) for column in DEFENSIVE_ACTION_COLUMNS).sum()
+        payload = {"matches": float(len(rows))}
+        for metric, column in PER_90_METRIC_COLUMNS.items():
+            payload[metric] = float(rows[column].fillna(0).sum()) * 90.0 / total_minutes
+        payload["defensive_actions_p90"] = float(defensive_total) * 90.0 / total_minutes
         self._player_form_metrics_cache[metrics_key] = payload
         return payload.copy()
 
@@ -831,15 +850,8 @@ class LiveInferenceService:
         if cached is not None:
             return cached.copy()
 
-        totals = {
-            "attack_strength": 0.0,
-            "finishing_strength": 0.0,
-            "creation_strength": 0.0,
-            "touch_strength": 0.0,
-            "tackle_strength": 0.0,
-            "defensive_strength": 0.0,
-            "known_players": 0.0,
-        }
+        totals = {strength: 0.0 for strength in LINEUP_STRENGTH_METRICS}
+        totals["known_players"] = 0.0
         for player_id in player_ids:
             metrics = self._player_form_metrics(
                 state,
@@ -851,12 +863,8 @@ class LiveInferenceService:
             )
             if metrics.get("matches", 0.0) > 0:
                 totals["known_players"] += 1.0
-            totals["attack_strength"] += metrics.get("xg_p90", 0.0)
-            totals["finishing_strength"] += metrics.get("shots_on_target_p90", 0.0)
-            totals["creation_strength"] += metrics.get("chances_created_p90", 0.0)
-            totals["touch_strength"] += metrics.get("touches_box_p90", 0.0)
-            totals["tackle_strength"] += metrics.get("tackles_won_p90", 0.0)
-            totals["defensive_strength"] += metrics.get("defensive_actions_p90", 0.0)
+            for strength, metric in LINEUP_STRENGTH_METRICS.items():
+                totals[strength] += metrics.get(metric, 0.0)
         self._lineup_metrics_cache[metrics_key] = totals
         return totals.copy()
 
@@ -914,70 +922,43 @@ class LiveInferenceService:
         home_team_id = int(fixture_row["home_team"])
         away_team_id = int(fixture_row["away_team"])
 
-        home_context = self.projected_lineup(
-            season=season,
-            team_id=home_team_id,
-            cutoff_kickoff=kickoff,
-            cutoff_gameweek=gameweek,
-        )
-        away_context = self.projected_lineup(
-            season=season,
-            team_id=away_team_id,
-            cutoff_kickoff=kickoff,
-            cutoff_gameweek=gameweek,
-        )
-
-        default_home_ids = [item["playerId"] for item in home_context["lineup"]]
-        default_away_ids = [item["playerId"] for item in away_context["lineup"]]
-        selected_home_ids = home_player_ids or default_home_ids
-        selected_away_ids = away_player_ids or default_away_ids
-
-        baseline_home = self._lineup_metrics(
-            state,
-            season=season,
-            team_id=home_team_id,
-            player_ids=default_home_ids,
-            cutoff_kickoff=kickoff,
-            cutoff_gameweek=gameweek,
-        )
-        baseline_away = self._lineup_metrics(
-            state,
-            season=season,
-            team_id=away_team_id,
-            player_ids=default_away_ids,
-            cutoff_kickoff=kickoff,
-            cutoff_gameweek=gameweek,
-        )
-        simulated_home = self._lineup_metrics(
-            state,
-            season=season,
-            team_id=home_team_id,
-            player_ids=selected_home_ids,
-            cutoff_kickoff=kickoff,
-            cutoff_gameweek=gameweek,
-        )
-        simulated_away = self._lineup_metrics(
-            state,
-            season=season,
-            team_id=away_team_id,
-            player_ids=selected_away_ids,
-            cutoff_kickoff=kickoff,
-            cutoff_gameweek=gameweek,
-        )
-
         adjusted = fixture_row.copy()
-        for side, baseline, simulated in (
-            ("home", baseline_home, simulated_home),
-            ("away", baseline_away, simulated_away),
+        sides: dict[str, dict[str, Any]] = {}
+        ratios: dict[str, dict[str, float | None]] = {}
+        applied: dict[str, dict[str, float]] = {}
+        for side, team_id, requested_ids in (
+            ("home", home_team_id, home_player_ids),
+            ("away", away_team_id, away_player_ids),
         ):
+            cutoff = {"season": season, "team_id": team_id, "cutoff_kickoff": kickoff, "cutoff_gameweek": gameweek}
+            context = self.projected_lineup(**cutoff)
+            default_ids = [item["playerId"] for item in context["lineup"]]
+            selected_ids = requested_ids or default_ids
+            baseline = self._lineup_metrics(state, player_ids=default_ids, **cutoff)
+            simulated = self._lineup_metrics(state, player_ids=selected_ids, **cutoff)
             self._adjust_lineup_features(adjusted, side, baseline, simulated)
+            sides[side] = {**context, "selectedPlayerIds": selected_ids, "defaultPlayerIds": default_ids}
+            ratios[side] = {
+                "attack": _strength_ratio(simulated, baseline, "attack_strength"),
+                "defence": _strength_ratio(simulated, baseline, "defensive_strength"),
+            }
+            applied[side] = {
+                "attack": _applied_ratio(simulated, baseline, "attack_strength"),
+                "defence": _applied_ratio(simulated, baseline, "defensive_strength"),
+            }
 
+        # A side's expected goals rise with its own attack and fall with the opponent's
+        # defence, the same way the lineup scales the xG and xGA features above.
+        home_goal_multiplier = applied["home"]["attack"] / applied["away"]["defence"]
+        away_goal_multiplier = applied["away"]["attack"] / applied["home"]["defence"]
         adjusted_frame = add_derived_features(pd.DataFrame([adjusted]))
         probabilities = predict_match_probabilities(
             state.model,
             adjusted_frame,
             feature_columns=feature_columns_for_model(state.model, FEATURE_COLUMNS),
             temperature=state.temperature,
+            home_goal_multiplier=home_goal_multiplier,
+            away_goal_multiplier=away_goal_multiplier,
         )
         simulated_fixture = serialize_prediction_fixture(
             adjusted.to_dict(),
@@ -991,40 +972,14 @@ class LiveInferenceService:
             "simulationMode": "lineup-adjusted-team-features",
             "match": baseline_fixture,
             "simulatedMatch": simulated_fixture,
-            "home": {
-                **home_context,
-                "selectedPlayerIds": selected_home_ids,
-                "defaultPlayerIds": default_home_ids,
-            },
-            "away": {
-                **away_context,
-                "selectedPlayerIds": selected_away_ids,
-                "defaultPlayerIds": default_away_ids,
-            },
+            "home": sides["home"],
+            "away": sides["away"],
             "adjustments": {
-                "homeAttackRatio": coerce_float(
-                    simulated_home["attack_strength"] / baseline_home["attack_strength"]
-                    if baseline_home["attack_strength"] > 0
-                    else None,
-                    3,
-                ),
-                "awayAttackRatio": coerce_float(
-                    simulated_away["attack_strength"] / baseline_away["attack_strength"]
-                    if baseline_away["attack_strength"] > 0
-                    else None,
-                    3,
-                ),
-                "homeDefenceRatio": coerce_float(
-                    simulated_home["defensive_strength"] / baseline_home["defensive_strength"]
-                    if baseline_home["defensive_strength"] > 0
-                    else None,
-                    3,
-                ),
-                "awayDefenceRatio": coerce_float(
-                    simulated_away["defensive_strength"] / baseline_away["defensive_strength"]
-                    if baseline_away["defensive_strength"] > 0
-                    else None,
-                    3,
-                ),
+                "homeAttackRatio": ratios["home"]["attack"],
+                "awayAttackRatio": ratios["away"]["attack"],
+                "homeDefenceRatio": ratios["home"]["defence"],
+                "awayDefenceRatio": ratios["away"]["defence"],
+                "homeGoalMultiplier": coerce_float(home_goal_multiplier, 3),
+                "awayGoalMultiplier": coerce_float(away_goal_multiplier, 3),
             },
         }

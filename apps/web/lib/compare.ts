@@ -1,4 +1,5 @@
 import { modelPick, resolveOutcome, type QuizMatch } from "@/lib/quiz";
+import { teamView } from "@/lib/teams";
 
 export type HeadToHeadMeeting = {
   match: QuizMatch;
@@ -41,8 +42,7 @@ export function headToHead(matches: QuizMatch[], slugA: string, slugB: string): 
   let modelCorrect = 0;
 
   for (const { match, teamAHome } of meetings) {
-    const scoredA = teamAHome ? match.score.home : match.score.away;
-    const scoredB = teamAHome ? match.score.away : match.score.home;
+    const { scored: scoredA, conceded: scoredB, xgFor: xgForA, xgAgainst: xgForB } = teamView(match, teamAHome);
     const outcome = resolveOutcome(match);
     if (scoredA !== null && scoredB !== null) {
       played += 1;
@@ -57,8 +57,6 @@ export function headToHead(matches: QuizMatch[], slugA: string, slugB: string): 
       }
     }
 
-    const xgForA = teamAHome ? match.stats.xg.home : match.stats.xg.away;
-    const xgForB = teamAHome ? match.stats.xg.away : match.stats.xg.home;
     if (xgForA !== null && xgForB !== null) {
       xgA += xgForA;
       xgB += xgForB;

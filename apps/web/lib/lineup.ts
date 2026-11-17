@@ -14,6 +14,19 @@ export type LineupPlayer = {
   news: string | null;
 };
 
+export function isGoalkeeper(player: Pick<LineupPlayer, "position">): boolean {
+  return (player.position ?? "").trim().toLowerCase().startsWith("goal");
+}
+
+/**
+ * Players who may take over the slot `current` holds: goalkeepers only swap with
+ * goalkeepers, so an XI always keeps the keeper in goal and nowhere else.
+ */
+export function slotOptions(roster: LineupPlayer[], current: LineupPlayer): LineupPlayer[] {
+  const goalkeeperSlot = isGoalkeeper(current);
+  return roster.filter((player) => isGoalkeeper(player) === goalkeeperSlot);
+}
+
 export type TeamLineupContext = {
   team: TeamSummary;
   lineup: LineupPlayer[];
@@ -40,5 +53,8 @@ export type FixtureSimulation = {
     awayAttackRatio: number | null;
     homeDefenceRatio: number | null;
     awayDefenceRatio: number | null;
+    /** Factor applied to each side's expected goals. Absent from API builds that predate it. */
+    homeGoalMultiplier?: number | null;
+    awayGoalMultiplier?: number | null;
   };
 };

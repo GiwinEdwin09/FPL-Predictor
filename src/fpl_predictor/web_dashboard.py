@@ -4,7 +4,7 @@ import argparse
 import json
 from datetime import UTC, datetime
 from pathlib import Path
-from typing import Any
+from typing import Any, Mapping
 
 import pandas as pd
 
@@ -124,6 +124,27 @@ def coerce_float(value: Any, digits: int = 2) -> float | None:
     return round(float(value), digits)
 
 
+def row_gameweek(row: Mapping[str, Any]) -> int | None:
+    """The gameweek a match was actually played in, falling back to its scheduled one."""
+    return coerce_int(row.get("source_gameweek")) or coerce_int(row.get("gameweek"))
+
+
+def gameweek_series(frame: pd.DataFrame) -> pd.Series:
+    return pd.to_numeric(frame.get("source_gameweek").fillna(frame.get("gameweek")), errors="coerce")
+
+
+def utc_kickoff(value: Any) -> pd.Timestamp | None:
+    """Kickoff as a timezone-aware timestamp; naive values are taken to be UTC."""
+    if pd.isna(value):
+        return None
+    kickoff = pd.Timestamp(value)
+    return kickoff.tz_localize("UTC") if kickoff.tzinfo is None else kickoff
+
+
+def sort_fixtures(frame: pd.DataFrame, columns: tuple[str, ...] = ("kickoff_time", "source_season", "_ordering_gameweek", "match_id")) -> pd.DataFrame:
+    return frame.sort_values(list(columns), kind="stable", na_position="last").reset_index(drop=True)
+
+
 def resolve_badge_slug(*names: Any) -> str:
     for name in names:
         badge_slug = BADGE_ALIASES.get(normalize_team_name(name))
@@ -228,7 +249,7 @@ def latest_completed_gameweek(features: pd.DataFrame, season: str) -> int | None
     ].copy()
     if completed.empty:
         return None
-    value = pd.to_numeric(completed.get("source_gameweek").fillna(completed.get("gameweek")), errors="coerce").max()
+    value = gameweek_series(completed).max()
     if pd.isna(value):
         return None
     return int(value)
@@ -240,15 +261,11 @@ def should_include_upcoming_match(
     now_utc: pd.Timestamp,
     latest_completed_gw: int | None,
 ) -> bool:
-    kickoff_time = row.get("kickoff_time")
-    gameweek = coerce_int(row.get("source_gameweek")) or coerce_int(row.get("gameweek"))
+    kickoff = utc_kickoff(row.get("kickoff_time"))
+    if kickoff is not None:
+        return kickoff > now_utc
 
-    if pd.notna(kickoff_time):
-        kickoff_timestamp = pd.Timestamp(kickoff_time)
-        if kickoff_timestamp.tzinfo is None:
-            kickoff_timestamp = kickoff_timestamp.tz_localize("UTC")
-        return kickoff_timestamp > now_utc
-
+    gameweek = row_gameweek(row)
     if latest_completed_gw is not None and gameweek is not None and gameweek <= latest_completed_gw:
         return False
 
@@ -260,13 +277,19 @@ def is_postponed_match(
     *,
     latest_completed_gw: int | None,
 ) -> bool:
-    gameweek = coerce_int(row.get("source_gameweek")) or coerce_int(row.get("gameweek"))
-    kickoff_time = row.get("kickoff_time")
-    if pd.notna(kickoff_time):
+    if pd.notna(row.get("kickoff_time")):
         return False
+    gameweek = row_gameweek(row)
     if latest_completed_gw is None or gameweek is None:
         return False
     return gameweek <= latest_completed_gw
+
+
+def postponed_mask(frame: pd.DataFrame, *, latest_completed_gw: int | None) -> pd.Series:
+    return frame.apply(
+        lambda row: is_postponed_match(row.to_dict(), latest_completed_gw=latest_completed_gw),
+        axis=1,
+    )
 
 
 def serialize_probabilities(probability: Any) -> dict[str, float]:
@@ -323,19 +346,12 @@ def serialize_prediction_fixture(
     probability: Any,
     team_lookup: dict[tuple[str, int], dict[str, Any]],
 ) -> dict[str, Any]:
+    kickoff = utc_kickoff(row.get("kickoff_time"))
     return {
         "matchId": row["match_id"],
         "season": row["source_season"],
-        "gameweek": coerce_int(row.get("source_gameweek")) or coerce_int(row.get("gameweek")),
-        "kickoffTime": (
-            pd.Timestamp(row["kickoff_time"]).tz_localize("UTC").isoformat()
-            if pd.notna(row.get("kickoff_time")) and pd.Timestamp(row["kickoff_time"]).tzinfo is None
-            else (
-                pd.Timestamp(row["kickoff_time"]).isoformat()
-                if pd.notna(row.get("kickoff_time"))
-                else None
-            )
-        ),
+        "gameweek": row_gameweek(row),
+        "kickoffTime": kickoff.isoformat() if kickoff is not None else None,
         "homeTeam": serialize_team(team_lookup, row["source_season"], row["home_team"]),
         "awayTeam": serialize_team(team_lookup, row["source_season"], row["away_team"]),
         "finished": bool(row.get("finished")) if pd.notna(row.get("finished")) else False,
@@ -369,10 +385,7 @@ def current_active_gameweek(features: pd.DataFrame, season: str, now_utc: pd.Tim
     ].copy()
     if current_candidates.empty:
         return None
-    value = pd.to_numeric(
-        current_candidates.get("source_gameweek").fillna(current_candidates.get("gameweek")),
-        errors="coerce",
-    ).min()
+    value = gameweek_series(current_candidates).min()
     if pd.isna(value):
         return None
     return int(value)
@@ -399,32 +412,13 @@ def build_prediction_groups_from_frame(
         & (features["source_season"] == season)
         & (features["finished"] != True)
     ].copy()
-    postponed = unresolved.loc[
-        unresolved.apply(
-            lambda row: is_postponed_match(
-                row.to_dict(),
-                latest_completed_gw=latest_completed_gw,
-            ),
-            axis=1,
-        )
-    ].copy()
+    postponed = unresolved.loc[postponed_mask(unresolved, latest_completed_gw=latest_completed_gw)].copy()
     current = features.loc[
         is_premier_league_frame(features)
         & (features["source_season"] == season)
-        & (
-            pd.to_numeric(features.get("source_gameweek").fillna(features.get("gameweek")), errors="coerce")
-            == current_gameweek
-        )
+        & (gameweek_series(features) == current_gameweek)
     ].copy() if current_gameweek is not None else features.iloc[0:0].copy()
-    current = current.loc[
-        ~current.apply(
-            lambda row: is_postponed_match(
-                row.to_dict(),
-                latest_completed_gw=latest_completed_gw,
-            ),
-            axis=1,
-        )
-    ].copy()
+    current = current.loc[~postponed_mask(current, latest_completed_gw=latest_completed_gw)].copy()
     upcoming = unresolved.loc[
         unresolved.apply(
             lambda row: should_include_upcoming_match(
@@ -436,31 +430,13 @@ def build_prediction_groups_from_frame(
         )
     ].copy()
     if current_gameweek is not None:
-        upcoming = upcoming.loc[
-            pd.to_numeric(upcoming.get("source_gameweek").fillna(upcoming.get("gameweek")), errors="coerce")
-            != current_gameweek
-        ].copy()
-    upcoming = upcoming.sort_values(
-        ["kickoff_time", "source_season", "_ordering_gameweek", "match_id"],
-        kind="stable",
-        na_position="last",
-    ).reset_index(drop=True)
-    current = current.sort_values(
-        ["kickoff_time", "source_season", "_ordering_gameweek", "match_id"],
-        kind="stable",
-        na_position="last",
-    ).reset_index(drop=True)
-    postponed = postponed.sort_values(
-        ["source_season", "_ordering_gameweek", "match_id"],
-        kind="stable",
-        na_position="last",
-    ).reset_index(drop=True)
+        upcoming = upcoming.loc[gameweek_series(upcoming) != current_gameweek].copy()
+    upcoming = sort_fixtures(upcoming)
+    current = sort_fixtures(current)
+    postponed = sort_fixtures(postponed, ("source_season", "_ordering_gameweek", "match_id"))
 
     if upcoming.empty and postponed.empty and current.empty:
-        current_fixtures: list[dict[str, Any]] = []
-        upcoming_fixtures: list[dict[str, Any]] = []
-        postponed_fixtures: list[dict[str, Any]] = []
-        return current_gameweek, current_fixtures, upcoming_fixtures, postponed_fixtures
+        return current_gameweek, [], [], []
 
     def serialize_rows(frame: pd.DataFrame, *, postponed_reason: str | None = None) -> list[dict[str, Any]]:
         if frame.empty:
@@ -577,7 +553,7 @@ def build_historical_matches_from_frames(
             {
                 "matchId": row["match_id"],
                 "season": row["source_season"],
-                "gameweek": coerce_int(row.get("source_gameweek")) or coerce_int(row.get("gameweek")),
+                "gameweek": row_gameweek(row),
                 "kickoffTime": pd.Timestamp(row["kickoff_time"]).isoformat() if pd.notna(row.get("kickoff_time")) else None,
                 "homeTeam": serialize_team(team_lookup, row["source_season"], row["home_team"]),
                 "awayTeam": serialize_team(team_lookup, row["source_season"], row["away_team"]),

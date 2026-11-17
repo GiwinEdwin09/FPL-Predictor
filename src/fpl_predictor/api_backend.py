@@ -10,6 +10,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
 
 from fpl_predictor.live_inference import InferencePaths, LiveInferenceService
+from fpl_predictor.model_bundle import MODEL_VERSIONS, default_artifact_paths
 from fpl_predictor.runtime_assets import ensure_runtime_assets
 
 
@@ -36,25 +37,19 @@ def dashboard_cache_path() -> Path:
 
 def configured_model_version() -> str:
     version = os.getenv("MODEL_VERSION", "v2").strip().casefold()
-    if version not in {"v2", "v3"}:
+    if version not in MODEL_VERSIONS:
         raise ValueError(f"Unsupported MODEL_VERSION {version!r}; expected 'v2' or 'v3'.")
     return version
 
 
 def prediction_feature_table_path() -> Path:
-    suffix = "_v3" if configured_model_version() == "v3" else ""
-    return env_path(
-        "PREDICTION_FEATURE_TABLE_PATH",
-        f"data/features/match_pre_match_features{suffix}.csv",
-    )
+    defaults = default_artifact_paths(configured_model_version())
+    return env_path("PREDICTION_FEATURE_TABLE_PATH", str(defaults.prediction_features))
 
 
 def training_feature_table_path() -> Path:
-    suffix = "_v3" if configured_model_version() == "v3" else ""
-    return env_path(
-        "TRAINING_FEATURE_TABLE_PATH",
-        f"data/features/all_match_pre_match_features{suffix}.csv",
-    )
+    defaults = default_artifact_paths(configured_model_version())
+    return env_path("TRAINING_FEATURE_TABLE_PATH", str(defaults.training_features))
 
 
 def bootstrap_runtime_assets_enabled() -> bool:
@@ -75,6 +70,7 @@ def load_cached_dashboard(cache_path: Path) -> dict[str, Any]:
 
 def inference_paths() -> InferencePaths:
     version = configured_model_version()
+    defaults = default_artifact_paths(version)
     data_dir = env_path("DATA_DIR", "data")
     configured_bundle = os.getenv("MODEL_BUNDLE_PATH")
     bundle_path = Path(configured_bundle) if configured_bundle else None
@@ -86,8 +82,8 @@ def inference_paths() -> InferencePaths:
         players_path=env_path("PLAYERS_PATH", "data/players.csv"),
         playerstats_path=env_path("PLAYERSTATS_PATH", "data/playerstats.csv"),
         playermatchstats_path=env_path("PLAYERMATCHSTATS_PATH", "data/playermatchstats.csv"),
-        model_path=env_path("MODEL_PATH", f"data/models/model_{version}.json"),
-        metrics_path=env_path("METRICS_PATH", f"data/models/model_{version}_metrics.json"),
+        model_path=env_path("MODEL_PATH", str(defaults.model)),
+        metrics_path=env_path("METRICS_PATH", str(defaults.metrics)),
         prediction_feature_table_path=prediction_feature_table_path(),
         bundle_path=bundle_path,
         ledger_path=env_path("PREDICTION_LEDGER_PATH", "data/predictions_ledger.json"),
