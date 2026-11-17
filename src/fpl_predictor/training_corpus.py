@@ -9,6 +9,7 @@ from typing import Any
 
 import pandas as pd
 
+from fpl_predictor import historical_ingestion
 from fpl_predictor.historical_ingestion import canonical_team_key
 
 FCI_SOURCE = "fpl-core-insights"
@@ -220,6 +221,24 @@ def build_training_corpus(
         seasons=int(combined["source_season"].nunique()),
         built_at_utc=datetime.now(UTC).isoformat(),
     )
+
+
+def build_v3_training_corpus(data_dir: Path, fci_matches_path: Path) -> Path:
+    """Rebuild the historical table from the committed snapshot and merge in recent matches."""
+    historical_dir = data_dir / "historical"
+    historical_path = historical_dir / "football_data_premier_league.csv"
+    historical_ingestion.sync_football_data_history(
+        raw_dir=historical_dir / "football-data" / "raw",
+        output_path=historical_path,
+        offline=True,
+    )
+    corpus = build_training_corpus(
+        fci_matches_path=fci_matches_path,
+        historical_path=historical_path,
+        output_path=data_dir / "matches_training.csv",
+        data_dir=data_dir,
+    )
+    return Path(corpus.output_path)
 
 
 def parse_args() -> argparse.Namespace:

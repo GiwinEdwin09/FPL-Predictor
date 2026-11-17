@@ -447,3 +447,52 @@ def test_historical_rows_can_warm_ratings_without_being_emitted() -> None:
     assert row["home_current_elo"] != 1500
     assert row["home_pi_rating"] != 0
 
+
+
+def _cup_or_league_match(match_id: str, kickoff: str, home, away, home_xg: float, away_xg: float, **overrides) -> dict:
+    return {
+        "match_id": match_id,
+        "source_season": "2025-2026",
+        "source_gameweek": 1,
+        "tournament": "prem",
+        "gameweek": 1,
+        "kickoff_time": kickoff,
+        "finished": True,
+        "home_team": home,
+        "away_team": away,
+        "home_score": 1,
+        "away_score": 0,
+        "home_expected_goals_xg": home_xg,
+        "away_expected_goals_xg": away_xg,
+        "home_shots_on_target": 4,
+        "away_shots_on_target": 2,
+        "home_big_chances": 1,
+        "away_big_chances": 0,
+        "home_tackles_won": 9,
+        "away_tackles_won": 8,
+        **overrides,
+    }
+
+
+def test_opponents_without_a_team_id_do_not_share_or_leak_history() -> None:
+    # Two different lower-league clubs host cup ties; neither has a team id upstream.
+    matches = pd.DataFrame(
+        [
+            _cup_or_league_match("cup-1", "2025-08-26 19:00:00", None, 1, 3.0, 0.5, tournament="efl-cup"),
+            _cup_or_league_match("cup-2", "2025-09-23 19:00:00", None, 2, 2.5, 0.4, tournament="efl-cup"),
+            _cup_or_league_match("league-1", "2025-09-27 15:00:00", 1, 2, 1.1, 0.9, finished=False),
+        ]
+    )
+
+    features = build_pre_match_feature_table(matches, competition_scope="all").set_index("match_id")
+
+    # The second unknown host is a fresh, default-rated side with no form window.
+    assert features.loc["cup-2", "home_last5_matches"] == 0
+    assert features.loc["cup-2", "home_current_elo"] == 1500.0
+    assert math.isnan(features.loc["cup-2", "home_days_rest"])
+    # Each visiting club keeps exactly one entry, from its own side of the match.
+    assert features.loc["league-1", "home_last5_matches"] == 1
+    assert features.loc["league-1", "home_last5_avg_xg"] == 0.5
+    assert features.loc["league-1", "home_last5_avg_xga"] == 3.0
+    assert features.loc["league-1", "away_last5_matches"] == 1
+    assert features.loc["league-1", "away_last5_avg_xg"] == 0.4

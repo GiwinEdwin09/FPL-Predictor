@@ -6,7 +6,7 @@ from pathlib import Path
 from fpl_predictor.data_ingestion import run_sync
 from fpl_predictor.feature_factory import build_feature_table
 from fpl_predictor.live_inference import InferencePaths
-from fpl_predictor.model_bundle import load_model_bundle
+from fpl_predictor.model_bundle import MODEL_VERSIONS, default_artifact_paths, load_model_bundle
 from fpl_predictor.model_training import train_and_save_model
 from fpl_predictor.web_dashboard import export_dashboard
 
@@ -45,7 +45,7 @@ def ensure_runtime_assets(
     model_version: str = "v2",
     reuse_existing_bundle: bool = False,
 ) -> bool:
-    if model_version not in {"v2", "v3"}:
+    if model_version not in MODEL_VERSIONS:
         raise ValueError(f"Unsupported model_version {model_version!r}; expected 'v2' or 'v3'.")
     missing = missing_runtime_paths(paths)
     if not missing and not force_sync:
@@ -72,23 +72,9 @@ def ensure_runtime_assets(
     include_historical_rows = True
     team_key_lookup = None
     if model_version == "v3":
-        from fpl_predictor.historical_ingestion import sync_football_data_history
-        from fpl_predictor.training_corpus import build_training_corpus, load_team_key_lookup
+        from fpl_predictor.training_corpus import build_v3_training_corpus, load_team_key_lookup
 
-        historical_dir = paths.data_dir / "historical"
-        historical_path = historical_dir / "football_data_premier_league.csv"
-        sync_football_data_history(
-            raw_dir=historical_dir / "football-data" / "raw",
-            output_path=historical_path,
-            offline=True,
-        )
-        corpus = build_training_corpus(
-            fci_matches_path=paths.matches_path,
-            historical_path=historical_path,
-            output_path=paths.data_dir / "matches_training.csv",
-            data_dir=paths.data_dir,
-        )
-        feature_matches_path = Path(corpus.output_path)
+        feature_matches_path = build_v3_training_corpus(paths.data_dir, paths.matches_path)
         include_historical_rows = False
         team_key_lookup = load_team_key_lookup(paths.data_dir)
     build_feature_table(
@@ -159,19 +145,11 @@ def parse_args() -> argparse.Namespace:
 
 def main() -> None:
     args = parse_args()
-    suffix = "_v3" if args.model_version == "v3" else ""
-    model_path = Path(args.model_path or f"data/models/model_{args.model_version}.json")
-    metrics_path = Path(
-        args.metrics_path or f"data/models/model_{args.model_version}_metrics.json"
-    )
-    prediction_feature_table_path = Path(
-        args.prediction_feature_table_path
-        or f"data/features/match_pre_match_features{suffix}.csv"
-    )
-    training_feature_table_path = Path(
-        args.training_feature_table_path
-        or f"data/features/all_match_pre_match_features{suffix}.csv"
-    )
+    defaults = default_artifact_paths(args.model_version)
+    model_path = Path(args.model_path or defaults.model)
+    metrics_path = Path(args.metrics_path or defaults.metrics)
+    prediction_feature_table_path = Path(args.prediction_feature_table_path or defaults.prediction_features)
+    training_feature_table_path = Path(args.training_feature_table_path or defaults.training_features)
     bundle_path = Path(args.bundle_path) if args.bundle_path else None
     if args.model_version == "v3" and bundle_path is None:
         bundle_path = model_path.with_name(f"{model_path.stem}_bundle.json")

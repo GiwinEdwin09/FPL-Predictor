@@ -86,7 +86,9 @@ V3_FEATURE_COLUMNS = (
     "last5_avg_big_chances_diff",
     "last5_clean_sheet_rate_diff",
 )
+VALIDATION_SEASON = "2025-2026"
 VALIDATION_WINDOW_DAYS = 28
+VALIDATION_FALLBACK_GAMEWEEKS = 3
 CALIBRATION_WINDOW_DAYS = 21
 TEMPERATURE_GRID = np.linspace(1.0, 5.0, 41)
 COMPETITION_WEIGHTS = {
@@ -239,55 +241,46 @@ def load_training_frame(training_feature_table_path: Path) -> pd.DataFrame:
     ).reset_index(drop=True)
 
 
-def split_train_validation(frame: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFrame, SplitSummary]:
-    premier_league_rows = frame.loc[is_premier_league_frame(frame)].copy()
-    finished_2025 = premier_league_rows.loc[premier_league_rows["source_season"] == "2025-2026"].copy()
-    if finished_2025.empty:
-        raise ValueError("No finished 2025-2026 Premier League matches available for validation.")
+def _gameweek_split_masks(
+    frame: pd.DataFrame,
+    season_rows: pd.DataFrame,
+    season: str,
+) -> tuple[pd.Series, pd.Series]:
+    """Hold out the season's last gameweeks when kickoff times cannot define the split."""
+    gameweek_floor = season_rows["_ordering_gameweek"].max() - VALIDATION_FALLBACK_GAMEWEEKS
+    in_season = frame["source_season"] == season
+    validation_mask = is_premier_league_frame(frame) & in_season & (frame["_ordering_gameweek"] >= gameweek_floor)
+    train_mask = ~in_season | (frame["_ordering_gameweek"] < gameweek_floor)
+    return validation_mask, train_mask
 
-    latest_finished_kickoff = finished_2025["kickoff_time"].dropna().max()
-    if pd.isna(latest_finished_kickoff):
-        latest_finished_kickoff = pd.NaT
 
+def split_train_validation(
+    frame: pd.DataFrame,
+    validation_season: str = VALIDATION_SEASON,
+) -> tuple[pd.DataFrame, pd.DataFrame, SplitSummary]:
+    """Hold out the final weeks of ``validation_season``'s Premier League matches."""
+    premier_league = is_premier_league_frame(frame)
+    in_season = frame["source_season"] == validation_season
+    season_rows = frame.loc[premier_league & in_season]
+    if season_rows.empty:
+        raise ValueError(f"No finished {validation_season} Premier League matches available for validation.")
+
+    latest_finished_kickoff = season_rows["kickoff_time"].dropna().max()
+    validation_cutoff = pd.NaT
+    validation_mask = pd.Series(False, index=frame.index)
     if pd.notna(latest_finished_kickoff):
         validation_cutoff = latest_finished_kickoff - timedelta(days=VALIDATION_WINDOW_DAYS)
-        validation_mask = is_premier_league_frame(frame) & (
-            (frame["source_season"] == "2025-2026")
-            & frame["kickoff_time"].notna()
-            & (frame["kickoff_time"] >= validation_cutoff)
-        )
+        has_kickoff = frame["kickoff_time"].notna()
+        validation_mask = premier_league & in_season & has_kickoff & (frame["kickoff_time"] >= validation_cutoff)
         validation_rows = frame.loc[validation_mask]
         validation_gw_floor = validation_rows["_ordering_gameweek"].min() if not validation_rows.empty else np.nan
-        train_mask = (
-            frame["kickoff_time"].notna() & (frame["kickoff_time"] < validation_cutoff)
-        ) | (
-            frame["kickoff_time"].isna() & (frame["_ordering_gameweek"] < validation_gw_floor)
-        )
-    else:
-        validation_cutoff = pd.NaT
-        latest_gw = finished_2025["_ordering_gameweek"].max()
-        validation_gw_floor = latest_gw - 3
-        validation_mask = is_premier_league_frame(frame) & (
-            (frame["source_season"] == "2025-2026")
-            & (frame["_ordering_gameweek"] >= validation_gw_floor)
-        )
-        train_mask = (
-            (frame["source_season"] != "2025-2026")
-            | (frame["_ordering_gameweek"] < validation_gw_floor)
+        train_mask = (has_kickoff & (frame["kickoff_time"] < validation_cutoff)) | (
+            ~has_kickoff & (frame["_ordering_gameweek"] < validation_gw_floor)
         )
 
-    if frame.loc[validation_mask].empty:
-        latest_gw = finished_2025["_ordering_gameweek"].max()
-        validation_gw_floor = latest_gw - 3
-        validation_mask = is_premier_league_frame(frame) & (
-            (frame["source_season"] == "2025-2026")
-            & (frame["_ordering_gameweek"] >= validation_gw_floor)
-        )
-        train_mask = (
-            (frame["source_season"] != "2025-2026")
-            | (frame["_ordering_gameweek"] < validation_gw_floor)
-        )
+    if not validation_mask.any():
         validation_cutoff = pd.NaT
+        validation_mask, train_mask = _gameweek_split_masks(frame, season_rows, validation_season)
 
     validation = frame.loc[validation_mask].copy()
     train = frame.loc[train_mask].copy()

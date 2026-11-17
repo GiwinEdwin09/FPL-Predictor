@@ -3,12 +3,35 @@ from __future__ import annotations
 import hashlib
 import json
 import os
+from dataclasses import dataclass
 from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any, Mapping
 
 BUNDLE_SCHEMA_VERSION = 1
 REQUIRED_COMPONENTS = frozenset({"model", "metrics", "prediction_features", "team_keys"})
+MODEL_VERSIONS = ("v2", "v3")
+
+
+@dataclass(frozen=True)
+class ArtifactPaths:
+    prediction_features: Path
+    training_features: Path
+    model: Path
+    metrics: Path
+
+
+def default_artifact_paths(model_version: str) -> ArtifactPaths:
+    """Where each model version keeps its feature tables and trained model by default."""
+    if model_version not in MODEL_VERSIONS:
+        raise ValueError(f"Unsupported model_version {model_version!r}; expected 'v2' or 'v3'.")
+    suffix = "_v3" if model_version == "v3" else ""
+    return ArtifactPaths(
+        prediction_features=Path(f"data/features/match_pre_match_features{suffix}.csv"),
+        training_features=Path(f"data/features/all_match_pre_match_features{suffix}.csv"),
+        model=Path(f"data/models/model_{model_version}.json"),
+        metrics=Path(f"data/models/model_{model_version}_metrics.json"),
+    )
 
 
 def sha256_file(path: Path) -> str:

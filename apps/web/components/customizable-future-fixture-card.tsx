@@ -8,7 +8,7 @@ import { PredictionCard } from "@/components/prediction-card";
 import { SaveLineup } from "@/components/save-lineup";
 import { validateScenarioRoster, type SavedScenario } from "@/lib/scenarios";
 import type { UpcomingFixture } from "@/lib/dashboard";
-import type { FixtureLineupContext, FixtureSimulation, LineupPlayer, TeamLineupContext } from "@/lib/lineup";
+import { slotOptions, type FixtureLineupContext, type FixtureSimulation, type LineupPlayer, type TeamLineupContext } from "@/lib/lineup";
 
 type CustomizableFutureFixtureCardProps = {
   fixture: UpcomingFixture;
@@ -51,6 +51,11 @@ function initials(name: string) {
 
 function equalIds(left: number[], right: number[]) {
   return left.length === right.length && left.every((value, index) => value === right[index]);
+}
+
+/** Player ids of the projected XI, in pitch order. */
+function lineupIds(team: TeamLineupContext) {
+  return team.lineup.map((player) => player.playerId);
 }
 
 function playersById(team: TeamLineupContext) {
@@ -106,6 +111,23 @@ function timeoutMessage(kind: "lineup" | "simulation", timeoutMs: number) {
     return `Lineups took longer than ${seconds}s to load. The lineup service is slow right now, so try again in a moment.`;
   }
   return `The updated forecast took longer than ${seconds}s. Try changing the lineup again in a moment.`;
+}
+
+/** Plain-language account of what the chosen XIs did to the forecast. */
+function adjustmentNote(simulation: FixtureSimulation, fixture: UpcomingFixture) {
+  const { homeGoalMultiplier, awayGoalMultiplier, homeAttackRatio, awayAttackRatio, homeDefenceRatio, awayDefenceRatio } =
+    simulation.adjustments;
+  if (typeof homeGoalMultiplier === "number" && typeof awayGoalMultiplier === "number") {
+    if (homeGoalMultiplier === 1 && awayGoalMultiplier === 1) {
+      return "These players have too little recent data to shift the forecast.";
+    }
+    return `Expected goals with your XI: ${fixture.homeTeam.shortName} ×${homeGoalMultiplier.toFixed(2)}, ${
+      fixture.awayTeam.shortName
+    } ×${awayGoalMultiplier.toFixed(2)}. Each lineup effect is capped at ±35%.`;
+  }
+  return `Attack shift: home ${homeAttackRatio ?? "—"}x, away ${awayAttackRatio ?? "—"}x. Defence shift: home ${
+    homeDefenceRatio ?? "—"
+  }x, away ${awayDefenceRatio ?? "—"}x.`;
 }
 
 function DeltaChip({ from, to }: { from: number; to: number }) {
@@ -174,7 +196,7 @@ function LineupControls({
           <p className="eyebrow">{team.team.name}</p>
           <h3>Customise XI</h3>
         </div>
-        <span className="lineup-controls-note">Swap in any player from the current roster snapshot.</span>
+        <span className="lineup-controls-note">Swap in any squad player. Goalkeepers stay in goal.</span>
       </div>
 
       <div className="lineup-controls-list">
@@ -193,7 +215,7 @@ function LineupControls({
                 onChange(nextIds);
               }}
             >
-              {team.roster.map((option) => {
+              {slotOptions(team.roster, player).map((option) => {
                 const selectedElsewhere = selectedIds.includes(option.playerId) && option.playerId !== selectedIds[index];
                 return (
                   <option key={option.playerId} value={option.playerId} disabled={selectedElsewhere}>
@@ -227,8 +249,8 @@ export function CustomizableFutureFixtureCard({
 
   function applyContext(payload: FixtureLineupContext) {
     setContext(payload);
-    let home = payload.home.lineup.map((player) => player.playerId);
-    let away = payload.away.lineup.map((player) => player.playerId);
+    let home = lineupIds(payload.home);
+    let away = lineupIds(payload.away);
     if (initialScenario) {
       try {
         validateScenarioRoster({ id: initialScenario.id, name: initialScenario.name, season: initialScenario.season,
@@ -299,9 +321,7 @@ export function CustomizableFutureFixtureCard({
       return;
     }
 
-    const baselineHome = context.home.lineup.map((player) => player.playerId);
-    const baselineAway = context.away.lineup.map((player) => player.playerId);
-    if (equalIds(homeSelectedIds, baselineHome) && equalIds(awaySelectedIds, baselineAway)) {
+    if (equalIds(homeSelectedIds, lineupIds(context.home)) && equalIds(awaySelectedIds, lineupIds(context.away))) {
       setSimulation(null);
       setSimulating(false);
       return;
@@ -388,13 +408,13 @@ export function CustomizableFutureFixtureCard({
               type="button"
               className="lineup-reset-button"
               onClick={() => {
-                setHomeSelectedIds(context.home.lineup.map((player) => player.playerId));
-                setAwaySelectedIds(context.away.lineup.map((player) => player.playerId));
+                setHomeSelectedIds(lineupIds(context.home));
+                setAwaySelectedIds(lineupIds(context.away));
                 setSimulation(null);
               }}
               disabled={
-                equalIds(homeSelectedIds, context.home.lineup.map((player) => player.playerId))
-                && equalIds(awaySelectedIds, context.away.lineup.map((player) => player.playerId))
+                equalIds(homeSelectedIds, lineupIds(context.home))
+                && equalIds(awaySelectedIds, lineupIds(context.away))
               }
             >
               Reset XI
@@ -494,12 +514,7 @@ export function CustomizableFutureFixtureCard({
                   ))}
                 </div>
                 {simulation ? (
-                  <p className="simulation-adjustment-note">
-                    Attack shift: home {simulation.adjustments.homeAttackRatio ?? "—"}x, away{" "}
-                    {simulation.adjustments.awayAttackRatio ?? "—"}x. Defence shift: home{" "}
-                    {simulation.adjustments.homeDefenceRatio ?? "—"}x, away{" "}
-                    {simulation.adjustments.awayDefenceRatio ?? "—"}x.
-                  </p>
+                  <p className="simulation-adjustment-note">{adjustmentNote(simulation, fixture)}</p>
                 ) : null}
               </div>
 

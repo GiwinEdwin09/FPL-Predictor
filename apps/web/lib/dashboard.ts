@@ -15,6 +15,9 @@ export type FixtureProbabilities = {
   awayWin: number;
 };
 
+/** How a stored forecast was produced: locked before kickoff, or scored after the fact. */
+export type PredictionType = "pre_kickoff" | "backfill_walk_forward" | "replay";
+
 export type UpcomingFixture = {
   matchId: string;
   season: string;
@@ -28,7 +31,7 @@ export type UpcomingFixture = {
   homeTeam: TeamSummary;
   awayTeam: TeamSummary;
   probabilities: FixtureProbabilities;
-  predictionType?: "pre_kickoff" | "backfill_walk_forward" | "replay" | null;
+  predictionType?: PredictionType | null;
   context: {
     homeElo: number | null;
     awayElo: number | null;
@@ -69,7 +72,7 @@ export type HistoricalMatch = {
     awayLast5Xg: number | null;
   };
   probabilities: FixtureProbabilities | null;
-  predictionType?: "pre_kickoff" | "backfill_walk_forward" | "replay" | null;
+  predictionType?: PredictionType | null;
   matchUrl: string | null;
 };
 
