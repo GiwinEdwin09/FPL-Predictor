@@ -1,14 +1,28 @@
 "use client";
 
-import { formatPercent } from "@/lib/format";
+import { useEffect, useId, useMemo, useRef, useState } from "react";
 
-import { useEffect, useMemo, useRef, useState } from "react";
-
-import { PredictionCard } from "@/components/prediction-card";
+import { FixtureModal } from "@/components/fixture-modal";
+import { LineupPitch, type PitchSelection } from "@/components/lineup-pitch";
+import { PredictionCard, WhyThisPrediction } from "@/components/prediction-card";
 import { SaveLineup } from "@/components/save-lineup";
-import { validateScenarioRoster, type SavedScenario } from "@/lib/scenarios";
+import { ModelVerdict } from "@/components/ui/badges";
+import { TeamCrest } from "@/components/ui/crest";
+import { LocalTime } from "@/components/ui/local-time";
+import { ProbabilityBar } from "@/components/ui/probability-bar";
 import type { UpcomingFixture } from "@/lib/dashboard";
-import { slotOptions, type FixtureLineupContext, type FixtureSimulation, type LineupPlayer, type TeamLineupContext } from "@/lib/lineup";
+import { clubKit } from "@/lib/kits";
+import type { FixtureLineupContext, FixtureSimulation, LineupPlayer, TeamLineupContext } from "@/lib/lineup";
+import {
+  LINES,
+  buildFormation,
+  formationIds,
+  formationLabel,
+  lineupKey,
+  sameEleven,
+  type Formation,
+} from "@/lib/pitch";
+import { validateScenarioRoster, type SavedScenario } from "@/lib/scenarios";
 
 type CustomizableFutureFixtureCardProps = {
   fixture: UpcomingFixture;
@@ -16,71 +30,17 @@ type CustomizableFutureFixtureCardProps = {
   highlighted?: boolean;
 };
 
-type PositionBucket = "goalkeeper" | "defender" | "midfielder" | "forward" | "unknown";
+type Side = "home" | "away";
+type Formations = Record<Side, Formation>;
 
-const POSITION_ROWS: PositionBucket[] = ["goalkeeper", "defender", "midfielder", "forward"];
+const SIDES: readonly Side[] = ["home", "away"];
 const LINEUP_CONTEXT_TIMEOUT_MS = 20000;
 const SIMULATION_TIMEOUT_MS = 15000;
+/** Quick successive changes send one forecast request, not one each. */
+const SIMULATION_DEBOUNCE_MS = 250;
+/** After a fixture link scrolls the row into view, wait a beat so the box visibly comes out of it. */
+const LINK_OPEN_DELAY_MS = 450;
 const lineupContextCache = new Map<string, FixtureLineupContext>();
-
-function bucketPosition(position: string | null | undefined): PositionBucket {
-  const normalized = (position ?? "").trim().toLowerCase();
-  if (normalized.startsWith("goal")) {
-    return "goalkeeper";
-  }
-  if (normalized.startsWith("def")) {
-    return "defender";
-  }
-  if (normalized.startsWith("mid")) {
-    return "midfielder";
-  }
-  if (normalized.startsWith("for")) {
-    return "forward";
-  }
-  return "unknown";
-}
-
-function initials(name: string) {
-  return name
-    .split(/\s+/)
-    .filter(Boolean)
-    .slice(0, 2)
-    .map((part) => part[0]?.toUpperCase() ?? "")
-    .join("");
-}
-
-function equalIds(left: number[], right: number[]) {
-  return left.length === right.length && left.every((value, index) => value === right[index]);
-}
-
-/** Player ids of the projected XI, in pitch order. */
-function lineupIds(team: TeamLineupContext) {
-  return team.lineup.map((player) => player.playerId);
-}
-
-function playersById(team: TeamLineupContext) {
-  return new Map(team.roster.map((player) => [player.playerId, player] as const));
-}
-
-function selectedPlayers(team: TeamLineupContext, selectedIds: number[]) {
-  const map = playersById(team);
-  return selectedIds.map((playerId) => map.get(playerId)).filter((player): player is LineupPlayer => player !== undefined);
-}
-
-function groupedPlayers(players: LineupPlayer[]) {
-  const groups = new Map<PositionBucket, LineupPlayer[]>();
-  POSITION_ROWS.forEach((bucket) => groups.set(bucket, []));
-  groups.set("unknown", []);
-
-  for (const player of players) {
-    const bucket = bucketPosition(player.position);
-    const current = groups.get(bucket) ?? [];
-    current.push(player);
-    groups.set(bucket, current);
-  }
-
-  return groups;
-}
 
 function fetchWithTimeout(input: RequestInfo | URL, init: RequestInit, timeoutMs: number) {
   const controller = new AbortController();
@@ -133,7 +93,7 @@ function adjustmentNote(simulation: FixtureSimulation, fixture: UpcomingFixture)
 function DeltaChip({ from, to }: { from: number; to: number }) {
   const diffPp = Math.round((to - from) * 100);
   if (diffPp === 0) {
-    return null;
+    return <span className="delta-chip delta-flat">±0pp</span>;
   }
   const up = diffPp > 0;
   return (
@@ -144,90 +104,46 @@ function DeltaChip({ from, to }: { from: number; to: number }) {
   );
 }
 
-function PitchMap({
-  title,
-  players,
-}: {
-  title: string;
-  players: LineupPlayer[];
-}) {
-  const groups = groupedPlayers(players);
+function defaultFormation(team: TeamLineupContext) {
+  return buildFormation(team.lineup);
+}
 
-  return (
-    <section className="lineup-pitch-card">
-      <p className="eyebrow">{title}</p>
-      <div className="lineup-pitch">
-        {POSITION_ROWS.map((bucket) => {
-          const rowPlayers = groups.get(bucket) ?? [];
-          return (
-            <div key={bucket} className="pitch-row">
-              <span className="pitch-row-label">{bucket}</span>
-              <div className="pitch-row-players">
-                {rowPlayers.map((player) => (
-                  <div key={player.playerId} className="pitch-marker">
-                    <strong>{initials(player.name)}</strong>
-                    <span>{player.name}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          );
-        })}
-      </div>
-    </section>
+function formationFor(team: TeamLineupContext, playerIds: number[]): Formation {
+  const byId = new Map(team.roster.map((player) => [player.playerId, player] as const));
+  for (const player of team.lineup) byId.set(player.playerId, player);
+  const players = playerIds.map((playerId) => byId.get(playerId)).filter((player): player is LineupPlayer => !!player);
+  return buildFormation(players);
+}
+
+function sameShape(left: Formation, right: Formation) {
+  return LINES.every(
+    (line) => left[line].length === right[line].length && left[line].every((id, index) => right[line][index] === id),
   );
 }
 
-function LineupControls({
-  team,
-  selectedIds,
-  onChange,
-}: {
-  team: TeamLineupContext;
-  selectedIds: number[];
-  onChange: (nextIds: number[]) => void;
-}) {
-  const selected = selectedPlayers(team, selectedIds);
-
+function PitchSkeleton() {
   return (
-    <section className="lineup-controls-card">
-      <div className="lineup-controls-header">
-        <div>
-          <p className="eyebrow">{team.team.name}</p>
-          <h3>Customise XI</h3>
+    <div className="pitch-editor pitch-editor-loading" aria-hidden="true">
+      <div className="pitch-stage">
+        <div className="pitch-field">
+          {[20, 44.5, 68.5, 89].map((top, row) => (
+            <div key={top} className="pitch-line" style={{ top: `${top}%` }}>
+              {Array.from({ length: [3, 4, 4, 1][row] }, (_, index) => (
+                <span key={index} className="pitch-token-skeleton" />
+              ))}
+            </div>
+          ))}
         </div>
-        <span className="lineup-controls-note">Swap in any squad player. Goalkeepers stay in goal.</span>
       </div>
-
-      <div className="lineup-controls-list">
-        {selected.map((player, index) => (
-          <label key={`${team.team.id}-${index}`} className="lineup-select-row">
-            <span>
-              <strong>{player.position ?? "Player"}</strong>
-              <small>{player.available ? "Available" : "Risk flagged"}</small>
-            </span>
-            <select
-              value={selectedIds[index]}
-              onChange={(event) => {
-                const nextId = Number(event.target.value);
-                const nextIds = [...selectedIds];
-                nextIds[index] = nextId;
-                onChange(nextIds);
-              }}
-            >
-              {slotOptions(team.roster, player).map((option) => {
-                const selectedElsewhere = selectedIds.includes(option.playerId) && option.playerId !== selectedIds[index];
-                return (
-                  <option key={option.playerId} value={option.playerId} disabled={selectedElsewhere}>
-                    {option.name} · {option.position ?? "Player"} · form {option.form ?? 0}
-                  </option>
-                );
-              })}
-            </select>
-          </label>
-        ))}
+      <div className="bench-panel skeleton-card">
+        <div className="skeleton-line skeleton-line-title" />
+        <div className="skeleton-line" />
+        <div className="skeleton-line" />
+        <div className="skeleton-line" />
+        <div className="skeleton-line" />
+        <div className="skeleton-line" />
       </div>
-    </section>
+    </div>
   );
 }
 
@@ -237,51 +153,66 @@ export function CustomizableFutureFixtureCard({
   highlighted = false,
 }: CustomizableFutureFixtureCardProps) {
   const cacheKey = `${fixture.season}:${fixture.matchId}`;
+  const titleId = useId();
+  const rowRef = useRef<HTMLElement>(null);
   const [open, setOpen] = useState(Boolean(initialScenario));
   const [context, setContext] = useState<FixtureLineupContext | null>(null);
+  const [formations, setFormations] = useState<Formations | null>(null);
+  const [side, setSide] = useState<Side>("home");
+  const [selection, setSelection] = useState<PitchSelection>(null);
+  const [announcement, setAnnouncement] = useState("");
   const [simulation, setSimulation] = useState<FixtureSimulation | null>(null);
-  const [homeSelectedIds, setHomeSelectedIds] = useState<number[]>([]);
-  const [awaySelectedIds, setAwaySelectedIds] = useState<number[]>([]);
   const [loadingContext, setLoadingContext] = useState(false);
   const [simulating, setSimulating] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const hasPrefetched = useRef(false);
+  const loadingRef = useRef(false);
 
   function applyContext(payload: FixtureLineupContext) {
     setContext(payload);
-    let home = lineupIds(payload.home);
-    let away = lineupIds(payload.away);
+    let home = defaultFormation(payload.home);
+    let away = defaultFormation(payload.away);
     if (initialScenario) {
       try {
-        validateScenarioRoster({ id: initialScenario.id, name: initialScenario.name, season: initialScenario.season,
-          matchId: initialScenario.match_id, homePlayerIds: initialScenario.home_player_ids, awayPlayerIds: initialScenario.away_player_ids }, payload);
-        home = initialScenario.home_player_ids; away = initialScenario.away_player_ids;
+        validateScenarioRoster(
+          {
+            id: initialScenario.id,
+            name: initialScenario.name,
+            season: initialScenario.season,
+            matchId: initialScenario.match_id,
+            homePlayerIds: initialScenario.home_player_ids,
+            awayPlayerIds: initialScenario.away_player_ids,
+          },
+          payload,
+        );
+        home = formationFor(payload.home, initialScenario.home_player_ids);
+        away = formationFor(payload.away, initialScenario.away_player_ids);
       } catch {
-        setError("Some saved players are no longer in this fixture’s squad. The simulator shows the current default XI; your original save is unchanged above.");
+        setError(
+          "Some saved players are no longer in this fixture’s squad. The editor shows the current projected XI; your original save is unchanged.",
+        );
       }
     }
-    setHomeSelectedIds(home); setAwaySelectedIds(away);
+    setFormations({ home, away });
   }
 
   async function ensureContextLoaded() {
-    if (lineupContextCache.has(cacheKey)) {
-      const cached = lineupContextCache.get(cacheKey)!;
+    if (context !== null || loadingRef.current) {
+      return;
+    }
+    const cached = lineupContextCache.get(cacheKey);
+    if (cached) {
       applyContext(cached);
       return;
     }
 
-    if (loadingContext) {
-      return;
-    }
-
+    loadingRef.current = true;
     setLoadingContext(true);
     setError(null);
     try {
       const response = await fetchWithTimeout(
         `/api/fixtures/${fixture.matchId}/lineup-context`,
-        {
-          cache: "no-store",
-        },
+        { cache: "no-store" },
         LINEUP_CONTEXT_TIMEOUT_MS,
       );
       if (!response.ok) {
@@ -297,6 +228,7 @@ export function CustomizableFutureFixtureCard({
         setError(loadError instanceof Error ? loadError.message : "Unable to load lineup context.");
       }
     } finally {
+      loadingRef.current = false;
       setLoadingContext(false);
     }
   }
@@ -309,43 +241,58 @@ export function CustomizableFutureFixtureCard({
   }
 
   useEffect(() => {
-    if (!open || context !== null) {
-      return;
+    if (open && context === null) {
+      void ensureContextLoaded();
     }
-    void ensureContextLoaded();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [context, open]);
 
+  // Arriving from a fixture link: the row scrolls into view, then the box opens out of it.
   useEffect(() => {
-    if (!open || context === null) {
+    if (!highlighted) return;
+    const timer = window.setTimeout(() => setOpen(true), LINK_OPEN_DELAY_MS);
+    return () => window.clearTimeout(timer);
+  }, [highlighted]);
+
+  const homeIds = useMemo(() => (formations ? formationIds(formations.home) : []), [formations]);
+  const awayIds = useMemo(() => (formations ? formationIds(formations.away) : []), [formations]);
+  const defaultIds = useMemo(
+    () => ({
+      home: context ? context.home.lineup.map((player) => player.playerId) : [],
+      away: context ? context.away.lineup.map((player) => player.playerId) : [],
+    }),
+    [context],
+  );
+  const changed = {
+    home: context !== null && !sameEleven(homeIds, defaultIds.home),
+    away: context !== null && !sameEleven(awayIds, defaultIds.away),
+  };
+  const customised = changed.home || changed.away;
+  // Rearranging the same eleven doesn't change the forecast, so only the set of players matters here.
+  const homeKey = lineupKey(homeIds);
+  const awayKey = lineupKey(awayIds);
+
+  useEffect(() => {
+    if (context === null || formations === null) {
       return;
     }
-
-    if (equalIds(homeSelectedIds, lineupIds(context.home)) && equalIds(awaySelectedIds, lineupIds(context.away))) {
+    if (!customised) {
       setSimulation(null);
       setSimulating(false);
       return;
     }
 
     let active = true;
-    async function runSimulation() {
-      setSimulating(true);
-      setSimulation(null);
-      setError(null);
+    setSimulating(true);
+    const timer = window.setTimeout(async () => {
       try {
         const response = await fetchWithTimeout(
           "/api/predict/simulate",
           {
             method: "POST",
             cache: "no-store",
-            headers: {
-              "content-type": "application/json",
-            },
-            body: JSON.stringify({
-              matchId: fixture.matchId,
-              homePlayerIds: homeSelectedIds,
-              awayPlayerIds: awaySelectedIds,
-            }),
+            headers: { "content-type": "application/json" },
+            body: JSON.stringify({ matchId: fixture.matchId, homePlayerIds: homeIds, awayPlayerIds: awayIds }),
           },
           SIMULATION_TIMEOUT_MS,
         );
@@ -353,7 +300,10 @@ export function CustomizableFutureFixtureCard({
           throw new Error(`Failed to simulate lineup (${response.status}).`);
         }
         const payload = (await response.json()) as FixtureSimulation;
-        if (active) setSimulation(payload);
+        if (active) {
+          setSimulation(payload);
+          setError(null);
+        }
       } catch (simulationError) {
         if (!active) return;
         if (simulationError instanceof DOMException && simulationError.name === "TimeoutError") {
@@ -364,173 +314,231 @@ export function CustomizableFutureFixtureCard({
       } finally {
         if (active) setSimulating(false);
       }
-    }
+    }, SIMULATION_DEBOUNCE_MS);
 
-    void runSimulation();
-    return () => { active = false; };
+    return () => {
+      active = false;
+      window.clearTimeout(timer);
+    };
+    // Keyed on the sets of players, not their order or pitch positions.
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [awaySelectedIds, context, fixture.matchId, homeSelectedIds, open]);
+  }, [homeKey, awayKey, context, fixture.matchId]);
 
-  const activeProbabilities = useMemo(
-    () => simulation?.simulatedMatch.probabilities ?? fixture.probabilities,
-    [fixture.probabilities, simulation],
-  );
-  const homePlayers = useMemo(
-    () => (context ? selectedPlayers(context.home, homeSelectedIds) : []),
-    [context, homeSelectedIds],
-  );
-  const awayPlayers = useMemo(
-    () => (context ? selectedPlayers(context.away, awaySelectedIds) : []),
-    [awaySelectedIds, context],
-  );
+  // A stale result from a previous XI shouldn't colour the forecast once we're back to the projected one.
+  const activeSimulation = customised ? simulation : null;
+  const activeProbabilities = activeSimulation?.simulatedMatch.probabilities ?? fixture.probabilities;
+
+  function updateFormation(target: Side, next: Formation, message: string) {
+    setFormations((current) => (current ? { ...current, [target]: next } : current));
+    setAnnouncement(message);
+  }
+
+  function resetSide(target: Side) {
+    if (!context) return;
+    setSelection(null);
+    updateFormation(target, defaultFormation(context[target]), `${context[target].team.name} back to the projected XI.`);
+  }
+
+  function resetAll() {
+    if (!context) return;
+    setSelection(null);
+    setFormations({ home: defaultFormation(context.home), away: defaultFormation(context.away) });
+    setAnnouncement("Both teams back to their projected XIs.");
+  }
+
+  function switchSide(next: Side) {
+    setSide(next);
+    setSelection(null);
+  }
+
+  const { homeTeam, awayTeam } = fixture;
+  const activeTeam = context?.[side] ?? null;
+  const activeFormation = formations?.[side] ?? null;
+  const shapeChanged =
+    context !== null && activeFormation !== null && !sameShape(activeFormation, defaultFormation(context[side]));
 
   return (
     <PredictionCard
       fixture={fixture}
       probabilitiesOverride={activeProbabilities}
       highlighted={highlighted}
-      defaultOpen={Boolean(initialScenario)}
+      articleRef={rowRef}
+      onIntent={prefetchContext}
+      onOpenDetails={() => {
+        hasPrefetched.current = true;
+        setOpen(true);
+      }}
+      tag={customised ? <span className="custom-xi-tag">Your XI</span> : null}
     >
-      <div className="fixture-actions">
-        <div>
-          <strong>Lineup simulator</strong>
-          <p>
-            {open
-              ? simulation
-                ? "The probabilities above now reflect your XI."
-                : "Swap players below and the forecast updates automatically."
-              : "Change either starting XI and see how the forecast moves."}
-          </p>
-        </div>
-        <div className="fixture-action-buttons">
-          {context ? (
-            <button
-              type="button"
-              className="lineup-reset-button"
-              onClick={() => {
-                setHomeSelectedIds(lineupIds(context.home));
-                setAwaySelectedIds(lineupIds(context.away));
-                setSimulation(null);
-              }}
-              disabled={
-                equalIds(homeSelectedIds, lineupIds(context.home))
-                && equalIds(awaySelectedIds, lineupIds(context.away))
-              }
-            >
-              Reset XI
-            </button>
-          ) : null}
-          <button
-            type="button"
-            className="lineup-toggle-button"
-            onMouseEnter={prefetchContext}
-            onFocus={prefetchContext}
-            onClick={() => {
-              hasPrefetched.current = true;
-              setOpen((current) => !current);
-              if (context === null) {
-                void ensureContextLoaded();
-              }
-            }}
-          >
-            {open ? "Close lineups" : "Edit lineups"}
-          </button>
-        </div>
-      </div>
-
       {open ? (
-        <section className="lineup-builder-shell">
-          {loadingContext && context === null ? (
-            <>
-              <p className="lineup-status">Loading projected lineups…</p>
-              <div className="lineup-builder-grid">
-                <div className="lineup-column">
-                  <section className="lineup-pitch-card skeleton-card">
-                    <div className="skeleton-line skeleton-line-title" />
-                    <div className="lineup-pitch lineup-pitch-skeleton">
-                      <div className="skeleton-pill-row">
-                        <span className="skeleton-pill" />
-                        <span className="skeleton-pill" />
-                        <span className="skeleton-pill" />
-                      </div>
-                      <div className="skeleton-pill-row">
-                        <span className="skeleton-pill" />
-                        <span className="skeleton-pill" />
-                        <span className="skeleton-pill" />
-                        <span className="skeleton-pill" />
-                      </div>
-                      <div className="skeleton-pill-row">
-                        <span className="skeleton-pill" />
-                        <span className="skeleton-pill" />
-                        <span className="skeleton-pill" />
-                      </div>
-                    </div>
-                  </section>
-                </div>
-                <div className="lineup-column">
-                  <section className="lineup-controls-card skeleton-card">
-                    <div className="skeleton-line skeleton-line-title" />
-                    <div className="skeleton-line" />
-                    <div className="skeleton-line" />
-                    <div className="skeleton-line" />
-                    <div className="skeleton-line" />
-                  </section>
-                </div>
+        <FixtureModal
+          originRef={rowRef}
+          labelledBy={titleId}
+          onClose={() => {
+            setOpen(false);
+            setSelection(null);
+            // Back to the row it came from, including when a fixture link opened it.
+            requestAnimationFrame(() => rowRef.current?.querySelector<HTMLElement>(".fixture-row-toggle")?.focus());
+          }}
+          onEscape={() => {
+            if (selection === null) return false;
+            setSelection(null);
+            return true;
+          }}
+        >
+          <header className="match-modal-head">
+            <p className="match-modal-kicker">
+              Matchweek {fixture.gameweek ?? "—"} · <LocalTime value={fixture.kickoffTime} withZone />
+            </p>
+            <h2 id={titleId} className="match-modal-title">
+              <span className="match-modal-team">
+                <TeamCrest name={homeTeam.name} badgePath={homeTeam.badgePath} size={36} />
+                <span>{homeTeam.name}</span>
+              </span>
+              <span className="match-modal-vs">vs</span>
+              <span className="match-modal-team match-modal-team-away">
+                <span>{awayTeam.name}</span>
+                <TeamCrest name={awayTeam.name} badgePath={awayTeam.badgePath} size={36} />
+              </span>
+            </h2>
+
+            <div className="match-modal-forecast">
+              <div className="match-modal-forecast-top">
+                <span className="match-modal-forecast-label">
+                  {customised ? "Forecast with your XIs" : "Model forecast"}
+                </span>
+                <span className={`forecast-status${simulating ? " is-updating" : ""}`} role="status">
+                  {simulating ? "Updating…" : customised ? "Your XI" : "Projected XI"}
+                </span>
+                <ModelVerdict
+                  probabilities={activeProbabilities}
+                  homeShort={homeTeam.shortName}
+                  awayShort={awayTeam.shortName}
+                />
               </div>
-            </>
-          ) : null}
-
-          {simulating ? <p className="lineup-status">Updating your forecast…</p> : null}
-          {error ? <p className="lineup-error">{error}</p> : null}
-
-          {context ? (
-            <>
-              <SaveLineup fixture={fixture} homePlayerIds={homeSelectedIds} awayPlayerIds={awaySelectedIds} />
-              <div className="simulation-summary-card">
-                <div className="simulation-summary-topline">
-                  <span>Your forecast</span>
+              <ProbabilityBar
+                probabilities={activeProbabilities}
+                homeShort={homeTeam.shortName}
+                awayShort={awayTeam.shortName}
+                size="sm"
+              />
+              {activeSimulation ? (
+                <div className="match-modal-deltas">
+                  <span>vs projected</span>
                   <span>
-                    {simulation ? "Your XI" : "Projected XI"}
-                    {simulating ? " · updating" : ""}
+                    {homeTeam.shortName}{" "}
+                    <DeltaChip from={fixture.probabilities.homeWin} to={activeProbabilities.homeWin} />
+                  </span>
+                  <span>
+                    Draw <DeltaChip from={fixture.probabilities.draw} to={activeProbabilities.draw} />
+                  </span>
+                  <span>
+                    {awayTeam.shortName}{" "}
+                    <DeltaChip from={fixture.probabilities.awayWin} to={activeProbabilities.awayWin} />
                   </span>
                 </div>
-                <div className="simulation-bars">
-                  {(
-                    [
-                      ["HOME", fixture.homeTeam.shortName, fixture.probabilities.homeWin, activeProbabilities.homeWin],
-                      ["DRAW", "Draw", fixture.probabilities.draw, activeProbabilities.draw],
-                      ["AWAY", fixture.awayTeam.shortName, fixture.probabilities.awayWin, activeProbabilities.awayWin],
-                    ] as const
-                  ).map(([slot, label, base, next]) => (
-                    <div key={slot}>
-                      <span>
-                        {label} <DeltaChip from={base} to={next} />
-                      </span>
-                      <strong>
-                        {formatPercent(base)}
-                        {base !== next ? <span style={{ color: "var(--muted)" }}> → {formatPercent(next)}</span> : null}
-                      </strong>
-                    </div>
-                  ))}
+              ) : null}
+            </div>
+          </header>
+
+          <div className="match-modal-body">
+            <section className="match-modal-editor" aria-label="Lineup editor">
+              <div className="editor-toolbar">
+                <div className="team-switch" role="tablist" aria-label="Team to edit">
+                  {SIDES.map((option) => {
+                    const team = option === "home" ? homeTeam : awayTeam;
+                    return (
+                      <button
+                        key={option}
+                        type="button"
+                        role="tab"
+                        aria-selected={side === option}
+                        className={`team-switch-tab${side === option ? " is-active" : ""}`}
+                        onClick={() => switchSide(option)}
+                      >
+                        <TeamCrest name={team.name} badgePath={team.badgePath} size={22} />
+                        <span className="team-switch-name">{team.name}</span>
+                        <span className="team-switch-side">{option === "home" ? "Home" : "Away"}</span>
+                        {changed[option] ? (
+                          <span className="team-switch-dot" title="Edited">
+                            <span className="sr-only">, edited</span>
+                          </span>
+                        ) : null}
+                      </button>
+                    );
+                  })}
                 </div>
-                {simulation ? (
-                  <p className="simulation-adjustment-note">{adjustmentNote(simulation, fixture)}</p>
-                ) : null}
+                <div className="editor-actions">
+                  {activeFormation ? (
+                    <span className="formation-chip" aria-label={`Formation ${formationLabel(activeFormation)}`}>
+                      {formationLabel(activeFormation)}
+                    </span>
+                  ) : null}
+                  <button
+                    type="button"
+                    className="lineup-reset-button"
+                    onClick={() => resetSide(side)}
+                    disabled={!context || (!changed[side] && !shapeChanged)}
+                  >
+                    Reset {side === "home" ? homeTeam.shortName : awayTeam.shortName}
+                  </button>
+                  {customised ? (
+                    <button type="button" className="lineup-reset-button" onClick={resetAll}>
+                      Reset both
+                    </button>
+                  ) : null}
+                </div>
               </div>
 
-              <div className="lineup-builder-grid">
-                <div className="lineup-column">
-                  <PitchMap title={`${context.home.team.shortName} shape`} players={homePlayers} />
-                  <LineupControls team={context.home} selectedIds={homeSelectedIds} onChange={setHomeSelectedIds} />
+              {error ? (
+                <div className="lineup-error" role="alert">
+                  <span>{error}</span>
+                  {context === null && !loadingContext ? (
+                    <button type="button" className="lineup-reset-button" onClick={() => void ensureContextLoaded()}>
+                      Try again
+                    </button>
+                  ) : null}
                 </div>
-                <div className="lineup-column">
-                  <PitchMap title={`${context.away.team.shortName} shape`} players={awayPlayers} />
-                  <LineupControls team={context.away} selectedIds={awaySelectedIds} onChange={setAwaySelectedIds} />
-                </div>
-              </div>
-            </>
-          ) : null}
-        </section>
+              ) : null}
+
+              {activeTeam && activeFormation ? (
+                <LineupPitch
+                  key={side}
+                  team={activeTeam}
+                  kit={clubKit((side === "home" ? homeTeam : awayTeam).badgeSlug, side)}
+                  formation={activeFormation}
+                  defaultIds={defaultIds[side]}
+                  selection={selection}
+                  onSelectionChange={setSelection}
+                  onFormationChange={(next, message) => updateFormation(side, next, message)}
+                  onNotice={setAnnouncement}
+                />
+              ) : context === null && (loadingContext || !error) ? (
+                <>
+                  <p className="lineup-status">Loading projected lineups…</p>
+                  <PitchSkeleton />
+                </>
+              ) : null}
+
+              <p className="editor-announce" role="status" aria-live="polite">
+                {announcement}
+              </p>
+              <p className="editor-hint">
+                Where a player stands is only the picture. The forecast moves when a different player starts.
+              </p>
+            </section>
+
+            <aside className="match-modal-aside">
+              {activeSimulation ? (
+                <p className="simulation-adjustment-note">{adjustmentNote(activeSimulation, fixture)}</p>
+              ) : null}
+              <WhyThisPrediction fixture={fixture} />
+              {context && formations ? (
+                <SaveLineup fixture={fixture} homePlayerIds={homeIds} awayPlayerIds={awayIds} />
+              ) : null}
+            </aside>
+          </div>
+        </FixtureModal>
       ) : null}
     </PredictionCard>
   );
