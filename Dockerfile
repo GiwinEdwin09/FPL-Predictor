@@ -10,7 +10,8 @@ ENV PORT=10000
 ENV DASHBOARD_CACHE_PATH=/tmp/dashboard.json
 ENV MODEL_VERSION=${MODEL_VERSION}
 
-RUN apt-get update && apt-get install -y --no-install-recommends libgomp1 && rm -rf /var/lib/apt/lists/*
+# git lists the upstream data repository when GitHub's anonymous API quota is used up.
+RUN apt-get update && apt-get install -y --no-install-recommends ca-certificates git libgomp1 && rm -rf /var/lib/apt/lists/*
 
 COPY requirements.txt pyproject.toml README.md /app/
 COPY src /app/src

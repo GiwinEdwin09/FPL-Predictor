@@ -3,7 +3,12 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import logging
+import os
 import re
+import shutil
+import subprocess
+import tempfile
 from dataclasses import asdict, dataclass
 from datetime import UTC, datetime
 from io import BytesIO
@@ -28,6 +33,9 @@ TREE_URL = (
 RAW_BASE_URL = (
     f"https://raw.githubusercontent.com/{GITHUB_OWNER}/{GITHUB_REPO}/{GITHUB_BRANCH}"
 )
+GIT_REPOSITORY_URL = f"https://github.com/{GITHUB_OWNER}/{GITHUB_REPO}.git"
+GIT_LISTING_TIMEOUT_SECONDS = 300
+logger = logging.getLogger(__name__)
 
 
 @dataclass(frozen=True)
@@ -92,13 +100,80 @@ def build_raw_url(path: str) -> str:
     return f"{RAW_BASE_URL}/{quote(path, safe='/')}"
 
 
-def fetch_repository_files() -> dict[str, str]:
-    with requests.Session() as session:
-        response = get_with_retries(
-            session,
-            TREE_URL,
-            headers={"Accept": "application/vnd.github+json"},
+def github_api_headers() -> dict[str, str]:
+    headers = {"Accept": "application/vnd.github+json"}
+    # Anonymous API calls share a 60-per-hour quota per IP, and build machines share
+    # IPs with other tenants; a token gets its own, much larger quota.
+    token = os.getenv("GITHUB_TOKEN", "").strip()
+    if token:
+        headers["Authorization"] = f"Bearer {token}"
+    return headers
+
+
+def is_rate_limited(error: requests.HTTPError) -> bool:
+    response = error.response
+    if response is None or response.status_code not in {403, 429}:
+        return False
+    return response.headers.get("x-ratelimit-remaining") == "0" or "rate limit" in str(error).casefold()
+
+
+def parse_git_ls_tree(output: str) -> dict[str, str]:
+    """Blob paths and hashes from `git ls-tree -r -z` output."""
+    files: dict[str, str] = {}
+    for entry in output.split("\0"):
+        if not entry:
+            continue
+        metadata, path = entry.split("\t", 1)
+        _mode, kind, sha = metadata.split()
+        if kind == "blob":
+            files[path] = sha
+    return files
+
+
+def fetch_repository_files_with_git(repository_url: str = GIT_REPOSITORY_URL) -> dict[str, str]:
+    """List the upstream tree over git, which the REST API's rate limit does not cover.
+
+    A blobless, depth-1 clone downloads only the latest commit's trees (about 200 KB),
+    and git reports the same blob hashes as the API.
+    """
+    if shutil.which("git") is None:
+        raise RuntimeError("GitHub's API rate limit was reached and git is not installed for the fallback listing.")
+    environment = {**os.environ, "GIT_TERMINAL_PROMPT": "0"}
+    with tempfile.TemporaryDirectory() as temporary:
+        checkout = os.path.join(temporary, "repository")
+        subprocess.run(
+            [
+                "git", "clone", "--quiet", "--depth", "1", "--filter=blob:none", "--no-checkout",
+                "--branch", GITHUB_BRANCH, repository_url, checkout,
+            ],
+            check=True,
+            capture_output=True,
+            env=environment,
+            timeout=GIT_LISTING_TIMEOUT_SECONDS,
         )
+        listing = subprocess.run(
+            ["git", "-C", checkout, "ls-tree", "-r", "-z", "HEAD"],
+            check=True,
+            capture_output=True,
+            text=True,
+            env=environment,
+            timeout=GIT_LISTING_TIMEOUT_SECONDS,
+        )
+    files = parse_git_ls_tree(listing.stdout)
+    if not files:
+        raise ValueError("The upstream git listing is empty; refusing an incomplete sync.")
+    return files
+
+
+def fetch_repository_files() -> dict[str, str]:
+    try:
+        with requests.Session() as session:
+            response = get_with_retries(session, TREE_URL, headers=github_api_headers())
+    except requests.HTTPError as error:
+        if not is_rate_limited(error):
+            raise
+        logger.warning("GitHub API rate limit reached; listing the upstream tree with git instead: %s", error)
+        return fetch_repository_files_with_git()
     payload = response.json()
     if payload.get("truncated"):
         raise ValueError("Upstream repository tree is truncated; refusing an incomplete sync.")
