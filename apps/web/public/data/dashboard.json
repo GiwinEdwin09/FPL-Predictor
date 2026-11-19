@@ -1,5 +1,5 @@
 {
-  "generatedAtUtc": "2026-11-19T14:37:44.035564+00:00",
+  "generatedAtUtc": "2026-11-19T23:42:10.851165+00:00",
   "currentSeason": "2026-2027",
   "model": {
     "version": "model_v3",
@@ -4327,23 +4327,23 @@
       "predictionType": "pre_kickoff"
     },
     {
-      "matchId": "26-27-prem-afc-bournemouth-vs-ipswich-town",
+      "matchId": "26-27-prem-coventry-city-vs-everton",
       "season": "2026-2027",
       "gameweek": 21,
-      "kickoffTime": "2027-01-16T15:00:00+00:00",
+      "kickoffTime": "2027-01-16T12:30:00+00:00",
       "homeTeam": {
-        "id": 91,
-        "name": "Bournemouth",
-        "shortName": "BOU",
-        "badgeSlug": "bournemouth",
-        "badgePath": "/teams/bournemouth.football-logos.cc.png"
+        "id": 9,
+        "name": "Coventry City",
+        "shortName": "COV",
+        "badgeSlug": "coventry-city",
+        "badgePath": "/teams/coventry-city.football-logos.cc.png"
       },
       "awayTeam": {
-        "id": 40,
-        "name": "Ipswich Town",
-        "shortName": "IPS",
-        "badgeSlug": "ipswich",
-        "badgePath": "/teams/ipswich.football-logos.cc.png"
+        "id": 11,
+        "name": "Everton",
+        "shortName": "EVE",
+        "badgeSlug": "everton",
+        "badgePath": "/teams/everton.football-logos.cc.png"
       },
       "finished": false,
       "score": {
@@ -4351,105 +4351,19 @@
         "away": null
       },
       "probabilities": {
-        "homeWin": 0.6493,
-        "draw": 0.1913,
-        "awayWin": 0.1594
+        "homeWin": 0.3005,
+        "draw": 0.2799,
+        "awayWin": 0.4196
       },
       "context": {
-        "homeElo": 1689.0,
-        "awayElo": 1446.0,
-        "homeDaysRest": 69.04,
-        "awayDaysRest": 69.04,
-        "homeLast5Xg": 2.14,
-        "awayLast5Xg": 1.12,
-        "homeLast5Xga": 1.38,
-        "awayLast5Xga": 2.13,
-        "homeLast5Matches": 5,
-        "awayLast5Matches": 5
-      },
-      "predictionType": "pre_kickoff"
-    },
-    {
-      "matchId": "26-27-prem-aston-villa-vs-manchester-united",
-      "season": "2026-2027",
-      "gameweek": 21,
-      "kickoffTime": "2027-01-16T15:00:00+00:00",
-      "homeTeam": {
-        "id": 7,
-        "name": "Aston Villa",
-        "shortName": "AVL",
-        "badgeSlug": "aston-villa",
-        "badgePath": "/teams/aston-villa.football-logos.cc.png"
-      },
-      "awayTeam": {
-        "id": 1,
-        "name": "Man Utd",
-        "shortName": "MUN",
-        "badgeSlug": "manchester-united",
-        "badgePath": "/teams/manchester-united.football-logos.cc.png"
-      },
-      "finished": false,
-      "score": {
-        "home": null,
-        "away": null
-      },
-      "probabilities": {
-        "homeWin": 0.4425,
-        "draw": 0.2476,
-        "awayWin": 0.3099
-      },
-      "context": {
-        "homeElo": 1673.0,
-        "awayElo": 1616.0,
-        "homeDaysRest": 68.94,
-        "awayDaysRest": 68.94,
-        "homeLast5Xg": 1.54,
-        "awayLast5Xg": 1.94,
-        "homeLast5Xga": 2.38,
-        "awayLast5Xga": 2.34,
-        "homeLast5Matches": 5,
-        "awayLast5Matches": 5
-      },
-      "predictionType": "pre_kickoff"
-    },
-    {
-      "matchId": "26-27-prem-brentford-vs-brighton-hove-albion",
-      "season": "2026-2027",
-      "gameweek": 21,
-      "kickoffTime": "2027-01-16T15:00:00+00:00",
-      "homeTeam": {
-        "id": 94,
-        "name": "Brentford",
-        "shortName": "BRE",
-        "badgeSlug": "brentford",
-        "badgePath": "/teams/brentford.football-logos.cc.png"
-      },
-      "awayTeam": {
-        "id": 36,
-        "name": "Brighton",
-        "shortName": "BHA",
-        "badgeSlug": "brighton",
-        "badgePath": "/teams/brighton.football-logos.cc.png"
-      },
-      "finished": false,
-      "score": {
-        "home": null,
-        "away": null
-      },
-      "probabilities": {
-        "homeWin": 0.3718,
-        "draw": 0.2571,
-        "awayWin": 0.3711
-      },
-      "context": {
-        "homeElo": 1625.0,
-        "awayElo": 1699.0,
-        "homeDaysRest": 69.04,
-        "awayDaysRest": 69.04,
-        "homeLast5Xg": 1.3,
-        "awayLast5Xg": 1.63,
-        "homeLast5Xga": 1.76,
-        "awayLast5Xga": 0.88,
+        "homeElo": 1452.0,
+        "awayElo": 1620.0,
+        "homeDaysRest": 70.69,
+        "awayDaysRest": 70.69,
+        "homeLast5Xg": 0.92,
+        "awayLast5Xg": 1.27,
+        "homeLast5Xga": 1.3,
+        "awayLast5Xga": 1.6,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
       },
@@ -4493,49 +4407,6 @@
         "awayLast5Xg": 1.83,
         "homeLast5Xga": 1.38,
         "awayLast5Xga": 1.27,
-        "homeLast5Matches": 5,
-        "awayLast5Matches": 5
-      },
-      "predictionType": "pre_kickoff"
-    },
-    {
-      "matchId": "26-27-prem-coventry-city-vs-everton",
-      "season": "2026-2027",
-      "gameweek": 21,
-      "kickoffTime": "2027-01-16T15:00:00+00:00",
-      "homeTeam": {
-        "id": 9,
-        "name": "Coventry City",
-        "shortName": "COV",
-        "badgeSlug": "coventry-city",
-        "badgePath": "/teams/coventry-city.football-logos.cc.png"
-      },
-      "awayTeam": {
-        "id": 11,
-        "name": "Everton",
-        "shortName": "EVE",
-        "badgeSlug": "everton",
-        "badgePath": "/teams/everton.football-logos.cc.png"
-      },
-      "finished": false,
-      "score": {
-        "home": null,
-        "away": null
-      },
-      "probabilities": {
-        "homeWin": 0.3005,
-        "draw": 0.2799,
-        "awayWin": 0.4196
-      },
-      "context": {
-        "homeElo": 1452.0,
-        "awayElo": 1620.0,
-        "homeDaysRest": 70.79,
-        "awayDaysRest": 70.79,
-        "homeLast5Xg": 0.92,
-        "awayLast5Xg": 1.27,
-        "homeLast5Xga": 1.3,
-        "awayLast5Xga": 1.6,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
       },
@@ -4714,10 +4585,96 @@
       "predictionType": "pre_kickoff"
     },
     {
+      "matchId": "26-27-prem-aston-villa-vs-manchester-united",
+      "season": "2026-2027",
+      "gameweek": 21,
+      "kickoffTime": "2027-01-16T17:30:00+00:00",
+      "homeTeam": {
+        "id": 7,
+        "name": "Aston Villa",
+        "shortName": "AVL",
+        "badgeSlug": "aston-villa",
+        "badgePath": "/teams/aston-villa.football-logos.cc.png"
+      },
+      "awayTeam": {
+        "id": 1,
+        "name": "Man Utd",
+        "shortName": "MUN",
+        "badgeSlug": "manchester-united",
+        "badgePath": "/teams/manchester-united.football-logos.cc.png"
+      },
+      "finished": false,
+      "score": {
+        "home": null,
+        "away": null
+      },
+      "probabilities": {
+        "homeWin": 0.4425,
+        "draw": 0.2476,
+        "awayWin": 0.3099
+      },
+      "context": {
+        "homeElo": 1673.0,
+        "awayElo": 1616.0,
+        "homeDaysRest": 69.04,
+        "awayDaysRest": 69.04,
+        "homeLast5Xg": 1.54,
+        "awayLast5Xg": 1.94,
+        "homeLast5Xga": 2.38,
+        "awayLast5Xga": 2.34,
+        "homeLast5Matches": 5,
+        "awayLast5Matches": 5
+      },
+      "predictionType": "pre_kickoff"
+    },
+    {
+      "matchId": "26-27-prem-afc-bournemouth-vs-ipswich-town",
+      "season": "2026-2027",
+      "gameweek": 21,
+      "kickoffTime": "2027-01-17T14:00:00+00:00",
+      "homeTeam": {
+        "id": 91,
+        "name": "Bournemouth",
+        "shortName": "BOU",
+        "badgeSlug": "bournemouth",
+        "badgePath": "/teams/bournemouth.football-logos.cc.png"
+      },
+      "awayTeam": {
+        "id": 40,
+        "name": "Ipswich Town",
+        "shortName": "IPS",
+        "badgeSlug": "ipswich",
+        "badgePath": "/teams/ipswich.football-logos.cc.png"
+      },
+      "finished": false,
+      "score": {
+        "home": null,
+        "away": null
+      },
+      "probabilities": {
+        "homeWin": 0.6493,
+        "draw": 0.1913,
+        "awayWin": 0.1594
+      },
+      "context": {
+        "homeElo": 1689.0,
+        "awayElo": 1446.0,
+        "homeDaysRest": 70.0,
+        "awayDaysRest": 70.0,
+        "homeLast5Xg": 2.14,
+        "awayLast5Xg": 1.12,
+        "homeLast5Xga": 1.38,
+        "awayLast5Xga": 2.13,
+        "homeLast5Matches": 5,
+        "awayLast5Matches": 5
+      },
+      "predictionType": "pre_kickoff"
+    },
+    {
       "matchId": "26-27-prem-tottenham-hotspur-vs-leeds-united",
       "season": "2026-2027",
       "gameweek": 21,
-      "kickoffTime": "2027-01-16T15:00:00+00:00",
+      "kickoffTime": "2027-01-17T16:30:00+00:00",
       "homeTeam": {
         "id": 6,
         "name": "Spurs",
@@ -4745,8 +4702,8 @@
       "context": {
         "homeElo": 1552.0,
         "awayElo": 1585.0,
-        "homeDaysRest": 70.1,
-        "awayDaysRest": 70.1,
+        "homeDaysRest": 71.17,
+        "awayDaysRest": 71.17,
         "homeLast5Xg": 1.48,
         "awayLast5Xg": 1.11,
         "homeLast5Xga": 0.83,
@@ -4757,172 +4714,43 @@
       "predictionType": "pre_kickoff"
     },
     {
-      "matchId": "26-27-prem-arsenal-vs-newcastle-united",
+      "matchId": "26-27-prem-brentford-vs-brighton-hove-albion",
       "season": "2026-2027",
-      "gameweek": 22,
-      "kickoffTime": "2027-01-23T15:00:00+00:00",
+      "gameweek": 21,
+      "kickoffTime": "2027-01-18T20:00:00+00:00",
       "homeTeam": {
-        "id": 3,
-        "name": "Arsenal",
-        "shortName": "ARS",
-        "badgeSlug": "arsenal",
-        "badgePath": "/teams/arsenal.football-logos.cc.png"
-      },
-      "awayTeam": {
-        "id": 4,
-        "name": "Newcastle",
-        "shortName": "NEW",
-        "badgeSlug": "newcastle",
-        "badgePath": "/teams/newcastle.football-logos.cc.png"
-      },
-      "finished": false,
-      "score": {
-        "home": null,
-        "away": null
-      },
-      "probabilities": {
-        "homeWin": 0.6494,
-        "draw": 0.2142,
-        "awayWin": 0.1364
-      },
-      "context": {
-        "homeElo": 1850.0,
-        "awayElo": 1595.0,
-        "homeDaysRest": 77.0,
-        "awayDaysRest": 77.0,
-        "homeLast5Xg": 1.5,
-        "awayLast5Xg": 1.33,
-        "homeLast5Xga": 0.87,
-        "awayLast5Xga": 1.57,
-        "homeLast5Matches": 5,
-        "awayLast5Matches": 5
-      },
-      "predictionType": "pre_kickoff"
-    },
-    {
-      "matchId": "26-27-prem-brighton-hove-albion-vs-manchester-city",
-      "season": "2026-2027",
-      "gameweek": 22,
-      "kickoffTime": "2027-01-23T15:00:00+00:00",
-      "homeTeam": {
-        "id": 36,
-        "name": "Brighton",
-        "shortName": "BHA",
-        "badgeSlug": "brighton",
-        "badgePath": "/teams/brighton.football-logos.cc.png"
-      },
-      "awayTeam": {
-        "id": 43,
-        "name": "Man City",
-        "shortName": "MCI",
-        "badgeSlug": "manchester-city",
-        "badgePath": "/teams/manchester-city.football-logos.cc.png"
-      },
-      "finished": false,
-      "score": {
-        "home": null,
-        "away": null
-      },
-      "probabilities": {
-        "homeWin": 0.3141,
-        "draw": 0.2533,
-        "awayWin": 0.4325
-      },
-      "context": {
-        "homeElo": 1699.0,
-        "awayElo": 1765.0,
-        "homeDaysRest": 76.04,
-        "awayDaysRest": 76.9,
-        "homeLast5Xg": 1.63,
-        "awayLast5Xg": 1.64,
-        "homeLast5Xga": 0.88,
-        "awayLast5Xga": 1.11,
-        "homeLast5Matches": 5,
-        "awayLast5Matches": 5
-      },
-      "predictionType": "pre_kickoff"
-    },
-    {
-      "matchId": "26-27-prem-crystal-palace-vs-tottenham-hotspur",
-      "season": "2026-2027",
-      "gameweek": 22,
-      "kickoffTime": "2027-01-23T15:00:00+00:00",
-      "homeTeam": {
-        "id": 31,
-        "name": "Crystal Palace",
-        "shortName": "CRY",
-        "badgeSlug": "crystal-palace",
-        "badgePath": "/teams/crystal-palace.football-logos.cc.png"
-      },
-      "awayTeam": {
-        "id": 6,
-        "name": "Spurs",
-        "shortName": "TOT",
-        "badgeSlug": "tottenham",
-        "badgePath": "/teams/tottenham.football-logos.cc.png"
-      },
-      "finished": false,
-      "score": {
-        "home": null,
-        "away": null
-      },
-      "probabilities": {
-        "homeWin": 0.3755,
-        "draw": 0.2677,
-        "awayWin": 0.3568
-      },
-      "context": {
-        "homeElo": 1552.0,
-        "awayElo": 1552.0,
-        "homeDaysRest": 76.04,
-        "awayDaysRest": 77.1,
-        "homeLast5Xg": 1.19,
-        "awayLast5Xg": 1.48,
-        "homeLast5Xga": 1.97,
-        "awayLast5Xga": 0.83,
-        "homeLast5Matches": 5,
-        "awayLast5Matches": 5
-      },
-      "predictionType": "pre_kickoff"
-    },
-    {
-      "matchId": "26-27-prem-everton-vs-brentford",
-      "season": "2026-2027",
-      "gameweek": 22,
-      "kickoffTime": "2027-01-23T15:00:00+00:00",
-      "homeTeam": {
-        "id": 11,
-        "name": "Everton",
-        "shortName": "EVE",
-        "badgeSlug": "everton",
-        "badgePath": "/teams/everton.football-logos.cc.png"
-      },
-      "awayTeam": {
         "id": 94,
         "name": "Brentford",
         "shortName": "BRE",
         "badgeSlug": "brentford",
         "badgePath": "/teams/brentford.football-logos.cc.png"
       },
+      "awayTeam": {
+        "id": 36,
+        "name": "Brighton",
+        "shortName": "BHA",
+        "badgeSlug": "brighton",
+        "badgePath": "/teams/brighton.football-logos.cc.png"
+      },
       "finished": false,
       "score": {
         "home": null,
         "away": null
       },
       "probabilities": {
-        "homeWin": 0.3621,
-        "draw": 0.2845,
-        "awayWin": 0.3534
+        "homeWin": 0.3718,
+        "draw": 0.2571,
+        "awayWin": 0.3711
       },
       "context": {
-        "homeElo": 1620.0,
-        "awayElo": 1625.0,
-        "homeDaysRest": 77.79,
-        "awayDaysRest": 76.04,
-        "homeLast5Xg": 1.27,
-        "awayLast5Xg": 1.3,
-        "homeLast5Xga": 1.6,
-        "awayLast5Xga": 1.76,
+        "homeElo": 1625.0,
+        "awayElo": 1699.0,
+        "homeDaysRest": 71.25,
+        "awayDaysRest": 71.25,
+        "homeLast5Xg": 1.3,
+        "awayLast5Xg": 1.63,
+        "homeLast5Xga": 1.76,
+        "awayLast5Xga": 0.88,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
       },
@@ -5015,23 +4843,23 @@
       "predictionType": "pre_kickoff"
     },
     {
-      "matchId": "26-27-prem-leeds-united-vs-chelsea",
+      "matchId": "26-27-prem-arsenal-vs-newcastle-united",
       "season": "2026-2027",
       "gameweek": 22,
-      "kickoffTime": "2027-01-23T15:00:00+00:00",
+      "kickoffTime": "2027-01-23T17:30:00+00:00",
       "homeTeam": {
-        "id": 2,
-        "name": "Leeds",
-        "shortName": "LEE",
-        "badgeSlug": "leeds-united",
-        "badgePath": "/teams/leeds-united.football-logos.cc.png"
+        "id": 3,
+        "name": "Arsenal",
+        "shortName": "ARS",
+        "badgeSlug": "arsenal",
+        "badgePath": "/teams/arsenal.football-logos.cc.png"
       },
       "awayTeam": {
-        "id": 8,
-        "name": "Chelsea",
-        "shortName": "CHE",
-        "badgeSlug": "chelsea",
-        "badgePath": "/teams/chelsea.football-logos.cc.png"
+        "id": 4,
+        "name": "Newcastle",
+        "shortName": "NEW",
+        "badgeSlug": "newcastle",
+        "badgePath": "/teams/newcastle.football-logos.cc.png"
       },
       "finished": false,
       "score": {
@@ -5039,42 +4867,42 @@
         "away": null
       },
       "probabilities": {
-        "homeWin": 0.3501,
-        "draw": 0.2642,
-        "awayWin": 0.3858
+        "homeWin": 0.6494,
+        "draw": 0.2142,
+        "awayWin": 0.1364
       },
       "context": {
-        "homeElo": 1585.0,
-        "awayElo": 1636.0,
+        "homeElo": 1850.0,
+        "awayElo": 1595.0,
         "homeDaysRest": 77.1,
-        "awayDaysRest": 76.04,
-        "homeLast5Xg": 1.11,
-        "awayLast5Xg": 1.49,
-        "homeLast5Xga": 1.27,
-        "awayLast5Xga": 1.38,
+        "awayDaysRest": 77.1,
+        "homeLast5Xg": 1.5,
+        "awayLast5Xg": 1.33,
+        "homeLast5Xga": 0.87,
+        "awayLast5Xga": 1.57,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
       },
       "predictionType": "pre_kickoff"
     },
     {
-      "matchId": "26-27-prem-manchester-united-vs-liverpool",
+      "matchId": "26-27-prem-brighton-hove-albion-vs-manchester-city",
       "season": "2026-2027",
       "gameweek": 22,
-      "kickoffTime": "2027-01-23T15:00:00+00:00",
+      "kickoffTime": "2027-01-23T20:00:00+00:00",
       "homeTeam": {
-        "id": 1,
-        "name": "Man Utd",
-        "shortName": "MUN",
-        "badgeSlug": "manchester-united",
-        "badgePath": "/teams/manchester-united.football-logos.cc.png"
+        "id": 36,
+        "name": "Brighton",
+        "shortName": "BHA",
+        "badgeSlug": "brighton",
+        "badgePath": "/teams/brighton.football-logos.cc.png"
       },
       "awayTeam": {
-        "id": 14,
-        "name": "Liverpool",
-        "shortName": "LIV",
-        "badgeSlug": "liverpool",
-        "badgePath": "/teams/liverpool.football-logos.cc.png"
+        "id": 43,
+        "name": "Man City",
+        "shortName": "MCI",
+        "badgeSlug": "manchester-city",
+        "badgePath": "/teams/manchester-city.football-logos.cc.png"
       },
       "finished": false,
       "score": {
@@ -5082,19 +4910,105 @@
         "away": null
       },
       "probabilities": {
-        "homeWin": 0.3256,
-        "draw": 0.2506,
-        "awayWin": 0.4238
+        "homeWin": 0.3141,
+        "draw": 0.2533,
+        "awayWin": 0.4325
       },
       "context": {
-        "homeElo": 1616.0,
-        "awayElo": 1705.0,
-        "homeDaysRest": 75.94,
-        "awayDaysRest": 76.04,
-        "homeLast5Xg": 1.94,
-        "awayLast5Xg": 1.67,
-        "homeLast5Xga": 2.34,
-        "awayLast5Xga": 1.7,
+        "homeElo": 1699.0,
+        "awayElo": 1765.0,
+        "homeDaysRest": 76.25,
+        "awayDaysRest": 77.1,
+        "homeLast5Xg": 1.63,
+        "awayLast5Xg": 1.64,
+        "homeLast5Xga": 0.88,
+        "awayLast5Xga": 1.11,
+        "homeLast5Matches": 5,
+        "awayLast5Matches": 5
+      },
+      "predictionType": "pre_kickoff"
+    },
+    {
+      "matchId": "26-27-prem-crystal-palace-vs-tottenham-hotspur",
+      "season": "2026-2027",
+      "gameweek": 22,
+      "kickoffTime": "2027-01-24T14:00:00+00:00",
+      "homeTeam": {
+        "id": 31,
+        "name": "Crystal Palace",
+        "shortName": "CRY",
+        "badgeSlug": "crystal-palace",
+        "badgePath": "/teams/crystal-palace.football-logos.cc.png"
+      },
+      "awayTeam": {
+        "id": 6,
+        "name": "Spurs",
+        "shortName": "TOT",
+        "badgeSlug": "tottenham",
+        "badgePath": "/teams/tottenham.football-logos.cc.png"
+      },
+      "finished": false,
+      "score": {
+        "home": null,
+        "away": null
+      },
+      "probabilities": {
+        "homeWin": 0.3755,
+        "draw": 0.2677,
+        "awayWin": 0.3568
+      },
+      "context": {
+        "homeElo": 1552.0,
+        "awayElo": 1552.0,
+        "homeDaysRest": 77.0,
+        "awayDaysRest": 78.06,
+        "homeLast5Xg": 1.19,
+        "awayLast5Xg": 1.48,
+        "homeLast5Xga": 1.97,
+        "awayLast5Xga": 0.83,
+        "homeLast5Matches": 5,
+        "awayLast5Matches": 5
+      },
+      "predictionType": "pre_kickoff"
+    },
+    {
+      "matchId": "26-27-prem-everton-vs-brentford",
+      "season": "2026-2027",
+      "gameweek": 22,
+      "kickoffTime": "2027-01-24T14:00:00+00:00",
+      "homeTeam": {
+        "id": 11,
+        "name": "Everton",
+        "shortName": "EVE",
+        "badgeSlug": "everton",
+        "badgePath": "/teams/everton.football-logos.cc.png"
+      },
+      "awayTeam": {
+        "id": 94,
+        "name": "Brentford",
+        "shortName": "BRE",
+        "badgeSlug": "brentford",
+        "badgePath": "/teams/brentford.football-logos.cc.png"
+      },
+      "finished": false,
+      "score": {
+        "home": null,
+        "away": null
+      },
+      "probabilities": {
+        "homeWin": 0.3621,
+        "draw": 0.2845,
+        "awayWin": 0.3534
+      },
+      "context": {
+        "homeElo": 1620.0,
+        "awayElo": 1625.0,
+        "homeDaysRest": 78.75,
+        "awayDaysRest": 77.0,
+        "homeLast5Xg": 1.27,
+        "awayLast5Xg": 1.3,
+        "homeLast5Xga": 1.6,
+        "awayLast5Xga": 1.76,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
       },
@@ -5104,7 +5018,7 @@
       "matchId": "26-27-prem-nottingham-forest-vs-afc-bournemouth",
       "season": "2026-2027",
       "gameweek": 22,
-      "kickoffTime": "2027-01-23T15:00:00+00:00",
+      "kickoffTime": "2027-01-24T14:00:00+00:00",
       "homeTeam": {
         "id": 17,
         "name": "Nott'm Forest",
@@ -5132,8 +5046,8 @@
       "context": {
         "homeElo": 1553.0,
         "awayElo": 1689.0,
-        "homeDaysRest": 76.9,
-        "awayDaysRest": 76.04,
+        "homeDaysRest": 77.85,
+        "awayDaysRest": 77.0,
         "homeLast5Xg": 1.66,
         "awayLast5Xg": 2.14,
         "homeLast5Xga": 1.23,
@@ -5147,7 +5061,7 @@
       "matchId": "26-27-prem-sunderland-vs-coventry-city",
       "season": "2026-2027",
       "gameweek": 22,
-      "kickoffTime": "2027-01-23T15:00:00+00:00",
+      "kickoffTime": "2027-01-24T14:00:00+00:00",
       "homeTeam": {
         "id": 56,
         "name": "Sunderland",
@@ -5175,8 +5089,8 @@
       "context": {
         "homeElo": 1550.0,
         "awayElo": 1452.0,
-        "homeDaysRest": 76.04,
-        "awayDaysRest": 77.79,
+        "homeDaysRest": 77.0,
+        "awayDaysRest": 78.75,
         "homeLast5Xg": 1.83,
         "awayLast5Xg": 0.92,
         "homeLast5Xga": 1.27,
@@ -5187,23 +5101,23 @@
       "predictionType": "pre_kickoff"
     },
     {
-      "matchId": "26-27-prem-afc-bournemouth-vs-fulham",
+      "matchId": "26-27-prem-manchester-united-vs-liverpool",
       "season": "2026-2027",
-      "gameweek": 23,
-      "kickoffTime": "2027-01-30T15:00:00+00:00",
+      "gameweek": 22,
+      "kickoffTime": "2027-01-24T16:30:00+00:00",
       "homeTeam": {
-        "id": 91,
-        "name": "Bournemouth",
-        "shortName": "BOU",
-        "badgeSlug": "bournemouth",
-        "badgePath": "/teams/bournemouth.football-logos.cc.png"
+        "id": 1,
+        "name": "Man Utd",
+        "shortName": "MUN",
+        "badgeSlug": "manchester-united",
+        "badgePath": "/teams/manchester-united.football-logos.cc.png"
       },
       "awayTeam": {
-        "id": 54,
-        "name": "Fulham",
-        "shortName": "FUL",
-        "badgeSlug": "fulham",
-        "badgePath": "/teams/fulham.football-logos.cc.png"
+        "id": 14,
+        "name": "Liverpool",
+        "shortName": "LIV",
+        "badgeSlug": "liverpool",
+        "badgePath": "/teams/liverpool.football-logos.cc.png"
       },
       "finished": false,
       "score": {
@@ -5211,19 +5125,105 @@
         "away": null
       },
       "probabilities": {
-        "homeWin": 0.4762,
-        "draw": 0.2653,
-        "awayWin": 0.2585
+        "homeWin": 0.3256,
+        "draw": 0.2506,
+        "awayWin": 0.4238
       },
       "context": {
-        "homeElo": 1689.0,
-        "awayElo": 1573.0,
-        "homeDaysRest": 83.04,
-        "awayDaysRest": 84.0,
-        "homeLast5Xg": 2.14,
-        "awayLast5Xg": 1.29,
-        "homeLast5Xga": 1.38,
-        "awayLast5Xga": 0.84,
+        "homeElo": 1616.0,
+        "awayElo": 1705.0,
+        "homeDaysRest": 77.0,
+        "awayDaysRest": 77.1,
+        "homeLast5Xg": 1.94,
+        "awayLast5Xg": 1.67,
+        "homeLast5Xga": 2.34,
+        "awayLast5Xga": 1.7,
+        "homeLast5Matches": 5,
+        "awayLast5Matches": 5
+      },
+      "predictionType": "pre_kickoff"
+    },
+    {
+      "matchId": "26-27-prem-leeds-united-vs-chelsea",
+      "season": "2026-2027",
+      "gameweek": 22,
+      "kickoffTime": "2027-01-25T20:00:00+00:00",
+      "homeTeam": {
+        "id": 2,
+        "name": "Leeds",
+        "shortName": "LEE",
+        "badgeSlug": "leeds-united",
+        "badgePath": "/teams/leeds-united.football-logos.cc.png"
+      },
+      "awayTeam": {
+        "id": 8,
+        "name": "Chelsea",
+        "shortName": "CHE",
+        "badgeSlug": "chelsea",
+        "badgePath": "/teams/chelsea.football-logos.cc.png"
+      },
+      "finished": false,
+      "score": {
+        "home": null,
+        "away": null
+      },
+      "probabilities": {
+        "homeWin": 0.3501,
+        "draw": 0.2642,
+        "awayWin": 0.3858
+      },
+      "context": {
+        "homeElo": 1585.0,
+        "awayElo": 1636.0,
+        "homeDaysRest": 79.31,
+        "awayDaysRest": 78.25,
+        "homeLast5Xg": 1.11,
+        "awayLast5Xg": 1.49,
+        "homeLast5Xga": 1.27,
+        "awayLast5Xga": 1.38,
+        "homeLast5Matches": 5,
+        "awayLast5Matches": 5
+      },
+      "predictionType": "pre_kickoff"
+    },
+    {
+      "matchId": "26-27-prem-liverpool-vs-everton",
+      "season": "2026-2027",
+      "gameweek": 23,
+      "kickoffTime": "2027-01-30T12:30:00+00:00",
+      "homeTeam": {
+        "id": 14,
+        "name": "Liverpool",
+        "shortName": "LIV",
+        "badgeSlug": "liverpool",
+        "badgePath": "/teams/liverpool.football-logos.cc.png"
+      },
+      "awayTeam": {
+        "id": 11,
+        "name": "Everton",
+        "shortName": "EVE",
+        "badgeSlug": "everton",
+        "badgePath": "/teams/everton.football-logos.cc.png"
+      },
+      "finished": false,
+      "score": {
+        "home": null,
+        "away": null
+      },
+      "probabilities": {
+        "homeWin": 0.5649,
+        "draw": 0.2479,
+        "awayWin": 0.1871
+      },
+      "context": {
+        "homeElo": 1705.0,
+        "awayElo": 1620.0,
+        "homeDaysRest": 82.94,
+        "awayDaysRest": 84.69,
+        "homeLast5Xg": 1.67,
+        "awayLast5Xg": 1.27,
+        "homeLast5Xga": 1.7,
+        "awayLast5Xga": 1.6,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
       },
@@ -5273,264 +5273,6 @@
       "predictionType": "pre_kickoff"
     },
     {
-      "matchId": "26-27-prem-brentford-vs-manchester-united",
-      "season": "2026-2027",
-      "gameweek": 23,
-      "kickoffTime": "2027-01-30T15:00:00+00:00",
-      "homeTeam": {
-        "id": 94,
-        "name": "Brentford",
-        "shortName": "BRE",
-        "badgeSlug": "brentford",
-        "badgePath": "/teams/brentford.football-logos.cc.png"
-      },
-      "awayTeam": {
-        "id": 1,
-        "name": "Man Utd",
-        "shortName": "MUN",
-        "badgeSlug": "manchester-united",
-        "badgePath": "/teams/manchester-united.football-logos.cc.png"
-      },
-      "finished": false,
-      "score": {
-        "home": null,
-        "away": null
-      },
-      "probabilities": {
-        "homeWin": 0.4468,
-        "draw": 0.2488,
-        "awayWin": 0.3044
-      },
-      "context": {
-        "homeElo": 1625.0,
-        "awayElo": 1616.0,
-        "homeDaysRest": 83.04,
-        "awayDaysRest": 82.94,
-        "homeLast5Xg": 1.3,
-        "awayLast5Xg": 1.94,
-        "homeLast5Xga": 1.76,
-        "awayLast5Xga": 2.34,
-        "homeLast5Matches": 5,
-        "awayLast5Matches": 5
-      },
-      "predictionType": "pre_kickoff"
-    },
-    {
-      "matchId": "26-27-prem-chelsea-vs-nottingham-forest",
-      "season": "2026-2027",
-      "gameweek": 23,
-      "kickoffTime": "2027-01-30T15:00:00+00:00",
-      "homeTeam": {
-        "id": 8,
-        "name": "Chelsea",
-        "shortName": "CHE",
-        "badgeSlug": "chelsea",
-        "badgePath": "/teams/chelsea.football-logos.cc.png"
-      },
-      "awayTeam": {
-        "id": 17,
-        "name": "Nott'm Forest",
-        "shortName": "NFO",
-        "badgeSlug": "nottingham-forest",
-        "badgePath": "/teams/nottingham-forest.football-logos.cc.png"
-      },
-      "finished": false,
-      "score": {
-        "home": null,
-        "away": null
-      },
-      "probabilities": {
-        "homeWin": 0.506,
-        "draw": 0.2497,
-        "awayWin": 0.2443
-      },
-      "context": {
-        "homeElo": 1636.0,
-        "awayElo": 1553.0,
-        "homeDaysRest": 83.04,
-        "awayDaysRest": 83.9,
-        "homeLast5Xg": 1.49,
-        "awayLast5Xg": 1.66,
-        "homeLast5Xga": 1.38,
-        "awayLast5Xga": 1.23,
-        "homeLast5Matches": 5,
-        "awayLast5Matches": 5
-      },
-      "predictionType": "pre_kickoff"
-    },
-    {
-      "matchId": "26-27-prem-coventry-city-vs-leeds-united",
-      "season": "2026-2027",
-      "gameweek": 23,
-      "kickoffTime": "2027-01-30T15:00:00+00:00",
-      "homeTeam": {
-        "id": 9,
-        "name": "Coventry City",
-        "shortName": "COV",
-        "badgeSlug": "coventry-city",
-        "badgePath": "/teams/coventry-city.football-logos.cc.png"
-      },
-      "awayTeam": {
-        "id": 2,
-        "name": "Leeds",
-        "shortName": "LEE",
-        "badgeSlug": "leeds-united",
-        "badgePath": "/teams/leeds-united.football-logos.cc.png"
-      },
-      "finished": false,
-      "score": {
-        "home": null,
-        "away": null
-      },
-      "probabilities": {
-        "homeWin": 0.3066,
-        "draw": 0.2669,
-        "awayWin": 0.4265
-      },
-      "context": {
-        "homeElo": 1452.0,
-        "awayElo": 1585.0,
-        "homeDaysRest": 84.79,
-        "awayDaysRest": 84.1,
-        "homeLast5Xg": 0.92,
-        "awayLast5Xg": 1.11,
-        "homeLast5Xga": 1.3,
-        "awayLast5Xga": 1.27,
-        "homeLast5Matches": 5,
-        "awayLast5Matches": 5
-      },
-      "predictionType": "pre_kickoff"
-    },
-    {
-      "matchId": "26-27-prem-hull-city-vs-crystal-palace",
-      "season": "2026-2027",
-      "gameweek": 23,
-      "kickoffTime": "2027-01-30T15:00:00+00:00",
-      "homeTeam": {
-        "id": 88,
-        "name": "Hull City",
-        "shortName": "HUL",
-        "badgeSlug": "hull-city",
-        "badgePath": "/teams/hull-city.football-logos.cc.png"
-      },
-      "awayTeam": {
-        "id": 31,
-        "name": "Crystal Palace",
-        "shortName": "CRY",
-        "badgeSlug": "crystal-palace",
-        "badgePath": "/teams/crystal-palace.football-logos.cc.png"
-      },
-      "finished": false,
-      "score": {
-        "home": null,
-        "away": null
-      },
-      "probabilities": {
-        "homeWin": 0.4431,
-        "draw": 0.2968,
-        "awayWin": 0.2601
-      },
-      "context": {
-        "homeElo": 1470.0,
-        "awayElo": 1552.0,
-        "homeDaysRest": 84.0,
-        "awayDaysRest": 83.04,
-        "homeLast5Xg": 0.89,
-        "awayLast5Xg": 1.19,
-        "homeLast5Xga": 1.42,
-        "awayLast5Xga": 1.97,
-        "homeLast5Matches": 5,
-        "awayLast5Matches": 5
-      },
-      "predictionType": "pre_kickoff"
-    },
-    {
-      "matchId": "26-27-prem-liverpool-vs-everton",
-      "season": "2026-2027",
-      "gameweek": 23,
-      "kickoffTime": "2027-01-30T15:00:00+00:00",
-      "homeTeam": {
-        "id": 14,
-        "name": "Liverpool",
-        "shortName": "LIV",
-        "badgeSlug": "liverpool",
-        "badgePath": "/teams/liverpool.football-logos.cc.png"
-      },
-      "awayTeam": {
-        "id": 11,
-        "name": "Everton",
-        "shortName": "EVE",
-        "badgeSlug": "everton",
-        "badgePath": "/teams/everton.football-logos.cc.png"
-      },
-      "finished": false,
-      "score": {
-        "home": null,
-        "away": null
-      },
-      "probabilities": {
-        "homeWin": 0.5649,
-        "draw": 0.2479,
-        "awayWin": 0.1871
-      },
-      "context": {
-        "homeElo": 1705.0,
-        "awayElo": 1620.0,
-        "homeDaysRest": 83.04,
-        "awayDaysRest": 84.79,
-        "homeLast5Xg": 1.67,
-        "awayLast5Xg": 1.27,
-        "homeLast5Xga": 1.7,
-        "awayLast5Xga": 1.6,
-        "homeLast5Matches": 5,
-        "awayLast5Matches": 5
-      },
-      "predictionType": "pre_kickoff"
-    },
-    {
-      "matchId": "26-27-prem-manchester-city-vs-arsenal",
-      "season": "2026-2027",
-      "gameweek": 23,
-      "kickoffTime": "2027-01-30T15:00:00+00:00",
-      "homeTeam": {
-        "id": 43,
-        "name": "Man City",
-        "shortName": "MCI",
-        "badgeSlug": "manchester-city",
-        "badgePath": "/teams/manchester-city.football-logos.cc.png"
-      },
-      "awayTeam": {
-        "id": 3,
-        "name": "Arsenal",
-        "shortName": "ARS",
-        "badgeSlug": "arsenal",
-        "badgePath": "/teams/arsenal.football-logos.cc.png"
-      },
-      "finished": false,
-      "score": {
-        "home": null,
-        "away": null
-      },
-      "probabilities": {
-        "homeWin": 0.377,
-        "draw": 0.2838,
-        "awayWin": 0.3392
-      },
-      "context": {
-        "homeElo": 1765.0,
-        "awayElo": 1850.0,
-        "homeDaysRest": 83.9,
-        "awayDaysRest": 84.0,
-        "homeLast5Xg": 1.64,
-        "awayLast5Xg": 1.5,
-        "homeLast5Xga": 1.11,
-        "awayLast5Xga": 0.87,
-        "homeLast5Matches": 5,
-        "awayLast5Matches": 5
-      },
-      "predictionType": "pre_kickoff"
-    },
-    {
       "matchId": "26-27-prem-newcastle-united-vs-brighton-hove-albion",
       "season": "2026-2027",
       "gameweek": 23,
@@ -5574,10 +5316,182 @@
       "predictionType": "pre_kickoff"
     },
     {
+      "matchId": "26-27-prem-chelsea-vs-nottingham-forest",
+      "season": "2026-2027",
+      "gameweek": 23,
+      "kickoffTime": "2027-01-30T17:30:00+00:00",
+      "homeTeam": {
+        "id": 8,
+        "name": "Chelsea",
+        "shortName": "CHE",
+        "badgeSlug": "chelsea",
+        "badgePath": "/teams/chelsea.football-logos.cc.png"
+      },
+      "awayTeam": {
+        "id": 17,
+        "name": "Nott'm Forest",
+        "shortName": "NFO",
+        "badgeSlug": "nottingham-forest",
+        "badgePath": "/teams/nottingham-forest.football-logos.cc.png"
+      },
+      "finished": false,
+      "score": {
+        "home": null,
+        "away": null
+      },
+      "probabilities": {
+        "homeWin": 0.506,
+        "draw": 0.2497,
+        "awayWin": 0.2443
+      },
+      "context": {
+        "homeElo": 1636.0,
+        "awayElo": 1553.0,
+        "homeDaysRest": 83.15,
+        "awayDaysRest": 84.0,
+        "homeLast5Xg": 1.49,
+        "awayLast5Xg": 1.66,
+        "homeLast5Xga": 1.38,
+        "awayLast5Xga": 1.23,
+        "homeLast5Matches": 5,
+        "awayLast5Matches": 5
+      },
+      "predictionType": "pre_kickoff"
+    },
+    {
+      "matchId": "26-27-prem-afc-bournemouth-vs-fulham",
+      "season": "2026-2027",
+      "gameweek": 23,
+      "kickoffTime": "2027-01-31T14:00:00+00:00",
+      "homeTeam": {
+        "id": 91,
+        "name": "Bournemouth",
+        "shortName": "BOU",
+        "badgeSlug": "bournemouth",
+        "badgePath": "/teams/bournemouth.football-logos.cc.png"
+      },
+      "awayTeam": {
+        "id": 54,
+        "name": "Fulham",
+        "shortName": "FUL",
+        "badgeSlug": "fulham",
+        "badgePath": "/teams/fulham.football-logos.cc.png"
+      },
+      "finished": false,
+      "score": {
+        "home": null,
+        "away": null
+      },
+      "probabilities": {
+        "homeWin": 0.4762,
+        "draw": 0.2653,
+        "awayWin": 0.2585
+      },
+      "context": {
+        "homeElo": 1689.0,
+        "awayElo": 1573.0,
+        "homeDaysRest": 84.0,
+        "awayDaysRest": 84.96,
+        "homeLast5Xg": 2.14,
+        "awayLast5Xg": 1.29,
+        "homeLast5Xga": 1.38,
+        "awayLast5Xga": 0.84,
+        "homeLast5Matches": 5,
+        "awayLast5Matches": 5
+      },
+      "predictionType": "pre_kickoff"
+    },
+    {
+      "matchId": "26-27-prem-coventry-city-vs-leeds-united",
+      "season": "2026-2027",
+      "gameweek": 23,
+      "kickoffTime": "2027-01-31T14:00:00+00:00",
+      "homeTeam": {
+        "id": 9,
+        "name": "Coventry City",
+        "shortName": "COV",
+        "badgeSlug": "coventry-city",
+        "badgePath": "/teams/coventry-city.football-logos.cc.png"
+      },
+      "awayTeam": {
+        "id": 2,
+        "name": "Leeds",
+        "shortName": "LEE",
+        "badgeSlug": "leeds-united",
+        "badgePath": "/teams/leeds-united.football-logos.cc.png"
+      },
+      "finished": false,
+      "score": {
+        "home": null,
+        "away": null
+      },
+      "probabilities": {
+        "homeWin": 0.3066,
+        "draw": 0.2669,
+        "awayWin": 0.4265
+      },
+      "context": {
+        "homeElo": 1452.0,
+        "awayElo": 1585.0,
+        "homeDaysRest": 85.75,
+        "awayDaysRest": 85.06,
+        "homeLast5Xg": 0.92,
+        "awayLast5Xg": 1.11,
+        "homeLast5Xga": 1.3,
+        "awayLast5Xga": 1.27,
+        "homeLast5Matches": 5,
+        "awayLast5Matches": 5
+      },
+      "predictionType": "pre_kickoff"
+    },
+    {
+      "matchId": "26-27-prem-hull-city-vs-crystal-palace",
+      "season": "2026-2027",
+      "gameweek": 23,
+      "kickoffTime": "2027-01-31T14:00:00+00:00",
+      "homeTeam": {
+        "id": 88,
+        "name": "Hull City",
+        "shortName": "HUL",
+        "badgeSlug": "hull-city",
+        "badgePath": "/teams/hull-city.football-logos.cc.png"
+      },
+      "awayTeam": {
+        "id": 31,
+        "name": "Crystal Palace",
+        "shortName": "CRY",
+        "badgeSlug": "crystal-palace",
+        "badgePath": "/teams/crystal-palace.football-logos.cc.png"
+      },
+      "finished": false,
+      "score": {
+        "home": null,
+        "away": null
+      },
+      "probabilities": {
+        "homeWin": 0.4431,
+        "draw": 0.2968,
+        "awayWin": 0.2601
+      },
+      "context": {
+        "homeElo": 1470.0,
+        "awayElo": 1552.0,
+        "homeDaysRest": 84.96,
+        "awayDaysRest": 84.0,
+        "homeLast5Xg": 0.89,
+        "awayLast5Xg": 1.19,
+        "homeLast5Xga": 1.42,
+        "awayLast5Xga": 1.97,
+        "homeLast5Matches": 5,
+        "awayLast5Matches": 5
+      },
+      "predictionType": "pre_kickoff"
+    },
+    {
       "matchId": "26-27-prem-tottenham-hotspur-vs-sunderland",
       "season": "2026-2027",
       "gameweek": 23,
-      "kickoffTime": "2027-01-30T15:00:00+00:00",
+      "kickoffTime": "2027-01-31T14:00:00+00:00",
       "homeTeam": {
         "id": 6,
         "name": "Spurs",
@@ -5605,12 +5519,98 @@
       "context": {
         "homeElo": 1552.0,
         "awayElo": 1550.0,
-        "homeDaysRest": 84.1,
-        "awayDaysRest": 83.04,
+        "homeDaysRest": 85.06,
+        "awayDaysRest": 84.0,
         "homeLast5Xg": 1.48,
         "awayLast5Xg": 1.83,
         "homeLast5Xga": 0.83,
         "awayLast5Xga": 1.27,
+        "homeLast5Matches": 5,
+        "awayLast5Matches": 5
+      },
+      "predictionType": "pre_kickoff"
+    },
+    {
+      "matchId": "26-27-prem-manchester-city-vs-arsenal",
+      "season": "2026-2027",
+      "gameweek": 23,
+      "kickoffTime": "2027-01-31T16:30:00+00:00",
+      "homeTeam": {
+        "id": 43,
+        "name": "Man City",
+        "shortName": "MCI",
+        "badgeSlug": "manchester-city",
+        "badgePath": "/teams/manchester-city.football-logos.cc.png"
+      },
+      "awayTeam": {
+        "id": 3,
+        "name": "Arsenal",
+        "shortName": "ARS",
+        "badgeSlug": "arsenal",
+        "badgePath": "/teams/arsenal.football-logos.cc.png"
+      },
+      "finished": false,
+      "score": {
+        "home": null,
+        "away": null
+      },
+      "probabilities": {
+        "homeWin": 0.377,
+        "draw": 0.2838,
+        "awayWin": 0.3392
+      },
+      "context": {
+        "homeElo": 1765.0,
+        "awayElo": 1850.0,
+        "homeDaysRest": 84.96,
+        "awayDaysRest": 85.06,
+        "homeLast5Xg": 1.64,
+        "awayLast5Xg": 1.5,
+        "homeLast5Xga": 1.11,
+        "awayLast5Xga": 0.87,
+        "homeLast5Matches": 5,
+        "awayLast5Matches": 5
+      },
+      "predictionType": "pre_kickoff"
+    },
+    {
+      "matchId": "26-27-prem-brentford-vs-manchester-united",
+      "season": "2026-2027",
+      "gameweek": 23,
+      "kickoffTime": "2027-02-01T20:00:00+00:00",
+      "homeTeam": {
+        "id": 94,
+        "name": "Brentford",
+        "shortName": "BRE",
+        "badgeSlug": "brentford",
+        "badgePath": "/teams/brentford.football-logos.cc.png"
+      },
+      "awayTeam": {
+        "id": 1,
+        "name": "Man Utd",
+        "shortName": "MUN",
+        "badgeSlug": "manchester-united",
+        "badgePath": "/teams/manchester-united.football-logos.cc.png"
+      },
+      "finished": false,
+      "score": {
+        "home": null,
+        "away": null
+      },
+      "probabilities": {
+        "homeWin": 0.4468,
+        "draw": 0.2488,
+        "awayWin": 0.3044
+      },
+      "context": {
+        "homeElo": 1625.0,
+        "awayElo": 1616.0,
+        "homeDaysRest": 85.25,
+        "awayDaysRest": 85.15,
+        "homeLast5Xg": 1.3,
+        "awayLast5Xg": 1.94,
+        "homeLast5Xga": 1.76,
+        "awayLast5Xga": 2.34,
         "homeLast5Matches": 5,
         "awayLast5Matches": 5
       },
