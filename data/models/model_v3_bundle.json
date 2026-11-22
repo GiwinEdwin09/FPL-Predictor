@@ -2,7 +2,7 @@
   "schema_version": 1,
   "model_version": "v3",
   "predictor_type": "blend_v3",
-  "created_at_utc": "2026-11-21T22:17:33.852112+00:00",
+  "created_at_utc": "2026-11-22T13:31:05.543219+00:00",
   "feature_columns": [
     "is_cup_match",
     "is_european_match",
@@ -42,18 +42,18 @@
   "components": {
     "metrics": {
       "path": "model_v3_metrics.json",
-      "sha256": "a0fd32f9e9eae29f8bb8acd666f1e72d23f1aaeb1ac257d18d269a7c841df5e6",
-      "size_bytes": 3281
+      "sha256": "da342954ebee6a9ef4a8c030787baca645376e0d7abf289d997529b26d8ba6bc",
+      "size_bytes": 3280
     },
     "model": {
       "path": "model_v3.json",
-      "sha256": "15154d70e8eb589d6144060c328f24a070fbaf809e73d4a05cab994fcb579b56",
-      "size_bytes": 5323
+      "sha256": "88eaab6d7a4e8df8624dff54863ba654d5d22a68a08d44f65db680a77d0390fb",
+      "size_bytes": 5318
     },
     "prediction_features": {
       "path": "../features/match_pre_match_features_v3.csv",
-      "sha256": "1698878f9143a3c99f7ae333292003fdb0fb2835677a73e3a58c7f5c8a65ad51",
-      "size_bytes": 509980
+      "sha256": "9167f4658615ec9c9ba527f9f2b059527ccfb4bae671a80e944e0b8fbdfcf792",
+      "size_bytes": 511060
     },
     "team_keys": {
       "path": "model_v3_team_keys.json",
